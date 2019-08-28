@@ -1,0 +1,16 @@
+//Items
+item.plant_fiber.name=Plant Fiber
+item.plant_rope.name=Plant Rope
+item.gravel.name=Gravel
+
+//Blocks
+tile.rock.name=Rock
+tile.stick.name=Placeable Stick
+tile.fire_pit.name=Fire Pit
+
+//Entities
+entity.pigeon.name=Pigeon
+
+//GUI
+itemGroup.primalrework_items=Primal.R Items
+itemGroup.primalrework_blocks=Primal.R Blocks

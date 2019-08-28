@@ -1,0 +1,6 @@
+{
+    "parent": "item/stick",
+    "textures": {
+        "layer0": "primalrework:items/stick"
+    }
+}

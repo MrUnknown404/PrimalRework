@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "primalrework:plant_fiber"
+    },
+    {
+      "item": "primalrework:plant_fiber"
+    },
+    {
+      "item": "primalrework:plant_fiber"
+    }
+  ],
+  "result": {
+    "item": "primalrework:plant_rope",
+    "count": 1
+  }
+}

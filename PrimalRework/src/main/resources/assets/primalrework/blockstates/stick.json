@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "normal": [
+            { "model": "primalrework:stick" },
+            { "model": "primalrework:stick", "y": 90 },
+            { "model": "primalrework:stick", "y": 180 },
+            { "model": "primalrework:stick", "y": 270 }
+        ]
+    }
+}

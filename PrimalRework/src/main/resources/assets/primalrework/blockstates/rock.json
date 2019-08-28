@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "normal": [
+            { "model": "primalrework:rock" },
+            { "model": "primalrework:rock", "y": 90 },
+            { "model": "primalrework:rock", "y": 180 },
+            { "model": "primalrework:rock", "y": 270 }
+        ]
+    }
+}
