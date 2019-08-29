@@ -1,7 +1,7 @@
 {
 	"textures": {
-		"0": "primalrework:items/rock",
-		"particle": "primalrework:items/rock"
+		"0": "primalrework:blocks/rock",
+		"particle": "primalrework:blocks/rock"
 	},
 	"elements": [
 		{

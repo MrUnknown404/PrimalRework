@@ -5,12 +5,15 @@ import java.util.Iterator;
 import com.google.common.collect.Lists;
 
 import mrunknown404.primalrework.handlers.RegistryHandler;
-import mrunknown404.primalrework.handlers.EntityRenderHandler;
+import mrunknown404.primalrework.handlers.HarvestHandler;
+import mrunknown404.primalrework.handlers.events.BlockEventHandler;
+import mrunknown404.primalrework.handlers.events.PlayerEventHandler;
 import mrunknown404.primalrework.proxy.CommonProxy;
 import mrunknown404.primalrework.util.DummyRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -35,12 +38,18 @@ public class Main {
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent e) {
+		HarvestHandler.changeHarvestLevels();
+		
 		RegistryHandler.registerEntities();
 		proxy.registerEntityRenders();
+		
+		MinecraftForge.EVENT_BUS.register(new PlayerEventHandler());
+		MinecraftForge.EVENT_BUS.register(new BlockEventHandler());
 	}
 	
 	@EventHandler
 	public void init(FMLInitializationEvent e) {
+		proxy.registerSounds();
 		removeRecipes();
 	}
 	
@@ -58,7 +67,6 @@ public class Main {
 		ForgeRegistry<IRecipe> rr = (ForgeRegistry<IRecipe>) ForgeRegistries.RECIPES;
 		
 		for (IRecipe r : Lists.newArrayList(rr.getValuesCollection())) {
-			System.err.println(r.getRegistryName());
 			if (r.getRegistryName().toString().startsWith("minecraft:")) {
 				rr.remove(r.getRegistryName());
 				rr.register(DummyRecipe.from(r));

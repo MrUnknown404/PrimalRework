@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mrunknown404.primalrework.blocks.BlockFirePit;
+import mrunknown404.primalrework.blocks.BlockPrimalTorchLit;
+import mrunknown404.primalrework.blocks.BlockPrimalTorchUnlit;
 import mrunknown404.primalrework.blocks.util.BlockGroundItem;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -15,4 +17,6 @@ public class ModBlocks {
 	public static final Block ROCK = new BlockGroundItem("rock", SoundType.STONE);
 	public static final Block STICK = new BlockGroundItem("stick", SoundType.WOOD, Items.STICK);
 	public static final Block FIRE_PIT = new BlockFirePit();
+	public static final Block UNLIT_PRIMAL_TORCH = new BlockPrimalTorchUnlit();
+	public static final Block LIT_PRIMAL_TORCH = new BlockPrimalTorchLit();
 }

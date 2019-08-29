@@ -1,6 +1,6 @@
 {
     "parent": "item/stick",
     "textures": {
-        "layer0": "primalrework:items/stick"
+        "layer0": "primalrework:blocks/stick"
     }
 }

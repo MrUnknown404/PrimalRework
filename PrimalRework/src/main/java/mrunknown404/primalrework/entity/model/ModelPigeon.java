@@ -1,10 +1,11 @@
 package mrunknown404.primalrework.entity.model;
 
+import mrunknown404.primalrework.entity.EntityPigeon;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBox;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.passive.EntityParrot;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -75,16 +76,36 @@ public class ModelPigeon extends ModelBase {
 	}
 	
 	@Override
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
-		LeftLeg.render(f5);
-		RightLeg.render(f5);
-		Body.render(f5);
-		TailRight.render(f5);
-		TailMiddle.render(f5);
-		TailLeft.render(f5);
-		RightWing.render(f5);
-		LeftWing.render(f5);
-		Head.render(f5);
+	public void render(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+		if (!isChild) {
+			LeftLeg.render(scale);
+			RightLeg.render(scale);
+			Body.render(scale);
+			TailRight.render(scale);
+			TailMiddle.render(scale);
+			TailLeft.render(scale);
+			RightWing.render(scale);
+			LeftWing.render(scale);
+			Head.render(scale);
+		} else {
+			GlStateManager.pushMatrix();
+			GlStateManager.scale(0.75F, 0.75F, 0.75F);
+			GlStateManager.translate(0.0125f, 0.6F, scale);
+			Head.render(scale);
+			GlStateManager.popMatrix();
+			GlStateManager.pushMatrix();
+			GlStateManager.scale(0.5F, 0.5F, 0.5F);
+			GlStateManager.translate(0.0F, 24.0F * scale, 0.0F);
+			LeftLeg.render(scale);
+			RightLeg.render(scale);
+			Body.render(scale);
+			TailRight.render(scale);
+			TailMiddle.render(scale);
+			TailLeft.render(scale);
+			RightWing.render(scale);
+			LeftWing.render(scale);
+			GlStateManager.popMatrix();
+		}
 	}
 	
 	private void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
@@ -95,7 +116,7 @@ public class ModelPigeon extends ModelBase {
 	
 	@Override
 	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity ent) {
-		if (((EntityParrot) ent).isFlying()) {
+		if (((EntityPigeon) ent).isFlying()) {
 			LeftLeg.rotateAngleX = -55;
 			RightLeg.rotateAngleX = -55;
 			

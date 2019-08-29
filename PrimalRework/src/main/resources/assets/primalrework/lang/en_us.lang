@@ -7,6 +7,8 @@ item.gravel.name=Gravel
 tile.rock.name=Rock
 tile.stick.name=Placeable Stick
 tile.fire_pit.name=Fire Pit
+tile.primal_torch_lit.name=Lit Primal Torch
+tile.primal_torch_unlit.name=Unlit Primal Torch
 
 //Entities
 entity.pigeon.name=Pigeon
@@ -14,3 +16,7 @@ entity.pigeon.name=Pigeon
 //GUI
 itemGroup.primalrework_items=Primal.R Items
 itemGroup.primalrework_blocks=Primal.R Blocks
+
+subtitles.entity.pigeon.ambient=Pigeon Cooing
+subtitles.entity.pigeon.hurt=Pigeon hurts
+subtitles.entity.pigeon.death=Pigeon dies

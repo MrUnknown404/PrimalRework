@@ -4,6 +4,8 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
+import mrunknown404.primalrework.util.ToolHarvestLevel;
+import mrunknown404.primalrework.util.ToolType;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -26,7 +28,8 @@ public class BlockGroundItem extends BlockBase {
 	}
 	
 	public BlockGroundItem(String name, SoundType soundType, @Nullable Item dropInstead) {
-		super(name, Material.CIRCUITS, soundType, BlockRenderLayer.CUTOUT, 0.01f, NULL_AABB, new AxisAlignedBB(3.05 / 16, 0, 3.05 / 16, 13.05 / 16, 1.05 / 16, 13.05 / 16));
+		super(name, Material.CIRCUITS, soundType, BlockRenderLayer.CUTOUT, 0, 0, NULL_AABB,
+				new AxisAlignedBB(3.05 / 16, 0, 3.05 / 16, 13.05 / 16, 1.05 / 16, 13.05 / 16));
 		this.dropInstead = dropInstead;
 	}
 	

@@ -1,12 +1,12 @@
 package mrunknown404.primalrework.blocks.util;
 
-import javax.annotation.Nullable;
-
 import mrunknown404.primalrework.Main;
+import mrunknown404.primalrework.handlers.HarvestHandler;
 import mrunknown404.primalrework.init.ModBlocks;
 import mrunknown404.primalrework.init.ModCreativeTabs;
 import mrunknown404.primalrework.init.ModItems;
 import mrunknown404.primalrework.util.IHasModel;
+import mrunknown404.primalrework.util.ToolHarvestLevel;
 import mrunknown404.primalrework.util.ToolType;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -24,21 +24,22 @@ public class BlockBase extends Block implements IHasModel {
 
 	private final BlockRenderLayer renderType;
 	private final AxisAlignedBB collisionAABB, visualAABB;
+	private final ToolType toolType;
+	private final ToolHarvestLevel harvestLevel;
 	
-	/**
-	 * @param name
+	/**@param name
 	 * @param material
 	 * @param tab
 	 * @param soundType
 	 * @param renderType
-	 * @param toolType
-	 * @param harvestLevel
+	 * @param type
+	 * @param level
 	 * @param hardness
 	 * @param resistance
 	 * @param collisionAABB
 	 * @param visualAABB
 	 */
-	public BlockBase(String name, Material material, CreativeTabs tab, SoundType soundType, BlockRenderLayer renderType, @Nullable ToolType toolType, int harvestLevel,
+	public BlockBase(String name, Material material, CreativeTabs tab, SoundType soundType, BlockRenderLayer renderType, ToolType toolType, ToolHarvestLevel level,
 			float hardness, float resistance, AxisAlignedBB collisionAABB, AxisAlignedBB visualAABB) {
 		super(material);
 		setUnlocalizedName(name);
@@ -52,69 +53,68 @@ public class BlockBase extends Block implements IHasModel {
 		this.collisionAABB = collisionAABB;
 		this.visualAABB = visualAABB;
 		
-		if (toolType != null) {
-			setHarvestLevel(toolType.toString(), harvestLevel);
-		}
+		this.toolType = toolType;
+		this.harvestLevel = level;
 		
 		ModBlocks.BLOCKS.add(this);
 		ModItems.ITEMS.add(new ItemBlock(this).setRegistryName(name));
 	}
 	
-	/**
-	 * @param name
+	/**@param name
 	 * @param material
 	 * @param soundType
 	 * @param renderType
 	 * @param toolType
-	 * @param harvestLevel
+	 * @param level
 	 * @param hardness
 	 * @param resistance
 	 * @param collisionAABB
 	 * @param visualAABB
 	 */
-	public BlockBase(String name, Material material, SoundType soundType, BlockRenderLayer renderType, ToolType toolType, int harvestLevel, float hardness, float resistance,
-			AxisAlignedBB collisionAABB, AxisAlignedBB visualAABB) {
-		this(name, material, ModCreativeTabs.PRIMALREWORK_BLOCKS, soundType, renderType, toolType, harvestLevel, hardness, resistance, collisionAABB, visualAABB);
+	public BlockBase(String name, Material material, SoundType soundType, BlockRenderLayer renderType, ToolType toolType, ToolHarvestLevel level,
+			float hardness, float resistance, AxisAlignedBB collisionAABB, AxisAlignedBB visualAABB) {
+		this(name, material, ModCreativeTabs.PRIMALREWORK_BLOCKS, soundType, renderType, toolType, level, hardness, resistance, collisionAABB, visualAABB);
 	}
 	
-	/**
-	 * @param name
-	 * @param material
-	 * @param soundType
-	 * @param renderType
-	 * @param hardness_resistance
-	 * @param collisionAABB
-	 * @param visualAABB
-	 */
-	public BlockBase(String name, Material material, SoundType soundType, BlockRenderLayer renderType, float hardness_resistance, AxisAlignedBB collisionAABB, AxisAlignedBB visualAABB) {
-		this(name, material, ModCreativeTabs.PRIMALREWORK_BLOCKS, soundType, renderType, null, -1, hardness_resistance, hardness_resistance, collisionAABB, visualAABB);
-	}
-	
-	/**
-	 * @param name
+	/**@param name
 	 * @param material
 	 * @param soundType
 	 * @param renderType
 	 * @param toolType
-	 * @param harvestLevel
+	 * @param level
 	 * @param hardness
 	 * @param resistance
 	 */
-	public BlockBase(String name, Material material, SoundType soundType, BlockRenderLayer renderType, ToolType toolType, int harvestLevel, float hardness, float resistance) {
-		this(name, material, ModCreativeTabs.PRIMALREWORK_BLOCKS, soundType, renderType, toolType, harvestLevel, hardness, resistance, FULL_BLOCK_AABB, FULL_BLOCK_AABB);
+	public BlockBase(String name, Material material, SoundType soundType, BlockRenderLayer renderType, ToolType toolType, ToolHarvestLevel level,
+			float hardness, float resistance) {
+		this(name, material, ModCreativeTabs.PRIMALREWORK_BLOCKS, soundType, renderType, toolType, level, hardness, resistance, FULL_BLOCK_AABB, FULL_BLOCK_AABB);
 	}
 	
-	/**
-	 * @param name
+	/**@param name
 	 * @param material
 	 * @param soundType
 	 * @param renderType
-	 * @param hardness_resistance
+	 * @param hardness
+	 * @param resistance
+	 * @param collisionAABB
+	 * @param visualAABB
 	 */
-	public BlockBase(String name, Material material, SoundType soundType, BlockRenderLayer renderType, float hardness_resistance) {
-		this(name, material, ModCreativeTabs.PRIMALREWORK_BLOCKS, soundType, renderType, null, -1, hardness_resistance, hardness_resistance, FULL_BLOCK_AABB, FULL_BLOCK_AABB);
+	public BlockBase(String name, Material material, SoundType soundType, BlockRenderLayer renderType, int hardness, int resistance, AxisAlignedBB collisionAABB,
+			AxisAlignedBB visualAABB) {
+		this(name, material, ModCreativeTabs.PRIMALREWORK_BLOCKS, soundType, renderType, ToolType.none, ToolHarvestLevel.hand, hardness, resistance, collisionAABB, visualAABB);
 	}
 	
+	/**@param name
+	 * @param material
+	 * @param soundType
+	 * @param renderType
+	 * @param hardness
+	 * @param resistance
+	 */
+	public BlockBase(String name, Material material, SoundType soundType, BlockRenderLayer renderType, int hardness, int resistance) {
+		this(name, material, ModCreativeTabs.PRIMALREWORK_BLOCKS, soundType, renderType, ToolType.none, ToolHarvestLevel.hand, hardness, resistance, FULL_BLOCK_AABB, FULL_BLOCK_AABB);
+	}
+
 	@Override
 	public BlockRenderLayer getBlockLayer() {
 		return renderType;
@@ -143,5 +143,13 @@ public class BlockBase extends Block implements IHasModel {
 	@Override
 	public void registerModels() {
 		Main.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
+	}
+	
+	public ToolType getToolType() {
+		return toolType;
+	}
+	
+	public ToolHarvestLevel getHarvestLevel() {
+		return harvestLevel;
 	}
 }

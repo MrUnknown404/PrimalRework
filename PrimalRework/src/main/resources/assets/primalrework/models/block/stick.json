@@ -1,7 +1,7 @@
 {
     "textures": {
-        "0": "primalrework:items/stick",
-        "particle": "primalrework:items/stick"
+        "0": "primalrework:blocks/stick",
+        "particle": "primalrework:blocks/stick"
     },
     "elements": [
         {
