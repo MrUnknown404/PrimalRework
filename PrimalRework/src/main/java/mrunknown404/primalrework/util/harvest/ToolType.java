@@ -1,4 +1,4 @@
-package mrunknown404.primalrework.util;
+package mrunknown404.primalrework.util.harvest;
 
 public enum ToolType {
 	none,

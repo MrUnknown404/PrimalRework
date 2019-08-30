@@ -1,8 +1,8 @@
 package mrunknown404.primalrework.blocks;
 
 import mrunknown404.primalrework.blocks.util.BlockBase;
-import mrunknown404.primalrework.util.ToolHarvestLevel;
-import mrunknown404.primalrework.util.ToolType;
+import mrunknown404.primalrework.util.harvest.ToolHarvestLevel;
+import mrunknown404.primalrework.util.harvest.ToolType;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

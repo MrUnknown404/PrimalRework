@@ -1,14 +1,16 @@
 package mrunknown404.primalrework.handlers.events;
 
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 import mrunknown404.primalrework.handlers.HarvestHandler;
-import mrunknown404.primalrework.init.ModBlocks;
-import mrunknown404.primalrework.init.ModItems;
-import mrunknown404.primalrework.util.ToolHarvestLevel;
+import mrunknown404.primalrework.util.harvest.HarvestDropInfo;
+import mrunknown404.primalrework.util.harvest.HarvestInfo;
+import mrunknown404.primalrework.util.harvest.ItemDropInfo;
+import mrunknown404.primalrework.util.harvest.ToolHarvestLevel;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -20,35 +22,46 @@ public class BlockEventHandler {
 
 	@SubscribeEvent
 	public void onHarvestDrop(HarvestDropsEvent e) {
+		if (e.getHarvester() != null || !(e.getHarvester() instanceof EntityPlayer)) {
+			return;
+		}
+		
 		Block b = e.getState().getBlock();
+		Item item = e.getHarvester().getHeldItemMainhand().getItem();
+		
 		Random r = new Random();
 		boolean isSilk = e.isSilkTouching();
-		int fortune = e.getFortuneLevel();
-		int after_rdrop = MathHelper.clamp(r.nextInt(fortune + 1), 0, Integer.MAX_VALUE);
+		int after_rdrop = MathHelper.clamp(r.nextInt(e.getFortuneLevel() + 1), 0, Integer.MAX_VALUE);
 		
-		if (b == Blocks.GRAVEL) {
-			if (!isSilk) {
-				e.getDrops().clear();
-				e.getDrops().add(new ItemStack(ModItems.GRAVEL, (r.nextInt(4) + 1) + after_rdrop ));
-			}
-		} else if (b == Blocks.STONE) {
-			if (!isSilk) {
-				e.getDrops().clear();
+		HarvestInfo binfo = HarvestHandler.getHarvestInfo(b), iinfo = HarvestHandler.getHarvestInfo(item);
+		if (binfo == null || iinfo == null) {
+			return;
+		}
+		
+		HarvestDropInfo drop = binfo.getDrop(HarvestHandler.getCurrentItemToolType(b, item));
+		if (drop == null) {
+			return;
+		}
+		
+		if (drop.isReplace()) {
+			e.getDrops().clear();
+		}
+		
+		for (ItemDropInfo itemDrop : drop.getDrops()) {
+			
+			
+			if (itemDrop.needsSilk() == isSilk) {
+				float dropFort = (itemDrop.getDropFortune() * after_rdrop) + 1;
+				float chanceFort = (itemDrop.getChanceFortune() * after_rdrop) + 1;
 				
-				for (int i = 0; i < after_rdrop + 1; i++) {
-					if (r.nextBoolean()) {
-						e.getDrops().add(new ItemStack(Blocks.COBBLESTONE));
-						break;
-					}
-				}
+				int random = r.nextInt(100) + 1;
+				System.out.println(random + "<=" + (itemDrop.getDropChance() * chanceFort) + " | " + chanceFort);
 				
-				if (e.getDrops().isEmpty()) {
-					e.getDrops().add(new ItemStack(ModBlocks.ROCK, (r.nextInt(6) + 4) + (after_rdrop * 2)));
+				if (random <= itemDrop.getDropChance() * chanceFort) {
+					System.out.println("run");
+					e.getDrops().add(new ItemStack(itemDrop.getItem(), (int) ((itemDrop.getDropAmount() + ThreadLocalRandom.current().nextInt(
+							itemDrop.getRandomDropMin(), itemDrop.getRandomDropMax() + 1)) * dropFort)));
 				}
-			}
-		} else if (b == Blocks.TALLGRASS) {
-			if (HarvestHandler.canBreak(b, e.getHarvester().getHeldItemMainhand().getItem())) {
-				e.getDrops().add(new ItemStack(ModItems.PLANT_FIBER));
 			}
 		}
 	}
@@ -67,11 +80,16 @@ public class BlockEventHandler {
 	
 	@SubscribeEvent
 	public void onBreakSpeed(PlayerEvent.BreakSpeed e) {
+		if (HarvestHandler.getCurrentBlockHarvestLevel(e.getState().getBlock(), e.getEntityPlayer().getHeldItemMainhand().getItem()) == ToolHarvestLevel.unbreakable) {
+			e.setNewSpeed(0);
+			return;
+		}
+		
 		if (HarvestHandler.canBreak(e.getState().getBlock(), e.getEntityPlayer().getHeldItemMainhand().getItem())) {
 			ToolHarvestLevel harvest = HarvestHandler.getCurrentItemHarvestLevel(e.getState().getBlock(), e.getEntityPlayer().getHeldItemMainhand().getItem());
 			e.setNewSpeed(e.getOriginalSpeed() * harvest.speed);
 		} else {
-			e.setNewSpeed(0.75f / e.getState().getBlockHardness(e.getEntityPlayer().world, e.getPos()));
+			e.setNewSpeed(MathHelper.clamp(0.75f / e.getState().getBlockHardness(e.getEntityPlayer().world, e.getPos()), -Integer.MAX_VALUE, 0.3f));
 		}
 	}
 }

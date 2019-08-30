@@ -4,8 +4,8 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
-import mrunknown404.primalrework.util.ToolHarvestLevel;
-import mrunknown404.primalrework.util.ToolType;
+import mrunknown404.primalrework.util.harvest.ToolHarvestLevel;
+import mrunknown404.primalrework.util.harvest.ToolType;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

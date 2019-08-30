@@ -1,16 +1,16 @@
-package mrunknown404.primalrework.util;
+package mrunknown404.primalrework.util.harvest;
 
 public enum ToolHarvestLevel {
-	hand       (0, 1f),
-	flint      (1, 1.5f),
-	stone      (2, 2f),
-	copper     (3, 2.5f),
-	bronze     (4, 3f),
-	iron       (5, 4f),
-	steel      (6, 5f),
-	diamond    (7, 6f),
+	hand       (0, 0.4f),
+	flint      (1, 1f),
+	stone      (2, 1.2f),
+	copper     (3, 1.8f),
+	bronze     (4, 2f),
+	iron       (5, 3f),
+	steel      (6, 3.5f),
+	diamond    (7, 4f),
 	//is
-	unbreakable(99, 1f);
+	unbreakable(99, 0f);
 	
 	public final int level;
 	public final float speed;

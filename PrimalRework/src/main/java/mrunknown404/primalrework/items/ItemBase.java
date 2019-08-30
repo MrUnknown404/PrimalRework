@@ -5,8 +5,8 @@ import mrunknown404.primalrework.handlers.HarvestHandler;
 import mrunknown404.primalrework.init.ModCreativeTabs;
 import mrunknown404.primalrework.init.ModItems;
 import mrunknown404.primalrework.util.IHasModel;
-import mrunknown404.primalrework.util.ToolHarvestLevel;
-import mrunknown404.primalrework.util.ToolType;
+import mrunknown404.primalrework.util.harvest.ToolHarvestLevel;
+import mrunknown404.primalrework.util.harvest.ToolType;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
