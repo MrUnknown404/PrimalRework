@@ -1,7 +1,6 @@
 package mrunknown404.primalrework.items;
 
 import mrunknown404.primalrework.Main;
-import mrunknown404.primalrework.handlers.HarvestHandler;
 import mrunknown404.primalrework.init.ModCreativeTabs;
 import mrunknown404.primalrework.init.ModItems;
 import mrunknown404.primalrework.util.IHasModel;

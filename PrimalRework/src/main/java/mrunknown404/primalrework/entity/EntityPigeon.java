@@ -9,7 +9,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIFollow;
-import net.minecraft.entity.ai.EntityAIFollowParent;
 import net.minecraft.entity.ai.EntityAIMate;
 import net.minecraft.entity.ai.EntityAIPanic;
 import net.minecraft.entity.ai.EntityAISwimming;
@@ -36,10 +35,7 @@ import net.minecraft.world.storage.loot.LootTableList;
 
 public class EntityPigeon extends EntityAnimal implements EntityFlying {
 
-	private float flap;
 	private float flapSpeed;
-	private float oFlapSpeed;
-	private float oFlap;
 	private float flapping = 1.0F;
 	
 	public EntityPigeon(World worldIn) {
@@ -85,8 +81,6 @@ public class EntityPigeon extends EntityAnimal implements EntityFlying {
 	}
 	
 	private void calculateFlapping() {
-		oFlap = flap;
-		oFlapSpeed = flapSpeed;
 		flapSpeed = (float) ((double) flapSpeed + (double) (onGround ? -1 : 4) * 0.3D);
 		flapSpeed = MathHelper.clamp(flapSpeed, 0.0F, 1.0F);
 		
@@ -99,8 +93,6 @@ public class EntityPigeon extends EntityAnimal implements EntityFlying {
 		if (!onGround && motionY < 0.0D) {
 			motionY *= 0.6D;
 		}
-		
-		flap += flapping * 2.0F;
 	}
 	
 	@Override

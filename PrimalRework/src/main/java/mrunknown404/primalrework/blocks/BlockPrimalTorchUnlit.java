@@ -5,8 +5,7 @@ import javax.annotation.Nullable;
 import com.google.common.base.Predicate;
 
 import mrunknown404.primalrework.blocks.util.BlockBase;
-import mrunknown404.primalrework.util.harvest.ToolHarvestLevel;
-import mrunknown404.primalrework.util.harvest.ToolType;
+import mrunknown404.primalrework.util.harvest.HarvestInfo;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -47,6 +46,11 @@ public class BlockPrimalTorchUnlit extends BlockBase {
 		super(name, Material.CIRCUITS, SoundType.WOOD, BlockRenderLayer.CUTOUT, 0, 0);
 		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.UP));
 		setLightOpacity(0);
+	}
+	
+	@Override
+	public void setHarvestInfo() {
+		this.harvestInfo = new HarvestInfo(this);
 	}
 	
 	@Override

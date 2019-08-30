@@ -7,10 +7,10 @@ import net.minecraft.entity.EntityLiving;
 public class EntityInfo {
 	public final String name;
 	public final Class<? extends EntityLiving> clazz;
-	public final RenderBase render;
+	public final RenderBase<? super EntityLiving> render;
 	public final int id, range, color1, color2;
 	
-	public EntityInfo(String name, Class<? extends EntityLiving> clazz, int id, int range, int color1, int color2, RenderBase render) {
+	public EntityInfo(String name, Class<? extends EntityLiving> clazz, int id, int range, int color1, int color2, RenderBase<? super EntityLiving> render) {
 		this.name = name;
 		this.clazz = clazz;
 		this.id = id;

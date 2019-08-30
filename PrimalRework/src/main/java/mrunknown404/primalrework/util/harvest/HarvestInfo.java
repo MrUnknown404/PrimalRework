@@ -7,7 +7,6 @@ import java.util.List;
 import mrunknown404.primalrework.util.DoubleValue;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 
 public class HarvestInfo {
 	
@@ -27,6 +26,14 @@ public class HarvestInfo {
 		this.item = null;
 		this.block = block;
 		this.types_harvests = Arrays.asList(types_harvests);
+	}
+	
+	public HarvestInfo(Item item) {
+		this(item, new DoubleValue<ToolType, ToolHarvestLevel>(ToolType.none, ToolHarvestLevel.hand));
+	}
+	
+	public HarvestInfo(Block block) {
+		this(block, new DoubleValue<ToolType, ToolHarvestLevel>(ToolType.none, ToolHarvestLevel.hand));
 	}
 	
 	public HarvestInfo setDrops(List<HarvestDropInfo> drops) {

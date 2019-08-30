@@ -1,18 +1,13 @@
 package mrunknown404.primalrework;
 
-import java.util.Iterator;
-
-import com.google.common.collect.Lists;
-
-import mrunknown404.primalrework.handlers.RegistryHandler;
+import mrunknown404.primalrework.handlers.GuiHandler;
 import mrunknown404.primalrework.handlers.HarvestHandler;
+import mrunknown404.primalrework.handlers.RegistryHandler;
 import mrunknown404.primalrework.handlers.events.BlockEventHandler;
 import mrunknown404.primalrework.handlers.events.PlayerEventHandler;
 import mrunknown404.primalrework.proxy.CommonProxy;
-import mrunknown404.primalrework.util.DummyRecipe;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
-import net.minecraft.item.crafting.IRecipe;
+import mrunknown404.primalrework.tileentity.TileEntityFirePit;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -22,13 +17,14 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import net.minecraftforge.registries.ForgeRegistry;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 @Mod(modid = Main.MOD_ID, useMetadata = true)
 public class Main {
 	
 	public static final String MOD_ID = "primalrework";
+	public static final int GUI_ID_FIRE_PIT = 1;
 	
 	@Instance
 	public static Main main;
@@ -49,8 +45,12 @@ public class Main {
 	
 	@EventHandler
 	public void init(FMLInitializationEvent e) {
+		NetworkRegistry.INSTANCE.registerGuiHandler(main, new GuiHandler());
+		
 		proxy.registerSounds();
-		removeRecipes();
+		proxy.setupRecipes();
+		
+		GameRegistry.registerTileEntity(TileEntityFirePit.class, new ResourceLocation(Main.MOD_ID, "fire_pit"));
 	}
 	
 	@EventHandler
@@ -61,23 +61,5 @@ public class Main {
 	@EventHandler
 	public void serverStart(FMLServerStartingEvent e) {
 		
-	}
-	
-	public void removeRecipes() {
-		ForgeRegistry<IRecipe> rr = (ForgeRegistry<IRecipe>) ForgeRegistries.RECIPES;
-		
-		for (IRecipe r : Lists.newArrayList(rr.getValuesCollection())) {
-			if (r.getRegistryName().toString().startsWith("minecraft:")) {
-				rr.remove(r.getRegistryName());
-				rr.register(DummyRecipe.from(r));
-			}
-		}
-		
-		Iterator<ItemStack> it = FurnaceRecipes.instance().getSmeltingList().keySet().iterator();
-		
-		while (it.hasNext()) {
-			ItemStack recipe = it.next();
-			it.remove();
-		}
 	}
 }

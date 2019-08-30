@@ -25,8 +25,6 @@ import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 public class HarvestHandler {
 
-	//public static Map<Block, List<DoubleValue<ToolType, ToolHarvestLevel>>> blocks = new HashMap<Block, List<DoubleValue<ToolType, ToolHarvestLevel>>>();
-	//public static Map<Item, List<DoubleValue<ToolType, ToolHarvestLevel>>> items = new HashMap<Item, List<DoubleValue<ToolType, ToolHarvestLevel>>>();
 	public static final List<HarvestInfo> BLOCKS = new ArrayList<HarvestInfo>();
 	public static final List<HarvestInfo> ITEMS = new ArrayList<HarvestInfo>();
 	
@@ -40,7 +38,7 @@ public class HarvestHandler {
 		}
 		
 		for (Block block : ModBlocks.BLOCKS) {
-			setHarvestLevel(block, ((BlockBase) block).getToolType(), ((BlockBase) block).getHarvestLevel());
+			setHarvestLevel(block, ((BlockBase) block).getHarvestInfo().getTypesHarvests());
 		}
 		
 		for (Item item : ModItems.ITEMS) {

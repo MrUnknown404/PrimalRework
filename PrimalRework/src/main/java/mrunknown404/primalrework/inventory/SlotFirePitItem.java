@@ -1,0 +1,23 @@
+package mrunknown404.primalrework.inventory;
+
+import mrunknown404.primalrework.init.ModRecipes;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
+
+public class SlotFirePitItem extends Slot {
+
+	public SlotFirePitItem(IInventory inventoryIn, int index, int x, int y) {
+		super(inventoryIn, index, x, y);
+	}
+	
+	@Override
+	public boolean isItemValid(ItemStack stack) {
+		return ModRecipes.getFirePitResult(stack) != null;
+	}
+	
+	@Override
+	public int getItemStackLimit(ItemStack stack) {
+		return 1;
+	}
+}

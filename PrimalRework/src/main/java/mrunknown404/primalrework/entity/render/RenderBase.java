@@ -1,6 +1,5 @@
 package mrunknown404.primalrework.entity.render;
 
-import mrunknown404.primalrework.Main;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
