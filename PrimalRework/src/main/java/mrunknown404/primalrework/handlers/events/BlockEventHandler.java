@@ -4,9 +4,10 @@ import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 import mrunknown404.primalrework.handlers.HarvestHandler;
+import mrunknown404.primalrework.util.harvest.BlockHarvestInfo;
 import mrunknown404.primalrework.util.harvest.HarvestDropInfo;
+import mrunknown404.primalrework.util.harvest.HarvestDropInfo.ItemDropInfo;
 import mrunknown404.primalrework.util.harvest.HarvestInfo;
-import mrunknown404.primalrework.util.harvest.ItemDropInfo;
 import mrunknown404.primalrework.util.harvest.ToolHarvestLevel;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,7 +23,8 @@ public class BlockEventHandler {
 
 	@SubscribeEvent
 	public void onHarvestDrop(HarvestDropsEvent e) {
-		if (e.getHarvester() != null || !(e.getHarvester() instanceof EntityPlayer)) {
+		if (e.getHarvester() != null && !(e.getHarvester() instanceof EntityPlayer)) {
+			e.getDrops().clear();
 			return;
 		}
 		
@@ -33,7 +35,8 @@ public class BlockEventHandler {
 		boolean isSilk = e.isSilkTouching();
 		int after_rdrop = MathHelper.clamp(r.nextInt(e.getFortuneLevel() + 1), 0, Integer.MAX_VALUE);
 		
-		HarvestInfo binfo = HarvestHandler.getHarvestInfo(b), iinfo = HarvestHandler.getHarvestInfo(item);
+		BlockHarvestInfo binfo = HarvestHandler.getHarvestInfo(b);
+		HarvestInfo iinfo = HarvestHandler.getHarvestInfo(item);
 		if (binfo == null || iinfo == null) {
 			return;
 		}
@@ -48,17 +51,13 @@ public class BlockEventHandler {
 		}
 		
 		for (ItemDropInfo itemDrop : drop.getDrops()) {
-			
-			
 			if (itemDrop.needsSilk() == isSilk) {
 				float dropFort = (itemDrop.getDropFortune() * after_rdrop) + 1;
 				float chanceFort = (itemDrop.getChanceFortune() * after_rdrop) + 1;
 				
 				int random = r.nextInt(100) + 1;
-				System.out.println(random + "<=" + (itemDrop.getDropChance() * chanceFort) + " | " + chanceFort);
 				
 				if (random <= itemDrop.getDropChance() * chanceFort) {
-					System.out.println("run");
 					e.getDrops().add(new ItemStack(itemDrop.getItem(), (int) ((itemDrop.getDropAmount() + ThreadLocalRandom.current().nextInt(
 							itemDrop.getRandomDropMin(), itemDrop.getRandomDropMax() + 1)) * dropFort)));
 				}

@@ -3,6 +3,9 @@ package mrunknown404.primalrework.util.harvest;
 import java.util.Arrays;
 import java.util.List;
 
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+
 public class HarvestDropInfo {
 	private final ToolType toolType;
 	private final boolean replace;
@@ -37,5 +40,61 @@ public class HarvestDropInfo {
 		}
 		
 		return false;
+	}
+	
+	public static class ItemDropInfo {
+		private final Item item;
+		private final boolean needsSilk;
+		private final int dropAmount, randomDropMin, randomDropMax;
+		private final float dropFortune, chanceFortune;
+		/** 1-100 */
+		private final int dropChance;
+		
+		public ItemDropInfo(Item item, boolean needsSilk, int dropChance, int dropAmount, int randomDropMin, int randomDropMax, float dropFortune, float chanceFortune) {
+			this.item = item;
+			this.needsSilk = needsSilk;
+			this.dropChance = dropChance;
+			this.dropAmount = dropAmount;
+			this.randomDropMin = randomDropMin;
+			this.randomDropMax = randomDropMax;
+			this.dropFortune = dropFortune;
+			this.chanceFortune = chanceFortune;
+		}
+		
+		public ItemDropInfo(Block block, boolean needsSilk, int dropChance, int dropAmount, int randomDropMin, int randomDropMax, float dropFortune, float chanceFortune) {
+			this(Item.getItemFromBlock(block), needsSilk, dropChance, dropAmount, randomDropMin, randomDropMax, dropFortune, chanceFortune);
+		}
+		
+		public Item getItem() {
+			return item;
+		}
+		
+		public boolean needsSilk() {
+			return needsSilk;
+		}
+		
+		public int getDropChance() {
+			return dropChance;
+		}
+		
+		public int getDropAmount() {
+			return dropAmount;
+		}
+		
+		public int getRandomDropMin() {
+			return randomDropMin;
+		}
+		
+		public int getRandomDropMax() {
+			return randomDropMax;
+		}
+		
+		public float getDropFortune() {
+			return dropFortune;
+		}
+		
+		public float getChanceFortune() {
+			return chanceFortune;
+		}
 	}
 }

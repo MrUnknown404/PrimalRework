@@ -4,7 +4,7 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
-import mrunknown404.primalrework.util.harvest.HarvestInfo;
+import mrunknown404.primalrework.util.harvest.BlockHarvestInfo;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -27,8 +27,8 @@ public class BlockGroundItem extends BlockBase {
 	}
 	
 	@Override
-	public void setHarvestInfo() {
-		this.harvestInfo = new HarvestInfo(this);
+	public void setupHarvestInfo() {
+		this.harvestInfo = new BlockHarvestInfo(this);
 	}
 	
 	public BlockGroundItem(String name, SoundType soundType, @Nullable Item dropInstead) {

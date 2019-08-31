@@ -34,8 +34,6 @@ public class Main {
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent e) {
-		HarvestHandler.changeHarvestLevels();
-		
 		RegistryHandler.registerEntities();
 		proxy.registerEntityRenders();
 		
@@ -51,6 +49,8 @@ public class Main {
 		proxy.setupRecipes();
 		
 		GameRegistry.registerTileEntity(TileEntityFirePit.class, new ResourceLocation(Main.MOD_ID, "fire_pit"));
+		
+		HarvestHandler.changeHarvestLevels();
 	}
 	
 	@EventHandler
