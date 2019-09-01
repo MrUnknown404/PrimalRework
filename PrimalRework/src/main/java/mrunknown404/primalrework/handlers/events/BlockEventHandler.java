@@ -23,7 +23,7 @@ public class BlockEventHandler {
 
 	@SubscribeEvent
 	public void onHarvestDrop(HarvestDropsEvent e) {
-		if (e.getHarvester() != null && !(e.getHarvester() instanceof EntityPlayer)) {
+		if (e.getHarvester() == null || !(e.getHarvester() instanceof EntityPlayer) || e.getHarvester().getHeldItemMainhand() == null) {
 			e.getDrops().clear();
 			return;
 		}

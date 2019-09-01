@@ -21,3 +21,4 @@ build
 lib
 eclipse
 run
+*.lnk

@@ -1,3 +1,6 @@
 {
-    "parent": "primalrework:block/fire_pit"
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "primalrework:items/fire_pit"
+    }
 }

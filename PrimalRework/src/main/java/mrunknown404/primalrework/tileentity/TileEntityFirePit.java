@@ -23,12 +23,6 @@ public class TileEntityFirePit extends TileEntity implements IInventory, ITickab
 	
 	@Override
 	public void update() {
-		if (burnTime > 0) {
-			burnTime--;
-		} else if (burnTime == 0) {
-			totalBurnTime = 0;
-		}
-		
 		if (!isBurning()) {
 			if (ModRecipes.isItemFirePitFuel(inv.get(ContainerFirePit.SLOT_FUEL))) {
 				ItemStack fuel = inv.get(ContainerFirePit.SLOT_FUEL);
@@ -39,34 +33,47 @@ public class TileEntityFirePit extends TileEntity implements IInventory, ITickab
 				cookTime = 0;
 				totalCookTime = 0;
 			}
-		} else {
-			if (totalCookTime == 0 && ModRecipes.isItemFirePitResult(inv.get(ContainerFirePit.SLOT_ITEM))) {
-				ItemStack item = inv.get(ContainerFirePit.SLOT_ITEM);
-				totalCookTime = ModRecipes.getFirePitResult(item).cookTime;
+		}
+		
+		if (isBurning()) {
+			if (!isCookingItem() && ModRecipes.isItemFirePitResult(inv.get(ContainerFirePit.SLOT_ITEM))) {
+				totalCookTime = ModRecipes.getFirePitResult(inv.get(ContainerFirePit.SLOT_ITEM)).getCookTime();
 				cookTime = totalCookTime;
-			} else if (totalCookTime > 0 && !ModRecipes.isItemFirePitResult(inv.get(ContainerFirePit.SLOT_ITEM))) {
-				cookTime = 0;
-				totalCookTime = 0;
 			}
 			
 			if (isCookingItem()) {
-				if (cookTime > 0) {
-					cookTime--;
-				} else if (cookTime == 0) {
+				if (ModRecipes.isItemFirePitResult(inv.get(ContainerFirePit.SLOT_ITEM))) {
+					if (cookTime > 0) {
+						cookTime--;
+						
+						if (cookTime == 0) {
+							ItemStack out = ModRecipes.getFirePitResult(inv.get(ContainerFirePit.SLOT_ITEM)).getOutput();
+							setInventorySlotContents(ContainerFirePit.SLOT_ITEM, out);
+							totalCookTime = 0;
+						}
+					}
+				} else {
 					totalCookTime = 0;
-					ItemStack out = ModRecipes.getFirePitResult(inv.get(ContainerFirePit.SLOT_ITEM)).getOutput();
-					setInventorySlotContents(ContainerFirePit.SLOT_ITEM, out);
+					cookTime = 0;
+				}
+			}
+			
+			if (burnTime > 0) {
+				burnTime--;
+				
+				if (burnTime == 0) {
+					totalBurnTime = 0;
 				}
 			}
 		}
 	}
 	
 	private boolean isCookingItem() {
-		return isBurning() && totalCookTime != 0;
+		return isBurning() && totalCookTime > 0;
 	}
 	
 	public boolean isBurning() {
-		return burnTime != 0;
+		return totalBurnTime > 0;
 	}
 	
 	@Override

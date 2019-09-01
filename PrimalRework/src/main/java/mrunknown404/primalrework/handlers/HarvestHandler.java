@@ -22,7 +22,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 public class HarvestHandler {
@@ -44,10 +43,6 @@ public class HarvestHandler {
 		}
 		
 		for (Item item : ModItems.ITEMS) {
-			if (item instanceof ItemBlock) {
-				System.out.println("HHI: " + ((ItemBlock) item).getBlock().getUnlocalizedName());
-			}
-			
 			if (item instanceof ItemBase) {
 				setHarvestLevel(item, ((ItemBase) item).getToolType(), ((ItemBase) item).getHarvestLevel());
 			} else {
@@ -55,33 +50,33 @@ public class HarvestHandler {
 			}
 		}
 		
-		ReflectionHelper.setPrivateValue(Material.class, Material.GRASS, true, "requiresNoTool");
-		ReflectionHelper.setPrivateValue(Material.class, Material.GROUND, true, "requiresNoTool");
-		ReflectionHelper.setPrivateValue(Material.class, Material.WOOD, true, "requiresNoTool");
-		ReflectionHelper.setPrivateValue(Material.class, Material.ROCK, true, "requiresNoTool");
-		ReflectionHelper.setPrivateValue(Material.class, Material.IRON, true, "requiresNoTool");
-		ReflectionHelper.setPrivateValue(Material.class, Material.ANVIL, true, "requiresNoTool");
-		ReflectionHelper.setPrivateValue(Material.class, Material.LEAVES, true, "requiresNoTool");
-		ReflectionHelper.setPrivateValue(Material.class, Material.PLANTS, true, "requiresNoTool");
-		ReflectionHelper.setPrivateValue(Material.class, Material.VINE, true, "requiresNoTool");
-		ReflectionHelper.setPrivateValue(Material.class, Material.SPONGE, true, "requiresNoTool");
-		ReflectionHelper.setPrivateValue(Material.class, Material.CLOTH, true, "requiresNoTool");
-		ReflectionHelper.setPrivateValue(Material.class, Material.SAND, true, "requiresNoTool");
-		ReflectionHelper.setPrivateValue(Material.class, Material.CIRCUITS, true, "requiresNoTool");
-		ReflectionHelper.setPrivateValue(Material.class, Material.CARPET, true, "requiresNoTool");
-		ReflectionHelper.setPrivateValue(Material.class, Material.GLASS, true, "requiresNoTool");
-		ReflectionHelper.setPrivateValue(Material.class, Material.REDSTONE_LIGHT, true, "requiresNoTool");
-		ReflectionHelper.setPrivateValue(Material.class, Material.TNT, true, "requiresNoTool");
-		ReflectionHelper.setPrivateValue(Material.class, Material.CORAL, true, "requiresNoTool");
-		ReflectionHelper.setPrivateValue(Material.class, Material.ICE, true, "requiresNoTool");
-		ReflectionHelper.setPrivateValue(Material.class, Material.PACKED_ICE, true, "requiresNoTool");
-		ReflectionHelper.setPrivateValue(Material.class, Material.SNOW, true, "requiresNoTool");
-		ReflectionHelper.setPrivateValue(Material.class, Material.CRAFTED_SNOW, true, "requiresNoTool");
-		ReflectionHelper.setPrivateValue(Material.class, Material.CACTUS, true, "requiresNoTool");
-		ReflectionHelper.setPrivateValue(Material.class, Material.CLAY, true, "requiresNoTool");
-		ReflectionHelper.setPrivateValue(Material.class, Material.GOURD, true, "requiresNoTool");
-		ReflectionHelper.setPrivateValue(Material.class, Material.DRAGON_EGG, true, "requiresNoTool");
-		ReflectionHelper.setPrivateValue(Material.class, Material.WEB, true, "requiresNoTool");
+		ReflectionHelper.setPrivateValue(Material.class, Material.GRASS, true, "requiresNoTool", "field_76241_J");
+		ReflectionHelper.setPrivateValue(Material.class, Material.GROUND, true, "requiresNoTool", "field_76241_J");
+		ReflectionHelper.setPrivateValue(Material.class, Material.WOOD, true, "requiresNoTool", "field_76241_J");
+		ReflectionHelper.setPrivateValue(Material.class, Material.ROCK, true, "requiresNoTool", "field_76241_J");
+		ReflectionHelper.setPrivateValue(Material.class, Material.IRON, true, "requiresNoTool", "field_76241_J");
+		ReflectionHelper.setPrivateValue(Material.class, Material.ANVIL, true, "requiresNoTool", "field_76241_J");
+		ReflectionHelper.setPrivateValue(Material.class, Material.LEAVES, true, "requiresNoTool", "field_76241_J");
+		ReflectionHelper.setPrivateValue(Material.class, Material.PLANTS, true, "requiresNoTool", "field_76241_J");
+		ReflectionHelper.setPrivateValue(Material.class, Material.VINE, true, "requiresNoTool", "field_76241_J");
+		ReflectionHelper.setPrivateValue(Material.class, Material.SPONGE, true, "requiresNoTool", "field_76241_J");
+		ReflectionHelper.setPrivateValue(Material.class, Material.CLOTH, true, "requiresNoTool", "field_76241_J");
+		ReflectionHelper.setPrivateValue(Material.class, Material.SAND, true, "requiresNoTool", "field_76241_J");
+		ReflectionHelper.setPrivateValue(Material.class, Material.CIRCUITS, true, "requiresNoTool", "field_76241_J");
+		ReflectionHelper.setPrivateValue(Material.class, Material.CARPET, true, "requiresNoTool", "field_76241_J");
+		ReflectionHelper.setPrivateValue(Material.class, Material.GLASS, true, "requiresNoTool", "field_76241_J");
+		ReflectionHelper.setPrivateValue(Material.class, Material.REDSTONE_LIGHT, true, "requiresNoTool", "field_76241_J");
+		ReflectionHelper.setPrivateValue(Material.class, Material.TNT, true, "requiresNoTool", "field_76241_J");
+		ReflectionHelper.setPrivateValue(Material.class, Material.CORAL, true, "requiresNoTool", "field_76241_J");
+		ReflectionHelper.setPrivateValue(Material.class, Material.ICE, true, "requiresNoTool", "field_76241_J");
+		ReflectionHelper.setPrivateValue(Material.class, Material.PACKED_ICE, true, "requiresNoTool", "field_76241_J");
+		ReflectionHelper.setPrivateValue(Material.class, Material.SNOW, true, "requiresNoTool", "field_76241_J");
+		ReflectionHelper.setPrivateValue(Material.class, Material.CRAFTED_SNOW, true, "requiresNoTool", "field_76241_J");
+		ReflectionHelper.setPrivateValue(Material.class, Material.CACTUS, true, "requiresNoTool", "field_76241_J");
+		ReflectionHelper.setPrivateValue(Material.class, Material.CLAY, true, "requiresNoTool", "field_76241_J");
+		ReflectionHelper.setPrivateValue(Material.class, Material.GOURD, true, "requiresNoTool", "field_76241_J");
+		ReflectionHelper.setPrivateValue(Material.class, Material.DRAGON_EGG, true, "requiresNoTool", "field_76241_J");
+		ReflectionHelper.setPrivateValue(Material.class, Material.WEB, true, "requiresNoTool", "field_76241_J");
 		
 		Items.DIAMOND_PICKAXE.setHarvestLevel("pickaxe", ToolHarvestLevel.unbreakable.level);
 		Items.IRON_PICKAXE.setHarvestLevel("pickaxe", ToolHarvestLevel.unbreakable.level);

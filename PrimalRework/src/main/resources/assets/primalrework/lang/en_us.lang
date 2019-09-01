@@ -17,7 +17,9 @@ entity.pigeon.name=Pigeon
 itemGroup.primalrework_items=Primal.R Items
 itemGroup.primalrework_blocks=Primal.R Blocks
 
-container.fire_pit=Fire Pit
+container.fire_pit=Camp Fire
+
+gui.fire_pit_cook=Fuel
 
 subtitles.entity.pigeon.ambient=Pigeon Cooing
 subtitles.entity.pigeon.hurt=Pigeon hurts
