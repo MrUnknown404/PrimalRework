@@ -31,6 +31,17 @@ public class ItemToolBase extends ItemTool implements IItemBase {
 	}
 	
 	@Override
+	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+		if (toolType == ToolType.knife || toolType == ToolType.sword) {
+			stack.damageItem(1, attacker);
+		} else {
+			stack.damageItem(2, attacker);
+		}
+		
+		return true;
+	}
+	
+	@Override
 	public boolean canDisableShield(ItemStack stack, ItemStack shield, EntityLivingBase entity, EntityLivingBase attacker) {
 		return toolType == ToolType.axe;
 	}

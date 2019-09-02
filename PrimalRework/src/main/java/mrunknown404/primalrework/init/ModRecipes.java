@@ -1,13 +1,13 @@
 package mrunknown404.primalrework.init;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
 import com.google.common.collect.Lists;
 
 import mrunknown404.primalrework.Main;
-import mrunknown404.primalrework.util.CompareFirePitFuel;
 import mrunknown404.primalrework.util.DoubleValue;
 import mrunknown404.primalrework.util.DummyRecipe;
 import mrunknown404.primalrework.util.recipes.FirePitRecipe;
@@ -128,5 +128,12 @@ public class ModRecipes {
 		}
 		
 		return fuels;
+	}
+	
+	private static class CompareFirePitFuel implements Comparator<DoubleValue<ItemStack, Integer>> {
+		@Override
+		public int compare(DoubleValue<ItemStack, Integer> o1, DoubleValue<ItemStack, Integer> o2) {
+			return o1.getL().getDisplayName().compareTo(o2.getL().getDisplayName()) - (o1.getR()- o2.getR());
+		}
 	}
 }

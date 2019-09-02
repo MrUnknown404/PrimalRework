@@ -16,6 +16,8 @@ import net.minecraft.item.ItemStack;
 @JEIPlugin
 public class JEICompat implements IModPlugin {
 
+	//TODO add information pages for in-world things like knapping
+	
 	@Override
 	public void registerCategories(IRecipeCategoryRegistration reg) {
 		final IJeiHelpers helpers = reg.getJeiHelpers();
