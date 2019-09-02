@@ -11,13 +11,13 @@ public class HarvestInfo {
 	protected final List<DoubleValue<ToolType, ToolHarvestLevel>> types_harvests;
 	protected final Item item;
 	
-	public HarvestInfo(Item item, DoubleValue<ToolType, ToolHarvestLevel>... types_harvests) {
+	public HarvestInfo(Item item, List<DoubleValue<ToolType, ToolHarvestLevel>> types_harvests) {
 		this.item = item;
-		this.types_harvests = Arrays.asList(types_harvests);
+		this.types_harvests = types_harvests;
 	}
 	
-	public HarvestInfo(Item item) {
-		this(item, new DoubleValue<ToolType, ToolHarvestLevel>(ToolType.none, ToolHarvestLevel.hand));
+	public HarvestInfo(Item item, DoubleValue<ToolType, ToolHarvestLevel> harvest) {
+		this(item, Arrays.asList(harvest));
 	}
 	
 	public Item getItem() {
@@ -35,5 +35,10 @@ public class HarvestInfo {
 		}
 		
 		return false;
+	}
+	
+	@Override
+	public String toString() {
+		return "(" + item.getUnlocalizedName() + ":" + types_harvests + ")";
 	}
 }

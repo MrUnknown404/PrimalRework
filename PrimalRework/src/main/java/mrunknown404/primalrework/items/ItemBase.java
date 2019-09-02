@@ -1,13 +1,11 @@
 package mrunknown404.primalrework.items;
 
-import mrunknown404.primalrework.Main;
 import mrunknown404.primalrework.init.ModCreativeTabs;
-import mrunknown404.primalrework.init.ModItems;
 import mrunknown404.primalrework.util.harvest.ToolHarvestLevel;
 import mrunknown404.primalrework.util.harvest.ToolType;
 import net.minecraft.item.Item;
 
-public class ItemBase extends Item {
+public class ItemBase extends Item implements IItemBase {
 
 	private final ToolType toolType;
 	private final ToolHarvestLevel harvestLevel;
@@ -21,21 +19,19 @@ public class ItemBase extends Item {
 		this.toolType = type;
 		this.harvestLevel = level;
 		
-		ModItems.ITEMS.add(this);
+		addToModList(this);
 	}
 	
 	public ItemBase(String name) {
 		this(name, 64, ToolType.none, ToolHarvestLevel.hand);
 	}
 	
-	public void registerModels() {
-		Main.proxy.registerItemRenderer(this, 0, "inventory");
-	}
-	
+	@Override
 	public ToolType getToolType() {
 		return toolType;
 	}
 	
+	@Override
 	public ToolHarvestLevel getHarvestLevel() {
 		return harvestLevel;
 	}

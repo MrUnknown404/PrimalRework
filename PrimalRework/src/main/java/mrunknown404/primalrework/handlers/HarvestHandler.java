@@ -4,12 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.annotation.Nullable;
-
 import mrunknown404.primalrework.blocks.util.BlockBase;
 import mrunknown404.primalrework.init.ModBlocks;
 import mrunknown404.primalrework.init.ModItems;
-import mrunknown404.primalrework.items.ItemBase;
+import mrunknown404.primalrework.items.IItemBase;
 import mrunknown404.primalrework.util.DoubleValue;
 import mrunknown404.primalrework.util.harvest.BlockHarvestInfo;
 import mrunknown404.primalrework.util.harvest.HarvestDropInfo;
@@ -22,6 +20,9 @@ import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemHoe;
+import net.minecraft.item.ItemSword;
+import net.minecraft.item.ItemTool;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 public class HarvestHandler {
@@ -39,12 +40,12 @@ public class HarvestHandler {
 		}
 		
 		for (Block block : ModBlocks.BLOCKS) {
-			setHarvestLevel(block, ((BlockBase) block).getHarvestInfo().getTypesHarvests().toArray(new DoubleValue[0]));
+			setHarvestLevel(block, ((BlockBase) block).getHarvestInfo().getTypesHarvests());
 		}
 		
 		for (Item item : ModItems.ITEMS) {
-			if (item instanceof ItemBase) {
-				setHarvestLevel(item, ((ItemBase) item).getToolType(), ((ItemBase) item).getHarvestLevel());
+			if (item instanceof IItemBase) {
+				setHarvestLevel(item, ((IItemBase) item).getToolType(), ((IItemBase) item).getHarvestLevel());
 			} else {
 				setHarvestLevel(item, ToolType.none, ToolHarvestLevel.hand);
 			}
@@ -98,25 +99,68 @@ public class HarvestHandler {
 		
 		registerBlocks();
 		registerItems();
+		
+		setVanillaHoeDamage((ItemHoe) Items.DIAMOND_HOE, ToolHarvestLevel.diamond);
+		setVanillaHoeDamage((ItemHoe) Items.IRON_HOE, ToolHarvestLevel.iron);
+		setVanillaHoeDamage((ItemHoe) Items.STONE_HOE, ToolHarvestLevel.stone);
+		setVanillaHoeDamage((ItemHoe) Items.WOODEN_HOE, ToolHarvestLevel.flint);
+		setVanillaHoeDamage((ItemHoe) Items.GOLDEN_HOE, ToolHarvestLevel.copper);
+		
+		setVanillaSwordDamage((ItemSword) Items.DIAMOND_SWORD, ToolHarvestLevel.diamond);
+		setVanillaSwordDamage((ItemSword) Items.IRON_SWORD, ToolHarvestLevel.iron);
+		setVanillaSwordDamage((ItemSword) Items.STONE_SWORD, ToolHarvestLevel.stone);
+		setVanillaSwordDamage((ItemSword) Items.WOODEN_SWORD, ToolHarvestLevel.flint);
+		setVanillaSwordDamage((ItemSword) Items.GOLDEN_SWORD, ToolHarvestLevel.copper);
+		
+		setVanillaToolDamage((ItemTool) Items.DIAMOND_PICKAXE, ToolType.pickaxe, ToolHarvestLevel.diamond);
+		setVanillaToolDamage((ItemTool) Items.IRON_PICKAXE, ToolType.pickaxe, ToolHarvestLevel.iron);
+		setVanillaToolDamage((ItemTool) Items.STONE_PICKAXE, ToolType.pickaxe, ToolHarvestLevel.stone);
+		setVanillaToolDamage((ItemTool) Items.WOODEN_PICKAXE, ToolType.pickaxe, ToolHarvestLevel.flint);
+		setVanillaToolDamage((ItemTool) Items.GOLDEN_PICKAXE, ToolType.pickaxe, ToolHarvestLevel.copper);
+		
+		setVanillaToolDamage((ItemTool) Items.DIAMOND_SHOVEL, ToolType.shovel, ToolHarvestLevel.diamond);
+		setVanillaToolDamage((ItemTool) Items.IRON_SHOVEL, ToolType.shovel, ToolHarvestLevel.iron);
+		setVanillaToolDamage((ItemTool) Items.STONE_SHOVEL, ToolType.shovel, ToolHarvestLevel.stone);
+		setVanillaToolDamage((ItemTool) Items.WOODEN_SHOVEL, ToolType.shovel, ToolHarvestLevel.flint);
+		setVanillaToolDamage((ItemTool) Items.GOLDEN_SHOVEL, ToolType.shovel, ToolHarvestLevel.copper);
+		
+		setVanillaToolDamage((ItemTool) Items.DIAMOND_AXE, ToolType.axe, ToolHarvestLevel.diamond);
+		setVanillaToolDamage((ItemTool) Items.IRON_AXE, ToolType.axe, ToolHarvestLevel.iron);
+		setVanillaToolDamage((ItemTool) Items.STONE_AXE, ToolType.axe, ToolHarvestLevel.stone);
+		setVanillaToolDamage((ItemTool) Items.WOODEN_AXE, ToolType.axe, ToolHarvestLevel.flint);
+		setVanillaToolDamage((ItemTool) Items.GOLDEN_AXE, ToolType.axe, ToolHarvestLevel.copper);
 	}
 	
-	public static void setHarvestLevel(Block b, DoubleValue<ToolType, ToolHarvestLevel>... list) {
-		setHarvestLevel(b, -1f, null, list);
+	private static void setVanillaHoeDamage(ItemHoe item, ToolHarvestLevel level) {
+		ReflectionHelper.setPrivateValue(ItemHoe.class, item, ToolType.hoe.swingSpeed + 4, "speed", "field_185072_b");
+	}
+	
+	private static void setVanillaSwordDamage(ItemSword item, ToolHarvestLevel level) {
+		ReflectionHelper.setPrivateValue(ItemSword.class, item, ToolType.sword.baseDamage + level.extraDamage, "attackDamage", "field_150934_a");
+	}
+	
+	private static void setVanillaToolDamage(ItemTool item, ToolType type, ToolHarvestLevel level) {
+		ReflectionHelper.setPrivateValue(ItemTool.class, item, type.swingSpeed, "attackSpeed", "field_185065_c");
+		ReflectionHelper.setPrivateValue(ItemTool.class, item, type.baseDamage + level.extraDamage, "attackDamage", "field_77865_bY");
 	}
 	
 	public static void setHarvestLevel(Block b, ToolType type, ToolHarvestLevel level) {
-		setHarvestLevel(b, -1f, null, new DoubleValue<ToolType, ToolHarvestLevel>(type, level));
+		setHarvestLevel(b, -1, Arrays.asList(new DoubleValue<ToolType, ToolHarvestLevel>(type, level)));
 	}
 	
 	public static void setHarvestLevel(Block b, float hardness, ToolType type, ToolHarvestLevel level) {
-		setHarvestLevel(b, hardness, null, new DoubleValue<ToolType, ToolHarvestLevel>(type, level));
+		setHarvestLevel(b, hardness, Arrays.asList(new DoubleValue<ToolType, ToolHarvestLevel>(type, level)));
 	}
 	
-	public static void setHarvestLevel(Block b, float hardness, @Nullable List<HarvestDropInfo> drops, DoubleValue<ToolType, ToolHarvestLevel>... list) {
-		BlockHarvestInfo info = new BlockHarvestInfo(b, list);
+	public static void setHarvestLevel(Block b, List<DoubleValue<ToolType, ToolHarvestLevel>> harvest) {
+		setHarvestLevel(b, -1, harvest);
+	}
+	
+	public static void setHarvestLevel(Block b, float hardness, List<DoubleValue<ToolType, ToolHarvestLevel>> harvest, HarvestDropInfo... drops) {
+		BlockHarvestInfo info = new BlockHarvestInfo(b, harvest);
 		
-		if (drops != null && !drops.isEmpty()) {
-			info.setDrops(drops);
+		if (drops != null) {
+			info = info.setDrops(drops);
 		}
 		
 		if (hardness != -1f) {
@@ -141,19 +185,11 @@ public class HarvestHandler {
 	public static boolean canBreak(Block block, Item item) {
 		BlockHarvestInfo binfo = getHarvestInfo(block);
 		HarvestInfo iinfo = getHarvestInfo(item);
-		if (binfo == null || iinfo == null) {
+		if (binfo == null || iinfo == null || binfo.isUnbreakable()) {
 			return false;
 		}
 		
 		for (DoubleValue<ToolType, ToolHarvestLevel> block_dv : binfo.getTypesHarvests()) {
-			if (block_dv.getR() == ToolHarvestLevel.unbreakable) {
-				return false;
-			} else if (block_dv.getR() == ToolHarvestLevel.hand) {
-				return true;
-			} else if (block_dv.getL() == ToolType.none) {
-				return true;
-			}
-			
 			for (DoubleValue<ToolType, ToolHarvestLevel> item_dv : iinfo.getTypesHarvests()) {
 				if (block_dv.getL() == item_dv.getL()) {
 					if (item_dv.getR().level >= block_dv.getR().level) {
@@ -163,7 +199,7 @@ public class HarvestHandler {
 			}
 		}
 		
-		return false;
+		return binfo.canBreakWithNone();
 	}
 	
 	public static BlockHarvestInfo getHarvestInfo(Block block) {
@@ -186,7 +222,7 @@ public class HarvestHandler {
 		return null;
 	}
 	
-	public static ToolHarvestLevel getCurrentItemHarvestLevel(Block block, Item item) {
+	public static ToolHarvestLevel getItemsHarvestLevel(Block block, Item item) {
 		BlockHarvestInfo binfo = getHarvestInfo(block);
 		HarvestInfo iinfo = getHarvestInfo(item);
 		if (binfo == null || iinfo == null) {
@@ -197,16 +233,14 @@ public class HarvestHandler {
 			for (DoubleValue<ToolType, ToolHarvestLevel> item_dv : iinfo.getTypesHarvests()) {
 				if (block_dv.getL() == item_dv.getL()) {
 					return item_dv.getR();
-				} else if (block_dv.getR() == ToolHarvestLevel.hand) {
-					return block_dv.getR();
 				}
 			}
 		}
 		
-		return null;
+		return binfo.canBreakWithNone() ? ToolHarvestLevel.hand : null;
 	}
 	
-	public static ToolHarvestLevel getCurrentBlockHarvestLevel(Block block, Item item) {
+	public static ToolHarvestLevel getBlocksHarvestLevel(Block block, Item item) {
 		BlockHarvestInfo binfo = getHarvestInfo(block);
 		HarvestInfo iinfo = getHarvestInfo(item);
 		if (binfo == null || iinfo == null) {
@@ -217,16 +251,14 @@ public class HarvestHandler {
 			for (DoubleValue<ToolType, ToolHarvestLevel> item_dv : iinfo.getTypesHarvests()) {
 				if (block_dv.getL() == item_dv.getL()) {
 					return block_dv.getR();
-				} else if (block_dv.getR() == ToolHarvestLevel.hand) {
-					return block_dv.getR();
 				}
 			}
 		}
 		
-		return null;
+		return binfo.canBreakWithNone() ? ToolHarvestLevel.hand : null;
 	}
 	
-	public static ToolType getCurrentItemToolType(Block block, Item item) {
+	public static ToolType getItemsToolType(Block block, Item item) {
 		BlockHarvestInfo binfo = getHarvestInfo(block);
 		HarvestInfo iinfo = getHarvestInfo(item);
 		if (binfo == null || iinfo == null) {
@@ -241,37 +273,45 @@ public class HarvestHandler {
 			}
 		}
 		
-		return null;
+		return ToolType.none;
 	}
 	
 	private static void registerBlocks() {
-		setHarvestLevel(Blocks.STONE, -1, Arrays.asList(new HarvestDropInfo(ToolType.pickaxe, true,
-				new ItemDropInfo(ModBlocks.ROCK, false, 100, 4, 0, 5, 1.2f, 0f),
-				new ItemDropInfo(Blocks.COBBLESTONE, false, 10, 1, 0, 0, 0f, 0.1f))),
-				new DoubleValue<ToolType, ToolHarvestLevel>(ToolType.pickaxe, ToolHarvestLevel.flint));
+		setHarvestLevel(Blocks.STONE, -1, Arrays.asList(
+				new DoubleValue<ToolType, ToolHarvestLevel>(ToolType.pickaxe, ToolHarvestLevel.flint)),
+				new HarvestDropInfo(ToolType.pickaxe, true,
+						new ItemDropInfo(ModBlocks.ROCK, false, 100, 4, 0, 5, 1.2f, 0f),
+						new ItemDropInfo(Blocks.COBBLESTONE, false, 10, 1, 0, 0, 0f, 0.1f)));
 		setHarvestLevel(Blocks.GRASS,                         ToolType.shovel,  ToolHarvestLevel.flint);
 		setHarvestLevel(Blocks.DIRT,                          ToolType.shovel,  ToolHarvestLevel.flint);
 		setHarvestLevel(Blocks.COBBLESTONE,                   ToolType.pickaxe, ToolHarvestLevel.flint);
 		setHarvestLevel(Blocks.PLANKS,                        ToolType.axe,     ToolHarvestLevel.flint);
 		setHarvestLevel(Blocks.SAPLING,                       ToolType.none,    ToolHarvestLevel.hand);
 		setHarvestLevel(Blocks.BEDROCK,                       ToolType.none,    ToolHarvestLevel.unbreakable);
-		setHarvestLevel(Blocks.SAND,                          ToolType.shovel,  ToolHarvestLevel.flint);
-		setHarvestLevel(Blocks.GRAVEL, -1, Arrays.asList(new HarvestDropInfo(ToolType.shovel, true,
-				new ItemDropInfo(ModItems.GRAVEL, false, 100, 2, 1, 2, 0.2f, 0f))),
-				new DoubleValue<ToolType, ToolHarvestLevel>(ToolType.shovel, ToolHarvestLevel.flint));
+		setHarvestLevel(Blocks.SAND,                          ToolType.shovel,  ToolHarvestLevel.hand);
+		setHarvestLevel(Blocks.GRAVEL, -1, Arrays.asList(
+				new DoubleValue<ToolType, ToolHarvestLevel>(ToolType.shovel, ToolHarvestLevel.flint)),
+				new HarvestDropInfo(ToolType.shovel, true,
+						new ItemDropInfo(ModItems.GRAVEL, false, 100, 2, 1, 2, 0.2f, 0f)));
 		setHarvestLevel(Blocks.GOLD_ORE,                      ToolType.pickaxe, ToolHarvestLevel.bronze);
 		setHarvestLevel(Blocks.IRON_ORE,                      ToolType.pickaxe, ToolHarvestLevel.bronze);
 		setHarvestLevel(Blocks.COAL_ORE,                      ToolType.pickaxe, ToolHarvestLevel.stone);
 		setHarvestLevel(Blocks.LOG,                           ToolType.axe,     ToolHarvestLevel.flint);
 		setHarvestLevel(Blocks.LOG2,                          ToolType.axe,     ToolHarvestLevel.flint);
-		setHarvestLevel(Blocks.LEAVES, 0.5f, Arrays.asList(new HarvestDropInfo(ToolType.none, false,
-				new ItemDropInfo(Items.STICK, false, 10, 1, 0, 0, 0.2f, 0.1f)),
-				new HarvestDropInfo(ToolType.knife, false, new ItemDropInfo(Items.STICK, false, 70, 1, 0, 1, 0.2f, 0.1f))),
-				new DoubleValue<ToolType, ToolHarvestLevel>(ToolType.knife, ToolHarvestLevel.hand));
-		setHarvestLevel(Blocks.LEAVES2, 0.5f, Arrays.asList(new HarvestDropInfo(ToolType.none, false,
-				new ItemDropInfo(Items.STICK, false, 10, 1, 0, 0, 0.2f, 0.1f)),
-				new HarvestDropInfo(ToolType.knife, false, new ItemDropInfo(Items.STICK, false, 70, 1, 0, 1, 0.2f, 0.1f))),
-				new DoubleValue<ToolType, ToolHarvestLevel>(ToolType.knife, ToolHarvestLevel.hand));
+		setHarvestLevel(Blocks.LEAVES, 0.3f, Arrays.asList(
+				new DoubleValue<ToolType, ToolHarvestLevel>(ToolType.none, ToolHarvestLevel.hand),
+				new DoubleValue<ToolType, ToolHarvestLevel>(ToolType.knife, ToolHarvestLevel.flint)),
+				new HarvestDropInfo(ToolType.none, false,
+						new ItemDropInfo(Items.STICK, false, 10, 1, 0, 0, 0.2f, 0.1f)),
+				new HarvestDropInfo(ToolType.knife, false,
+						new ItemDropInfo(Items.STICK, false, 70, 1, 0, 1, 0.2f, 0.1f)));
+		setHarvestLevel(Blocks.LEAVES2, 0.3f, Arrays.asList(
+				new DoubleValue<ToolType, ToolHarvestLevel>(ToolType.none, ToolHarvestLevel.hand),
+				new DoubleValue<ToolType, ToolHarvestLevel>(ToolType.knife, ToolHarvestLevel.flint)),
+				new HarvestDropInfo(ToolType.none, false,
+						new ItemDropInfo(Items.STICK, false, 10, 1, 0, 0, 0.2f, 0.1f)),
+				new HarvestDropInfo(ToolType.knife, false,
+						new ItemDropInfo(Items.STICK, false, 70, 1, 0, 1, 0.2f, 0.1f)));
 		setHarvestLevel(Blocks.SPONGE,                        ToolType.none,    ToolHarvestLevel.hand);
 		setHarvestLevel(Blocks.GLASS,                         ToolType.none,    ToolHarvestLevel.hand);
 		setHarvestLevel(Blocks.LAPIS_ORE,                     ToolType.pickaxe, ToolHarvestLevel.copper);
@@ -284,14 +324,20 @@ public class HarvestHandler {
 		setHarvestLevel(Blocks.DETECTOR_RAIL,                 ToolType.none,    ToolHarvestLevel.hand);
 		setHarvestLevel(Blocks.STICKY_PISTON,                 ToolType.none,    ToolHarvestLevel.hand);
 		setHarvestLevel(Blocks.WEB,                           ToolType.sword,   ToolHarvestLevel.flint);
-		setHarvestLevel(Blocks.TALLGRASS, -1, Arrays.asList(new HarvestDropInfo(ToolType.knife, true,
-				new ItemDropInfo(ModItems.PLANT_FIBER, false, 100, 1, 0, 0, 0f, 0f))),
-				new DoubleValue<ToolType, ToolHarvestLevel>(ToolType.knife, ToolHarvestLevel.flint));
+		setHarvestLevel(Blocks.TALLGRASS, -1, Arrays.asList(
+				new DoubleValue<ToolType, ToolHarvestLevel>(ToolType.none, ToolHarvestLevel.hand),
+				new DoubleValue<ToolType, ToolHarvestLevel>(ToolType.knife, ToolHarvestLevel.flint)),
+				new HarvestDropInfo(ToolType.none, false,
+						new ItemDropInfo(ModItems.PLANT_FIBER, false, 50, 1, 0, 0, 0f, 0f)),
+				new HarvestDropInfo(ToolType.knife, false,
+						new ItemDropInfo(ModItems.PLANT_FIBER, false, 100, 1, 1, 2, 0f, 0f)));
 		setHarvestLevel(Blocks.DEADBUSH,                      ToolType.none,    ToolHarvestLevel.hand);
 		setHarvestLevel(Blocks.PISTON,                        ToolType.none,    ToolHarvestLevel.hand);
 		setHarvestLevel(Blocks.PISTON_HEAD,                   ToolType.none,    ToolHarvestLevel.hand);
-		setHarvestLevel(Blocks.WOOL, new DoubleValue<ToolType, ToolHarvestLevel>(ToolType.none, ToolHarvestLevel.hand),
-				new DoubleValue<ToolType, ToolHarvestLevel>(ToolType.shears, ToolHarvestLevel.flint));
+		setHarvestLevel(Blocks.WOOL, Arrays.asList(
+				new DoubleValue<ToolType, ToolHarvestLevel>(ToolType.none, ToolHarvestLevel.hand),
+				new DoubleValue<ToolType, ToolHarvestLevel>(ToolType.shears, ToolHarvestLevel.flint),
+				new DoubleValue<ToolType, ToolHarvestLevel>(ToolType.knife, ToolHarvestLevel.flint)));
 		//setHarvestLevel(Blocks.PISTON_EXTENSION, ToolType., ToolHarvestLevel.);
 		setHarvestLevel(Blocks.YELLOW_FLOWER,                 ToolType.none,    ToolHarvestLevel.hand);
 		setHarvestLevel(Blocks.RED_FLOWER,                    ToolType.none,    ToolHarvestLevel.hand);
@@ -361,10 +407,11 @@ public class HarvestHandler {
 		setHarvestLevel(Blocks.UNPOWERED_REPEATER,            ToolType.none,    ToolHarvestLevel.hand);
 		setHarvestLevel(Blocks.POWERED_REPEATER,              ToolType.none,    ToolHarvestLevel.hand);
 		setHarvestLevel(Blocks.TRAPDOOR,                      ToolType.axe,     ToolHarvestLevel.flint);
-		setHarvestLevel(Blocks.MONSTER_EGG, -1, Arrays.asList(new HarvestDropInfo(ToolType.pickaxe, true,
-				new ItemDropInfo(ModBlocks.ROCK, false, 100, 4, 0, 5, 1.2f, 0f),
-				new ItemDropInfo(Blocks.COBBLESTONE, false, 10, 1, 0, 0, 0f, 0.1f))),
-				new DoubleValue<ToolType, ToolHarvestLevel>(ToolType.pickaxe, ToolHarvestLevel.flint));
+		setHarvestLevel(Blocks.MONSTER_EGG, -1, Arrays.asList(
+				new DoubleValue<ToolType, ToolHarvestLevel>(ToolType.pickaxe, ToolHarvestLevel.flint)),
+				new HarvestDropInfo(ToolType.pickaxe, true,
+						new ItemDropInfo(ModBlocks.ROCK, false, 100, 4, 0, 5, 1.2f, 0f),
+						new ItemDropInfo(Blocks.COBBLESTONE, false, 10, 1, 0, 0, 0f, 0.1f)));
 		setHarvestLevel(Blocks.STONEBRICK,                    ToolType.pickaxe, ToolHarvestLevel.flint);
 		setHarvestLevel(Blocks.BROWN_MUSHROOM_BLOCK,          ToolType.axe,     ToolHarvestLevel.flint);
 		setHarvestLevel(Blocks.RED_MUSHROOM_BLOCK,            ToolType.axe,     ToolHarvestLevel.flint);

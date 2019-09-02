@@ -7,10 +7,8 @@ import mrunknown404.primalrework.handlers.HarvestHandler;
 import mrunknown404.primalrework.util.harvest.BlockHarvestInfo;
 import mrunknown404.primalrework.util.harvest.HarvestDropInfo;
 import mrunknown404.primalrework.util.harvest.HarvestDropInfo.ItemDropInfo;
-import mrunknown404.primalrework.util.harvest.HarvestInfo;
 import mrunknown404.primalrework.util.harvest.ToolHarvestLevel;
 import net.minecraft.block.Block;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.MathHelper;
@@ -23,7 +21,9 @@ public class BlockEventHandler {
 
 	@SubscribeEvent
 	public void onHarvestDrop(HarvestDropsEvent e) {
-		if (e.getHarvester() == null || !(e.getHarvester() instanceof EntityPlayer) || e.getHarvester().getHeldItemMainhand() == null) {
+		if (e.getHarvester() == null) {
+			return;
+		} else if (e.getHarvester().getHeldItemMainhand() == null) {
 			e.getDrops().clear();
 			return;
 		}
@@ -31,20 +31,18 @@ public class BlockEventHandler {
 		Block b = e.getState().getBlock();
 		Item item = e.getHarvester().getHeldItemMainhand().getItem();
 		
-		Random r = new Random();
-		boolean isSilk = e.isSilkTouching();
-		int after_rdrop = MathHelper.clamp(r.nextInt(e.getFortuneLevel() + 1), 0, Integer.MAX_VALUE);
-		
 		BlockHarvestInfo binfo = HarvestHandler.getHarvestInfo(b);
-		HarvestInfo iinfo = HarvestHandler.getHarvestInfo(item);
-		if (binfo == null || iinfo == null) {
+		if (binfo == null || HarvestHandler.getHarvestInfo(item) == null) {
 			return;
 		}
-		
-		HarvestDropInfo drop = binfo.getDrop(HarvestHandler.getCurrentItemToolType(b, item));
+		HarvestDropInfo drop = binfo.getDrop(HarvestHandler.getItemsToolType(b, item));
 		if (drop == null) {
 			return;
 		}
+		
+		Random r = new Random();
+		boolean isSilk = e.isSilkTouching();
+		int after_rdrop = MathHelper.clamp(r.nextInt(e.getFortuneLevel() + 1), 0, Integer.MAX_VALUE);
 		
 		if (drop.isReplace()) {
 			e.getDrops().clear();
@@ -67,7 +65,9 @@ public class BlockEventHandler {
 	
 	@SubscribeEvent
 	public void onBlockBreak(BlockEvent.HarvestDropsEvent e) {
-		if (e.getHarvester() == null || !(e.getHarvester() instanceof EntityPlayer)) {
+		if (HarvestHandler.getHarvestInfo(e.getState().getBlock()).canBreakWithNone()) {
+			return;
+		} else if (e.getHarvester() == null) {
 			e.setDropChance(0);
 			return;
 		}
@@ -79,16 +79,19 @@ public class BlockEventHandler {
 	
 	@SubscribeEvent
 	public void onBreakSpeed(PlayerEvent.BreakSpeed e) {
-		if (HarvestHandler.getCurrentBlockHarvestLevel(e.getState().getBlock(), e.getEntityPlayer().getHeldItemMainhand().getItem()) == ToolHarvestLevel.unbreakable) {
+		if (HarvestHandler.getHarvestInfo(e.getState().getBlock()).isUnbreakable()) {
 			e.setNewSpeed(0);
 			return;
 		}
 		
+		float newSpeed = MathHelper.clamp(0.75f / e.getState().getBlockHardness(e.getEntityPlayer().world, e.getPos()), 0, 0.3f);
 		if (HarvestHandler.canBreak(e.getState().getBlock(), e.getEntityPlayer().getHeldItemMainhand().getItem())) {
-			ToolHarvestLevel harvest = HarvestHandler.getCurrentItemHarvestLevel(e.getState().getBlock(), e.getEntityPlayer().getHeldItemMainhand().getItem());
-			e.setNewSpeed(e.getOriginalSpeed() * harvest.speed);
+			ToolHarvestLevel harvest = HarvestHandler.getItemsHarvestLevel(e.getState().getBlock(), e.getEntityPlayer().getHeldItemMainhand().getItem());
+			e.setNewSpeed((2 * harvest.speed) * newSpeed);
 		} else {
-			e.setNewSpeed(MathHelper.clamp(0.75f / e.getState().getBlockHardness(e.getEntityPlayer().world, e.getPos()), -Integer.MAX_VALUE, 0.3f));
+			e.setNewSpeed(newSpeed);
 		}
+		
+		System.out.println(e.getNewSpeed());
 	}
 }

@@ -16,6 +16,18 @@ public class ModCreativeTabs {
 		}
 	}).setBackgroundImageName("item_search.png");
 	
+	public static final CreativeTabs PRIMALREWORK_TOOLS = (new CreativeTabs("primalrework_tools") {
+		@Override
+		public ItemStack getTabIconItem() {
+			return new ItemStack(ModItems.FLINT_KNIFE);
+		}
+		
+		@Override
+		public boolean hasSearchBar() {
+			return true;
+		}
+	}).setBackgroundImageName("item_search.png");
+	
 	public static final CreativeTabs PRIMALREWORK_BLOCKS = (new CreativeTabs("primalrework_blocks") {
 		@Override
 		public ItemStack getTabIconItem() {

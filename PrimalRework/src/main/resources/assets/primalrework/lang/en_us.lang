@@ -2,6 +2,10 @@
 item.plant_fiber.name=Plant Fiber
 item.plant_rope.name=Plant Rope
 item.gravel.name=Gravel
+item.flint_knapped.name=Knapped Flint
+item.flint_point.name=Flint Point
+
+item.flint_knife.name=Flint Knife
 
 //Blocks
 tile.rock.name=Rock
@@ -15,6 +19,7 @@ entity.pigeon.name=Pigeon
 
 //GUI
 itemGroup.primalrework_items=Primal.R Items
+itemGroup.primalrework_tools=Primal.R Tools
 itemGroup.primalrework_blocks=Primal.R Blocks
 
 container.fire_pit=Camp Fire

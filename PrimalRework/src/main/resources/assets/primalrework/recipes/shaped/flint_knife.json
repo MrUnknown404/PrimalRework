@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "FS",
+    "I "
+  ],
+  "key": {
+    "F": {
+      "item": "primalrework:flint_point"
+    },
+    "S": {
+      "item": "primalrework:plant_rope"
+    },
+    "I": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "primalrework:flint_knife"
+  }
+}

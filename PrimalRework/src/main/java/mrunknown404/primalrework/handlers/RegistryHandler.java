@@ -5,7 +5,7 @@ import mrunknown404.primalrework.blocks.util.BlockBase;
 import mrunknown404.primalrework.init.ModBlocks;
 import mrunknown404.primalrework.init.ModEntities;
 import mrunknown404.primalrework.init.ModItems;
-import mrunknown404.primalrework.items.ItemBase;
+import mrunknown404.primalrework.items.IItemBase;
 import mrunknown404.primalrework.util.EntityInfo;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -33,8 +33,8 @@ public class RegistryHandler {
 	@SubscribeEvent
 	public static void onModelRegister(ModelRegistryEvent e) {
 		for (Item item : ModItems.ITEMS) {
-			if (item instanceof ItemBase) {
-				((ItemBase) item).registerModels();
+			if (item instanceof IItemBase) {
+				((IItemBase) item).registerModels(item);
 			}
 		}
 		

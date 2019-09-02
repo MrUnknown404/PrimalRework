@@ -42,6 +42,11 @@ public class HarvestDropInfo {
 		return false;
 	}
 	
+	@Override
+	public String toString() {
+		return "(" + toolType + ", " + replace + " | " + drops + ")";
+	}
+	
 	public static class ItemDropInfo {
 		private final Item item;
 		private final boolean needsSilk;
@@ -95,6 +100,11 @@ public class HarvestDropInfo {
 		
 		public float getChanceFortune() {
 			return chanceFortune;
+		}
+		@Override
+		public String toString() {
+			return "(" + item.getUnlocalizedName() + ", " + needsSilk + ", " + dropAmount + ", " + randomDropMin + ", " + randomDropMax + ", " + dropFortune + ", " +
+					chanceFortune + ", " + dropChance + ")";
 		}
 	}
 }

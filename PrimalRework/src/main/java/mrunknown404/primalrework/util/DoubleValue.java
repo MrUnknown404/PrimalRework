@@ -48,6 +48,6 @@ public class DoubleValue<L, R> {
 	
 	@Override
 	public String toString() {
-		return "(" + left + "," + right + ")";
+		return "(" + left + ", " + right + ")";
 	}
 }
