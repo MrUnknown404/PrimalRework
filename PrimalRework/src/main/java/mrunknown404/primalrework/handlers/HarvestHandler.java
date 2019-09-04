@@ -288,7 +288,7 @@ public class HarvestHandler {
 		setHarvestLevel(Blocks.PLANKS,                        ToolType.axe,     ToolHarvestLevel.flint);
 		setHarvestLevel(Blocks.SAPLING,                       ToolType.none,    ToolHarvestLevel.hand);
 		setHarvestLevel(Blocks.BEDROCK,                       ToolType.none,    ToolHarvestLevel.unbreakable);
-		setHarvestLevel(Blocks.SAND,                          ToolType.shovel,  ToolHarvestLevel.hand);
+		setHarvestLevel(Blocks.SAND,                          ToolType.shovel,  ToolHarvestLevel.flint);
 		setHarvestLevel(Blocks.GRAVEL, -1, Arrays.asList(
 				new DoubleValue<ToolType, ToolHarvestLevel>(ToolType.shovel, ToolHarvestLevel.flint)),
 				new HarvestDropInfo(ToolType.shovel, true,

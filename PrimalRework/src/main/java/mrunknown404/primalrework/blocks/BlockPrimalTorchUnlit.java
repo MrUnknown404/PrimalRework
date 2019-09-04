@@ -1,10 +1,13 @@
 package mrunknown404.primalrework.blocks;
 
+import java.util.List;
+
 import javax.annotation.Nullable;
 
 import com.google.common.base.Predicate;
 
 import mrunknown404.primalrework.blocks.util.BlockBase;
+import mrunknown404.primalrework.util.ColorH;
 import mrunknown404.primalrework.util.harvest.BlockHarvestInfo;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -14,13 +17,16 @@ import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -40,6 +46,17 @@ public class BlockPrimalTorchUnlit extends BlockBase {
 	
 	public BlockPrimalTorchUnlit() {
 		this("primal_torch_unlit");
+	}
+	
+	@Override
+	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced) {
+		if (getUnlocalizedName().equalsIgnoreCase("tile.primal_torch_unlit")) {
+			String[] tips = new TextComponentTranslation(getUnlocalizedName() + ".tooltip").getUnformattedText().trim().split("\\\\n");
+			
+			for (String t : tips) {
+				tooltip.add(ColorH.addColor(t));
+			}
+		}
 	}
 	
 	public BlockPrimalTorchUnlit(String name) {

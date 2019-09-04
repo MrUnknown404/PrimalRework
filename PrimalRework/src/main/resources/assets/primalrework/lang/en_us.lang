@@ -14,8 +14,18 @@ tile.fire_pit.name=Fire Pit
 tile.primal_torch_lit.name=Lit Primal Torch
 tile.primal_torch_unlit.name=Unlit Primal Torch
 
+tile.primal_torch_unlit.tooltip=&7Right click on a fire source or \nplace the unlit torch inside a fire pit to light it
+
 //Entities
 entity.pigeon.name=Pigeon
+
+//Commands
+commands.stage.usage=/stage add [stage name]
+
+//Stage
+stage.before.name=Stage 0 (Before)
+stage.early_stone.name=Stage 1 (Early Stone)
+stage.late_stone.name=Stage 2 (Late Stone)
 
 //GUI
 itemGroup.primalrework_items=Primal.R Items
@@ -24,6 +34,7 @@ itemGroup.primalrework_blocks=Primal.R Blocks
 
 container.fire_pit=Camp Fire
 
+gui.cant_craft=Unknown Recipe
 gui.fire_pit_cook=Fuel
 
 subtitles.entity.pigeon.ambient=Pigeon Cooing

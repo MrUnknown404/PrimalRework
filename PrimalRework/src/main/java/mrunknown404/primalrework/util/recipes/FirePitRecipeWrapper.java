@@ -6,6 +6,7 @@ import java.util.List;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
+import mrunknown404.primalrework.handlers.StageHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -23,12 +24,21 @@ public class FirePitRecipeWrapper implements IRecipeWrapper {
 		ingredients.setOutput(VanillaTypes.ITEM, recipe.getOutput());
 	}
 	
+	public FirePitRecipe getRecipe() {
+		return recipe;
+	}
+	
 	@Override
 	public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
 		FontRenderer r = minecraft.fontRenderer;
 		String cookTime = new TextComponentTranslation("gui.fire_pit_cook").getUnformattedText() + ": " + recipe.getCookTime();
+		
+		if (!StageHandler.hasAccessToStage(recipe.getStage())) {
+			cookTime = new TextComponentTranslation("gui.cant_craft").getUnformattedText();
+		}
+		
 		int width = r.getStringWidth(cookTime);
-		r.drawString(cookTime, recipeWidth / 2 - width / 2, 29, 16777215, true);
+		r.drawString(cookTime, recipeWidth / 2 - width / 2, 28, 16777215, true);
 	}
 	
 	public static List<FirePitRecipeWrapper> createFromList(List<FirePitRecipe> list) {
@@ -39,5 +49,10 @@ public class FirePitRecipeWrapper implements IRecipeWrapper {
 		}
 		
 		return wr;
+	}
+	
+	@Override
+	public String toString() {
+		return recipe.toString();
 	}
 }

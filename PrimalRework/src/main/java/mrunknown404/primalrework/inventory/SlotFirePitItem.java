@@ -13,7 +13,7 @@ public class SlotFirePitItem extends Slot {
 	
 	@Override
 	public boolean isItemValid(ItemStack stack) {
-		return ModRecipes.getFirePitResult(stack) != null;
+		return ModRecipes.isItemFirePitResult(stack);
 	}
 	
 	@Override

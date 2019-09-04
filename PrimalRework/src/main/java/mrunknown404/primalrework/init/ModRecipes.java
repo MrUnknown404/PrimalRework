@@ -8,6 +8,8 @@ import java.util.List;
 import com.google.common.collect.Lists;
 
 import mrunknown404.primalrework.Main;
+import mrunknown404.primalrework.handlers.StageHandler;
+import mrunknown404.primalrework.handlers.StageHandler.Stage;
 import mrunknown404.primalrework.util.DoubleValue;
 import mrunknown404.primalrework.util.DummyRecipe;
 import mrunknown404.primalrework.util.recipes.FirePitRecipe;
@@ -45,8 +47,8 @@ public class ModRecipes {
 		FIRE_PIT_FUELS.sort(new CompareFirePitFuel());
 		
 		//TODO write more of these (and remove the test recipe)
-		FIRE_PIT_RECIPES.add(new FirePitRecipe(ModBlocks.UNLIT_PRIMAL_TORCH, ModBlocks.LIT_PRIMAL_TORCH, 10));
-		FIRE_PIT_RECIPES.add(new FirePitRecipe(Blocks.BRICK_BLOCK, Items.COAL, 100));
+		FIRE_PIT_RECIPES.add(new FirePitRecipe(Stage.stage0, ModBlocks.UNLIT_PRIMAL_TORCH, ModBlocks.LIT_PRIMAL_TORCH, 10));
+		FIRE_PIT_RECIPES.add(new FirePitRecipe(Stage.stage1, Blocks.BRICK_BLOCK, Items.COAL, 100));
 	}
 	
 	public static void removeRecipes() {
@@ -94,7 +96,7 @@ public class ModRecipes {
 	/** @param stack Input */
 	public static FirePitRecipe getFirePitResult(ItemStack stack) {
 		for (FirePitRecipe info : FIRE_PIT_RECIPES) {
-			if (compareItemStacks(info.getInput(), stack)) {
+			if (StageHandler.hasAccessToStage(info.getStage()) && compareItemStacks(info.getInput(), stack)) {
 				return info;
 			}
 		}

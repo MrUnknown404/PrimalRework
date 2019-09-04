@@ -1,10 +1,12 @@
 package mrunknown404.primalrework;
 
+import mrunknown404.primalrework.commands.CommandStage;
 import mrunknown404.primalrework.handlers.GuiHandler;
 import mrunknown404.primalrework.handlers.HarvestHandler;
 import mrunknown404.primalrework.handlers.RegistryHandler;
 import mrunknown404.primalrework.handlers.events.BlockEventHandler;
 import mrunknown404.primalrework.handlers.events.PlayerEventHandler;
+import mrunknown404.primalrework.handlers.events.WorldEventHandler;
 import mrunknown404.primalrework.proxy.CommonProxy;
 import mrunknown404.primalrework.tileentity.TileEntityFirePit;
 import net.minecraft.util.ResourceLocation;
@@ -39,6 +41,7 @@ public class Main {
 		
 		MinecraftForge.EVENT_BUS.register(new PlayerEventHandler());
 		MinecraftForge.EVENT_BUS.register(new BlockEventHandler());
+		MinecraftForge.EVENT_BUS.register(new WorldEventHandler());
 	}
 	
 	@EventHandler
@@ -60,6 +63,6 @@ public class Main {
 	
 	@EventHandler
 	public void serverStart(FMLServerStartingEvent e) {
-		
+		e.registerServerCommand(new CommandStage());
 	}
 }
