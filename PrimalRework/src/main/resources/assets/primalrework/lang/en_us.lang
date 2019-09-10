@@ -14,7 +14,7 @@ tile.fire_pit.name=Fire Pit
 tile.primal_torch_lit.name=Lit Primal Torch
 tile.primal_torch_unlit.name=Unlit Primal Torch
 
-tile.primal_torch_unlit.tooltip=&7Right click on a fire source or \nplace the unlit torch inside a fire pit to light it
+tile.primal_torch_unlit.tooltip=&7Right click on a fire source while holding this item or\nput the unlit torch inside a fire pit to light it
 
 //Entities
 entity.pigeon.name=Pigeon

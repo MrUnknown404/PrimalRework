@@ -7,7 +7,7 @@ import javax.annotation.Nullable;
 import com.google.common.base.Predicate;
 
 import mrunknown404.primalrework.blocks.util.BlockBase;
-import mrunknown404.primalrework.util.ColorH;
+import mrunknown404.primalrework.util.IEasyToolTip;
 import mrunknown404.primalrework.util.harvest.BlockHarvestInfo;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -30,7 +30,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockPrimalTorchUnlit extends BlockBase {
+public class BlockPrimalTorchUnlit extends BlockBase implements IEasyToolTip {
 	
 	protected static final AxisAlignedBB STANDING_AABB = new AxisAlignedBB(0.4D, 0.0D, 0.4D, 0.6D, 0.5D, 0.6D);
 	protected static final AxisAlignedBB TORCH_NORTH_AABB = new AxisAlignedBB(0.35D, 0.2D, 0.7D, 0.65D, 0.7D, 1.0D);
@@ -49,13 +49,14 @@ public class BlockPrimalTorchUnlit extends BlockBase {
 	}
 	
 	@Override
+	public void setTooltip() {
+		this.tooltip = new TextComponentTranslation(getUnlocalizedName() + ".tooltip");
+	}
+	
+	@Override
 	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced) {
 		if (getUnlocalizedName().equalsIgnoreCase("tile.primal_torch_unlit")) {
-			String[] tips = new TextComponentTranslation(getUnlocalizedName() + ".tooltip").getUnformattedText().trim().split("\\\\n");
-			
-			for (String t : tips) {
-				tooltip.add(ColorH.addColor(t));
-			}
+			super.addInformation(stack, world, tooltip, advanced);
 		}
 	}
 	
