@@ -7,8 +7,8 @@ import mrunknown404.primalrework.blocks.util.BlockBase;
 import mrunknown404.primalrework.tileentity.TileEntityFirePit;
 import mrunknown404.primalrework.util.DoubleValue;
 import mrunknown404.primalrework.util.harvest.BlockHarvestInfo;
-import mrunknown404.primalrework.util.harvest.ToolHarvestLevel;
-import mrunknown404.primalrework.util.harvest.ToolType;
+import mrunknown404.primalrework.util.harvest.EnumToolMaterial;
+import mrunknown404.primalrework.util.harvest.EnumToolType;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
@@ -37,7 +37,7 @@ public class BlockFirePit extends BlockBase implements ITileEntityProvider {
 	
 	@Override
 	public void setupHarvestInfo() {
-		this.harvestInfo = new BlockHarvestInfo(this, new DoubleValue<ToolType, ToolHarvestLevel>(ToolType.axe, ToolHarvestLevel.hand));
+		this.harvestInfo = new BlockHarvestInfo(this, new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.axe, EnumToolMaterial.hand));
 	}
 	
 	@Override

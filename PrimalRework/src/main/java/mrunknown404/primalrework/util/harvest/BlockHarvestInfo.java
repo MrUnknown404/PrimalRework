@@ -12,15 +12,15 @@ public class BlockHarvestInfo extends HarvestInfo {
 	
 	private final List<HarvestDropInfo> drops = new ArrayList<HarvestDropInfo>();
 	
-	public BlockHarvestInfo(Block block, List<DoubleValue<ToolType, ToolHarvestLevel>> harvest) {
+	public BlockHarvestInfo(Block block, List<DoubleValue<EnumToolType, EnumToolMaterial>> harvest) {
 		super(Item.getItemFromBlock(block), harvest);
 	}
 	
 	public BlockHarvestInfo(Block block) {
-		this(block, Arrays.asList(new DoubleValue<ToolType, ToolHarvestLevel>(ToolType.none, ToolHarvestLevel.hand)));
+		this(block, Arrays.asList(new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.none, EnumToolMaterial.hand)));
 	}
 	
-	public BlockHarvestInfo(Block block, DoubleValue<ToolType, ToolHarvestLevel> harvest) {
+	public BlockHarvestInfo(Block block, DoubleValue<EnumToolType, EnumToolMaterial> harvest) {
 		this(block, Arrays.asList(harvest));
 	}
 	
@@ -36,7 +36,7 @@ public class BlockHarvestInfo extends HarvestInfo {
 		return this;
 	}
 	
-	public HarvestDropInfo getDrop(ToolType type) {
+	public HarvestDropInfo getDrop(EnumToolType type) {
 		for (HarvestDropInfo drop : drops) {
 			if (drop.getToolType() == type) {
 				return drop;
@@ -47,8 +47,8 @@ public class BlockHarvestInfo extends HarvestInfo {
 	}
 	
 	public boolean canBreakWithNone() {
-		for (DoubleValue<ToolType, ToolHarvestLevel> dv : types_harvests) {
-			if (dv.getL() == ToolType.none || dv.getR() == ToolHarvestLevel.hand) {
+		for (DoubleValue<EnumToolType, EnumToolMaterial> dv : types_harvests) {
+			if (dv.getL() == EnumToolType.none || dv.getR() == EnumToolMaterial.hand) {
 				return true;
 			}
 		}
@@ -57,8 +57,8 @@ public class BlockHarvestInfo extends HarvestInfo {
 	}
 	
 	public boolean isUnbreakable() {
-		for (DoubleValue<ToolType, ToolHarvestLevel> dv : types_harvests) {
-			if (dv.getR() == ToolHarvestLevel.unbreakable) {
+		for (DoubleValue<EnumToolType, EnumToolMaterial> dv : types_harvests) {
+			if (dv.getR() == EnumToolMaterial.unbreakable) {
 				return true;
 			}
 		}

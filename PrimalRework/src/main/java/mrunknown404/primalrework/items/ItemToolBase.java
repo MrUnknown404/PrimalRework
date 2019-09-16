@@ -3,66 +3,64 @@ package mrunknown404.primalrework.items;
 import java.util.List;
 
 import mrunknown404.primalrework.init.ModCreativeTabs;
-import mrunknown404.primalrework.util.ColorH;
-import mrunknown404.primalrework.util.IEasyToolTip;
-import mrunknown404.primalrework.util.harvest.ToolHarvestLevel;
-import mrunknown404.primalrework.util.harvest.ToolType;
+import mrunknown404.primalrework.util.harvest.EnumToolMaterial;
+import mrunknown404.primalrework.util.harvest.EnumToolType;
+import mrunknown404.primalrework.util.harvest.HarvestHelper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class ItemToolBase extends ItemTool implements IItemBase {
 
-	private final ToolType toolType;
-	private final ToolHarvestLevel harvestLevel;
+	private final EnumToolType toolType;
+	private final EnumToolMaterial harvestLevel;
 	
-	protected TextComponentTranslation tooltip;
-	
-	public ItemToolBase(String name, ToolType type, ToolHarvestLevel level, ToolMaterial materialIn) {
+	public ItemToolBase(String name, EnumToolType type, EnumToolMaterial level, ToolMaterial materialIn) {
 		super(getDamage(type, level), type.swingSpeed, materialIn, null);
 		setUnlocalizedName(name);
 		setRegistryName(name);
 		setCreativeTab(ModCreativeTabs.PRIMALREWORK_TOOLS);
 		setMaxStackSize(1);
+		setMaxDamage(level.durability);
 		
 		this.toolType = type;
 		this.harvestLevel = level;
-		
-		if (this instanceof IEasyToolTip) {
-			((IEasyToolTip) this).setTooltip();
-		}
 		
 		addToModList(this);
 	}
 	
 	@Override
 	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced) {
-		if (this.tooltip == null) {
-			super.addInformation(stack, world, tooltip, advanced);
-			return;
-		}
-		
-		String[] tips = this.tooltip.getUnformattedText().trim().split("\\\\n");
-		
-		for (String t : tips) {
-			tooltip.add(ColorH.addColor(t));
-		}
+		tooltip.addAll(getTooltip(getUnlocalizedName()));
 	}
 	
-	private static float getDamage(ToolType type, ToolHarvestLevel level) {
-		return type == ToolType.hoe ? 0 : type.baseDamage + level.extraDamage;
+	private static float getDamage(EnumToolType type, EnumToolMaterial level) {
+		return type == EnumToolType.hoe ? 0 : type.baseDamage + level.extraDamage;
 	}
 	
 	@Override
 	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-		if (toolType == ToolType.knife || toolType == ToolType.sword) {
+		if (toolType == EnumToolType.knife || toolType == EnumToolType.sword || toolType == EnumToolType.axe) {
 			stack.damageItem(1, attacker);
 		} else {
-			stack.damageItem(2, attacker);
+			stack.damageItem(3, attacker);
+		}
+		
+		return true;
+	}
+	
+	@Override
+	public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving) {
+		if (!worldIn.isRemote && state.getBlockHardness(worldIn, pos) != 0) {
+			if (HarvestHelper.canBreak(state.getBlock(), stack.getItem())) {
+				stack.damageItem(1, entityLiving);
+			} else {
+				stack.damageItem(3, entityLiving);
+			}
 		}
 		
 		return true;
@@ -70,7 +68,7 @@ public class ItemToolBase extends ItemTool implements IItemBase {
 	
 	@Override
 	public boolean canDisableShield(ItemStack stack, ItemStack shield, EntityLivingBase entity, EntityLivingBase attacker) {
-		return toolType == ToolType.axe;
+		return toolType == EnumToolType.axe;
 	}
 	
 	@Override
@@ -79,12 +77,22 @@ public class ItemToolBase extends ItemTool implements IItemBase {
 	}
 	
 	@Override
-	public ToolType getToolType() {
+	public int getItemEnchantability() {
+		return harvestLevel.enchantability;
+	}
+	
+	@Override
+	public EnumToolType getToolType() {
 		return toolType;
 	}
 	
 	@Override
-	public ToolHarvestLevel getHarvestLevel() {
+	public EnumToolMaterial getHarvestLevel() {
 		return harvestLevel;
+	}
+	
+	@Override
+	public boolean isEnchantable(ItemStack stack) {
+		return getItemEnchantability() != 0;
 	}
 }

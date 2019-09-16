@@ -1,4 +1,4 @@
-package mrunknown404.primalrework.proxy;
+package mrunknown404.primalrework.util.proxy;
 
 import mrunknown404.primalrework.handlers.EntityRenderHandler;
 import mrunknown404.primalrework.handlers.SoundHandler;

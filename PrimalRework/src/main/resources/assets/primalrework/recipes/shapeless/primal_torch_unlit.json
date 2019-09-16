@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "O",
+    "I"
+  ],
+  "key": {
+    "O": {
+      "item": "primalrework:plant_fiber"
+    },
+    "I": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "primalrework:primal_torch_unlit",
+    "count": 2
+  }
+}

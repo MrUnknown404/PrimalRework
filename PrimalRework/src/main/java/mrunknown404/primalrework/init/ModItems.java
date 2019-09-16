@@ -5,8 +5,8 @@ import java.util.List;
 
 import mrunknown404.primalrework.items.ItemBase;
 import mrunknown404.primalrework.items.ItemToolBase;
-import mrunknown404.primalrework.util.harvest.ToolHarvestLevel;
-import mrunknown404.primalrework.util.harvest.ToolType;
+import mrunknown404.primalrework.util.harvest.EnumToolMaterial;
+import mrunknown404.primalrework.util.harvest.EnumToolType;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 
@@ -19,7 +19,8 @@ public class ModItems {
 	public static final Item FLINT_KNAPPED = new ItemBase("flint_knapped");
 	public static final Item FLINT_POINT = new ItemBase("flint_point");
 	
-	public static final Item FLINT_KNIFE = new ItemToolBase("flint_knife", ToolType.knife, ToolHarvestLevel.flint, ModToolMaterials.FLINT_MATERIAL);
+	public static final Item FLINT_KNIFE = new ItemToolBase("flint_knife", EnumToolType.knife, EnumToolMaterial.flint, ModToolMaterials.FLINT_MATERIAL);
+	public static final Item FLINT_AXE = new ItemToolBase("flint_axe", EnumToolType.axe, EnumToolMaterial.flint, ModToolMaterials.FLINT_MATERIAL);
 	
 	public static Item find(ResourceLocation name) {
 		for (Item item : ITEMS) {

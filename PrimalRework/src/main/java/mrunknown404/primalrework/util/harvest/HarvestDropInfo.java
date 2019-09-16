@@ -7,7 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 
 public class HarvestDropInfo {
-	private final ToolType toolType;
+	private final EnumToolType toolType;
 	private final boolean replace;
 	private final List<ItemDropInfo> drops;
 	
@@ -15,7 +15,7 @@ public class HarvestDropInfo {
 	 * @param replace
 	 * @param drops
 	 */
-	public HarvestDropInfo(ToolType toolType, boolean replace, ItemDropInfo... drops) {
+	public HarvestDropInfo(EnumToolType toolType, boolean replace, ItemDropInfo... drops) {
 		this.toolType = toolType;
 		this.replace = replace;
 		this.drops = Arrays.asList(drops);
@@ -25,7 +25,7 @@ public class HarvestDropInfo {
 		return replace;
 	}
 	
-	public ToolType getToolType() {
+	public EnumToolType getToolType() {
 		return toolType;
 	}
 	

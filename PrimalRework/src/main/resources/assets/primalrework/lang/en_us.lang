@@ -6,6 +6,7 @@ item.flint_knapped.name=Knapped Flint
 item.flint_point.name=Flint Point
 
 item.flint_knife.name=Flint Knife
+item.flint_axe.name=Flint Hatchet
 
 //Blocks
 tile.rock.name=Rock
@@ -14,7 +15,8 @@ tile.fire_pit.name=Fire Pit
 tile.primal_torch_lit.name=Lit Primal Torch
 tile.primal_torch_unlit.name=Unlit Primal Torch
 
-tile.primal_torch_unlit.tooltip=&7Right click on a fire source while holding this item or\nput the unlit torch inside a fire pit to light it
+tile.primal_torch_unlit.tooltip_0=&7Right click on a fire source while holding this item or
+tile.primal_torch_unlit.tooltip_1=&7put the unlit torch inside a fire pit to light it
 
 //Entities
 entity.pigeon.name=Pigeon

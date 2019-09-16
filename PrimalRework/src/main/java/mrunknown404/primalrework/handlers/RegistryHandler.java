@@ -1,7 +1,7 @@
 package mrunknown404.primalrework.handlers;
 
 import mrunknown404.primalrework.Main;
-import mrunknown404.primalrework.blocks.util.BlockBase;
+import mrunknown404.primalrework.blocks.util.IBlockBase;
 import mrunknown404.primalrework.init.ModBlocks;
 import mrunknown404.primalrework.init.ModEntities;
 import mrunknown404.primalrework.init.ModItems;
@@ -39,8 +39,8 @@ public class RegistryHandler {
 		}
 		
 		for (Block block : ModBlocks.BLOCKS) {
-			if (block instanceof BlockBase) {
-				((BlockBase) block).registerModels();
+			if (block instanceof IBlockBase) {
+				((IBlockBase) block).registerModels(block);
 			}
 		}
 	}
