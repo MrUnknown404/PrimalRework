@@ -5,13 +5,13 @@ import java.util.List;
 
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
-import mezz.jei.api.recipe.IRecipeWrapper;
 import mrunknown404.primalrework.handlers.StageHandler;
+import mrunknown404.primalrework.util.recipes.util.IRecipeWrapperBase;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.util.text.TextComponentTranslation;
 
-public class FirePitRecipeWrapper implements IRecipeWrapper {
+public class FirePitRecipeWrapper implements IRecipeWrapperBase<FirePitRecipe> {
 	private final FirePitRecipe recipe;
 	
 	public FirePitRecipeWrapper(FirePitRecipe recipe) {
@@ -24,6 +24,7 @@ public class FirePitRecipeWrapper implements IRecipeWrapper {
 		ingredients.setOutput(VanillaTypes.ITEM, recipe.getOutput());
 	}
 	
+	@Override
 	public FirePitRecipe getRecipe() {
 		return recipe;
 	}

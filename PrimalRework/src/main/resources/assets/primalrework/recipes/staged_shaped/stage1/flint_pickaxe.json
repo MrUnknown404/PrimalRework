@@ -1,0 +1,26 @@
+{
+  "type": "primalrework:staged_shaped",
+  "stage": "stage1",
+  "pattern": [
+    "KSP",
+    " I ",
+    " I "
+  ],
+  "key": {
+    "K": {
+      "item": "primalrework:flint_knapped"
+    },
+    "P": {
+      "item": "primalrework:flint_point"
+    },
+    "S": {
+      "item": "primalrework:plant_rope"
+    },
+    "I": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "primalrework:flint_pickaxe"
+  }
+}

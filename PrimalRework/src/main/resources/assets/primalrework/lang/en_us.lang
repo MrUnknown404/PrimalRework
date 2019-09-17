@@ -6,7 +6,9 @@ item.flint_knapped.name=Knapped Flint
 item.flint_point.name=Flint Point
 
 item.flint_knife.name=Flint Knife
+item.flint_pickaxe.name=Flint Pickaxe
 item.flint_axe.name=Flint Hatchet
+item.flint_shovel.name=Flint Shovel
 
 //Blocks
 tile.rock.name=Rock

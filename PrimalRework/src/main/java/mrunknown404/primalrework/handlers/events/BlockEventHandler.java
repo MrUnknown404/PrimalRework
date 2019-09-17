@@ -152,7 +152,7 @@ public class BlockEventHandler {
 		if (e.getEntityPlayer().getHeldItemMainhand().isItemEnchanted()) {
 			Map<Enchantment, Integer> it = EnchantmentHelper.getEnchantments(e.getEntityPlayer().getHeldItemMainhand());
 			if (it.containsKey(Enchantments.EFFICIENCY)) {
-				eff = it.get(Enchantments.EFFICIENCY) * 0.2f + 1;
+				eff = it.get(Enchantments.EFFICIENCY) * 0.25f + 1;
 			}
 		}
 		

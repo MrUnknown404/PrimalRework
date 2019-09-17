@@ -20,7 +20,9 @@ public class ModItems {
 	public static final Item FLINT_POINT = new ItemBase("flint_point");
 	
 	public static final Item FLINT_KNIFE = new ItemToolBase("flint_knife", EnumToolType.knife, EnumToolMaterial.flint, ModToolMaterials.FLINT_MATERIAL);
+	public static final Item FLINT_PICKAXE = new ItemToolBase("flint_pickaxe", EnumToolType.pickaxe, EnumToolMaterial.flint, ModToolMaterials.FLINT_MATERIAL);
 	public static final Item FLINT_AXE = new ItemToolBase("flint_axe", EnumToolType.axe, EnumToolMaterial.flint, ModToolMaterials.FLINT_MATERIAL);
+	public static final Item FLINT_SHOVEL = new ItemToolBase("flint_shovel", EnumToolType.shovel, EnumToolMaterial.flint, ModToolMaterials.FLINT_MATERIAL);
 	
 	public static Item find(ResourceLocation name) {
 		for (Item item : ITEMS) {

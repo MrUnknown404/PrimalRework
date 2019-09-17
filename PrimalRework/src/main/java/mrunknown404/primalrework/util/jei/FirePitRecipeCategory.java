@@ -10,12 +10,10 @@ import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mrunknown404.primalrework.Main;
-import mrunknown404.primalrework.handlers.StageHandler;
 import mrunknown404.primalrework.init.ModBlocks;
 import mrunknown404.primalrework.init.ModRecipes;
 import mrunknown404.primalrework.util.recipes.FirePitRecipeWrapper;
 import net.minecraft.client.Minecraft;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
@@ -38,7 +36,7 @@ public class FirePitRecipeCategory implements IRecipeCategory<FirePitRecipeWrapp
 		animatedCookTime = helper.createAnimatedDrawable(staticCookTime, 100, StartDirection.BOTTOM, false);
 		
 		background = helper.createDrawable(TEXTURES, 0, 166, 73, 37);
-		icon = helper.createDrawable(TEXTURES, 176, 38, 12, 12);
+		icon = helper.createDrawableIngredient(new ItemStack(ModBlocks.FIRE_PIT));
 	}
 	
 	@Override
@@ -69,12 +67,7 @@ public class FirePitRecipeCategory implements IRecipeCategory<FirePitRecipeWrapp
 		stacks.init(SLOT_INPUT, true, 23, 4);
 		stacks.init(SLOT_OUTPUT, false, 51, 4);
 		
-		if (StageHandler.hasAccessToStage(recipe.getRecipe().getStage())) {
-			stacks.set(ingredients);
-		} else {
-			stacks.set(SLOT_INPUT, new ItemStack(Blocks.BARRIER));
-			stacks.set(SLOT_OUTPUT, new ItemStack(Blocks.BARRIER));
-		}
+		stacks.set(ingredients);
 		
 		stacks.init(SLOT_FUEL, false, 0, 4);
 		stacks.set(SLOT_FUEL, ModRecipes.getFirePitFuels());

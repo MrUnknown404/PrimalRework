@@ -1,5 +1,6 @@
 package mrunknown404.primalrework.handlers;
 
+import mrunknown404.primalrework.util.jei.JEICompat;
 import mrunknown404.primalrework.world.StageWorldSaveData;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -13,6 +14,7 @@ public class StageHandler {
 	public static void setStage(Stage stage) {
 		StageHandler.stage = stage;
 		StageWorldSaveData.load(world).markDirty();
+		JEICompat.setupRecipes();
 	}
 	
 	public static Stage getStage() {
@@ -21,6 +23,7 @@ public class StageHandler {
 	
 	public static void setStageFromNBT(Stage stage) {
 		StageHandler.stage = stage;
+		JEICompat.setupRecipes();
 	}
 	
 	public static boolean hasAccessToStage(Stage stage) {
