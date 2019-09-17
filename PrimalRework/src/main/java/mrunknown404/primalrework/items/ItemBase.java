@@ -12,23 +12,40 @@ import net.minecraft.world.World;
 
 public class ItemBase extends Item implements IItemBase {
 
-	private final EnumToolType toolType;
 	private final EnumToolMaterial harvestLevel;
+	private final boolean isContainer;
 	
-	public ItemBase(String name, int maxStackSize, EnumToolType type, EnumToolMaterial level) {
+	public ItemBase(String name, int maxStackSize, boolean isContainer, EnumToolMaterial level) {
 		setUnlocalizedName(name);
 		setRegistryName(name);
 		setCreativeTab(ModCreativeTabs.PRIMALREWORK_ITEMS);
 		setMaxStackSize(maxStackSize);
+		setMaxDamage(level.durability);
 		
-		this.toolType = type;
 		this.harvestLevel = level;
+		this.isContainer = isContainer;
 		
 		addToModList(this);
 	}
 	
+	public ItemBase(String name, EnumToolMaterial level) {
+		this(name, 1, true, level);
+	}
+	
 	public ItemBase(String name) {
-		this(name, 64, EnumToolType.none, EnumToolMaterial.hand);
+		this(name, 64, false, EnumToolMaterial.hand);
+	}
+	
+	@Override
+	public boolean hasContainerItem(ItemStack stack) {
+		return isContainer;
+	}
+	
+	@Override
+	public ItemStack getContainerItem(ItemStack stack) {
+		ItemStack s = stack.copy();
+		s.setItemDamage(stack.getItemDamage() + 1);
+		return s;
 	}
 	
 	@Override
@@ -38,7 +55,7 @@ public class ItemBase extends Item implements IItemBase {
 	
 	@Override
 	public EnumToolType getToolType() {
-		return toolType;
+		return EnumToolType.none;
 	}
 	
 	@Override

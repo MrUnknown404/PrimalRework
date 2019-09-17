@@ -1,0 +1,16 @@
+{
+  "type": "primalrework:staged_shapeless",
+  "stage": "stage0",
+  "ingredients": [
+    {
+      "item": "primalrework:plant_mesh"
+    },
+    {
+      "item": "minecraft:gravel"
+    }
+  ],
+  "result": {
+    "item": "minecraft:flint",
+    "count": 1
+  }
+}

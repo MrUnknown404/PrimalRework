@@ -8,9 +8,13 @@ import mrunknown404.primalrework.items.ItemToolBase;
 import mrunknown404.primalrework.util.harvest.EnumToolMaterial;
 import mrunknown404.primalrework.util.harvest.EnumToolType;
 import net.minecraft.item.Item;
+import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.util.EnumHelper;
 
 public class ModItems {
+	private static final ToolMaterial MATERIAL = EnumHelper.addToolMaterial("MATERIAL", 0, 0, 0, 0, 0);
+	
 	public static final List<Item> ITEMS = new ArrayList<Item>();
 	
 	public static final Item PLANT_FIBER = new ItemBase("plant_fiber");
@@ -19,10 +23,13 @@ public class ModItems {
 	public static final Item FLINT_KNAPPED = new ItemBase("flint_knapped");
 	public static final Item FLINT_POINT = new ItemBase("flint_point");
 	
-	public static final Item FLINT_KNIFE = new ItemToolBase("flint_knife", EnumToolType.knife, EnumToolMaterial.flint, ModToolMaterials.FLINT_MATERIAL);
-	public static final Item FLINT_PICKAXE = new ItemToolBase("flint_pickaxe", EnumToolType.pickaxe, EnumToolMaterial.flint, ModToolMaterials.FLINT_MATERIAL);
-	public static final Item FLINT_AXE = new ItemToolBase("flint_axe", EnumToolType.axe, EnumToolMaterial.flint, ModToolMaterials.FLINT_MATERIAL);
-	public static final Item FLINT_SHOVEL = new ItemToolBase("flint_shovel", EnumToolType.shovel, EnumToolMaterial.flint, ModToolMaterials.FLINT_MATERIAL);
+	public static final Item PLANT_MESH = new ItemBase("plant_mesh", EnumToolMaterial.flint);
+	public static final Item STRING_MESH = new ItemBase("string_mesh", EnumToolMaterial.copper);
+	
+	public static final Item FLINT_KNIFE = new ItemToolBase("flint_knife", EnumToolType.knife, EnumToolMaterial.flint, MATERIAL);
+	public static final Item FLINT_PICKAXE = new ItemToolBase("flint_pickaxe", EnumToolType.pickaxe, EnumToolMaterial.flint, MATERIAL);
+	public static final Item FLINT_AXE = new ItemToolBase("flint_axe", EnumToolType.axe, EnumToolMaterial.flint, MATERIAL);
+	public static final Item FLINT_SHOVEL = new ItemToolBase("flint_shovel", EnumToolType.shovel, EnumToolMaterial.flint, MATERIAL);
 	
 	public static Item find(ResourceLocation name) {
 		for (Item item : ITEMS) {

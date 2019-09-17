@@ -5,6 +5,9 @@ item.gravel.name=Gravel
 item.flint_knapped.name=Knapped Flint
 item.flint_point.name=Flint Point
 
+item.plant_mesh.name=Plant Mesh
+item.string_mesh.name=String Mesh
+
 item.flint_knife.name=Flint Knife
 item.flint_pickaxe.name=Flint Pickaxe
 item.flint_axe.name=Flint Hatchet

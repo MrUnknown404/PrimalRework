@@ -1,5 +1,6 @@
 {
     "recipes": {
-        "staged_shaped": "mrunknown404.primalrework.util.recipes.StagedShapedRecipe$Factory"
+        "staged_shaped": "mrunknown404.primalrework.util.recipes.StagedShapedRecipe$Factory",
+        "staged_shapeless": "mrunknown404.primalrework.util.recipes.StagedShapelessRecipe$Factory"
     }
 }

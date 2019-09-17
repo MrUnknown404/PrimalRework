@@ -5,7 +5,7 @@ public enum EnumToolMaterial {
 	flint      (1,  32,   1.50f, 0.25f, 1 ),
 	stone      (2,  64,   2.00f, 0.50f, 1 ),
 	gold       (2,  48,   4.00f, 1.00f, 10),
-	copper     (3,  192,  2.50f, 1.25f, 4 ),
+	copper     (3,  128,  2.50f, 1.25f, 4 ),
 	bronze     (4,  256,  3.50f, 1.75f, 6 ),
 	iron       (5,  512,  3.75f, 3.00f, 8 ),
 	steel      (6,  1024, 4.50f, 3.50f, 10),

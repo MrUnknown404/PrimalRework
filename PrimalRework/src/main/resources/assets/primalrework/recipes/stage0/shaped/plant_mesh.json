@@ -1,19 +1,19 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "primalrework:staged_shaped",
+  "stage": "stage0",
   "pattern": [
-    "O",
-    "I"
+    "SX",
+    "XS"
   ],
   "key": {
-    "O": {
+    "X": {
       "item": "primalrework:plant_fiber"
     },
-    "I": {
+    "S": {
       "item": "minecraft:stick"
     }
   },
   "result": {
-    "item": "primalrework:primal_torch_unlit",
-    "count": 2
+    "item": "primalrework:plant_mesh"
   }
 }

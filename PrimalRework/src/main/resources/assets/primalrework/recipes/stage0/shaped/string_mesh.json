@@ -1,0 +1,19 @@
+{
+  "type": "primalrework:staged_shaped",
+  "stage": "stage0",
+  "pattern": [
+    "SX",
+    "XS"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:string"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "primalrework:string_mesh"
+  }
+}
