@@ -1,43 +1,56 @@
 package mrunknown404.primalrework.util.recipes;
 
-import mrunknown404.primalrework.handlers.StageHandler.Stage;
+import java.util.Arrays;
+import java.util.List;
+
+import mrunknown404.primalrework.util.EnumStage;
 import mrunknown404.primalrework.util.recipes.util.IRecipeBase;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class FirePitRecipe implements IRecipeBase {
-	private final Stage stage;
-	
+	private final EnumStage stage;
+	private final ItemStack input, output;
 	private final int cookTime; //default 100
 	
-	private FirePitRecipe(Stage stage, ItemStack input, ItemStack output, int cookTime) {
+	private FirePitRecipe(EnumStage stage, ItemStack input, ItemStack output, int cookTime) {
 		this.stage = stage;
 		this.cookTime = cookTime;
 		
-		inputs.add(input);
-		outputs.add(output);
+		this.input = input;
+		this.output = output;
 	}
 	
-	public FirePitRecipe(Stage stage, Item input, Item output, int cookTime) {
+	public FirePitRecipe(EnumStage stage, Item input, Item output, int cookTime) {
 		this(stage, new ItemStack(input), new ItemStack(output), cookTime);
 	}
 	
-	public FirePitRecipe(Stage stage, Item input, Block output, int cookTime) {
+	public FirePitRecipe(EnumStage stage, Item input, Block output, int cookTime) {
 		this(stage, new ItemStack(input), new ItemStack(output), cookTime);
 	}
 	
-	public FirePitRecipe(Stage stage, Block input, Item output, int cookTime) {
+	public FirePitRecipe(EnumStage stage, Block input, Item output, int cookTime) {
 		this(stage, new ItemStack(input), new ItemStack(output), cookTime);
 	}
 	
-	public FirePitRecipe(Stage stage, Block input, Block output, int cookTime) {
+	public FirePitRecipe(EnumStage stage, Block input, Block output, int cookTime) {
 		this(stage, new ItemStack(input), new ItemStack(output), cookTime);
 	}
 	
 	@Override
-	public Stage getStage() {
+	public EnumStage getStage() {
 		return stage;
+	}
+	
+	@Override
+	public List<ItemStack> getInputs() {
+		return Arrays.asList(input);
+	}
+	
+	@Override
+	public List<ItemStack> getOutputs() {
+		return Arrays.asList(output);
 	}
 	
 	/** Copied */

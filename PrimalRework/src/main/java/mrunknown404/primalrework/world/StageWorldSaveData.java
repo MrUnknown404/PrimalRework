@@ -2,7 +2,7 @@ package mrunknown404.primalrework.world;
 
 import mrunknown404.primalrework.Main;
 import mrunknown404.primalrework.handlers.StageHandler;
-import mrunknown404.primalrework.handlers.StageHandler.Stage;
+import mrunknown404.primalrework.util.EnumStage;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.MapStorage;
@@ -22,7 +22,7 @@ public class StageWorldSaveData extends WorldSavedData {
 	
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
-		StageHandler.setStageFromNBT(Stage.valueOf(nbt.getString("Stage")));
+		StageHandler.setStageFromNBT(EnumStage.valueOf(nbt.getString("Stage")));
 	}
 	
 	@Override

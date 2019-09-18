@@ -13,7 +13,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.EnumHelper;
 
 public class ModItems {
-	private static final ToolMaterial MATERIAL = EnumHelper.addToolMaterial("MATERIAL", 0, 0, 0, 0, 0);
+	public static final ToolMaterial MATERIAL = EnumHelper.addToolMaterial("MATERIAL", 0, 0, 0, 0, 0);
 	
 	public static final List<Item> ITEMS = new ArrayList<Item>();
 	
@@ -26,10 +26,12 @@ public class ModItems {
 	public static final Item PLANT_MESH = new ItemBase("plant_mesh", EnumToolMaterial.flint);
 	public static final Item STRING_MESH = new ItemBase("string_mesh", EnumToolMaterial.copper);
 	
-	public static final Item FLINT_KNIFE = new ItemToolBase("flint_knife", EnumToolType.knife, EnumToolMaterial.flint, MATERIAL);
-	public static final Item FLINT_PICKAXE = new ItemToolBase("flint_pickaxe", EnumToolType.pickaxe, EnumToolMaterial.flint, MATERIAL);
-	public static final Item FLINT_AXE = new ItemToolBase("flint_axe", EnumToolType.axe, EnumToolMaterial.flint, MATERIAL);
-	public static final Item FLINT_SHOVEL = new ItemToolBase("flint_shovel", EnumToolType.shovel, EnumToolMaterial.flint, MATERIAL);
+	public static final Item FLINT_CRAFTING_HAMMER = new ItemBase("flint_crafting_hammer", EnumToolMaterial.flint);
+	
+	public static final Item FLINT_KNIFE = new ItemToolBase("flint_knife", EnumToolType.knife, EnumToolMaterial.flint);
+	public static final Item FLINT_PICKAXE = new ItemToolBase("flint_pickaxe", EnumToolType.pickaxe, EnumToolMaterial.flint);
+	public static final Item FLINT_AXE = new ItemToolBase("flint_axe", EnumToolType.axe, EnumToolMaterial.flint);
+	public static final Item FLINT_SHOVEL = new ItemToolBase("flint_shovel", EnumToolType.shovel, EnumToolMaterial.flint);
 	
 	public static Item find(ResourceLocation name) {
 		for (Item item : ITEMS) {

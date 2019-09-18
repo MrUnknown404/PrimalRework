@@ -8,6 +8,8 @@ item.flint_point.name=Flint Point
 item.plant_mesh.name=Plant Mesh
 item.string_mesh.name=String Mesh
 
+item.flint_crafting_hammer.name=Flint Crafting Hammer
+
 item.flint_knife.name=Flint Knife
 item.flint_pickaxe.name=Flint Pickaxe
 item.flint_axe.name=Flint Hatchet
@@ -43,7 +45,6 @@ itemGroup.primalrework_blocks=Primal.R Blocks
 
 container.fire_pit=Camp Fire
 
-gui.cant_craft=Unknown Recipe
 gui.fire_pit_cook=Fuel
 
 subtitles.entity.pigeon.ambient=Pigeon Cooing

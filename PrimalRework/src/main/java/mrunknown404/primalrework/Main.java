@@ -36,7 +36,7 @@ public class Main {
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent e) {
 		proxy.registerEntities();
-		proxy.registerEntityRenders();
+		proxy.registerRenders();
 		
 		MinecraftForge.EVENT_BUS.register(new PlayerEventHandler());
 		MinecraftForge.EVENT_BUS.register(new BlockEventHandler());

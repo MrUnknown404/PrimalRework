@@ -4,7 +4,6 @@ import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
-import mrunknown404.primalrework.Main;
 import mrunknown404.primalrework.init.ModItems;
 import mrunknown404.primalrework.util.harvest.BlockHarvestInfo;
 import mrunknown404.primalrework.util.harvest.EnumToolMaterial;
@@ -21,11 +20,8 @@ import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityEnchantmentTable;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
@@ -34,20 +30,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class BlockEventHandler {
 
-	@SubscribeEvent
-	public void onBlockRightClick(PlayerInteractEvent.RightClickBlock e) {
-		World world = e.getWorld();
-		
-		if (!world.isRemote) {
-			TileEntity tileentity = world.getTileEntity(e.getPos());
-			
-			if (tileentity instanceof TileEntityEnchantmentTable) {
-				e.getEntityPlayer().openGui(Main.main, Main.GUI_ID_ENCHANTING, world, e.getPos().getX(), e.getPos().getY(), e.getPos().getZ());
-				e.setCanceled(true);
-			}
-		}
-	}
-	
 	@SubscribeEvent
 	public void onBlockPunch(PlayerInteractEvent.LeftClickBlock e) {
 		if (e.getEntityPlayer().isCreative()) {

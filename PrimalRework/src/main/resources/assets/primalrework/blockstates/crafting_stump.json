@@ -1,5 +1,8 @@
 {
     "variants": {
-        "normal": { "model": "primalrework:crafting_stump" }
+        "facing=north": { "model": "primalrework:crafting_stump" },
+        "facing=east": { "model": "primalrework:crafting_stump", "y": 90 },
+        "facing=south":  { "model": "primalrework:crafting_stump", "y": 180 },
+        "facing=west":  { "model": "primalrework:crafting_stump" , "y": 270 }
     }
 }

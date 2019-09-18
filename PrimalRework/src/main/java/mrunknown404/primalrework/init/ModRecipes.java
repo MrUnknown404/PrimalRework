@@ -9,11 +9,13 @@ import com.google.common.collect.Lists;
 
 import mrunknown404.primalrework.Main;
 import mrunknown404.primalrework.handlers.StageHandler;
-import mrunknown404.primalrework.handlers.StageHandler.Stage;
 import mrunknown404.primalrework.util.DoubleValue;
 import mrunknown404.primalrework.util.DummyRecipe;
+import mrunknown404.primalrework.util.EnumStage;
 import mrunknown404.primalrework.util.recipes.FirePitRecipe;
 import mrunknown404.primalrework.util.recipes.FirePitRecipeWrapper;
+import mrunknown404.primalrework.util.recipes.StagedCraftingWrapper;
+import mrunknown404.primalrework.util.recipes.util.IStagedRecipeBase;
 import net.minecraft.block.BlockPlanks.EnumType;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -26,6 +28,9 @@ import net.minecraftforge.registries.ForgeRegistry;
 public class ModRecipes {
 	
 	public static final String CATEGORY_FIRE_PIT = Main.MOD_ID + ".fire_pit_jei";
+	public static final String CATEGORY_STAGED_CRAFTING = Main.MOD_ID + ".staged_crafting_jei";
+	
+	private static final List<IStagedRecipeBase> STAGED_CRAFTING_RECIPES = new ArrayList<IStagedRecipeBase>();
 	
 	private static final List<FirePitRecipe> FIRE_PIT_RECIPES = new ArrayList<FirePitRecipe>();
 	private static final List<DoubleValue<ItemStack, Integer>> FIRE_PIT_FUELS = new ArrayList<>();
@@ -47,8 +52,8 @@ public class ModRecipes {
 		FIRE_PIT_FUELS.sort(new CompareFirePitFuel());
 		
 		//TODO write more of these (and remove the test recipe)
-		FIRE_PIT_RECIPES.add(new FirePitRecipe(Stage.stage0, ModBlocks.UNLIT_PRIMAL_TORCH, ModBlocks.LIT_PRIMAL_TORCH, 10));
-		FIRE_PIT_RECIPES.add(new FirePitRecipe(Stage.stage1, Blocks.BRICK_BLOCK, Items.COAL, 100));
+		FIRE_PIT_RECIPES.add(new FirePitRecipe(EnumStage.stage0, ModBlocks.UNLIT_PRIMAL_TORCH, ModBlocks.LIT_PRIMAL_TORCH, 10));
+		FIRE_PIT_RECIPES.add(new FirePitRecipe(EnumStage.stage1, Blocks.BRICK_BLOCK, Items.COAL, 100));
 	}
 	
 	public static void removeRecipes() {
@@ -118,8 +123,16 @@ public class ModRecipes {
 		return stack2.getItem() == stack1.getItem() && (stack2.getMetadata() == 32767 || stack2.getMetadata() == stack1.getMetadata());
 	}
 	
+	public static void addStagedRecipe(IStagedRecipeBase recipe) {
+		STAGED_CRAFTING_RECIPES.add(recipe);
+	}
+	
 	public static List<FirePitRecipeWrapper> getWrappedFirePitRecipes() {
 		return FirePitRecipeWrapper.createFromList(FIRE_PIT_RECIPES);
+	}
+	
+	public static List<StagedCraftingWrapper> getWrappedStageRecipes() {
+		return StagedCraftingWrapper.createFromList(STAGED_CRAFTING_RECIPES);
 	}
 	
 	public static List<ItemStack> getFirePitFuels() {

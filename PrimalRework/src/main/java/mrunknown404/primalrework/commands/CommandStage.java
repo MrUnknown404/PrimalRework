@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import mrunknown404.primalrework.handlers.StageHandler;
+import mrunknown404.primalrework.util.EnumStage;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -34,7 +35,7 @@ public class CommandStage extends CommandBase {
 	public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
 		if (args.length == 2) {
 			if (args[0].equalsIgnoreCase("set")) {
-				for (StageHandler.Stage stage : StageHandler.Stage.values()) {
+				for (EnumStage stage : EnumStage.values()) {
 					if (args[1].equalsIgnoreCase(stage.toString())) {
 						sender.sendMessage(new TextComponentString("Set stage to \"" + args[1] + "\""));
 						StageHandler.setStage(stage);
@@ -55,6 +56,6 @@ public class CommandStage extends CommandBase {
 	@Override
 	public List<String> getTabCompletions(MinecraftServer server, ICommandSender sender, String[] args, BlockPos targetPos) {
 		return args.length == 1 ? getListOfStringsMatchingLastWord(args, Arrays.asList("set", "get")) :
-			args.length == 2 && args[0].equalsIgnoreCase("set") ? getListOfStringsMatchingLastWord(args, StageHandler.Stage.getStringList()) : Collections.emptyList();
+			args.length == 2 && args[0].equalsIgnoreCase("set") ? getListOfStringsMatchingLastWord(args, EnumStage.getStringList()) : Collections.emptyList();
 	}
 }

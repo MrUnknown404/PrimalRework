@@ -4,7 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.google.common.collect.Lists;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
 
 import mrunknown404.primalrework.handlers.StageHandler;
 import mrunknown404.primalrework.init.ModRecipes;
@@ -16,24 +18,25 @@ import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.item.crafting.ShapedRecipes;
-import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraft.util.JsonUtils;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.common.util.RecipeMatcher;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 
-public class StagedShapelessRecipe extends ShapelessRecipes implements IStagedRecipeBase {
+public class StagedOreShapelessRecipe extends ShapelessOreRecipe implements IStagedRecipeBase {
 
 	protected final EnumStage stage;
 	protected final ItemStack output;
 	
-	public StagedShapelessRecipe(EnumStage stage, ItemStack output, NonNullList<Ingredient> ingredients) {
-		super("shapeless", output, ingredients);
+	public StagedOreShapelessRecipe(EnumStage stage, NonNullList<Ingredient> input, ItemStack result) {
+		super(new ResourceLocation("ore_shapeless"), input, result);
 		this.stage = stage;
-		this.output = output;
+		this.output = result;
 		
 		ModRecipes.addStagedRecipe(this);
 	}
@@ -77,11 +80,11 @@ public class StagedShapelessRecipe extends ShapelessRecipes implements IStagedRe
 			}
 		}
 		
-		if (ingredientCount != recipeItems.size()) {
+		if (ingredientCount != input.size()) {
 			return false;
 		}
 		
-		return RecipeMatcher.findMatches(inputs, recipeItems) != null;
+		return RecipeMatcher.findMatches(inputs, input) != null;
 	}
 	
 	@Override
@@ -96,10 +99,18 @@ public class StagedShapelessRecipe extends ShapelessRecipes implements IStagedRe
 	
 	public static class Factory implements IRecipeFactory, IStagedFactoryBase {
 		@Override
-		public IRecipe parse(final JsonContext context, final JsonObject json) {
-			NonNullList<Ingredient> ingredients = deserializeIngredients(JsonUtils.getJsonArray(json, "ingredients"));
-			ItemStack result = ShapedRecipes.deserializeItem(JsonUtils.getJsonObject(json, "result"), true);
-			return new StagedShapelessRecipe(EnumStage.valueOf(JsonUtils.getString(json, "stage")), result, ingredients);
+		public IRecipe parse(JsonContext context, JsonObject json) {
+			NonNullList<Ingredient> ings = NonNullList.create();
+			for (JsonElement ele : JsonUtils.getJsonArray(json, "ingredients")) {
+				ings.add(CraftingHelper.getIngredient(ele, context));
+			}
+			
+			if (ings.isEmpty()) {
+				throw new JsonParseException("No ingredients for shapeless recipe");
+			}
+			
+			ItemStack itemstack = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "result"), context);
+			return new StagedOreShapelessRecipe(EnumStage.valueOf(JsonUtils.getString(json, "stage")), ings, itemstack);
 		}
 	}
 }

@@ -3,6 +3,7 @@ package mrunknown404.primalrework.items;
 import java.util.List;
 
 import mrunknown404.primalrework.init.ModCreativeTabs;
+import mrunknown404.primalrework.init.ModItems;
 import mrunknown404.primalrework.util.harvest.EnumToolMaterial;
 import mrunknown404.primalrework.util.harvest.EnumToolType;
 import mrunknown404.primalrework.util.harvest.HarvestHelper;
@@ -30,8 +31,8 @@ public class ItemToolBase extends ItemTool implements IItemBase {
 	private final EnumToolType toolType;
 	private final EnumToolMaterial harvestLevel;
 	
-	public ItemToolBase(String name, EnumToolType type, EnumToolMaterial level, ToolMaterial materialIn) {
-		super(getDamage(type, level), type.swingSpeed, materialIn, null);
+	public ItemToolBase(String name, EnumToolType type, EnumToolMaterial level) {
+		super(getDamage(type, level), type.swingSpeed, ModItems.MATERIAL, null);
 		setUnlocalizedName(name);
 		setRegistryName(name);
 		setCreativeTab(ModCreativeTabs.PRIMALREWORK_TOOLS);
@@ -42,6 +43,18 @@ public class ItemToolBase extends ItemTool implements IItemBase {
 		this.harvestLevel = level;
 		
 		addToModList(this);
+	}
+	
+	@Override
+	public boolean hasContainerItem(ItemStack stack) {
+		return true;
+	}
+	
+	@Override
+	public ItemStack getContainerItem(ItemStack stack) {
+		ItemStack s = stack.copy();
+		s.setItemDamage(stack.getItemDamage() + 1);
+		return s;
 	}
 	
 	@Override
