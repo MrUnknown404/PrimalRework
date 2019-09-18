@@ -7,6 +7,7 @@ import mrunknown404.primalrework.handlers.events.PlayerEventHandler;
 import mrunknown404.primalrework.handlers.events.WorldEventHandler;
 import mrunknown404.primalrework.util.harvest.HarvestHelper;
 import mrunknown404.primalrework.util.proxy.CommonProxy;
+import mrunknown404.primalrework.world.WorldGen;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -17,6 +18,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 @Mod(modid = Main.MOD_ID, useMetadata = true)
 public class Main {
@@ -49,6 +51,8 @@ public class Main {
 		proxy.setupRecipes();
 		
 		HarvestHelper.changeHarvestLevels();
+		
+		GameRegistry.registerWorldGenerator(new WorldGen(), 0);
 	}
 	
 	@EventHandler

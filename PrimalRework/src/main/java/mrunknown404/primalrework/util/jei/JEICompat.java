@@ -14,6 +14,7 @@ import mezz.jei.api.IModRegistry;
 import mezz.jei.api.IRecipeRegistry;
 import mezz.jei.api.JEIPlugin;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
+import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
 import mezz.jei.api.recipe.transfer.IRecipeTransferRegistry;
 import mrunknown404.primalrework.client.gui.GuiFirePit;
 import mrunknown404.primalrework.handlers.StageHandler;
@@ -58,6 +59,7 @@ public class JEICompat implements IModPlugin {
 		RECIPE_MAP.put(ModRecipes.CATEGORY_FIRE_PIT, rr.getRecipeWrappers(rr.getRecipeCategory(ModRecipes.CATEGORY_FIRE_PIT)));
 		
 		//rr.hideRecipeCategory(VanillaRecipeCategoryUid.CRAFTING);
+		rr.hideRecipeCategory(VanillaRecipeCategoryUid.FUEL);
 	}
 	
 	public static void setupRecipes() {

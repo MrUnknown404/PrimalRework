@@ -57,7 +57,7 @@ public class BlockGroundItem extends BlockBase {
 		checkForDrop(worldIn, pos, state);
 	}
 	
-	private boolean canBlockStay(World worldIn, BlockPos pos) {
+	public boolean canBlockStay(World worldIn, BlockPos pos) {
 		return worldIn.isBlockFullCube(pos.down());
 	}
 	

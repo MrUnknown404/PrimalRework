@@ -16,9 +16,11 @@ item.flint_shovel.name=Flint Shovel
 //Blocks
 tile.rock.name=Rock
 tile.stick.name=Placeable Stick
+tile.flint.name=Placeable Flint
 tile.fire_pit.name=Fire Pit
 tile.primal_torch_lit.name=Lit Primal Torch
 tile.primal_torch_unlit.name=Unlit Primal Torch
+tile.crafting_stump.name=Crafting Stump
 
 tile.primal_torch_unlit.tooltip_0=&7Right click on a fire source while holding this item or
 tile.primal_torch_unlit.tooltip_1=&7put the unlit torch inside a fire pit to light it

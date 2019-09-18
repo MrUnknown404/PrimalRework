@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "normal": [
+            { "model": "primalrework:flint" },
+            { "model": "primalrework:flint", "y": 90 },
+            { "model": "primalrework:flint", "y": 180 },
+            { "model": "primalrework:flint", "y": 270 }
+        ]
+    }
+}
