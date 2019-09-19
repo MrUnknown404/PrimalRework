@@ -1,0 +1,20 @@
+{
+  "type": "primalrework:staged_shaped",
+  "stage": "stage1",
+  "pattern": [
+    " SR",
+    "S R",
+    " SR"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "R": {
+      "item": "primalrework:plant_rope"
+    }
+  },
+  "result": {
+    "item": "primalrework:fire_starter"
+  }
+}

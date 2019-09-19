@@ -16,7 +16,6 @@ import mezz.jei.api.JEIPlugin;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
 import mezz.jei.api.recipe.transfer.IRecipeTransferRegistry;
-import mezz.jei.transfer.PlayerRecipeTransferHandler;
 import mrunknown404.primalrework.client.gui.GuiFirePit;
 import mrunknown404.primalrework.handlers.StageHandler;
 import mrunknown404.primalrework.init.ModBlocks;
@@ -27,6 +26,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiCrafting;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.init.Blocks;
+import net.minecraft.inventory.ContainerPlayer;
 import net.minecraft.inventory.ContainerWorkbench;
 import net.minecraft.item.ItemStack;
 
@@ -65,7 +65,7 @@ public class JEICompat implements IModPlugin {
 		
 		recipeTransfer.addRecipeTransferHandler(ContainerFirePit.class, ModRecipes.CATEGORY_FIRE_PIT, FirePitRecipeCategory.SLOT_INPUT, 1, FirePitRecipeCategory.SLOT_INPUT, 36);
 		recipeTransfer.addRecipeTransferHandler(ContainerWorkbench.class, ModRecipes.CATEGORY_STAGED_CRAFTING, 1, 9, 10, 36);
-		recipeTransfer.addRecipeTransferHandler(new PlayerRecipeTransferHandler(reg.getJeiHelpers().recipeTransferHandlerHelper()), ModRecipes.CATEGORY_STAGED_CRAFTING);
+		recipeTransfer.addRecipeTransferHandler(ContainerPlayer.class, ModRecipes.CATEGORY_STAGED_CRAFTING, 1, 4, 10, 36);
 	}
 	
 	@Override

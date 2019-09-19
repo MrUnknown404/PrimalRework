@@ -10,18 +10,12 @@ import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategory;
-import mezz.jei.api.recipe.wrapper.ICraftingRecipeWrapper;
-import mezz.jei.startup.ForgeModIdHelper;
-import mezz.jei.util.Translator;
 import mrunknown404.primalrework.Main;
 import mrunknown404.primalrework.init.ModRecipes;
 import mrunknown404.primalrework.util.recipes.StagedCraftingWrapper;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TextFormatting;
 
 public class StagedCraftingRecipeCategory implements IRecipeCategory<StagedCraftingWrapper> {
 	
@@ -77,38 +71,6 @@ public class StagedCraftingRecipeCategory implements IRecipeCategory<StagedCraft
 		}
 		
 		guiItemStacks.set(craftOutputSlot, outputs.get(0));
-		
-		if (recipe instanceof ICraftingRecipeWrapper) {
-			ICraftingRecipeWrapper craftingRecipeWrapper = (ICraftingRecipeWrapper) recipe;
-			ResourceLocation registryName = craftingRecipeWrapper.getRegistryName();
-			
-			if (registryName != null) {
-				guiItemStacks.addTooltipCallback((slotIndex, input, ingredient, tooltip) -> {
-					if (slotIndex == craftOutputSlot) {
-						String recipeModId = registryName.getResourceDomain();
-						
-						boolean modIdDifferent = false;
-						ResourceLocation itemRegistryName = ingredient.getItem().getRegistryName();
-						if (itemRegistryName != null) {
-							String itemModId = itemRegistryName.getResourceDomain();
-							modIdDifferent = !recipeModId.equals(itemModId);
-						}
-						
-						if (modIdDifferent) {
-							String modName = ForgeModIdHelper.getInstance().getFormattedModNameForModId(recipeModId);
-							if (modName != null) {
-								tooltip.add(TextFormatting.GRAY + Translator.translateToLocalFormatted("jei.tooltip.recipe.by", modName));
-							}
-						}
-						
-						boolean showAdvanced = Minecraft.getMinecraft().gameSettings.advancedItemTooltips || GuiScreen.isShiftKeyDown();
-						if (showAdvanced) {
-							tooltip.add(TextFormatting.DARK_GRAY + Translator.translateToLocalFormatted("jei.tooltip.recipe.id", registryName.toString()));
-						}
-					}
-				});
-			}
-		}
 	}
 	
 	@Override
