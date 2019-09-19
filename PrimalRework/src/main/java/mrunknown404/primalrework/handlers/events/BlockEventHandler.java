@@ -59,6 +59,26 @@ public class BlockEventHandler {
 					e.getWorld().spawnEntity(new EntityItem(e.getWorld(), e.getHitVec().x, e.getHitVec().y, e.getHitVec().z, new ItemStack(ModItems.FLINT_POINT,
 							1 + MathHelper.clamp(r.nextInt(3) - 1, 0, 1))));
 				}
+			} else if (item.getItem() == Items.BONE) {
+				e.getWorld().playSound(e.getEntityPlayer(), e.getPos(), SoundEvents.BLOCK_STONE_BREAK, SoundCategory.PLAYERS, 1, 2);
+				
+				if (!e.getWorld().isRemote && r.nextInt(3) == 0) {
+					item.shrink(1);
+					
+					e.getWorld().spawnEntity(new EntityItem(e.getWorld(), e.getHitVec().x, e.getHitVec().y, e.getHitVec().z, new ItemStack(ModItems.BONE_SHARD,
+							1 + MathHelper.clamp(r.nextInt(3) - 1, 0, 1))));
+					
+					if (r.nextInt(3) == 0) {
+						e.getWorld().spawnEntity(new EntityItem(e.getWorld(), e.getHitVec().x, e.getHitVec().y, e.getHitVec().z, new ItemStack(Items.DYE, 1, 15)));
+					}
+				}
+			} else if (item.getItem() == ModItems.BONE_SHARD) {
+				e.getWorld().playSound(e.getEntityPlayer(), e.getPos(), SoundEvents.BLOCK_STONE_BREAK, SoundCategory.PLAYERS, 1, 2);
+				
+				if (!e.getWorld().isRemote && r.nextInt(3) == 0) {
+					item.shrink(1);
+					e.getWorld().spawnEntity(new EntityItem(e.getWorld(), e.getHitVec().x, e.getHitVec().y, e.getHitVec().z, new ItemStack(Items.DYE, 1, 15)));
+				}
 			}
 		}
 	}

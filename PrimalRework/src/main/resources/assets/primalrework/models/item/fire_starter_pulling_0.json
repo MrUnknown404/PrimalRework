@@ -1,0 +1,6 @@
+{
+    "parent": "item/bow",
+    "textures": {
+        "layer0": "primalrework:items/fire_starter_pulling_0"
+    }
+}

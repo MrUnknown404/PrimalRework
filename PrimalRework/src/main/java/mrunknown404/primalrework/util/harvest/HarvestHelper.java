@@ -80,31 +80,31 @@ public class HarvestHelper {
 		setupVanillaHoe((ItemHoe) Items.DIAMOND_HOE, EnumToolMaterial.diamond);
 		setupVanillaHoe((ItemHoe) Items.IRON_HOE, EnumToolMaterial.iron);
 		setupVanillaHoe((ItemHoe) Items.STONE_HOE, EnumToolMaterial.stone);
-		setupVanillaHoe((ItemHoe) Items.WOODEN_HOE, EnumToolMaterial.flint);
+		setupVanillaHoe((ItemHoe) Items.WOODEN_HOE, EnumToolMaterial.wood);
 		setupVanillaHoe((ItemHoe) Items.GOLDEN_HOE, EnumToolMaterial.gold);
 		
 		setupVanillaSword((ItemSword) Items.DIAMOND_SWORD, EnumToolMaterial.diamond);
 		setupVanillaSword((ItemSword) Items.IRON_SWORD, EnumToolMaterial.iron);
 		setupVanillaSword((ItemSword) Items.STONE_SWORD, EnumToolMaterial.stone);
-		setupVanillaSword((ItemSword) Items.WOODEN_SWORD, EnumToolMaterial.flint);
+		setupVanillaSword((ItemSword) Items.WOODEN_SWORD, EnumToolMaterial.wood);
 		setupVanillaSword((ItemSword) Items.GOLDEN_SWORD, EnumToolMaterial.gold);
 		
 		setupVanillaTool((ItemTool) Items.DIAMOND_PICKAXE, EnumToolType.pickaxe, EnumToolMaterial.diamond);
 		setupVanillaTool((ItemTool) Items.IRON_PICKAXE, EnumToolType.pickaxe, EnumToolMaterial.iron);
 		setupVanillaTool((ItemTool) Items.STONE_PICKAXE, EnumToolType.pickaxe, EnumToolMaterial.stone);
-		setupVanillaTool((ItemTool) Items.WOODEN_PICKAXE, EnumToolType.pickaxe, EnumToolMaterial.flint);
+		setupVanillaTool((ItemTool) Items.WOODEN_PICKAXE, EnumToolType.pickaxe, EnumToolMaterial.wood);
 		setupVanillaTool((ItemTool) Items.GOLDEN_PICKAXE, EnumToolType.pickaxe, EnumToolMaterial.gold);
 		
 		setupVanillaTool((ItemTool) Items.DIAMOND_SHOVEL, EnumToolType.shovel, EnumToolMaterial.diamond);
 		setupVanillaTool((ItemTool) Items.IRON_SHOVEL, EnumToolType.shovel, EnumToolMaterial.iron);
 		setupVanillaTool((ItemTool) Items.STONE_SHOVEL, EnumToolType.shovel, EnumToolMaterial.stone);
-		setupVanillaTool((ItemTool) Items.WOODEN_SHOVEL, EnumToolType.shovel, EnumToolMaterial.flint);
+		setupVanillaTool((ItemTool) Items.WOODEN_SHOVEL, EnumToolType.shovel, EnumToolMaterial.wood);
 		setupVanillaTool((ItemTool) Items.GOLDEN_SHOVEL, EnumToolType.shovel, EnumToolMaterial.gold);
 		
 		setupVanillaTool((ItemTool) Items.DIAMOND_AXE, EnumToolType.axe, EnumToolMaterial.diamond);
 		setupVanillaTool((ItemTool) Items.IRON_AXE, EnumToolType.axe, EnumToolMaterial.iron);
 		setupVanillaTool((ItemTool) Items.STONE_AXE, EnumToolType.axe, EnumToolMaterial.stone);
-		setupVanillaTool((ItemTool) Items.WOODEN_AXE, EnumToolType.axe, EnumToolMaterial.flint);
+		setupVanillaTool((ItemTool) Items.WOODEN_AXE, EnumToolType.axe, EnumToolMaterial.wood);
 		setupVanillaTool((ItemTool) Items.GOLDEN_AXE, EnumToolType.axe, EnumToolMaterial.gold);
 	}
 	
@@ -553,30 +553,30 @@ public class HarvestHelper {
 		setHarvestLevel(Items.GOLDEN_PICKAXE, EnumToolType.pickaxe, EnumToolMaterial.gold);
 		setHarvestLevel(Items.IRON_PICKAXE, EnumToolType.pickaxe, EnumToolMaterial.iron);
 		setHarvestLevel(Items.STONE_PICKAXE, EnumToolType.pickaxe, EnumToolMaterial.stone);
-		setHarvestLevel(Items.WOODEN_PICKAXE, EnumToolType.pickaxe, EnumToolMaterial.flint);
+		setHarvestLevel(Items.WOODEN_PICKAXE, EnumToolType.pickaxe, EnumToolMaterial.wood);
 		
 		setHarvestLevel(Items.DIAMOND_SHOVEL, EnumToolType.shovel, EnumToolMaterial.diamond);
 		setHarvestLevel(Items.GOLDEN_SHOVEL, EnumToolType.shovel, EnumToolMaterial.gold);
 		setHarvestLevel(Items.IRON_SHOVEL, EnumToolType.shovel, EnumToolMaterial.iron);
 		setHarvestLevel(Items.STONE_SHOVEL, EnumToolType.shovel, EnumToolMaterial.stone);
-		setHarvestLevel(Items.WOODEN_SHOVEL, EnumToolType.shovel, EnumToolMaterial.flint);
+		setHarvestLevel(Items.WOODEN_SHOVEL, EnumToolType.shovel, EnumToolMaterial.wood);
 		
 		setHarvestLevel(Items.DIAMOND_AXE, EnumToolType.axe, EnumToolMaterial.diamond);
 		setHarvestLevel(Items.GOLDEN_AXE, EnumToolType.axe, EnumToolMaterial.gold);
 		setHarvestLevel(Items.IRON_AXE, EnumToolType.axe, EnumToolMaterial.iron);
 		setHarvestLevel(Items.STONE_AXE, EnumToolType.axe, EnumToolMaterial.stone);
-		setHarvestLevel(Items.WOODEN_AXE, EnumToolType.axe, EnumToolMaterial.flint);
+		setHarvestLevel(Items.WOODEN_AXE, EnumToolType.axe, EnumToolMaterial.wood);
 		
 		setHarvestLevel(Items.DIAMOND_SWORD, EnumToolType.sword, EnumToolMaterial.diamond);
 		setHarvestLevel(Items.GOLDEN_SWORD, EnumToolType.sword, EnumToolMaterial.gold);
 		setHarvestLevel(Items.IRON_SWORD, EnumToolType.sword, EnumToolMaterial.iron);
 		setHarvestLevel(Items.STONE_SWORD, EnumToolType.sword, EnumToolMaterial.stone);
-		setHarvestLevel(Items.WOODEN_SWORD, EnumToolType.sword, EnumToolMaterial.flint);
+		setHarvestLevel(Items.WOODEN_SWORD, EnumToolType.sword, EnumToolMaterial.wood);
 		
 		setHarvestLevel(Items.DIAMOND_HOE, EnumToolType.hoe, EnumToolMaterial.diamond);
 		setHarvestLevel(Items.GOLDEN_HOE, EnumToolType.hoe, EnumToolMaterial.gold);
 		setHarvestLevel(Items.IRON_HOE, EnumToolType.hoe, EnumToolMaterial.iron);
 		setHarvestLevel(Items.STONE_HOE, EnumToolType.hoe, EnumToolMaterial.stone);
-		setHarvestLevel(Items.WOODEN_HOE, EnumToolType.hoe, EnumToolMaterial.flint);
+		setHarvestLevel(Items.WOODEN_HOE, EnumToolType.hoe, EnumToolMaterial.wood);
 	}
 }

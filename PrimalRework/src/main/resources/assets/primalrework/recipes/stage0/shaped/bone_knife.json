@@ -2,12 +2,12 @@
   "type": "primalrework:staged_shaped",
   "stage": "stage0",
   "pattern": [
-    "FS",
+    "BS",
     "I "
   ],
   "key": {
-    "F": {
-      "item": "primalrework:flint_point"
+    "B": {
+      "item": "primalrework:bone_shard"
     },
     "S": {
       "item": "primalrework:plant_fiber"
@@ -17,6 +17,6 @@
     }
   },
   "result": {
-    "item": "primalrework:flint_knife"
+    "item": "primalrework:bone_knife"
   }
 }

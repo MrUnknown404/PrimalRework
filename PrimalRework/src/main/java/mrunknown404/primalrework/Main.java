@@ -5,6 +5,9 @@ import mrunknown404.primalrework.commands.CommandStage;
 import mrunknown404.primalrework.handlers.events.BlockEventHandler;
 import mrunknown404.primalrework.handlers.events.PlayerEventHandler;
 import mrunknown404.primalrework.handlers.events.WorldEventHandler;
+import mrunknown404.primalrework.network.FireStarterMessage;
+import mrunknown404.primalrework.network.FireStarterPacketHandler;
+import mrunknown404.primalrework.util.OreDict;
 import mrunknown404.primalrework.util.harvest.HarvestHelper;
 import mrunknown404.primalrework.util.proxy.CommonProxy;
 import mrunknown404.primalrework.world.WorldGen;
@@ -18,7 +21,9 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
 
 @Mod(modid = Main.MOD_ID, useMetadata = true)
 public class Main {
@@ -26,6 +31,8 @@ public class Main {
 	public static final String MOD_ID = "primalrework";
 	public static final int GUI_ID_FIRE_PIT = 1;
 	public static final int GUI_ID_ENCHANTING = 2;
+	
+	public static SimpleNetworkWrapper networkWrapper;
 	
 	@Instance
 	public static Main main;
@@ -46,11 +53,14 @@ public class Main {
 	@EventHandler
 	public void init(FMLInitializationEvent e) {
 		NetworkRegistry.INSTANCE.registerGuiHandler(main, new GuiHandler());
+		networkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel(MOD_ID);
+		networkWrapper.registerMessage(FireStarterPacketHandler.class, FireStarterMessage.class, 0, Side.SERVER);
 		
 		proxy.registerSounds();
 		proxy.setupRecipes();
 		
 		HarvestHelper.changeHarvestLevels();
+		OreDict.register();
 		
 		GameRegistry.registerWorldGenerator(new WorldGen(), 0);
 	}

@@ -2,9 +2,10 @@ package mrunknown404.primalrework.util.harvest;
 
 public enum EnumToolMaterial {
 	hand       (0,  0,    0.50f, 0.00f, 0 ),
+	wood       (1,  16,   0.75f, 0.25f, 1 ),
 	flint      (1,  32,   1.50f, 0.25f, 1 ),
-	bone       (1,  24,   3.50f, 2.25f, 3 ),
-	stone      (2,  64,   2.00f, 0.50f, 1 ),
+	bone       (1,  24,   3.50f, 2.00f, 3 ),
+	stone      (2,  64,   2.00f, 0.50f, 2 ),
 	gold       (2,  48,   4.00f, 1.00f, 10),
 	copper     (3,  128,  2.50f, 1.25f, 4 ),
 	bronze     (4,  256,  3.50f, 1.75f, 6 ),

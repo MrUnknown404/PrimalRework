@@ -4,6 +4,8 @@ item.plant_rope.name=Plant Rope
 item.gravel.name=Gravel
 item.flint_knapped.name=Knapped Flint
 item.flint_point.name=Flint Point
+item.bone_shard.name=Bone Shard
+item.fire_starter.name=Fire Starter
 
 item.plant_mesh.name=Plant Mesh
 item.string_mesh.name=String Mesh
@@ -14,6 +16,8 @@ item.flint_knife.name=Flint Knife
 item.flint_pickaxe.name=Flint Pickaxe
 item.flint_axe.name=Flint Hatchet
 item.flint_shovel.name=Flint Shovel
+
+item.bone_knife.name=Bone Knife
 
 //Blocks
 tile.rock.name=Rock

@@ -1,0 +1,17 @@
+{
+  "type": "primalrework:staged_ore_shapeless",
+  "stage": "stage0",
+  "ingredients": [
+    {
+      "type": "forge:ore_dict",
+      "ore": "toolKnife"
+    },
+    {
+      "item": "primalrework:plant_rope"
+    }
+  ],
+  "result": {
+    "item": "primalrework:plant_fiber",
+    "count": 3
+  }
+}

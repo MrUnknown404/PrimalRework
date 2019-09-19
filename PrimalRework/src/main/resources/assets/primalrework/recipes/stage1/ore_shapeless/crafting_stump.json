@@ -7,10 +7,12 @@
       "ore": "logWood"
     },
     {
-      "item": "primalrework:flint_axe"
+      "type": "forge:ore_dict",
+      "ore": "toolAxe"
     },
     {
-      "item": "primalrework:flint_knife"
+      "type": "forge:ore_dict",
+      "ore": "toolKnife"
     }
   ],
   "result": {
