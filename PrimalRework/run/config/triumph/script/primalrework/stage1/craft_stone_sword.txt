@@ -1,0 +1,16 @@
+setIcon(<minecraft:stone_sword>)
+setTitle("Stone Sword")
+setDescription("Craft a stone sword")
+setBackground("minecraft:textures/gui/advancements/backgrounds/adventure.png")
+setShowToast(true)
+setAnnounceToChat(true)
+setRequiresParents()
+alwaysVisible()
+
+addParent("primalrework:stage1/craft_stone_sword_head")
+
+//hideLines()
+setPos(141,-12)
+
+criteria = addCriteria("craft", "minecraft:inventory_changed")
+criteria.addItem(<minecraft:stone_sword>)

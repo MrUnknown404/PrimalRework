@@ -35,7 +35,7 @@ public class FirePitRecipeCategory implements IRecipeCategory<FirePitRecipeWrapp
 		IDrawableStatic staticCookTime = helper.createDrawable(TEXTURES, 176, 14, 2, 24);
 		animatedCookTime = helper.createAnimatedDrawable(staticCookTime, 100, StartDirection.BOTTOM, false);
 		
-		background = helper.createDrawable(TEXTURES, 0, 166, 73, 37);
+		background = helper.createDrawable(TEXTURES, 0, 166, 115, 45);
 		icon = helper.createDrawableIngredient(new ItemStack(ModBlocks.FIRE_PIT));
 	}
 	
@@ -46,8 +46,8 @@ public class FirePitRecipeCategory implements IRecipeCategory<FirePitRecipeWrapp
 	
 	@Override
 	public void drawExtras(Minecraft minecraft) {
-		animatedFuel.draw(minecraft, 2, 6);
-		animatedCookTime.draw(minecraft, 43, 1);
+		animatedFuel.draw(minecraft, 23, 6);
+		animatedCookTime.draw(minecraft, 64, 1);
 	}
 	
 	@Override
@@ -64,12 +64,12 @@ public class FirePitRecipeCategory implements IRecipeCategory<FirePitRecipeWrapp
 	public void setRecipe(IRecipeLayout layout, FirePitRecipeWrapper recipe, IIngredients ingredients) {
 		IGuiItemStackGroup stacks = layout.getItemStacks();
 		
-		stacks.init(SLOT_INPUT, true, 23, 4);
-		stacks.init(SLOT_OUTPUT, false, 51, 4);
+		stacks.init(SLOT_INPUT, true, 44, 4);
+		stacks.init(SLOT_OUTPUT, false, 72, 4);
 		
 		stacks.set(ingredients);
 		
-		stacks.init(SLOT_FUEL, false, 0, 4);
+		stacks.init(SLOT_FUEL, false, 21, 4);
 		stacks.set(SLOT_FUEL, ModRecipes.getFirePitFuels());
 	}
 	

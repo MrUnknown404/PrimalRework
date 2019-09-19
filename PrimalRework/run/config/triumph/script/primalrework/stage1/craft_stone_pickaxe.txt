@@ -1,0 +1,16 @@
+setIcon(<minecraft:stone_pickaxe>)
+setTitle("Stone Pickaxe")
+setDescription("Craft a stone pickaxe")
+setBackground("minecraft:textures/gui/advancements/backgrounds/adventure.png")
+setShowToast(true)
+setAnnounceToChat(true)
+setRequiresParents()
+alwaysVisible()
+
+addParent("primalrework:stage1/craft_stone_pickaxe_head")
+
+//hideLines()
+setPos(141,42)
+
+criteria = addCriteria("craft", "minecraft:inventory_changed")
+criteria.addItem(<minecraft:stone_pickaxe>)

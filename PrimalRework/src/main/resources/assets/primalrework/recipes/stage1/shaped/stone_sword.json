@@ -1,0 +1,22 @@
+{
+  "type": "primalrework:staged_shaped",
+  "stage": "stage1",
+  "pattern": [
+    "SR",
+    "I "
+  ],
+  "key": {
+    "S": {
+      "item": "primalrework:stone_sword_head"
+    },
+    "R": {
+      "item": "primalrework:plant_rope"
+    },
+    "I": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "minecraft:stone_sword"
+  }
+}

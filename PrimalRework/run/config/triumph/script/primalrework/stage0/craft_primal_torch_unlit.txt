@@ -1,0 +1,18 @@
+setIcon(<primalrework:primal_torch_unlit>)
+setTitle("Unlit Primal Torch")
+setDescription("Craft an unlit primal torch")
+setBackground("minecraft:textures/gui/advancements/backgrounds/adventure.png")
+setShowToast(true)
+setAnnounceToChat(true)
+setRequiresParents()
+alwaysVisible()
+
+addParent("primalrework:stage0/get_stick")
+addParent("primalrework:stage0/get_plant_fiber")
+
+//hideLines()
+setPos(126,-2)
+setFrameType("GOAL")
+
+criteria = addCriteria("primal_torch_unlit", "minecraft:inventory_changed")
+criteria.addItem(<primalrework:primal_torch_unlit>)

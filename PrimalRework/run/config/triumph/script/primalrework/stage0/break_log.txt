@@ -1,0 +1,18 @@
+setIcon(<minecraft:log>)
+setTitle("Deforestation")
+setDescription("Cut down your first tree")
+setBackground("minecraft:textures/gui/advancements/backgrounds/adventure.png")
+setShowToast(true)
+setAnnounceToChat(true)
+setRequiresParents()
+alwaysVisible()
+
+addParent("primalrework:stage0/craft_flint_axe")
+
+//hideLines()
+setPos(173,-8)
+setFrameType("CHALLENGE")
+
+criteria = addCriteria("log", "minecraft:inventory_changed")
+criteria.addItem(<minecraft:log>)
+criteria.setCount(4)

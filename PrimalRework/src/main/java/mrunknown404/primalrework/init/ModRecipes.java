@@ -51,9 +51,8 @@ public class ModRecipes {
 		
 		FIRE_PIT_FUELS.sort(new CompareFirePitFuel());
 		
-		//TODO write more of these (and remove the test recipe)
 		FIRE_PIT_RECIPES.add(new FirePitRecipe(EnumStage.stage0, ModBlocks.UNLIT_PRIMAL_TORCH, ModBlocks.LIT_PRIMAL_TORCH, 10));
-		FIRE_PIT_RECIPES.add(new FirePitRecipe(EnumStage.stage1, Blocks.BRICK_BLOCK, Items.COAL, 100));
+		FIRE_PIT_RECIPES.add(new FirePitRecipe(EnumStage.stage1, Blocks.COBBLESTONE, Blocks.STONE, 100));
 	}
 	
 	public static void removeRecipes() {

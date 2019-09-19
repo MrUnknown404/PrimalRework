@@ -32,6 +32,10 @@ public class ItemBase extends Item implements IItemBase {
 		this(name, 1, true, level);
 	}
 	
+	public ItemBase(String name, int maxStackSize) {
+		this(name, maxStackSize, false, EnumToolMaterial.hand);
+	}
+	
 	public ItemBase(String name) {
 		this(name, 64, false, EnumToolMaterial.hand);
 	}

@@ -1,0 +1,18 @@
+{
+  "type": "primalrework:staged_shaped",
+  "stage": "stage1",
+  "pattern": [
+    "RCR"
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:cobblestone"
+    },
+    "R": {
+      "item": "primalrework:rock"
+    }
+  },
+  "result": {
+    "item": "primalrework:stone_pickaxe_head"
+  }
+}

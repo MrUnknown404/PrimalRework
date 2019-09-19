@@ -1,0 +1,16 @@
+setIcon(<primalrework:flint_point>)
+setTitle("Flint point")
+setDescription("Smash a knapped flint on a stone block for a chance to get a flint point")
+setBackground("minecraft:textures/gui/advancements/backgrounds/adventure.png")
+setShowToast(true)
+setAnnounceToChat(true)
+setRequiresParents()
+alwaysVisible()
+
+addParent("primalrework:stage0/get_flint_knapped")
+
+//hideLines()
+setPos(110,61)
+
+criteria = addCriteria("flint_point", "minecraft:inventory_changed")
+criteria.addItem(<primalrework:flint_point>)

@@ -1,0 +1,16 @@
+setIcon(<minecraft:cobblestone>)
+setTitle("Cobblestone")
+setDescription("Craft a cobblestone")
+setBackground("minecraft:textures/gui/advancements/backgrounds/adventure.png")
+setShowToast(true)
+setAnnounceToChat(true)
+setRequiresParents()
+alwaysVisible()
+
+addParent("primalrework:stage0/get_rock")
+
+//hideLines()
+setPos(60,31)
+
+criteria = addCriteria("cobblestone", "minecraft:inventory_changed")
+criteria.addItem(<minecraft:cobblestone>)

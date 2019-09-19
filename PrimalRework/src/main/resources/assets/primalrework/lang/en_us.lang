@@ -9,15 +9,23 @@ item.fire_starter.name=Fire Starter
 
 item.plant_mesh.name=Plant Mesh
 item.string_mesh.name=String Mesh
-
 item.flint_crafting_hammer.name=Flint Crafting Hammer
 
-item.flint_knife.name=Flint Knife
+item.stone_pickaxe_head.name=Stone Pickaxe Head
+item.stone_axe_head.name=Stone Axe Head
+item.stone_shovel_head.name=Stone Shovel Head
+item.stone_sword_head.name=Stone Sword Head
+item.stone_knife_head.name=Stone Knife Head
+item.stone_hoe_head.name=Stone Hoe Head
+
 item.flint_pickaxe.name=Flint Pickaxe
 item.flint_axe.name=Flint Hatchet
 item.flint_shovel.name=Flint Shovel
+item.flint_knife.name=Flint Knife
 
 item.bone_knife.name=Bone Knife
+
+item.stone_knife.name=Stone Knife
 
 //Blocks
 tile.rock.name=Rock

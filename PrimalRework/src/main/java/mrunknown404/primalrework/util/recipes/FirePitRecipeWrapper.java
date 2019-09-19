@@ -32,9 +32,11 @@ public class FirePitRecipeWrapper implements IRecipeWrapperBase<FirePitRecipe> {
 	public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
 		FontRenderer r = minecraft.fontRenderer;
 		String cookTime = new TextComponentTranslation("gui.fire_pit_cook").getUnformattedText() + ": " + recipe.getCookTime();
+		String stage = recipe.getStage().getName();
 		
-		int width = r.getStringWidth(cookTime);
-		r.drawString(cookTime, recipeWidth / 2 - width / 2, 28, 16777215, true);
+		int width1 = r.getStringWidth(cookTime), width2 = r.getStringWidth(stage);
+		r.drawString(cookTime, recipeWidth / 2 - width1 / 2, 28, 16777215, true);
+		r.drawString(stage, recipeWidth / 2 - width2 / 2, 37, 16777215, true);
 	}
 	
 	public static List<FirePitRecipeWrapper> createFromList(List<FirePitRecipe> list) {

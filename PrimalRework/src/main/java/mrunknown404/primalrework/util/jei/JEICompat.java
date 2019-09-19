@@ -62,6 +62,7 @@ public class JEICompat implements IModPlugin {
 		
 		reg.addRecipeCatalyst(new ItemStack(ModBlocks.FIRE_PIT), ModRecipes.CATEGORY_FIRE_PIT);
 		reg.addRecipeCatalyst(new ItemStack(Blocks.CRAFTING_TABLE), ModRecipes.CATEGORY_STAGED_CRAFTING);
+		reg.addRecipeCatalyst(new ItemStack(ModBlocks.CRAFTING_STUMP), ModRecipes.CATEGORY_STAGED_CRAFTING);
 		
 		recipeTransfer.addRecipeTransferHandler(ContainerFirePit.class, ModRecipes.CATEGORY_FIRE_PIT, FirePitRecipeCategory.SLOT_INPUT, 1, FirePitRecipeCategory.SLOT_INPUT, 36);
 		recipeTransfer.addRecipeTransferHandler(ContainerWorkbench.class, ModRecipes.CATEGORY_STAGED_CRAFTING, 1, 9, 10, 36);

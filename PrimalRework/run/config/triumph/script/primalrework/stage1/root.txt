@@ -1,0 +1,10 @@
+setIcon(<minecraft:log>)
+setTitle("Stage 1 (Early Stone)")
+setDescription("Fiiire!")
+setBackground("minecraft:textures/gui/advancements/backgrounds/adventure.png")
+setShowToast(false)
+setAnnounceToChat(false)
+
+setPos(0,15)
+
+addCriteria("location", "minecraft:location")

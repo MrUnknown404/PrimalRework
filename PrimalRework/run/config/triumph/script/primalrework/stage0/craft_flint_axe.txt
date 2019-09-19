@@ -1,0 +1,19 @@
+setIcon(<primalrework:flint_axe>)
+setTitle("Flint Knife")
+setDescription("Craft a flint axe")
+setBackground("minecraft:textures/gui/advancements/backgrounds/adventure.png")
+setShowToast(true)
+setAnnounceToChat(true)
+setRequiresParents()
+alwaysVisible()
+
+addParent("primalrework:stage0/get_stick")
+addParent("primalrework:stage0/get_flint_knapped")
+addParent("primalrework:stage0/craft_plant_rope")
+
+//hideLines()
+setPos(187,29)
+setFrameType("GOAL")
+
+criteria = addCriteria("flint_axe", "minecraft:inventory_changed")
+criteria.addItem(<primalrework:flint_axe>)
