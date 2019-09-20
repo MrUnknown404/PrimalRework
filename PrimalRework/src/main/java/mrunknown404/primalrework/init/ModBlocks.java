@@ -7,6 +7,7 @@ import mrunknown404.primalrework.blocks.BlockCraftingStump;
 import mrunknown404.primalrework.blocks.BlockFirePit;
 import mrunknown404.primalrework.blocks.BlockPrimalTorchLit;
 import mrunknown404.primalrework.blocks.BlockPrimalTorchUnlit;
+import mrunknown404.primalrework.blocks.BlockStrippedLog;
 import mrunknown404.primalrework.blocks.util.BlockGroundItem;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -23,4 +24,11 @@ public class ModBlocks {
 	public static final Block UNLIT_PRIMAL_TORCH = new BlockPrimalTorchUnlit();
 	public static final Block LIT_PRIMAL_TORCH = new BlockPrimalTorchLit();
 	public static final Block CRAFTING_STUMP = new BlockCraftingStump();
+	
+	public static final Block STRIPPED_OAK_LOG = new BlockStrippedLog("oak");
+	public static final Block STRIPPED_SPRUCE_LOG = new BlockStrippedLog("spruce");
+	public static final Block STRIPPED_BIRCH_LOG = new BlockStrippedLog("birch");
+	public static final Block STRIPPED_JUNGLE_LOG = new BlockStrippedLog("jungle");
+	public static final Block STRIPPED_DARK_OAK_LOG = new BlockStrippedLog("dark_oak");
+	public static final Block STRIPPED_ACACIA_LOG = new BlockStrippedLog("acacia");
 }

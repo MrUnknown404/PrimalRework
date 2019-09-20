@@ -4,7 +4,6 @@ import java.util.List;
 
 import mrunknown404.primalrework.init.ModCreativeTabs;
 import mrunknown404.primalrework.util.harvest.BlockHarvestInfo;
-import mrunknown404.primalrework.util.harvest.HarvestInfo;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -48,7 +47,7 @@ public abstract class BlockBase extends Block implements IBlockBase {
 	
 	@Override
 	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced) {
-		tooltip.addAll(getTooltip(getUnlocalizedName()));
+		tooltip.addAll(getTooltips(getUnlocalizedName()));
 	}
 	
 	@Override
@@ -77,7 +76,7 @@ public abstract class BlockBase extends Block implements IBlockBase {
 	}
 	
 	@Override
-	public HarvestInfo getHarvestInfo() {
+	public BlockHarvestInfo getHarvestInfo() {
 		return harvestInfo;
 	}
 }

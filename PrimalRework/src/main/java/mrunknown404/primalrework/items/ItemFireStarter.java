@@ -4,6 +4,7 @@ import javax.annotation.Nullable;
 
 import mrunknown404.primalrework.Main;
 import mrunknown404.primalrework.init.ModItems;
+import mrunknown404.primalrework.items.util.ItemBase;
 import mrunknown404.primalrework.network.FireStarterMessage;
 import mrunknown404.primalrework.util.harvest.EnumToolMaterial;
 import net.minecraft.entity.EntityLivingBase;
@@ -76,6 +77,7 @@ public class ItemFireStarter extends ItemBase {
 		return 288000;
 	}
 	
+	@Override
 	public EnumAction getItemUseAction(ItemStack stack) {
 		return EnumAction.BOW;
 	}

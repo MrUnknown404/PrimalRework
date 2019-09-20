@@ -5,7 +5,7 @@ import mrunknown404.primalrework.blocks.util.IBlockBase;
 import mrunknown404.primalrework.init.ModBlocks;
 import mrunknown404.primalrework.init.ModEntities;
 import mrunknown404.primalrework.init.ModItems;
-import mrunknown404.primalrework.items.IItemBase;
+import mrunknown404.primalrework.items.util.IItemBase;
 import mrunknown404.primalrework.util.EntityInfo;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;

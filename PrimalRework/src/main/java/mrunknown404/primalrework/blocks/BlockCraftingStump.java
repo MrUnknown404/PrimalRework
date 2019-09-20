@@ -198,9 +198,6 @@ public class BlockCraftingStump extends BlockBase implements ITileEntityProvider
 				
 				NBTTagCompound nbt = new NBTTagCompound();
 				tile.writeToNBT(nbt);
-				//ItemStack stack = new ItemStack(Item.getItemFromBlock(this), 1);
-				
-				//InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), stack);
 				world.removeTileEntity(pos);
 			}
 		}
@@ -235,7 +232,7 @@ public class BlockCraftingStump extends BlockBase implements ITileEntityProvider
 	@Override
 	public int getMetaFromState(IBlockState state) {
 		int meta = 0;
-		meta = meta | ((EnumFacing) state.getValue(FACING)).getIndex();
+		meta = meta | state.getValue(FACING).getIndex();
 		
 		return meta;
 	}

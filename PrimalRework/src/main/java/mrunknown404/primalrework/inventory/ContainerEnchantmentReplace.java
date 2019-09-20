@@ -3,7 +3,7 @@ package mrunknown404.primalrework.inventory;
 import java.util.List;
 import java.util.Random;
 
-import mrunknown404.primalrework.util.EnchantHelper;
+import mrunknown404.primalrework.util.helpers.EnchantHelper;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentData;
@@ -43,7 +43,7 @@ public class ContainerEnchantmentReplace extends ContainerEnchantment {
 			ItemStack itemstack = inventoryIn.getStackInSlot(0);
 			
 			if (!itemstack.isEmpty() && EnchantHelper.isEnchantable(itemstack.getItem())) {
-				if (!this.world.isRemote) {
+				if (!world.isRemote) {
 					float power = 0;
 					
 					for (int j = -1; j <= 1; ++j) {
@@ -51,6 +51,7 @@ public class ContainerEnchantmentReplace extends ContainerEnchantment {
 							if ((j != 0 || k != 0) && world.isAirBlock(position.add(k, 0, j)) && world.isAirBlock(position.add(k, 1, j))) {
 								power += ForgeHooks.getEnchantPower(world, position.add(k * 2, 0, j * 2));
 								power += ForgeHooks.getEnchantPower(world, position.add(k * 2, 1, j * 2));
+								
 								if (k != 0 && j != 0) {
 									power += ForgeHooks.getEnchantPower(world, position.add(k * 2, 0, j));
 									power += ForgeHooks.getEnchantPower(world, position.add(k * 2, 1, j));
@@ -71,6 +72,7 @@ public class ContainerEnchantmentReplace extends ContainerEnchantment {
 						if (enchantLevels[i1] < i1 + 1) {
 							enchantLevels[i1] = 0;
 						}
+						
 						enchantLevels[i1] = ForgeEventFactory.onEnchantmentLevelSet(world, position, i1, (int) power, itemstack, enchantLevels[i1]);
 					}
 					

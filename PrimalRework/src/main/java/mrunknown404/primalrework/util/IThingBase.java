@@ -14,7 +14,7 @@ public interface IThingBase<T> {
 		return 0;
 	}
 	
-	public default List<String> getTooltip(String name) {
+	public default List<String> getTooltips(String name) {
 		List<String> tooltip = new ArrayList<String>();
 		
 		for (int i = 0; i < getAmountOfTooltips(); i++) {

@@ -9,13 +9,13 @@ import com.google.common.collect.Lists;
 
 import mrunknown404.primalrework.Main;
 import mrunknown404.primalrework.handlers.StageHandler;
+import mrunknown404.primalrework.recipes.FirePitRecipe;
+import mrunknown404.primalrework.recipes.util.IStagedRecipeBase;
 import mrunknown404.primalrework.util.DoubleValue;
 import mrunknown404.primalrework.util.DummyRecipe;
 import mrunknown404.primalrework.util.EnumStage;
-import mrunknown404.primalrework.util.recipes.FirePitRecipe;
-import mrunknown404.primalrework.util.recipes.FirePitRecipeWrapper;
-import mrunknown404.primalrework.util.recipes.StagedCraftingWrapper;
-import mrunknown404.primalrework.util.recipes.util.IStagedRecipeBase;
+import mrunknown404.primalrework.util.jei.wrappers.FirePitRecipeWrapper;
+import mrunknown404.primalrework.util.jei.wrappers.StagedCraftingWrapper;
 import net.minecraft.block.BlockPlanks.EnumType;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;

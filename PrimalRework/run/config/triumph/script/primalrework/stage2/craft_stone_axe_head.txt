@@ -1,0 +1,16 @@
+setIcon(<primalrework:stone_axe_head>)
+setTitle("Stone Axe Head")
+setDescription("Craft a stone axe head")
+setBackground("minecraft:textures/gui/advancements/backgrounds/adventure.png")
+setShowToast(true)
+setAnnounceToChat(true)
+setRequiresParents()
+alwaysVisible()
+
+addParent("primalrework:stage2/root")
+
+//hideLines()
+setPos(114,58)
+
+criteria = addCriteria("craft", "minecraft:inventory_changed")
+criteria.addItem(<primalrework:stone_axe_head>)

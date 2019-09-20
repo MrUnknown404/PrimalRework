@@ -9,12 +9,12 @@ import net.minecraft.init.Enchantments;
 
 public enum EnumToolType {
 	none   (0.00f, 0.00f, new ArrayList<Enchantment>()),
-	shears (1.75f, 1.75f, combineEnchants(Enchs.TOOL_EFF_UN, Enchs.TOOL_FORT_SILK)),
+	shears (1.75f, 1.50f, combineEnchants(Enchs.TOOL_EFF_UN, Enchs.TOOL_FORT_SILK)),
 	knife  (1.75f, 2.00f, combineEnchants(Enchs.TOOL_EFF_UN, Enchs.TOOL_FORT_SILK, Enchs.WEAPON_BASE)),
 	pickaxe(1.25f, 1.00f, combineEnchants(Enchs.TOOL_EFF_UN, Enchs.TOOL_FORT_SILK)),
 	shovel (1.50f, 1.50f, combineEnchants(Enchs.TOOL_EFF_UN, Enchs.TOOL_FORT_SILK)),
 	axe    (0.90f, 4.50f, combineEnchants(Enchs.TOOL_EFF_UN, Enchs.TOOL_FORT_SILK, Enchs.WEAPON_BASE)),
-	hoe    (2.00f, 0.00f, Arrays.asList(Enchantments.UNBREAKING, Enchantments.KNOCKBACK)),
+	hoe    (1.25f, 0.50f, Arrays.asList(Enchantments.UNBREAKING, Enchantments.KNOCKBACK)),
 	sword  (1.50f, 3.00f, combineEnchants(combineEnchants(Enchs.WEAPON_BASE, Enchs.WEAPON_SPECIFIC, Enchs.WEAPON_SPECIAL), Enchantments.UNBREAKING));
 	
 	public final float swingSpeed, baseDamage;

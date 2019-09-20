@@ -8,7 +8,7 @@ import mrunknown404.primalrework.handlers.events.WorldEventHandler;
 import mrunknown404.primalrework.network.FireStarterMessage;
 import mrunknown404.primalrework.network.FireStarterPacketHandler;
 import mrunknown404.primalrework.util.OreDict;
-import mrunknown404.primalrework.util.harvest.HarvestHelper;
+import mrunknown404.primalrework.util.helpers.HarvestHelper;
 import mrunknown404.primalrework.util.proxy.CommonProxy;
 import mrunknown404.primalrework.world.WorldGen;
 import net.minecraftforge.common.MinecraftForge;

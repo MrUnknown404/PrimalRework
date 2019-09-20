@@ -1,4 +1,4 @@
-//Items
+//ITEMS
 item.plant_fiber.name=Plant Fiber
 item.plant_rope.name=Plant Rope
 item.gravel.name=Gravel
@@ -6,11 +6,14 @@ item.flint_knapped.name=Knapped Flint
 item.flint_point.name=Flint Point
 item.bone_shard.name=Bone Shard
 item.fire_starter.name=Fire Starter
+item.bark.name=Bark
 
+// ITEMS WITH DURABILITY
 item.plant_mesh.name=Plant Mesh
 item.string_mesh.name=String Mesh
 item.flint_crafting_hammer.name=Flint Crafting Hammer
 
+// TOOL HEADS
 item.stone_pickaxe_head.name=Stone Pickaxe Head
 item.stone_axe_head.name=Stone Axe Head
 item.stone_shovel_head.name=Stone Shovel Head
@@ -18,6 +21,7 @@ item.stone_sword_head.name=Stone Sword Head
 item.stone_knife_head.name=Stone Knife Head
 item.stone_hoe_head.name=Stone Hoe Head
 
+// TOOLS
 item.flint_pickaxe.name=Flint Pickaxe
 item.flint_axe.name=Flint Hatchet
 item.flint_shovel.name=Flint Shovel
@@ -27,7 +31,18 @@ item.bone_knife.name=Bone Knife
 
 item.stone_knife.name=Stone Knife
 
-//Blocks
+item.diamond_axe.name=Diamond Axe
+item.iron_axe.name=Iron Axe
+item.stone_axe.name=Stone Axe
+item.golden_axe.name=Golden Axe
+item.wooden_axe.name=Wooden Axe
+item.diamond_hoe.name=Diamond Hoe
+item.iron_hoe.name=Iron Hoe
+item.stone_hoe.name=Stone Hoe
+item.golden_hoe.name=Golden Hoe
+item.wooden_hoe.name=Wooden Hoe
+
+// BLOCKS
 tile.rock.name=Rock
 tile.stick.name=Placeable Stick
 tile.flint.name=Placeable Flint
@@ -36,21 +51,28 @@ tile.primal_torch_lit.name=Lit Primal Torch
 tile.primal_torch_unlit.name=Unlit Primal Torch
 tile.crafting_stump.name=Crafting Stump
 
+tile.stripped_oak_log.name=Stripped Oak Log
+tile.stripped_spruce_log.name=Stripped Spruce Log
+tile.stripped_birch_log.name=Stripped Birch Log
+tile.stripped_jungle_log.name=Stripped Jungle Log
+tile.stripped_dark_oak_log.name=Stripped Dark Oak Log
+tile.stripped_acacia_log.name=Stripped Acacia Log
+
 tile.primal_torch_unlit.tooltip_0=&7Right click on a fire source while holding this item or
 tile.primal_torch_unlit.tooltip_1=&7put the unlit torch inside a fire pit to light it
 
-//Entities
+// ENTITIES
 entity.pigeon.name=Pigeon
 
-//Commands
+// COMMANDS
 commands.stage.usage=/stage add [stage name]
 
-//Stage
+// STAGE
 stage.before.name=Stage 0 (Before)
 stage.early_stone.name=Stage 1 (Early Stone)
 stage.late_stone.name=Stage 2 (Late Stone)
 
-//GUI
+// GUI
 itemGroup.primalrework_items=Primal.R Items
 itemGroup.primalrework_tools=Primal.R Tools
 itemGroup.primalrework_blocks=Primal.R Blocks

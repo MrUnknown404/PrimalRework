@@ -4,7 +4,7 @@ import mrunknown404.primalrework.Main;
 import mrunknown404.primalrework.init.ModBlocks;
 import mrunknown404.primalrework.init.ModItems;
 import mrunknown404.primalrework.util.IThingBase;
-import mrunknown404.primalrework.util.harvest.HarvestInfo;
+import mrunknown404.primalrework.util.harvest.BlockHarvestInfo;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -22,5 +22,5 @@ public interface IBlockBase extends IThingBase<Block> {
 	}
 	
 	public abstract void setupHarvestInfo();
-	public abstract HarvestInfo getHarvestInfo();
+	public abstract BlockHarvestInfo getHarvestInfo();
 }

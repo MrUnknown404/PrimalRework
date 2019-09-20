@@ -1,0 +1,16 @@
+setIcon(<minecraft:stone_hoe>)
+setTitle("Stone Hoe")
+setDescription("Craft a stone hoe")
+setBackground("minecraft:textures/gui/advancements/backgrounds/adventure.png")
+setShowToast(true)
+setAnnounceToChat(true)
+setRequiresParents()
+alwaysVisible()
+
+addParent("primalrework:stage2/craft_stone_hoe_head")
+
+//hideLines()
+setPos(195,-44)
+
+criteria = addCriteria("craft", "minecraft:inventory_changed")
+criteria.addItem(<minecraft:stone_hoe>)

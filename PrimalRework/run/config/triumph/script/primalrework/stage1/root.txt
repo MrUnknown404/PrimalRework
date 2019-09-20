@@ -1,6 +1,6 @@
 setIcon(<minecraft:log>)
 setTitle("Stage 1 (Early Stone)")
-setDescription("Fiiire!")
+setDescription("write later")
 setBackground("minecraft:textures/gui/advancements/backgrounds/adventure.png")
 setShowToast(false)
 setAnnounceToChat(false)
