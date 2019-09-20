@@ -34,13 +34,13 @@ public class RegistryHandler {
 	public static void onModelRegister(ModelRegistryEvent e) {
 		for (Item item : ModItems.ITEMS) {
 			if (item instanceof IItemBase) {
-				((IItemBase) item).registerModels(item);
+				((IItemBase<Item>) item).registerModels(item);
 			}
 		}
 		
 		for (Block block : ModBlocks.BLOCKS) {
 			if (block instanceof IBlockBase) {
-				((IBlockBase) block).registerModels(block);
+				((IBlockBase<Block>) block).registerModels(block);
 			}
 		}
 	}

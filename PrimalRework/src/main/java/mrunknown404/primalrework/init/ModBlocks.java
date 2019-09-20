@@ -5,6 +5,7 @@ import java.util.List;
 
 import mrunknown404.primalrework.blocks.BlockCraftingStump;
 import mrunknown404.primalrework.blocks.BlockFirePit;
+import mrunknown404.primalrework.blocks.BlockPrimalEnchantingTable;
 import mrunknown404.primalrework.blocks.BlockPrimalTorchLit;
 import mrunknown404.primalrework.blocks.BlockPrimalTorchUnlit;
 import mrunknown404.primalrework.blocks.BlockStrippedLog;
@@ -21,9 +22,10 @@ public class ModBlocks {
 	public static final Block FLINT = new BlockGroundItem("flint", SoundType.STONE, Items.FLINT);
 	
 	public static final Block FIRE_PIT = new BlockFirePit();
-	public static final Block UNLIT_PRIMAL_TORCH = new BlockPrimalTorchUnlit();
+	public static final Block UNLIT_PRIMAL_TORCH = new BlockPrimalTorchUnlit().setAmountOfTooltops(2);
 	public static final Block LIT_PRIMAL_TORCH = new BlockPrimalTorchLit();
 	public static final Block CRAFTING_STUMP = new BlockCraftingStump();
+	public static final Block BlockPrimalEnchantingTable = new BlockPrimalEnchantingTable();
 	
 	public static final Block STRIPPED_OAK_LOG = new BlockStrippedLog("oak");
 	public static final Block STRIPPED_SPRUCE_LOG = new BlockStrippedLog("spruce");

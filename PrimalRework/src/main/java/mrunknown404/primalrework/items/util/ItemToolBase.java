@@ -35,10 +35,11 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 
-public class ItemToolBase extends ItemTool implements IItemBase {
+public class ItemToolBase extends ItemTool implements IItemBase<ItemToolBase> {
 
 	private final EnumToolType toolType;
 	private final EnumToolMaterial harvestLevel;
+	private int amountOfTooltops = 0;
 	
 	public ItemToolBase(String name, EnumToolType type, EnumToolMaterial level) {
 		super(type.baseDamage + level.extraDamage, type.swingSpeed, ModItems.MATERIAL, null);
@@ -52,6 +53,17 @@ public class ItemToolBase extends ItemTool implements IItemBase {
 		this.harvestLevel = level;
 		
 		addToModList(this);
+	}
+	
+	@Override
+	public ItemToolBase setAmountOfTooltops(int amountOfTooltops) {
+		this.amountOfTooltops = amountOfTooltops;
+		return this;
+	}
+	
+	@Override
+	public int getAmountOfTooltips() {
+		return amountOfTooltops;
 	}
 	
 	@Override
@@ -128,21 +140,6 @@ public class ItemToolBase extends ItemTool implements IItemBase {
 			}
 		}
 	}
-	
-	/*
-	private Axis axisSwitch(EnumAxis axis) {
-		switch (axis) {
-			case NONE:
-				return Axis.;
-			case X:
-				break;
-			case Y:
-				break;
-			case Z:
-				break;
-		}
-	}
-	*/
 	
 	@Override
 	public int getMaxItemUseDuration(ItemStack stack) {

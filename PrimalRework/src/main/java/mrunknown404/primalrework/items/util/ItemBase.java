@@ -10,10 +10,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class ItemBase extends Item implements IItemBase {
+public class ItemBase extends Item implements IItemBase<ItemBase> {
 
 	private final EnumToolMaterial harvestLevel;
 	private final boolean isContainer;
+	private int amountOfTooltops = 0;
 	
 	public ItemBase(String name, int maxStackSize, boolean isContainer, EnumToolMaterial level) {
 		setUnlocalizedName(name);
@@ -38,6 +39,17 @@ public class ItemBase extends Item implements IItemBase {
 	
 	public ItemBase(String name) {
 		this(name, 64, false, EnumToolMaterial.hand);
+	}
+	
+	@Override
+	public ItemBase setAmountOfTooltops(int amountOfTooltops) {
+		this.amountOfTooltops = amountOfTooltops;
+		return this;
+	}
+	
+	@Override
+	public int getAmountOfTooltips() {
+		return amountOfTooltops;
 	}
 	
 	@Override

@@ -16,10 +16,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public abstract class BlockBase extends Block implements IBlockBase {
+public abstract class BlockBase extends Block implements IBlockBase<BlockBase> {
 
 	private final BlockRenderLayer renderType;
 	private final AxisAlignedBB collisionAABB, visualAABB;
+	private int amountOfTooltops = 0;
 	protected BlockHarvestInfo harvestInfo;
 	
 	public BlockBase(String name, Material material, SoundType soundType, BlockRenderLayer renderType, float hardness, float resistance,
@@ -43,6 +44,17 @@ public abstract class BlockBase extends Block implements IBlockBase {
 	
 	public BlockBase(String name, Material material, SoundType soundType, BlockRenderLayer renderType, float hardness, float resistance) {
 		this(name, material, soundType, renderType, hardness, resistance, FULL_BLOCK_AABB, FULL_BLOCK_AABB);
+	}
+	
+	@Override
+	public BlockBase setAmountOfTooltops(int amountOfTooltops) {
+		this.amountOfTooltops = amountOfTooltops;
+		return this;
+	}
+	
+	@Override
+	public int getAmountOfTooltips() {
+		return amountOfTooltops;
 	}
 	
 	@Override

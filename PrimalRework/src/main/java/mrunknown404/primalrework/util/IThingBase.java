@@ -5,14 +5,12 @@ import java.util.List;
 
 import net.minecraft.util.text.TextComponentTranslation;
 
-public interface IThingBase<T> {
+public interface IThingBase<T, R> {
 	
 	public abstract void registerModels(T t);
 	public abstract void addToModList(T t);
-	
-	public default int getAmountOfTooltips() {
-		return 0;
-	}
+	public abstract int getAmountOfTooltips();
+	public abstract R setAmountOfTooltops(int amountOfToolTips);
 	
 	public default List<String> getTooltips(String name) {
 		List<String> tooltip = new ArrayList<String>();

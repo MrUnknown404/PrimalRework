@@ -14,7 +14,6 @@ import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.ContainerEnchantment;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemEnchantedBook;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
@@ -42,7 +41,7 @@ public class ContainerEnchantmentReplace extends ContainerEnchantment {
 		if (inventoryIn == this.tableInventory) {
 			ItemStack itemstack = inventoryIn.getStackInSlot(0);
 			
-			if (!itemstack.isEmpty() && EnchantHelper.isEnchantable(itemstack.getItem())) {
+			if (!itemstack.isEmpty() && EnchantHelper.isEnchantable(itemstack)) {
 				if (!world.isRemote) {
 					float power = 0;
 					
@@ -78,7 +77,7 @@ public class ContainerEnchantmentReplace extends ContainerEnchantment {
 					
 					for (int j1 = 0; j1 < 3; ++j1) {
 						if (enchantLevels[j1] > 0) {
-							List<EnchantmentData> list = getEnchantmentList(itemstack.getItem(), j1, enchantLevels[j1]);
+							List<EnchantmentData> list = getEnchantmentList(itemstack, j1, enchantLevels[j1]);
 							
 							if (list != null && !list.isEmpty()) {
 								EnchantmentData enchantmentdata = list.get(rand.nextInt(list.size()));
@@ -100,17 +99,18 @@ public class ContainerEnchantmentReplace extends ContainerEnchantment {
 		}
 	}
 	
-	private List<EnchantmentData> getEnchantmentList(Item item, int enchantSlot, int level) {
+	private List<EnchantmentData> getEnchantmentList(ItemStack item, int enchantSlot, int level) {
 		rand.setSeed((long) (xpSeed + enchantSlot));
-		List<EnchantmentData> list = EnchantHelper.buildEnchantmentList(rand, item, level, false);
+		List<EnchantmentData> list = EnchantHelper.buildVanillaEnchantmentList(rand, item, level);
 		
-		if (item == Items.BOOK && list.size() > 1) {
+		if (item.getItem() == Items.BOOK && list.size() > 1) {
 			list.remove(rand.nextInt(list.size()));
 		}
 		
 		return list;
 	}
 	
+	@Override
 	public boolean enchantItem(EntityPlayer playerIn, int id) {
 		ItemStack itemstack = tableInventory.getStackInSlot(0);
 		ItemStack itemstack1 = tableInventory.getStackInSlot(1);
@@ -121,7 +121,7 @@ public class ContainerEnchantmentReplace extends ContainerEnchantment {
 		} else if (enchantLevels[id] > 0 && !itemstack.isEmpty() && (playerIn.experienceLevel >= i && playerIn.experienceLevel >= enchantLevels[id] ||
 				playerIn.capabilities.isCreativeMode)) {
 			if (!world.isRemote) {
-				List<EnchantmentData> list = getEnchantmentList(itemstack.getItem(), id, enchantLevels[id]);
+				List<EnchantmentData> list = getEnchantmentList(itemstack, id, enchantLevels[id]);
 				
 				if (!list.isEmpty()) {
 					playerIn.onEnchant(itemstack, i);

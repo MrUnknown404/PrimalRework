@@ -5,6 +5,7 @@ import mrunknown404.primalrework.handlers.RegistryHandler;
 import mrunknown404.primalrework.init.ModRecipes;
 import mrunknown404.primalrework.tileentity.TileEntityCraftingStump;
 import mrunknown404.primalrework.tileentity.TileEntityFirePit;
+import mrunknown404.primalrework.tileentity.TileEntityPrimalEnchanting;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -24,5 +25,6 @@ public abstract class CommonProxy {
 		
 		GameRegistry.registerTileEntity(TileEntityFirePit.class, new ResourceLocation(Main.MOD_ID, "fire_pit"));
 		GameRegistry.registerTileEntity(TileEntityCraftingStump.class, new ResourceLocation(Main.MOD_ID, "crafting_stump"));
+		GameRegistry.registerTileEntity(TileEntityPrimalEnchanting.class, new ResourceLocation(Main.MOD_ID, "primal_enchanting_table"));
 	}
 }

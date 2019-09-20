@@ -7,6 +7,8 @@ import mrunknown404.primalrework.handlers.events.PlayerEventHandler;
 import mrunknown404.primalrework.handlers.events.WorldEventHandler;
 import mrunknown404.primalrework.network.FireStarterMessage;
 import mrunknown404.primalrework.network.FireStarterPacketHandler;
+import mrunknown404.primalrework.network.PrimalEnchantingMessage;
+import mrunknown404.primalrework.network.PrimalEnchantingPacketHandler;
 import mrunknown404.primalrework.util.OreDict;
 import mrunknown404.primalrework.util.helpers.HarvestHelper;
 import mrunknown404.primalrework.util.proxy.CommonProxy;
@@ -31,6 +33,7 @@ public class Main {
 	public static final String MOD_ID = "primalrework";
 	public static final int GUI_ID_FIRE_PIT = 1;
 	public static final int GUI_ID_ENCHANTING = 2;
+	public static final int GUI_ID_PRIMAL_ENCHANTING = 3;
 	
 	public static SimpleNetworkWrapper networkWrapper;
 	
@@ -55,6 +58,7 @@ public class Main {
 		NetworkRegistry.INSTANCE.registerGuiHandler(main, new GuiHandler());
 		networkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel(MOD_ID);
 		networkWrapper.registerMessage(FireStarterPacketHandler.class, FireStarterMessage.class, 0, Side.SERVER);
+		networkWrapper.registerMessage(PrimalEnchantingPacketHandler.class, PrimalEnchantingMessage.class, 0, Side.SERVER);
 		
 		proxy.registerSounds();
 		proxy.setupRecipes();

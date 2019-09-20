@@ -47,11 +47,6 @@ public class BlockPrimalTorchUnlit extends BlockBase {
 	}
 	
 	@Override
-	public int getAmountOfTooltips() {
-		return 2;
-	}
-	
-	@Override
 	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced) {
 		if (getUnlocalizedName().equalsIgnoreCase("tile.primal_torch_unlit")) {
 			super.addInformation(stack, world, tooltip, advanced);

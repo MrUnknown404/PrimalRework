@@ -8,8 +8,10 @@ import mrunknown404.primalrework.util.harvest.EnumToolMaterial;
 import mrunknown404.primalrework.util.harvest.EnumToolType;
 import mrunknown404.primalrework.util.harvest.HarvestInfo;
 import mrunknown404.primalrework.util.helpers.HarvestHelper;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class OreDict {
@@ -26,6 +28,10 @@ public class OreDict {
 		
 		for (Item item : ModItems.ITEMS) {
 			register(HarvestHelper.getHarvestInfo(item));
+		}
+		
+		for (int i = 0; i < 16; i++) {
+			OreDictionary.registerOre("wool", new ItemStack(Blocks.WOOL, 1, i));
 		}
 		
 		OreDictionary.registerOre("logStripped", ModBlocks.STRIPPED_OAK_LOG);

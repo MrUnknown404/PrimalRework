@@ -7,7 +7,7 @@ import mrunknown404.primalrework.util.harvest.EnumToolMaterial;
 import mrunknown404.primalrework.util.harvest.EnumToolType;
 import net.minecraft.item.Item;
 
-public interface IItemBase extends IThingBase<Item> {
+public interface IItemBase<T extends Item> extends IThingBase<Item, T> {
 	@Override
 	public default void registerModels(Item item) {
 		Main.proxy.registerItemRenderer(item, 0, "inventory");

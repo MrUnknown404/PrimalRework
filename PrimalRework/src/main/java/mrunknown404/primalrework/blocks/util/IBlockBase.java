@@ -9,7 +9,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 
-public interface IBlockBase extends IThingBase<Block> {
+public interface IBlockBase<T extends Block> extends IThingBase<Block, T> {
 	@Override
 	public default void registerModels(Block block) {
 		Main.proxy.registerItemRenderer(Item.getItemFromBlock(block), 0, "inventory");

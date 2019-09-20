@@ -7,6 +7,14 @@ item.flint_point.name=Flint Point
 item.bone_shard.name=Bone Shard
 item.fire_starter.name=Fire Starter
 item.bark.name=Bark
+item.magic_dust_red.name=Red Magic Dust
+item.magic_dust_green.name=Green Magic Dust
+item.magic_dust_blue.name=Blue Magic Dust
+item.cloth.name=Cloth
+
+item.magic_dust_red.tooltip_0=Level 1 Magic Dust
+item.magic_dust_green.tooltip_0=Level 2 Magic Dust
+item.magic_dust_blue.tooltip_0=Level 3 Magic Dust
 
 // ITEMS WITH DURABILITY
 item.plant_mesh.name=Plant Mesh
@@ -50,6 +58,7 @@ tile.fire_pit.name=Fire Pit
 tile.primal_torch_lit.name=Lit Primal Torch
 tile.primal_torch_unlit.name=Unlit Primal Torch
 tile.crafting_stump.name=Crafting Stump
+tile.primal_enchanting_table.name=Primal Enchanting Table
 
 tile.stripped_oak_log.name=Stripped Oak Log
 tile.stripped_spruce_log.name=Stripped Spruce Log
@@ -78,6 +87,7 @@ itemGroup.primalrework_tools=Primal.R Tools
 itemGroup.primalrework_blocks=Primal.R Blocks
 
 container.fire_pit=Camp Fire
+container.primal_enchantment_table=Primal Enchanting
 
 gui.fire_pit_cook=Fuel
 

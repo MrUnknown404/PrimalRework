@@ -40,12 +40,12 @@ public class HarvestHelper {
 		}
 		
 		for (Block block : ModBlocks.BLOCKS) {
-			setHarvestLevel(block, ((IBlockBase) block).getHarvestInfo().getTypesHarvests());
+			setHarvestLevel(block, ((IBlockBase<Block>) block).getHarvestInfo().getTypesHarvests());
 		}
 		
 		for (Item item : ModItems.ITEMS) {
 			if (item instanceof IItemBase) {
-				setHarvestLevel(item, ((IItemBase) item).getToolType(), ((IItemBase) item).getHarvestLevel());
+				setHarvestLevel(item, ((IItemBase<Item>) item).getToolType(), ((IItemBase<Item>) item).getHarvestLevel());
 			} else {
 				setHarvestLevel(item, EnumToolType.none, EnumToolMaterial.hand);
 			}

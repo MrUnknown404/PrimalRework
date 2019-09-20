@@ -26,6 +26,10 @@ public class ModItems {
 	public static final Item BONE_SHARD = new ItemBase("bone_shard");
 	public static final Item FIRE_STARTER = new ItemFireStarter();
 	public static final Item BARK = new ItemBase("bark");
+	public static final Item MAGIC_DUST_RED = new ItemBase("magic_dust_red").setAmountOfTooltops(1);
+	public static final Item MAGIC_DUST_GREEN = new ItemBase("magic_dust_green").setAmountOfTooltops(1);
+	public static final Item MAGIC_DUST_BLUE = new ItemBase("magic_dust_blue").setAmountOfTooltops(1);
+	public static final Item CLOTH = new ItemBase("cloth");
 	
 	// ITEMS WITH DURABILITY
 	public static final Item PLANT_MESH = new ItemBase("plant_mesh", EnumToolMaterial.flint);

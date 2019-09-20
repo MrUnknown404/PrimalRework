@@ -6,20 +6,21 @@ import java.util.Random;
 
 import com.google.common.collect.Lists;
 
+import mrunknown404.primalrework.init.ModItems;
 import mrunknown404.primalrework.util.DoubleValue;
 import mrunknown404.primalrework.util.harvest.EnumToolMaterial;
 import mrunknown404.primalrework.util.harvest.EnumToolType;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandom;
 import net.minecraft.util.math.MathHelper;
 
 public class EnchantHelper {
-	public static List<EnchantmentData> buildEnchantmentList(Random randomIn, Item item, int level, boolean allowTreasure) {
+	public static List<EnchantmentData> buildVanillaEnchantmentList(Random randomIn, ItemStack item, int level) {
 		List<EnchantmentData> list = Lists.<EnchantmentData>newArrayList();
-		int i = HarvestHelper.getHarvestInfo(item).getHighestEnchantability();
+		int i = HarvestHelper.getHarvestInfo(item.getItem()).getHighestEnchantability();
 		
 		if (i <= 0) {
 			return list;
@@ -27,17 +28,21 @@ public class EnchantHelper {
 			level = level + 1 + randomIn.nextInt(i / 4 + 1) + randomIn.nextInt(i / 4 + 1);
 			float f = (randomIn.nextFloat() + randomIn.nextFloat() - 1.0F) * 0.15F;
 			level = MathHelper.clamp(Math.round((float) level + (float) level * f), 1, Integer.MAX_VALUE);
-			List<EnchantmentData> list1 = getEnchantmentDatas(level, item, allowTreasure);
+			List<EnchantmentData> list1 = getVanillaEnchantmentDatas(level, item);
 			
 			if (!list1.isEmpty()) {
-				list.add(WeightedRandom.getRandomItem(randomIn, list1));
+				EnchantmentData re1 = WeightedRandom.getRandomItem(randomIn, list1);
+				list.add(re1);
+				list1.remove(re1);
 				
 				while (randomIn.nextInt(50) <= level) {
 					if (list1.isEmpty()) {
 						break;
 					}
 					
-					list.add(WeightedRandom.getRandomItem(randomIn, list1));
+					EnchantmentData re2 = WeightedRandom.getRandomItem(randomIn, list1);
+					list.add(re2);
+					list1.remove(re2);
 					level /= 2;
 				}
 			}
@@ -46,15 +51,50 @@ public class EnchantHelper {
 		}
 	}
 	
-	public static List<EnchantmentData> getEnchantmentDatas(int p_185291_0_, Item item, boolean allowTreasure) {
+	public static List<EnchantmentData> buildPrimalEnchantmentList(Random rand, ItemStack item, int level) {
 		List<EnchantmentData> list = Lists.<EnchantmentData>newArrayList();
-		boolean flag = item == Items.BOOK;
+		int enchantability = HarvestHelper.getHarvestInfo(item.getItem()).getHighestEnchantability();
 		
-		for (Enchantment enchantment : EnchantHelper.getItemsEnchants(item)) {
-			if ((!enchantment.isTreasureEnchantment() || allowTreasure) && (isEnchantable(item) || (flag && enchantment.isAllowedOnBooks()))) {
-				for (int i = enchantment.getMaxLevel(); i > enchantment.getMinLevel() - 1; --i) {
-					if (p_185291_0_ >= enchantment.getMinEnchantability(i) && p_185291_0_ <= enchantment.getMaxEnchantability(i)) {
-						list.add(new EnchantmentData(enchantment, i));
+		if (enchantability <= 0) {
+			return list;
+		} else {
+			if (enchantability < 5) {
+				level *= (enchantability * 4);
+			} else {
+				level *= enchantability;
+			}
+			
+			List<EnchantmentData> list1 = getPrimalEnchantmentDatas(level, item);
+			
+			if (!list1.isEmpty()) {
+				EnchantmentData re1 = WeightedRandom.getRandomItem(rand, list1);
+				list.add(re1);
+				list1.remove(re1);
+				
+				while (rand.nextInt(30) <= level) {
+					if (list1.isEmpty()) {
+						break;
+					}
+					
+					EnchantmentData re2 = WeightedRandom.getRandomItem(rand, list1);
+					list.add(re2);
+					list1.remove(re2);
+					level /= 2;
+				}
+			}
+			
+			return list;
+		}
+	}
+	
+	public static List<EnchantmentData> getVanillaEnchantmentDatas(int enchantability, ItemStack item) {
+		List<EnchantmentData> list = Lists.<EnchantmentData>newArrayList();
+		
+		for (EnchantmentData enchantment : EnchantHelper.getVanillaItemsEnchants(item.getItem())) {
+			if (isEnchantable(item) || (item.getItem() == Items.BOOK && enchantment.enchantment.isAllowedOnBooks())) {
+				for (int i = enchantment.enchantmentLevel; i > 0; --i) {
+					if (enchantability >= enchantment.enchantment.getMinEnchantability(i) && enchantability <= enchantment.enchantment.getMaxEnchantability(i)) {
+						list.add(new EnchantmentData(enchantment.enchantment, i));
 						break;
 					}
 				}
@@ -64,8 +104,25 @@ public class EnchantHelper {
 		return list;
 	}
 	
-	private static List<Enchantment> getItemsEnchants(Item item) {
-		List<Enchantment> enchs = new ArrayList<Enchantment>();
+	public static List<EnchantmentData> getPrimalEnchantmentDatas(int enchantability, ItemStack item) {
+		List<EnchantmentData> list = Lists.<EnchantmentData>newArrayList();
+		
+		for (EnchantmentData enchantment : EnchantHelper.getPrimalItemsEnchants(item.getItem())) {
+			if (isEnchantable(item) || (item.getItem() == Items.BOOK && enchantment.enchantment.isAllowedOnBooks())) {
+				for (int i = enchantment.enchantmentLevel; i > 0; --i) {
+					if (enchantability >= enchantment.enchantment.getMinEnchantability(i) && enchantability <= enchantment.enchantment.getMaxEnchantability(i)) {
+						list.add(new EnchantmentData(enchantment.enchantment, i));
+						break;
+					}
+				}
+			}
+		}
+		
+		return list;
+	}
+	
+	private static List<EnchantmentData> getVanillaItemsEnchants(Item item) {
+		List<EnchantmentData> enchs = new ArrayList<EnchantmentData>();
 		
 		for (DoubleValue<EnumToolType, EnumToolMaterial> t : HarvestHelper.getHarvestInfo(item).getTypesHarvests()) {
 			enchs.addAll(t.getL().replaceEnchants);
@@ -74,12 +131,22 @@ public class EnchantHelper {
 		return enchs;
 	}
 	
-	public static boolean isEnchantable(Item item) {
-		if (item == Items.BOOK) {
-			return true;
-		}
+	private static List<EnchantmentData> getPrimalItemsEnchants(Item item) {
+		List<EnchantmentData> enchs = new ArrayList<EnchantmentData>();
 		
 		for (DoubleValue<EnumToolType, EnumToolMaterial> t : HarvestHelper.getHarvestInfo(item).getTypesHarvests()) {
+			enchs.addAll(t.getL().primalEnchants);
+		}
+		
+		return enchs;
+	}
+	
+	public static boolean isEnchantable(ItemStack item) {
+		if (item.isItemEnchanted()) {
+			return false;
+		}
+		
+		for (DoubleValue<EnumToolType, EnumToolMaterial> t : HarvestHelper.getHarvestInfo(item.getItem()).getTypesHarvests()) {
 			if (t.getL().isEnchantable()) {
 				return true;
 			}
@@ -106,5 +173,9 @@ public class EnchantHelper {
 				return enchantNum == 1 ? j * 2 / 3 + 1 : Math.max(j, power * 2);
 			}
 		}
+	}
+	
+	public static boolean isMagicDust(Item item) {
+		return item == ModItems.MAGIC_DUST_RED || item == ModItems.MAGIC_DUST_GREEN || item == ModItems.MAGIC_DUST_BLUE ? true : false;
 	}
 }

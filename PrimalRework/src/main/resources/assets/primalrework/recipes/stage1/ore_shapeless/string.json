@@ -1,0 +1,17 @@
+{
+  "type": "primalrework:staged_ore_shapeless",
+  "stage": "stage1",
+  "ingredients": [
+    {
+      "item": "primalrework:cloth"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "toolKnife"
+    }
+  ],
+  "result": {
+    "item": "minecraft:string",
+    "count": 4
+  }
+}

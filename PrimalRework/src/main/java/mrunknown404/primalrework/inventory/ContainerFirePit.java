@@ -92,16 +92,24 @@ public class ContainerFirePit extends Container {
 			stack = stack1;
 			
 			if (index == SLOT_FUEL || index == SLOT_ITEM) {
-				for (int i = 2; i < 38; i++) {
-					if (inventorySlots.get(i).getStack().isItemEqual(stack1)) {
-						if (!mergeItemStack(stack1, i, i + 1, false)) {
+				for (int i = 29; i < 38; i++) {
+					if (inventorySlots.get(i).getStack().isItemEqual(stack1) && inventorySlots.get(i).getStack().getCount() != inventorySlots.get(i).getStack().getMaxStackSize()) {
+						if (!mergeItemStack(stack1, i, i + 1, true)) {
 							return ItemStack.EMPTY;
 						}
 					}
 				}
 				
-				if (!mergeItemStack(stack1, 29, 37, false)) {
-					if (!mergeItemStack(stack1, 2, 28, false)) {
+				for (int i = 2; i < 29; i++) {
+					if (inventorySlots.get(i).getStack().isItemEqual(stack1) && inventorySlots.get(i).getStack().getCount() != inventorySlots.get(i).getStack().getMaxStackSize()) {
+						if (!mergeItemStack(stack1, i, i + 1, true)) {
+							return ItemStack.EMPTY;
+						}
+					}
+				}
+				
+				if (!mergeItemStack(stack1, 29, 38, false)) {
+					if (!mergeItemStack(stack1, 2, 29, false)) {
 						return ItemStack.EMPTY;
 					}
 				}
