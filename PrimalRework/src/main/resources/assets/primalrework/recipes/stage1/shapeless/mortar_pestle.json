@@ -1,0 +1,16 @@
+{
+  "type": "primalrework:staged_shapeless",
+  "stage": "stage1",
+  "ingredients": [
+    {
+      "item": "minecraft:bowl"
+    },
+    {
+      "item": "minecraft:stick"
+    }
+  ],
+  "result": {
+    "item": "primalrework:mortar_pestle",
+    "count": 1
+  }
+}

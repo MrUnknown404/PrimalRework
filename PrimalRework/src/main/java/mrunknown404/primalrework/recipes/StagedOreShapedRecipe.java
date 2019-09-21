@@ -58,7 +58,7 @@ public class StagedOreShapedRecipe extends ShapedOreRecipe implements IStagedRec
 	
 	@Override
 	public boolean isShapeless() {
-		return true;
+		return false;
 	}
 	
 	@Override
@@ -99,10 +99,7 @@ public class StagedOreShapedRecipe extends ShapedOreRecipe implements IStagedRec
 					}
 				}
 				
-				ItemStack is = inv.getStackInRowAndColumn(x, y).copy();
-				is.setItemDamage(0);
-				
-				if (!target.apply(is)) {
+				if (!target.apply(inv.getStackInRowAndColumn(x, y).copy())) {
 					return false;
 				}
 			}

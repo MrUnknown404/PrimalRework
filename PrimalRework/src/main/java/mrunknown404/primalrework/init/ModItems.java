@@ -30,6 +30,13 @@ public class ModItems {
 	public static final Item MAGIC_DUST_GREEN = new ItemBase("magic_dust_green").setAmountOfTooltops(1);
 	public static final Item MAGIC_DUST_BLUE = new ItemBase("magic_dust_blue").setAmountOfTooltops(1);
 	public static final Item CLOTH = new ItemBase("cloth");
+	public static final Item MORTAR_PESTLE = new ItemBase("mortar_pestle");
+	public static final Item OAK_PLANK = new ItemBase("oak_plank");
+	public static final Item SPRUCE_PLANK = new ItemBase("spruce_plank");
+	public static final Item BIRCH_PLANK = new ItemBase("birch_plank");
+	public static final Item JUNGLE_PLANK = new ItemBase("jungle_plank");
+	public static final Item DARK_OAK_PLANK = new ItemBase("dark_oak_plank");
+	public static final Item ACACIA_PLANK = new ItemBase("acacia_plank");
 	
 	// ITEMS WITH DURABILITY
 	public static final Item PLANT_MESH = new ItemBase("plant_mesh", EnumToolMaterial.flint);

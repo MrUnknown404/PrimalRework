@@ -10,7 +10,7 @@ alwaysVisible()
 addParent("primalrework:stage2/root")
 
 //hideLines()
-setPos(141,74)
+setPos(114,-60)
 
-criteria = addCriteria("craft", "minecraft:inventory_changed")
-criteria.addItem(<primalrework:stone_shovel_head>)
+criteria = addCriteria("craft", "triumph:player_crafted_item")
+criteria.setItem(<primalrework:stone_shovel_head>)

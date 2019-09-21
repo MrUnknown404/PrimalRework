@@ -13,5 +13,5 @@ addParent("primalrework:stage0/get_plant_fiber")
 setPos(66,-17)
 setFrameType("GOAL")
 
-criteria = addCriteria("plant_mesh", "minecraft:inventory_changed")
-criteria.addItem(<primalrework:plant_mesh>)
+criteria = addCriteria("plant_mesh", "triumph:player_crafted_item")
+criteria.setItem(<primalrework:plant_mesh>)

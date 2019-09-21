@@ -2,7 +2,7 @@ package mrunknown404.primalrework.world;
 
 import java.util.Random;
 
-import mrunknown404.primalrework.blocks.util.BlockGroundItem;
+import mrunknown404.primalrework.blocks.BlockGroundItem;
 import mrunknown404.primalrework.init.ModBlocks;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;

@@ -1,0 +1,30 @@
+{
+  "type": "primalrework:staged_ore_shaped",
+  "stage": "stage1",
+  "pattern": [
+    "WCC",
+    "PPP",
+    "S S"
+  ],
+  "key": {
+    "W": {
+      "item": "minecraft:wool",
+      "data": 1
+    },
+    "C": {
+      "item": "primalrework:cloth"
+    },
+    "P": {
+      "type": "forge:ore_dict",
+      "ore": "plankWood"
+    },
+    "S": {
+      "type": "forge:ore_dict",
+      "ore": "plankItem"
+    }
+  },
+  "result": {
+    "item": "minecraft:bed",
+	"data": 1
+  }
+}

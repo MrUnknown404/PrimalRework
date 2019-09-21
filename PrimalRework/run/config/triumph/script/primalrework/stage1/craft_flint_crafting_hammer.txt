@@ -10,7 +10,7 @@ alwaysVisible()
 addParent("primalrework:stage1/root")
 
 //hideLines()
-setPos(27,15)
+setPos(27,0)
 
-criteria = addCriteria("flint_crafting_hammer", "minecraft:inventory_changed")
-criteria.addItem(<primalrework:flint_crafting_hammer>)
+criteria = addCriteria("flint_crafting_hammer", "triumph:player_crafted_item")
+criteria.setItem(<primalrework:flint_crafting_hammer>)

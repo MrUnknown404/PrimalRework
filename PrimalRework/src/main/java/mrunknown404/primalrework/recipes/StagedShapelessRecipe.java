@@ -3,7 +3,6 @@ package mrunknown404.primalrework.recipes;
 import java.util.Arrays;
 import java.util.List;
 
-import com.google.common.collect.Lists;
 import com.google.gson.JsonObject;
 
 import mrunknown404.primalrework.handlers.StageHandler;
@@ -23,7 +22,6 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
-import net.minecraftforge.common.util.RecipeMatcher;
 
 public class StagedShapelessRecipe extends ShapelessRecipes implements IStagedRecipeBase {
 
@@ -55,34 +53,10 @@ public class StagedShapelessRecipe extends ShapelessRecipes implements IStagedRe
 	
 	@Override
 	public boolean matches(InventoryCrafting inv, World world) {
-		return StageHandler.hasAccessToStage(stage) && match(inv, world);
+		return StageHandler.hasAccessToStage(stage) && super.matches(inv, world);
 	}
 	
-	@Override
-	public boolean match(InventoryCrafting inv, World world) {
-		int ingredientCount = 0;
-		List<ItemStack> inputs = Lists.newArrayList();
-		
-		for (int i = 0; i < inv.getHeight(); ++i) {
-			for (int j = 0; j < inv.getWidth(); ++j) {
-				ItemStack itemstack = inv.getStackInRowAndColumn(j, i);
-				
-				if (!itemstack.isEmpty()) {
-					++ingredientCount;
-					
-					ItemStack st = itemstack.copy();
-					st.setItemDamage(0);
-					inputs.add(st);
-				}
-			}
-		}
-		
-		if (ingredientCount != recipeItems.size()) {
-			return false;
-		}
-		
-		return RecipeMatcher.findMatches(inputs, recipeItems) != null;
-	}
+	@Override public boolean match(InventoryCrafting inv, World world) {return false;}
 	
 	@Override
 	public IRecipe getRecipe() {

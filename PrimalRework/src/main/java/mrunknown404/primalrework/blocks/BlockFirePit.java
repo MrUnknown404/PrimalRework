@@ -6,7 +6,6 @@ import mrunknown404.primalrework.Main;
 import mrunknown404.primalrework.blocks.util.BlockBase;
 import mrunknown404.primalrework.tileentity.TileEntityFirePit;
 import mrunknown404.primalrework.util.DoubleValue;
-import mrunknown404.primalrework.util.harvest.BlockHarvestInfo;
 import mrunknown404.primalrework.util.harvest.EnumToolMaterial;
 import mrunknown404.primalrework.util.harvest.EnumToolType;
 import net.minecraft.block.Block;
@@ -31,13 +30,8 @@ public class BlockFirePit extends BlockBase implements ITileEntityProvider {
 	private static final AxisAlignedBB bb = new AxisAlignedBB(2.05 / 16, 0, 2.05 / 16, 14.05 / 16, 13.05 / 16, 14.05 / 16);
 	
 	public BlockFirePit() {
-		super("fire_pit", Material.CIRCUITS, SoundType.WOOD, BlockRenderLayer.CUTOUT, 1, 1, bb, bb);
+		super("fire_pit", Material.CIRCUITS, SoundType.WOOD, BlockRenderLayer.CUTOUT, 1, 1, bb, bb, new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.axe, EnumToolMaterial.hand));
 		hasTileEntity = true;
-	}
-	
-	@Override
-	public void setupHarvestInfo() {
-		this.harvestInfo = new BlockHarvestInfo(this, new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.axe, EnumToolMaterial.hand));
 	}
 	
 	@Override

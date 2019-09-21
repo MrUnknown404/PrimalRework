@@ -1,0 +1,18 @@
+{
+  "type": "primalrework:staged_ore_shapeless",
+  "stage": "stage1",
+  "ingredients": [
+    {
+      "type": "forge:ore_dict",
+      "ore": "logAcacia"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "toolAxe"
+    }
+  ],
+  "result": {
+    "item": "primalrework:acacia_plank",
+    "count": 16
+  }
+}

@@ -73,9 +73,7 @@ public class StagedOreShapelessRecipe extends ShapelessOreRecipe implements ISta
 				if (!itemstack.isEmpty()) {
 					++ingredientCount;
 					
-					ItemStack st = itemstack.copy();
-					st.setItemDamage(0);
-					inputs.add(st);
+					inputs.add(itemstack.copy());
 				}
 			}
 		}

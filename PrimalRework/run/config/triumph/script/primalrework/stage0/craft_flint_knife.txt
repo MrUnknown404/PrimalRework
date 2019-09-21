@@ -15,5 +15,5 @@ addParent("primalrework:stage0/craft_plant_rope")
 setPos(159,45)
 setFrameType("GOAL")
 
-criteria = addCriteria("flint_knife", "minecraft:inventory_changed")
-criteria.addItem(<primalrework:flint_knife>)
+criteria = addCriteria("flint_knife", "triumph:player_crafted_item")
+criteria.setItem(<primalrework:flint_knife>)

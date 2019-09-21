@@ -10,7 +10,7 @@ alwaysVisible()
 addParent("primalrework:stage2/craft_stone_sword_head")
 
 //hideLines()
-setPos(141,-12)
+setPos(139,-44)
 
-criteria = addCriteria("craft", "minecraft:inventory_changed")
-criteria.addItem(<minecraft:stone_sword>)
+criteria = addCriteria("craft", "triumph:player_crafted_item")
+criteria.setItem(<minecraft:stone_sword>)

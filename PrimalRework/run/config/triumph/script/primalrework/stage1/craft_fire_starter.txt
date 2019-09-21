@@ -12,5 +12,5 @@ addParent("primalrework:stage1/craft_crafting_stump")
 //hideLines()
 setPos(87,15)
 
-criteria = addCriteria("fire_starter", "minecraft:inventory_changed")
-criteria.addItem(<primalrework:fire_starter>)
+criteria = addCriteria("fire_starter", "triumph:player_crafted_item")
+criteria.setItem(<primalrework:fire_starter>)

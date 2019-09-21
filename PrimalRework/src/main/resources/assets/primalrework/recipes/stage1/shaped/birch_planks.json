@@ -1,0 +1,17 @@
+{
+  "type": "primalrework:staged_shaped",
+  "stage": "stage1",
+  "pattern": [
+    "PP",
+    "PP"
+  ],
+  "key": {
+    "P": {
+      "item": "primalrework:birch_plank"
+    }
+  },
+  "result": {
+    "item": "minecraft:planks",
+	"data": 1
+  }
+}

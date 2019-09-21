@@ -2,11 +2,10 @@ package mrunknown404.primalrework.blocks;
 
 import mrunknown404.primalrework.blocks.util.BlockRotatedPillarBase;
 import mrunknown404.primalrework.util.DoubleValue;
-import mrunknown404.primalrework.util.harvest.BlockHarvestInfo;
 import mrunknown404.primalrework.util.harvest.EnumToolMaterial;
 import mrunknown404.primalrework.util.harvest.EnumToolType;
-import net.minecraft.block.BlockLog.EnumAxis;
 import net.minecraft.block.BlockLog;
+import net.minecraft.block.BlockLog.EnumAxis;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -23,13 +22,9 @@ public class BlockStrippedLog extends BlockRotatedPillarBase {
 	private static final AxisAlignedBB NONE_BB = new AxisAlignedBB(1.05 / 16, 1.05 / 16, 1.05 / 16, 15.05 / 16, 15.05 / 16, 15.05 / 16);
 	
 	public BlockStrippedLog(String type) {
-		super("stripped_" + type + "_log", Material.WOOD, SoundType.WOOD, BlockRenderLayer.CUTOUT, 2, 2);
+		super("stripped_" + type + "_log", Material.WOOD, SoundType.WOOD, BlockRenderLayer.CUTOUT, 2, 2, NONE_BB, NONE_BB,
+				new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.axe, EnumToolMaterial.flint));
 		setDefaultState(blockState.getBaseState().withProperty(BlockLog.LOG_AXIS, EnumAxis.Y));
-	}
-	
-	@Override
-	public void setupHarvestInfo() {
-		this.harvestInfo = new BlockHarvestInfo(this, new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.axe, EnumToolMaterial.flint));
 	}
 	
 	@Override

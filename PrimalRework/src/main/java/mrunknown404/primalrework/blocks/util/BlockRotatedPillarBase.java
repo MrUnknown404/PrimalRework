@@ -1,5 +1,8 @@
 package mrunknown404.primalrework.blocks.util;
 
+import mrunknown404.primalrework.util.DoubleValue;
+import mrunknown404.primalrework.util.harvest.EnumToolMaterial;
+import mrunknown404.primalrework.util.harvest.EnumToolType;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.BlockLog.EnumAxis;
 import net.minecraft.block.SoundType;
@@ -18,12 +21,12 @@ import net.minecraft.world.World;
 
 public abstract class BlockRotatedPillarBase extends BlockBase {
 	public BlockRotatedPillarBase(String name, Material material, SoundType soundType, BlockRenderLayer renderType, float hardness, float resistance,
-			AxisAlignedBB collisionAABB, AxisAlignedBB visualAABB) {
-		super(name, material, soundType, renderType, hardness, resistance, collisionAABB, visualAABB);
+			AxisAlignedBB collisionAABB, AxisAlignedBB visualAABB, DoubleValue<EnumToolType, EnumToolMaterial>... types) {
+		super(name, material, soundType, renderType, hardness, resistance, collisionAABB, visualAABB, types);
 	}
 	
-	public BlockRotatedPillarBase(String name, Material material, SoundType soundType, BlockRenderLayer renderType, float hardness, float resistance) {
-		super(name, material, soundType, renderType, hardness, resistance);
+	public BlockRotatedPillarBase(String name, Material material, SoundType soundType, float hardness, float resistance, DoubleValue<EnumToolType, EnumToolMaterial>... types) {
+		super(name, material, soundType, hardness, resistance, types);
 	}
 	
 	@Override

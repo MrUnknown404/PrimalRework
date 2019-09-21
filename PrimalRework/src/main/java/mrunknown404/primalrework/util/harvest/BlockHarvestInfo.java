@@ -16,12 +16,12 @@ public class BlockHarvestInfo extends HarvestInfo {
 		super(Item.getItemFromBlock(block), harvest);
 	}
 	
-	public BlockHarvestInfo(Block block) {
-		this(block, Arrays.asList(new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.none, EnumToolMaterial.hand)));
+	public static BlockHarvestInfo create(DoubleValue<EnumToolType, EnumToolMaterial>... harvest) {
+		return new BlockHarvestInfo(null, Arrays.asList(harvest));
 	}
 	
-	public BlockHarvestInfo(Block block, DoubleValue<EnumToolType, EnumToolMaterial> harvest) {
-		this(block, Arrays.asList(harvest));
+	public static BlockHarvestInfo create() {
+		return new BlockHarvestInfo(null, Arrays.asList(new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.none, EnumToolMaterial.hand)));
 	}
 	
 	public BlockHarvestInfo setDrops(List<HarvestDropInfo> drops) {

@@ -1,0 +1,16 @@
+setIcon(<primalrework:mortar_pestle>)
+setTitle("Mortar And Pestle")
+setDescription("Craft a mortar and pestle")
+setBackground("minecraft:textures/gui/advancements/backgrounds/adventure.png")
+setShowToast(true)
+setAnnounceToChat(true)
+setRequiresParents()
+alwaysVisible()
+
+addParent("primalrework:stage1/craft_crafting_stump")
+
+//hideLines()
+setPos(87,42)
+
+criteria = addCriteria("craft", "triumph:player_crafted_item")
+criteria.setItem(<primalrework:mortar_pestle>)

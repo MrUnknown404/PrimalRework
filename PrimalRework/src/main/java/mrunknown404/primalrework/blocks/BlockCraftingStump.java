@@ -4,7 +4,6 @@ import mrunknown404.primalrework.blocks.util.BlockBase;
 import mrunknown404.primalrework.init.ModItems;
 import mrunknown404.primalrework.tileentity.TileEntityCraftingStump;
 import mrunknown404.primalrework.util.DoubleValue;
-import mrunknown404.primalrework.util.harvest.BlockHarvestInfo;
 import mrunknown404.primalrework.util.harvest.EnumToolMaterial;
 import mrunknown404.primalrework.util.harvest.EnumToolType;
 import net.minecraft.block.BlockHorizontal;
@@ -35,13 +34,10 @@ public class BlockCraftingStump extends BlockBase implements ITileEntityProvider
 	private static final AxisAlignedBB bb = new AxisAlignedBB(2.05 / 16, 0, 2.05 / 16, 14.05 / 16, 15.05f / 16, 14.05 / 16);
 	
 	public BlockCraftingStump() {
-		super("crafting_stump", Material.WOOD, SoundType.WOOD, BlockRenderLayer.CUTOUT, 2f, 2f, bb, bb);
+		super("crafting_stump", Material.WOOD, SoundType.WOOD, BlockRenderLayer.CUTOUT, 2f, 2f, bb, bb,
+				new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.axe, EnumToolMaterial.flint));
 		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
-	}
-	
-	@Override
-	public void setupHarvestInfo() {
-		this.harvestInfo = new BlockHarvestInfo(this, new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.axe, EnumToolMaterial.flint));
+		hasTileEntity = true;
 	}
 	
 	@Override
@@ -185,7 +181,7 @@ public class BlockCraftingStump extends BlockBase implements ITileEntityProvider
 	
 	@Override
 	public void onBlockHarvested(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
-		if (!world.isRemote && !player.capabilities.isCreativeMode) {
+		if (!world.isRemote) {
 			TileEntityCraftingStump tile = (TileEntityCraftingStump) world.getTileEntity(pos);
 			if (tile instanceof TileEntityCraftingStump) {
 				InventoryHelper.dropInventoryItems(world, pos, tile);

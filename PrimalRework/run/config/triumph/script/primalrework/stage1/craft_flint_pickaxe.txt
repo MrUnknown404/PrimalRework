@@ -10,7 +10,7 @@ alwaysVisible()
 addParent("primalrework:stage1/craft_crafting_stump")
 
 //hideLines()
-setPos(87,42)
+setPos(87,69)
 
-criteria = addCriteria("craft", "minecraft:inventory_changed")
-criteria.addItem(<primalrework:flint_pickaxe>)
+criteria = addCriteria("craft", "triumph:player_crafted_item")
+criteria.setItem(<primalrework:flint_pickaxe>)

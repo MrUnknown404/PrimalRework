@@ -61,53 +61,11 @@ public class StagedShapedRecipe extends ShapedRecipes implements IStagedRecipeBa
 	}
 	
 	@Override
-	public boolean matches(InventoryCrafting inv, World worldIn) {
-		return StageHandler.hasAccessToStage(stage) && match(inv, worldIn);
+	public boolean matches(InventoryCrafting inv, World world) {
+		return StageHandler.hasAccessToStage(stage) && super.matches(inv, world);
 	}
 	
-	@Override
-	public boolean match(InventoryCrafting inv, World world) {
-		for (int i = 0; i <= inv.getWidth() - recipeWidth; ++i) {
-			for (int j = 0; j <= inv.getHeight() - recipeHeight; ++j) {
-				if (checkMatch(inv, i, j, true)) {
-					return true;
-				}
-				
-				if (checkMatch(inv, i, j, false)) {
-					return true;
-				}
-			}
-		}
-		
-		return false;
-	}
-	
-	private boolean checkMatch(InventoryCrafting inv, int w, int h, boolean bool) {
-		for (int i = 0; i < inv.getWidth(); ++i) {
-			for (int j = 0; j < inv.getHeight(); ++j) {
-				int k = i - w;
-				int l = j - h;
-				Ingredient ingredient = Ingredient.EMPTY;
-				
-				if (k >= 0 && l >= 0 && k < recipeWidth && l < recipeHeight) {
-					if (bool) {
-						ingredient = recipeItems.get(recipeWidth - k - 1 + l * recipeWidth);
-					} else {
-						ingredient = recipeItems.get(k + l * recipeWidth);
-					}
-				}
-				
-				ItemStack is = inv.getStackInRowAndColumn(i, j).copy();
-				is.setItemDamage(0);
-				
-				if (!ingredient.apply(is)) {
-					return false;
-				}
-			}
-		}
-		
-		return true;
-	}
+	@Override public boolean match(InventoryCrafting inv, World world) {return false;}
 	
 	@Override
 	public IRecipe getRecipe() {

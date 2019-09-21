@@ -13,5 +13,5 @@ addParent("primalrework:stage1/craft_fire_starter")
 setPos(114,15)
 setFrameType("GOAL")
 
-criteria = addCriteria("fire_pit", "minecraft:inventory_changed")
-criteria.addItem(<primalrework:fire_pit>)
+criteria = addCriteria("fire_pit", "triumph:player_crafted_item")
+criteria.setItem(<primalrework:fire_pit>)

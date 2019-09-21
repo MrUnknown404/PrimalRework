@@ -32,18 +32,14 @@ public class HarvestHelper {
 	
 	public static void changeHarvestLevels() {
 		for (Block block : Block.REGISTRY) {
-			setHarvestLevel(block, EnumToolType.none, EnumToolMaterial.unbreakable);
+			if (block instanceof IBlockBase<?>) {
+				setHarvestLevel(block, ((IBlockBase<Block>) block).getHarvestInfo().getTypesHarvests());
+			} else {
+				setHarvestLevel(block, EnumToolType.none, EnumToolMaterial.unbreakable);
+			}
 		}
 		
 		for (Item item : Item.REGISTRY) {
-			setHarvestLevel(item, EnumToolType.none, EnumToolMaterial.hand);
-		}
-		
-		for (Block block : ModBlocks.BLOCKS) {
-			setHarvestLevel(block, ((IBlockBase<Block>) block).getHarvestInfo().getTypesHarvests());
-		}
-		
-		for (Item item : ModItems.ITEMS) {
 			if (item instanceof IItemBase) {
 				setHarvestLevel(item, ((IItemBase<Item>) item).getToolType(), ((IItemBase<Item>) item).getHarvestLevel());
 			} else {
@@ -157,6 +153,10 @@ public class HarvestHelper {
 		
 		if (hardness != -1f) {
 			b.setHardness(hardness);
+		}
+		
+		if (b instanceof IBlockBase<?>) {
+			((IBlockBase<Block>) b).setHarvestInfo(info);
 		}
 		
 		if (BLOCKS.contains(info)) {

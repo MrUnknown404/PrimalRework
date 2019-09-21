@@ -7,7 +7,9 @@ import javax.annotation.Nullable;
 import com.google.common.base.Predicate;
 
 import mrunknown404.primalrework.blocks.util.BlockBase;
-import mrunknown404.primalrework.util.harvest.BlockHarvestInfo;
+import mrunknown404.primalrework.util.DoubleValue;
+import mrunknown404.primalrework.util.harvest.EnumToolMaterial;
+import mrunknown404.primalrework.util.harvest.EnumToolType;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -46,22 +48,18 @@ public class BlockPrimalTorchUnlit extends BlockBase {
 		this("primal_torch_unlit");
 	}
 	
-	@Override
-	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced) {
-		if (getUnlocalizedName().equalsIgnoreCase("tile.primal_torch_unlit")) {
-			super.addInformation(stack, world, tooltip, advanced);
-		}
-	}
-	
 	public BlockPrimalTorchUnlit(String name) {
-		super(name, Material.CIRCUITS, SoundType.WOOD, BlockRenderLayer.CUTOUT, 0, 0);
+		super(name, Material.CIRCUITS, SoundType.WOOD, BlockRenderLayer.CUTOUT, 0, 0, STANDING_AABB, STANDING_AABB,
+				new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.none, EnumToolMaterial.hand));
 		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.UP));
 		setLightOpacity(0);
 	}
 	
 	@Override
-	public void setupHarvestInfo() {
-		this.harvestInfo = new BlockHarvestInfo(this);
+	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced) {
+		if (getUnlocalizedName().equalsIgnoreCase("tile.primal_torch_unlit")) {
+			super.addInformation(stack, world, tooltip, advanced);
+		}
 	}
 	
 	@Override

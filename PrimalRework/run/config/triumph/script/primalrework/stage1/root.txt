@@ -5,6 +5,6 @@ setBackground("minecraft:textures/gui/advancements/backgrounds/adventure.png")
 setShowToast(false)
 setAnnounceToChat(false)
 
-setPos(0,15)
+setPos(-6,-6)
 
 addCriteria("location", "minecraft:location")

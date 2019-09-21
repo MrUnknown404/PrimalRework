@@ -1,0 +1,18 @@
+{
+  "type": "primalrework:staged_shaped",
+  "stage": "stage0",
+  "pattern": [
+    "TTT",
+    "TTT",
+    "TTT"
+  ],
+  "key": {
+    "T": {
+      "item": "primalrework:plant_fiber"
+    }
+  },
+  "result": {
+    "item": "primalrework:thatch",
+    "count": 2
+  }
+}

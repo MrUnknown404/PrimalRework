@@ -12,5 +12,5 @@ addParent("primalrework:stage0/get_rock")
 //hideLines()
 setPos(60,31)
 
-criteria = addCriteria("cobblestone", "minecraft:inventory_changed")
-criteria.addItem(<minecraft:cobblestone>)
+criteria = addCriteria("cobblestone", "triumph:player_crafted_item")
+criteria.setItem(<minecraft:cobblestone>)

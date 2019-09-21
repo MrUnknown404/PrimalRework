@@ -2,8 +2,13 @@ package mrunknown404.primalrework.blocks.util;
 
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import mrunknown404.primalrework.init.ModCreativeTabs;
+import mrunknown404.primalrework.util.DoubleValue;
 import mrunknown404.primalrework.util.harvest.BlockHarvestInfo;
+import mrunknown404.primalrework.util.harvest.EnumToolMaterial;
+import mrunknown404.primalrework.util.harvest.EnumToolType;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -16,7 +21,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public abstract class BlockBase extends Block implements IBlockBase<BlockBase> {
+public class BlockBase extends Block implements IBlockBase<BlockBase> {
 
 	private final BlockRenderLayer renderType;
 	private final AxisAlignedBB collisionAABB, visualAABB;
@@ -24,7 +29,7 @@ public abstract class BlockBase extends Block implements IBlockBase<BlockBase> {
 	protected BlockHarvestInfo harvestInfo;
 	
 	public BlockBase(String name, Material material, SoundType soundType, BlockRenderLayer renderType, float hardness, float resistance,
-			AxisAlignedBB collisionAABB, AxisAlignedBB visualAABB) {
+			AxisAlignedBB collisionAABB, AxisAlignedBB visualAABB, @Nonnull DoubleValue<EnumToolType, EnumToolMaterial>... types) {
 		super(material);
 		setUnlocalizedName(name);
 		setRegistryName(name);
@@ -39,11 +44,22 @@ public abstract class BlockBase extends Block implements IBlockBase<BlockBase> {
 		
 		addToModList(this);
 		
-		setupHarvestInfo();
+		if (types == null || types.length == 0) {
+			System.err.println("Invalid types for " + getUnlocalizedName());
+			setHarvestInfo(BlockHarvestInfo.create());
+			return;
+		}
+		
+		setHarvestInfo(BlockHarvestInfo.create(types));
 	}
 	
-	public BlockBase(String name, Material material, SoundType soundType, BlockRenderLayer renderType, float hardness, float resistance) {
-		this(name, material, soundType, renderType, hardness, resistance, FULL_BLOCK_AABB, FULL_BLOCK_AABB);
+	public BlockBase(String name, Material material, SoundType soundType, float hardness, float resistance, DoubleValue<EnumToolType, EnumToolMaterial>... types) {
+		this(name, material, soundType, BlockRenderLayer.SOLID, hardness, resistance, FULL_BLOCK_AABB, FULL_BLOCK_AABB, types);
+	}
+	
+	@Override
+	public void setHarvestInfo(BlockHarvestInfo info) {
+		this.harvestInfo = info;
 	}
 	
 	@Override
