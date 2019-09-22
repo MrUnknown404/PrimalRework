@@ -58,7 +58,7 @@ public class Main {
 		NetworkRegistry.INSTANCE.registerGuiHandler(main, new GuiHandler());
 		networkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel(MOD_ID);
 		networkWrapper.registerMessage(FireStarterPacketHandler.class, FireStarterMessage.class, 0, Side.SERVER);
-		networkWrapper.registerMessage(PrimalEnchantingPacketHandler.class, PrimalEnchantingMessage.class, 0, Side.SERVER);
+		networkWrapper.registerMessage(PrimalEnchantingPacketHandler.class, PrimalEnchantingMessage.class, 1, Side.SERVER);
 		
 		proxy.registerSounds();
 		proxy.setupRecipes();
