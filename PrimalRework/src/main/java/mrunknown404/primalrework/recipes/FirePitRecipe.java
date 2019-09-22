@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import mrunknown404.primalrework.recipes.util.IRecipeBase;
-import mrunknown404.primalrework.util.EnumStage;
+import mrunknown404.primalrework.util.enums.EnumStage;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

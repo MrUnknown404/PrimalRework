@@ -8,12 +8,12 @@ import java.util.List;
 import com.google.common.collect.Lists;
 
 import mrunknown404.primalrework.Main;
-import mrunknown404.primalrework.handlers.StageHandler;
 import mrunknown404.primalrework.recipes.FirePitRecipe;
+import mrunknown404.primalrework.recipes.util.DummyRecipe;
 import mrunknown404.primalrework.recipes.util.IStagedRecipeBase;
 import mrunknown404.primalrework.util.DoubleValue;
-import mrunknown404.primalrework.util.DummyRecipe;
-import mrunknown404.primalrework.util.EnumStage;
+import mrunknown404.primalrework.util.enums.EnumStage;
+import mrunknown404.primalrework.util.helpers.StageHelper;
 import mrunknown404.primalrework.util.jei.wrappers.FirePitRecipeWrapper;
 import mrunknown404.primalrework.util.jei.wrappers.StagedCraftingWrapper;
 import net.minecraft.block.BlockPlanks.EnumType;
@@ -100,7 +100,7 @@ public class ModRecipes {
 	/** @param stack Input */
 	public static FirePitRecipe getFirePitResult(ItemStack stack) {
 		for (FirePitRecipe info : FIRE_PIT_RECIPES) {
-			if (StageHandler.hasAccessToStage(info.getStage()) && compareItemStacks(info.getInput(), stack)) {
+			if (StageHelper.hasAccessToStage(info.getStage()) && compareItemStacks(info.getInput(), stack)) {
 				return info;
 			}
 		}

@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import mrunknown404.primalrework.util.DoubleValue;
+import mrunknown404.primalrework.util.enums.EnumToolMaterial;
+import mrunknown404.primalrework.util.enums.EnumToolType;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 
@@ -49,16 +51,6 @@ public class BlockHarvestInfo extends HarvestInfo {
 	public boolean canBreakWithNone() {
 		for (DoubleValue<EnumToolType, EnumToolMaterial> dv : types_harvests) {
 			if (dv.getL() == EnumToolType.none || dv.getR() == EnumToolMaterial.hand) {
-				return true;
-			}
-		}
-		
-		return false;
-	}
-	
-	public boolean isUnbreakable() {
-		for (DoubleValue<EnumToolType, EnumToolMaterial> dv : types_harvests) {
-			if (dv.getR() == EnumToolMaterial.unbreakable) {
 				return true;
 			}
 		}

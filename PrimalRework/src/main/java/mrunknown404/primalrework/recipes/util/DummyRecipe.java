@@ -1,4 +1,4 @@
-package mrunknown404.primalrework.util;
+package mrunknown404.primalrework.recipes.util;
 
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;

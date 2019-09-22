@@ -1,4 +1,4 @@
-package mrunknown404.primalrework.util;
+package mrunknown404.primalrework.util.enums;
 
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;

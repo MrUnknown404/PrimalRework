@@ -4,8 +4,8 @@ import org.apache.commons.lang3.text.WordUtils;
 
 import mrunknown404.primalrework.init.ModBlocks;
 import mrunknown404.primalrework.init.ModItems;
-import mrunknown404.primalrework.util.harvest.EnumToolMaterial;
-import mrunknown404.primalrework.util.harvest.EnumToolType;
+import mrunknown404.primalrework.util.enums.EnumToolMaterial;
+import mrunknown404.primalrework.util.enums.EnumToolType;
 import mrunknown404.primalrework.util.harvest.HarvestInfo;
 import mrunknown404.primalrework.util.helpers.HarvestHelper;
 import net.minecraft.init.Blocks;

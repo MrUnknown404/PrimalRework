@@ -2,9 +2,9 @@ package mrunknown404.primalrework;
 
 import mrunknown404.primalrework.client.gui.GuiHandler;
 import mrunknown404.primalrework.commands.CommandStage;
-import mrunknown404.primalrework.handlers.events.BlockEventHandler;
-import mrunknown404.primalrework.handlers.events.PlayerEventHandler;
-import mrunknown404.primalrework.handlers.events.WorldEventHandler;
+import mrunknown404.primalrework.handlers.BlockEventHandler;
+import mrunknown404.primalrework.handlers.PlayerEventHandler;
+import mrunknown404.primalrework.handlers.WorldEventHandler;
 import mrunknown404.primalrework.network.FireStarterMessage;
 import mrunknown404.primalrework.network.FireStarterPacketHandler;
 import mrunknown404.primalrework.network.PrimalEnchantingMessage;

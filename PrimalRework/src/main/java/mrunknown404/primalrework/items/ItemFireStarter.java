@@ -4,9 +4,9 @@ import javax.annotation.Nullable;
 
 import mrunknown404.primalrework.Main;
 import mrunknown404.primalrework.init.ModItems;
-import mrunknown404.primalrework.items.util.ItemBase;
+import mrunknown404.primalrework.items.util.ItemDamageableBase;
 import mrunknown404.primalrework.network.FireStarterMessage;
-import mrunknown404.primalrework.util.harvest.EnumToolMaterial;
+import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
@@ -22,10 +22,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemFireStarter extends ItemBase {
+public class ItemFireStarter extends ItemDamageableBase {
 
 	public ItemFireStarter() {
-		super("fire_starter", 1, true, EnumToolMaterial.wood);
+		super("fire_starter", 1, EnumToolMaterial.wood);
 		
 		addPropertyOverride(new ResourceLocation("pull"), new IItemPropertyGetter() {
 			@SideOnly(Side.CLIENT)

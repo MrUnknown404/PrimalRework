@@ -3,6 +3,7 @@ package mrunknown404.primalrework.util.harvest;
 import java.util.Arrays;
 import java.util.List;
 
+import mrunknown404.primalrework.util.enums.EnumToolType;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 

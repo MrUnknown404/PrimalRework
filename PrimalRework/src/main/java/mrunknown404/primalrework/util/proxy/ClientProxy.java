@@ -2,14 +2,16 @@ package mrunknown404.primalrework.util.proxy;
 
 import mrunknown404.primalrework.client.render.TileEntityCraftingStumpRenderer;
 import mrunknown404.primalrework.client.render.TileEntityPrimalEnchantingRenderer;
-import mrunknown404.primalrework.handlers.EntityRenderHandler;
-import mrunknown404.primalrework.handlers.SoundHandler;
+import mrunknown404.primalrework.init.ModEntities;
+import mrunknown404.primalrework.init.ModSoundEvents;
 import mrunknown404.primalrework.tileentity.TileEntityCraftingStump;
 import mrunknown404.primalrework.tileentity.TileEntityPrimalEnchanting;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
+import net.minecraft.util.SoundEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 public class ClientProxy extends CommonProxy {
 	@Override
@@ -19,7 +21,7 @@ public class ClientProxy extends CommonProxy {
 	
 	@Override
 	public void registerRenders() {
-		EntityRenderHandler.registerEntityRenderers();
+		ModEntities.registerEntityRenderers();
 		
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCraftingStump.class, new TileEntityCraftingStumpRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPrimalEnchanting.class, new TileEntityPrimalEnchantingRenderer());
@@ -27,6 +29,6 @@ public class ClientProxy extends CommonProxy {
 	
 	@Override
 	public void registerSounds() {
-		SoundHandler.registerSounds();
+		ForgeRegistries.SOUND_EVENTS.registerAll(ModSoundEvents.SOUNDS.toArray(new SoundEvent[0]));
 	}
 }

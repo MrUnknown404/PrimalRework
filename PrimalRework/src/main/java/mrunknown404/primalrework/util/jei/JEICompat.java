@@ -17,10 +17,10 @@ import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
 import mezz.jei.api.recipe.transfer.IRecipeTransferRegistry;
 import mrunknown404.primalrework.client.gui.GuiFirePit;
-import mrunknown404.primalrework.handlers.StageHandler;
 import mrunknown404.primalrework.init.ModBlocks;
 import mrunknown404.primalrework.init.ModRecipes;
 import mrunknown404.primalrework.inventory.ContainerFirePit;
+import mrunknown404.primalrework.util.helpers.StageHelper;
 import mrunknown404.primalrework.util.jei.category.FirePitRecipeCategory;
 import mrunknown404.primalrework.util.jei.category.StagedCraftingRecipeCategory;
 import mrunknown404.primalrework.util.jei.wrappers.IRecipeWrapperBase;
@@ -93,7 +93,7 @@ public class JEICompat implements IModPlugin {
 					Entry<String, List<IRecipeWrapperBase<?>>> pair = it.next();
 					
 					for (IRecipeWrapperBase<?> wrap : pair.getValue()) {
-						if (StageHandler.hasAccessToStage(wrap.getRecipe().getStage())) {
+						if (StageHelper.hasAccessToStage(wrap.getRecipe().getStage())) {
 							rr.unhideRecipe(wrap, pair.getKey());
 						} else {
 							rr.hideRecipe(wrap, pair.getKey());

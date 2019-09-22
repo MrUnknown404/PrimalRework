@@ -1,22 +1,20 @@
 package mrunknown404.primalrework.items.util;
 
-import java.util.List;
 import java.util.Random;
 
 import mrunknown404.primalrework.init.ModBlocks;
-import mrunknown404.primalrework.init.ModCreativeTabs;
 import mrunknown404.primalrework.init.ModItems;
-import mrunknown404.primalrework.util.harvest.EnumToolMaterial;
-import mrunknown404.primalrework.util.harvest.EnumToolType;
+import mrunknown404.primalrework.util.enums.EnumToolMaterial;
+import mrunknown404.primalrework.util.enums.EnumToolType;
 import mrunknown404.primalrework.util.helpers.HarvestHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirt;
+import net.minecraft.block.BlockDirt.DirtType;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.BlockNewLog;
 import net.minecraft.block.BlockOldLog;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,7 +22,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemTool;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
@@ -35,35 +32,15 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 
-public class ItemToolBase extends ItemTool implements IItemBase<ItemToolBase> {
+public class ItemToolBase extends ItemDamageableBase {
 
 	private final EnumToolType toolType;
 	private final EnumToolMaterial harvestLevel;
-	private int amountOfTooltops = 0;
 	
-	public ItemToolBase(String name, EnumToolType type, EnumToolMaterial level) {
-		super(type.baseDamage + level.extraDamage, type.swingSpeed, ModItems.MATERIAL, null);
-		setUnlocalizedName(name);
-		setRegistryName(name);
-		setCreativeTab(ModCreativeTabs.PRIMALREWORK_TOOLS);
-		setMaxStackSize(1);
-		setMaxDamage(level.durability);
-		
-		this.toolType = type;
-		this.harvestLevel = level;
-		
-		addToModList(this);
-	}
-	
-	@Override
-	public ItemToolBase setAmountOfTooltops(int amountOfTooltops) {
-		this.amountOfTooltops = amountOfTooltops;
-		return this;
-	}
-	
-	@Override
-	public int getAmountOfTooltips() {
-		return amountOfTooltops;
+	public ItemToolBase(String name, EnumToolType toolType, EnumToolMaterial harvestLevel) {
+		super(name, 1, harvestLevel);
+		this.toolType = toolType;
+		this.harvestLevel = harvestLevel;
 	}
 	
 	@Override
@@ -160,28 +137,11 @@ public class ItemToolBase extends ItemTool implements IItemBase<ItemToolBase> {
 	}
 	
 	@Override
-	public boolean hasContainerItem(ItemStack stack) {
-		return true;
-	}
-	
-	@Override
-	public ItemStack getContainerItem(ItemStack stack) {
-		ItemStack s = stack.copy();
-		s.setItemDamage(stack.getItemDamage() + 1);
-		return s;
-	}
-	
-	@Override
-	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced) {
-		tooltip.addAll(getTooltips(getUnlocalizedName()));
-	}
-	
-	@Override
 	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
 		if (toolType == EnumToolType.knife || toolType == EnumToolType.sword || toolType == EnumToolType.axe) {
 			stack.damageItem(1, attacker);
 		} else {
-			stack.damageItem(3, attacker);
+			stack.damageItem(2, attacker);
 		}
 		
 		return true;
@@ -193,14 +153,13 @@ public class ItemToolBase extends ItemTool implements IItemBase<ItemToolBase> {
 			if (HarvestHelper.canBreak(state.getBlock(), stack.getItem())) {
 				stack.damageItem(1, entityLiving);
 			} else {
-				stack.damageItem(3, entityLiving);
+				stack.damageItem(2, entityLiving);
 			}
 		}
 		
 		return true;
 	}
 	
-	@SuppressWarnings("incomplete-switch")
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (toolType == EnumToolType.shovel) {
@@ -247,13 +206,12 @@ public class ItemToolBase extends ItemTool implements IItemBase<ItemToolBase> {
 					}
 					
 					if (block == Blocks.DIRT) {
-						switch ((BlockDirt.DirtType)iblockstate.getValue(BlockDirt.VARIANT)) {
-						case DIRT:
+						if (iblockstate.getValue(BlockDirt.VARIANT) == DirtType.DIRT) {
 							setBlock(itemstack, player, world, pos, Blocks.FARMLAND.getDefaultState());
-							return EnumActionResult.SUCCESS;
-						case COARSE_DIRT:
+								return EnumActionResult.SUCCESS;
+						} else if (iblockstate.getValue(BlockDirt.VARIANT) == DirtType.COARSE_DIRT) {
 							setBlock(itemstack, player, world, pos, Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.DIRT));
-							return EnumActionResult.SUCCESS;
+								return EnumActionResult.SUCCESS;
 						}
 					}
 				}
@@ -280,16 +238,6 @@ public class ItemToolBase extends ItemTool implements IItemBase<ItemToolBase> {
 	}
 	
 	@Override
-	public float getDestroySpeed(ItemStack stack, IBlockState state) {
-		return harvestLevel.speed;
-	}
-	
-	@Override
-	public int getItemEnchantability() {
-		return harvestLevel.enchantability;
-	}
-	
-	@Override
 	public EnumToolType getToolType() {
 		return toolType;
 	}
@@ -297,10 +245,5 @@ public class ItemToolBase extends ItemTool implements IItemBase<ItemToolBase> {
 	@Override
 	public EnumToolMaterial getHarvestLevel() {
 		return harvestLevel;
-	}
-	
-	@Override
-	public boolean isEnchantable(ItemStack stack) {
-		return getItemEnchantability() != 0;
 	}
 }

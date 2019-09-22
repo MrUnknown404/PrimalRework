@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import mrunknown404.primalrework.util.DoubleValue;
+import mrunknown404.primalrework.util.enums.EnumToolMaterial;
+import mrunknown404.primalrework.util.enums.EnumToolType;
 import net.minecraft.item.Item;
 
 public class HarvestInfo {

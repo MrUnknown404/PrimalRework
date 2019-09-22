@@ -1,4 +1,4 @@
-package mrunknown404.primalrework.util.harvest;
+package mrunknown404.primalrework.util.enums;
 
 import java.util.ArrayList;
 import java.util.Arrays;

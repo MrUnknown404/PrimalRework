@@ -6,9 +6,9 @@ import javax.annotation.Nonnull;
 
 import mrunknown404.primalrework.init.ModCreativeTabs;
 import mrunknown404.primalrework.util.DoubleValue;
+import mrunknown404.primalrework.util.enums.EnumToolMaterial;
+import mrunknown404.primalrework.util.enums.EnumToolType;
 import mrunknown404.primalrework.util.harvest.BlockHarvestInfo;
-import mrunknown404.primalrework.util.harvest.EnumToolMaterial;
-import mrunknown404.primalrework.util.harvest.EnumToolType;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

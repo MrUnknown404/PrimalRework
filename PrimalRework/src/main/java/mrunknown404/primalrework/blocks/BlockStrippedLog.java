@@ -2,8 +2,8 @@ package mrunknown404.primalrework.blocks;
 
 import mrunknown404.primalrework.blocks.util.BlockRotatedPillarBase;
 import mrunknown404.primalrework.util.DoubleValue;
-import mrunknown404.primalrework.util.harvest.EnumToolMaterial;
-import mrunknown404.primalrework.util.harvest.EnumToolType;
+import mrunknown404.primalrework.util.enums.EnumToolMaterial;
+import mrunknown404.primalrework.util.enums.EnumToolType;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.BlockLog.EnumAxis;
 import net.minecraft.block.SoundType;

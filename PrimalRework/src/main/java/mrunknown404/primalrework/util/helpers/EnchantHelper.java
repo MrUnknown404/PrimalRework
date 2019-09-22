@@ -8,8 +8,8 @@ import com.google.common.collect.Lists;
 
 import mrunknown404.primalrework.init.ModItems;
 import mrunknown404.primalrework.util.DoubleValue;
-import mrunknown404.primalrework.util.harvest.EnumToolMaterial;
-import mrunknown404.primalrework.util.harvest.EnumToolType;
+import mrunknown404.primalrework.util.enums.EnumToolMaterial;
+import mrunknown404.primalrework.util.enums.EnumToolType;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -87,7 +87,7 @@ public class EnchantHelper {
 		}
 	}
 	
-	public static List<EnchantmentData> getVanillaEnchantmentDatas(int enchantability, ItemStack item) {
+	private static List<EnchantmentData> getVanillaEnchantmentDatas(int enchantability, ItemStack item) {
 		List<EnchantmentData> list = Lists.<EnchantmentData>newArrayList();
 		
 		for (EnchantmentData enchantment : EnchantHelper.getVanillaItemsEnchants(item.getItem())) {
@@ -104,7 +104,7 @@ public class EnchantHelper {
 		return list;
 	}
 	
-	public static List<EnchantmentData> getPrimalEnchantmentDatas(int enchantability, ItemStack item) {
+	private static List<EnchantmentData> getPrimalEnchantmentDatas(int enchantability, ItemStack item) {
 		List<EnchantmentData> list = Lists.<EnchantmentData>newArrayList();
 		
 		for (EnchantmentData enchantment : EnchantHelper.getPrimalItemsEnchants(item.getItem())) {

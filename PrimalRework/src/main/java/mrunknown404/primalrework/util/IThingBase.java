@@ -3,6 +3,7 @@ package mrunknown404.primalrework.util;
 import java.util.ArrayList;
 import java.util.List;
 
+import mrunknown404.primalrework.util.helpers.ColorH;
 import net.minecraft.util.text.TextComponentTranslation;
 
 public interface IThingBase<T, R> {

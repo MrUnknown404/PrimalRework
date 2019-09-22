@@ -1,11 +1,13 @@
 package mrunknown404.primalrework.handlers;
 
 import mrunknown404.primalrework.Main;
+import mrunknown404.primalrework.blocks.util.BlockBase;
 import mrunknown404.primalrework.blocks.util.IBlockBase;
 import mrunknown404.primalrework.init.ModBlocks;
 import mrunknown404.primalrework.init.ModEntities;
 import mrunknown404.primalrework.init.ModItems;
 import mrunknown404.primalrework.items.util.IItemBase;
+import mrunknown404.primalrework.items.util.ItemBase;
 import mrunknown404.primalrework.util.EntityInfo;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -34,13 +36,13 @@ public class RegistryHandler {
 	public static void onModelRegister(ModelRegistryEvent e) {
 		for (Item item : ModItems.ITEMS) {
 			if (item instanceof IItemBase) {
-				((IItemBase<Item>) item).registerModels(item);
+				((IItemBase<ItemBase>) item).registerModels(item);
 			}
 		}
 		
 		for (Block block : ModBlocks.BLOCKS) {
 			if (block instanceof IBlockBase) {
-				((IBlockBase<Block>) block).registerModels(block);
+				((IBlockBase<BlockBase>) block).registerModels(block);
 			}
 		}
 	}

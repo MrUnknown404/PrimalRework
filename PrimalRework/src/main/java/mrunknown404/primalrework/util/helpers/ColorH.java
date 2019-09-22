@@ -1,4 +1,4 @@
-package mrunknown404.primalrework.util;
+package mrunknown404.primalrework.util.helpers;
 
 public class ColorH {
 	public static String addColor(String str) {

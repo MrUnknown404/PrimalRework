@@ -2,7 +2,7 @@ package mrunknown404.primalrework.recipes.util;
 
 import java.util.List;
 
-import mrunknown404.primalrework.util.EnumStage;
+import mrunknown404.primalrework.util.enums.EnumStage;
 import net.minecraft.item.ItemStack;
 
 public interface IRecipeBase {

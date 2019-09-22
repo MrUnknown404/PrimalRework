@@ -1,16 +1,14 @@
-package mrunknown404.primalrework.handlers.events;
+package mrunknown404.primalrework.handlers;
 
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
-import mrunknown404.primalrework.util.DoubleValue;
+import mrunknown404.primalrework.util.enums.EnumToolMaterial;
+import mrunknown404.primalrework.util.enums.EnumToolType;
 import mrunknown404.primalrework.util.harvest.BlockHarvestInfo;
-import mrunknown404.primalrework.util.harvest.EnumToolMaterial;
-import mrunknown404.primalrework.util.harvest.EnumToolType;
 import mrunknown404.primalrework.util.harvest.HarvestDropInfo;
 import mrunknown404.primalrework.util.harvest.HarvestDropInfo.ItemDropInfo;
-import mrunknown404.primalrework.util.harvest.HarvestInfo;
 import mrunknown404.primalrework.util.helpers.HarvestHelper;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
@@ -47,6 +45,7 @@ public class BlockEventHandler {
 		if (binfo == null || HarvestHelper.getHarvestInfo(item) == null) {
 			return;
 		}
+		
 		HarvestDropInfo drop = binfo.getDrop(HarvestHelper.getItemsToolType(b, item));
 		if (drop == null) {
 			return;
@@ -79,38 +78,30 @@ public class BlockEventHandler {
 	public void onBlockBreak(BlockEvent.BreakEvent e) {
 		EntityPlayer p = e.getPlayer();
 		if (p.isCreative() && !p.getActiveItemStack().isEmpty()) {
-			HarvestInfo info = HarvestHelper.getHarvestInfo(p.getActiveItemStack().getItem());
-			
-			for (DoubleValue<EnumToolType, EnumToolMaterial> dv : info.getTypesHarvests()) {
-				if (dv.getL() == EnumToolType.sword) {
-					e.setCanceled(true);
-				}
+			if (HarvestHelper.hasToolType(p.getActiveItemStack().getItem(), EnumToolType.sword)) {
+				e.setCanceled(true);
 			}
 		}
 	}
 	
 	@SubscribeEvent
 	public void onBreakSpeed(PlayerEvent.BreakSpeed e) {
-		if (HarvestHelper.getHarvestInfo(e.getState().getBlock()).isUnbreakable()) {
+		if (HarvestHelper.hasToolMaterial(e.getState().getBlock(), EnumToolMaterial.unbreakable)) {
 			e.setNewSpeed(0);
 			return;
 		}
 		
+		ItemStack item = e.getEntityPlayer().getHeldItemMainhand();
 		float newSpeed = MathHelper.clamp(0.75f / e.getState().getBlockHardness(e.getEntityPlayer().world, e.getPos()), 0, 0.3f);
 		float eff = 1;
 		
-		if (e.getEntityPlayer().getHeldItemMainhand().isItemEnchanted()) {
-			Map<Enchantment, Integer> it = EnchantmentHelper.getEnchantments(e.getEntityPlayer().getHeldItemMainhand());
+		if (item != null && item.isItemEnchanted()) {
+			Map<Enchantment, Integer> it = EnchantmentHelper.getEnchantments(item);
 			if (it.containsKey(Enchantments.EFFICIENCY)) {
 				eff = it.get(Enchantments.EFFICIENCY) * 0.25f + 1;
 			}
 		}
 		
-		if (HarvestHelper.canBreak(e.getState().getBlock(), e.getEntityPlayer().getHeldItemMainhand().getItem())) {
-			EnumToolMaterial harvest = HarvestHelper.getItemsHarvestLevel(e.getState().getBlock(), e.getEntityPlayer().getHeldItemMainhand().getItem());
-			e.setNewSpeed((2 * harvest.speed) * newSpeed * eff);
-		} else {
-			e.setNewSpeed(newSpeed);
-		}
+		e.setNewSpeed(HarvestHelper.getItemsHarvestSpeed(e.getState().getBlock(), item.getItem()) * newSpeed * eff);
 	}
 }

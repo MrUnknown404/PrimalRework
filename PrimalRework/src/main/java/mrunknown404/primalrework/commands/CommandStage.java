@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import mrunknown404.primalrework.handlers.StageHandler;
-import mrunknown404.primalrework.util.EnumStage;
+import mrunknown404.primalrework.util.enums.EnumStage;
+import mrunknown404.primalrework.util.helpers.StageHelper;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -38,14 +38,14 @@ public class CommandStage extends CommandBase {
 				for (EnumStage stage : EnumStage.values()) {
 					if (args[1].equalsIgnoreCase(stage.toString())) {
 						sender.sendMessage(new TextComponentString("Set stage to \"" + args[1] + "\""));
-						StageHandler.setStage(stage);
+						StageHelper.setStage(stage);
 						return;
 					}
 				}
 			}
 		} else if (args.length == 1) {
 			if (args[0].equalsIgnoreCase("get")) {
-				sender.sendMessage(new TextComponentString("Stage is \"" + StageHandler.getStage().getName() + "\""));
+				sender.sendMessage(new TextComponentString("Stage is \"" + StageHelper.getStage().getName() + "\""));
 				return;
 			}
 		}

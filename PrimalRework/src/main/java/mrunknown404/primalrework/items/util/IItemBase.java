@@ -3,11 +3,11 @@ package mrunknown404.primalrework.items.util;
 import mrunknown404.primalrework.Main;
 import mrunknown404.primalrework.init.ModItems;
 import mrunknown404.primalrework.util.IThingBase;
-import mrunknown404.primalrework.util.harvest.EnumToolMaterial;
-import mrunknown404.primalrework.util.harvest.EnumToolType;
+import mrunknown404.primalrework.util.enums.EnumToolMaterial;
+import mrunknown404.primalrework.util.enums.EnumToolType;
 import net.minecraft.item.Item;
 
-public interface IItemBase<T extends Item> extends IThingBase<Item, T> {
+public interface IItemBase<R extends ItemBase> extends IThingBase<Item, R> {
 	@Override
 	public default void registerModels(Item item) {
 		Main.proxy.registerItemRenderer(item, 0, "inventory");

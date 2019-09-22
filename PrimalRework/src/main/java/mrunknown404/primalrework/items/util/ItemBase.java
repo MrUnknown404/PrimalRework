@@ -3,42 +3,33 @@ package mrunknown404.primalrework.items.util;
 import java.util.List;
 
 import mrunknown404.primalrework.init.ModCreativeTabs;
-import mrunknown404.primalrework.util.harvest.EnumToolMaterial;
-import mrunknown404.primalrework.util.harvest.EnumToolType;
+import mrunknown404.primalrework.util.enums.EnumToolMaterial;
+import mrunknown404.primalrework.util.enums.EnumToolType;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class ItemBase extends Item implements IItemBase<ItemBase> {
 
-	private final EnumToolMaterial harvestLevel;
-	private final boolean isContainer;
 	private int amountOfTooltops = 0;
 	
-	public ItemBase(String name, int maxStackSize, boolean isContainer, EnumToolMaterial level) {
+	protected ItemBase(String name, CreativeTabs tab, int maxStackSize) {
 		setUnlocalizedName(name);
 		setRegistryName(name);
-		setCreativeTab(ModCreativeTabs.PRIMALREWORK_ITEMS);
+		setCreativeTab(tab);
 		setMaxStackSize(maxStackSize);
-		setMaxDamage(level.durability);
-		
-		this.harvestLevel = level;
-		this.isContainer = isContainer;
 		
 		addToModList(this);
 	}
 	
-	public ItemBase(String name, EnumToolMaterial level) {
-		this(name, 1, true, level);
-	}
-	
 	public ItemBase(String name, int maxStackSize) {
-		this(name, maxStackSize, false, EnumToolMaterial.hand);
+		this(name, ModCreativeTabs.PRIMALREWORK_ITEMS, maxStackSize);
 	}
 	
 	public ItemBase(String name) {
-		this(name, 64, false, EnumToolMaterial.hand);
+		this(name, ModCreativeTabs.PRIMALREWORK_ITEMS, 64);
 	}
 	
 	@Override
@@ -53,18 +44,6 @@ public class ItemBase extends Item implements IItemBase<ItemBase> {
 	}
 	
 	@Override
-	public boolean hasContainerItem(ItemStack stack) {
-		return isContainer;
-	}
-	
-	@Override
-	public ItemStack getContainerItem(ItemStack stack) {
-		ItemStack s = stack.copy();
-		s.setItemDamage(stack.getItemDamage() + 1);
-		return s;
-	}
-	
-	@Override
 	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced) {
 		tooltip.addAll(getTooltips(getUnlocalizedName()));
 	}
@@ -76,6 +55,6 @@ public class ItemBase extends Item implements IItemBase<ItemBase> {
 	
 	@Override
 	public EnumToolMaterial getHarvestLevel() {
-		return harvestLevel;
+		return EnumToolMaterial.hand;
 	}
 }

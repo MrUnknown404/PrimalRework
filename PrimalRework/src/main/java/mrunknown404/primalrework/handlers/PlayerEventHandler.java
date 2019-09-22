@@ -1,4 +1,4 @@
-package mrunknown404.primalrework.handlers.events;
+package mrunknown404.primalrework.handlers;
 
 import java.util.Arrays;
 import java.util.List;
@@ -7,16 +7,21 @@ import java.util.Random;
 import mrunknown404.primalrework.Main;
 import mrunknown404.primalrework.init.ModBlocks;
 import mrunknown404.primalrework.init.ModItems;
+import mrunknown404.primalrework.util.enums.EnumToolType;
+import mrunknown404.primalrework.util.helpers.HarvestHelper;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityEnchantmentTable;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -114,23 +119,40 @@ public class PlayerEventHandler {
 	@SubscribeEvent
 	public void onRightClick(PlayerInteractEvent.RightClickBlock e) {
 		World w = e.getWorld();
+		BlockPos pos = e.getPos();
+		EntityPlayer p = e.getEntityPlayer();
 		
 		if (!w.isRemote) {
-			TileEntity tileentity = w.getTileEntity(e.getPos());
-			
-			if (tileentity instanceof TileEntityEnchantmentTable) {
-				e.getEntityPlayer().openGui(Main.main, Main.GUI_ID_ENCHANTING, w, e.getPos().getX(), e.getPos().getY(), e.getPos().getZ());
+			if (w.getTileEntity(pos) instanceof TileEntityEnchantmentTable) {
+				e.getEntityPlayer().openGui(Main.main, Main.GUI_ID_ENCHANTING, w, pos.getX(), pos.getY(), pos.getZ());
 				e.setCanceled(true);
 				return;
 			}
 		}
 		
+		if (e.getItemStack() == null || e.getItemStack().isEmpty()) {
+			return;
+		}
+		
 		if (e.getItemStack().getItem() == Item.getItemFromBlock(ModBlocks.UNLIT_PRIMAL_TORCH)) {
-			if (fire_blocks.contains(w.getBlockState(e.getPos()).getBlock())) {
+			if (fire_blocks.contains(w.getBlockState(pos).getBlock())) {
 				e.getItemStack().shrink(1);
-				e.getEntityPlayer().addItemStackToInventory(new ItemStack(ModBlocks.LIT_PRIMAL_TORCH));
+				p.addItemStackToInventory(new ItemStack(ModBlocks.LIT_PRIMAL_TORCH));
 				e.setCanceled(true);
 				return;
+			}
+		} else if (e.getItemStack().getItem() instanceof ItemSpade || HarvestHelper.hasToolType(e.getItemStack().getItem(), EnumToolType.shovel)) {
+			if (w.getBlockState(pos.up()).getMaterial() == Material.AIR) {
+				w.playSound(p, pos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0f, 1.0f);
+				p.swingArm(e.getHand());
+				
+				if (!w.isRemote) {
+					if (!p.isCreative()) {
+						e.getItemStack().damageItem(1, p);
+					}
+					
+					w.setBlockState(pos, Blocks.GRASS_PATH.getDefaultState());
+				}
 			}
 		}
 	}
