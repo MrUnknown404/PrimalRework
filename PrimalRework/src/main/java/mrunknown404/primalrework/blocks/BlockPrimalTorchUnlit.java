@@ -49,7 +49,7 @@ public class BlockPrimalTorchUnlit extends BlockBase {
 	}
 	
 	public BlockPrimalTorchUnlit(String name) {
-		super(name, Material.CIRCUITS, SoundType.WOOD, BlockRenderLayer.CUTOUT, 0, 0, STANDING_AABB, STANDING_AABB,
+		super(name, Material.CIRCUITS, SoundType.WOOD, BlockRenderLayer.CUTOUT, 0, 0, NULL_AABB, STANDING_AABB,
 				new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.none, EnumToolMaterial.hand));
 		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.UP));
 		setLightOpacity(0);
@@ -76,11 +76,6 @@ public class BlockPrimalTorchUnlit extends BlockBase {
 			default:
 				return STANDING_AABB;
 		}
-	}
-	
-	@Override
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-		return NULL_AABB;
 	}
 	
 	private boolean canPlaceOn(World worldIn, BlockPos pos) {
