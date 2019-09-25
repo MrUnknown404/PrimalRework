@@ -102,8 +102,6 @@ public abstract class BlockRotatedPillarBase extends BlockBase {
 	
 	@Override
 	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
-		System.out.println(state.getValue(BlockLog.LOG_AXIS));
-		
 		switch (state.getValue(BlockLog.LOG_AXIS)) {
 			case NONE:
 				return BlockFaceShape.UNDEFINED;

@@ -13,4 +13,4 @@ addParent("primalrework:stage2/root")
 setPos(87,15)
 
 criteria = addCriteria("craft", "triumph:player_crafted_item")
-criteria.setItem(magic_dust_red)
+criteria.setItem(<primalrework:magic_dust_red>)

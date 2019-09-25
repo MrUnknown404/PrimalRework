@@ -10,6 +10,7 @@ import mrunknown404.primalrework.blocks.BlockPrimalEnchantingTable;
 import mrunknown404.primalrework.blocks.BlockPrimalTorchLit;
 import mrunknown404.primalrework.blocks.BlockPrimalTorchUnlit;
 import mrunknown404.primalrework.blocks.BlockStrippedLog;
+import mrunknown404.primalrework.blocks.BlockThatchSlab;
 import mrunknown404.primalrework.blocks.util.BlockBase;
 import mrunknown404.primalrework.util.DoubleValue;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
@@ -32,6 +33,8 @@ public class ModBlocks {
 	public static final Block CRAFTING_STUMP = new BlockCraftingStump();
 	public static final Block PRIMAL_ENCHANTING_TABLE = new BlockPrimalEnchantingTable();
 	public static final Block THATCH = new BlockBase("thatch", Material.LEAVES, SoundType.PLANT, 0.2f, 0.2f, new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.none, EnumToolMaterial.hand), new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.knife, EnumToolMaterial.flint));
+	public static final Block THATCH_DOUBLE_SLAB = new BlockThatchSlab("double_thatch_slab", true);
+	public static final Block THATCH_SLAB = new BlockThatchSlab("thatch_slab", false);
 	
 	public static final Block STRIPPED_OAK_LOG = new BlockStrippedLog("oak");
 	public static final Block STRIPPED_SPRUCE_LOG = new BlockStrippedLog("spruce");

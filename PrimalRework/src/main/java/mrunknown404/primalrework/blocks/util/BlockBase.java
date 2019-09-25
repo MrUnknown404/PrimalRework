@@ -28,7 +28,7 @@ public class BlockBase extends Block implements IBlockBase<BlockBase> {
 	private int amountOfTooltops = 0;
 	protected BlockHarvestInfo harvestInfo;
 	
-	public BlockBase(String name, Material material, SoundType soundType, BlockRenderLayer renderType, float hardness, float resistance,
+	protected BlockBase(String name, Material material, SoundType soundType, BlockRenderLayer renderType, float hardness, float resistance,
 			AxisAlignedBB collisionAABB, AxisAlignedBB visualAABB, @Nonnull DoubleValue<EnumToolType, EnumToolMaterial>... types) {
 		super(material);
 		setUnlocalizedName(name);

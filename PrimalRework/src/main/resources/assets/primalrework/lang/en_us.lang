@@ -68,6 +68,7 @@ tile.primal_torch_unlit.name=Unlit Primal Torch
 tile.crafting_stump.name=Crafting Stump
 tile.primal_enchanting_table.name=Primal Enchanting Table
 tile.thatch.name=Thatch
+tile.thatch_slab.name=Thatch Slab
 
 tile.stripped_oak_log.name=Stripped Oak Log
 tile.stripped_spruce_log.name=Stripped Spruce Log
