@@ -10,10 +10,10 @@ import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public abstract class CommonProxy {
-	public abstract void registerItemRenderer(Item item, int meta, String id);
-	public abstract void registerRenders();
-	public abstract void registerSounds();
+public class CommonProxy {
+	public void registerItemRenderer(Item item, int meta, String id) {}
+	public void registerRenders() {}
+	public void registerSounds() {}
 	
 	public final void setupRecipes() {
 		ModRecipes.removeRecipes();

@@ -2,15 +2,13 @@ package mrunknown404.primalrework.entity.render;
 
 import mrunknown404.primalrework.Main;
 import mrunknown404.primalrework.entity.model.ModelPigeon;
-import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
 
 public class RenderPigeon extends RenderBase<EntityLiving> {
 
-	public RenderPigeon(RenderManager manager) {
-		super(manager, new ModelPigeon(), new ResourceLocation(Main.MOD_ID, "textures/entity/pigeon.png"), 0.25f);
-		
+	public RenderPigeon() {
+		super(null, new ModelPigeon(), new ResourceLocation(Main.MOD_ID, "textures/entity/pigeon.png"), 0.25f);
 	}
 	
 	@Override

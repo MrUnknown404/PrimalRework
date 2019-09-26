@@ -38,6 +38,10 @@ public class BlockHarvestInfo extends HarvestInfo {
 		return this;
 	}
 	
+	public List<HarvestDropInfo> getAllDrops() {
+		return drops;
+	}
+	
 	public HarvestDropInfo getDrop(EnumToolType type) {
 		for (HarvestDropInfo drop : drops) {
 			if (drop.getToolType() == type) {

@@ -27,15 +27,9 @@ public class BlockEventHandler {
 
 	@SubscribeEvent
 	public void onHarvestDrop(HarvestDropsEvent e) {
-		if (e.getHarvester() == null || HarvestHelper.getHarvestInfo(e.getState().getBlock()).canBreakWithNone()) {
-			return;
-		} else if (e.getHarvester() == null || e.getHarvester().getHeldItemMainhand() == null) {
+		if (e.getHarvester() == null || !HarvestHelper.canBreak(e.getState().getBlock(), e.getHarvester().getHeldItemMainhand().getItem())) {
 			e.getDrops().clear();
 			return;
-		}
-		
-		if (!HarvestHelper.canBreak(e.getState().getBlock(), e.getHarvester().getHeldItemMainhand().getItem())) {
-			e.setDropChance(0);
 		}
 		
 		Block b = e.getState().getBlock();

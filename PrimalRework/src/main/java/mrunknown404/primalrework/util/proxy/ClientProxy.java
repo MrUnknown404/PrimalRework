@@ -2,7 +2,7 @@ package mrunknown404.primalrework.util.proxy;
 
 import mrunknown404.primalrework.client.render.TileEntityCraftingStumpRenderer;
 import mrunknown404.primalrework.client.render.TileEntityPrimalEnchantingRenderer;
-import mrunknown404.primalrework.init.ModEntities;
+import mrunknown404.primalrework.handlers.EntityRenderHandler;
 import mrunknown404.primalrework.init.ModSoundEvents;
 import mrunknown404.primalrework.tileentity.TileEntityCraftingStump;
 import mrunknown404.primalrework.tileentity.TileEntityPrimalEnchanting;
@@ -21,7 +21,7 @@ public class ClientProxy extends CommonProxy {
 	
 	@Override
 	public void registerRenders() {
-		ModEntities.registerEntityRenderers();
+		EntityRenderHandler.registerEntityRenderers();
 		
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCraftingStump.class, new TileEntityCraftingStumpRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPrimalEnchanting.class, new TileEntityPrimalEnchantingRenderer());

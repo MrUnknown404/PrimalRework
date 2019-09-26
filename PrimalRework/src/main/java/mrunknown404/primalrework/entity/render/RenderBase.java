@@ -22,7 +22,7 @@ public class RenderBase<T extends EntityLiving> extends RenderLiving<T> {
 	public RenderBase<T> createNew(RenderManager manager) {
 		return new RenderBase<T>(manager, model, resourceLoc, shadow);
 	}
-
+	
 	@Override
 	protected ResourceLocation getEntityTexture(T entity) {
 		return resourceLoc;

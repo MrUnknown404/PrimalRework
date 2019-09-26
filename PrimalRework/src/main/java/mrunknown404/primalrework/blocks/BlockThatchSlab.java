@@ -11,8 +11,9 @@ import net.minecraft.block.material.Material;
 public class BlockThatchSlab extends BlockSlabBase {
 
 	public BlockThatchSlab(String name, boolean isDouble) {
-		super(name, Material.LEAVES, SoundType.PLANT, 0.1f, 0.1f, isDouble,
-				new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.none, EnumToolMaterial.hand), new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.knife, EnumToolMaterial.flint));
+		super(name, Material.LEAVES, SoundType.PLANT, 0.15f, 0.15f, isDouble,
+				new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.none, EnumToolMaterial.hand),
+				new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.knife, EnumToolMaterial.flint));
 	}
 	
 	@Override

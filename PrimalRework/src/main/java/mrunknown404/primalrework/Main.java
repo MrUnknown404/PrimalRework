@@ -10,7 +10,7 @@ import mrunknown404.primalrework.network.FireStarterPacketHandler;
 import mrunknown404.primalrework.network.PrimalEnchantingMessage;
 import mrunknown404.primalrework.network.PrimalEnchantingPacketHandler;
 import mrunknown404.primalrework.util.OreDict;
-import mrunknown404.primalrework.util.helpers.HarvestHelper;
+import mrunknown404.primalrework.util.VanillaOverrides;
 import mrunknown404.primalrework.util.proxy.CommonProxy;
 import mrunknown404.primalrework.world.WorldGen;
 import net.minecraftforge.common.MinecraftForge;
@@ -63,7 +63,7 @@ public class Main {
 		proxy.registerSounds();
 		proxy.setupRecipes();
 		
-		HarvestHelper.changeHarvestLevels();
+		VanillaOverrides.overrideAll();
 		OreDict.register();
 		
 		GameRegistry.registerWorldGenerator(new WorldGen(), 0);
