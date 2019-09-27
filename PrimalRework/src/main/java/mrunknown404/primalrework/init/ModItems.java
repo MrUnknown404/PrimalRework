@@ -3,15 +3,18 @@ package mrunknown404.primalrework.init;
 import java.util.ArrayList;
 import java.util.List;
 
+import mrunknown404.primalrework.items.ItemChangeWithWater;
 import mrunknown404.primalrework.items.ItemFireStarter;
 import mrunknown404.primalrework.items.util.ItemBase;
 import mrunknown404.primalrework.items.util.ItemDamageableBase;
 import mrunknown404.primalrework.items.util.ItemToolBase;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import mrunknown404.primalrework.util.enums.EnumToolType;
+import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
+import net.minecraft.item.ItemBlock;
 import net.minecraftforge.common.util.EnumHelper;
 
 public class ModItems {
@@ -39,6 +42,17 @@ public class ModItems {
 	public static final Item JUNGLE_PLANK = new ItemBase("jungle_plank");
 	public static final Item DARK_OAK_PLANK = new ItemBase("dark_oak_plank");
 	public static final Item ACACIA_PLANK = new ItemBase("acacia_plank");
+	public static final Item SALT = new ItemBase("salt");
+	public static final Item ANIMAL_PELT = new ItemBase("animal_pelt");
+	public static final Item WET_HIDE = new ItemBase("wet_hide");
+	public static final Item RAW_HIDE = new ItemChangeWithWater("raw_hide", WET_HIDE);
+	public static final Item CLEANED_HIDE = new ItemBase("cleaned_hide");
+	public static final Item SALTED_HIDE = new ItemBase("salted_hide");
+	public static final Item DRIED_HIDE = new ItemBase("dried_hide");
+	public static final Item WET_TANNED_HIDE = new ItemBase("wet_tanned_hide");
+	public static final Item DRY_TANNED_HIDE = new ItemChangeWithWater("dry_tanned_hide", WET_TANNED_HIDE);
+	
+	//TODO add clay
 	
 	// ITEMS WITH DURABILITY
 	public static final Item PLANT_MESH = new ItemDamageableBase("plant_mesh", EnumToolMaterial.flint);
@@ -75,4 +89,14 @@ public class ModItems {
 	public static final Item STONE_HOE = new ItemToolBase("stone_hoe", EnumToolType.hoe, EnumToolMaterial.stone).setCreativeTab(CreativeTabs.TOOLS);
 	public static final Item GOLDEN_HOE = new ItemToolBase("golden_hoe", EnumToolType.hoe, EnumToolMaterial.gold).setCreativeTab(CreativeTabs.TOOLS);
 	public static final Item WOODEN_HOE = new ItemToolBase("wooden_hoe", EnumToolType.hoe, EnumToolMaterial.wood).setCreativeTab(CreativeTabs.TOOLS);
+	
+	public static Item findBlock(Block block) {
+		for (Item item : ITEMS) {
+			if (item instanceof ItemBlock && ((ItemBlock) item).getBlock().getUnlocalizedName().equalsIgnoreCase(block.getUnlocalizedName())) {
+				return item;
+			}
+		}
+		
+		return Item.getItemFromBlock(block);
+	}
 }

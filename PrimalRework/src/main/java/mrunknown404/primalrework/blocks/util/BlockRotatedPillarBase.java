@@ -27,7 +27,8 @@ public abstract class BlockRotatedPillarBase extends BlockBase {
 		super(name, material, soundType, renderType, hardness, resistance, collisionAABB, visualAABB, types);
 	}
 	
-	public BlockRotatedPillarBase(String name, Material material, SoundType soundType, float hardness, float resistance, DoubleValue<EnumToolType, EnumToolMaterial>... types) {
+	public BlockRotatedPillarBase(String name, Material material, SoundType soundType, float hardness, float resistance,
+			DoubleValue<EnumToolType, EnumToolMaterial>... types) {
 		super(name, material, soundType, hardness, resistance, types);
 	}
 	

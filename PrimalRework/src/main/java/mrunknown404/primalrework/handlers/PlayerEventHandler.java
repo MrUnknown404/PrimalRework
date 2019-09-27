@@ -24,6 +24,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.player.BonemealEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
@@ -31,6 +32,11 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 public class PlayerEventHandler {
 
 	private final List<Block> fire_blocks = Arrays.asList(ModBlocks.LIT_PRIMAL_TORCH, Blocks.TORCH);
+	
+	@SubscribeEvent
+	public void onBonemeal(BonemealEvent e) {
+		e.setCanceled(true);
+	}
 	
 	@SubscribeEvent
 	public void onPlayerTick(PlayerTickEvent e) {

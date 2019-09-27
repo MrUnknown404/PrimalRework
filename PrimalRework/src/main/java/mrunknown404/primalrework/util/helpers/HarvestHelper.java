@@ -44,16 +44,13 @@ public class HarvestHelper {
 	
 	public static void setHarvestLevel(Block b, float hardness, List<DoubleValue<EnumToolType, EnumToolMaterial>> harvest, HarvestDropInfo... drops) {
 		BlockHarvestInfo info = new BlockHarvestInfo(b, harvest);
-		
-		if (drops != null) {
-			info = info.setDrops(drops);
-		}
+		info = info.setDrops(drops);
 		
 		if (hardness != -1f) {
 			b.setHardness(hardness);
 		}
 		
-		if (b instanceof IBlockBase<?>) {
+		if (b instanceof IBlockBase) {
 			((IBlockBase<BlockBase>) b).setHarvestInfo(info);
 		}
 		

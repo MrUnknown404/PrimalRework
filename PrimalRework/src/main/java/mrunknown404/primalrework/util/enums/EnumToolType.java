@@ -65,8 +65,8 @@ public enum EnumToolType {
 	}
 	
 	private static class Enchs {
-		//private static final List<Enchantment> TOOL_FISHING = Arrays.asList(Enchantments.LUCK_OF_THE_SEA, Enchantments.LURE);
-		//private static final List<Enchantment> WEAPON_BOW = Arrays.asList(Enchantments.POWER, Enchantments.PUNCH, Enchantments.FLAME, Enchantments.INFINITY);
+		//TODO private static final List<Enchantment> TOOL_FISHING = Arrays.asList(Enchantments.LUCK_OF_THE_SEA, Enchantments.LURE);
+		//TODO private static final List<Enchantment> WEAPON_BOW = Arrays.asList(Enchantments.POWER, Enchantments.PUNCH, Enchantments.FLAME, Enchantments.INFINITY);
 		
 		/**@param i1 EFFICIENCY
 		 * @param i2 UNBREAKING

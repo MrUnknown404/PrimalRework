@@ -1,0 +1,17 @@
+{
+  "type": "primalrework:staged_shaped",
+  "stage": "stage1",
+  "pattern": [
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "primalrework:smooth_stone"
+    }
+  },
+  "result": {
+    "item": "minecraft:stone_slab",
+	"count": 6,
+	"data": 0
+  }
+}

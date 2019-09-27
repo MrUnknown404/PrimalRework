@@ -1,0 +1,17 @@
+setIcon(<primalrework:salt>)
+setTitle("Salty")
+setDescription("Mine some salt")
+setBackground("minecraft:textures/gui/advancements/backgrounds/adventure.png")
+setShowToast(true)
+setAnnounceToChat(true)
+setRequiresParents()
+alwaysVisible()
+
+addParent("primalrework:stage1/craft_flint_shovel")
+
+//hideLines()
+setPos(120,69)
+//setFrameType("GOAL")
+
+criteria = addCriteria("salt", "minecraft:inventory_changed")
+criteria.addItem(<primalrework:salt>)

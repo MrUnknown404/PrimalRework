@@ -1,0 +1,18 @@
+{
+  "type": "primalrework:staged_shaped",
+  "stage": "stage0",
+  "pattern": [
+    "T",
+    "T"
+  ],
+  "key": {
+    "T": {
+      "item": "minecraft:stone_slab",
+	  "data": 3
+    }
+  },
+  "result": {
+    "item": "minecraft:cobblestone",
+    "count": 1
+  }
+}

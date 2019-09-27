@@ -10,7 +10,7 @@ alwaysVisible()
 addParent("primalrework:stage1/craft_cloth")
 
 //hideLines()
-setPos(60,-27)
+setPos(64,-27)
 
 criteria = addCriteria("craft", "triumph:player_crafted_item")
 criteria.setItem(<minecraft:wool>)

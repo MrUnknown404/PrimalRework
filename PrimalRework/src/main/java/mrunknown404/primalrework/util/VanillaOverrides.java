@@ -4,7 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import mrunknown404.primalrework.blocks.util.BlockBase;
+import mrunknown404.primalrework.blocks.util.BlockSlabBase;
 import mrunknown404.primalrework.blocks.util.IBlockBase;
+import mrunknown404.primalrework.blocks.util.ISlabBase;
 import mrunknown404.primalrework.init.ModBlocks;
 import mrunknown404.primalrework.init.ModItems;
 import mrunknown404.primalrework.items.util.IItemBase;
@@ -40,8 +42,10 @@ public class VanillaOverrides {
 	
 	private static void resetHarvestLevels() {
 		for (Block block : Block.REGISTRY) {
-			if (block instanceof IBlockBase<?>) {
-				HarvestHelper.setHarvestLevel(block, ((IBlockBase<BlockBase>) block).getHarvestInfo().getTypesHarvests());
+			if (block instanceof IBlockBase) {
+				HarvestHelper.setHarvestLevel(block, ((IBlockBase<BlockBase>) block).getHarvestInfo());
+			} else if (block instanceof ISlabBase) {
+				HarvestHelper.setHarvestLevel(block, ((ISlabBase<BlockSlabBase>) block).getHarvestInfo());
 			} else {
 				HarvestHelper.setHarvestLevel(block, EnumToolType.none, EnumToolMaterial.unbreakable);
 			}

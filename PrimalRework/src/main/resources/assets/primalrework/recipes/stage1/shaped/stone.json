@@ -1,0 +1,19 @@
+{
+  "type": "primalrework:staged_shaped",
+  "stage": "stage1",
+  "pattern": [
+    "S",
+	"S"
+  ],
+  "key": {
+    "S": {
+      "item": "primalrework:stone_slab",
+	  "data": 0
+    }
+  },
+  "result": {
+    "item": "minecraft:stone",
+	"count": 1,
+	"data": 0
+  }
+}

@@ -2,8 +2,6 @@ package mrunknown404.primalrework.blocks.util;
 
 import java.util.List;
 
-import javax.annotation.Nonnull;
-
 import mrunknown404.primalrework.init.ModCreativeTabs;
 import mrunknown404.primalrework.util.DoubleValue;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
@@ -29,7 +27,7 @@ public class BlockBase extends Block implements IBlockBase<BlockBase> {
 	protected BlockHarvestInfo harvestInfo;
 	
 	protected BlockBase(String name, Material material, SoundType soundType, BlockRenderLayer renderType, float hardness, float resistance,
-			AxisAlignedBB collisionAABB, AxisAlignedBB visualAABB, @Nonnull DoubleValue<EnumToolType, EnumToolMaterial>... types) {
+			AxisAlignedBB collisionAABB, AxisAlignedBB visualAABB, DoubleValue<EnumToolType, EnumToolMaterial>... types) {
 		super(material);
 		setUnlocalizedName(name);
 		setRegistryName(name);

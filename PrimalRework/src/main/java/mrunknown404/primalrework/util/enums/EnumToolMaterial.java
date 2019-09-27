@@ -26,9 +26,4 @@ public enum EnumToolMaterial {
 		this.extraDamage = extraDamage;
 		this.enchantability = enchantability;
 	}
-	
-	@Override
-	public String toString() {
-		return "(" + name() + ", lvl:" + level + ", dur:" + durability + ", spd:" + speed + ", dmg: " + extraDamage + ")";
-	}
 }

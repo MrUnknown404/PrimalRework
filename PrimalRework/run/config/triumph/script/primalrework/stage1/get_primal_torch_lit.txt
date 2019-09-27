@@ -4,13 +4,13 @@ setDescription("Light an unlit primal torch on fire")
 setBackground("minecraft:textures/gui/advancements/backgrounds/adventure.png")
 setShowToast(true)
 setAnnounceToChat(true)
-//setRequiresParents()
+setRequiresParents()
 alwaysVisible()
 
 addParent("primalrework:stage1/craft_fire_pit")
 
 //hideLines()
-setPos(141,15)
+setPos(147,15)
 //setFrameType("GOAL")
 
 criteria = addCriteria("primal_torch_lit", "minecraft:inventory_changed")

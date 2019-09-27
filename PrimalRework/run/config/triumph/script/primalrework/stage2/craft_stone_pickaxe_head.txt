@@ -4,7 +4,7 @@ setDescription("Craft a stone pickaxe head")
 setBackground("minecraft:textures/gui/advancements/backgrounds/adventure.png")
 setShowToast(true)
 setAnnounceToChat(true)
-setRequiresParents()
+//setRequiresParents()
 alwaysVisible()
 
 addParent("primalrework:stage2/root")

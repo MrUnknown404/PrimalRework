@@ -1,0 +1,18 @@
+{
+  "type": "primalrework:staged_shaped",
+  "stage": "stage1",
+  "pattern": [
+    "TTT"
+  ],
+  "key": {
+    "T": {
+      "item": "minecraft:dirt",
+	  "data": 0
+    }
+  },
+  "result": {
+    "item": "primalrework:dirt_slab",
+    "count": 6,
+	"data": 0
+  }
+}

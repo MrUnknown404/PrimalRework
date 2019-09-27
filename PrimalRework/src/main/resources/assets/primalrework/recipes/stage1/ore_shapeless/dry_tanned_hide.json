@@ -1,0 +1,20 @@
+{
+  "type": "primalrework:staged_ore_shapeless",
+  "stage": "stage1",
+  "ingredients": [
+    {
+      "item": "primalrework:dried_hide"
+    },
+    {
+      "item": "primalrework:bark"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "toolKnife"
+    }
+  ],
+  "result": {
+    "item": "primalrework:dry_tanned_hide",
+    "count": 1
+  }
+}

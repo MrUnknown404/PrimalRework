@@ -9,6 +9,8 @@ import mrunknown404.primalrework.network.FireStarterMessage;
 import mrunknown404.primalrework.network.FireStarterPacketHandler;
 import mrunknown404.primalrework.network.PrimalEnchantingMessage;
 import mrunknown404.primalrework.network.PrimalEnchantingPacketHandler;
+import mrunknown404.primalrework.network.RecipeTransferMessage;
+import mrunknown404.primalrework.network.RecipeTransferMessagePacketHandler;
 import mrunknown404.primalrework.util.OreDict;
 import mrunknown404.primalrework.util.VanillaOverrides;
 import mrunknown404.primalrework.util.proxy.CommonProxy;
@@ -59,6 +61,7 @@ public class Main {
 		networkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel(MOD_ID);
 		networkWrapper.registerMessage(FireStarterPacketHandler.class, FireStarterMessage.class, 0, Side.SERVER);
 		networkWrapper.registerMessage(PrimalEnchantingPacketHandler.class, PrimalEnchantingMessage.class, 1, Side.SERVER);
+		networkWrapper.registerMessage(RecipeTransferMessagePacketHandler.class, RecipeTransferMessage.class, 2, Side.SERVER);
 		
 		proxy.registerSounds();
 		proxy.setupRecipes();
@@ -71,7 +74,7 @@ public class Main {
 	
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent e) {
-		
+		proxy.registerColors();
 	}
 	
 	@EventHandler

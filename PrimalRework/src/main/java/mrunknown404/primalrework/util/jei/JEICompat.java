@@ -12,35 +12,47 @@ import mezz.jei.api.IJeiRuntime;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.IRecipeRegistry;
+import mezz.jei.api.ISubtypeRegistry;
 import mezz.jei.api.JEIPlugin;
+import mezz.jei.api.ingredients.IIngredientRegistry;
+import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
 import mezz.jei.api.recipe.transfer.IRecipeTransferRegistry;
 import mrunknown404.primalrework.client.gui.GuiFirePit;
 import mrunknown404.primalrework.init.ModBlocks;
+import mrunknown404.primalrework.init.ModItems;
 import mrunknown404.primalrework.init.ModRecipes;
 import mrunknown404.primalrework.inventory.ContainerFirePit;
 import mrunknown404.primalrework.util.helpers.StageHelper;
 import mrunknown404.primalrework.util.jei.category.FirePitRecipeCategory;
 import mrunknown404.primalrework.util.jei.category.StagedCraftingRecipeCategory;
+import mrunknown404.primalrework.util.jei.icantgetthistoworkwithoutcopyingeverything.PlayerRecipeTransferHandler;
+import mrunknown404.primalrework.util.jei.icantgetthistoworkwithoutcopyingeverything.StackHelper;
 import mrunknown404.primalrework.util.jei.wrappers.IRecipeWrapperBase;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.inventory.GuiCrafting;
-import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.init.Blocks;
-import net.minecraft.inventory.ContainerPlayer;
 import net.minecraft.inventory.ContainerWorkbench;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.TextComponentTranslation;
 
 @JEIPlugin
 public class JEICompat implements IModPlugin {
 
-	//TODO add information pages for in-world things like knapping
-	//TODO hide stage recipes
+	//TODO replace vanilla crafting GUI with custom GUI
+	//TODO add vanilla & primal enchanting category
 	
 	public static final Map<String, List<IRecipeWrapperBase<?>>> RECIPE_MAP = new HashMap<String, List<IRecipeWrapperBase<?>>>();
+	
 	public static IRecipeRegistry rr;
 	public static IJeiHelpers helper;
+	public static StackHelper stackHelper;
+	public static IIngredientRegistry ingReg;
+	
+	@Override
+	public void registerItemSubtypes(ISubtypeRegistry reg) {
+		stackHelper = new StackHelper(reg);
+	}
 	
 	@Override
 	public void registerCategories(IRecipeCategoryRegistration reg) {
@@ -54,13 +66,21 @@ public class JEICompat implements IModPlugin {
 	@Override
 	public void register(IModRegistry reg) {
 		IRecipeTransferRegistry recipeTransfer = reg.getRecipeTransferRegistry();
+		ingReg = reg.getIngredientRegistry();
+		
+		reg.addIngredientInfo(new ItemStack(ModItems.FLINT_KNAPPED), VanillaTypes.ITEM, new TextComponentTranslation("jei.info.flint_knapped").getUnformattedText());
+		reg.addIngredientInfo(new ItemStack(ModItems.FLINT_POINT), VanillaTypes.ITEM, new TextComponentTranslation("jei.info.flint_point").getUnformattedText());
+		reg.addIngredientInfo(new ItemStack(ModItems.BONE_SHARD), VanillaTypes.ITEM, new TextComponentTranslation("jei.info.bone_shard").getUnformattedText());
+		reg.addIngredientInfo(new ItemStack(ModItems.BARK), VanillaTypes.ITEM, new TextComponentTranslation("jei.info.bark").getUnformattedText());
+		reg.addIngredientInfo(new ItemStack(ModItems.WET_HIDE), VanillaTypes.ITEM, new TextComponentTranslation("jei.info.wet_hide").getUnformattedText());
+		reg.addIngredientInfo(new ItemStack(ModItems.WET_TANNED_HIDE), VanillaTypes.ITEM, new TextComponentTranslation("jei.info.wet_tanned_hide").getUnformattedText());
 		
 		reg.addRecipes(ModRecipes.getWrappedFirePitRecipes(), ModRecipes.CATEGORY_FIRE_PIT);
 		reg.addRecipes(ModRecipes.getWrappedStageRecipes(), ModRecipes.CATEGORY_STAGED_CRAFTING);
 		
 		reg.addRecipeClickArea(GuiFirePit.class, 102, 9, 3, 25, ModRecipes.CATEGORY_FIRE_PIT);
-		reg.addRecipeClickArea(GuiInventory.class, 137, 29, 10, 13, ModRecipes.CATEGORY_STAGED_CRAFTING);
-		reg.addRecipeClickArea(GuiCrafting.class, 88, 32, 28, 23, ModRecipes.CATEGORY_STAGED_CRAFTING); //TODO replace vanilla crafting GUI with custom GUI
+		//reg.addRecipeClickArea(GuiInventory.class, 137, 29, 10, 13, ModRecipes.CATEGORY_STAGED_CRAFTING);
+		//reg.addRecipeClickArea(GuiCrafting.class, 88, 32, 28, 23, ModRecipes.CATEGORY_STAGED_CRAFTING);
 		
 		reg.addRecipeCatalyst(new ItemStack(ModBlocks.FIRE_PIT), ModRecipes.CATEGORY_FIRE_PIT);
 		reg.addRecipeCatalyst(new ItemStack(Blocks.CRAFTING_TABLE), ModRecipes.CATEGORY_STAGED_CRAFTING);
@@ -68,7 +88,7 @@ public class JEICompat implements IModPlugin {
 		
 		recipeTransfer.addRecipeTransferHandler(ContainerFirePit.class, ModRecipes.CATEGORY_FIRE_PIT, FirePitRecipeCategory.SLOT_INPUT, 1, FirePitRecipeCategory.SLOT_INPUT, 36);
 		recipeTransfer.addRecipeTransferHandler(ContainerWorkbench.class, ModRecipes.CATEGORY_STAGED_CRAFTING, 1, 9, 10, 36);
-		recipeTransfer.addRecipeTransferHandler(ContainerPlayer.class, ModRecipes.CATEGORY_STAGED_CRAFTING, 1, 4, 10, 36);
+		recipeTransfer.addRecipeTransferHandler(new PlayerRecipeTransferHandler(helper.recipeTransferHandlerHelper()), ModRecipes.CATEGORY_STAGED_CRAFTING);
 	}
 	
 	@Override

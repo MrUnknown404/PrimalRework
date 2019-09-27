@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "half=top,variant=default": { "model": "minecraft:grass_normal" },
+        "half=bottom,variant=default": { "model": "minecraft:grass_normal" }
+    }
+}

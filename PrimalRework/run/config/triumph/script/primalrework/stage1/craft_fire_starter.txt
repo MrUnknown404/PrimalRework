@@ -10,7 +10,7 @@ alwaysVisible()
 addParent("primalrework:stage1/craft_crafting_stump")
 
 //hideLines()
-setPos(87,15)
+setPos(93,15)
 
 criteria = addCriteria("fire_starter", "triumph:player_crafted_item")
 criteria.setItem(<primalrework:fire_starter>)

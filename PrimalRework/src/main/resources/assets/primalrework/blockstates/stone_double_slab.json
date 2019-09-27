@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "half=top,variant=default": { "model": "minecraft:stone" },
+        "half=bottom,variant=default": { "model": "minecraft:stone" }
+    }
+}

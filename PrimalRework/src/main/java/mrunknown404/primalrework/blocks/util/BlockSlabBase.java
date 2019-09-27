@@ -3,8 +3,6 @@ package mrunknown404.primalrework.blocks.util;
 import java.util.List;
 import java.util.Random;
 
-import javax.annotation.Nonnull;
-
 import mrunknown404.primalrework.init.ModCreativeTabs;
 import mrunknown404.primalrework.util.DoubleValue;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
@@ -33,7 +31,7 @@ public abstract class BlockSlabBase extends BlockSlab implements ISlabBase<Block
 	protected BlockHarvestInfo harvestInfo;
 	
 	public BlockSlabBase(String name, Material material, SoundType soundType, float hardness, float resistance, boolean isDouble,
-			@Nonnull DoubleValue<EnumToolType, EnumToolMaterial>... types) {
+			DoubleValue<EnumToolType, EnumToolMaterial>... types) {
 		super(material);
 		setUnlocalizedName(name);
 		setRegistryName(name);

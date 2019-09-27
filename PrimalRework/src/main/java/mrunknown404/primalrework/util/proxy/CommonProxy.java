@@ -13,6 +13,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class CommonProxy {
 	public void registerItemRenderer(Item item, int meta, String id) {}
 	public void registerRenders() {}
+	public void registerColors() {}
 	public void registerSounds() {}
 	
 	public final void setupRecipes() {

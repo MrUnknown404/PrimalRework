@@ -1,4 +1,4 @@
-//ITEMS
+// ITEMS
 item.plant_fiber.name=Plant Fiber
 item.plant_rope.name=Plant Rope
 item.gravel.name=Gravel
@@ -18,6 +18,15 @@ item.spruce_plank.name=Spruce Plank
 item.jungle_plank.name=Jungle Plank
 item.dark_oak_plank.name=Dark Oak Plank
 item.acacia_plank.name=Acacia Plank
+item.salt.name=Salt
+item.animal_pelt.name=Animal Pelt
+item.raw_hide.name=Raw Hide
+item.wet_hide.name=Wet Hide
+item.cleaned_hide.name=Cleaned Hide
+item.salted_hide.name=Salted Hide
+item.dried_hide.name=Dried Hide
+item.dry_tanned_hide.name=Dry Tanned Hide
+item.wet_tanned_hide.name=Wet Tanned Hide
 
 item.magic_dust_red.tooltip_0=Level 1 Magic Dust
 item.magic_dust_green.tooltip_0=Level 2 Magic Dust
@@ -69,6 +78,11 @@ tile.crafting_stump.name=Crafting Stump
 tile.primal_enchanting_table.name=Primal Enchanting Table
 tile.thatch.name=Thatch
 tile.thatch_slab.name=Thatch Slab
+tile.salt_block.name=Salt Block
+tile.smooth_stone.name=Smooth Stone
+tile.stone_slab.name=Stone Slab
+tile.dirt_slab.name=Dirt Slab
+tile.grass_slab.name=Grass Slab
 
 tile.stripped_oak_log.name=Stripped Oak Log
 tile.stripped_spruce_log.name=Stripped Spruce Log
@@ -100,6 +114,13 @@ container.fire_pit=Camp Fire
 container.primal_enchantment_table=Primal Enchanting
 
 gui.fire_pit_cook=Fuel
+
+jei.info.flint_knapped=Can be obtained by left clicking a piece of flint onto a stone block (1/3 chance)
+jei.info.flint_point=Can be obtained by left clicking a knapped flint onto a stone block (1/3 chance)
+jei.info.bone_shard=Can be obtained by left clicking a bone onto a stone block (1/3 chance)
+jei.info.bark=Can be obtained by holding down right click with an axe while looking at a log
+jei.info.wet_hide=Can be obtained by right clicking raw hide while looking at water
+jei.info.wet_tanned_hide=Can be obtained by right clicking dry tanned hide while looking at water
 
 subtitles.entity.pigeon.ambient=Pigeon Cooing
 subtitles.entity.pigeon.hurt=Pigeon hurts

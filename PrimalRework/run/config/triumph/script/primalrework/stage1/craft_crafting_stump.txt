@@ -10,7 +10,7 @@ alwaysVisible()
 addParent("primalrework:stage1/craft_flint_crafting_hammer")
 
 //hideLines()
-setPos(54,0)
+setPos(60,0)
 setFrameType("GOAL")
 
 criteria = addCriteria("crafting_stump", "triumph:player_crafted_item")
