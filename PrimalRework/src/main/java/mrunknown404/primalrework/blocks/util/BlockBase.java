@@ -4,6 +4,7 @@ import java.util.List;
 
 import mrunknown404.primalrework.init.ModCreativeTabs;
 import mrunknown404.primalrework.util.DoubleValue;
+import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import mrunknown404.primalrework.util.enums.EnumToolType;
 import mrunknown404.primalrework.util.harvest.BlockHarvestInfo;
@@ -23,11 +24,12 @@ public class BlockBase extends Block implements IBlockBase<BlockBase> {
 
 	private final BlockRenderLayer renderType;
 	private final AxisAlignedBB collisionAABB, visualAABB;
+	protected final EnumStage stage;
 	private int amountOfTooltops = 0;
 	protected BlockHarvestInfo harvestInfo;
 	
 	protected BlockBase(String name, Material material, SoundType soundType, BlockRenderLayer renderType, float hardness, float resistance,
-			AxisAlignedBB collisionAABB, AxisAlignedBB visualAABB, DoubleValue<EnumToolType, EnumToolMaterial>... types) {
+			AxisAlignedBB collisionAABB, AxisAlignedBB visualAABB, EnumStage stage, DoubleValue<EnumToolType, EnumToolMaterial>... types) {
 		super(material);
 		setUnlocalizedName(name);
 		setRegistryName(name);
@@ -39,6 +41,7 @@ public class BlockBase extends Block implements IBlockBase<BlockBase> {
 		this.renderType = renderType;
 		this.collisionAABB = collisionAABB;
 		this.visualAABB = visualAABB;
+		this.stage = stage;
 		
 		addToModList(this);
 		
@@ -51,8 +54,8 @@ public class BlockBase extends Block implements IBlockBase<BlockBase> {
 		setHarvestInfo(BlockHarvestInfo.create(types));
 	}
 	
-	public BlockBase(String name, Material material, SoundType soundType, float hardness, float resistance, DoubleValue<EnumToolType, EnumToolMaterial>... types) {
-		this(name, material, soundType, BlockRenderLayer.SOLID, hardness, resistance, FULL_BLOCK_AABB, FULL_BLOCK_AABB, types);
+	public BlockBase(String name, Material material, SoundType soundType, float hardness, float resistance, EnumStage stage, DoubleValue<EnumToolType, EnumToolMaterial>... types) {
+		this(name, material, soundType, BlockRenderLayer.SOLID, hardness, resistance, FULL_BLOCK_AABB, FULL_BLOCK_AABB, stage, types);
 	}
 	
 	@Override
@@ -104,5 +107,10 @@ public class BlockBase extends Block implements IBlockBase<BlockBase> {
 	@Override
 	public BlockHarvestInfo getHarvestInfo() {
 		return harvestInfo;
+	}
+	
+	@Override
+	public EnumStage getStage() {
+		return stage;
 	}
 }

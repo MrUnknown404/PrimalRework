@@ -4,6 +4,7 @@ import java.util.Random;
 
 import mrunknown404.primalrework.init.ModBlocks;
 import mrunknown404.primalrework.init.ModItems;
+import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import mrunknown404.primalrework.util.enums.EnumToolType;
 import mrunknown404.primalrework.util.helpers.HarvestHelper;
@@ -37,8 +38,8 @@ public class ItemToolBase extends ItemDamageableBase {
 	private final EnumToolType toolType;
 	private final EnumToolMaterial harvestLevel;
 	
-	public ItemToolBase(String name, EnumToolType toolType, EnumToolMaterial harvestLevel) {
-		super(name, 1, harvestLevel);
+	public ItemToolBase(String name, EnumToolType toolType, EnumToolMaterial harvestLevel, EnumStage stage) {
+		super(name, 1, harvestLevel, stage);
 		this.toolType = toolType;
 		this.harvestLevel = harvestLevel;
 	}

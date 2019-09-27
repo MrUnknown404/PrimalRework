@@ -18,6 +18,6 @@ public interface IItemBase<R extends ItemBase> extends IThingBase<Item, R> {
 		ModItems.ITEMS.add(item);
 	}
 	
-	public EnumToolType getToolType();
-	public EnumToolMaterial getHarvestLevel();
+	public abstract EnumToolType getToolType();
+	public abstract EnumToolMaterial getHarvestLevel();
 }

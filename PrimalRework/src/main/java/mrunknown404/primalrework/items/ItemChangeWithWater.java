@@ -1,6 +1,7 @@
 package mrunknown404.primalrework.items;
 
 import mrunknown404.primalrework.items.util.ItemBase;
+import mrunknown404.primalrework.util.enums.EnumStage;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -15,8 +16,8 @@ public class ItemChangeWithWater extends ItemBase {
 
 	private final Item changeInto;
 	
-	public ItemChangeWithWater(String name, Item changeInto) {
-		super(name);
+	public ItemChangeWithWater(String name, Item changeInto, EnumStage stage) {
+		super(name, stage);
 		this.changeInto = changeInto;
 	}
 	

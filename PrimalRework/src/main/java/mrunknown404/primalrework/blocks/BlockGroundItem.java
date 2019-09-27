@@ -6,6 +6,7 @@ import javax.annotation.Nullable;
 
 import mrunknown404.primalrework.blocks.util.BlockBase;
 import mrunknown404.primalrework.util.DoubleValue;
+import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import mrunknown404.primalrework.util.enums.EnumToolType;
 import net.minecraft.block.Block;
@@ -30,7 +31,7 @@ public class BlockGroundItem extends BlockBase {
 	}
 	
 	public BlockGroundItem(String name, SoundType soundType, @Nullable Item dropInstead) {
-		super(name, Material.CIRCUITS, soundType, BlockRenderLayer.CUTOUT, 0, 0, NULL_AABB, new AxisAlignedBB(3.05 / 16, 0, 3.05 / 16, 13.05 / 16, 1.05 / 16, 13.05 / 16),
+		super(name, Material.CIRCUITS, soundType, BlockRenderLayer.CUTOUT, 0, 0, NULL_AABB, new AxisAlignedBB(3.05 / 16, 0, 3.05 / 16, 13.05 / 16, 1.05 / 16, 13.05 / 16), EnumStage.stage0,
 				new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.none, EnumToolMaterial.hand));
 		this.dropInstead = dropInstead;
 	}

@@ -2,6 +2,7 @@ package mrunknown404.primalrework.blocks;
 
 import mrunknown404.primalrework.blocks.util.BlockRotatedPillarBase;
 import mrunknown404.primalrework.util.DoubleValue;
+import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import mrunknown404.primalrework.util.enums.EnumToolType;
 import net.minecraft.block.BlockLog;
@@ -22,7 +23,7 @@ public class BlockStrippedLog extends BlockRotatedPillarBase {
 	private static final AxisAlignedBB NONE_BB = new AxisAlignedBB(1.05 / 16, 1.05 / 16, 1.05 / 16, 15.05 / 16, 15.05 / 16, 15.05 / 16);
 	
 	public BlockStrippedLog(String type) {
-		super("stripped_" + type + "_log", Material.WOOD, SoundType.WOOD, BlockRenderLayer.CUTOUT, 2, 2, NONE_BB, NONE_BB,
+		super("stripped_" + type + "_log", Material.WOOD, SoundType.WOOD, BlockRenderLayer.CUTOUT, 2, 2, NONE_BB, NONE_BB, EnumStage.stage0,
 				new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.axe, EnumToolMaterial.flint));
 		setDefaultState(blockState.getBaseState().withProperty(BlockLog.LOG_AXIS, EnumAxis.Y));
 	}

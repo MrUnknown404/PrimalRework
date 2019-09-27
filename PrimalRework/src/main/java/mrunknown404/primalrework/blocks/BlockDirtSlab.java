@@ -5,6 +5,7 @@ import java.util.Random;
 import mrunknown404.primalrework.blocks.util.BlockSlabBase;
 import mrunknown404.primalrework.init.ModBlocks;
 import mrunknown404.primalrework.util.DoubleValue;
+import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import mrunknown404.primalrework.util.enums.EnumToolType;
 import net.minecraft.block.SoundType;
@@ -17,7 +18,7 @@ import net.minecraft.world.World;
 public class BlockDirtSlab extends BlockSlabBase {
 
 	public BlockDirtSlab(String name, boolean isDouble) {
-		super(name, Material.GROUND, SoundType.GROUND, 0.75f, 0.75f, isDouble,
+		super(name, Material.GROUND, SoundType.GROUND, 0.75f, 0.75f, isDouble, EnumStage.stage1,
 				new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.shovel, EnumToolMaterial.flint));
 		setTickRandomly(true);
 	}

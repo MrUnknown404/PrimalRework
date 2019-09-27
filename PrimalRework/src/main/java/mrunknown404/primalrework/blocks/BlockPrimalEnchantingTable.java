@@ -4,6 +4,7 @@ import mrunknown404.primalrework.Main;
 import mrunknown404.primalrework.blocks.util.BlockBase;
 import mrunknown404.primalrework.tileentity.TileEntityPrimalEnchanting;
 import mrunknown404.primalrework.util.DoubleValue;
+import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import mrunknown404.primalrework.util.enums.EnumToolType;
 import net.minecraft.block.ITileEntityProvider;
@@ -25,7 +26,7 @@ public class BlockPrimalEnchantingTable extends BlockBase implements ITileEntity
 	private static final AxisAlignedBB bb = new AxisAlignedBB(1.05 / 16, 0, 1.05 / 16, 15.05 / 16, 9.05 / 16, 15.05 / 16);
 	
 	public BlockPrimalEnchantingTable() {
-		super("primal_enchanting_table", Material.ROCK, SoundType.STONE, BlockRenderLayer.CUTOUT, 3, 3, bb, bb,
+		super("primal_enchanting_table", Material.ROCK, SoundType.STONE, BlockRenderLayer.CUTOUT, 3, 3, bb, bb, EnumStage.stage2,
 				new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.pickaxe, EnumToolMaterial.flint));
 		hasTileEntity = true;
 	}

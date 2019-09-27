@@ -1,0 +1,21 @@
+{
+  "type": "primalrework:staged_shapeless",
+  "stage": "stage1",
+  "ingredients": [
+    {
+      "item": "primalrework:cloth"
+    },
+	{
+      "item": "primalrework:cloth"
+    },
+    {
+      "item": "minecraft:dye",
+	  "data": 12
+    }
+  ],
+  "result": {
+    "item": "minecraft:carpet",
+    "count": 2,
+	"data": 3
+  }
+}

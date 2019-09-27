@@ -27,6 +27,8 @@ import net.minecraftforge.registries.ForgeRegistry;
 
 public class ModRecipes {
 	
+	//TODO add recipes for : leather armor, mushroom stew, bread, cook recipes, wooden tools, boat, paper, book, sugar
+	
 	public static final String CATEGORY_FIRE_PIT = Main.MOD_ID + ".fire_pit_jei";
 	public static final String CATEGORY_STAGED_CRAFTING = Main.MOD_ID + ".staged_crafting_jei";
 	
@@ -52,6 +54,7 @@ public class ModRecipes {
 		FIRE_PIT_FUELS.sort(new CompareFirePitFuel());
 		
 		FIRE_PIT_RECIPES.add(new FirePitRecipe(EnumStage.stage0, ModBlocks.UNLIT_PRIMAL_TORCH, ModBlocks.LIT_PRIMAL_TORCH, 10));
+		
 		FIRE_PIT_RECIPES.add(new FirePitRecipe(EnumStage.stage1, Blocks.COBBLESTONE, Blocks.STONE, 100));
 		FIRE_PIT_RECIPES.add(new FirePitRecipe(EnumStage.stage1, Blocks.STONE, ModBlocks.SMOOTH_STONE, 100));
 	}

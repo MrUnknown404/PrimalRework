@@ -5,6 +5,7 @@ import java.util.Random;
 
 import mrunknown404.primalrework.init.ModCreativeTabs;
 import mrunknown404.primalrework.util.DoubleValue;
+import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import mrunknown404.primalrework.util.enums.EnumToolType;
 import mrunknown404.primalrework.util.harvest.BlockHarvestInfo;
@@ -27,10 +28,11 @@ public abstract class BlockSlabBase extends BlockSlab implements ISlabBase<Block
 	
 	private final BlockRenderLayer renderType;
 	private final boolean isDouble;
+	protected final EnumStage stage;
 	private int amountOfTooltops = 0;
 	protected BlockHarvestInfo harvestInfo;
 	
-	public BlockSlabBase(String name, Material material, SoundType soundType, float hardness, float resistance, boolean isDouble,
+	public BlockSlabBase(String name, Material material, SoundType soundType, float hardness, float resistance, boolean isDouble, EnumStage stage,
 			DoubleValue<EnumToolType, EnumToolMaterial>... types) {
 		super(material);
 		setUnlocalizedName(name);
@@ -49,6 +51,7 @@ public abstract class BlockSlabBase extends BlockSlab implements ISlabBase<Block
 		this.isDouble = isDouble;
 		this.renderType = isDouble ? BlockRenderLayer.SOLID : BlockRenderLayer.CUTOUT;
 		this.useNeighborBrightness = !isDouble();
+		this.stage = stage;
 		
 		addToModList(this);
 		
@@ -158,6 +161,11 @@ public abstract class BlockSlabBase extends BlockSlab implements ISlabBase<Block
 	@Override
 	public BlockHarvestInfo getHarvestInfo() {
 		return harvestInfo;
+	}
+	
+	@Override
+	public EnumStage getStage() {
+		return stage;
 	}
 	
 	public static enum Variant implements IStringSerializable {

@@ -2,6 +2,7 @@ package mrunknown404.primalrework.blocks;
 
 import java.util.Random;
 
+import mrunknown404.primalrework.util.enums.EnumStage;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
@@ -11,7 +12,7 @@ import net.minecraft.world.World;
 public class BlockPrimalTorchLit extends BlockPrimalTorchUnlit {
 	
 	public BlockPrimalTorchLit() {
-		super("primal_torch_lit");
+		super("primal_torch_lit", EnumStage.stage1);
 		setTickRandomly(true);
 		setLightLevel(0.8f);
 	}

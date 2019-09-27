@@ -8,6 +8,7 @@ import com.google.common.base.Predicate;
 
 import mrunknown404.primalrework.blocks.util.BlockBase;
 import mrunknown404.primalrework.util.DoubleValue;
+import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import mrunknown404.primalrework.util.enums.EnumToolType;
 import net.minecraft.block.Block;
@@ -45,11 +46,11 @@ public class BlockPrimalTorchUnlit extends BlockBase {
 	});
 	
 	public BlockPrimalTorchUnlit() {
-		this("primal_torch_unlit");
+		this("primal_torch_unlit", EnumStage.stage0);
 	}
 	
-	public BlockPrimalTorchUnlit(String name) {
-		super(name, Material.CIRCUITS, SoundType.WOOD, BlockRenderLayer.CUTOUT, 0, 0, NULL_AABB, STANDING_AABB,
+	protected BlockPrimalTorchUnlit(String name, EnumStage stage) {
+		super(name, Material.CIRCUITS, SoundType.WOOD, BlockRenderLayer.CUTOUT, 0, 0, NULL_AABB, STANDING_AABB, stage,
 				new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.none, EnumToolMaterial.hand));
 		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.UP));
 		setLightOpacity(0);

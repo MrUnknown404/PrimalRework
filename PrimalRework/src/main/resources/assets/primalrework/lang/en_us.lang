@@ -80,7 +80,7 @@ tile.thatch.name=Thatch
 tile.thatch_slab.name=Thatch Slab
 tile.salt_block.name=Salt Block
 tile.smooth_stone.name=Smooth Stone
-tile.stone_slab.name=Stone Slab
+tile.pr_stone_slab.name=Stone Slab
 tile.dirt_slab.name=Dirt Slab
 tile.grass_slab.name=Grass Slab
 

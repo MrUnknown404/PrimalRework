@@ -1,0 +1,19 @@
+{
+  "type": "primalrework:staged_ore_shapeless",
+  "stage": "stage1",
+  "ingredients": [
+    {
+      "type": "forge:ore_dict",
+      "ore": "wool"
+    },
+    {
+      "item": "minecraft:dye",
+	  "data": 15
+    }
+  ],
+  "result": {
+    "item": "minecraft:wool",
+    "count": 1,
+	"data": 0
+  }
+}

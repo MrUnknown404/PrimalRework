@@ -1,5 +1,6 @@
 package mrunknown404.primalrework.util.jei;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -14,6 +15,7 @@ import mezz.jei.api.IModRegistry;
 import mezz.jei.api.IRecipeRegistry;
 import mezz.jei.api.ISubtypeRegistry;
 import mezz.jei.api.JEIPlugin;
+import mezz.jei.api.ingredients.IIngredientBlacklist;
 import mezz.jei.api.ingredients.IIngredientRegistry;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
@@ -24,6 +26,7 @@ import mrunknown404.primalrework.init.ModBlocks;
 import mrunknown404.primalrework.init.ModItems;
 import mrunknown404.primalrework.init.ModRecipes;
 import mrunknown404.primalrework.inventory.ContainerFirePit;
+import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.helpers.StageHelper;
 import mrunknown404.primalrework.util.jei.category.FirePitRecipeCategory;
 import mrunknown404.primalrework.util.jei.category.StagedCraftingRecipeCategory;
@@ -31,7 +34,10 @@ import mrunknown404.primalrework.util.jei.icantgetthistoworkwithoutcopyingeveryt
 import mrunknown404.primalrework.util.jei.icantgetthistoworkwithoutcopyingeverything.StackHelper;
 import mrunknown404.primalrework.util.jei.wrappers.IRecipeWrapperBase;
 import net.minecraft.client.Minecraft;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.ContainerWorkbench;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -46,8 +52,9 @@ public class JEICompat implements IModPlugin {
 	
 	public static IRecipeRegistry rr;
 	public static IJeiHelpers helper;
-	public static StackHelper stackHelper;
 	public static IIngredientRegistry ingReg;
+	public static IIngredientBlacklist ib;
+	public static StackHelper stackHelper;
 	
 	@Override
 	public void registerItemSubtypes(ISubtypeRegistry reg) {
@@ -56,8 +63,7 @@ public class JEICompat implements IModPlugin {
 	
 	@Override
 	public void registerCategories(IRecipeCategoryRegistration reg) {
-		helper = reg.getJeiHelpers();
-		IGuiHelper gui = helper.getGuiHelper();
+		IGuiHelper gui = reg.getJeiHelpers().getGuiHelper();
 		
 		reg.addRecipeCategories(new FirePitRecipeCategory(gui));
 		reg.addRecipeCategories(new StagedCraftingRecipeCategory(gui));
@@ -66,7 +72,14 @@ public class JEICompat implements IModPlugin {
 	@Override
 	public void register(IModRegistry reg) {
 		IRecipeTransferRegistry recipeTransfer = reg.getRecipeTransferRegistry();
+		helper = reg.getJeiHelpers();
 		ingReg = reg.getIngredientRegistry();
+		ib = helper.getIngredientBlacklist();
+		ib.addIngredientToBlacklist(new ItemStack(Items.SPAWN_EGG));
+		ib.addIngredientToBlacklist(new ItemStack(Items.POTIONITEM));
+		ib.addIngredientToBlacklist(new ItemStack(Items.LINGERING_POTION));
+		ib.addIngredientToBlacklist(new ItemStack(Items.SPLASH_POTION));
+		ib.addIngredientToBlacklist(new ItemStack(Items.TIPPED_ARROW));
 		
 		reg.addIngredientInfo(new ItemStack(ModItems.FLINT_KNAPPED), VanillaTypes.ITEM, new TextComponentTranslation("jei.info.flint_knapped").getUnformattedText());
 		reg.addIngredientInfo(new ItemStack(ModItems.FLINT_POINT), VanillaTypes.ITEM, new TextComponentTranslation("jei.info.flint_point").getUnformattedText());
@@ -103,8 +116,9 @@ public class JEICompat implements IModPlugin {
 		rr.hideRecipeCategory(VanillaRecipeCategoryUid.ANVIL);
 	}
 	
-	public static void setupRecipes() {
+	public static void setupRecipesAndItems() {
 		Minecraft.getMinecraft().addScheduledTask(new Runnable() {
+			@SuppressWarnings("deprecation")
 			@Override
 			public void run() {
 				Iterator<Entry<String, List<IRecipeWrapperBase<?>>>> it = RECIPE_MAP.entrySet().iterator();
@@ -118,6 +132,42 @@ public class JEICompat implements IModPlugin {
 						} else {
 							rr.hideRecipe(wrap, pair.getKey());
 						}
+					}
+				}
+				
+				Iterator<Entry<EnumStage, List<ItemStack>>> it2 = StageHelper.ITEM_STAGE_MAP.entrySet().iterator();
+				
+				while (it2.hasNext()) {
+					Entry<EnumStage, List<ItemStack>> pair = it2.next();
+					List<ItemStack> hidden = new ArrayList<ItemStack>();
+					List<ItemStack> visible = new ArrayList<ItemStack>();
+					
+					for (ItemStack item : pair.getValue()) {
+						if (StageHelper.hasAccessToStage(pair.getKey())) {
+							visible.add(item);
+						} else {
+							hidden.add(item);
+						}
+					}
+					
+					if (!hidden.isEmpty()) {
+						ingReg.removeIngredientsAtRuntime(VanillaTypes.ITEM, hidden);
+					}
+					if (!visible.isEmpty()) {
+						ingReg.addIngredientsAtRuntime(VanillaTypes.ITEM, visible);
+					}
+					
+					List<EnchantmentData> enchs = new ArrayList<EnchantmentData>();
+					for (Enchantment en : Enchantment.REGISTRY) {
+						for (int i = 1; i < en.getMaxLevel() + 1; i++) {
+							enchs.add(new EnchantmentData(en, i));
+						}
+					}
+					
+					if (StageHelper.hasAccessToStage(EnumStage.do_later)) { //TODO change to enchant later
+						ingReg.addIngredientsAtRuntime(VanillaTypes.ENCHANT, enchs);
+					} else {
+						ingReg.removeIngredientsAtRuntime(VanillaTypes.ENCHANT, enchs);
 					}
 				}
 			}

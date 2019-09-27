@@ -6,6 +6,7 @@ import mrunknown404.primalrework.Main;
 import mrunknown404.primalrework.init.ModItems;
 import mrunknown404.primalrework.items.util.ItemDamageableBase;
 import mrunknown404.primalrework.network.FireStarterMessage;
+import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,7 +26,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemFireStarter extends ItemDamageableBase {
 
 	public ItemFireStarter() {
-		super("fire_starter", 1, EnumToolMaterial.wood);
+		super("fire_starter", 1, EnumToolMaterial.wood, EnumStage.stage1);
 		
 		addPropertyOverride(new ResourceLocation("pull"), new IItemPropertyGetter() {
 			@SideOnly(Side.CLIENT)

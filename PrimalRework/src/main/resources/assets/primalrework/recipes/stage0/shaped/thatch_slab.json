@@ -2,7 +2,7 @@
   "type": "primalrework:staged_shaped",
   "stage": "stage0",
   "pattern": [
-    "TTT"
+    "TT"
   ],
   "key": {
     "T": {
@@ -11,7 +11,7 @@
   },
   "result": {
     "item": "primalrework:thatch_slab",
-    "count": 6,
+    "count": 4,
 	"data": 0
   }
 }

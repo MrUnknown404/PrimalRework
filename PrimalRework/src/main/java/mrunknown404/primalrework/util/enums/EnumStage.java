@@ -6,7 +6,10 @@ import net.minecraft.util.text.TextComponentTranslation;
 public enum EnumStage {
 	stage0("before", 0),
 	stage1("early_stone", 1),
-	stage2("late_stone", 2);
+	stage2("late_stone", 2),
+	
+	do_later("do_later", 98),
+	no_show("no_show", 99);
 	
 	public final ITextComponent name;
 	public final int id;

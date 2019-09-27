@@ -13,6 +13,7 @@ import mrunknown404.primalrework.network.RecipeTransferMessage;
 import mrunknown404.primalrework.network.RecipeTransferMessagePacketHandler;
 import mrunknown404.primalrework.util.OreDict;
 import mrunknown404.primalrework.util.VanillaOverrides;
+import mrunknown404.primalrework.util.helpers.StageHelper;
 import mrunknown404.primalrework.util.proxy.CommonProxy;
 import mrunknown404.primalrework.world.WorldGen;
 import net.minecraftforge.common.MinecraftForge;
@@ -75,6 +76,8 @@ public class Main {
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent e) {
 		proxy.registerColors();
+		
+		StageHelper.setupItemStages();
 	}
 	
 	@EventHandler
