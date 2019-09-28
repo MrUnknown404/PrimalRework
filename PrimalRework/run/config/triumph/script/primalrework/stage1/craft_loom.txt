@@ -12,7 +12,7 @@ addParent("primalrework:stage1/craft_plank")
 
 //hideLines()
 setPos(31,-73)
-//setFrameType("GOAL")
+setFrameType("GOAL")
 
 criteria = addCriteria("craft", "triumph:player_crafted_item")
 criteria.setItem(<primalrework:loom>)
