@@ -5,9 +5,11 @@ import java.util.List;
 
 import mrunknown404.primalrework.blocks.BlockCraftingStump;
 import mrunknown404.primalrework.blocks.BlockDirtSlab;
+import mrunknown404.primalrework.blocks.BlockDryingTable;
 import mrunknown404.primalrework.blocks.BlockFirePit;
 import mrunknown404.primalrework.blocks.BlockGrassSlab;
 import mrunknown404.primalrework.blocks.BlockGroundItem;
+import mrunknown404.primalrework.blocks.BlockLoom;
 import mrunknown404.primalrework.blocks.BlockPrimalEnchantingTable;
 import mrunknown404.primalrework.blocks.BlockPrimalTorchLit;
 import mrunknown404.primalrework.blocks.BlockPrimalTorchUnlit;
@@ -48,6 +50,10 @@ public class ModBlocks {
 	public static final Block DIRT_SLAB = new BlockDirtSlab("dirt_slab", false);
 	public static final Block GRASS_DOUBLE_SLAB = new BlockGrassSlab("grass_double_slab", true);
 	public static final Block GRASS_SLAB = new BlockGrassSlab("grass_slab", false);
+	public static final Block DRYING_TABLE = new BlockDryingTable();
+	public static final Block LOOM = new BlockLoom(); //TODO make work
+	
+	//TODO add cotton crop
 	
 	public static final Block STRIPPED_OAK_LOG = new BlockStrippedLog("oak");
 	public static final Block STRIPPED_SPRUCE_LOG = new BlockStrippedLog("spruce");

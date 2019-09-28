@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "primalrework:loom" },
+        "facing=east": { "model": "primalrework:loom", "y": 90 },
+        "facing=south":  { "model": "primalrework:loom", "y": 180 },
+        "facing=west":  { "model": "primalrework:loom" , "y": 270 }
+    }
+}

@@ -1,17 +1,16 @@
-setIcon(<primalrework:oak_plank>)
-setTitle("Plank")
-setDescription("Craft planks")
+setIcon(<primalrework:stone_saw_head>)
+setTitle("Stone Saw Head")
+setDescription("Craft a stone saw head")
 setBackground("minecraft:textures/gui/advancements/backgrounds/adventure.png")
 setShowToast(true)
 setAnnounceToChat(true)
 //setRequiresParents()
 alwaysVisible()
 
-addParent("primalrework:stage1/craft_flint_saw")
+addParent("primalrework:stage2/root")
 
 //hideLines()
-setPos(-8,-73)
-setFrameType("GOAL")
+setPos(87,-108)
 
 criteria = addCriteria("craft", "triumph:player_crafted_item")
-criteria.setItem(<ore:plankItem>)
+criteria.setItem(<primalrework:stone_saw_head>)

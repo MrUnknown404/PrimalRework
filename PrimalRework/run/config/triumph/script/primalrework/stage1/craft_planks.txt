@@ -10,7 +10,7 @@ alwaysVisible()
 addParent("primalrework:stage1/craft_plank")
 
 //hideLines()
-setPos(60,27)
+setPos(25,-46)
 
 criteria = addCriteria("craft", "triumph:player_crafted_item")
 criteria.setItem(<ore:plankWood>)

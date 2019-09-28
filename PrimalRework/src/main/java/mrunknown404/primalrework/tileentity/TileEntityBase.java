@@ -5,6 +5,8 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
@@ -111,6 +113,24 @@ public abstract class TileEntityBase extends TileEntity implements IInventory {
 		if (c.hasKey("CustomName", 8)) {
 			setCustomName(c.getString("CustomName"));
 		}
+	}
+	
+	@Override
+	public NBTTagCompound getUpdateTag() {
+		NBTTagCompound nbt = new NBTTagCompound();
+		return writeToNBT(nbt);
+	}
+	
+	@Override
+	public SPacketUpdateTileEntity getUpdatePacket() {
+		NBTTagCompound nbt = new NBTTagCompound();
+		writeToNBT(nbt);
+		return new SPacketUpdateTileEntity(pos, 0, nbt);
+	}
+	
+	@Override
+	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
+		readFromNBT(packet.getNbtCompound());
 	}
 	
 	@Override

@@ -46,7 +46,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 public class JEICompat implements IModPlugin {
 
 	//TODO replace vanilla crafting GUI with custom GUI
-	//TODO add vanilla & primal enchanting category
+	//TODO add vanilla, primal enchanting & loom category
 	
 	public static final Map<String, List<IRecipeWrapperBase<?>>> RECIPE_MAP = new HashMap<String, List<IRecipeWrapperBase<?>>>();
 	

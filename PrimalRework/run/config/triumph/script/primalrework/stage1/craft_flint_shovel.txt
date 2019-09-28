@@ -10,7 +10,7 @@ alwaysVisible()
 addParent("primalrework:stage1/craft_crafting_stump")
 
 //hideLines()
-setPos(93,69)
+setPos(-35,14)
 
 criteria = addCriteria("craft", "triumph:player_crafted_item")
 criteria.setItem(<primalrework:flint_shovel>)

@@ -1,11 +1,13 @@
 package mrunknown404.primalrework.util.proxy;
 
 import mrunknown404.primalrework.client.render.TileEntityCraftingStumpRenderer;
+import mrunknown404.primalrework.client.render.TileEntityDryingTableRenderer;
 import mrunknown404.primalrework.client.render.TileEntityPrimalEnchantingRenderer;
 import mrunknown404.primalrework.handlers.EntityRenderHandler;
 import mrunknown404.primalrework.init.ModBlocks;
 import mrunknown404.primalrework.init.ModSoundEvents;
 import mrunknown404.primalrework.tileentity.TileEntityCraftingStump;
+import mrunknown404.primalrework.tileentity.TileEntityDryingTable;
 import mrunknown404.primalrework.tileentity.TileEntityPrimalEnchanting;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -35,6 +37,7 @@ public class ClientProxy extends CommonProxy {
 		EntityRenderHandler.registerEntityRenderers();
 		
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCraftingStump.class, new TileEntityCraftingStumpRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDryingTable.class, new TileEntityDryingTableRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPrimalEnchanting.class, new TileEntityPrimalEnchantingRenderer());
 	}
 	

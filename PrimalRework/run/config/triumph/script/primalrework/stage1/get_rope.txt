@@ -1,0 +1,17 @@
+setIcon(<primalrework:rope>)
+setTitle("Rope")
+setDescription("Get a rope")
+setBackground("minecraft:textures/gui/advancements/backgrounds/adventure.png")
+setShowToast(true)
+setAnnounceToChat(true)
+setRequiresParents()
+alwaysVisible()
+
+addParent("primalrework:stage1/get_string")
+
+//hideLines()
+setPos(-2,-100)
+//setFrameType("GOAL")
+
+criteria = addCriteria("rope", "minecraft:inventory_changed")
+criteria.addItem(<primalrework:rope>)

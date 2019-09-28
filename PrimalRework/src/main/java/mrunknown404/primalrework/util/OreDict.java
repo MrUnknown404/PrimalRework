@@ -29,6 +29,9 @@ public class OreDict {
 			OreDictionary.registerOre("bed", new ItemStack(Items.BED, 1, i));
 		}
 		
+		OreDictionary.registerOre("logSaw", new ItemStack(ModItems.FLINT_SAW, 1, OreDictionary.WILDCARD_VALUE));
+		OreDictionary.registerOre("logSaw", new ItemStack(ModItems.STONE_SAW, 1, OreDictionary.WILDCARD_VALUE));
+		
 		OreDictionary.registerOre("logStripped", ModBlocks.STRIPPED_OAK_LOG);
 		OreDictionary.registerOre("logStripped", ModBlocks.STRIPPED_BIRCH_LOG);
 		OreDictionary.registerOre("logStripped", ModBlocks.STRIPPED_SPRUCE_LOG);

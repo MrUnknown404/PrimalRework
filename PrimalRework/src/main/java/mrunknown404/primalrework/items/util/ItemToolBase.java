@@ -39,7 +39,7 @@ public class ItemToolBase extends ItemDamageableBase {
 	private final EnumToolMaterial harvestLevel;
 	
 	public ItemToolBase(String name, EnumToolType toolType, EnumToolMaterial harvestLevel, EnumStage stage) {
-		super(name, 1, harvestLevel, stage);
+		super(name, harvestLevel, stage);
 		this.toolType = toolType;
 		this.harvestLevel = harvestLevel;
 	}

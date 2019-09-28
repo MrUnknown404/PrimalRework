@@ -7,13 +7,9 @@ import net.minecraft.item.ItemStack;
 
 public class ItemDamageableBase extends ItemBase {
 
-	protected ItemDamageableBase(String name, int maxStackSize, EnumToolMaterial level, EnumStage stage) {
-		super(name, ModCreativeTabs.PRIMALREWORK_TOOLS, maxStackSize, stage);
-		setMaxDamage(level.durability);
-	}
-	
 	public ItemDamageableBase(String name, EnumToolMaterial level, EnumStage stage) {
-		this(name, 1, level, stage);
+		super(name, ModCreativeTabs.PRIMALREWORK_TOOLS, 1, stage);
+		setMaxDamage(level.durability);
 	}
 	
 	@Override

@@ -2,7 +2,7 @@ package mrunknown404.primalrework.client.render;
 
 import org.lwjgl.opengl.GL11;
 
-import mrunknown404.primalrework.tileentity.TileEntityCraftingStump;
+import mrunknown404.primalrework.tileentity.TileEntityDryingTable;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
@@ -11,16 +11,16 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 
-public class TileEntityCraftingStumpRenderer extends TileEntitySpecialRenderer<TileEntityCraftingStump> {
+public class TileEntityDryingTableRenderer extends TileEntitySpecialRenderer<TileEntityDryingTable> {
 	@Override
-	public void render(TileEntityCraftingStump te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+	public void render(TileEntityDryingTable te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
 		if (te == null || !te.hasWorld() || te.facing == null) {
 			return;
 		}
 		
 		GlStateManager.pushMatrix();
-		GlStateManager.translate(x + 0.5D, y + 0.767D, z + 0.5D);
-		GlStateManager.scale(0.2125F, 0.2125F, 0.2125F);
+		GlStateManager.translate(x + 0.5f, y + (12.1f / 16f), z + 0.5f);
+		GlStateManager.scale(0.25F, 0.25F, 0.25F);
 		
 		if (te.facing == EnumFacing.NORTH) {
 			GlStateManager.rotate(180.0F, 0.0F, 1.0F, 0.0F);
@@ -36,8 +36,7 @@ public class TileEntityCraftingStumpRenderer extends TileEntitySpecialRenderer<T
 		for (int h = 0; h < 3; h++) {
 			for (int w = 0; w < 3; w++) {
 				if (!te.getStackInSlot(i).isEmpty()) {
-					renderItemInSlot(te, te.getStackInSlot(i), (w * 14.2f) / 16f, 0.3F, (h * 14.2f) / 16f,
-							te.getItemRotation()[i], te.getItemJump()[i], te.getItemJumpPrev()[i], partialTicks);
+					renderItemInSlot(te, te.getStackInSlot(i), w, 0.25F, h, partialTicks);
 				}
 				
 				i++;
@@ -47,15 +46,12 @@ public class TileEntityCraftingStumpRenderer extends TileEntitySpecialRenderer<T
 		GlStateManager.popMatrix();
 	}
 	
-	private void renderItemInSlot(TileEntityCraftingStump te, ItemStack stack, float x, float y, float z, float rotation, float jump, float prevJump, float partialTicks) {
+	private void renderItemInSlot(TileEntityDryingTable te, ItemStack stack, float x, float y, float z, float partialTicks) {
 		if (!stack.isEmpty()) {
-			float jumpUP = jump * 0.05F + (jump * 0.05F - prevJump * 0.05F) * partialTicks;
 			GlStateManager.pushMatrix();
 			GlStateManager.translate(x, y, z);
-			GlStateManager.translate(0.115F, 0.52F + jumpUP, 0.115F);
-			GlStateManager.scale(-0.5f, -0.5f, 0.5f);
-			GlStateManager.rotate(180.0F, 0.0F, 1.0F, 0.0F);
-			GlStateManager.rotate(90F, 1.0F, 0.0F, 0.0F);
+			GlStateManager.rotate(-90.0F, 1.0F, 0.0F, 0.0F);
+			
 			bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
 			Minecraft.getMinecraft().getTextureManager().getTexture(TextureMap.LOCATION_BLOCKS_TEXTURE).setBlurMipmap(false, false);
 			RenderHelper.disableStandardItemLighting();
@@ -64,7 +60,6 @@ public class TileEntityCraftingStumpRenderer extends TileEntitySpecialRenderer<T
 			Minecraft.getMinecraft().getRenderItem().renderItem(stack, Minecraft.getMinecraft().getRenderItem().getItemModelWithOverrides(stack, null, null));
 			GlStateManager.enableLighting();
 			GlStateManager.disableBlend();
-			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 			GlStateManager.popMatrix();
 		}
 	}

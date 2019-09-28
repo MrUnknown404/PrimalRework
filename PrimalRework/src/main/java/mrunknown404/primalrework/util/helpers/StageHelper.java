@@ -23,7 +23,6 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemSlab;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.minecraftforge.oredict.OreDictionary;
 
 public class StageHelper {
 	
@@ -171,7 +170,7 @@ public class StageHelper {
 		addStagedItem(EnumStage.do_later, Blocks.IRON_BLOCK);
 		addStagedItem(EnumStage.stage1, Blocks.STONE_SLAB, 0);
 		addStagedItem(EnumStage.do_later, Blocks.STONE_SLAB, 1);
-		addStagedItem(EnumStage.stage1, Blocks.STONE_SLAB, 2);
+		addStagedItem(EnumStage.no_show, Blocks.STONE_SLAB, 2);
 		addStagedItem(EnumStage.do_later, Blocks.STONE_SLAB, 3);
 		addStagedItem(EnumStage.do_later, Blocks.STONE_SLAB, 4);
 		addStagedItem(EnumStage.do_later, Blocks.STONE_SLAB, 5);
@@ -354,7 +353,6 @@ public class StageHelper {
 		addStagedItem(EnumStage.do_later, Items.BOW);
 		addStagedItem(EnumStage.do_later, Items.ARROW);
 		addStagedItem(EnumStage.do_later, Items.SPECTRAL_ARROW);
-		addStagedItem(EnumStage.do_later, Items.TIPPED_ARROW);
 		addStagedItem(EnumStage.do_later, Items.COAL, 0);
 		addStagedItem(EnumStage.do_later, Items.COAL, 1);
 		addStagedItem(EnumStage.do_later, Items.DIAMOND);
@@ -365,10 +363,10 @@ public class StageHelper {
 		addStagedItem(EnumStage.stage1, Items.WOODEN_SHOVEL);
 		addStagedItem(EnumStage.stage1, Items.WOODEN_PICKAXE);
 		addStagedItem(EnumStage.stage1, Items.WOODEN_AXE);
-		addStagedItem(EnumStage.stage1, Items.STONE_SWORD);
-		addStagedItem(EnumStage.stage1, Items.STONE_SHOVEL);
-		addStagedItem(EnumStage.stage1, Items.STONE_PICKAXE);
-		addStagedItem(EnumStage.stage1, Items.STONE_AXE);
+		addStagedItem(EnumStage.stage2, Items.STONE_SWORD);
+		addStagedItem(EnumStage.stage2, Items.STONE_SHOVEL);
+		addStagedItem(EnumStage.stage2, Items.STONE_PICKAXE);
+		addStagedItem(EnumStage.stage2, Items.STONE_AXE);
 		addStagedItem(EnumStage.do_later, Items.DIAMOND_SWORD);
 		addStagedItem(EnumStage.do_later, Items.DIAMOND_SHOVEL);
 		addStagedItem(EnumStage.do_later, Items.DIAMOND_PICKAXE);
@@ -384,7 +382,7 @@ public class StageHelper {
 		addStagedItem(EnumStage.stage0, Items.FEATHER);
 		addStagedItem(EnumStage.stage0, Items.GUNPOWDER);
 		addStagedItem(EnumStage.stage1, Items.WOODEN_HOE);
-		addStagedItem(EnumStage.stage1, Items.STONE_HOE);
+		addStagedItem(EnumStage.stage2, Items.STONE_HOE);
 		addStagedItem(EnumStage.do_later, Items.IRON_HOE);
 		addStagedItem(EnumStage.do_later, Items.DIAMOND_HOE);
 		addStagedItem(EnumStage.do_later, Items.GOLDEN_HOE);
@@ -482,9 +480,6 @@ public class StageHelper {
 		addStagedItem(EnumStage.do_later, Items.GHAST_TEAR);
 		addStagedItem(EnumStage.do_later, Items.GOLD_NUGGET);
 		addStagedItem(EnumStage.do_later, Items.NETHER_WART);
-		addStagedItem(EnumStage.do_later, Items.POTIONITEM);
-		addStagedItem(EnumStage.do_later, Items.SPLASH_POTION);
-		addStagedItem(EnumStage.do_later, Items.LINGERING_POTION);
 		addStagedItem(EnumStage.do_later, Items.GLASS_BOTTLE);
 		addStagedItem(EnumStage.do_later, Items.DRAGON_BREATH);
 		addStagedItem(EnumStage.stage0, Items.SPIDER_EYE);
@@ -495,7 +490,6 @@ public class StageHelper {
 		addStagedItem(EnumStage.do_later, Items.CAULDRON);
 		addStagedItem(EnumStage.do_later, Items.ENDER_EYE);
 		addStagedItem(EnumStage.do_later, Items.SPECKLED_MELON);
-		addStagedItem(EnumStage.no_show, Items.SPAWN_EGG, OreDictionary.WILDCARD_VALUE);
 		addStagedItem(EnumStage.do_later, Items.EXPERIENCE_BOTTLE);
 		addStagedItem(EnumStage.do_later, Items.FIRE_CHARGE);
 		addStagedItem(EnumStage.do_later, Items.WRITABLE_BOOK);

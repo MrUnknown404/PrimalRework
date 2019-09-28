@@ -10,7 +10,7 @@ alwaysVisible()
 addParent("primalrework:stage1/craft_flint_shovel")
 
 //hideLines()
-setPos(120,69)
+setPos(-5,14)
 //setFrameType("GOAL")
 
 criteria = addCriteria("salt", "minecraft:inventory_changed")
