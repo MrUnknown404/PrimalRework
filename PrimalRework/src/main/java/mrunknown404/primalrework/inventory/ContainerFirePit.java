@@ -118,7 +118,7 @@ public class ContainerFirePit extends Container {
 					if (!mergeItemStack(stack1, SLOT_FUEL, SLOT_FUEL + 1, false)) {
 						return ItemStack.EMPTY;
 					}
-				} else if (ModRecipes.isItemFirePitResult(stack1)) {
+				} else if (ModRecipes.doesItemHaveFirePitRecipe(stack1)) {
 					if (!mergeItemStack(stack1, SLOT_ITEM, SLOT_ITEM + 1, false)) {
 						return ItemStack.EMPTY;
 					}

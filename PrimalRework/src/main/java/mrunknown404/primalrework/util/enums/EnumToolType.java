@@ -25,7 +25,7 @@ public enum EnumToolType {
 			combineEnchants(Enchs.getToolBase(5, 3), Enchs.getToolSpecials(3, 1), Enchs.getWeaponBase(5, 2)),
 			combineEnchants(Enchs.getToolBase(2, 1), Enchs.getWeaponBase(2, 1))),
 	hoe    (1.25f, 0.50f,
-			Arrays.asList(new EnchantmentData(Enchantments.UNBREAKING, 3), new EnchantmentData(Enchantments.KNOCKBACK, 2)),
+			Arrays.asList(new EnchantmentData(Enchantments.UNBREAKING, 3), new EnchantmentData(Enchantments.KNOCKBACK, 2), new EnchantmentData(Enchantments.FORTUNE, 3)),
 			Arrays.asList(new EnchantmentData(Enchantments.UNBREAKING, 1), new EnchantmentData(Enchantments.KNOCKBACK, 1))),
 	sword  (1.50f, 3.00f,
 			combineEnchants(combineEnchants(Enchs.getWeaponBase(5, 2), Enchs.getWeaponSword(5, 5), Enchs.getWeaponSpecial(3, 2, 3)), new EnchantmentData(Enchantments.UNBREAKING, 3)),

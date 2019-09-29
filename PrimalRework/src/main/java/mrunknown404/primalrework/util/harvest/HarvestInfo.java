@@ -3,56 +3,36 @@ package mrunknown404.primalrework.util.harvest;
 import java.util.Arrays;
 import java.util.List;
 
-import mrunknown404.primalrework.util.DoubleValue;
-import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import mrunknown404.primalrework.util.enums.EnumToolType;
-import net.minecraft.item.Item;
 
-public class HarvestInfo {
+public abstract class HarvestInfo<T> {
 	
-	protected final List<DoubleValue<EnumToolType, EnumToolMaterial>> types_harvests;
-	protected final Item item;
+	protected final List<EnumToolType> toolTypes;
+	protected final T type;
 	
-	public HarvestInfo(Item item, List<DoubleValue<EnumToolType, EnumToolMaterial>> types_harvests) {
-		this.item = item;
-		this.types_harvests = types_harvests;
+	protected HarvestInfo(T type, List<EnumToolType> toolTypes) {
+		this.type = type;
+		this.toolTypes = toolTypes;
 	}
 	
-	public HarvestInfo(Item item, DoubleValue<EnumToolType, EnumToolMaterial> harvest) {
-		this(item, Arrays.asList(harvest));
+	protected HarvestInfo(T type, EnumToolType toolType) {
+		this(type, Arrays.asList(toolType));
 	}
 	
-	public Item getItem() {
-		return item;
+	public T getType() {
+		return type;
 	}
 	
-	public List<DoubleValue<EnumToolType, EnumToolMaterial>> getTypesHarvests() {
-		return types_harvests;
-	}
-	
-	public int getHighestEnchantability() {
-		int high = 0;
-		
-		for (DoubleValue<EnumToolType, EnumToolMaterial> t : types_harvests) {
-			if (t.getR().enchantability > high) {
-				high = t.getR().enchantability;
-			}
-		}
-		
-		return high;
+	public List<EnumToolType> getToolTypes() {
+		return toolTypes;
 	}
 	
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof HarvestInfo) {
-			return ((HarvestInfo) obj).item == item;
+			return ((HarvestInfo<T>) obj).type == type;
 		}
 		
 		return false;
-	}
-	
-	@Override
-	public String toString() {
-		return "(" + item.getUnlocalizedName() + ":" + types_harvests + ")";
 	}
 }

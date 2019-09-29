@@ -4,9 +4,8 @@ import org.apache.commons.lang3.text.WordUtils;
 
 import mrunknown404.primalrework.init.ModBlocks;
 import mrunknown404.primalrework.init.ModItems;
-import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import mrunknown404.primalrework.util.enums.EnumToolType;
-import mrunknown404.primalrework.util.harvest.HarvestInfo;
+import mrunknown404.primalrework.util.harvest.ItemHarvestInfo;
 import mrunknown404.primalrework.util.helpers.HarvestHelper;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -67,10 +66,10 @@ public class OreDict {
 		OreDictionary.registerOre("logAcacia", new ItemStack(Blocks.LOG2, 1, 1));
 	}
 	
-	private static void register(HarvestInfo info, int meta) {
-		for (DoubleValue<EnumToolType, EnumToolMaterial> type : info.getTypesHarvests()) {
-			if (type.getL() != EnumToolType.none) {
-				OreDictionary.registerOre("tool" + WordUtils.capitalizeFully(type.getL().name()), new ItemStack(info.getItem(), 1, meta));
+	private static void register(ItemHarvestInfo info, int meta) {
+		for (EnumToolType type : info.getToolTypes()) {
+			if (type != EnumToolType.none) {
+				OreDictionary.registerOre("tool" + WordUtils.capitalizeFully(type.name()), new ItemStack(info.getType(), 1, meta));
 			}
 		}
 	}

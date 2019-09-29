@@ -7,15 +7,17 @@ import java.util.List;
 import mrunknown404.primalrework.util.DoubleValue;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import mrunknown404.primalrework.util.enums.EnumToolType;
+import mrunknown404.primalrework.util.helpers.HarvestHelper;
 import net.minecraft.block.Block;
-import net.minecraft.item.Item;
 
-public class BlockHarvestInfo extends HarvestInfo {
+public class BlockHarvestInfo extends HarvestInfo<Block> {
 	
+	private final List<DoubleValue<EnumToolType, EnumToolMaterial>> harvests;
 	private final List<HarvestDropInfo> drops = new ArrayList<HarvestDropInfo>();
 	
-	public BlockHarvestInfo(Block block, List<DoubleValue<EnumToolType, EnumToolMaterial>> harvest) {
-		super(Item.getItemFromBlock(block), harvest);
+	public BlockHarvestInfo(Block block, List<DoubleValue<EnumToolType, EnumToolMaterial>> harvests) {
+		super(block, new ArrayList<EnumToolType>());
+		this.harvests = harvests;
 	}
 	
 	public static BlockHarvestInfo create(DoubleValue<EnumToolType, EnumToolMaterial>... harvest) {
@@ -53,17 +55,31 @@ public class BlockHarvestInfo extends HarvestInfo {
 	}
 	
 	public boolean canBreakWithNone() {
-		for (DoubleValue<EnumToolType, EnumToolMaterial> dv : types_harvests) {
-			if (dv.getL() == EnumToolType.none || dv.getR() == EnumToolMaterial.hand) {
-				return true;
-			}
-		}
-		
-		return false;
+		return HarvestHelper.hasToolMaterial(type, EnumToolMaterial.hand) || HarvestHelper.hasToolType(type, EnumToolType.none);
+	}
+	
+	public List<DoubleValue<EnumToolType, EnumToolMaterial>> getHarvests() {
+		return harvests;
 	}
 	
 	@Override
-	public String toString() {
-		return "(" + item.getUnlocalizedName() + ":" + types_harvests + ":" + drops + ")";
+	public List<EnumToolType> getToolTypes() {
+		List<EnumToolType> types = new ArrayList<EnumToolType>();
+		
+		for (DoubleValue<EnumToolType, EnumToolMaterial> t : harvests) {
+			types.add(t.getL());
+		}
+		
+		return types;
+	}
+	
+	public List<EnumToolMaterial> getToolMaterials() {
+		List<EnumToolMaterial> types = new ArrayList<EnumToolMaterial>();
+		
+		for (DoubleValue<EnumToolType, EnumToolMaterial> t : harvests) {
+			types.add(t.getR());
+		}
+		
+		return types;
 	}
 }

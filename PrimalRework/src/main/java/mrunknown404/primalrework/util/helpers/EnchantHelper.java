@@ -7,8 +7,6 @@ import java.util.Random;
 import com.google.common.collect.Lists;
 
 import mrunknown404.primalrework.init.ModItems;
-import mrunknown404.primalrework.util.DoubleValue;
-import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import mrunknown404.primalrework.util.enums.EnumToolType;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.init.Items;
@@ -20,7 +18,7 @@ import net.minecraft.util.math.MathHelper;
 public class EnchantHelper {
 	public static List<EnchantmentData> buildVanillaEnchantmentList(Random randomIn, ItemStack item, int level) {
 		List<EnchantmentData> list = Lists.<EnchantmentData>newArrayList();
-		int i = HarvestHelper.getHarvestInfo(item.getItem()).getHighestEnchantability();
+		int i = HarvestHelper.getHarvestInfo(item.getItem()).getEnchantability();
 		
 		if (i <= 0) {
 			return list;
@@ -53,7 +51,7 @@ public class EnchantHelper {
 	
 	public static List<EnchantmentData> buildPrimalEnchantmentList(Random rand, ItemStack item, int level) {
 		List<EnchantmentData> list = Lists.<EnchantmentData>newArrayList();
-		int enchantability = HarvestHelper.getHarvestInfo(item.getItem()).getHighestEnchantability();
+		int enchantability = HarvestHelper.getHarvestInfo(item.getItem()).getEnchantability();
 		
 		if (enchantability <= 0) {
 			return list;
@@ -124,8 +122,8 @@ public class EnchantHelper {
 	private static List<EnchantmentData> getVanillaItemsEnchants(Item item) {
 		List<EnchantmentData> enchs = new ArrayList<EnchantmentData>();
 		
-		for (DoubleValue<EnumToolType, EnumToolMaterial> t : HarvestHelper.getHarvestInfo(item).getTypesHarvests()) {
-			enchs.addAll(t.getL().replaceEnchants);
+		for (EnumToolType t : HarvestHelper.getHarvestInfo(item).getToolTypes()) {
+			enchs.addAll(t.replaceEnchants);
 		}
 		
 		return enchs;
@@ -134,8 +132,8 @@ public class EnchantHelper {
 	private static List<EnchantmentData> getPrimalItemsEnchants(Item item) {
 		List<EnchantmentData> enchs = new ArrayList<EnchantmentData>();
 		
-		for (DoubleValue<EnumToolType, EnumToolMaterial> t : HarvestHelper.getHarvestInfo(item).getTypesHarvests()) {
-			enchs.addAll(t.getL().primalEnchants);
+		for (EnumToolType t : HarvestHelper.getHarvestInfo(item).getToolTypes()) {
+			enchs.addAll(t.primalEnchants);
 		}
 		
 		return enchs;
@@ -146,8 +144,8 @@ public class EnchantHelper {
 			return false;
 		}
 		
-		for (DoubleValue<EnumToolType, EnumToolMaterial> t : HarvestHelper.getHarvestInfo(item.getItem()).getTypesHarvests()) {
-			if (t.getL().isEnchantable()) {
+		for (EnumToolType t : HarvestHelper.getHarvestInfo(item.getItem()).getToolTypes()) {
+			if (t.isEnchantable()) {
 				return true;
 			}
 		}
@@ -156,7 +154,7 @@ public class EnchantHelper {
 	}
 	
 	public static int calcItemStackEnchantability(Random rand, int enchantNum, int power, Item item) {
-		int i = HarvestHelper.getHarvestInfo(item).getHighestEnchantability();
+		int i = HarvestHelper.getHarvestInfo(item).getEnchantability();
 		
 		if (i <= 0) {
 			return 0;

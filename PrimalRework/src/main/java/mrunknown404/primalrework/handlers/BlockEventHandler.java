@@ -10,12 +10,10 @@ import mrunknown404.primalrework.util.harvest.BlockHarvestInfo;
 import mrunknown404.primalrework.util.harvest.HarvestDropInfo;
 import mrunknown404.primalrework.util.harvest.HarvestDropInfo.ItemDropInfo;
 import mrunknown404.primalrework.util.helpers.HarvestHelper;
-import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Enchantments;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -27,27 +25,25 @@ public class BlockEventHandler {
 
 	@SubscribeEvent
 	public void onHarvestDrop(HarvestDropsEvent e) {
-		if (e.getHarvester() == null || !HarvestHelper.canBreak(e.getState().getBlock(), e.getHarvester().getHeldItemMainhand().getItem())) {
+		e.setDropChance(100);
+		if (e.getHarvester() != null && !HarvestHelper.canBreak(e.getState().getBlock(), e.getHarvester().getHeldItemMainhand().getItem())) {
 			e.getDrops().clear();
 			return;
 		}
 		
-		Block b = e.getState().getBlock();
-		Item item = e.getHarvester().getHeldItemMainhand().getItem();
-		
-		BlockHarvestInfo binfo = HarvestHelper.getHarvestInfo(b);
-		if (binfo == null || HarvestHelper.getHarvestInfo(item) == null) {
+		BlockHarvestInfo binfo = HarvestHelper.getHarvestInfo(e.getState().getBlock());
+		if (binfo == null) {
 			return;
 		}
 		
-		HarvestDropInfo drop = binfo.getDrop(HarvestHelper.getItemsToolType(b, item));
+		HarvestDropInfo drop = binfo.getDrop(e.getHarvester() != null ? HarvestHelper.getItemsToolType(e.getState().getBlock(),
+				e.getHarvester().getHeldItemMainhand().getItem()) : EnumToolType.none);
 		if (drop == null) {
 			return;
 		}
 		
 		Random r = new Random();
 		boolean isSilk = e.isSilkTouching();
-		int after_rdrop = MathHelper.clamp(r.nextInt(e.getFortuneLevel() + 1), 0, Integer.MAX_VALUE);
 		
 		if (drop.isReplace()) {
 			e.getDrops().clear();
@@ -55,14 +51,11 @@ public class BlockEventHandler {
 		
 		for (ItemDropInfo itemDrop : drop.getDrops()) {
 			if (itemDrop.needsSilk() == isSilk) {
-				float dropFort = (itemDrop.getDropFortune() * after_rdrop) + 1;
-				float chanceFort = (itemDrop.getChanceFortune() * after_rdrop) + 1;
+				int fort = r.nextInt(e.getFortuneLevel() + 1);
 				
-				int random = r.nextInt(100) + 1;
-				
-				if (random <= itemDrop.getDropChance() * chanceFort) {
-					e.getDrops().add(new ItemStack(itemDrop.getItem(), (int) ((itemDrop.getDropAmount() + ThreadLocalRandom.current().nextInt(
-							itemDrop.getRandomDropMin(), itemDrop.getRandomDropMax() + 1)) * dropFort)));
+				if (r.nextInt(100) + 1 <= itemDrop.getDropChance() * fort * itemDrop.getChanceFortune() + 1) {
+					int amount = itemDrop.getDropAmount() + ThreadLocalRandom.current().nextInt(itemDrop.getRandomDropMin(), itemDrop.getRandomDropMax() + 1) + fort;
+					e.getDrops().add(new ItemStack(itemDrop.getItem(), amount));
 				}
 			}
 		}

@@ -291,7 +291,6 @@ public class StageHelper {
 		addStagedItem(EnumStage.do_later, Blocks.RED_SANDSTONE, 1);
 		addStagedItem(EnumStage.do_later, Blocks.RED_SANDSTONE, 2);
 		addStagedItem(EnumStage.do_later, Blocks.RED_SANDSTONE_STAIRS);
-		addStagedItem(EnumStage.stage1, Blocks.DOUBLE_STONE_SLAB2);
 		addStagedItem(EnumStage.stage1, Blocks.STONE_SLAB2);
 		addStagedItem(EnumStage.do_later, Blocks.END_ROD);
 		addStagedItem(EnumStage.do_later, Blocks.CHORUS_PLANT);
@@ -299,7 +298,6 @@ public class StageHelper {
 		addStagedItem(EnumStage.do_later, Blocks.PURPUR_BLOCK);
 		addStagedItem(EnumStage.do_later, Blocks.PURPUR_PILLAR);
 		addStagedItem(EnumStage.do_later, Blocks.PURPUR_STAIRS);
-		addStagedItem(EnumStage.do_later, Blocks.PURPUR_DOUBLE_SLAB);
 		addStagedItem(EnumStage.do_later, Blocks.PURPUR_SLAB);
 		addStagedItem(EnumStage.do_later, Blocks.END_BRICKS);
 		addStagedItem(EnumStage.do_later, Blocks.GRASS_PATH);

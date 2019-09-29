@@ -29,18 +29,18 @@ public class TileEntityFirePit extends TileEntityBase implements ITickable {
 		}
 		
 		if (isBurning()) {
-			if (!isCookingItem() && ModRecipes.isItemFirePitResult(inv.get(ContainerFirePit.SLOT_ITEM))) {
-				totalCookTime = ModRecipes.getFirePitResult(inv.get(ContainerFirePit.SLOT_ITEM)).getCookTime();
+			if (!isCookingItem() && ModRecipes.doesItemHaveFirePitRecipe(inv.get(ContainerFirePit.SLOT_ITEM))) {
+				totalCookTime = ModRecipes.getFirePitRecipeFromInput(inv.get(ContainerFirePit.SLOT_ITEM)).getCookTime();
 				cookTime = totalCookTime;
 			}
 			
 			if (isCookingItem()) {
-				if (ModRecipes.isItemFirePitResult(inv.get(ContainerFirePit.SLOT_ITEM))) {
+				if (ModRecipes.doesItemHaveFirePitRecipe(inv.get(ContainerFirePit.SLOT_ITEM))) {
 					if (cookTime > 0) {
 						cookTime--;
 						
 						if (cookTime == 0) {
-							ItemStack out = ModRecipes.getFirePitResult(inv.get(ContainerFirePit.SLOT_ITEM)).getOutput();
+							ItemStack out = ModRecipes.getFirePitRecipeFromInput(inv.get(ContainerFirePit.SLOT_ITEM)).getOutput();
 							setInventorySlotContents(ContainerFirePit.SLOT_ITEM, out);
 							totalCookTime = 0;
 						}
@@ -84,7 +84,7 @@ public class TileEntityFirePit extends TileEntityBase implements ITickable {
 		if (index == ContainerFirePit.SLOT_FUEL) {
 			return ModRecipes.isItemFirePitFuel(stack);
 		} else if (index == ContainerFirePit.SLOT_ITEM) {
-			return ModRecipes.isItemFirePitResult(stack);
+			return ModRecipes.doesItemHaveFirePitRecipe(stack);
 		}
 		
 		return false;

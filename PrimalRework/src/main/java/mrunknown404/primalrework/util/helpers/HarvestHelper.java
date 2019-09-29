@@ -13,14 +13,14 @@ import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import mrunknown404.primalrework.util.enums.EnumToolType;
 import mrunknown404.primalrework.util.harvest.BlockHarvestInfo;
 import mrunknown404.primalrework.util.harvest.HarvestDropInfo;
-import mrunknown404.primalrework.util.harvest.HarvestInfo;
+import mrunknown404.primalrework.util.harvest.ItemHarvestInfo;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 
 public class HarvestHelper {
 
 	public static final List<BlockHarvestInfo> BLOCKS = new ArrayList<BlockHarvestInfo>();
-	public static final List<HarvestInfo> ITEMS = new ArrayList<HarvestInfo>();
+	public static final List<ItemHarvestInfo> ITEMS = new ArrayList<ItemHarvestInfo>();
 	
 	public static void setHarvestLevel(Block b, EnumToolType type, EnumToolMaterial level) {
 		setHarvestLevel(b, -1, Arrays.asList(new DoubleValue<EnumToolType, EnumToolMaterial>(type, level)));
@@ -35,11 +35,11 @@ public class HarvestHelper {
 	}
 	
 	public static void setHarvestLevel(Block b, float hardness, BlockHarvestInfo info) {
-		setHarvestLevel(b, hardness, info.getTypesHarvests(), info.getAllDrops().toArray(new HarvestDropInfo[0]));
+		setHarvestLevel(b, hardness, info.getHarvests(), info.getAllDrops().toArray(new HarvestDropInfo[0]));
 	}
 	
 	public static void setHarvestLevel(Block b, BlockHarvestInfo info) {
-		setHarvestLevel(b, -1, info.getTypesHarvests(), info.getAllDrops().toArray(new HarvestDropInfo[0]));
+		setHarvestLevel(b, -1, info.getHarvests(), info.getAllDrops().toArray(new HarvestDropInfo[0]));
 	}
 	
 	public static void setHarvestLevel(Block b, float hardness, List<DoubleValue<EnumToolType, EnumToolMaterial>> harvest, HarvestDropInfo... drops) {
@@ -61,7 +61,7 @@ public class HarvestHelper {
 	}
 	
 	public static void setHarvestLevel(Item i, EnumToolType type, EnumToolMaterial level) {
-		HarvestInfo info = new HarvestInfo(i, new DoubleValue<EnumToolType, EnumToolMaterial>(type, level));
+		ItemHarvestInfo info = new ItemHarvestInfo(i, type, level);
 		
 		if (ITEMS.contains(info)) {
 			ITEMS.remove(info);
@@ -77,15 +77,19 @@ public class HarvestHelper {
 			return true;
 		}
 		
-		HarvestInfo iinfo = getHarvestInfo(item);
+		ItemHarvestInfo iinfo = getHarvestInfo(item);
 		if (iinfo == null) {
 			return false;
 		}
 		
-		for (DoubleValue<EnumToolType, EnumToolMaterial> block_dv : binfo.getTypesHarvests()) {
-			for (DoubleValue<EnumToolType, EnumToolMaterial> item_dv : iinfo.getTypesHarvests()) {
-				if (block_dv.getL() == item_dv.getL()) {
-					if (item_dv.getR().level >= block_dv.getR().level) {
+		if (binfo.getToolMaterials().contains(EnumToolMaterial.hand)) {
+			return true;
+		}
+		
+		for (DoubleValue<EnumToolType, EnumToolMaterial> block_dv : binfo.getHarvests()) {
+			for (EnumToolType itemType : iinfo.getToolTypes()) {
+				if (block_dv.getL() == itemType) {
+					if (iinfo.getMaterial().level >= block_dv.getR().level) {
 						return true;
 					}
 				}
@@ -96,28 +100,20 @@ public class HarvestHelper {
 	}
 	
 	public static boolean hasToolType(Item item, EnumToolType type) {
-		for (DoubleValue<EnumToolType, EnumToolMaterial> dv : getHarvestInfo(item).getTypesHarvests()) {
-			if (dv.getL() == type) {
-				return true;
-			}
-		}
-		
-		return false;
+		return getHarvestInfo(item).getToolTypes().contains(type);
+	}
+	
+	public static boolean hasToolType(Block block, EnumToolType type) {
+		return getHarvestInfo(block).getToolTypes().contains(type);
 	}
 	
 	public static boolean hasToolMaterial(Block block, EnumToolMaterial type) {
-		for (DoubleValue<EnumToolType, EnumToolMaterial> dv : getHarvestInfo(block).getTypesHarvests()) {
-			if (dv.getR() == type) {
-				return true;
-			}
-		}
-		
-		return false;
+		return getHarvestInfo(block).getToolMaterials().contains(type);
 	}
 	
 	public static BlockHarvestInfo getHarvestInfo(Block block) {
 		for (BlockHarvestInfo info : BLOCKS) {
-			if (info.getItem() == Item.getItemFromBlock(block)) {
+			if (info.getType() == block) {
 				return info;
 			}
 		}
@@ -125,9 +121,9 @@ public class HarvestHelper {
 		return null;
 	}
 	
-	public static HarvestInfo getHarvestInfo(Item item) {
-		for (HarvestInfo info : ITEMS) {
-			if (info.getItem() == item) {
+	public static ItemHarvestInfo getHarvestInfo(Item item) {
+		for (ItemHarvestInfo info : ITEMS) {
+			if (info.getType() == item) {
 				return info;
 			}
 		}
@@ -137,15 +133,15 @@ public class HarvestHelper {
 	
 	public static float getItemsHarvestSpeed(Block block, @Nullable Item item) {
 		BlockHarvestInfo binfo = getHarvestInfo(block);
-		HarvestInfo iinfo = getHarvestInfo(item);
+		ItemHarvestInfo iinfo = getHarvestInfo(item);
 		if (item == null || binfo == null || iinfo == null) {
 			return EnumToolMaterial.hand.speed;
 		}
 		
-		for (DoubleValue<EnumToolType, EnumToolMaterial> block_dv : binfo.getTypesHarvests()) {
-			for (DoubleValue<EnumToolType, EnumToolMaterial> item_dv : iinfo.getTypesHarvests()) {
-				if (block_dv.getL() == item_dv.getL()) {
-					return item_dv.getR().speed;
+		for (DoubleValue<EnumToolType, EnumToolMaterial> block_dv : binfo.getHarvests()) {
+			for (EnumToolType toolType : iinfo.getToolTypes()) {
+				if (block_dv.getL() == toolType) {
+					return iinfo.getMaterial().speed;
 				}
 			}
 		}
@@ -155,15 +151,15 @@ public class HarvestHelper {
 	
 	public static EnumToolType getItemsToolType(Block block, Item item) {
 		BlockHarvestInfo binfo = getHarvestInfo(block);
-		HarvestInfo iinfo = getHarvestInfo(item);
+		ItemHarvestInfo iinfo = getHarvestInfo(item);
 		if (binfo == null || iinfo == null) {
 			return null;
 		}
 		
-		for (DoubleValue<EnumToolType, EnumToolMaterial> block_dv : binfo.getTypesHarvests()) {
-			for (DoubleValue<EnumToolType, EnumToolMaterial> item_dv : iinfo.getTypesHarvests()) {
-				if (block_dv.getL() == item_dv.getL()) {
-					return item_dv.getL();
+		for (DoubleValue<EnumToolType, EnumToolMaterial> block_dv : binfo.getHarvests()) {
+			for (EnumToolType toolType : iinfo.getToolTypes()) {
+				if (block_dv.getL() == toolType) {
+					return toolType;
 				}
 			}
 		}

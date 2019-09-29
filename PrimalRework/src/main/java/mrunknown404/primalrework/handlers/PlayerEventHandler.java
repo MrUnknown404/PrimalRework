@@ -148,7 +148,7 @@ public class PlayerEventHandler {
 				return;
 			}
 		} else if (e.getItemStack().getItem() instanceof ItemSpade || HarvestHelper.hasToolType(e.getItemStack().getItem(), EnumToolType.shovel)) {
-			if (w.getBlockState(pos.up()).getMaterial() == Material.AIR) {
+			if ((w.getBlockState(pos).getBlock() == Blocks.DIRT || w.getBlockState(pos).getBlock() == Blocks.GRASS) && w.getBlockState(pos.up()).getMaterial() == Material.AIR) {
 				w.playSound(p, pos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0f, 1.0f);
 				p.swingArm(e.getHand());
 				

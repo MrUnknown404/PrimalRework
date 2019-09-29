@@ -28,6 +28,7 @@ import mrunknown404.primalrework.init.ModRecipes;
 import mrunknown404.primalrework.inventory.ContainerFirePit;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.helpers.StageHelper;
+import mrunknown404.primalrework.util.jei.category.DryingTableRecipeCategory;
 import mrunknown404.primalrework.util.jei.category.FirePitRecipeCategory;
 import mrunknown404.primalrework.util.jei.category.StagedCraftingRecipeCategory;
 import mrunknown404.primalrework.util.jei.icantgetthistoworkwithoutcopyingeverything.PlayerRecipeTransferHandler;
@@ -65,8 +66,9 @@ public class JEICompat implements IModPlugin {
 	public void registerCategories(IRecipeCategoryRegistration reg) {
 		IGuiHelper gui = reg.getJeiHelpers().getGuiHelper();
 		
-		reg.addRecipeCategories(new FirePitRecipeCategory(gui));
 		reg.addRecipeCategories(new StagedCraftingRecipeCategory(gui));
+		reg.addRecipeCategories(new FirePitRecipeCategory(gui));
+		reg.addRecipeCategories(new DryingTableRecipeCategory(gui));
 	}
 	
 	@Override
@@ -88,20 +90,22 @@ public class JEICompat implements IModPlugin {
 		reg.addIngredientInfo(new ItemStack(ModItems.WET_HIDE), VanillaTypes.ITEM, new TextComponentTranslation("jei.info.wet_hide").getUnformattedText());
 		reg.addIngredientInfo(new ItemStack(ModItems.WET_TANNED_HIDE), VanillaTypes.ITEM, new TextComponentTranslation("jei.info.wet_tanned_hide").getUnformattedText());
 		
-		reg.addRecipes(ModRecipes.getWrappedFirePitRecipes(), ModRecipes.CATEGORY_FIRE_PIT);
 		reg.addRecipes(ModRecipes.getWrappedStageRecipes(), ModRecipes.CATEGORY_STAGED_CRAFTING);
+		reg.addRecipes(ModRecipes.getWrappedFirePitRecipes(), ModRecipes.CATEGORY_FIRE_PIT);
+		reg.addRecipes(ModRecipes.getWrappedDryingTableRecipes(), ModRecipes.CATEGORY_DRYING_TABLE);
 		
 		reg.addRecipeClickArea(GuiFirePit.class, 102, 9, 3, 25, ModRecipes.CATEGORY_FIRE_PIT);
 		//reg.addRecipeClickArea(GuiInventory.class, 137, 29, 10, 13, ModRecipes.CATEGORY_STAGED_CRAFTING);
 		//reg.addRecipeClickArea(GuiCrafting.class, 88, 32, 28, 23, ModRecipes.CATEGORY_STAGED_CRAFTING);
 		
-		reg.addRecipeCatalyst(new ItemStack(ModBlocks.FIRE_PIT), ModRecipes.CATEGORY_FIRE_PIT);
 		reg.addRecipeCatalyst(new ItemStack(Blocks.CRAFTING_TABLE), ModRecipes.CATEGORY_STAGED_CRAFTING);
 		reg.addRecipeCatalyst(new ItemStack(ModBlocks.CRAFTING_STUMP), ModRecipes.CATEGORY_STAGED_CRAFTING);
+		reg.addRecipeCatalyst(new ItemStack(ModBlocks.FIRE_PIT), ModRecipes.CATEGORY_FIRE_PIT);
+		reg.addRecipeCatalyst(new ItemStack(ModBlocks.DRYING_TABLE), ModRecipes.CATEGORY_DRYING_TABLE);
 		
-		recipeTransfer.addRecipeTransferHandler(ContainerFirePit.class, ModRecipes.CATEGORY_FIRE_PIT, FirePitRecipeCategory.SLOT_INPUT, 1, FirePitRecipeCategory.SLOT_INPUT, 36);
 		recipeTransfer.addRecipeTransferHandler(ContainerWorkbench.class, ModRecipes.CATEGORY_STAGED_CRAFTING, 1, 9, 10, 36);
 		recipeTransfer.addRecipeTransferHandler(new PlayerRecipeTransferHandler(helper.recipeTransferHandlerHelper()), ModRecipes.CATEGORY_STAGED_CRAFTING);
+		recipeTransfer.addRecipeTransferHandler(ContainerFirePit.class, ModRecipes.CATEGORY_FIRE_PIT, FirePitRecipeCategory.SLOT_INPUT, 1, FirePitRecipeCategory.SLOT_INPUT, 36);
 	}
 	
 	@Override
@@ -114,6 +118,8 @@ public class JEICompat implements IModPlugin {
 		rr.hideRecipeCategory(VanillaRecipeCategoryUid.CRAFTING);
 		rr.hideRecipeCategory(VanillaRecipeCategoryUid.FUEL);
 		rr.hideRecipeCategory(VanillaRecipeCategoryUid.ANVIL);
+		
+		setupRecipesAndItems();
 	}
 	
 	public static void setupRecipesAndItems() {

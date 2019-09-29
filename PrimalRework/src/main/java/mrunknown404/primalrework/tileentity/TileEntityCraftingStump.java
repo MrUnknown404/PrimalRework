@@ -115,8 +115,8 @@ public class TileEntityCraftingStump extends TileEntityBase implements ITickable
 	}
 	
 	public void markForUpdate() {
-		IBlockState state = this.getWorld().getBlockState(this.getPos());
-		getWorld().notifyBlockUpdate(this.getPos(), state, state, 2);
+		IBlockState state = getWorld().getBlockState(this.getPos());
+		getWorld().notifyBlockUpdate(getPos(), state, state, 2);
 	}
 	
 	@Override

@@ -52,23 +52,22 @@ public class HarvestDropInfo {
 		private final Item item;
 		private final boolean needsSilk;
 		private final int dropAmount, randomDropMin, randomDropMax;
-		private final float dropFortune, chanceFortune;
+		private final float chanceFortune;
 		/** 1-100 */
 		private final int dropChance;
 		
-		public ItemDropInfo(Item item, boolean needsSilk, int dropChance, int dropAmount, int randomDropMin, int randomDropMax, float dropFortune, float chanceFortune) {
+		public ItemDropInfo(Item item, boolean needsSilk, int dropChance, int dropAmount, int randomDropMin, int randomDropMax, float chanceFortune) {
 			this.item = item;
 			this.needsSilk = needsSilk;
 			this.dropChance = dropChance;
 			this.dropAmount = dropAmount;
 			this.randomDropMin = randomDropMin;
 			this.randomDropMax = randomDropMax;
-			this.dropFortune = dropFortune;
 			this.chanceFortune = chanceFortune;
 		}
 		
-		public ItemDropInfo(Block block, boolean needsSilk, int dropChance, int dropAmount, int randomDropMin, int randomDropMax, float dropFortune, float chanceFortune) {
-			this(Item.getItemFromBlock(block), needsSilk, dropChance, dropAmount, randomDropMin, randomDropMax, dropFortune, chanceFortune);
+		public ItemDropInfo(Block block, boolean needsSilk, int dropChance, int dropAmount, int randomDropMin, int randomDropMax, float chanceFortune) {
+			this(Item.getItemFromBlock(block), needsSilk, dropChance, dropAmount, randomDropMin, randomDropMax, chanceFortune);
 		}
 		
 		public Item getItem() {
@@ -95,16 +94,12 @@ public class HarvestDropInfo {
 			return randomDropMax;
 		}
 		
-		public float getDropFortune() {
-			return dropFortune;
-		}
-		
 		public float getChanceFortune() {
 			return chanceFortune;
 		}
 		@Override
 		public String toString() {
-			return "(" + item.getUnlocalizedName() + ", " + needsSilk + ", " + dropAmount + ", " + randomDropMin + ", " + randomDropMax + ", " + dropFortune + ", " +
+			return "(" + item.getUnlocalizedName() + ", " + needsSilk + ", " + dropAmount + ", " + randomDropMin + ", " + randomDropMax + ", " +
 					chanceFortune + ", " + dropChance + ")";
 		}
 	}

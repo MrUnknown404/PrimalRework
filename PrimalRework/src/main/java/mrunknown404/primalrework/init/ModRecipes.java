@@ -8,12 +8,14 @@ import java.util.List;
 import com.google.common.collect.Lists;
 
 import mrunknown404.primalrework.Main;
+import mrunknown404.primalrework.recipes.DryingTableRecipe;
 import mrunknown404.primalrework.recipes.FirePitRecipe;
 import mrunknown404.primalrework.recipes.util.DummyRecipe;
 import mrunknown404.primalrework.recipes.util.IStagedRecipeBase;
 import mrunknown404.primalrework.util.DoubleValue;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.helpers.StageHelper;
+import mrunknown404.primalrework.util.jei.wrappers.DryingTableRecipeWrapper;
 import mrunknown404.primalrework.util.jei.wrappers.FirePitRecipeWrapper;
 import mrunknown404.primalrework.util.jei.wrappers.StagedCraftingWrapper;
 import net.minecraft.block.BlockPlanks.EnumType;
@@ -29,12 +31,15 @@ public class ModRecipes {
 	
 	//TODO add recipes for : leather armor, mushroom stew, bread, cook recipes, wooden tools, boat, paper, book, sugar
 	
-	public static final String CATEGORY_FIRE_PIT = Main.MOD_ID + ".fire_pit_jei";
 	public static final String CATEGORY_STAGED_CRAFTING = Main.MOD_ID + ".staged_crafting_jei";
+	public static final String CATEGORY_FIRE_PIT = Main.MOD_ID + ".fire_pit_jei";
+	public static final String CATEGORY_DRYING_TABLE = Main.MOD_ID + ".drying_table_jei";
 	
 	private static final List<IStagedRecipeBase> STAGED_CRAFTING_RECIPES = new ArrayList<IStagedRecipeBase>();
 	
 	private static final List<FirePitRecipe> FIRE_PIT_RECIPES = new ArrayList<FirePitRecipe>();
+	private static final List<DryingTableRecipe> DRYING_TABLE_RECIPES = new ArrayList<DryingTableRecipe>();
+	
 	private static final List<DoubleValue<ItemStack, Integer>> FIRE_PIT_FUELS = new ArrayList<>();
 	
 	public static void addRecipes() {
@@ -54,9 +59,11 @@ public class ModRecipes {
 		FIRE_PIT_FUELS.sort(new CompareFirePitFuel());
 		
 		FIRE_PIT_RECIPES.add(new FirePitRecipe(EnumStage.stage0, ModBlocks.UNLIT_PRIMAL_TORCH, ModBlocks.LIT_PRIMAL_TORCH, 10));
-		
 		FIRE_PIT_RECIPES.add(new FirePitRecipe(EnumStage.stage1, Blocks.COBBLESTONE, Blocks.STONE, 100));
 		FIRE_PIT_RECIPES.add(new FirePitRecipe(EnumStage.stage1, Blocks.STONE, ModBlocks.SMOOTH_STONE, 100));
+		
+		DRYING_TABLE_RECIPES.add(new DryingTableRecipe(EnumStage.stage1, ModItems.SALTED_HIDE, ModItems.DRIED_HIDE, 1200));
+		DRYING_TABLE_RECIPES.add(new DryingTableRecipe(EnumStage.stage1, ModItems.WET_TANNED_HIDE, Items.LEATHER, 1200));
 	}
 	
 	public static void removeRecipes() {
@@ -77,8 +84,12 @@ public class ModRecipes {
 		}
 	}
 	
-	public static boolean isItemFirePitResult(ItemStack stack) {
-		return getFirePitResult(stack) != null;
+	public static boolean doesItemHaveFirePitRecipe(ItemStack stack) {
+		return getFirePitRecipeFromInput(stack) != null;
+	}
+	
+	public static boolean doesItemHaveDryingTableRecipe(ItemStack stack) {
+		return getDryingTableRecipeFromInput(stack) != null;
 	}
 	
 	public static boolean isItemFirePitFuel(ItemStack stack) {
@@ -101,9 +112,18 @@ public class ModRecipes {
 		return 0;
 	}
 	
-	/** @param stack Input */
-	public static FirePitRecipe getFirePitResult(ItemStack stack) {
+	public static FirePitRecipe getFirePitRecipeFromInput(ItemStack stack) {
 		for (FirePitRecipe info : FIRE_PIT_RECIPES) {
+			if (StageHelper.hasAccessToStage(info.getStage()) && compareItemStacks(info.getInput(), stack)) {
+				return info;
+			}
+		}
+		
+		return null;
+	}
+	
+	public static DryingTableRecipe getDryingTableRecipeFromInput(ItemStack stack) {
+		for (DryingTableRecipe info : DRYING_TABLE_RECIPES) {
 			if (StageHelper.hasAccessToStage(info.getStage()) && compareItemStacks(info.getInput(), stack)) {
 				return info;
 			}
@@ -136,6 +156,10 @@ public class ModRecipes {
 	
 	public static List<StagedCraftingWrapper> getWrappedStageRecipes() {
 		return StagedCraftingWrapper.createFromList(STAGED_CRAFTING_RECIPES);
+	}
+	
+	public static List<DryingTableRecipeWrapper> getWrappedDryingTableRecipes() {
+		return DryingTableRecipeWrapper.createFromList(DRYING_TABLE_RECIPES);
 	}
 	
 	public static List<ItemStack> getFirePitFuels() {
