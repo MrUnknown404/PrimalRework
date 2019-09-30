@@ -1,0 +1,18 @@
+{
+  "type": "primalrework:staged_shapeless",
+  "stage": "stage1",
+  "ingredients": [
+    {
+      "item": "minecraft:wheat"
+    },
+	{
+      "item": "primalrework:salt"
+    },
+	{
+      "item": "primalrework:mortar_pestle"
+    }
+  ],
+  "result": {
+    "item": "primalrework:dough"
+  }
+}

@@ -29,7 +29,10 @@ public enum EnumToolType {
 			Arrays.asList(new EnchantmentData(Enchantments.UNBREAKING, 1), new EnchantmentData(Enchantments.KNOCKBACK, 1))),
 	sword  (1.50f, 3.00f,
 			combineEnchants(combineEnchants(Enchs.getWeaponBase(5, 2), Enchs.getWeaponSword(5, 5), Enchs.getWeaponSpecial(3, 2, 3)), new EnchantmentData(Enchantments.UNBREAKING, 3)),
-			combineEnchants(Enchs.getWeaponBase(2, 1), new EnchantmentData(Enchantments.UNBREAKING, 1)));
+			combineEnchants(Enchs.getWeaponBase(2, 1), new EnchantmentData(Enchantments.UNBREAKING, 1))),
+	saw    (1.00f, 1.50f,
+			combineEnchants(Enchs.getToolBase(5, 3), new EnchantmentData(Enchantments.SHARPNESS, 5)),
+			combineEnchants(Enchs.getToolBase(2, 1), new EnchantmentData(Enchantments.SHARPNESS, 2)));
 	
 	public final float swingSpeed, baseDamage;
 	public final List<EnchantmentData> replaceEnchants, primalEnchants;
@@ -47,7 +50,6 @@ public enum EnumToolType {
 	
 	private static List<EnchantmentData> combineEnchants(List<EnchantmentData>... enchs) {
 		List<EnchantmentData> newEnchs = new ArrayList<EnchantmentData>();
-		
 		for (List<EnchantmentData> e : enchs) {
 			newEnchs.addAll(e);
 		}
@@ -56,7 +58,7 @@ public enum EnumToolType {
 	}
 	
 	private static List<EnchantmentData> combineEnchants(List<EnchantmentData> tench, EnchantmentData... enchs) {
-		List<EnchantmentData> ench = new ArrayList<>(tench);
+		List<EnchantmentData> ench = new ArrayList<EnchantmentData>(tench);
 		for (EnchantmentData e : enchs) {
 			ench.add(e);
 		}

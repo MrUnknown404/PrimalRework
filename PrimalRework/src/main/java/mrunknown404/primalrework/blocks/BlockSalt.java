@@ -20,7 +20,7 @@ public class BlockSalt extends BlockBase {
 				new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.shovel, EnumToolMaterial.flint));
 		harvestInfo.setDrops(Arrays.asList(
 				new HarvestDropInfo(EnumToolType.shovel, true,
-						new ItemDropInfo(ModItems.SALT, false, 100, 4, 0, 0, 0),
-						new ItemDropInfo(ModItems.findBlock(this), true, 100, 1, 0, 0, 0))));
+						new ItemDropInfo(ModItems.SALT, false, true, 100, 4, 0, 0, 0),
+						new ItemDropInfo(ModItems.findBlock(this), true, false, 100, 1, 0, 0, 0))));
 	}
 }

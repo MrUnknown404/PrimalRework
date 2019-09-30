@@ -51,10 +51,12 @@ public class BlockEventHandler {
 		
 		for (ItemDropInfo itemDrop : drop.getDrops()) {
 			if (itemDrop.needsSilk() == isSilk) {
-				int fort = r.nextInt(e.getFortuneLevel() + 1);
+				int fort = itemDrop.usesFortune() ? r.nextInt(e.getFortuneLevel() + 1) : 1;
 				
-				if (r.nextInt(100) + 1 <= itemDrop.getDropChance() * fort * itemDrop.getChanceFortune() + 1) {
-					int amount = itemDrop.getDropAmount() + ThreadLocalRandom.current().nextInt(itemDrop.getRandomDropMin(), itemDrop.getRandomDropMax() + 1) + fort;
+				if (r.nextInt(100) + 1 <= itemDrop.getDropChance() * (itemDrop.getChanceFortune() + 1)) {
+					int amount = itemDrop.getDropAmount() + (itemDrop.usesFortune() ? fort : 0) +
+							ThreadLocalRandom.current().nextInt(itemDrop.getRandomDropMin(), itemDrop.getRandomDropMax() + 1);
+					
 					e.getDrops().add(new ItemStack(itemDrop.getItem(), amount));
 				}
 			}

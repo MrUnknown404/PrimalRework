@@ -7,7 +7,7 @@ import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import mrunknown404.primalrework.util.enums.EnumToolType;
 import net.minecraft.item.Item;
 
-public interface IItemBase<R extends ItemBase> extends IThingBase<Item, R> {
+public interface IItemBase<R extends Item> extends IThingBase<Item, R> {
 	@Override
 	public default void registerModels(Item item) {
 		Main.proxy.registerItemRenderer(item, 0, "inventory");

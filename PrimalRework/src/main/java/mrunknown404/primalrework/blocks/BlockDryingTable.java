@@ -1,18 +1,14 @@
 package mrunknown404.primalrework.blocks;
 
-import mrunknown404.primalrework.blocks.util.BlockBase;
+import mrunknown404.primalrework.blocks.util.BlockDirectionalBase;
 import mrunknown404.primalrework.tileentity.TileEntityDryingTable;
 import mrunknown404.primalrework.util.DoubleValue;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import mrunknown404.primalrework.util.enums.EnumToolType;
-import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.properties.PropertyDirection;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -28,15 +24,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 
-public class BlockDryingTable extends BlockBase implements ITileEntityProvider {
+public class BlockDryingTable extends BlockDirectionalBase implements ITileEntityProvider {
 
-	public static final PropertyDirection FACING = BlockHorizontal.FACING;
 	private static final AxisAlignedBB bb = new AxisAlignedBB(1.05 / 16, 0, 1.05 / 16, 15.05 / 16, 13.05f / 16, 15.05 / 16);
 	
 	public BlockDryingTable() {
 		super("drying_table", Material.WOOD, SoundType.WOOD, BlockRenderLayer.CUTOUT_MIPPED, 2f, 2f, bb, bb, EnumStage.stage1,
 				new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.axe, EnumToolMaterial.flint));
-		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 		hasTileEntity = true;
 	}
 	
@@ -197,35 +191,7 @@ public class BlockDryingTable extends BlockBase implements ITileEntityProvider {
 	}
 	
 	@Override
-	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, new IProperty[] {FACING});
-	}
-	
-	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileEntityDryingTable();
-	}
-	
-	@Override
-	public IBlockState getStateFromMeta(int meta) {
-		EnumFacing facing = EnumFacing.getFront(meta);
-		if (facing.getAxis() == EnumFacing.Axis.Y) {
-			facing = EnumFacing.NORTH;
-		}
-		
-		return getDefaultState().withProperty(FACING, facing);
-	}
-	
-	@Override
-	public int getMetaFromState(IBlockState state) {
-		int meta = 0;
-		meta = meta | state.getValue(FACING).getIndex();
-		
-		return meta;
-	}
-	
-	@Override
-	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
-		return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
 	}
 }

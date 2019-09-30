@@ -152,22 +152,22 @@ public class VanillaOverrides {
 	private static final BlockHarvestInfo STONE_HARVEST_INFO = setupBlockInfo(Arrays.asList(
 			new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.pickaxe, EnumToolMaterial.flint)),
 			new HarvestDropInfo(EnumToolType.pickaxe, true,
-					new ItemDropInfo(ModBlocks.ROCK, false, 100, 4, 0, 5, 0f),
-					new ItemDropInfo(Blocks.COBBLESTONE, false, 10, 1, 0, 0, 0.1f)));
+					new ItemDropInfo(ModBlocks.ROCK, false, true, 100, 4, 0, 5, 0f),
+					new ItemDropInfo(Blocks.COBBLESTONE, false, false, 10, 1, 0, 0, 0.1f)));
 	private static final BlockHarvestInfo LEAVES_HARVEST_INFO = setupBlockInfo(Arrays.asList(
 			new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.none, EnumToolMaterial.hand),
 			new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.knife, EnumToolMaterial.flint)),
 			new HarvestDropInfo(EnumToolType.none, false,
-					new ItemDropInfo(Items.STICK, false, 10, 1, 0, 0, 0.1f)),
+					new ItemDropInfo(Items.STICK, false, false, 10, 1, 0, 0, 0.1f)),
 			new HarvestDropInfo(EnumToolType.knife, false,
-					new ItemDropInfo(Items.STICK, false, 70, 1, 0, 1, 0.1f)));
+					new ItemDropInfo(Items.STICK, false, false, 70, 1, 0, 1, 0.1f)));
 	private static final BlockHarvestInfo TALLGRASS_HARVEST_INFO = setupBlockInfo(Arrays.asList(
 				new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.none, EnumToolMaterial.hand),
 				new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.knife, EnumToolMaterial.flint)),
 				new HarvestDropInfo(EnumToolType.none, true,
-						new ItemDropInfo(ModItems.PLANT_FIBER, false, 50, 1, 0, 0, 0f)),
+						new ItemDropInfo(ModItems.PLANT_FIBER, false, false, 50, 1, 0, 0, 0f)),
 				new HarvestDropInfo(EnumToolType.knife, false,
-						new ItemDropInfo(ModItems.PLANT_FIBER, false, 100, 1, 1, 2, 0f)));
+						new ItemDropInfo(ModItems.PLANT_FIBER, false, true, 100, 1, 1, 2, 0f)));
 	
 	private static final List<DoubleValue<EnumToolType, EnumToolMaterial>> PLANT_DV = Arrays.asList(
 			new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.none, EnumToolMaterial.hand),
@@ -189,7 +189,7 @@ public class VanillaOverrides {
 		HarvestHelper.setHarvestLevel(Blocks.GRAVEL, -1, Arrays.asList(
 				new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.shovel, EnumToolMaterial.flint)),
 				new HarvestDropInfo(EnumToolType.shovel, true,
-						new ItemDropInfo(ModItems.GRAVEL, false, 100, 2, 1, 2, 0f)));
+						new ItemDropInfo(ModItems.GRAVEL, false, true, 100, 2, 1, 2, 0f)));
 		HarvestHelper.setHarvestLevel(Blocks.GOLD_ORE,                      EnumToolType.pickaxe, EnumToolMaterial.bronze);
 		HarvestHelper.setHarvestLevel(Blocks.IRON_ORE,                      EnumToolType.pickaxe, EnumToolMaterial.bronze);
 		HarvestHelper.setHarvestLevel(Blocks.COAL_ORE,                      EnumToolType.pickaxe, EnumToolMaterial.stone);
@@ -239,10 +239,10 @@ public class VanillaOverrides {
 		HarvestHelper.setHarvestLevel(Blocks.CRAFTING_TABLE,                EnumToolType.axe,     EnumToolMaterial.flint);
 		HarvestHelper.setHarvestLevel(Blocks.WHEAT, 0.3f, PLANT_DV,
 				new HarvestDropInfo(EnumToolType.none, true,
-						new ItemDropInfo(Items.WHEAT, false, 100, 1, 0, 0, 0f)),
+						new ItemDropInfo(Items.WHEAT, false, false, 100, 1, 0, 0, 0f)),
 				new HarvestDropInfo(EnumToolType.hoe, true,
-						new ItemDropInfo(Items.WHEAT_SEEDS, false, 100, 1, 0, 1, 0.2f),
-						new ItemDropInfo(Items.WHEAT, false, 100, 1, 0, 0, 0.2f)));
+						new ItemDropInfo(Items.WHEAT_SEEDS, false, false, 100, 1, 0, 1, 0.2f),
+						new ItemDropInfo(Items.WHEAT, false, true, 100, 1, 0, 0, 0.2f)));
 		HarvestHelper.setHarvestLevel(Blocks.FARMLAND,                      EnumToolType.shovel,  EnumToolMaterial.flint);
 		HarvestHelper.setHarvestLevel(Blocks.FURNACE,                       EnumToolType.pickaxe, EnumToolMaterial.flint);
 		HarvestHelper.setHarvestLevel(Blocks.LIT_FURNACE,                   EnumToolType.pickaxe, EnumToolMaterial.flint);
@@ -335,14 +335,14 @@ public class VanillaOverrides {
 		HarvestHelper.setHarvestLevel(Blocks.FLOWER_POT,                    EnumToolType.none,    EnumToolMaterial.hand);
 		HarvestHelper.setHarvestLevel(Blocks.CARROTS, 0.3f, PLANT_DV,
 				new HarvestDropInfo(EnumToolType.none, true,
-						new ItemDropInfo(Items.CARROT, false, 100, 1, 0, 0, 0f)),
+						new ItemDropInfo(Items.CARROT, false, false, 100, 1, 0, 0, 0f)),
 				new HarvestDropInfo(EnumToolType.hoe, true,
-						new ItemDropInfo(Items.CARROT, false, 100, 1, 0, 1, 0.2f)));
+						new ItemDropInfo(Items.CARROT, false, true, 100, 1, 0, 1, 0.2f)));
 		HarvestHelper.setHarvestLevel(Blocks.POTATOES, 0.3f, PLANT_DV,
 				new HarvestDropInfo(EnumToolType.none, true,
-						new ItemDropInfo(Items.POTATO, false, 100, 1, 0, 0, 0f)),
+						new ItemDropInfo(Items.POTATO, false, false, 100, 1, 0, 0, 0f)),
 				new HarvestDropInfo(EnumToolType.hoe, true,
-						new ItemDropInfo(Items.POTATO, false, 100, 1, 0, 1, 0.2f)));
+						new ItemDropInfo(Items.POTATO, false, true, 100, 1, 0, 1, 0.2f)));
 		HarvestHelper.setHarvestLevel(Blocks.WOODEN_BUTTON,                 EnumToolType.none,    EnumToolMaterial.hand);
 		HarvestHelper.setHarvestLevel(Blocks.SKULL,                         EnumToolType.pickaxe, EnumToolMaterial.flint);
 		HarvestHelper.setHarvestLevel(Blocks.ANVIL,                         EnumToolType.pickaxe, EnumToolMaterial.flint);
@@ -392,10 +392,10 @@ public class VanillaOverrides {
 		HarvestHelper.setHarvestLevel(Blocks.END_BRICKS,                    EnumToolType.pickaxe, EnumToolMaterial.iron);
 		HarvestHelper.setHarvestLevel(Blocks.BEETROOTS, 0.3f, PLANT_DV,
 				new HarvestDropInfo(EnumToolType.none, true,
-						new ItemDropInfo(Items.BEETROOT, false, 100, 1, 0, 0, 0f)),
+						new ItemDropInfo(Items.BEETROOT, false, false, 100, 1, 0, 0, 0f)),
 				new HarvestDropInfo(EnumToolType.hoe, true,
-						new ItemDropInfo(Items.BEETROOT_SEEDS, false, 100, 1, 0, 1, 0.2f),
-						new ItemDropInfo(Items.BEETROOT, false, 100, 1, 0, 0, 0.2f)));
+						new ItemDropInfo(Items.BEETROOT_SEEDS, false, false, 100, 1, 0, 1, 0.2f),
+						new ItemDropInfo(Items.BEETROOT, false, true, 100, 1, 0, 0, 0.2f)));
 		HarvestHelper.setHarvestLevel(Blocks.GRASS_PATH,                    EnumToolType.shovel,  EnumToolMaterial.flint);
 		HarvestHelper.setHarvestLevel(Blocks.FROSTED_ICE,                   EnumToolType.pickaxe, EnumToolMaterial.flint);
 		HarvestHelper.setHarvestLevel(Blocks.MAGMA,                         EnumToolType.pickaxe, EnumToolMaterial.bronze);

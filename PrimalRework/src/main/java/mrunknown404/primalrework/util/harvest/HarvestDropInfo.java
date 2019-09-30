@@ -50,15 +50,16 @@ public class HarvestDropInfo {
 	
 	public static class ItemDropInfo {
 		private final Item item;
-		private final boolean needsSilk;
+		private final boolean needsSilk, usesFortune;
 		private final int dropAmount, randomDropMin, randomDropMax;
 		private final float chanceFortune;
 		/** 1-100 */
 		private final int dropChance;
 		
-		public ItemDropInfo(Item item, boolean needsSilk, int dropChance, int dropAmount, int randomDropMin, int randomDropMax, float chanceFortune) {
+		public ItemDropInfo(Item item, boolean needsSilk, boolean usesFortune, int dropChance, int dropAmount, int randomDropMin, int randomDropMax, float chanceFortune) {
 			this.item = item;
 			this.needsSilk = needsSilk;
+			this.usesFortune = usesFortune;
 			this.dropChance = dropChance;
 			this.dropAmount = dropAmount;
 			this.randomDropMin = randomDropMin;
@@ -66,8 +67,8 @@ public class HarvestDropInfo {
 			this.chanceFortune = chanceFortune;
 		}
 		
-		public ItemDropInfo(Block block, boolean needsSilk, int dropChance, int dropAmount, int randomDropMin, int randomDropMax, float chanceFortune) {
-			this(Item.getItemFromBlock(block), needsSilk, dropChance, dropAmount, randomDropMin, randomDropMax, chanceFortune);
+		public ItemDropInfo(Block block, boolean needsSilk, boolean usesFortune, int dropChance, int dropAmount, int randomDropMin, int randomDropMax, float chanceFortune) {
+			this(Item.getItemFromBlock(block), needsSilk, usesFortune, dropChance, dropAmount, randomDropMin, randomDropMax, chanceFortune);
 		}
 		
 		public Item getItem() {
@@ -76,6 +77,10 @@ public class HarvestDropInfo {
 		
 		public boolean needsSilk() {
 			return needsSilk;
+		}
+		
+		public boolean usesFortune() {
+			return usesFortune;
 		}
 		
 		public int getDropChance() {

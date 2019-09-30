@@ -27,10 +27,15 @@ item.salted_hide.name=Salted Hide
 item.dried_hide.name=Dried Hide
 item.dry_tanned_hide.name=Dry Tanned Hide
 item.wet_tanned_hide.name=Wet Tanned Hide
+item.rope.name=Rope
+item.leather_strip.name=Leather Strip
 
 item.magic_dust_red.tooltip_0=Level 1 Magic Dust
 item.magic_dust_green.tooltip_0=Level 2 Magic Dust
 item.magic_dust_blue.tooltip_0=Level 3 Magic Dust
+
+// FOOD
+item.dough.name=Dough
 
 // ITEMS WITH DURABILITY
 item.plant_mesh.name=Plant Mesh
@@ -114,6 +119,7 @@ stage.late_stone.name=Stage 2 (Late Stone)
 // GUI
 itemGroup.primalrework_items=Primal.R Items
 itemGroup.primalrework_tools=Primal.R Tools
+itemGroup.primalrework_food=Primal.R Food
 itemGroup.primalrework_blocks=Primal.R Blocks
 
 container.fire_pit=Camp Fire

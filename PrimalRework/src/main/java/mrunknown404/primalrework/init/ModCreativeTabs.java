@@ -28,6 +28,18 @@ public class ModCreativeTabs {
 		}
 	}).setBackgroundImageName("item_search.png");
 	
+	public static final CreativeTabs PRIMALREWORK_FOOD = (new CreativeTabs("primalrework_food") {
+		@Override
+		public ItemStack getTabIconItem() {
+			return new ItemStack(ModItems.DOUGH);
+		}
+		
+		@Override
+		public boolean hasSearchBar() {
+			return true;
+		}
+	}).setBackgroundImageName("item_search.png");
+	
 	public static final CreativeTabs PRIMALREWORK_BLOCKS = (new CreativeTabs("primalrework_blocks") {
 		@Override
 		public ItemStack getTabIconItem() {
