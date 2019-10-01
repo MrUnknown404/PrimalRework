@@ -1,9 +1,16 @@
 package mrunknown404.primalrework.init;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import javax.annotation.Nullable;
 
 import mrunknown404.primalrework.items.ItemChangeWithWater;
+import mrunknown404.primalrework.items.ItemClayBucket;
+import mrunknown404.primalrework.items.ItemClayBucketMilk;
 import mrunknown404.primalrework.items.ItemFireStarter;
 import mrunknown404.primalrework.items.util.ItemBase;
 import mrunknown404.primalrework.items.util.ItemDamageableBase;
@@ -18,11 +25,14 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 
 public class ModItems {
 	public static final ToolMaterial MATERIAL = EnumHelper.addToolMaterial("MATERIAL", 0, 0, 0, 0, 0);
 	
 	public static final List<Item> ITEMS = new ArrayList<Item>();
+	public static final Map<Fluid, ItemClayBucket> CLAY_BUCKETS = new HashMap<Fluid, ItemClayBucket>();
 	
 	// ITEMS
 	public static final Item PLANT_FIBER = new ItemBase("plant_fiber", EnumStage.stage0);
@@ -55,13 +65,13 @@ public class ModItems {
 	public static final Item ROPE = new ItemBase("rope", EnumStage.stage1);
 	public static final Item LEATHER_STRIP = new ItemBase("leather_strip", EnumStage.stage1);
 	
-	//TODO add clay items, add shears
-	
 	// ITEMS WITH DURABILITY
 	public static final Item PLANT_MESH = new ItemDamageableBase("plant_mesh", EnumToolMaterial.flint, EnumStage.stage0);
 	public static final Item STRING_MESH = new ItemDamageableBase("string_mesh", EnumToolMaterial.copper, EnumStage.stage1);
 	public static final Item FLINT_CRAFTING_HAMMER = new ItemDamageableBase("flint_crafting_hammer", EnumToolMaterial.flint, EnumStage.stage1);
 	public static final Item MORTAR_PESTLE = new ItemDamageableBase("mortar_pestle", EnumToolMaterial.wood, EnumStage.stage1);
+	public static final Item CLAY_BUCKET_EMPTY = new ItemClayBucket(null);
+	public static final Item CLAY_BUCKET_MILK = new ItemClayBucketMilk();
 	
 	// FOOD
 	public static final Item DOUGH = new ItemFoodBase("dough", EnumStage.stage1, 1, 1f);
@@ -76,6 +86,7 @@ public class ModItems {
 	public static final Item STONE_KNIFE_HEAD = new ItemBase("stone_knife_head", 1, EnumStage.stage2);
 	public static final Item STONE_HOE_HEAD = new ItemBase("stone_hoe_head", 1, EnumStage.stage2);
 	public static final Item STONE_SAW_HEAD = new ItemBase("stone_saw_head", 1, EnumStage.stage2);
+	public static final Item STONE_SHEARS_HEAD = new ItemBase("stone_shears_head", 1, EnumStage.stage2);
 	
 	// TOOLS
 	public static final Item FLINT_PICKAXE = new ItemToolBase("flint_pickaxe", EnumToolType.pickaxe, EnumToolMaterial.flint, EnumStage.stage1);
@@ -84,11 +95,13 @@ public class ModItems {
 	public static final Item FLINT_KNIFE = new ItemToolBase("flint_knife", EnumToolType.knife, EnumToolMaterial.flint, EnumStage.stage0);
 	public static final Item FLINT_HOE = new ItemToolBase("flint_hoe", EnumToolType.hoe, EnumToolMaterial.flint, EnumStage.stage1);
 	public static final Item FLINT_SAW = new ItemToolBase("flint_saw", EnumToolType.saw, EnumToolMaterial.flint, EnumStage.stage1);
+	public static final Item FLINT_SHEARS = new ItemToolBase("flint_shears", EnumToolType.shears, EnumToolMaterial.flint, EnumStage.stage1);
 	
 	public static final Item BONE_KNIFE = new ItemToolBase("bone_knife", EnumToolType.knife, EnumToolMaterial.bone, EnumStage.stage0);
 	
 	public static final Item STONE_KNIFE = new ItemToolBase("stone_knife", EnumToolType.knife, EnumToolMaterial.stone, EnumStage.stage2);
 	public static final Item STONE_SAW = new ItemToolBase("stone_saw", EnumToolType.saw, EnumToolMaterial.stone, EnumStage.stage2);
+	public static final Item STONE_SHEARS = new ItemToolBase("stone_shears", EnumToolType.shears, EnumToolMaterial.stone, EnumStage.stage2);
 	
 	// VANILLA REPLACEMENTS
 	public static final Item DIAMOND_AXE = new ItemToolBase("diamond_axe", EnumToolType.axe, EnumToolMaterial.diamond, EnumStage.do_later).setCreativeTab(CreativeTabs.TOOLS);
@@ -111,5 +124,24 @@ public class ModItems {
 		}
 		
 		return Item.getItemFromBlock(block);
+	}
+	
+	static {
+		//CLAY_BUCKETS.put(FluidRegistry.LAVA, new ItemClayBucket(FluidRegistry.LAVA));
+		CLAY_BUCKETS.put(FluidRegistry.WATER, new ItemClayBucket(FluidRegistry.WATER));
+	}
+	
+	public static ItemClayBucket getClayBucket(@Nullable Fluid f) {
+		if (f == null) {
+			return (ItemClayBucket) CLAY_BUCKET_EMPTY;
+		}
+		
+		for (Entry<Fluid, ItemClayBucket> bucket : CLAY_BUCKETS.entrySet()) {
+			if (bucket.getKey() == f) {
+				return bucket.getValue();
+			}
+		}
+		
+		return null;
 	}
 }

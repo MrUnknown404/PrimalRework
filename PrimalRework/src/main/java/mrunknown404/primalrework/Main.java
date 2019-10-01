@@ -41,9 +41,6 @@ public class Main {
 	
 	public static SimpleNetworkWrapper networkWrapper;
 	
-	//TODO replace mob drops -> (leather -> air)
-	//TODO add mob drops (animal -> animal pelt)
-	
 	@Instance
 	public static Main main;
 	

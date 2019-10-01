@@ -21,8 +21,6 @@ public class TileEntityPrimalEnchantingRenderer extends TileEntitySpecialRendere
 		GlStateManager.scale(0.5f, 0.5f, 0.5f);
 		GlStateManager.rotate(te.getWorld().getTotalWorldTime() * 3, 0, 1f, 0);
 		
-		//TODO draw particles depending on dust type
-		
 		bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
 		Minecraft.getMinecraft().getTextureManager().getTexture(TextureMap.LOCATION_BLOCKS_TEXTURE).setBlurMipmap(false, false);
 		RenderHelper.disableStandardItemLighting();

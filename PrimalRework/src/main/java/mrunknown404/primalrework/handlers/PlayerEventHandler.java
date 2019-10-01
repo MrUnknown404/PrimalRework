@@ -12,6 +12,7 @@ import mrunknown404.primalrework.util.helpers.HarvestHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -26,6 +27,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.BonemealEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteract;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 
@@ -123,7 +125,7 @@ public class PlayerEventHandler {
 	}
 	
 	@SubscribeEvent
-	public void onRightClick(PlayerInteractEvent.RightClickBlock e) {
+	public void onRightClickBlock(PlayerInteractEvent.RightClickBlock e) {
 		World w = e.getWorld();
 		BlockPos pos = e.getPos();
 		EntityPlayer p = e.getEntityPlayer();
@@ -160,6 +162,13 @@ public class PlayerEventHandler {
 					w.setBlockState(pos, Blocks.GRASS_PATH.getDefaultState());
 				}
 			}
+		}
+	}
+	
+	@SubscribeEvent
+	public void onRightClickEntity(EntityInteract e) {
+		if (e.getTarget() instanceof EntityCow && e.getItemStack().getItem() == ModItems.CLAY_BUCKET_EMPTY) {
+			e.getEntityPlayer().setHeldItem(e.getHand(), new ItemStack(ModItems.CLAY_BUCKET_MILK, 1, e.getItemStack().getItemDamage()));
 		}
 	}
 }

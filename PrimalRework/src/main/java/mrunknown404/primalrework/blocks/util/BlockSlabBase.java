@@ -150,12 +150,12 @@ public abstract class BlockSlabBase extends BlockSlab implements ISlabBase<Block
 	
 	@Override
 	public boolean isFullCube(IBlockState state) {
-		return renderType == BlockRenderLayer.SOLID ? true : false;
+		return renderType == BlockRenderLayer.SOLID;
 	}
 	
 	@Override
 	public boolean isOpaqueCube(IBlockState state) {
-		return renderType == BlockRenderLayer.SOLID ? true : false;
+		return renderType == BlockRenderLayer.SOLID;
 	}
 	
 	@Override

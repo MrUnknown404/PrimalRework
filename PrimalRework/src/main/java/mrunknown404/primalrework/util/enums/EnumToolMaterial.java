@@ -2,6 +2,7 @@ package mrunknown404.primalrework.util.enums;
 
 public enum EnumToolMaterial {
 	hand       (0,  0,     1.00f, 0.00f, 0 ),
+	clay       (1,  8,     1.25f, 0.00f, 1 ),
 	wood       (1,  16,    1.75f, 0.25f, 1 ),
 	flint      (1,  32,    3.00f, 0.25f, 1 ),
 	bone       (1,  24,    6.00f, 2.00f, 3 ),
