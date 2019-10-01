@@ -1,0 +1,18 @@
+setIcon(<primalrework:dried_hide>)
+setTitle("Dried Hide")
+setDescription("Get a dried hide")
+setBackground("minecraft:textures/gui/advancements/backgrounds/adventure.png")
+setShowToast(true)
+setAnnounceToChat(true)
+setRequiresParents()
+alwaysVisible()
+
+addParent("primalrework:stage1/craft_raw_hide")
+addParent("primalrework:stage1/craft_drying_table")
+
+//hideLines()
+setPos(118,-127)
+//setFrameType("GOAL")
+
+criteria = addCriteria("dried_hide", "minecraft:inventory_changed")
+criteria.addItem(<primalrework:dried_hide>)

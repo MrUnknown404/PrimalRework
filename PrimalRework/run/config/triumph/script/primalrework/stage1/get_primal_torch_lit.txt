@@ -10,7 +10,7 @@ alwaysVisible()
 addParent("primalrework:stage1/craft_fire_pit")
 
 //hideLines()
-setPos(25,-13)
+setPos(25,-11)
 //setFrameType("GOAL")
 
 criteria = addCriteria("primal_torch_lit", "minecraft:inventory_changed")

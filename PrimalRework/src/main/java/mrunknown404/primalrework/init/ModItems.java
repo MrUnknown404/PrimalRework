@@ -46,16 +46,16 @@ public class ModItems {
 	public static final Item SALT = new ItemBase("salt", EnumStage.stage1);
 	public static final Item ANIMAL_PELT = new ItemBase("animal_pelt", EnumStage.stage0);
 	public static final Item WET_HIDE = new ItemBase("wet_hide", EnumStage.stage1);
-	public static final Item RAW_HIDE = new ItemChangeWithWater("raw_hide", WET_HIDE, EnumStage.stage1);
+	public static final Item RAW_HIDE = new ItemChangeWithWater("raw_hide", WET_HIDE, EnumStage.stage1).setAmountOfTooltops(1);
 	public static final Item CLEANED_HIDE = new ItemBase("cleaned_hide", EnumStage.stage1);
 	public static final Item SALTED_HIDE = new ItemBase("salted_hide", EnumStage.stage1);
 	public static final Item DRIED_HIDE = new ItemBase("dried_hide", EnumStage.stage1);
 	public static final Item WET_TANNED_HIDE = new ItemBase("wet_tanned_hide", EnumStage.stage1);
-	public static final Item DRY_TANNED_HIDE = new ItemChangeWithWater("dry_tanned_hide", WET_TANNED_HIDE, EnumStage.stage1);
+	public static final Item DRY_TANNED_HIDE = new ItemChangeWithWater("dry_tanned_hide", WET_TANNED_HIDE, EnumStage.stage1).setAmountOfTooltops(1);
 	public static final Item ROPE = new ItemBase("rope", EnumStage.stage1);
 	public static final Item LEATHER_STRIP = new ItemBase("leather_strip", EnumStage.stage1);
 	
-	//TODO add clay items, add shears, cooked fish/carrots/etc
+	//TODO add clay items, add shears
 	
 	// ITEMS WITH DURABILITY
 	public static final Item PLANT_MESH = new ItemDamageableBase("plant_mesh", EnumToolMaterial.flint, EnumStage.stage0);
@@ -64,7 +64,9 @@ public class ModItems {
 	public static final Item MORTAR_PESTLE = new ItemDamageableBase("mortar_pestle", EnumToolMaterial.wood, EnumStage.stage1);
 	
 	// FOOD
-	public static final Item DOUGH = new ItemFoodBase("dough", EnumStage.stage1, 1, 1);
+	public static final Item DOUGH = new ItemFoodBase("dough", EnumStage.stage1, 1, 1f);
+	public static final Item COOKED_CARROT = new ItemFoodBase("cooked_carrot", EnumStage.stage0, 5, 0.6f);
+	public static final Item COOKED_BEETROOT = new ItemFoodBase("cooked_beetroot", EnumStage.stage0, 5, 0.6f);
 	
 	// TOOL HEADS
 	public static final Item STONE_PICKAXE_HEAD = new ItemBase("stone_pickaxe_head", 1, EnumStage.stage2);

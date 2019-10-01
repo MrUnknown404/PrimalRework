@@ -23,6 +23,22 @@ public class FirePitRecipe implements IRecipeBase {
 		this.output = output;
 	}
 	
+	public FirePitRecipe(EnumStage stage, Item input, int imeta, Item output, int ometa, int cookTime) {
+		this(stage, new ItemStack(input, 1, imeta), new ItemStack(output, 1, ometa), cookTime);
+	}
+	
+	public FirePitRecipe(EnumStage stage, Item input, int imeta, Block output, int ometa, int cookTime) {
+		this(stage, new ItemStack(input, 1, imeta), new ItemStack(output, 1, ometa), cookTime);
+	}
+	
+	public FirePitRecipe(EnumStage stage, Block input, int imeta, Item output, int ometa, int cookTime) {
+		this(stage, new ItemStack(input, 1, imeta), new ItemStack(output, 1, ometa), cookTime);
+	}
+	
+	public FirePitRecipe(EnumStage stage, Block input, int imeta, Block output, int ometa, int cookTime) {
+		this(stage, new ItemStack(input, 1, imeta), new ItemStack(output, 1, ometa), cookTime);
+	}
+	
 	public FirePitRecipe(EnumStage stage, Item input, Item output, int cookTime) {
 		this(stage, new ItemStack(input), new ItemStack(output), cookTime);
 	}

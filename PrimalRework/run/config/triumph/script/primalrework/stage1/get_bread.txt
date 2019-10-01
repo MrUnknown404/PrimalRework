@@ -1,0 +1,17 @@
+setIcon(<minecraft:bread>)
+setTitle("Bread")
+setDescription("Get some bread")
+setBackground("minecraft:textures/gui/advancements/backgrounds/adventure.png")
+setShowToast(true)
+setAnnounceToChat(true)
+setRequiresParents()
+alwaysVisible()
+
+addParent("primalrework:stage1/craft_dough")
+
+//hideLines()
+setPos(118,-15)
+setFrameType("GOAL")
+
+criteria = addCriteria("bread", "minecraft:inventory_changed")
+criteria.addItem(<minecraft:bread>)

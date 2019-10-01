@@ -10,7 +10,7 @@ alwaysVisible()
 addParent("primalrework:stage0/craft_flint_axe")
 
 //hideLines()
-setPos(173,-8)
+setPos(221,14)
 setFrameType("CHALLENGE")
 
 criteria = addCriteria("log", "minecraft:inventory_changed")

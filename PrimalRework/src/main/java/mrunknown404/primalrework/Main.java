@@ -3,6 +3,7 @@ package mrunknown404.primalrework;
 import mrunknown404.primalrework.client.gui.GuiHandler;
 import mrunknown404.primalrework.commands.CommandStage;
 import mrunknown404.primalrework.handlers.BlockEventHandler;
+import mrunknown404.primalrework.handlers.EntityEventHandler;
 import mrunknown404.primalrework.handlers.PlayerEventHandler;
 import mrunknown404.primalrework.handlers.WorldEventHandler;
 import mrunknown404.primalrework.network.FireStarterMessage;
@@ -40,6 +41,9 @@ public class Main {
 	
 	public static SimpleNetworkWrapper networkWrapper;
 	
+	//TODO replace mob drops -> (leather -> air)
+	//TODO add mob drops (animal -> animal pelt)
+	
 	@Instance
 	public static Main main;
 	
@@ -54,6 +58,7 @@ public class Main {
 		MinecraftForge.EVENT_BUS.register(new PlayerEventHandler());
 		MinecraftForge.EVENT_BUS.register(new BlockEventHandler());
 		MinecraftForge.EVENT_BUS.register(new WorldEventHandler());
+		MinecraftForge.EVENT_BUS.register(new EntityEventHandler());
 	}
 	
 	@EventHandler

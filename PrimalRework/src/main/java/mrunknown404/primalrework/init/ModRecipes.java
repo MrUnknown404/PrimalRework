@@ -29,7 +29,7 @@ import net.minecraftforge.registries.ForgeRegistry;
 
 public class ModRecipes {
 	
-	//TODO add recipes for : bread, cook recipes, wooden tools, boat, paper, book, sugar
+	//TODO add recipes for : wooden tools, boat, paper, book, sugar
 	
 	public static final String CATEGORY_STAGED_CRAFTING = Main.MOD_ID + ".staged_crafting_jei";
 	public static final String CATEGORY_FIRE_PIT = Main.MOD_ID + ".fire_pit_jei";
@@ -59,6 +59,16 @@ public class ModRecipes {
 		FIRE_PIT_FUELS.sort(new CompareFirePitFuel());
 		
 		FIRE_PIT_RECIPES.add(new FirePitRecipe(EnumStage.stage0, ModBlocks.UNLIT_PRIMAL_TORCH, ModBlocks.LIT_PRIMAL_TORCH, 10));
+		FIRE_PIT_RECIPES.add(new FirePitRecipe(EnumStage.stage0, Items.PORKCHOP, Items.COOKED_PORKCHOP, 100));
+		FIRE_PIT_RECIPES.add(new FirePitRecipe(EnumStage.stage0, Items.BEEF, Items.COOKED_BEEF, 100));
+		FIRE_PIT_RECIPES.add(new FirePitRecipe(EnumStage.stage0, Items.MUTTON, Items.COOKED_MUTTON, 100));
+		FIRE_PIT_RECIPES.add(new FirePitRecipe(EnumStage.stage0, Items.FISH, 0, Items.COOKED_FISH, 0, 100));
+		FIRE_PIT_RECIPES.add(new FirePitRecipe(EnumStage.stage0, Items.FISH, 1, Items.COOKED_FISH, 1, 100));
+		FIRE_PIT_RECIPES.add(new FirePitRecipe(EnumStage.stage0, Items.CHICKEN, Items.COOKED_CHICKEN, 100));
+		FIRE_PIT_RECIPES.add(new FirePitRecipe(EnumStage.stage0, Items.RABBIT, Items.COOKED_RABBIT, 100));
+		FIRE_PIT_RECIPES.add(new FirePitRecipe(EnumStage.stage0, Items.CARROT, ModItems.COOKED_CARROT, 100));
+		FIRE_PIT_RECIPES.add(new FirePitRecipe(EnumStage.stage0, Items.POTATO, Items.BAKED_POTATO, 100));
+		FIRE_PIT_RECIPES.add(new FirePitRecipe(EnumStage.stage0, Items.BEETROOT, ModItems.COOKED_BEETROOT, 100));
 		FIRE_PIT_RECIPES.add(new FirePitRecipe(EnumStage.stage1, Blocks.COBBLESTONE, Blocks.STONE, 100));
 		FIRE_PIT_RECIPES.add(new FirePitRecipe(EnumStage.stage1, Blocks.STONE, ModBlocks.SMOOTH_STONE, 100));
 		FIRE_PIT_RECIPES.add(new FirePitRecipe(EnumStage.stage1, ModItems.DOUGH, Items.BREAD, 100));

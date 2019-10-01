@@ -170,7 +170,7 @@ public class JEICompat implements IModPlugin {
 						}
 					}
 					
-					if (StageHelper.hasAccessToStage(EnumStage.do_later)) { //TODO change to enchant later
+					if (StageHelper.hasAccessToStage(EnumStage.do_later)) { //TODO change to proper stage later
 						ingReg.addIngredientsAtRuntime(VanillaTypes.ENCHANT, enchs);
 					} else {
 						ingReg.removeIngredientsAtRuntime(VanillaTypes.ENCHANT, enchs);

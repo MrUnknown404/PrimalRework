@@ -10,7 +10,8 @@ alwaysVisible()
 addParent("primalrework:stage1/get_rope")
 
 //hideLines()
-setPos(31,-100)
+setPos(85,-100)
+setFrameType("GOAL")
 
 criteria = addCriteria("drying_table", "triumph:player_crafted_item")
 criteria.setItem(<primalrework:drying_table>)

@@ -10,7 +10,7 @@ alwaysVisible()
 addParent("primalrework:stage1/craft_fire_starter")
 
 //hideLines()
-setPos(-5,-13)
+setPos(-8,-19)
 setFrameType("GOAL")
 
 criteria = addCriteria("fire_pit", "triumph:player_crafted_item")

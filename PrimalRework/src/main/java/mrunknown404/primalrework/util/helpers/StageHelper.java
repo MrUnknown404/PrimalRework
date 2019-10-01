@@ -385,7 +385,7 @@ public class StageHelper {
 		addStagedItem(EnumStage.do_later, Items.DIAMOND_HOE);
 		addStagedItem(EnumStage.do_later, Items.GOLDEN_HOE);
 		addStagedItem(EnumStage.stage1, Items.WHEAT_SEEDS);
-		addStagedItem(EnumStage.stage1, Items.WHEAT);
+		addStagedItem(EnumStage.stage0, Items.WHEAT);
 		addStagedItem(EnumStage.stage1, Items.BREAD);
 		addStagedItem(EnumStage.stage1, Items.LEATHER_HELMET);
 		addStagedItem(EnumStage.stage1, Items.LEATHER_CHESTPLATE);
@@ -495,10 +495,10 @@ public class StageHelper {
 		addStagedItem(EnumStage.do_later, Items.EMERALD);
 		addStagedItem(EnumStage.do_later, Items.ITEM_FRAME);
 		addStagedItem(EnumStage.do_later, Items.FLOWER_POT);
-		addStagedItem(EnumStage.stage1, Items.CARROT);
-		addStagedItem(EnumStage.stage1, Items.POTATO);
-		addStagedItem(EnumStage.stage1, Items.BAKED_POTATO);
-		addStagedItem(EnumStage.stage1, Items.POISONOUS_POTATO);
+		addStagedItem(EnumStage.stage0, Items.CARROT);
+		addStagedItem(EnumStage.stage0, Items.POTATO);
+		addStagedItem(EnumStage.stage0, Items.BAKED_POTATO);
+		addStagedItem(EnumStage.stage0, Items.POISONOUS_POTATO);
 		addStagedItem(EnumStage.do_later, Items.MAP);
 		addStagedItem(EnumStage.do_later, Items.GOLDEN_CARROT);
 		addStagedItem(EnumStage.do_later, Items.CARROT_ON_A_STICK);
@@ -539,7 +539,7 @@ public class StageHelper {
 		addStagedItem(EnumStage.do_later, Items.CHORUS_FRUIT);
 		addStagedItem(EnumStage.do_later, Items.CHORUS_FRUIT_POPPED);
 		addStagedItem(EnumStage.stage1, Items.BEETROOT_SEEDS);
-		addStagedItem(EnumStage.stage1, Items.BEETROOT);
+		addStagedItem(EnumStage.stage0, Items.BEETROOT);
 		addStagedItem(EnumStage.do_later, Items.BEETROOT_SOUP);
 		addStagedItem(EnumStage.do_later, Items.TOTEM_OF_UNDYING);
 		addStagedItem(EnumStage.do_later, Items.SHULKER_SHELL);

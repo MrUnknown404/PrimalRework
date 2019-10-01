@@ -30,12 +30,16 @@ item.wet_tanned_hide.name=Wet Tanned Hide
 item.rope.name=Rope
 item.leather_strip.name=Leather Strip
 
+item.raw_hide.tooltip_0=Right click water while holding this item to wet it
+item.dry_tanned_hide.tooltip_0=Right click water while holding this item to wet it
 item.magic_dust_red.tooltip_0=Level 1 Magic Dust
 item.magic_dust_green.tooltip_0=Level 2 Magic Dust
 item.magic_dust_blue.tooltip_0=Level 3 Magic Dust
 
 // FOOD
 item.dough.name=Dough
+item.cooked_carrot.name=Cooked Carrot
+item.cooked_beetroot.name=Cooked Beetroot
 
 // ITEMS WITH DURABILITY
 item.plant_mesh.name=Plant Mesh
