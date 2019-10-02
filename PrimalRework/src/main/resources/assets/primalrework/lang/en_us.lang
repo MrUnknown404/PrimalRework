@@ -29,6 +29,10 @@ item.dry_tanned_hide.name=Dry Tanned Hide
 item.wet_tanned_hide.name=Wet Tanned Hide
 item.rope.name=Rope
 item.leather_strip.name=Leather Strip
+item.white_dye.name=White Dye
+item.blue_dye.name=Blue Dye
+item.black_dye.name=Black Dye
+item.brown_dye.name=Brown Dye
 
 item.raw_hide.tooltip_0=Right click water while holding this item to wet it
 item.dry_tanned_hide.tooltip_0=Right click water while holding this item to wet it
@@ -66,6 +70,7 @@ item.flint_axe.name=Flint Hatchet
 item.flint_shovel.name=Flint Shovel
 item.flint_knife.name=Flint Knife
 item.flint_hoe.name=Flint Hoe
+item.flint_shears.name=Flint Shears
 
 item.bone_knife.name=Bone Knife
 

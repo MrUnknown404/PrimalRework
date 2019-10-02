@@ -22,10 +22,45 @@ public class WorldGen implements IWorldGenerator {
 	public void generate(Random r, int chunkX, int chunkZ, World w, IChunkGenerator gen, IChunkProvider prov) {
 		if (w.provider.getDimensionType() == DimensionType.OVERWORLD) {
 			generateGroundItems(w, r, new BlockPos(chunkX * 16 + 8, 128, chunkZ * 16 + 8));
+			generateGrassSlabs(w, new BlockPos(chunkX * 16 + 8, 63, chunkZ * 16 + 8));
 			
 			for (int i = 63; i > 20; i--) {
 				if (r.nextInt(4) == 0) {
 					generateSalt(w, r.nextInt(2) + 3, new BlockPos(chunkX * 16 + 8, i, chunkZ * 16 + 8));
+				}
+			}
+		}
+	}
+	
+	@SuppressWarnings("deprecation")
+	private void generateGrassSlabs(World w, BlockPos pos) {
+		for (int xx = 0; xx < 16; xx++) {
+			for (int zz = 0; zz < 16; zz++) {
+				yCheck:
+				for (int yy = 62; yy < 255; yy++) {
+					BlockPos bpos = new BlockPos(pos.getX() + xx, yy, pos.getZ() + zz);
+					Block b = w.getBlockState(bpos).getBlock();
+					
+					if ((b == Blocks.GRASS || b == Blocks.SNOW_LAYER) && w.getBlockState(bpos.up()).getBlock().isReplaceable(w, bpos)) {
+						BlockPos toCheck = b == Blocks.GRASS ? bpos.up() : bpos;
+						int amount = 0;
+						
+						if (w.getBlockState(toCheck.north()).getBlock() == Blocks.GRASS || w.getBlockState(toCheck.north()).getBlock() == Blocks.DIRT) {amount++;}
+						if (w.getBlockState(toCheck.east()).getBlock() == Blocks.GRASS || w.getBlockState(toCheck.east()).getBlock() == Blocks.DIRT) {amount++;}
+						if (w.getBlockState(toCheck.south()).getBlock() == Blocks.GRASS || w.getBlockState(toCheck.south()).getBlock() == Blocks.DIRT) {amount++;}
+						if (w.getBlockState(toCheck.west()).getBlock() == Blocks.GRASS || w.getBlockState(toCheck.west()).getBlock() == Blocks.DIRT) {amount++;}
+						
+						if (amount >= 2) {
+							if (b == Blocks.GRASS) {
+								w.setBlockState(bpos.up(), ModBlocks.GRASS_SLAB.getStateFromMeta(0), 2);
+								w.setBlockState(bpos, Blocks.DIRT.getDefaultState(), 2);
+								break yCheck;
+							} else if (b == Blocks.SNOW_LAYER) {
+								w.setBlockState(bpos, Blocks.SNOW_LAYER.getStateFromMeta(3), 2);
+								break yCheck;
+							}
+						}
+					}
 				}
 			}
 		}

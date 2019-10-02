@@ -64,6 +64,10 @@ public class ModItems {
 	public static final Item DRY_TANNED_HIDE = new ItemChangeWithWater("dry_tanned_hide", WET_TANNED_HIDE, EnumStage.stage1).setAmountOfTooltops(1);
 	public static final Item ROPE = new ItemBase("rope", EnumStage.stage1);
 	public static final Item LEATHER_STRIP = new ItemBase("leather_strip", EnumStage.stage1);
+	public static final Item WHITE_DYE = new ItemBase("white_dye", EnumStage.stage1);
+	public static final Item BLUE_DYE = new ItemBase("blue_dye", EnumStage.stage1);
+	public static final Item BLACK_DYE = new ItemBase("black_dye", EnumStage.stage1);
+	public static final Item BROWN_DYE = new ItemBase("brown_dye", EnumStage.stage1);
 	
 	// ITEMS WITH DURABILITY
 	public static final Item PLANT_MESH = new ItemDamageableBase("plant_mesh", EnumToolMaterial.flint, EnumStage.stage0);

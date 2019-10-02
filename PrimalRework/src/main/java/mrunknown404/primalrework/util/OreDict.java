@@ -28,6 +28,11 @@ public class OreDict {
 			OreDictionary.registerOre("bed", new ItemStack(Items.BED, 1, i));
 		}
 		
+		OreDictionary.registerOre("prDyeWhite", ModItems.WHITE_DYE);
+		OreDictionary.registerOre("prDyeBlue", ModItems.BLUE_DYE);
+		OreDictionary.registerOre("prDyeBlack", ModItems.BLACK_DYE);
+		OreDictionary.registerOre("prDyeBrown", ModItems.BROWN_DYE);
+		
 		OreDictionary.registerOre("logStripped", ModBlocks.STRIPPED_OAK_LOG);
 		OreDictionary.registerOre("logStripped", ModBlocks.STRIPPED_BIRCH_LOG);
 		OreDictionary.registerOre("logStripped", ModBlocks.STRIPPED_SPRUCE_LOG);

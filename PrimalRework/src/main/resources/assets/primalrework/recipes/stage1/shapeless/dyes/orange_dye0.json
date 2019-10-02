@@ -3,10 +3,8 @@
   "stage": "stage1",
   "ingredients": [
     {
-      "item": "minecraft:wheat"
-    },
-	{
-      "item": "primalrework:salt"
+      "item": "minecraft:red_flower",
+	  "data": 5
     },
 	{
       "item": "primalrework:mortar_pestle",
@@ -14,6 +12,8 @@
     }
   ],
   "result": {
-    "item": "primalrework:dough"
+    "item": "minecraft:dye",
+	"data": 14,
+	"count": 2
   }
 }

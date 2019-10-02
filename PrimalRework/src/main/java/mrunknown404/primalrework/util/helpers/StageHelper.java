@@ -101,6 +101,8 @@ public class StageHelper {
 		for (int i = 0; i < 3; i++) {
 			addStagedItem(EnumStage.stage0, Blocks.DIRT, i);
 			addStagedItem(EnumStage.stage0, Blocks.TALLGRASS, i);
+			addStagedItem(EnumStage.stage1, Blocks.SANDSTONE, i);
+			addStagedItem(EnumStage.stage1, Blocks.RED_SANDSTONE, i);
 		}
 		for (int i = 0; i < 4; i++) {
 			if (i <= 1) {
@@ -126,7 +128,7 @@ public class StageHelper {
 			addStagedItem(EnumStage.stage0, Blocks.RED_FLOWER, i);
 		}
 		for (int i = 0; i < 16; i++) {
-			addStagedItem(EnumStage.do_later, Items.DYE, i);
+			addStagedItem(EnumStage.stage1, Items.DYE, i);
 			addStagedItem(EnumStage.stage1, Blocks.WOOL, i);
 			addStagedItem(EnumStage.stage1, Blocks.CARPET, i);
 			addStagedItem(EnumStage.do_later, Blocks.STAINED_HARDENED_CLAY, i);
@@ -153,9 +155,6 @@ public class StageHelper {
 		addStagedItem(EnumStage.do_later, Blocks.LAPIS_ORE);
 		addStagedItem(EnumStage.do_later, Blocks.LAPIS_BLOCK);
 		addStagedItem(EnumStage.do_later, Blocks.DISPENSER);
-		addStagedItem(EnumStage.do_later, Blocks.SANDSTONE, 0);
-		addStagedItem(EnumStage.do_later, Blocks.SANDSTONE, 1);
-		addStagedItem(EnumStage.do_later, Blocks.SANDSTONE, 2);
 		addStagedItem(EnumStage.do_later, Blocks.NOTEBLOCK);
 		addStagedItem(EnumStage.do_later, Blocks.GOLDEN_RAIL);
 		addStagedItem(EnumStage.do_later, Blocks.DETECTOR_RAIL);
@@ -287,9 +286,6 @@ public class StageHelper {
 		addStagedItem(EnumStage.do_later, Blocks.PRISMARINE, 1);
 		addStagedItem(EnumStage.do_later, Blocks.PRISMARINE, 2);
 		addStagedItem(EnumStage.do_later, Blocks.SEA_LANTERN);
-		addStagedItem(EnumStage.do_later, Blocks.RED_SANDSTONE, 0);
-		addStagedItem(EnumStage.do_later, Blocks.RED_SANDSTONE, 1);
-		addStagedItem(EnumStage.do_later, Blocks.RED_SANDSTONE, 2);
 		addStagedItem(EnumStage.do_later, Blocks.RED_SANDSTONE_STAIRS);
 		addStagedItem(EnumStage.stage1, Blocks.STONE_SLAB2);
 		addStagedItem(EnumStage.do_later, Blocks.END_ROD);
