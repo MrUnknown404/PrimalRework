@@ -134,6 +134,7 @@ itemGroup.primalrework_blocks=Primal.R Blocks
 
 container.fire_pit=Camp Fire
 container.primal_enchantment_table=Primal Enchanting
+container.loom=Loom
 
 gui.fire_pit_cook=Fuel
 gui.drying_table_time=Drying Time

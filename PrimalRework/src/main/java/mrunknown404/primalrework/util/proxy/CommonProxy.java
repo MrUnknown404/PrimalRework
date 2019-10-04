@@ -6,6 +6,7 @@ import mrunknown404.primalrework.init.ModRecipes;
 import mrunknown404.primalrework.tileentity.TileEntityCraftingStump;
 import mrunknown404.primalrework.tileentity.TileEntityDryingTable;
 import mrunknown404.primalrework.tileentity.TileEntityFirePit;
+import mrunknown404.primalrework.tileentity.TileEntityLoom;
 import mrunknown404.primalrework.tileentity.TileEntityPrimalEnchanting;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
@@ -29,5 +30,6 @@ public class CommonProxy {
 		GameRegistry.registerTileEntity(TileEntityCraftingStump.class, new ResourceLocation(Main.MOD_ID, "crafting_stump"));
 		GameRegistry.registerTileEntity(TileEntityDryingTable.class, new ResourceLocation(Main.MOD_ID, "drying_table"));
 		GameRegistry.registerTileEntity(TileEntityPrimalEnchanting.class, new ResourceLocation(Main.MOD_ID, "primal_enchanting_table"));
+		GameRegistry.registerTileEntity(TileEntityLoom.class, new ResourceLocation(Main.MOD_ID, "loom"));
 	}
 }

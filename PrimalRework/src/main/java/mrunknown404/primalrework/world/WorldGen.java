@@ -16,7 +16,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 public class WorldGen implements IWorldGenerator {
 
-	//TODO add random crop gen
+	//TODO add random crop gen, replace vanilla ore gen
 	
 	@Override
 	public void generate(Random r, int chunkX, int chunkZ, World w, IChunkGenerator gen, IChunkProvider prov) {

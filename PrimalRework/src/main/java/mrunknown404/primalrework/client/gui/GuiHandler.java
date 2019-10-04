@@ -3,8 +3,10 @@ package mrunknown404.primalrework.client.gui;
 import mrunknown404.primalrework.Main;
 import mrunknown404.primalrework.inventory.ContainerEnchantmentReplace;
 import mrunknown404.primalrework.inventory.ContainerFirePit;
+import mrunknown404.primalrework.inventory.ContainerLoom;
 import mrunknown404.primalrework.inventory.ContainerPrimalEnchanting;
 import mrunknown404.primalrework.tileentity.TileEntityFirePit;
+import mrunknown404.primalrework.tileentity.TileEntityLoom;
 import mrunknown404.primalrework.tileentity.TileEntityPrimalEnchanting;
 import net.minecraft.client.gui.GuiEnchantment;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,6 +25,8 @@ public class GuiHandler implements IGuiHandler {
 			return new ContainerEnchantmentReplace(player.inventory, world, new BlockPos(x, y, z));
 		} else if (ID == Main.GUI_ID_PRIMAL_ENCHANTING) {
 			return new ContainerPrimalEnchanting(player.inventory, (TileEntityPrimalEnchanting) world.getTileEntity(new BlockPos(x, y, z)));
+		} else if (ID == Main.GUI_ID_LOOM) {
+			return new ContainerLoom(player.inventory, (TileEntityLoom) world.getTileEntity(new BlockPos(x, y, z)));
 		}
 		
 		return null;
@@ -36,6 +40,8 @@ public class GuiHandler implements IGuiHandler {
 			return new GuiEnchantment(player.inventory, world, (IWorldNameable) world.getTileEntity(new BlockPos(x, y, z)));
 		} else if (ID == Main.GUI_ID_PRIMAL_ENCHANTING) {
 			return new GuiPrimalEnchantment(player.inventory, (TileEntityPrimalEnchanting) world.getTileEntity(new BlockPos(x, y, z)));
+		} else if (ID == Main.GUI_ID_LOOM) {
+			return new GuiLoom(player.inventory, (TileEntityLoom) world.getTileEntity(new BlockPos(x, y, z)));
 		}
 		
 		return null;

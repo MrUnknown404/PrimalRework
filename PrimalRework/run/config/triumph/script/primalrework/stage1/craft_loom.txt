@@ -7,7 +7,7 @@ setAnnounceToChat(true)
 setRequiresParents()
 alwaysVisible()
 
-addParent("primalrework:stage1/get_rope")
+addParent("primalrework:stage1/craft_rope")
 addParent("primalrework:stage1/craft_plank")
 
 //hideLines()

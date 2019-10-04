@@ -38,6 +38,7 @@ public class Main {
 	public static final int GUI_ID_FIRE_PIT = 1;
 	public static final int GUI_ID_ENCHANTING = 2;
 	public static final int GUI_ID_PRIMAL_ENCHANTING = 3;
+	public static final int GUI_ID_LOOM = 4;
 	
 	public static SimpleNetworkWrapper networkWrapper;
 	
