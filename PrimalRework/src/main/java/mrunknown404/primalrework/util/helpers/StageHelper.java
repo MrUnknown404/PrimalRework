@@ -424,12 +424,12 @@ public class StageHelper {
 		addStagedItem(EnumStage.do_later, Items.IRON_DOOR);
 		addStagedItem(EnumStage.do_later, Items.REDSTONE);
 		addStagedItem(EnumStage.stage1, Items.SNOWBALL);
-		addStagedItem(EnumStage.do_later, Items.BOAT);
-		addStagedItem(EnumStage.do_later, Items.SPRUCE_BOAT);
-		addStagedItem(EnumStage.do_later, Items.BIRCH_BOAT);
-		addStagedItem(EnumStage.do_later, Items.JUNGLE_BOAT);
-		addStagedItem(EnumStage.do_later, Items.ACACIA_BOAT);
-		addStagedItem(EnumStage.do_later, Items.DARK_OAK_BOAT);
+		addStagedItem(EnumStage.stage1, Items.BOAT);
+		addStagedItem(EnumStage.stage1, Items.SPRUCE_BOAT);
+		addStagedItem(EnumStage.stage1, Items.BIRCH_BOAT);
+		addStagedItem(EnumStage.stage1, Items.JUNGLE_BOAT);
+		addStagedItem(EnumStage.stage1, Items.ACACIA_BOAT);
+		addStagedItem(EnumStage.stage1, Items.DARK_OAK_BOAT);
 		addStagedItem(EnumStage.stage1, Items.LEATHER);
 		addStagedItem(EnumStage.do_later, Items.MILK_BUCKET);
 		addStagedItem(EnumStage.do_later, Items.BRICK);

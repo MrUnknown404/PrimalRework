@@ -89,8 +89,6 @@ public class ModItems {
 	public static final Item STONE_SWORD_HEAD = new ItemBase("stone_sword_head", 1, EnumStage.stage2);
 	public static final Item STONE_KNIFE_HEAD = new ItemBase("stone_knife_head", 1, EnumStage.stage2);
 	public static final Item STONE_HOE_HEAD = new ItemBase("stone_hoe_head", 1, EnumStage.stage2);
-	public static final Item STONE_SAW_HEAD = new ItemBase("stone_saw_head", 1, EnumStage.stage2);
-	public static final Item STONE_SHEARS_HEAD = new ItemBase("stone_shears_head", 1, EnumStage.stage2);
 	
 	// TOOLS
 	public static final Item FLINT_PICKAXE = new ItemToolBase("flint_pickaxe", EnumToolType.pickaxe, EnumToolMaterial.flint, EnumStage.stage1);
@@ -104,8 +102,6 @@ public class ModItems {
 	public static final Item BONE_KNIFE = new ItemToolBase("bone_knife", EnumToolType.knife, EnumToolMaterial.bone, EnumStage.stage0);
 	
 	public static final Item STONE_KNIFE = new ItemToolBase("stone_knife", EnumToolType.knife, EnumToolMaterial.stone, EnumStage.stage2);
-	public static final Item STONE_SAW = new ItemToolBase("stone_saw", EnumToolType.saw, EnumToolMaterial.stone, EnumStage.stage2);
-	public static final Item STONE_SHEARS = new ItemToolBase("stone_shears", EnumToolType.shears, EnumToolMaterial.stone, EnumStage.stage2);
 	
 	// VANILLA REPLACEMENTS
 	public static final Item DIAMOND_AXE = new ItemToolBase("diamond_axe", EnumToolType.axe, EnumToolMaterial.diamond, EnumStage.do_later).setCreativeTab(CreativeTabs.TOOLS);

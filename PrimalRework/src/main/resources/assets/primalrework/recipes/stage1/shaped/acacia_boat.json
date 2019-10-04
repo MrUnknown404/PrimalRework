@@ -1,0 +1,16 @@
+{
+  "type": "primalrework:staged_shaped",
+  "stage": "stage1",
+  "pattern": [
+    "P P",
+    "PPP"
+  ],
+  "key": {
+    "P": {
+      "item": "primalrework:acacia_plank"
+    }
+  },
+  "result": {
+    "item": "minecraft:acacia_boat"
+  }
+}

@@ -50,7 +50,6 @@ item.plant_mesh.name=Plant Mesh
 item.string_mesh.name=String Mesh
 item.flint_crafting_hammer.name=Flint Crafting Hammer
 item.flint_saw.name=Flint Saw
-item.stone_saw.name=Stone Saw
 item.clay_bucket_empty.name=Clay Bucket
 item.clay_bucket_water.name=Water Clay Bucket
 item.clay_bucket_milk.name=Milk Clay Bucket
@@ -62,7 +61,6 @@ item.stone_shovel_head.name=Stone Shovel Head
 item.stone_sword_head.name=Stone Sword Head
 item.stone_knife_head.name=Stone Knife Head
 item.stone_hoe_head.name=Stone Hoe Head
-item.stone_saw_head.name=Stone Saw Head
 
 // TOOLS
 item.flint_pickaxe.name=Flint Pickaxe

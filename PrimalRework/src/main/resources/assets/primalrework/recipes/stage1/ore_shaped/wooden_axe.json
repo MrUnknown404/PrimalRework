@@ -1,0 +1,21 @@
+{
+  "type": "primalrework:staged_ore_shaped",
+  "stage": "stage1",
+  "pattern": [
+    "PP",
+    "PI",
+    " I"
+  ],
+  "key": {
+    "P": {
+      "type": "forge:ore_dict",
+      "ore": "plankItem"
+    },
+    "I": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "primalrework:wooden_axe"
+  }
+}
