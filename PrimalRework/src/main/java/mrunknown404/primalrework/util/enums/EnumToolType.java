@@ -66,10 +66,8 @@ public enum EnumToolType {
 		return ench;
 	}
 	
-	private static class Enchs {
-		//TODO private static final List<Enchantment> TOOL_FISHING = Arrays.asList(Enchantments.LUCK_OF_THE_SEA, Enchantments.LURE);
-		//TODO private static final List<Enchantment> WEAPON_BOW = Arrays.asList(Enchantments.POWER, Enchantments.PUNCH, Enchantments.FLAME, Enchantments.INFINITY);
-		
+	@SuppressWarnings("unused")
+	public static class Enchs { //TODO setup enchanting for fishing rod/bow
 		/**@param i1 EFFICIENCY
 		 * @param i2 UNBREAKING
 		 */
@@ -105,6 +103,22 @@ public enum EnumToolType {
 		private static List<EnchantmentData> getWeaponSpecial(int i1, int i2, int i3) {
 			return Arrays.asList(new EnchantmentData(Enchantments.LOOTING, i1), new EnchantmentData(Enchantments.FIRE_ASPECT, i2),
 					new EnchantmentData(Enchantments.SWEEPING, i3));
+		}
+		
+		/**@param i1 POWER
+		 * @param i2 PUNCH
+		 * @param i3 FLAME
+		 */
+		private static List<EnchantmentData> getBowBase(int i1, int i2, int i3) {
+			return Arrays.asList(new EnchantmentData(Enchantments.POWER, i1), new EnchantmentData(Enchantments.PUNCH, i2),
+					new EnchantmentData(Enchantments.FLAME, i3), new EnchantmentData(Enchantments.INFINITY, 1));
+		}
+		
+		/**@param i1 LUCK_OF_THE_SEA
+		 * @param i2 LURE
+		 */
+		private static List<EnchantmentData> getFishingBase(int i1, int i2) {
+			return Arrays.asList(new EnchantmentData(Enchantments.LUCK_OF_THE_SEA, i1), new EnchantmentData(Enchantments.LURE, i2));
 		}
 	}
 }

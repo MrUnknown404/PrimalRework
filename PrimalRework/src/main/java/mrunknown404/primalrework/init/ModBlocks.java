@@ -51,7 +51,7 @@ public class ModBlocks {
 	public static final Block GRASS_DOUBLE_SLAB = new BlockGrassSlab("grass_double_slab", true);
 	public static final Block GRASS_SLAB = new BlockGrassSlab("grass_slab", false);
 	public static final Block DRYING_TABLE = new BlockDryingTable();
-	public static final Block LOOM = new BlockLoom(); //TODO make work
+	public static final Block LOOM = new BlockLoom();
 	
 	//TODO add cotton crop
 	

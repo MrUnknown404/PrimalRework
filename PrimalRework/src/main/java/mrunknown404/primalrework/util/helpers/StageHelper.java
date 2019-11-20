@@ -435,8 +435,8 @@ public class StageHelper {
 		addStagedItem(EnumStage.do_later, Items.BRICK);
 		addStagedItem(EnumStage.stage1, Items.CLAY_BALL);
 		addStagedItem(EnumStage.stage1, Items.REEDS);
-		addStagedItem(EnumStage.do_later, Items.PAPER);
-		addStagedItem(EnumStage.do_later, Items.BOOK);
+		addStagedItem(EnumStage.stage2, Items.PAPER);
+		addStagedItem(EnumStage.stage2, Items.BOOK);
 		addStagedItem(EnumStage.stage0, Items.SLIME_BALL);
 		addStagedItem(EnumStage.do_later, Items.CHEST_MINECART);
 		addStagedItem(EnumStage.do_later, Items.FURNACE_MINECART);
@@ -448,7 +448,7 @@ public class StageHelper {
 		addStagedItem(EnumStage.stage0, Items.COOKED_FISH, 0);
 		addStagedItem(EnumStage.stage0, Items.COOKED_FISH, 1);
 		addStagedItem(EnumStage.stage0, Items.BONE);
-		addStagedItem(EnumStage.do_later, Items.SUGAR);
+		addStagedItem(EnumStage.stage2, Items.SUGAR);
 		addStagedItem(EnumStage.do_later, Items.CAKE);
 		addStagedItem(EnumStage.do_later, Items.REPEATER);
 		addStagedItem(EnumStage.do_later, Items.COOKIE);

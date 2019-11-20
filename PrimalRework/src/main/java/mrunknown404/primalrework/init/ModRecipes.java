@@ -29,8 +29,6 @@ import net.minecraftforge.registries.ForgeRegistry;
 
 public class ModRecipes {
 	
-	//TODO add recipes for : paper, book, sugar
-	
 	public static final String CATEGORY_STAGED_CRAFTING = Main.MOD_ID + ".staged_crafting_jei";
 	public static final String CATEGORY_FIRE_PIT = Main.MOD_ID + ".fire_pit_jei";
 	public static final String CATEGORY_DRYING_TABLE = Main.MOD_ID + ".drying_table_jei";
