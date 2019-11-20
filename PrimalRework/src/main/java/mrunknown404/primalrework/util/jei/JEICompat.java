@@ -47,7 +47,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 public class JEICompat implements IModPlugin {
 
 	//TODO replace vanilla crafting GUI with custom GUI
-	//TODO add vanilla enchanting, primal enchanting & loom category
+	//TODO add vanilla enchanting, primal enchanting
 	
 	public static final Map<String, List<IRecipeWrapperBase<?>>> RECIPE_MAP = new HashMap<String, List<IRecipeWrapperBase<?>>>();
 	
@@ -89,6 +89,7 @@ public class JEICompat implements IModPlugin {
 		reg.addIngredientInfo(new ItemStack(ModItems.BARK), VanillaTypes.ITEM, new TextComponentTranslation("jei.info.bark").getUnformattedText());
 		reg.addIngredientInfo(new ItemStack(ModItems.WET_HIDE), VanillaTypes.ITEM, new TextComponentTranslation("jei.info.wet_hide").getUnformattedText());
 		reg.addIngredientInfo(new ItemStack(ModItems.WET_TANNED_HIDE), VanillaTypes.ITEM, new TextComponentTranslation("jei.info.wet_tanned_hide").getUnformattedText());
+		reg.addIngredientInfo(new ItemStack(ModItems.CLOTH), VanillaTypes.ITEM, new TextComponentTranslation("jei.info.cloth").getUnformattedText());
 		
 		reg.addRecipes(ModRecipes.getWrappedStageRecipes(), ModRecipes.CATEGORY_STAGED_CRAFTING);
 		reg.addRecipes(ModRecipes.getWrappedFirePitRecipes(), ModRecipes.CATEGORY_FIRE_PIT);

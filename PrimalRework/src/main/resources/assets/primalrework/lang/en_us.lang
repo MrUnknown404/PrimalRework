@@ -145,6 +145,7 @@ jei.info.bone_shard=Can be obtained by left clicking a bone onto a stone block (
 jei.info.bark=Can be obtained by holding down right click with an axe while looking at a log
 jei.info.wet_hide=Can be obtained by right clicking raw hide while looking at water
 jei.info.wet_tanned_hide=Can be obtained by right clicking dry tanned hide while looking at water
+jei.info.cloth=Right click 7 string onto a loom to make cloth
 
 subtitles.entity.pigeon.ambient=Pigeon Cooing
 subtitles.entity.pigeon.hurt=Pigeon hurts

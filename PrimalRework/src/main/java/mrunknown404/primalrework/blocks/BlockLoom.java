@@ -1,6 +1,5 @@
 package mrunknown404.primalrework.blocks;
 
-import mrunknown404.primalrework.Main;
 import mrunknown404.primalrework.blocks.util.BlockDirectionalBase;
 import mrunknown404.primalrework.tileentity.TileEntityLoom;
 import mrunknown404.primalrework.util.DoubleValue;
@@ -10,28 +9,49 @@ import mrunknown404.primalrework.util.enums.EnumToolType;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.InventoryHelper;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockLoom extends BlockDirectionalBase implements ITileEntityProvider {
 	
+	public static final PropertyInteger STRING_LEVEL = PropertyInteger.create("stringlevel", 0, 7);
+	
 	public BlockLoom() {
 		super("loom", Material.WOOD, SoundType.WOOD, BlockRenderLayer.CUTOUT, 2, 2, FULL_BLOCK_AABB, FULL_BLOCK_AABB, EnumStage.stage1,
 				new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.axe, EnumToolMaterial.flint));
+		setDefaultState(blockState.getBaseState().withProperty(STRING_LEVEL, 0));
+		hasTileEntity = true;
 	}
 	
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		if (!worldIn.isRemote) {
-			playerIn.openGui(Main.main, Main.GUI_ID_LOOM, worldIn, pos.getX(), pos.getY(), pos.getZ());
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		if (world.getTileEntity(pos) instanceof TileEntityLoom) {
+			TileEntityLoom te = (TileEntityLoom) world.getTileEntity(pos);
+			ItemStack stack = player.getHeldItemMainhand();
+			
+			if (stack.getItem() == Items.STRING) {
+				if (te.click(true)) {
+					stack.shrink(1);
+				}
+			} else {
+				te.click(false);
+			}
+			
+			world.setBlockState(pos, world.getBlockState(pos).getActualState(world, pos));
 		}
 		
 		return true;
@@ -42,7 +62,10 @@ public class BlockLoom extends BlockDirectionalBase implements ITileEntityProvid
 		TileEntity te = world.getTileEntity(pos);
 		
 		if (te instanceof TileEntityLoom) {
-			InventoryHelper.dropInventoryItems(world, pos, (TileEntityLoom) te);
+			for (int i = 0; i < ((TileEntityLoom) te).getStringLevel(); i++) {
+				world.spawnEntity(new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(Items.STRING)));
+			}
+			
 			world.updateComparatorOutputLevel(pos, this);
 		}
 		
@@ -62,5 +85,15 @@ public class BlockLoom extends BlockDirectionalBase implements ITileEntityProvid
 	@Override
 	public EnumBlockRenderType getRenderType(IBlockState state) {
 		return EnumBlockRenderType.MODEL;
+	}
+	
+	@Override
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, new IProperty[] {FACING, STRING_LEVEL});
+	}
+	
+	@Override
+	public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
+		return state.withProperty(STRING_LEVEL, ((TileEntityLoom) world.getTileEntity(pos)).getStringLevel());
 	}
 }
