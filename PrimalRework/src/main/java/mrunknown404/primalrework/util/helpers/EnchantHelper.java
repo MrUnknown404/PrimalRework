@@ -15,30 +15,32 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandom;
 import net.minecraft.util.math.MathHelper;
 
+//TODO rewrite all enchanting this
+
 public class EnchantHelper {
-	public static List<EnchantmentData> buildVanillaEnchantmentList(Random randomIn, ItemStack item, int level) {
+	public static List<EnchantmentData> buildVanillaEnchantmentList(Random random, ItemStack item, int level) {
 		List<EnchantmentData> list = Lists.<EnchantmentData>newArrayList();
 		int i = HarvestHelper.getHarvestInfo(item.getItem()).getEnchantability();
 		
 		if (i <= 0) {
 			return list;
 		} else {
-			level = level + 1 + randomIn.nextInt(i / 4 + 1) + randomIn.nextInt(i / 4 + 1);
-			float f = (randomIn.nextFloat() + randomIn.nextFloat() - 1.0F) * 0.15F;
+			level = level + 1 + random.nextInt(i / 4 + 1) + random.nextInt(i / 4 + 1);
+			float f = (random.nextFloat() + random.nextFloat() - 1.0F) * 0.15F;
 			level = MathHelper.clamp(Math.round((float) level + (float) level * f), 1, Integer.MAX_VALUE);
 			List<EnchantmentData> list1 = getVanillaEnchantmentDatas(level, item);
 			
 			if (!list1.isEmpty()) {
-				EnchantmentData re1 = WeightedRandom.getRandomItem(randomIn, list1);
+				EnchantmentData re1 = WeightedRandom.getRandomItem(random, list1);
 				list.add(re1);
 				list1.remove(re1);
 				
-				while (randomIn.nextInt(50) <= level) {
+				while (random.nextInt(50) <= level) {
 					if (list1.isEmpty()) {
 						break;
 					}
 					
-					EnchantmentData re2 = WeightedRandom.getRandomItem(randomIn, list1);
+					EnchantmentData re2 = WeightedRandom.getRandomItem(random, list1);
 					list.add(re2);
 					list1.remove(re2);
 					level /= 2;
@@ -106,7 +108,7 @@ public class EnchantHelper {
 		List<EnchantmentData> list = Lists.<EnchantmentData>newArrayList();
 		
 		for (EnchantmentData enchantment : EnchantHelper.getPrimalItemsEnchants(item.getItem())) {
-			if (isEnchantable(item) || (item.getItem() == Items.BOOK && enchantment.enchantment.isAllowedOnBooks())) {
+			if (isEnchantable(item)) {
 				for (int i = enchantment.enchantmentLevel; i > 0; --i) {
 					if (enchantability >= enchantment.enchantment.getMinEnchantability(i) && enchantability <= enchantment.enchantment.getMaxEnchantability(i)) {
 						list.add(new EnchantmentData(enchantment.enchantment, i));

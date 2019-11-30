@@ -26,6 +26,7 @@ import mrunknown404.primalrework.init.ModBlocks;
 import mrunknown404.primalrework.init.ModItems;
 import mrunknown404.primalrework.init.ModRecipes;
 import mrunknown404.primalrework.inventory.ContainerFirePit;
+import mrunknown404.primalrework.recipes.util.IRecipeBase;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.helpers.StageHelper;
 import mrunknown404.primalrework.util.jei.category.DryingTableRecipeCategory;
@@ -40,6 +41,7 @@ import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.ContainerWorkbench;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentTranslation;
 
@@ -128,12 +130,12 @@ public class JEICompat implements IModPlugin {
 			@SuppressWarnings("deprecation")
 			@Override
 			public void run() {
-				Iterator<Entry<String, List<IRecipeWrapperBase<?>>>> it = RECIPE_MAP.entrySet().iterator();
+				Iterator<Entry<String, List<IRecipeWrapperBase<? extends IRecipeBase>>>> it = RECIPE_MAP.entrySet().iterator();
 				
 				while (it.hasNext()) {
-					Entry<String, List<IRecipeWrapperBase<?>>> pair = it.next();
+					Entry<String, List<IRecipeWrapperBase<? extends IRecipeBase>>> pair = it.next();
 					
-					for (IRecipeWrapperBase<?> wrap : pair.getValue()) {
+					for (IRecipeWrapperBase<? extends IRecipeBase> wrap : pair.getValue()) {
 						if (StageHelper.hasAccessToStage(wrap.getRecipe().getStage())) {
 							rr.unhideRecipe(wrap, pair.getKey());
 						} else {
@@ -150,7 +152,7 @@ public class JEICompat implements IModPlugin {
 					List<ItemStack> visible = new ArrayList<ItemStack>();
 					
 					for (ItemStack item : pair.getValue()) {
-						if (StageHelper.hasAccessToStage(pair.getKey())) {
+						if (StageHelper.hasAccessToStage(pair.getKey()) || item.getItem() == Item.getItemFromBlock(ModBlocks.CRAFTING_STUMP)) {
 							visible.add(item);
 						} else {
 							hidden.add(item);
@@ -163,19 +165,19 @@ public class JEICompat implements IModPlugin {
 					if (!visible.isEmpty()) {
 						ingReg.addIngredientsAtRuntime(VanillaTypes.ITEM, visible);
 					}
-					
-					List<EnchantmentData> enchs = new ArrayList<EnchantmentData>();
-					for (Enchantment en : Enchantment.REGISTRY) {
-						for (int i = 1; i < en.getMaxLevel() + 1; i++) {
-							enchs.add(new EnchantmentData(en, i));
-						}
+				}
+				
+				List<EnchantmentData> enchs = new ArrayList<EnchantmentData>();
+				for (Enchantment en : Enchantment.REGISTRY) {
+					for (int i = 1; i < en.getMaxLevel() + 1; i++) {
+						enchs.add(new EnchantmentData(en, i));
 					}
-					
-					if (StageHelper.hasAccessToStage(EnumStage.do_later)) { //TODO change to proper stage later
-						ingReg.addIngredientsAtRuntime(VanillaTypes.ENCHANT, enchs);
-					} else {
-						ingReg.removeIngredientsAtRuntime(VanillaTypes.ENCHANT, enchs);
-					}
+				}
+				
+				if (StageHelper.hasAccessToStage(EnumStage.do_later)) { //TODO change to proper stage later
+					ingReg.addIngredientsAtRuntime(VanillaTypes.ENCHANT, enchs);
+				} else {
+					ingReg.removeIngredientsAtRuntime(VanillaTypes.ENCHANT, enchs);
 				}
 			}
 		});

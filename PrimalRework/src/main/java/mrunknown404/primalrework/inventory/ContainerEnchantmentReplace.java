@@ -111,20 +111,20 @@ public class ContainerEnchantmentReplace extends ContainerEnchantment {
 	}
 	
 	@Override
-	public boolean enchantItem(EntityPlayer playerIn, int id) {
+	public boolean enchantItem(EntityPlayer player, int id) {
 		ItemStack itemstack = tableInventory.getStackInSlot(0);
 		ItemStack itemstack1 = tableInventory.getStackInSlot(1);
 		int i = id + 1;
 		
-		if ((itemstack1.isEmpty() || itemstack1.getCount() < i) && !playerIn.capabilities.isCreativeMode) {
+		if ((itemstack1.isEmpty() || itemstack1.getCount() < i) && !player.capabilities.isCreativeMode) {
 			return false;
-		} else if (enchantLevels[id] > 0 && !itemstack.isEmpty() && (playerIn.experienceLevel >= i && playerIn.experienceLevel >= enchantLevels[id] ||
-				playerIn.capabilities.isCreativeMode)) {
+		} else if (enchantLevels[id] > 0 && !itemstack.isEmpty() && (player.experienceLevel >= i && player.experienceLevel >= enchantLevels[id] ||
+				player.capabilities.isCreativeMode)) {
 			if (!world.isRemote) {
 				List<EnchantmentData> list = getEnchantmentList(itemstack, id, enchantLevels[id]);
 				
 				if (!list.isEmpty()) {
-					playerIn.onEnchant(itemstack, i);
+					player.onEnchant(itemstack, i);
 					boolean flag = itemstack.getItem() == Items.BOOK;
 					
 					if (flag) {
@@ -142,7 +142,7 @@ public class ContainerEnchantmentReplace extends ContainerEnchantment {
 						}
 					}
 					
-					if (!playerIn.capabilities.isCreativeMode) {
+					if (!player.capabilities.isCreativeMode) {
 						itemstack1.shrink(i);
 						
 						if (itemstack1.isEmpty()) {
@@ -150,14 +150,14 @@ public class ContainerEnchantmentReplace extends ContainerEnchantment {
 						}
 					}
 					
-					playerIn.addStat(StatList.ITEM_ENCHANTED);
+					player.addStat(StatList.ITEM_ENCHANTED);
 					
-					if (playerIn instanceof EntityPlayerMP) {
-						CriteriaTriggers.ENCHANTED_ITEM.trigger((EntityPlayerMP)playerIn, itemstack, i);
+					if (player instanceof EntityPlayerMP) {
+						CriteriaTriggers.ENCHANTED_ITEM.trigger((EntityPlayerMP)player, itemstack, i);
 					}
 					
 					tableInventory.markDirty();
-					xpSeed = playerIn.getXPSeed();
+					xpSeed = player.getXPSeed();
 					onCraftMatrixChanged(tableInventory);
 					world.playSound(null, position, SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE, SoundCategory.BLOCKS, 1.0F, world.rand.nextFloat() * 0.1F + 0.9F);
 				}

@@ -53,7 +53,7 @@ public class StageHelper {
 	}
 	
 	public static boolean hasAccessToStage(EnumStage stage) {
-		return stage.id <= StageHelper.stage.id;
+		return StageHelper.stage.id >= stage.id;
 	}
 	
 	public static void setWorld(World world) {
