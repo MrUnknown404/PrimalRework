@@ -24,8 +24,9 @@ public class BlockBase extends Block implements IBlockBase<BlockBase> {
 
 	private final BlockRenderLayer renderType;
 	private final AxisAlignedBB collisionAABB, visualAABB;
-	protected final EnumStage stage;
 	private int amountOfTooltops = 0;
+	
+	protected final EnumStage stage;
 	protected BlockHarvestInfo harvestInfo;
 	
 	protected BlockBase(String name, Material material, SoundType soundType, BlockRenderLayer renderType, float hardness, float resistance,
@@ -85,13 +86,8 @@ public class BlockBase extends Block implements IBlockBase<BlockBase> {
 	}
 	
 	@Override
-	public boolean isFullCube(IBlockState state) {
-		return renderType == BlockRenderLayer.SOLID;
-	}
-	
-	@Override
 	public boolean isOpaqueCube(IBlockState state) {
-		return renderType == BlockRenderLayer.SOLID;
+		return true;
 	}
 	
 	@Override

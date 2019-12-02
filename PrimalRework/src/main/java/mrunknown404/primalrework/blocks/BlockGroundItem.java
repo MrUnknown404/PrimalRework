@@ -69,4 +69,14 @@ public class BlockGroundItem extends BlockBase {
 			return true;
 		}
 	}
+	
+	@Override
+	public boolean isOpaqueCube(IBlockState state) {
+		return false;
+	}
+	
+	@Override
+	public boolean isFullCube(IBlockState state) {
+		return false;
+	}
 }

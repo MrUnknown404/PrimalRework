@@ -22,7 +22,7 @@ import net.minecraft.world.World;
 public class BlockGrassSlab extends BlockSlabBase {
 	
 	public BlockGrassSlab(String name, boolean isDouble) {
-		super(name, Material.GROUND, SoundType.GROUND, 0.75f, 0.75f, isDouble, EnumStage.stage1,
+		super(name, Material.GROUND, SoundType.PLANT, 0.75f, 0.75f, isDouble, EnumStage.stage1,
 				new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.shovel, EnumToolMaterial.flint));
 		setTickRandomly(true);
 	}

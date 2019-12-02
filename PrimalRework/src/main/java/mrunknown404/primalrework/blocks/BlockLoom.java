@@ -96,4 +96,14 @@ public class BlockLoom extends BlockDirectionalBase implements ITileEntityProvid
 	public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
 		return state.withProperty(STRING_LEVEL, ((TileEntityLoom) world.getTileEntity(pos)).getStringLevel());
 	}
+	
+	@Override
+	public boolean isOpaqueCube(IBlockState state) {
+		return false;
+	}
+	
+	@Override
+	public boolean isFullCube(IBlockState state) {
+		return false;
+	}
 }

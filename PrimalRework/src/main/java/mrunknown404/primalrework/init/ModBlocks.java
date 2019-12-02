@@ -10,6 +10,7 @@ import mrunknown404.primalrework.blocks.BlockFirePit;
 import mrunknown404.primalrework.blocks.BlockGrassSlab;
 import mrunknown404.primalrework.blocks.BlockGroundItem;
 import mrunknown404.primalrework.blocks.BlockLoom;
+import mrunknown404.primalrework.blocks.BlockOre;
 import mrunknown404.primalrework.blocks.BlockPrimalEnchantingTable;
 import mrunknown404.primalrework.blocks.BlockPrimalTorchLit;
 import mrunknown404.primalrework.blocks.BlockPrimalTorchUnlit;
@@ -19,6 +20,8 @@ import mrunknown404.primalrework.blocks.BlockStrippedLog;
 import mrunknown404.primalrework.blocks.BlockThatchSlab;
 import mrunknown404.primalrework.blocks.util.BlockBase;
 import mrunknown404.primalrework.util.DoubleValue;
+import mrunknown404.primalrework.util.enums.EnumAlloy;
+import mrunknown404.primalrework.util.enums.EnumOreValue;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import mrunknown404.primalrework.util.enums.EnumToolType;
@@ -29,6 +32,8 @@ import net.minecraft.init.Items;
 
 public class ModBlocks {
 	public static final List<Block> BLOCKS = new ArrayList<Block>();
+	
+	//TODO add new wood types, cotton crop
 	
 	public static final Block ROCK = new BlockGroundItem("rock", SoundType.STONE);
 	public static final Block STICK = new BlockGroundItem("stick", SoundType.WOOD, Items.STICK);
@@ -52,8 +57,12 @@ public class ModBlocks {
 	public static final Block GRASS_SLAB = new BlockGrassSlab("grass_slab", false);
 	public static final Block DRYING_TABLE = new BlockDryingTable();
 	public static final Block LOOM = new BlockLoom();
-	
-	//TODO add cotton crop
+	public static final Block COPPER_ORE_POOR = new BlockOre(2, 2, EnumStage.stage2, EnumAlloy.copper, EnumOreValue.poor, BlockOre.COPPER_TYPES);
+	public static final Block COPPER_ORE_LOW = new BlockOre(2, 2, EnumStage.stage2, EnumAlloy.copper, EnumOreValue.low, BlockOre.COPPER_TYPES);
+	public static final Block COPPER_ORE_MEDIUM = new BlockOre(2, 2, EnumStage.stage2, EnumAlloy.copper, EnumOreValue.medium, BlockOre.COPPER_TYPES);
+	public static final Block COPPER_ORE_GOOD = new BlockOre(2, 2, EnumStage.stage2, EnumAlloy.copper, EnumOreValue.good, BlockOre.COPPER_TYPES);
+	public static final Block COPPER_ORE_HIGH = new BlockOre(2, 2, EnumStage.stage2, EnumAlloy.copper, EnumOreValue.high, BlockOre.COPPER_TYPES);
+	public static final Block COPPER_BLOCK = new BlockOre(3, 3, EnumStage.stage2, EnumAlloy.copper, BlockOre.COPPER_TYPES);
 	
 	public static final Block STRIPPED_OAK_LOG = new BlockStrippedLog("oak");
 	public static final Block STRIPPED_SPRUCE_LOG = new BlockStrippedLog("spruce");

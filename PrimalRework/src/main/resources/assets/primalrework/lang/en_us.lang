@@ -34,11 +34,19 @@ item.blue_dye.name=Blue Dye
 item.black_dye.name=Black Dye
 item.brown_dye.name=Brown Dye
 
+item.copper_nugget_poor.name=Copper Nugget
+item.copper_nugget_low.name=Copper Nugget
+item.copper_nugget_medium.name=Copper Nugget
+item.copper_nugget_good.name=Copper Nugget
+item.copper_nugget_high.name=Copper Nugget
+
 item.raw_hide.tooltip_0=Right click water while holding this item to wet it
 item.dry_tanned_hide.tooltip_0=Right click water while holding this item to wet it
 item.magic_dust_red.tooltip_0=Level 1 Magic Dust
 item.magic_dust_green.tooltip_0=Level 2 Magic Dust
 item.magic_dust_blue.tooltip_0=Level 3 Magic Dust
+
+item.ore_units.tooltip=Units
 
 // FOOD
 item.dough.name=Dough
@@ -104,6 +112,12 @@ tile.dirt_slab.name=Dirt Slab
 tile.grass_slab.name=Grass Slab
 tile.drying_table.name=Drying Table
 tile.loom.name=Loom
+tile.copper_ore_poor.name=Copper Ore
+tile.copper_ore_low.name=Copper Ore
+tile.copper_ore_medium.name=Copper Ore
+tile.copper_ore_good.name=Copper Ore
+tile.copper_ore_high.name=Copper Ore
+tile.copper_block.name=Copper Block
 
 tile.stripped_oak_log.name=Stripped Oak Log
 tile.stripped_spruce_log.name=Stripped Spruce Log

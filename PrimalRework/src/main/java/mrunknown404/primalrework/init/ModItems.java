@@ -12,10 +12,13 @@ import mrunknown404.primalrework.items.ItemChangeWithWater;
 import mrunknown404.primalrework.items.ItemClayBucket;
 import mrunknown404.primalrework.items.ItemClayBucketMilk;
 import mrunknown404.primalrework.items.ItemFireStarter;
+import mrunknown404.primalrework.items.ItemOreNugget;
 import mrunknown404.primalrework.items.util.ItemBase;
 import mrunknown404.primalrework.items.util.ItemDamageableBase;
 import mrunknown404.primalrework.items.util.ItemFoodBase;
 import mrunknown404.primalrework.items.util.ItemToolBase;
+import mrunknown404.primalrework.util.enums.EnumAlloy;
+import mrunknown404.primalrework.util.enums.EnumOreValue;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import mrunknown404.primalrework.util.enums.EnumToolType;
@@ -33,6 +36,8 @@ public class ModItems {
 	
 	public static final List<Item> ITEMS = new ArrayList<Item>();
 	public static final Map<Fluid, ItemClayBucket> CLAY_BUCKETS = new HashMap<Fluid, ItemClayBucket>();
+	
+	//TODO add tool handle (and edit recipes), copper ingots/tools
 	
 	// ITEMS
 	public static final Item PLANT_FIBER = new ItemBase("plant_fiber", EnumStage.stage0);
@@ -68,6 +73,11 @@ public class ModItems {
 	public static final Item BLUE_DYE = new ItemBase("blue_dye", EnumStage.stage1);
 	public static final Item BLACK_DYE = new ItemBase("black_dye", EnumStage.stage1);
 	public static final Item BROWN_DYE = new ItemBase("brown_dye", EnumStage.stage1);
+	public static final Item COPPER_NUGGET_POOR = new ItemOreNugget(EnumStage.stage2, EnumAlloy.copper, EnumOreValue.poor);
+	public static final Item COPPER_NUGGET_LOW = new ItemOreNugget(EnumStage.stage2, EnumAlloy.copper, EnumOreValue.low);
+	public static final Item COPPER_NUGGET_MEDIUM = new ItemOreNugget(EnumStage.stage2, EnumAlloy.copper, EnumOreValue.medium);
+	public static final Item COPPER_NUGGET_GOOD = new ItemOreNugget(EnumStage.stage2, EnumAlloy.copper, EnumOreValue.good);
+	public static final Item COPPER_NUGGET_HIGH = new ItemOreNugget(EnumStage.stage2, EnumAlloy.copper, EnumOreValue.high);
 	
 	// ITEMS WITH DURABILITY
 	public static final Item PLANT_MESH = new ItemDamageableBase("plant_mesh", EnumToolMaterial.flint, EnumStage.stage0);

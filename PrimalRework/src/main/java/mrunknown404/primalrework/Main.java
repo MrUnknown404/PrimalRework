@@ -47,6 +47,9 @@ public class Main {
 	@SidedProxy(clientSide = "mrunknown404.primalrework.util.proxy.ClientProxy", serverSide = "mrunknown404.primalrework.util.proxy.CommonProxy")
 	public static CommonProxy proxy;
 	
+	//TODO add map system similar to antique atlas
+	//TODO think of a metal working system
+	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent e) {
 		proxy.registerEntities();
