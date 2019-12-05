@@ -57,11 +57,11 @@ public abstract class BlockSlabBase extends BlockSlab implements ISlabBase<Block
 		
 		if (types == null || types.length == 0) {
 			System.err.println("Invalid types for " + getUnlocalizedName());
-			setHarvestInfo(BlockHarvestInfo.create());
+			setHarvestInfo(BlockHarvestInfo.createFromEmptyBlock());
 			return;
 		}
 		
-		setHarvestInfo(BlockHarvestInfo.create(types));
+		setHarvestInfo(BlockHarvestInfo.createFromEmptyBlock(types));
 	}
 	
 	@Override

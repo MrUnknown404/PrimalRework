@@ -48,11 +48,11 @@ public class BlockBase extends Block implements IBlockBase<BlockBase> {
 		
 		if (types == null || types.length == 0) {
 			System.err.println("Invalid types for " + getUnlocalizedName());
-			setHarvestInfo(BlockHarvestInfo.create());
+			setHarvestInfo(BlockHarvestInfo.createFromEmptyBlock());
 			return;
 		}
 		
-		setHarvestInfo(BlockHarvestInfo.create(types));
+		setHarvestInfo(BlockHarvestInfo.createFromEmptyBlock(types));
 	}
 	
 	public BlockBase(String name, Material material, SoundType soundType, float hardness, float resistance, EnumStage stage, DoubleValue<EnumToolType, EnumToolMaterial>... types) {

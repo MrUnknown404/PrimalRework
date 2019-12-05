@@ -113,7 +113,7 @@ public class HarvestHelper {
 	
 	public static BlockHarvestInfo getHarvestInfo(Block block) {
 		for (BlockHarvestInfo info : BLOCKS) {
-			if (info.getType() == block) {
+			if (info.getBlock() == block) {
 				return info;
 			}
 		}
@@ -123,7 +123,7 @@ public class HarvestHelper {
 	
 	public static ItemHarvestInfo getHarvestInfo(Item item) {
 		for (ItemHarvestInfo info : ITEMS) {
-			if (info.getType() == item) {
+			if (info.getItem() == item) {
 				return info;
 			}
 		}

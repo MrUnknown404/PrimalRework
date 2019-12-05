@@ -71,7 +71,7 @@ public class OreDict {
 	private static void register(ItemHarvestInfo info, int meta) {
 		for (EnumToolType type : info.getToolTypes()) {
 			if (type != EnumToolType.none) {
-				OreDictionary.registerOre("tool" + WordUtils.capitalizeFully(type.name()), new ItemStack(info.getType(), 1, meta));
+				OreDictionary.registerOre("tool" + WordUtils.capitalizeFully(type.name()), new ItemStack(info.getItem(), 1, meta));
 			}
 		}
 	}

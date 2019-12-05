@@ -153,6 +153,8 @@ container.loom=Loom
 gui.fire_pit_cook=Fuel
 gui.drying_table_time=Drying Time
 
+generator.primal=Primal World
+
 jei.info.flint_knapped=Can be obtained by left clicking a piece of flint onto a stone block (1/3 chance)
 jei.info.flint_point=Can be obtained by left clicking a knapped flint onto a stone block (1/3 chance)
 jei.info.bone_shard=Can be obtained by left clicking a bone onto a stone block (1/3 chance)

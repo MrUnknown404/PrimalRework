@@ -4,6 +4,7 @@ import mrunknown404.primalrework.client.gui.GuiHandler;
 import mrunknown404.primalrework.commands.CommandStage;
 import mrunknown404.primalrework.handlers.BlockEventHandler;
 import mrunknown404.primalrework.handlers.EntityEventHandler;
+import mrunknown404.primalrework.handlers.GuiEventHandler;
 import mrunknown404.primalrework.handlers.PlayerEventHandler;
 import mrunknown404.primalrework.handlers.WorldEventHandler;
 import mrunknown404.primalrework.network.FireStarterMessage;
@@ -17,6 +18,8 @@ import mrunknown404.primalrework.util.VanillaOverrides;
 import mrunknown404.primalrework.util.helpers.StageHelper;
 import mrunknown404.primalrework.util.proxy.CommonProxy;
 import mrunknown404.primalrework.world.WorldGen;
+import mrunknown404.primalrework.world.WorldTypePrimal;
+import net.minecraft.world.WorldType;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -39,6 +42,8 @@ public class Main {
 	public static final int GUI_ID_ENCHANTING = 2;
 	public static final int GUI_ID_PRIMAL_ENCHANTING = 3;
 	
+	public static final WorldType PRIMAL_WORLD = new WorldTypePrimal();
+	
 	public static SimpleNetworkWrapper networkWrapper;
 	
 	@Instance
@@ -47,8 +52,8 @@ public class Main {
 	@SidedProxy(clientSide = "mrunknown404.primalrework.util.proxy.ClientProxy", serverSide = "mrunknown404.primalrework.util.proxy.CommonProxy")
 	public static CommonProxy proxy;
 	
-	//TODO add map system similar to antique atlas
-	//TODO think of a metal working system
+	// TODO add map system similar to antique atlas
+	// TODO think of a metal working system
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent e) {
@@ -59,6 +64,7 @@ public class Main {
 		MinecraftForge.EVENT_BUS.register(new BlockEventHandler());
 		MinecraftForge.EVENT_BUS.register(new WorldEventHandler());
 		MinecraftForge.EVENT_BUS.register(new EntityEventHandler());
+		MinecraftForge.EVENT_BUS.register(new GuiEventHandler());
 	}
 	
 	@EventHandler
@@ -81,6 +87,10 @@ public class Main {
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent e) {
 		proxy.registerColors();
+		
+		WorldType.WORLD_TYPES = new WorldType[16];
+		WorldType.WORLD_TYPES[0] = PRIMAL_WORLD;
+		WorldType.WORLD_TYPES[1] = WorldType.FLAT;
 		
 		StageHelper.setupItemStages();
 	}

@@ -49,15 +49,17 @@ public class HarvestDropInfo {
 	}
 	
 	public static class ItemDropInfo {
-		private final Item item;
-		private final boolean needsSilk, usesFortune;
-		private final int dropAmount, randomDropMin, randomDropMax;
-		private final float chanceFortune;
+		public final Item item;
+		public final boolean needsSilk, usesFortune;
+		public final int meta, dropAmount, randomDropMin, randomDropMax;
+		/** drop chance * by this + 1 */
+		public final float chanceFortune;
 		/** 1-100 */
-		private final int dropChance;
+		public final int dropChance;
 		
-		public ItemDropInfo(Item item, boolean needsSilk, boolean usesFortune, int dropChance, int dropAmount, int randomDropMin, int randomDropMax, float chanceFortune) {
+		public ItemDropInfo(Item item, int meta, boolean needsSilk, boolean usesFortune, int dropChance, int dropAmount, int randomDropMin, int randomDropMax, float chanceFortune) {
 			this.item = item;
+			this.meta = meta;
 			this.needsSilk = needsSilk;
 			this.usesFortune = usesFortune;
 			this.dropChance = dropChance;
@@ -67,41 +69,18 @@ public class HarvestDropInfo {
 			this.chanceFortune = chanceFortune;
 		}
 		
+		public ItemDropInfo(Block block, int meta, boolean needsSilk, boolean usesFortune, int dropChance, int dropAmount, int randomDropMin, int randomDropMax, float chanceFortune) {
+			this(Item.getItemFromBlock(block), meta, needsSilk, usesFortune, dropChance, dropAmount, randomDropMin, randomDropMax, chanceFortune);
+		}
+		
+		public ItemDropInfo(Item item, boolean needsSilk, boolean usesFortune, int dropChance, int dropAmount, int randomDropMin, int randomDropMax, float chanceFortune) {
+			this(item, 0, needsSilk, usesFortune, dropChance, dropAmount, randomDropMin, randomDropMax, chanceFortune);
+		}
+		
 		public ItemDropInfo(Block block, boolean needsSilk, boolean usesFortune, int dropChance, int dropAmount, int randomDropMin, int randomDropMax, float chanceFortune) {
-			this(Item.getItemFromBlock(block), needsSilk, usesFortune, dropChance, dropAmount, randomDropMin, randomDropMax, chanceFortune);
+			this(Item.getItemFromBlock(block), 0, needsSilk, usesFortune, dropChance, dropAmount, randomDropMin, randomDropMax, chanceFortune);
 		}
 		
-		public Item getItem() {
-			return item;
-		}
-		
-		public boolean needsSilk() {
-			return needsSilk;
-		}
-		
-		public boolean usesFortune() {
-			return usesFortune;
-		}
-		
-		public int getDropChance() {
-			return dropChance;
-		}
-		
-		public int getDropAmount() {
-			return dropAmount;
-		}
-		
-		public int getRandomDropMin() {
-			return randomDropMin;
-		}
-		
-		public int getRandomDropMax() {
-			return randomDropMax;
-		}
-		
-		public float getChanceFortune() {
-			return chanceFortune;
-		}
 		@Override
 		public String toString() {
 			return "(" + item.getUnlocalizedName() + ", " + needsSilk + ", " + dropAmount + ", " + randomDropMin + ", " + randomDropMax + ", " +

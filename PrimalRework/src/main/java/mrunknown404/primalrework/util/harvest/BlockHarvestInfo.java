@@ -10,21 +10,30 @@ import mrunknown404.primalrework.util.enums.EnumToolType;
 import mrunknown404.primalrework.util.helpers.HarvestHelper;
 import net.minecraft.block.Block;
 
-public class BlockHarvestInfo extends HarvestInfo<Block> {
+public class BlockHarvestInfo {
 	
+	private final Block block;
 	private final List<DoubleValue<EnumToolType, EnumToolMaterial>> harvests;
 	private final List<HarvestDropInfo> drops = new ArrayList<HarvestDropInfo>();
 	
 	public BlockHarvestInfo(Block block, List<DoubleValue<EnumToolType, EnumToolMaterial>> harvests) {
-		super(block, new ArrayList<EnumToolType>());
+		this.block = block;
 		this.harvests = harvests;
 	}
 	
-	public static BlockHarvestInfo create(DoubleValue<EnumToolType, EnumToolMaterial>... harvest) {
+	public BlockHarvestInfo(Block block, DoubleValue<EnumToolType, EnumToolMaterial>... harvests) {
+		this(block, Arrays.asList(harvests));
+	}
+	
+	public BlockHarvestInfo(Block block, EnumToolType toolType, EnumToolMaterial toolMaterial) {
+		this(block, new DoubleValue<EnumToolType, EnumToolMaterial>(toolType, toolMaterial));
+	}
+
+	public static BlockHarvestInfo createFromEmptyBlock(DoubleValue<EnumToolType, EnumToolMaterial>... harvest) {
 		return new BlockHarvestInfo(null, Arrays.asList(harvest));
 	}
 	
-	public static BlockHarvestInfo create() {
+	public static BlockHarvestInfo createFromEmptyBlock() {
 		return new BlockHarvestInfo(null, Arrays.asList(new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.none, EnumToolMaterial.hand)));
 	}
 	
@@ -55,14 +64,17 @@ public class BlockHarvestInfo extends HarvestInfo<Block> {
 	}
 	
 	public boolean canBreakWithNone() {
-		return HarvestHelper.hasToolMaterial(type, EnumToolMaterial.hand) || HarvestHelper.hasToolType(type, EnumToolType.none);
+		return HarvestHelper.hasToolMaterial(block, EnumToolMaterial.hand) || HarvestHelper.hasToolType(block, EnumToolType.none);
 	}
 	
 	public List<DoubleValue<EnumToolType, EnumToolMaterial>> getHarvests() {
 		return harvests;
 	}
 	
-	@Override
+	public Block getBlock() {
+		return block;
+	}
+	
 	public List<EnumToolType> getToolTypes() {
 		List<EnumToolType> types = new ArrayList<EnumToolType>();
 		
