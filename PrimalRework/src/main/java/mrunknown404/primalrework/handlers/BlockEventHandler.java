@@ -22,7 +22,7 @@ import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class BlockEventHandler {
-
+	
 	@SubscribeEvent
 	public void onHarvestDrop(HarvestDropsEvent e) {
 		e.setDropChance(100);
@@ -36,8 +36,8 @@ public class BlockEventHandler {
 			return;
 		}
 		
-		HarvestDropInfo drop = binfo.getDrop(e.getHarvester() != null ? HarvestHelper.getItemsToolType(e.getState().getBlock(),
-				e.getHarvester().getHeldItemMainhand().getItem()) : EnumToolType.none);
+		HarvestDropInfo drop = binfo.getDrop(e.getHarvester() != null ?
+				HarvestHelper.getItemsToolType(e.getState().getBlock(), e.getHarvester().getHeldItemMainhand().getItem()) : EnumToolType.none);
 		if (drop == null) {
 			return;
 		}
@@ -54,8 +54,7 @@ public class BlockEventHandler {
 				int fort = itemDrop.usesFortune ? r.nextInt(e.getFortuneLevel() + 1) : 1;
 				
 				if (r.nextInt(100) + 1 <= itemDrop.dropChance * (itemDrop.chanceFortune + 1)) {
-					int amount = itemDrop.dropAmount + (itemDrop.usesFortune ? fort : 0) +
-							ThreadLocalRandom.current().nextInt(itemDrop.randomDropMin, itemDrop.randomDropMax + 1);
+					int amount = itemDrop.dropAmount + (itemDrop.usesFortune ? fort : 0) + ThreadLocalRandom.current().nextInt(itemDrop.randomDropMin, itemDrop.randomDropMax + 1);
 					
 					e.getDrops().add(new ItemStack(itemDrop.item, amount, itemDrop.meta));
 				}

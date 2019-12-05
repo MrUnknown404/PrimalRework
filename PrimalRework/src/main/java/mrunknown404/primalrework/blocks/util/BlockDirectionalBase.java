@@ -19,11 +19,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class BlockDirectionalBase extends BlockBase {
-
+	
 	protected static final PropertyDirection FACING = BlockHorizontal.FACING;
 	
-	protected BlockDirectionalBase(String name, Material material, SoundType soundType, BlockRenderLayer renderType, float hardness, float resistance,
-			AxisAlignedBB collisionAABB, AxisAlignedBB visualAABB, EnumStage stage, DoubleValue<EnumToolType, EnumToolMaterial>... types) {
+	protected BlockDirectionalBase(String name, Material material, SoundType soundType, BlockRenderLayer renderType, float hardness, float resistance, AxisAlignedBB collisionAABB,
+			AxisAlignedBB visualAABB, EnumStage stage, DoubleValue<EnumToolType, EnumToolMaterial>... types) {
 		super(name, material, soundType, renderType, hardness, resistance, collisionAABB, visualAABB, stage, types);
 		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 	}
@@ -35,7 +35,7 @@ public class BlockDirectionalBase extends BlockBase {
 	
 	@Override
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, new IProperty[] {FACING});
+		return new BlockStateContainer(this, new IProperty[] { FACING });
 	}
 	
 	@Override

@@ -47,9 +47,9 @@ import net.minecraft.util.text.TextComponentTranslation;
 
 @JEIPlugin
 public class JEICompat implements IModPlugin {
-
-	//TODO replace vanilla crafting GUI with custom GUI
-	//TODO add vanilla enchanting, primal enchanting
+	
+	// TODO replace vanilla crafting GUI with custom GUI
+	// TODO add vanilla enchanting, primal enchanting
 	
 	public static final Map<String, List<IRecipeWrapperBase<?>>> RECIPE_MAP = new HashMap<String, List<IRecipeWrapperBase<?>>>();
 	
@@ -174,7 +174,7 @@ public class JEICompat implements IModPlugin {
 					}
 				}
 				
-				if (StageHelper.hasAccessToStage(EnumStage.do_later)) { //TODO change to proper stage later
+				if (StageHelper.hasAccessToStage(EnumStage.do_later)) { // TODO change to proper stage later
 					ingReg.addIngredientsAtRuntime(VanillaTypes.ENCHANT, enchs);
 				} else {
 					ingReg.removeIngredientsAtRuntime(VanillaTypes.ENCHANT, enchs);

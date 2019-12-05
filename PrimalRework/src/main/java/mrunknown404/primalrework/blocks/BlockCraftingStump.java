@@ -28,7 +28,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 
 public class BlockCraftingStump extends BlockDirectionalBase implements ITileEntityProvider {
-
+	
 	private static final AxisAlignedBB bb = new AxisAlignedBB(2.05 / 16, 0, 2.05 / 16, 14.05 / 16, 15.05f / 16, 14.05 / 16);
 	
 	public BlockCraftingStump() {

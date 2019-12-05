@@ -91,25 +91,25 @@ public class TileEntityDryingTableRenderer extends TileEntitySpecialRenderer<Til
 	}
 	
 	private void renderItem(ItemStack stack, IBakedModel model, int darkness) {
-if (!stack.isEmpty()) {
-GlStateManager.pushMatrix();
-GlStateManager.translate(-0.5F, -0.5F, -0.5F);
-
-if (model.isBuiltInRenderer()) {
-GlStateManager.color(1f, 1f, 1f, 1f);
-GlStateManager.enableRescaleNormal();
-stack.getItem().getTileEntityItemStackRenderer().renderByItem(stack);
-} else {
-   renderModel(model, darkness, stack);
-
-if (stack.hasEffect()) {
-renderEffect(model);
-}
-}
-
-GlStateManager.popMatrix();
-}
-}
+		if (!stack.isEmpty()) {
+			GlStateManager.pushMatrix();
+			GlStateManager.translate(-0.5F, -0.5F, -0.5F);
+			
+			if (model.isBuiltInRenderer()) {
+				GlStateManager.color(1f, 1f, 1f, 1f);
+				GlStateManager.enableRescaleNormal();
+				stack.getItem().getTileEntityItemStackRenderer().renderByItem(stack);
+			} else {
+				renderModel(model, darkness, stack);
+				
+				if (stack.hasEffect()) {
+					renderEffect(model);
+				}
+			}
+			
+			GlStateManager.popMatrix();
+		}
+	}
 	
 	private void renderEffect(IBakedModel model) {
 		GlStateManager.depthMask(false);
@@ -143,7 +143,7 @@ GlStateManager.popMatrix();
 	private void renderModel(IBakedModel model, int darkness, ItemStack stack) {
 		renderModel(model, -1, darkness, stack);
 	}
-
+	
 	private void renderModel(IBakedModel model, int color) {
 		renderModel(model, color, 255, ItemStack.EMPTY);
 	}

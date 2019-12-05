@@ -33,7 +33,7 @@ import net.minecraft.init.Items;
 public class ModBlocks {
 	public static final List<Block> BLOCKS = new ArrayList<Block>();
 	
-	//TODO add new wood types, cotton crop
+	// TODO add new wood types, cotton crop
 	
 	public static final Block ROCK = new BlockGroundItem("rock", SoundType.STONE);
 	public static final Block STICK = new BlockGroundItem("stick", SoundType.WOOD, Items.STICK);
@@ -44,11 +44,14 @@ public class ModBlocks {
 	public static final Block LIT_PRIMAL_TORCH = new BlockPrimalTorchLit();
 	public static final Block CRAFTING_STUMP = new BlockCraftingStump();
 	public static final Block PRIMAL_ENCHANTING_TABLE = new BlockPrimalEnchantingTable();
-	public static final Block THATCH = new BlockBase("thatch", Material.LEAVES, SoundType.PLANT, 0.2f, 0.2f, EnumStage.stage0, new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.none, EnumToolMaterial.hand), new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.knife, EnumToolMaterial.flint));
+	public static final Block THATCH = new BlockBase("thatch", Material.LEAVES, SoundType.PLANT, 0.2f, 0.2f, EnumStage.stage0,
+			new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.none, EnumToolMaterial.hand),
+			new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.knife, EnumToolMaterial.flint));
 	public static final Block THATCH_DOUBLE_SLAB = new BlockThatchSlab("thatch_double_slab", true);
 	public static final Block THATCH_SLAB = new BlockThatchSlab("thatch_slab", false);
 	public static final Block SALT = new BlockSalt();
-	public static final Block SMOOTH_STONE = new BlockBase("smooth_stone", Material.ROCK, SoundType.STONE, 2, 2, EnumStage.stage1, new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.pickaxe, EnumToolMaterial.flint));
+	public static final Block SMOOTH_STONE = new BlockBase("smooth_stone", Material.ROCK, SoundType.STONE, 2, 2, EnumStage.stage1,
+			new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.pickaxe, EnumToolMaterial.flint));
 	public static final Block STONE_DOUBLE_SLAB = new BlockStoneSlab("pr_stone_double_slab", true);
 	public static final Block STONE_SLAB = new BlockStoneSlab("pr_stone_slab", false);
 	public static final Block DIRT_DOUBLE_SLAB = new BlockDirtSlab("dirt_double_slab", true);

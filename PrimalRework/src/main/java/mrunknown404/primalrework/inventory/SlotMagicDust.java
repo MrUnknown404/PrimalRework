@@ -6,7 +6,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 public class SlotMagicDust extends Slot {
-
+	
 	public SlotMagicDust(IInventory inventoryIn, int index, int x, int y) {
 		super(inventoryIn, index, x, y);
 	}

@@ -6,7 +6,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 public class SlotFirePitItem extends Slot {
-
+	
 	public SlotFirePitItem(IInventory inventoryIn, int index, int x, int y) {
 		super(inventoryIn, index, x, y);
 	}

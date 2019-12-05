@@ -15,7 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandom;
 import net.minecraft.util.math.MathHelper;
 
-//TODO rewrite all enchanting this (maybe write equation that gives % chance for half/etc of the possible enchants)
+// TODO rewrite all enchanting this (maybe write equation that gives % chance for half/etc of the possible enchants)
 
 public class EnchantHelper {
 	public static List<EnchantmentData> buildVanillaEnchantmentList(Random random, ItemStack item, int level) {

@@ -21,7 +21,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockBase extends Block implements IBlockBase<BlockBase> {
-
+	
 	private final BlockRenderLayer renderType;
 	private final AxisAlignedBB collisionAABB, visualAABB;
 	private int amountOfTooltops = 0;
@@ -29,8 +29,8 @@ public class BlockBase extends Block implements IBlockBase<BlockBase> {
 	protected final EnumStage stage;
 	protected BlockHarvestInfo harvestInfo;
 	
-	protected BlockBase(String name, Material material, SoundType soundType, BlockRenderLayer renderType, float hardness, float resistance,
-			AxisAlignedBB collisionAABB, AxisAlignedBB visualAABB, EnumStage stage, DoubleValue<EnumToolType, EnumToolMaterial>... types) {
+	protected BlockBase(String name, Material material, SoundType soundType, BlockRenderLayer renderType, float hardness, float resistance, AxisAlignedBB collisionAABB,
+			AxisAlignedBB visualAABB, EnumStage stage, DoubleValue<EnumToolType, EnumToolMaterial>... types) {
 		super(material);
 		setUnlocalizedName(name);
 		setRegistryName(name);

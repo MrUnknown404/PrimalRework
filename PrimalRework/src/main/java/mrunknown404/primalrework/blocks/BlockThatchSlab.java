@@ -10,7 +10,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 
 public class BlockThatchSlab extends BlockSlabBase {
-
+	
 	public BlockThatchSlab(String name, boolean isDouble) {
 		super(name, Material.LEAVES, SoundType.PLANT, 0.15f, 0.15f, isDouble, EnumStage.stage0,
 				new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.none, EnumToolMaterial.hand),

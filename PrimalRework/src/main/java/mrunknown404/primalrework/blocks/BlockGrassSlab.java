@@ -69,7 +69,8 @@ public class BlockGrassSlab extends BlockSlabBase {
 						IBlockState iblockstate = world.getBlockState(blockpos.up());
 						IBlockState iblockstate1 = world.getBlockState(blockpos);
 						
-						if (iblockstate1.getBlock() == Blocks.DIRT && iblockstate1.getValue(BlockDirt.VARIANT) == BlockDirt.DirtType.DIRT && world.getLightFromNeighbors(blockpos.up()) >= 4 && iblockstate.getLightOpacity(world, pos.up()) <= 2) {
+						if (iblockstate1.getBlock() == Blocks.DIRT && iblockstate1.getValue(BlockDirt.VARIANT) == BlockDirt.DirtType.DIRT &&
+								world.getLightFromNeighbors(blockpos.up()) >= 4 && iblockstate.getLightOpacity(world, pos.up()) <= 2) {
 							world.setBlockState(blockpos, Blocks.GRASS.getDefaultState());
 						}
 					}

@@ -13,7 +13,7 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.item.ItemStack;
 
 public class StagedCraftingWrapper implements IRecipeWrapperBase<IStagedRecipeBase>, ICustomCraftingRecipeWrapper {
-
+	
 	private final IStagedRecipeBase recipe;
 	
 	public StagedCraftingWrapper(IStagedRecipeBase recipe) {
@@ -54,7 +54,7 @@ public class StagedCraftingWrapper implements IRecipeWrapperBase<IStagedRecipeBa
 	public IStagedRecipeBase getRecipe() {
 		return recipe;
 	}
-
+	
 	@Override
 	public void setRecipe(IRecipeLayout recipeLayout, IIngredients ingredients) {
 		

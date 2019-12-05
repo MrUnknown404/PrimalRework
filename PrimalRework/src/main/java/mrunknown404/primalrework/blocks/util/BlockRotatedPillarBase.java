@@ -23,8 +23,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public abstract class BlockRotatedPillarBase extends BlockBase {
-	protected BlockRotatedPillarBase(String name, Material material, SoundType soundType, BlockRenderLayer renderType, float hardness, float resistance,
-			AxisAlignedBB collisionAABB, AxisAlignedBB visualAABB, EnumStage stage, DoubleValue<EnumToolType, EnumToolMaterial>... types) {
+	protected BlockRotatedPillarBase(String name, Material material, SoundType soundType, BlockRenderLayer renderType, float hardness, float resistance, AxisAlignedBB collisionAABB,
+			AxisAlignedBB visualAABB, EnumStage stage, DoubleValue<EnumToolType, EnumToolMaterial>... types) {
 		super(name, material, soundType, renderType, hardness, resistance, collisionAABB, visualAABB, stage, types);
 	}
 	
@@ -94,7 +94,7 @@ public abstract class BlockRotatedPillarBase extends BlockBase {
 	
 	@Override
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, new IProperty[] {BlockLog.LOG_AXIS});
+		return new BlockStateContainer(this, new IProperty[] { BlockLog.LOG_AXIS });
 	}
 	
 	@Override

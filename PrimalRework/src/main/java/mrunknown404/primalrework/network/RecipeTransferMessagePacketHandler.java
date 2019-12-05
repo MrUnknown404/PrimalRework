@@ -15,7 +15,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class RecipeTransferMessagePacketHandler implements IMessageHandler<RecipeTransferMessage, IMessage> {
-
+	
 	@Override
 	public IMessage onMessage(RecipeTransferMessage message, MessageContext ctx) {
 		if (ctx.getServerHandler().player.getEntityId() == message.playerID) {
@@ -25,7 +25,8 @@ public class RecipeTransferMessagePacketHandler implements IMessageHandler<Recip
 		return null;
 	}
 	
-	public static void setItems(EntityPlayer player, Map<Integer, Integer> slotIdMap, List<Integer> craftingSlots, List<Integer> inventorySlots, boolean maxTransfer, boolean requireCompleteSets) {
+	public static void setItems(EntityPlayer player, Map<Integer, Integer> slotIdMap, List<Integer> craftingSlots, List<Integer> inventorySlots, boolean maxTransfer,
+			boolean requireCompleteSets) {
 		Container container = player.openContainer;
 		
 		Map<Integer, ItemStack> slotMap = new HashMap<>(slotIdMap.size());
@@ -100,13 +101,12 @@ public class RecipeTransferMessagePacketHandler implements IMessageHandler<Recip
 		container.detectAndSendChanges();
 	}
 	
-	private static Map<Integer, ItemStack> removeItemsFromInventory(Container container, Map<Integer, ItemStack> required, List<Integer> craftingSlots,
-			List<Integer> inventorySlots, boolean transferAsCompleteSets, boolean maxTransfer) {
+	private static Map<Integer, ItemStack> removeItemsFromInventory(Container container, Map<Integer, ItemStack> required, List<Integer> craftingSlots, List<Integer> inventorySlots,
+			boolean transferAsCompleteSets, boolean maxTransfer) {
 		
 		final Map<Integer, ItemStack> result = new HashMap<>(required.size());
 		
-		loopSets:
-		while (true) {
+		loopSets: while (true) {
 			Map<Slot, ItemStack> originalSlotContents = null;
 			
 			if (transferAsCompleteSets) {
@@ -162,7 +162,7 @@ public class RecipeTransferMessagePacketHandler implements IMessageHandler<Recip
 		
 		return result;
 	}
-
+	
 	private static Slot getSlotWithStack(Container container, ItemStack stack, List<Integer> craftingSlots, List<Integer> inventorySlots) {
 		Slot slot = getSlotWithStack(container, craftingSlots, stack);
 		if (slot == null) {
@@ -179,10 +179,7 @@ public class RecipeTransferMessagePacketHandler implements IMessageHandler<Recip
 				final Slot slot = container.getSlot(slotIndex);
 				final ItemStack inventoryStack = slot.getStack();
 				
-				if (!inventoryStack.isEmpty() &&
-					inventoryStack.isStackable() &&
-					inventoryStack.isItemEqual(stack) &&
-					ItemStack.areItemStackTagsEqual(inventoryStack, stack)) {
+				if (!inventoryStack.isEmpty() && inventoryStack.isStackable() && inventoryStack.isItemEqual(stack) && ItemStack.areItemStackTagsEqual(inventoryStack, stack)) {
 					
 					final int remain = stack.getCount() - added;
 					final int maxStackSize = Math.min(slot.getItemStackLimit(inventoryStack), inventoryStack.getMaxStackSize());

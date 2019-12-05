@@ -24,7 +24,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemFireStarter extends ItemDamageableBase {
-
+	
 	public ItemFireStarter() {
 		super("fire_starter", EnumToolMaterial.wood, EnumStage.stage1);
 		

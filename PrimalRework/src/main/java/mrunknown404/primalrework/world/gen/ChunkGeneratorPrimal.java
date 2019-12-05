@@ -26,7 +26,7 @@ import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
 
 public class ChunkGeneratorPrimal implements IChunkGenerator {
-
+	
 	private NoiseGeneratorOctaves minLimitPerlinNoise;
 	private NoiseGeneratorOctaves maxLimitPerlinNoise;
 	private NoiseGeneratorOctaves mainPerlinNoise;
@@ -72,8 +72,8 @@ public class ChunkGeneratorPrimal implements IChunkGenerator {
 			}
 		}
 		
-		InitNoiseGensEvent.ContextOverworld ctx = new InitNoiseGensEvent.ContextOverworld(
-				minLimitPerlinNoise, maxLimitPerlinNoise, mainPerlinNoise, surfaceNoise, scaleNoise, depthNoise, forestNoise);
+		InitNoiseGensEvent.ContextOverworld ctx = new InitNoiseGensEvent.ContextOverworld(minLimitPerlinNoise, maxLimitPerlinNoise, mainPerlinNoise, surfaceNoise, scaleNoise,
+				depthNoise, forestNoise);
 		ctx = TerrainGen.getModdedNoiseGenerators(world, rand, ctx);
 		minLimitPerlinNoise = ctx.getLPerlin1();
 		maxLimitPerlinNoise = ctx.getLPerlin2();
@@ -177,10 +177,12 @@ public class ChunkGeneratorPrimal implements IChunkGenerator {
 	}
 	
 	private void generateHeightmap(int p_185978_1_, int p_185978_2_, int p_185978_3_) {
-		depthRegion = depthNoise.generateNoiseOctaves(depthRegion, p_185978_1_, p_185978_3_, 5, 5, (double) WorldInfo.depthNoiseScaleX, (double) WorldInfo.depthNoiseScaleZ, (double) WorldInfo.depthNoiseScaleExponent);
+		depthRegion = depthNoise.generateNoiseOctaves(depthRegion, p_185978_1_, p_185978_3_, 5, 5, (double) WorldInfo.depthNoiseScaleX, (double) WorldInfo.depthNoiseScaleZ,
+				(double) WorldInfo.depthNoiseScaleExponent);
 		float f = WorldInfo.coordinateScale;
 		float f1 = WorldInfo.heightScale;
-		mainNoiseRegion = mainPerlinNoise.generateNoiseOctaves(mainNoiseRegion, p_185978_1_, p_185978_2_, p_185978_3_, 5, 33, 5, (double) (f / WorldInfo.mainNoiseScaleX), (double) (f1 / WorldInfo.mainNoiseScaleY), (double) (f / WorldInfo.mainNoiseScaleZ));
+		mainNoiseRegion = mainPerlinNoise.generateNoiseOctaves(mainNoiseRegion, p_185978_1_, p_185978_2_, p_185978_3_, 5, 33, 5, (double) (f / WorldInfo.mainNoiseScaleX),
+				(double) (f1 / WorldInfo.mainNoiseScaleY), (double) (f / WorldInfo.mainNoiseScaleZ));
 		minLimitRegion = minLimitPerlinNoise.generateNoiseOctaves(minLimitRegion, p_185978_1_, p_185978_2_, p_185978_3_, 5, 33, 5, (double) f, (double) f1, (double) f);
 		maxLimitRegion = maxLimitPerlinNoise.generateNoiseOctaves(maxLimitRegion, p_185978_1_, p_185978_2_, p_185978_3_, 5, 33, 5, (double) f, (double) f1, (double) f);
 		int i = 0;
@@ -335,7 +337,7 @@ public class ChunkGeneratorPrimal implements IChunkGenerator {
 	
 	@Override
 	public void recreateStructures(Chunk chunkIn, int x, int z) {
-		//TODO setup structures
+		// TODO setup structures
 	}
 	
 	public static final class WorldInfo {

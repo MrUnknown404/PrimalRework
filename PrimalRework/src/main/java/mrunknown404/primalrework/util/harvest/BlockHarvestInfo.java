@@ -28,7 +28,7 @@ public class BlockHarvestInfo {
 	public BlockHarvestInfo(Block block, EnumToolType toolType, EnumToolMaterial toolMaterial) {
 		this(block, new DoubleValue<EnumToolType, EnumToolMaterial>(toolType, toolMaterial));
 	}
-
+	
 	public static BlockHarvestInfo createFromEmptyBlock(DoubleValue<EnumToolType, EnumToolMaterial>... harvest) {
 		return new BlockHarvestInfo(null, Arrays.asList(harvest));
 	}

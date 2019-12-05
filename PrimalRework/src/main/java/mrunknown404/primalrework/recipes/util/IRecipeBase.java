@@ -8,6 +8,5 @@ import net.minecraft.item.ItemStack;
 public interface IRecipeBase {
 	public abstract List<ItemStack> getInputs();
 	public abstract List<ItemStack> getOutputs();
-	
 	public abstract EnumStage getStage();
 }

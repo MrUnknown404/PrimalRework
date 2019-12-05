@@ -15,7 +15,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 
 public class CommandStage extends CommandBase {
-
+	
 	@Override
 	public String getName() {
 		return "stage";
@@ -56,6 +56,6 @@ public class CommandStage extends CommandBase {
 	@Override
 	public List<String> getTabCompletions(MinecraftServer server, ICommandSender sender, String[] args, BlockPos targetPos) {
 		return args.length == 1 ? getListOfStringsMatchingLastWord(args, Arrays.asList("set", "get")) :
-			args.length == 2 && args[0].equalsIgnoreCase("set") ? getListOfStringsMatchingLastWord(args, EnumStage.getStringList()) : Collections.emptyList();
+				args.length == 2 && args[0].equalsIgnoreCase("set") ? getListOfStringsMatchingLastWord(args, EnumStage.getStringList()) : Collections.emptyList();
 	}
 }

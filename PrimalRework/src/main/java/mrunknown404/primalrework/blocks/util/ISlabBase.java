@@ -21,8 +21,8 @@ public interface ISlabBase<R extends BlockSlab> extends IBlockBase<R> {
 		ModBlocks.BLOCKS.add(block);
 		
 		if (!((ISlabBase<BlockSlab>) block).isDouble()) {
-			ModItems.ITEMS.add(new ItemSlab(block, (BlockSlab) block, ((ISlabBase<BlockSlabBase>) block).getDoubleVersion())
-					.setUnlocalizedName(block.getUnlocalizedName().substring(5)).setRegistryName(block.getUnlocalizedName().substring(5)));
+			ModItems.ITEMS.add(new ItemSlab(block, (BlockSlab) block, ((ISlabBase<BlockSlabBase>) block).getDoubleVersion()).setUnlocalizedName(block.getUnlocalizedName().substring(5))
+					.setRegistryName(block.getUnlocalizedName().substring(5)));
 		}
 	}
 	

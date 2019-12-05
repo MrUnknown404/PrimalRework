@@ -34,7 +34,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootTableList;
 
 public class EntityPigeon extends EntityAnimal implements EntityFlying {
-
+	
 	private float flapSpeed;
 	private float flapping = 1.0F;
 	
@@ -99,7 +99,8 @@ public class EntityPigeon extends EntityAnimal implements EntityFlying {
 	public boolean getCanSpawnHere() {
 		BlockPos blockpos = new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.getEntityBoundingBox().minY), MathHelper.floor(this.posZ));
 		Block block = this.world.getBlockState(blockpos.down()).getBlock();
-		return block instanceof BlockLeaves || block == Blocks.GRASS || block instanceof BlockLog || block == Blocks.AIR && this.world.getLight(blockpos) > 8 && super.getCanSpawnHere();
+		return block instanceof BlockLeaves || block == Blocks.GRASS || block instanceof BlockLog ||
+				block == Blocks.AIR && this.world.getLight(blockpos) > 8 && super.getCanSpawnHere();
 	}
 	
 	@Override public void fall(float distance, float damageMultiplier) {}

@@ -7,7 +7,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ITickable;
 
 public class TileEntityFirePit extends TileEntityBase implements ITickable {
-
+	
 	private int cookTime, totalCookTime, burnTime, totalBurnTime;
 	
 	public TileEntityFirePit() {

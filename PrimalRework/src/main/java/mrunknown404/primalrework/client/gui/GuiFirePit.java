@@ -9,7 +9,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 
 public class GuiFirePit extends GuiContainer {
-
+	
 	private static final ResourceLocation LOC = new ResourceLocation(Main.MOD_ID, "textures/gui/fire_pit.png");
 	private final InventoryPlayer player;
 	private final TileEntityFirePit te;

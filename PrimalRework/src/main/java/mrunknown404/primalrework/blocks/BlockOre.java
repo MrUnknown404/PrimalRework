@@ -31,8 +31,7 @@ public class BlockOre extends BlockBase {
 		this.value = EnumOreValue.block;
 	}
 	
-	public BlockOre(float hardness, float resistance, EnumStage stage, EnumAlloy alloy, EnumOreValue value,
-			DoubleValue<EnumToolType, EnumToolMaterial>... types) {
+	public BlockOre(float hardness, float resistance, EnumStage stage, EnumAlloy alloy, EnumOreValue value, DoubleValue<EnumToolType, EnumToolMaterial>... types) {
 		super(alloy.toString() + "_ore_" + value.toString(), Material.ROCK, SoundType.STONE, hardness, resistance, stage, types);
 		this.alloy = alloy;
 		this.value = value;

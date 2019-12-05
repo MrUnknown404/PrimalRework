@@ -37,7 +37,7 @@ public class ModItems {
 	public static final List<Item> ITEMS = new ArrayList<Item>();
 	public static final Map<Fluid, ItemClayBucket> CLAY_BUCKETS = new HashMap<Fluid, ItemClayBucket>();
 	
-	//TODO add copper ingots/tools
+	// TODO add copper ingots/tools
 	
 	// ITEMS
 	public static final Item PLANT_FIBER = new ItemBase("plant_fiber", EnumStage.stage0);

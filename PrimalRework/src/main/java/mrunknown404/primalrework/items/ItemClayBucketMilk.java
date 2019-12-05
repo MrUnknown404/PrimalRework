@@ -21,7 +21,7 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fluids.capability.wrappers.FluidBucketWrapper;
 
 public class ItemClayBucketMilk extends ItemDamageableBase {
-
+	
 	public ItemClayBucketMilk() {
 		super("clay_bucket_milk", ModCreativeTabs.PRIMALREWORK_FOOD, EnumToolMaterial.clay, EnumStage.stage1);
 	}

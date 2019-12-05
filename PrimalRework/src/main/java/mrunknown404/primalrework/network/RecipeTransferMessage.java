@@ -10,7 +10,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 public class RecipeTransferMessage implements IMessage {
-
+	
 	Map<Integer, Integer> recipeMap;
 	List<Integer> craftingSlots;
 	List<Integer> inventorySlots;
@@ -20,7 +20,8 @@ public class RecipeTransferMessage implements IMessage {
 	
 	public RecipeTransferMessage() {}
 	
-	public RecipeTransferMessage(EntityPlayer player, Map<Integer, Integer> recipeMap, List<Integer> craftingSlots, List<Integer> inventorySlots, boolean maxTransfer, boolean requireCompleteSets) {
+	public RecipeTransferMessage(EntityPlayer player, Map<Integer, Integer> recipeMap, List<Integer> craftingSlots, List<Integer> inventorySlots, boolean maxTransfer,
+			boolean requireCompleteSets) {
 		this.playerID = player.getEntityId();
 		this.recipeMap = recipeMap;
 		this.craftingSlots = craftingSlots;
@@ -53,10 +54,9 @@ public class RecipeTransferMessage implements IMessage {
 			int slotIndex = buf.readInt();
 			inventorySlots.add(slotIndex);
 		}
+		
 		maxTransfer = buf.readBoolean();
 		requireCompleteSets = buf.readBoolean();
-		
-		//BasicRecipeTransferHandlerServer.setItems(player, recipeMap, craftingSlots, inventorySlots, maxTransfer, requireCompleteSets);
 	}
 	
 	@Override
@@ -67,17 +67,17 @@ public class RecipeTransferMessage implements IMessage {
 			buf.writeInt(recipeMapEntry.getKey());
 			buf.writeInt(recipeMapEntry.getValue());
 		}
-
+		
 		buf.writeInt(craftingSlots.size());
 		for (Integer craftingSlot : craftingSlots) {
 			buf.writeInt(craftingSlot);
 		}
-
+		
 		buf.writeInt(inventorySlots.size());
 		for (Integer inventorySlot : inventorySlots) {
 			buf.writeInt(inventorySlot);
 		}
-
+		
 		buf.writeBoolean(maxTransfer);
 		buf.writeBoolean(requireCompleteSets);
 	}

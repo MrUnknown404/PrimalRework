@@ -6,7 +6,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
 
 public class RenderPigeon extends RenderBase<EntityLiving> {
-
+	
 	public RenderPigeon() {
 		super(null, new ModelPigeon(), new ResourceLocation(Main.MOD_ID, "textures/entity/pigeon.png"), 0.25f);
 	}

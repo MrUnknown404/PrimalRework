@@ -13,7 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class ItemBase extends Item implements IItemBase<ItemBase> {
-
+	
 	protected final EnumStage stage;
 	private int amountOfTooltops = 0;
 	

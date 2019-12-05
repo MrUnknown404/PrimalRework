@@ -24,7 +24,7 @@ import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
 
 public class StagedShapelessRecipe extends ShapelessRecipes implements IStagedRecipeBase {
-
+	
 	protected final EnumStage stage;
 	protected final ItemStack output;
 	
@@ -56,7 +56,10 @@ public class StagedShapelessRecipe extends ShapelessRecipes implements IStagedRe
 		return StageHelper.hasAccessToStage(stage) && super.matches(inv, world);
 	}
 	
-	@Override public boolean match(InventoryCrafting inv, World world) {return false;}
+	@Override
+	public boolean match(InventoryCrafting inv, World world) {
+		return false;
+	}
 	
 	@Override
 	public IRecipe getRecipe() {

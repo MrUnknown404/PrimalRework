@@ -10,7 +10,7 @@ import mrunknown404.primalrework.util.enums.EnumStage;
 import net.minecraft.util.text.TextComponentTranslation;
 
 public class ItemOreNugget extends ItemBase {
-
+	
 	protected final EnumAlloy alloy;
 	protected final EnumOreValue value;
 	

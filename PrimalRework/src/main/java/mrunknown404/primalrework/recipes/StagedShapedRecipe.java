@@ -23,7 +23,7 @@ import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
 
 public class StagedShapedRecipe extends ShapedRecipes implements IStagedRecipeBase {
-
+	
 	protected final EnumStage stage;
 	protected final ItemStack output;
 	
@@ -65,7 +65,10 @@ public class StagedShapedRecipe extends ShapedRecipes implements IStagedRecipeBa
 		return StageHelper.hasAccessToStage(stage) && super.matches(inv, world);
 	}
 	
-	@Override public boolean match(InventoryCrafting inv, World world) {return false;}
+	@Override
+	public boolean match(InventoryCrafting inv, World world) {
+		return false;
+	}
 	
 	@Override
 	public IRecipe getRecipe() {

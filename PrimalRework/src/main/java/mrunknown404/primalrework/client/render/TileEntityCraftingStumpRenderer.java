@@ -36,8 +36,8 @@ public class TileEntityCraftingStumpRenderer extends TileEntitySpecialRenderer<T
 		for (int h = 0; h < 3; h++) {
 			for (int w = 0; w < 3; w++) {
 				if (!te.getStackInSlot(i).isEmpty()) {
-					renderItemInSlot(te, te.getStackInSlot(i), (w * 14.2f) / 16f, 0.3F, (h * 14.2f) / 16f,
-							te.getItemRotation()[i], te.getItemJump()[i], te.getItemJumpPrev()[i], partialTicks);
+					renderItemInSlot(te, te.getStackInSlot(i), (w * 14.2f) / 16f, 0.3F, (h * 14.2f) / 16f, te.getItemRotation()[i], te.getItemJump()[i], te.getItemJumpPrev()[i],
+							partialTicks);
 				}
 				
 				i++;

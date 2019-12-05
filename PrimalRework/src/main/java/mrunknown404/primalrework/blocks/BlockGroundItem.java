@@ -23,7 +23,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockGroundItem extends BlockBase {
-
+	
 	private final Item dropInstead;
 	
 	public BlockGroundItem(String name, SoundType soundType) {
@@ -31,8 +31,8 @@ public class BlockGroundItem extends BlockBase {
 	}
 	
 	public BlockGroundItem(String name, SoundType soundType, @Nullable Item dropInstead) {
-		super(name, Material.CIRCUITS, soundType, BlockRenderLayer.CUTOUT, 0, 0, NULL_AABB, new AxisAlignedBB(3.05 / 16, 0, 3.05 / 16, 13.05 / 16, 1.05 / 16, 13.05 / 16), EnumStage.stage0,
-				new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.none, EnumToolMaterial.hand));
+		super(name, Material.CIRCUITS, soundType, BlockRenderLayer.CUTOUT, 0, 0, NULL_AABB, new AxisAlignedBB(3.05 / 16, 0, 3.05 / 16, 13.05 / 16, 1.05 / 16, 13.05 / 16),
+				EnumStage.stage0, new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.none, EnumToolMaterial.hand));
 		this.dropInstead = dropInstead;
 	}
 	

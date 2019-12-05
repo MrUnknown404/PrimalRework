@@ -6,7 +6,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
 public class PrimalEnchantingMessage implements IMessage {
-
+	
 	int dimension, playerID;
 	BlockPos pos;
 	

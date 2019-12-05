@@ -29,7 +29,7 @@ import net.minecraft.item.ItemTool;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 public class VanillaOverrides {
-
+	
 	public static void overrideAll() {
 		resetHarvestLevels();
 		overrideMaterials();

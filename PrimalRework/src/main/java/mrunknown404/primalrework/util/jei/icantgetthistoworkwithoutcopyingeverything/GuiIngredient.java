@@ -19,22 +19,21 @@ import net.minecraft.client.renderer.GlStateManager;
 
 public class GuiIngredient<T> extends Gui implements IGuiIngredient<T> {
 	private final boolean input;
-
+	
 	private final Rectangle rect;
 	private final int xPadding;
 	private final int yPadding;
-
+	
 	private final CycleTimer cycleTimer;
 	private final List<T> displayIngredients = new ArrayList<>();
 	private final List<T> allIngredients = new ArrayList<>();
 	private final IIngredientRenderer<T> ingredientRenderer;
 	private final IIngredientHelper<T> ingredientHelper;
 	private IDrawable background;
-
+	
 	private boolean enabled;
-
-	public GuiIngredient(boolean input, IIngredientRenderer<T> ingredientRenderer, IIngredientHelper<T> ingredientHelper, Rectangle rect,
-			int xPadding, int yPadding, int cycleOffset) {
+	
+	public GuiIngredient(boolean input, IIngredientRenderer<T> ingredientRenderer, IIngredientHelper<T> ingredientHelper, Rectangle rect, int xPadding, int yPadding, int cycleOffset) {
 		this.ingredientRenderer = ingredientRenderer;
 		this.ingredientHelper = ingredientHelper;
 		this.input = input;

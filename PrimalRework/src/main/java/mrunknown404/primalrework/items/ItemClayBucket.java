@@ -34,7 +34,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.wrappers.FluidBucketWrapper;
 
 public class ItemClayBucket extends ItemDamageableBase {
-
+	
 	protected final Fluid fluid;
 	
 	public ItemClayBucket(@Nullable Fluid fluid) {
@@ -83,7 +83,7 @@ public class ItemClayBucket extends ItemDamageableBase {
 					return new ActionResult<ItemStack>(EnumActionResult.FAIL, item);
 				} else if (tryPlaceContainedLiquid(player, world, pos1)) {
 					if (player instanceof EntityPlayerMP) {
-						CriteriaTriggers.PLACED_BLOCK.trigger((EntityPlayerMP)player, pos1, item);
+						CriteriaTriggers.PLACED_BLOCK.trigger((EntityPlayerMP) player, pos1, item);
 					}
 					
 					player.addStat(StatList.getObjectUseStats(this));
@@ -127,7 +127,7 @@ public class ItemClayBucket extends ItemDamageableBase {
 					world.playSound(player, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
 					
 					for (int k = 0; k < 8; ++k) {
-						world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, (double) pos.getX() + Math.random(), (double ) pos.getY() + Math.random(),
+						world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, (double) pos.getX() + Math.random(), (double) pos.getY() + Math.random(),
 								(double) pos.getZ() + Math.random(), 0, 0, 0);
 					}
 				} else {

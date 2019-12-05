@@ -16,7 +16,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class BlockDirtSlab extends BlockSlabBase {
-
+	
 	public BlockDirtSlab(String name, boolean isDouble) {
 		super(name, Material.GROUND, SoundType.GROUND, 0.75f, 0.75f, isDouble, EnumStage.stage1,
 				new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.shovel, EnumToolMaterial.flint));

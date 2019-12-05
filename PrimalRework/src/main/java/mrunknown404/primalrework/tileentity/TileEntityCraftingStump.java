@@ -19,11 +19,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class TileEntityCraftingStump extends TileEntityBase implements ITickable {
-
+	
 	public EnumFacing facing;
-	protected float[] itemRotation = {0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F};
-	protected int itemJump[] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
-	protected int itemJumpPrev[] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+	protected float[] itemRotation = { 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F };
+	protected int itemJump[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+	protected int itemJumpPrev[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 	protected boolean hit = false;
 	protected int strikes = 0;
 	protected InventoryCrafting craftMatrix;
@@ -36,7 +36,7 @@ public class TileEntityCraftingStump extends TileEntityBase implements ITickable
 	public void update() {
 		if (gethit()) {
 			if (getWorld().isRemote) {
-				for(int count = 0; count < 9; count++) {
+				for (int count = 0; count < 9; count++) {
 					itemJump[count] = 1 + getWorld().rand.nextInt(5);
 					getItemRotation()[count] = (getWorld().rand.nextFloat() - getWorld().rand.nextFloat()) * 25F;
 				}

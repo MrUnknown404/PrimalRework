@@ -7,7 +7,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 
 public class ItemDamageableBase extends ItemBase {
-
+	
 	protected ItemDamageableBase(String name, CreativeTabs tab, EnumToolMaterial level, EnumStage stage) {
 		super(name, tab, 1, stage);
 		setMaxDamage(level.durability);

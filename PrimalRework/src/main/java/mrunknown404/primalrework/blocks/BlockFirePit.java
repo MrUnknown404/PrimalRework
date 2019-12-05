@@ -27,7 +27,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class BlockFirePit extends BlockBase implements ITileEntityProvider {
-
+	
 	private static final AxisAlignedBB bb = new AxisAlignedBB(2.05 / 16, 0, 2.05 / 16, 14.05 / 16, 13.05 / 16, 14.05 / 16);
 	
 	public BlockFirePit() {
@@ -37,12 +37,12 @@ public class BlockFirePit extends BlockBase implements ITileEntityProvider {
 	}
 	
 	@Override
-	public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-		if (((TileEntityFirePit) worldIn.getTileEntity(pos)).isBurning()) {
+	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
+		if (((TileEntityFirePit) world.getTileEntity(pos)).isBurning()) {
 			Random r = new Random();
 			
 			for (int i = 0; i < 5; i++) {
-				float xAdd = (float) r.nextInt(21) / 100f, yAdd = (float) r.nextInt(11) / 100f, zAdd =  (float) r.nextInt(21) / 100f;
+				float xAdd = (float) r.nextInt(21) / 100f, yAdd = (float) r.nextInt(11) / 100f, zAdd = (float) r.nextInt(21) / 100f;
 				float xsAdd = (float) r.nextInt(11) / 5000f, ysAdd = (float) r.nextInt(11) / 5000f, zsAdd = (float) r.nextInt(11) / 5000f;
 				
 				if (r.nextBoolean()) {
@@ -52,10 +52,10 @@ public class BlockFirePit extends BlockBase implements ITileEntityProvider {
 					zAdd = -zAdd;
 				}
 				
-				worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 0.5 + xAdd, pos.getY() + yAdd, pos.getZ() + 0.5 + zAdd, 0.0D + xsAdd, 0.01D + ysAdd, 0.0D + zsAdd);
+				world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 0.5 + xAdd, pos.getY() + yAdd, pos.getZ() + 0.5 + zAdd, 0.0D + xsAdd, 0.01D + ysAdd, 0.0D + zsAdd);
 				
 				if (i == 0) {
-					worldIn.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 0.5 + xAdd, pos.getY() + yAdd + 0.1, pos.getZ() + 0.5 + zAdd, 0.0D + xsAdd, 0.01D + ysAdd, 0.0D + zsAdd);
+					world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 0.5 + xAdd, pos.getY() + yAdd + 0.1, pos.getZ() + 0.5 + zAdd, 0.0D + xsAdd, 0.01D + ysAdd, 0.0D + zsAdd);
 				}
 			}
 		}

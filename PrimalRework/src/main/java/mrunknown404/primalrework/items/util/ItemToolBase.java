@@ -34,7 +34,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 
 public class ItemToolBase extends ItemDamageableBase {
-
+	
 	private final EnumToolType toolType;
 	private final EnumToolMaterial harvestLevel;
 	
@@ -209,10 +209,10 @@ public class ItemToolBase extends ItemDamageableBase {
 					if (block == Blocks.DIRT) {
 						if (iblockstate.getValue(BlockDirt.VARIANT) == DirtType.DIRT) {
 							setBlock(itemstack, player, world, pos, Blocks.FARMLAND.getDefaultState());
-								return EnumActionResult.SUCCESS;
+							return EnumActionResult.SUCCESS;
 						} else if (iblockstate.getValue(BlockDirt.VARIANT) == DirtType.COARSE_DIRT) {
 							setBlock(itemstack, player, world, pos, Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.DIRT));
-								return EnumActionResult.SUCCESS;
+							return EnumActionResult.SUCCESS;
 						}
 					}
 				}

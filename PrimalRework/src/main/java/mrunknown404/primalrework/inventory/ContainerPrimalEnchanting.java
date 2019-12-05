@@ -18,7 +18,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 
 public class ContainerPrimalEnchanting extends Container {
-
+	
 	private final TileEntityPrimalEnchanting te;
 	private final World world;
 	private final Random rand;
@@ -26,11 +26,10 @@ public class ContainerPrimalEnchanting extends Container {
 	public int xpSeed;
 	
 	public ContainerPrimalEnchanting(InventoryPlayer player, TileEntityPrimalEnchanting te) {
-		this.te = te.setContainer(this);;
+		this.te = te.setContainer(this);
 		this.world = te.getWorld();
 		this.rand = new Random();
 		this.xpSeed = player.player.getXPSeed();
-		
 		
 		addSlotToContainer(new SlotPrimalEnchantable(te, 0, 80, 31));
 		addSlotToContainer(new SlotMagicDust(te, 1, 80, 52));
@@ -50,7 +49,7 @@ public class ContainerPrimalEnchanting extends Container {
 	public void onCraftMatrixChanged(IInventory inv) {
 		if (inv == te) {
 			ItemStack itemstack = inv.getStackInSlot(0);
-				
+			
 			if (!itemstack.isEmpty() && EnchantHelper.isEnchantable(itemstack)) {
 				if (!world.isRemote) {
 					rand.setSeed((long) xpSeed);

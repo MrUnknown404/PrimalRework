@@ -7,7 +7,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
 
 public class RenderBase<T extends EntityLiving> extends RenderLiving<T> {
-
+	
 	private final ModelBase model;
 	private final ResourceLocation resourceLoc;
 	private final float shadow;

@@ -114,8 +114,8 @@ public interface IStagedFactoryBase {
 		Map<String, Ingredient> map = Maps.<String, Ingredient>newHashMap();
 		
 		for (Entry<String, JsonElement> entry : json.entrySet()) {
-			if (((String)entry.getKey()).length() != 1) {
-				throw new JsonSyntaxException("Invalid key entry: '" + (String)entry.getKey() + "' is an invalid symbol (must be 1 character only).");
+			if (entry.getKey().length() != 1) {
+				throw new JsonSyntaxException("Invalid key entry: '" + entry.getKey() + "' is an invalid symbol (must be 1 character only).");
 			}
 			
 			if (" ".equals(entry.getKey())) {

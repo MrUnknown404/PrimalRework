@@ -12,7 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class ItemFoodBase extends ItemFood implements IItemBase<ItemFoodBase> {
-
+	
 	protected final EnumStage stage;
 	protected final int eatTime;
 	private int amountOfTooltops = 0;

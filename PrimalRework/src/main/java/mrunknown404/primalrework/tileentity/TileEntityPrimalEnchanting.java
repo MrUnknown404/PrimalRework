@@ -8,7 +8,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 
 public class TileEntityPrimalEnchanting extends TileEntityBase implements ITickable {
-
+	
 	private ContainerPrimalEnchanting container;
 	
 	public TileEntityPrimalEnchanting() {

@@ -32,7 +32,7 @@ public class PlayerRecipeTransferHandler implements IRecipeTransferHandler<Conta
 	private final StackHelper stackHelper;
 	private final IRecipeTransferHandlerHelper handlerHelper;
 	private final IRecipeTransferInfo<ContainerPlayer> transferHelper;
-
+	
 	public PlayerRecipeTransferHandler(IRecipeTransferHandlerHelper handlerHelper) {
 		this.stackHelper = JEICompat.stackHelper;
 		this.handlerHelper = handlerHelper;
@@ -88,7 +88,7 @@ public class PlayerRecipeTransferHandler implements IRecipeTransferHandler<Conta
 		}
 		
 		IGuiItemStackGroup playerInvItemStackGroup = new GuiItemStackGroup(null, 0);
-		int[] playerGridIndexes = {0, 1, 3, 4};
+		int[] playerGridIndexes = { 0, 1, 3, 4 };
 		for (int i = 0; i < 4; i++) {
 			int index = playerGridIndexes[i];
 			

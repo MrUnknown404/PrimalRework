@@ -29,7 +29,7 @@ import net.minecraftforge.common.util.RecipeMatcher;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public class StagedOreShapelessRecipe extends ShapelessOreRecipe implements IStagedRecipeBase {
-
+	
 	protected final EnumStage stage;
 	protected final ItemStack output;
 	

@@ -135,7 +135,7 @@ public class BlockPrimalTorchUnlit extends BlockBase {
 		if (!checkForDrop(worldIn, pos, state)) {
 			return;
 		} else {
-			EnumFacing enumfacing = (EnumFacing)state.getValue(FACING);
+			EnumFacing enumfacing = (EnumFacing) state.getValue(FACING);
 			EnumFacing.Axis enumfacing$axis = enumfacing.getAxis();
 			EnumFacing enumfacing1 = enumfacing.getOpposite();
 			BlockPos blockpos = pos.offset(enumfacing1);
@@ -230,7 +230,7 @@ public class BlockPrimalTorchUnlit extends BlockBase {
 	
 	@Override
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, new IProperty[] {FACING});
+		return new BlockStateContainer(this, new IProperty[] { FACING });
 	}
 	
 	@Override

@@ -111,8 +111,8 @@ public class PlayerEventHandler {
 				if (!e.getWorld().isRemote && r.nextInt(3) == 0) {
 					item.shrink(1);
 					
-					e.getWorld().spawnEntity(new EntityItem(e.getWorld(), e.getHitVec().x, e.getHitVec().y, e.getHitVec().z, new ItemStack(ModItems.BONE_SHARD,
-							1 + MathHelper.clamp(r.nextInt(3) - 1, 0, 1))));
+					e.getWorld().spawnEntity(new EntityItem(e.getWorld(), e.getHitVec().x, e.getHitVec().y, e.getHitVec().z,
+							new ItemStack(ModItems.BONE_SHARD, 1 + MathHelper.clamp(r.nextInt(3) - 1, 0, 1))));
 					
 					if (r.nextInt(3) == 0) {
 						e.getWorld().spawnEntity(new EntityItem(e.getWorld(), e.getHitVec().x, e.getHitVec().y, e.getHitVec().z, new ItemStack(Items.DYE, 1, 15)));

@@ -9,7 +9,7 @@ import net.minecraft.world.storage.MapStorage;
 import net.minecraft.world.storage.WorldSavedData;
 
 public class StageWorldSaveData extends WorldSavedData {
-
+	
 	private static final String DATA_NAME = Main.MOD_ID + "_StageData";
 	
 	public StageWorldSaveData() {

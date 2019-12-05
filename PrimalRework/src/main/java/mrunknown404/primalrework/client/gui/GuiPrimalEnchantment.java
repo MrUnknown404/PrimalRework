@@ -36,7 +36,6 @@ public class GuiPrimalEnchantment extends GuiContainer {
 		int l = mouseX - (i + 7);
 		int i1 = mouseY - (j + 7);
 		
-		
 		if (l >= 0 && i1 >= 0 && l < 164 && i1 < 19) {
 			int lvl = te.getContainer().enchantItem(mc.player);
 			

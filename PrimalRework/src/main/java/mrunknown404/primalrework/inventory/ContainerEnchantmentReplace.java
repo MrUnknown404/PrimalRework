@@ -24,7 +24,7 @@ import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.event.ForgeEventFactory;
 
 public class ContainerEnchantmentReplace extends ContainerEnchantment {
-
+	
 	private final World world;
 	private final BlockPos position;
 	private final Random rand;
@@ -118,8 +118,8 @@ public class ContainerEnchantmentReplace extends ContainerEnchantment {
 		
 		if ((itemstack1.isEmpty() || itemstack1.getCount() < i) && !player.capabilities.isCreativeMode) {
 			return false;
-		} else if (enchantLevels[id] > 0 && !itemstack.isEmpty() && (player.experienceLevel >= i && player.experienceLevel >= enchantLevels[id] ||
-				player.capabilities.isCreativeMode)) {
+		} else if (enchantLevels[id] > 0 && !itemstack.isEmpty() &&
+				(player.experienceLevel >= i && player.experienceLevel >= enchantLevels[id] || player.capabilities.isCreativeMode)) {
 			if (!world.isRemote) {
 				List<EnchantmentData> list = getEnchantmentList(itemstack, id, enchantLevels[id]);
 				
@@ -153,7 +153,7 @@ public class ContainerEnchantmentReplace extends ContainerEnchantment {
 					player.addStat(StatList.ITEM_ENCHANTED);
 					
 					if (player instanceof EntityPlayerMP) {
-						CriteriaTriggers.ENCHANTED_ITEM.trigger((EntityPlayerMP)player, itemstack, i);
+						CriteriaTriggers.ENCHANTED_ITEM.trigger((EntityPlayerMP) player, itemstack, i);
 					}
 					
 					tableInventory.markDirty();

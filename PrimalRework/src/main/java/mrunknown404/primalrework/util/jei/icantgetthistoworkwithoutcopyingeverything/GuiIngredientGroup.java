@@ -31,7 +31,7 @@ public class GuiIngredientGroup<T> implements IGuiIngredientGroup<T> {
 	private final IIngredientType<T> ingredientType;
 	private final int cycleOffset;
 	private IFocus<T> focus;
-
+	
 	public GuiIngredientGroup(IIngredientType<T> ingredientType, @Nullable IFocus<T> focus, int cycleOffset) {
 		this.ingredientType = ingredientType;
 		if (focus == null) {
@@ -60,7 +60,7 @@ public class GuiIngredientGroup<T> implements IGuiIngredientGroup<T> {
 			inputSlots.add(slotIndex);
 		}
 	}
-
+	
 	@Override
 	public void set(IIngredients ingredients) {
 		List<List<T>> inputs = ingredients.getInputs(ingredientType);
@@ -86,7 +86,7 @@ public class GuiIngredientGroup<T> implements IGuiIngredientGroup<T> {
 			}
 		}
 	}
-
+	
 	@Override
 	public void set(int slotIndex, @Nullable List<T> ingredients) {
 		if (ingredients != null) {
@@ -108,12 +108,12 @@ public class GuiIngredientGroup<T> implements IGuiIngredientGroup<T> {
 			guiIngredient.set(ingredients, null);
 		}
 	}
-
+	
 	@Override
 	public void set(int slotIndex, @Nullable T value) {
 		set(slotIndex, Collections.singletonList(value));
 	}
-
+	
 	@Override
 	public void setBackground(int slotIndex, IDrawable background) {
 		guiIngredients.get(slotIndex).setBackground(background);
@@ -139,5 +139,6 @@ public class GuiIngredientGroup<T> implements IGuiIngredientGroup<T> {
 		this.focus = focus == null ? null : Focus.check(focus);
 	}
 	
-	@Override public void addTooltipCallback(ITooltipCallback<T> tooltipCallback) {}
+	@Override
+	public void addTooltipCallback(ITooltipCallback<T> tooltipCallback) {}
 }

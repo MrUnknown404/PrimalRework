@@ -18,7 +18,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 
 public class HarvestHelper {
-
+	
 	public static final List<BlockHarvestInfo> BLOCKS = new ArrayList<BlockHarvestInfo>();
 	public static final List<ItemHarvestInfo> ITEMS = new ArrayList<ItemHarvestInfo>();
 	

@@ -24,7 +24,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockPrimalEnchantingTable extends BlockBase implements ITileEntityProvider {
-
+	
 	private static final AxisAlignedBB bb = new AxisAlignedBB(1.05 / 16, 0, 1.05 / 16, 15.05 / 16, 9.05 / 16, 15.05 / 16);
 	
 	public BlockPrimalEnchantingTable() {

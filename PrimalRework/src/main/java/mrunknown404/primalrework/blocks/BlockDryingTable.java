@@ -27,7 +27,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 
 public class BlockDryingTable extends BlockDirectionalBase implements ITileEntityProvider {
-
+	
 	private static final AxisAlignedBB bb = new AxisAlignedBB(1.05 / 16, 0, 1.05 / 16, 15.05 / 16, 13.05f / 16, 15.05 / 16);
 	
 	public BlockDryingTable() {

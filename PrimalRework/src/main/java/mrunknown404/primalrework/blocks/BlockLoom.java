@@ -89,7 +89,7 @@ public class BlockLoom extends BlockDirectionalBase implements ITileEntityProvid
 	
 	@Override
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, new IProperty[] {FACING, STRING_LEVEL});
+		return new BlockStateContainer(this, new IProperty[] { FACING, STRING_LEVEL });
 	}
 	
 	@Override

@@ -113,8 +113,8 @@ public abstract class BlockSlabBase extends BlockSlab implements ISlabBase<Block
 	
 	@Override
 	protected BlockStateContainer createBlockState() {
-		return isDouble() ? new BlockStateContainer(this, new IProperty[] {BlockPurpurSlab.VARIANT}) :
-			new BlockStateContainer(this, new IProperty[] {HALF, BlockPurpurSlab.VARIANT});
+		return isDouble() ? new BlockStateContainer(this, new IProperty[] { BlockPurpurSlab.VARIANT }) :
+				new BlockStateContainer(this, new IProperty[] { HALF, BlockPurpurSlab.VARIANT });
 	}
 	
 	@Override

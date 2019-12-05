@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 
 public class TileEntityDryingTable extends TileEntityBase implements ITickable {
 	public EnumFacing facing;
-	private int[] dryingProgress = new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0};
+	private int[] dryingProgress = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 	
 	public TileEntityDryingTable() {
 		super(9);
@@ -27,7 +27,6 @@ public class TileEntityDryingTable extends TileEntityBase implements ITickable {
 		for (int i = 0; i < getSizeInventory(); i++) {
 			ItemStack item = getStackInSlot(i);
 			int curDryingProgress = dryingProgress[i];
-			//int curVisualProgress = visualProgress[i];
 			
 			if (!item.isEmpty()) {
 				if (ModRecipes.doesItemHaveDryingTableRecipe(item)) {

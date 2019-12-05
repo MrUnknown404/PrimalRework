@@ -10,7 +10,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 
 public class BlockStoneSlab extends BlockSlabBase {
-
+	
 	public BlockStoneSlab(String name, boolean isDouble) {
 		super(name, Material.ROCK, SoundType.STONE, 1.5f, 1.5f, isDouble, EnumStage.stage1,
 				new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.pickaxe, EnumToolMaterial.flint));
