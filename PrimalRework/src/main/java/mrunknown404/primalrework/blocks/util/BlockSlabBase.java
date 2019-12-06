@@ -52,16 +52,15 @@ public abstract class BlockSlabBase extends BlockSlab implements ISlabBase<Block
 		this.renderType = isDouble ? BlockRenderLayer.SOLID : BlockRenderLayer.CUTOUT;
 		this.useNeighborBrightness = !isDouble();
 		this.stage = stage;
+		this.harvestInfo = new BlockHarvestInfo(types);
 		
 		addToModList(this);
 		
 		if (types == null || types.length == 0) {
 			System.err.println("Invalid types for " + getUnlocalizedName());
-			setHarvestInfo(BlockHarvestInfo.createFromEmptyBlock());
+			this.harvestInfo = new BlockHarvestInfo();
 			return;
 		}
-		
-		setHarvestInfo(BlockHarvestInfo.createFromEmptyBlock(types));
 	}
 	
 	@Override
@@ -120,11 +119,6 @@ public abstract class BlockSlabBase extends BlockSlab implements ISlabBase<Block
 	@Override
 	public boolean isDouble() {
 		return isDouble;
-	}
-	
-	@Override
-	public void setHarvestInfo(BlockHarvestInfo info) {
-		this.harvestInfo = info;
 	}
 	
 	@Override

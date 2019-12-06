@@ -54,6 +54,7 @@ public class Main {
 	
 	// TODO add map system similar to antique atlas
 	// TODO think of a metal working system
+	// TODO create biome decorator
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent e) {

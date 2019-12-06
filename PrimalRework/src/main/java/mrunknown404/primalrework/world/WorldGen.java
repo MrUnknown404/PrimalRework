@@ -15,14 +15,14 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 public class WorldGen implements IWorldGenerator {
-
-	//TODO replace all worldgen, add random crop gen, replace biomes with variants ie Forest & Forest Hills
+	
+	// TODO replace all worldgen, add random crop gen, replace biomes with variants ie Forest & Forest Hills
 	
 	@Override
 	public void generate(Random r, int chunkX, int chunkZ, World w, IChunkGenerator gen, IChunkProvider prov) {
 		if (w.provider.getDimensionType() == DimensionType.OVERWORLD) {
-			generateGroundItems(w, r, new BlockPos(chunkX * 16 + 8, 128, chunkZ * 16 + 8));
 			generateGrassSlabs(w, new BlockPos(chunkX * 16 + 8, 63, chunkZ * 16 + 8));
+			generateGroundItems(w, r, new BlockPos(chunkX * 16 + 8, 128, chunkZ * 16 + 8));
 			
 			for (int i = 63; i > 20; i--) {
 				if (r.nextInt(4) == 0) {
@@ -61,6 +61,11 @@ public class WorldGen implements IWorldGenerator {
 							if (b == Blocks.GRASS) {
 								w.setBlockState(bpos.up(), ModBlocks.GRASS_SLAB.getStateFromMeta(0), 2);
 								w.setBlockState(bpos, Blocks.DIRT.getDefaultState(), 2);
+								
+								if (w.getBlockState(bpos.up().up()).getMaterial().isReplaceable()) {
+									w.setBlockState(bpos.up().up(), Blocks.AIR.getDefaultState(), 2);
+								}
+								
 								break yCheck;
 							} else if (b == Blocks.SNOW_LAYER) {
 								w.setBlockState(bpos, Blocks.SNOW_LAYER.getStateFromMeta(3), 2);
@@ -82,7 +87,8 @@ public class WorldGen implements IWorldGenerator {
 				if (w.isAirBlock(blockpos) && b.canBlockStay(w, blockpos)) {
 					BlockPos newCheck = new BlockPos(blockpos).down();
 					
-					if (w.getBlockState(newCheck).getBlock() != Blocks.LEAVES && w.getBlockState(newCheck).getBlock() != Blocks.LEAVES2) {
+					if (w.getBlockState(newCheck).getBlock() != Blocks.LEAVES && w.getBlockState(newCheck).getBlock() != Blocks.LEAVES2 &&
+							w.getBlockState(newCheck).getBlock() != Blocks.BROWN_MUSHROOM_BLOCK && w.getBlockState(newCheck).getBlock() != Blocks.RED_MUSHROOM_BLOCK) {
 						w.setBlockState(blockpos, b.getDefaultState(), 2);
 					}
 				}

@@ -21,6 +21,5 @@ public interface IBlockBase<R extends Block> extends IThingBase<Block, R> {
 		ModItems.ITEMS.add(new ItemBlock(block).setUnlocalizedName(block.getUnlocalizedName().substring(5)).setRegistryName(block.getUnlocalizedName().substring(5)));
 	}
 	
-	public abstract void setHarvestInfo(BlockHarvestInfo info);
 	public abstract BlockHarvestInfo getHarvestInfo();
 }

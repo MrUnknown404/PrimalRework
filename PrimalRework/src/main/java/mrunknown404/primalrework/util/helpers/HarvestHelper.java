@@ -1,13 +1,14 @@
 package mrunknown404.primalrework.util.helpers;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.annotation.Nullable;
 
-import mrunknown404.primalrework.blocks.util.BlockBase;
-import mrunknown404.primalrework.blocks.util.IBlockBase;
 import mrunknown404.primalrework.util.DoubleValue;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import mrunknown404.primalrework.util.enums.EnumToolType;
@@ -19,8 +20,8 @@ import net.minecraft.item.Item;
 
 public class HarvestHelper {
 	
-	public static final List<BlockHarvestInfo> BLOCKS = new ArrayList<BlockHarvestInfo>();
-	public static final List<ItemHarvestInfo> ITEMS = new ArrayList<ItemHarvestInfo>();
+	public static final Map<Block, BlockHarvestInfo> BLOCKS = new HashMap<Block, BlockHarvestInfo>();
+	public static final Map<Item, ItemHarvestInfo> ITEMS = new HashMap<Item, ItemHarvestInfo>();
 	
 	public static void setHarvestLevel(Block b, EnumToolType type, EnumToolMaterial level) {
 		setHarvestLevel(b, -1, Arrays.asList(new DoubleValue<EnumToolType, EnumToolMaterial>(type, level)));
@@ -43,30 +44,26 @@ public class HarvestHelper {
 	}
 	
 	public static void setHarvestLevel(Block b, float hardness, List<DoubleValue<EnumToolType, EnumToolMaterial>> harvest, HarvestDropInfo... drops) {
-		BlockHarvestInfo info = new BlockHarvestInfo(b, harvest);
+		BlockHarvestInfo info = new BlockHarvestInfo(harvest);
 		info = info.setDrops(drops);
 		
 		if (hardness != -1f) {
 			b.setHardness(hardness);
 		}
 		
-		if (b instanceof IBlockBase) {
-			((IBlockBase<BlockBase>) b).setHarvestInfo(info);
+		if (BLOCKS.containsKey(b)) {
+			BLOCKS.remove(b);
 		}
-		
-		if (BLOCKS.contains(info)) {
-			BLOCKS.remove(info);
-		}
-		BLOCKS.add(info);
+		BLOCKS.put(b, info);
 	}
 	
 	public static void setHarvestLevel(Item i, EnumToolType type, EnumToolMaterial level) {
-		ItemHarvestInfo info = new ItemHarvestInfo(i, type, level);
+		ItemHarvestInfo info = new ItemHarvestInfo(type, level);
 		
-		if (ITEMS.contains(info)) {
-			ITEMS.remove(info);
+		if (ITEMS.containsKey(i)) {
+			ITEMS.remove(i);
 		}
-		ITEMS.add(info);
+		ITEMS.put(i, info);
 	}
 	
 	public static boolean canBreak(Block block, @Nullable Item item) {
@@ -112,9 +109,11 @@ public class HarvestHelper {
 	}
 	
 	public static BlockHarvestInfo getHarvestInfo(Block block) {
-		for (BlockHarvestInfo info : BLOCKS) {
-			if (info.getBlock() == block) {
-				return info;
+		Iterator<Entry<Block, BlockHarvestInfo>> it = BLOCKS.entrySet().iterator();
+		while (it.hasNext()) {
+			Entry<Block, BlockHarvestInfo> pair = it.next();
+			if (pair.getKey() == block) {
+				return pair.getValue();
 			}
 		}
 		
@@ -122,9 +121,35 @@ public class HarvestHelper {
 	}
 	
 	public static ItemHarvestInfo getHarvestInfo(Item item) {
-		for (ItemHarvestInfo info : ITEMS) {
-			if (info.getItem() == item) {
-				return info;
+		Iterator<Entry<Item, ItemHarvestInfo>> it = ITEMS.entrySet().iterator();
+		while (it.hasNext()) {
+			Entry<Item, ItemHarvestInfo> pair = it.next();
+			if (pair.getKey() == item) {
+				return pair.getValue();
+			}
+		}
+		
+		return null;
+	}
+	
+	public static Item getItem(ItemHarvestInfo info) {
+		Iterator<Entry<Item, ItemHarvestInfo>> it = ITEMS.entrySet().iterator();
+		while (it.hasNext()) {
+			Entry<Item, ItemHarvestInfo> pair = it.next();
+			if (pair.getValue() == info) {
+				return pair.getKey();
+			}
+		}
+		
+		return null;
+	}
+	
+	public static Block getBlock(BlockHarvestInfo info) {
+		Iterator<Entry<Block, BlockHarvestInfo>> it = BLOCKS.entrySet().iterator();
+		while (it.hasNext()) {
+			Entry<Block, BlockHarvestInfo> pair = it.next();
+			if (pair.getValue() == info) {
+				return pair.getKey();
 			}
 		}
 		

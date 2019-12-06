@@ -337,12 +337,8 @@ public class GuiCreatePrimalWorld extends GuiScreen {
 			}
 			
 			if (btnAllowCommands.visible) {
-				int y = 151;
-				if (WorldType.WORLD_TYPES[selectedIndex] == Main.PRIMAL_WORLD) {
-					y = 100;
-				}
-				
-				drawString(fontRenderer, I18n.format("selectWorld.allowCommands.info"), width / 2 - 150, (79 + y), -6250336);
+				int y = WorldType.WORLD_TYPES[selectedIndex] == Main.PRIMAL_WORLD ? 122 : 172;
+				drawString(fontRenderer, I18n.format("selectWorld.allowCommands.info"), width / 2 - 150, y, -6250336);
 			}
 			
 			worldSeedField.drawTextBox();

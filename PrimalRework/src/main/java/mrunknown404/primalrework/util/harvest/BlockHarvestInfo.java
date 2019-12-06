@@ -8,33 +8,22 @@ import mrunknown404.primalrework.util.DoubleValue;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import mrunknown404.primalrework.util.enums.EnumToolType;
 import mrunknown404.primalrework.util.helpers.HarvestHelper;
-import net.minecraft.block.Block;
 
 public class BlockHarvestInfo {
 	
-	private final Block block;
 	private final List<DoubleValue<EnumToolType, EnumToolMaterial>> harvests;
 	private final List<HarvestDropInfo> drops = new ArrayList<HarvestDropInfo>();
 	
-	public BlockHarvestInfo(Block block, List<DoubleValue<EnumToolType, EnumToolMaterial>> harvests) {
-		this.block = block;
+	public BlockHarvestInfo(List<DoubleValue<EnumToolType, EnumToolMaterial>> harvests) {
 		this.harvests = harvests;
 	}
 	
-	public BlockHarvestInfo(Block block, DoubleValue<EnumToolType, EnumToolMaterial>... harvests) {
-		this(block, Arrays.asList(harvests));
+	public BlockHarvestInfo(DoubleValue<EnumToolType, EnumToolMaterial>... harvests) {
+		this(Arrays.asList(harvests));
 	}
 	
-	public BlockHarvestInfo(Block block, EnumToolType toolType, EnumToolMaterial toolMaterial) {
-		this(block, new DoubleValue<EnumToolType, EnumToolMaterial>(toolType, toolMaterial));
-	}
-	
-	public static BlockHarvestInfo createFromEmptyBlock(DoubleValue<EnumToolType, EnumToolMaterial>... harvest) {
-		return new BlockHarvestInfo(null, Arrays.asList(harvest));
-	}
-	
-	public static BlockHarvestInfo createFromEmptyBlock() {
-		return new BlockHarvestInfo(null, Arrays.asList(new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.none, EnumToolMaterial.hand)));
+	public BlockHarvestInfo(EnumToolType toolType, EnumToolMaterial toolMaterial) {
+		this(new DoubleValue<EnumToolType, EnumToolMaterial>(toolType, toolMaterial));
 	}
 	
 	public BlockHarvestInfo setDrops(List<HarvestDropInfo> drops) {
@@ -64,15 +53,11 @@ public class BlockHarvestInfo {
 	}
 	
 	public boolean canBreakWithNone() {
-		return HarvestHelper.hasToolMaterial(block, EnumToolMaterial.hand) || HarvestHelper.hasToolType(block, EnumToolType.none);
+		return HarvestHelper.hasToolMaterial(HarvestHelper.getBlock(this), EnumToolMaterial.hand) || HarvestHelper.hasToolType(HarvestHelper.getBlock(this), EnumToolType.none);
 	}
 	
 	public List<DoubleValue<EnumToolType, EnumToolMaterial>> getHarvests() {
 		return harvests;
-	}
-	
-	public Block getBlock() {
-		return block;
 	}
 	
 	public List<EnumToolType> getToolTypes() {

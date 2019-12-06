@@ -174,7 +174,7 @@ public class VanillaOverrides {
 			new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.hoe, EnumToolMaterial.flint));
 	
 	private static BlockHarvestInfo setupBlockInfo(List<DoubleValue<EnumToolType, EnumToolMaterial>> info, HarvestDropInfo... drops) {
-		return new BlockHarvestInfo(null, info).setDrops(drops);
+		return new BlockHarvestInfo(info).setDrops(drops);
 	}
 	
 	private static void registerBlocks() {
@@ -192,7 +192,7 @@ public class VanillaOverrides {
 						new ItemDropInfo(ModItems.GRAVEL, false, true, 100, 2, 1, 2, 0f)));
 		HarvestHelper.setHarvestLevel(Blocks.GOLD_ORE,                      EnumToolType.pickaxe, EnumToolMaterial.bronze);
 		HarvestHelper.setHarvestLevel(Blocks.IRON_ORE,                      EnumToolType.pickaxe, EnumToolMaterial.bronze);
-		HarvestHelper.setHarvestLevel(Blocks.COAL_ORE, new BlockHarvestInfo(Blocks.COAL_ORE, EnumToolType.pickaxe, EnumToolMaterial.stone).setDrops(
+		HarvestHelper.setHarvestLevel(Blocks.COAL_ORE, new BlockHarvestInfo(EnumToolType.pickaxe, EnumToolMaterial.stone).setDrops(
 				new HarvestDropInfo(EnumToolType.pickaxe, true, new ItemDropInfo(Items.COAL, false, true, 100, 1, 0, 0, 0))));
 		HarvestHelper.setHarvestLevel(Blocks.LOG,                           EnumToolType.axe,     EnumToolMaterial.flint);
 		HarvestHelper.setHarvestLevel(Blocks.LOG2,                          EnumToolType.axe,     EnumToolMaterial.flint);
@@ -200,7 +200,7 @@ public class VanillaOverrides {
 		HarvestHelper.setHarvestLevel(Blocks.LEAVES2, 0.3f,                 LEAVES_HARVEST_INFO);
 		HarvestHelper.setHarvestLevel(Blocks.SPONGE,                        EnumToolType.none,    EnumToolMaterial.hand);
 		HarvestHelper.setHarvestLevel(Blocks.GLASS,                         EnumToolType.none,    EnumToolMaterial.hand);
-		HarvestHelper.setHarvestLevel(Blocks.LAPIS_ORE, new BlockHarvestInfo(Blocks.LAPIS_ORE, EnumToolType.pickaxe, EnumToolMaterial.copper).setDrops(
+		HarvestHelper.setHarvestLevel(Blocks.LAPIS_ORE, new BlockHarvestInfo(EnumToolType.pickaxe, EnumToolMaterial.copper).setDrops(
 				new HarvestDropInfo(EnumToolType.pickaxe, true, new ItemDropInfo(Items.DYE, 4, false, true, 100, 0, 4, 9, 0))));
 		HarvestHelper.setHarvestLevel(Blocks.LAPIS_BLOCK,                   EnumToolType.pickaxe, EnumToolMaterial.copper);
 		HarvestHelper.setHarvestLevel(Blocks.DISPENSER,                     EnumToolType.pickaxe, EnumToolMaterial.flint);
@@ -236,7 +236,7 @@ public class VanillaOverrides {
 		HarvestHelper.setHarvestLevel(Blocks.OAK_STAIRS,                    EnumToolType.axe,     EnumToolMaterial.flint);
 		HarvestHelper.setHarvestLevel(Blocks.CHEST,                         EnumToolType.axe,     EnumToolMaterial.flint);
 		HarvestHelper.setHarvestLevel(Blocks.REDSTONE_WIRE,                 EnumToolType.none,    EnumToolMaterial.hand);
-		HarvestHelper.setHarvestLevel(Blocks.DIAMOND_ORE, new BlockHarvestInfo(Blocks.DIAMOND_ORE, EnumToolType.pickaxe, EnumToolMaterial.steel).setDrops(
+		HarvestHelper.setHarvestLevel(Blocks.DIAMOND_ORE, new BlockHarvestInfo(EnumToolType.pickaxe, EnumToolMaterial.steel).setDrops(
 				new HarvestDropInfo(EnumToolType.pickaxe, true, new ItemDropInfo(Items.DIAMOND, false, true, 100, 1, 0, 0, 0))));
 		HarvestHelper.setHarvestLevel(Blocks.DIAMOND_BLOCK,                 EnumToolType.pickaxe, EnumToolMaterial.steel);
 		HarvestHelper.setHarvestLevel(Blocks.CRAFTING_TABLE,                EnumToolType.axe,     EnumToolMaterial.flint);
@@ -264,9 +264,9 @@ public class VanillaOverrides {
 		HarvestHelper.setHarvestLevel(Blocks.STONE_PRESSURE_PLATE,          EnumToolType.none,    EnumToolMaterial.hand);
 		HarvestHelper.setHarvestLevel(Blocks.IRON_DOOR,                     EnumToolType.pickaxe, EnumToolMaterial.bronze);
 		HarvestHelper.setHarvestLevel(Blocks.WOODEN_PRESSURE_PLATE,         EnumToolType.none,    EnumToolMaterial.hand);
-		HarvestHelper.setHarvestLevel(Blocks.REDSTONE_ORE, new BlockHarvestInfo(Blocks.REDSTONE_ORE, EnumToolType.pickaxe, EnumToolMaterial.iron).setDrops(
+		HarvestHelper.setHarvestLevel(Blocks.REDSTONE_ORE, new BlockHarvestInfo(EnumToolType.pickaxe, EnumToolMaterial.iron).setDrops(
 				new HarvestDropInfo(EnumToolType.pickaxe, true, new ItemDropInfo(Items.REDSTONE, false, true, 100, 0, 4, 5, 0))));
-		HarvestHelper.setHarvestLevel(Blocks.LIT_REDSTONE_ORE, new BlockHarvestInfo(Blocks.LIT_REDSTONE_ORE, EnumToolType.pickaxe, EnumToolMaterial.iron).setDrops(
+		HarvestHelper.setHarvestLevel(Blocks.LIT_REDSTONE_ORE, new BlockHarvestInfo(EnumToolType.pickaxe, EnumToolMaterial.iron).setDrops(
 				new HarvestDropInfo(EnumToolType.pickaxe, true, new ItemDropInfo(Items.REDSTONE, false, true, 100, 0, 4, 5, 0))));
 		HarvestHelper.setHarvestLevel(Blocks.UNLIT_REDSTONE_TORCH,          EnumToolType.none,    EnumToolMaterial.hand);
 		HarvestHelper.setHarvestLevel(Blocks.REDSTONE_TORCH,                EnumToolType.none,    EnumToolMaterial.hand);
@@ -327,7 +327,7 @@ public class VanillaOverrides {
 		HarvestHelper.setHarvestLevel(Blocks.WOODEN_SLAB,                   EnumToolType.axe,     EnumToolMaterial.flint);
 		HarvestHelper.setHarvestLevel(Blocks.COCOA, 0.3f,                   EnumToolType.hoe,     EnumToolMaterial.hand);
 		HarvestHelper.setHarvestLevel(Blocks.SANDSTONE_STAIRS,              EnumToolType.pickaxe, EnumToolMaterial.flint);
-		HarvestHelper.setHarvestLevel(Blocks.EMERALD_ORE, new BlockHarvestInfo(Blocks.EMERALD_ORE, EnumToolType.pickaxe, EnumToolMaterial.steel).setDrops(
+		HarvestHelper.setHarvestLevel(Blocks.EMERALD_ORE, new BlockHarvestInfo(EnumToolType.pickaxe, EnumToolMaterial.steel).setDrops(
 				new HarvestDropInfo(EnumToolType.pickaxe, true, new ItemDropInfo(Items.EMERALD, false, true, 100, 1, 0, 0, 0))));
 		HarvestHelper.setHarvestLevel(Blocks.ENDER_CHEST,                   EnumToolType.pickaxe, EnumToolMaterial.steel);
 		HarvestHelper.setHarvestLevel(Blocks.TRIPWIRE_HOOK,                 EnumToolType.none,    EnumToolMaterial.hand);
@@ -360,7 +360,7 @@ public class VanillaOverrides {
 		HarvestHelper.setHarvestLevel(Blocks.DAYLIGHT_DETECTOR,             EnumToolType.axe,     EnumToolMaterial.flint);
 		HarvestHelper.setHarvestLevel(Blocks.DAYLIGHT_DETECTOR_INVERTED,    EnumToolType.axe,     EnumToolMaterial.flint);
 		HarvestHelper.setHarvestLevel(Blocks.REDSTONE_BLOCK,                EnumToolType.pickaxe, EnumToolMaterial.iron);
-		HarvestHelper.setHarvestLevel(Blocks.QUARTZ_ORE, new BlockHarvestInfo(Blocks.QUARTZ_ORE, EnumToolType.pickaxe, EnumToolMaterial.stone).setDrops(
+		HarvestHelper.setHarvestLevel(Blocks.QUARTZ_ORE, new BlockHarvestInfo(EnumToolType.pickaxe, EnumToolMaterial.stone).setDrops(
 				new HarvestDropInfo(EnumToolType.pickaxe, true, new ItemDropInfo(Items.QUARTZ, false, true, 100, 1, 0, 0, 0))));
 		HarvestHelper.setHarvestLevel(Blocks.HOPPER,                        EnumToolType.pickaxe, EnumToolMaterial.flint);
 		HarvestHelper.setHarvestLevel(Blocks.QUARTZ_BLOCK,                  EnumToolType.pickaxe, EnumToolMaterial.stone);

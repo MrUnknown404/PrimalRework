@@ -43,25 +43,19 @@ public class BlockBase extends Block implements IBlockBase<BlockBase> {
 		this.collisionAABB = collisionAABB;
 		this.visualAABB = visualAABB;
 		this.stage = stage;
+		this.harvestInfo = new BlockHarvestInfo(types);
 		
 		addToModList(this);
 		
 		if (types == null || types.length == 0) {
 			System.err.println("Invalid types for " + getUnlocalizedName());
-			setHarvestInfo(BlockHarvestInfo.createFromEmptyBlock());
+			this.harvestInfo = new BlockHarvestInfo();
 			return;
 		}
-		
-		setHarvestInfo(BlockHarvestInfo.createFromEmptyBlock(types));
 	}
 	
 	public BlockBase(String name, Material material, SoundType soundType, float hardness, float resistance, EnumStage stage, DoubleValue<EnumToolType, EnumToolMaterial>... types) {
 		this(name, material, soundType, BlockRenderLayer.SOLID, hardness, resistance, FULL_BLOCK_AABB, FULL_BLOCK_AABB, stage, types);
-	}
-	
-	@Override
-	public void setHarvestInfo(BlockHarvestInfo info) {
-		this.harvestInfo = info;
 	}
 	
 	@Override

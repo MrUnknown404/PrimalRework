@@ -5,26 +5,19 @@ import java.util.List;
 
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import mrunknown404.primalrework.util.enums.EnumToolType;
-import net.minecraft.item.Item;
 
 public class ItemHarvestInfo {
 	
-	private final Item item;
 	private final List<EnumToolType> toolTypes;
 	private final EnumToolMaterial material;
 	
-	public ItemHarvestInfo(Item item, List<EnumToolType> toolTypes, EnumToolMaterial material) {
-		this.item = item;
+	public ItemHarvestInfo(List<EnumToolType> toolTypes, EnumToolMaterial material) {
 		this.material = material;
 		this.toolTypes = toolTypes;
 	}
 	
-	public ItemHarvestInfo(Item item, EnumToolType toolType, EnumToolMaterial material) {
-		this(item, Arrays.asList(toolType), material);
-	}
-	
-	public Item getItem() {
-		return item;
+	public ItemHarvestInfo(EnumToolType toolType, EnumToolMaterial material) {
+		this(Arrays.asList(toolType), material);
 	}
 	
 	public EnumToolMaterial getMaterial() {
