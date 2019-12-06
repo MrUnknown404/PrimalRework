@@ -3,7 +3,6 @@ package mrunknown404.primalrework.world.biome;
 import java.util.Random;
 
 import net.minecraft.block.BlockDoublePlant;
-import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
@@ -12,6 +11,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenBigMushroom;
 import net.minecraft.world.gen.feature.WorldGenBirchTree;
+import net.minecraft.world.gen.feature.WorldGenTaiga1;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeManager.BiomeType;
 import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
@@ -22,20 +22,19 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class BiomePrimalForest extends BiomeBase {
 	private static final WorldGenBirchTree SUPER_BIRCH_TREE = new WorldGenBirchTree(false, true);
 	private static final WorldGenBirchTree BIRCH_TREE = new WorldGenBirchTree(false, false);
+	private static final WorldGenTaiga1 SPRUCE_TREE = new WorldGenTaiga1();
 	private final ForestType forestType;
 	
-	// TODO add mushrooms to ground
+	// TODO add mushrooms to ground & more cool trees
 	
-	public BiomePrimalForest(String name, BiomeType type, ForestType forestType, int weight, int treesPerChunk) {
-		super(name, type, new BiomeDictionary.Type[] { BiomeDictionary.Type.FOREST }, weight, true, false);
+	public BiomePrimalForest(BiomeModifier biomeMod, ForestType forestType, int weight, int treesPerChunk) {
+		super(forestType.toString().toLowerCase() + "_forest", BiomeType.WARM, biomeMod, new BiomeDictionary.Type[] { BiomeDictionary.Type.FOREST }, weight, true, false);
 		this.forestType = forestType;
 		this.decorator.treesPerChunk = treesPerChunk;
-		this.decorator.grassPerChunk = 2;
+		this.decorator.grassPerChunk = 3;
 		
 		if (forestType == ForestType.NORMAL) {
 			spawnableCreatureList.add(new SpawnListEntry(EntityWolf.class, 5, 2, 4));
-		} else if (forestType == ForestType.MUSHROOM) {
-			spawnableMonsterList.add(new SpawnListEntry(EntitySlime.class, 8, 1, 2));
 		}
 	}
 	
@@ -45,9 +44,9 @@ public class BiomePrimalForest extends BiomeBase {
 			case BIRCH:
 				return rand.nextInt(6) == 0 ? SUPER_BIRCH_TREE : BIRCH_TREE;
 			case MUSHROOM:
-				return TREE_FEATURE;
+				return rand.nextInt(14) == 0 ? SPRUCE_TREE : TREE_FEATURE;
 			case NORMAL:
-				return rand.nextInt(10) == 0 ? BIG_TREE_FEATURE : TREE_FEATURE;
+				return rand.nextInt(32) == 0 ? SPRUCE_TREE : rand.nextInt(32) == 0 ? BIRCH_TREE : rand.nextInt(10) == 0 ? BIG_TREE_FEATURE : TREE_FEATURE;
 		}
 		
 		return TREE_FEATURE;
@@ -123,6 +122,6 @@ public class BiomePrimalForest extends BiomeBase {
 	}
 	
 	public static enum ForestType {
-		NORMAL, BIRCH, MUSHROOM;
+		NORMAL, BIRCH, MUSHROOM; //TODO add dead, spruce, big forest
 	}
 }

@@ -32,10 +32,10 @@ public class GenLayerPrimal extends GenLayer {
 		}
 		
 		//TODO remove later
-		biomes[BiomeType.DESERT.ordinal()].add(new BiomeEntry(ModBiomes.PRIMAL_FOREST, ((BiomeBase) ModBiomes.PRIMAL_FOREST).getWeight()));
-		biomes[BiomeType.WARM.ordinal()].add(new BiomeEntry(ModBiomes.PRIMAL_FOREST, ((BiomeBase) ModBiomes.PRIMAL_FOREST).getWeight()));
-		biomes[BiomeType.COOL.ordinal()].add(new BiomeEntry(ModBiomes.PRIMAL_FOREST, ((BiomeBase) ModBiomes.PRIMAL_FOREST).getWeight()));
-		biomes[BiomeType.ICY.ordinal()].add(new BiomeEntry(ModBiomes.PRIMAL_FOREST, ((BiomeBase) ModBiomes.PRIMAL_FOREST).getWeight()));
+		biomes[BiomeType.DESERT.ordinal()].add(new BiomeEntry(ModBiomes.PRIMAL_FLAT_FOREST, 10));
+		//biomes[BiomeType.WARM.ordinal()].add(new BiomeEntry(ModBiomes.PRIMAL_FLAT_FOREST, 10));
+		biomes[BiomeType.COOL.ordinal()].add(new BiomeEntry(ModBiomes.PRIMAL_FLAT_FOREST, 10));
+		biomes[BiomeType.ICY.ordinal()].add(new BiomeEntry(ModBiomes.PRIMAL_FLAT_FOREST, 10));
 	}
 	
 	@Override

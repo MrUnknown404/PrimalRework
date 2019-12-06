@@ -1,5 +1,7 @@
 package mrunknown404.primalrework.world.biome;
 
+import org.apache.commons.lang3.text.WordUtils;
+
 import mrunknown404.primalrework.init.ModBiomes;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
@@ -9,21 +11,55 @@ import net.minecraftforge.common.BiomeManager.BiomeType;
 public class BiomeBase extends Biome {
 	
 	protected final BiomeType biomeType;
+	protected final BiomeModifier biomeMod;
 	protected final BiomeDictionary.Type[] types;
 	protected final int weight;
 	protected final boolean isStrongholdBiome, isVillageBiome;
 	
-	public BiomeBase(String name, BiomeType biomeType, BiomeDictionary.Type[] types, int weight, boolean isStrongholdBiome, boolean isVillageBiome) {
-		super(new BiomeProperties(name));
-		setRegistryName(name);
+	/** @param name primal_ + biomeMod + _ + name */
+	public BiomeBase(String name, BiomeType biomeType, BiomeModifier biomeMod, BiomeDictionary.Type[] types, int weight, boolean isStrongholdBiome, boolean isVillageBiome) {
+		super(new BiomeProperties(WordUtils.capitalizeFully("primal_" + biomeMod.toString() + "_" + name, '_')).setBaseHeight(getBaseHeight(biomeMod))
+				.setHeightVariation(getHeightVariation(biomeMod)));
+		setRegistryName("primal_" + biomeMod + "_" + name);
 		
 		this.biomeType = biomeType;
+		this.biomeMod = biomeMod;
 		this.types = types;
 		this.weight = weight;
 		this.isStrongholdBiome = isStrongholdBiome;
 		this.isVillageBiome = isVillageBiome;
 		
 		ModBiomes.BIOMES.add(this);
+	}
+	
+	protected static float getBaseHeight(BiomeModifier biomeMod) {
+		switch (biomeMod) {
+			case FLAT:
+				return 0.005f;
+			case MODERATE:
+				return 0.1f;
+			case HILLY:
+				return 1;
+			case MOUNTAINOUS:
+				return 1.5f;
+		}
+		
+		return 0f;
+	}
+	
+	protected static float getHeightVariation(BiomeModifier biomeMod) {
+		switch (biomeMod) {
+			case FLAT:
+				return 0.05f;
+			case MODERATE:
+				return 0.2f;
+			case HILLY:
+				return 0.3f;
+			case MOUNTAINOUS:
+				return 0.5f;
+		}
+		
+		return 0f;
 	}
 	
 	public BiomeType getBiomeType() {
@@ -44,5 +80,17 @@ public class BiomeBase extends Biome {
 	
 	public boolean isVillageBiome() {
 		return isVillageBiome;
+	}
+	
+	public enum BiomeModifier {
+		FLAT,
+		MODERATE,
+		HILLY,
+		MOUNTAINOUS;
+		
+		@Override
+		public String toString() {
+			return name().toLowerCase();
+		}
 	}
 }

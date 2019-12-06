@@ -16,7 +16,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 public class WorldGen implements IWorldGenerator {
 	
-	// TODO replace all worldgen, add random crop gen, replace biomes with variants ie Forest & Forest Hills
+	// TODO replace all worldgen (just need decoration), add random crop gen
 	
 	@Override
 	public void generate(Random r, int chunkX, int chunkZ, World w, IChunkGenerator gen, IChunkProvider prov) {
