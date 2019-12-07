@@ -18,10 +18,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.event.world.BlockEvent.FarmlandTrampleEvent;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class BlockEventHandler {
+	
+	@SubscribeEvent
+	public void onTrample(FarmlandTrampleEvent e) {
+		e.setCanceled(true);
+	}
 	
 	@SubscribeEvent
 	public void onHarvestDrop(HarvestDropsEvent e) {

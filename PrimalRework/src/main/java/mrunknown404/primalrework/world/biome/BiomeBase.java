@@ -1,5 +1,9 @@
 package mrunknown404.primalrework.world.biome;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.apache.commons.lang3.text.WordUtils;
 
 import mrunknown404.primalrework.init.ModBiomes;
@@ -24,12 +28,32 @@ public class BiomeBase extends Biome {
 		
 		this.biomeType = biomeType;
 		this.biomeMod = biomeMod;
-		this.types = types;
+		this.types = getBiomeTypes(types, biomeMod);
 		this.weight = weight;
 		this.isStrongholdBiome = isStrongholdBiome;
 		this.isVillageBiome = isVillageBiome;
 		
 		ModBiomes.BIOMES.add(this);
+	}
+	
+	protected static BiomeDictionary.Type[] getBiomeTypes(BiomeDictionary.Type[] types, BiomeModifier biomeMod) {
+		List<BiomeDictionary.Type> t = new ArrayList<BiomeDictionary.Type>();
+		t.addAll(Arrays.asList(types));
+		
+		switch (biomeMod) {
+			case FLAT:
+				t.add(BiomeDictionary.Type.PLAINS);
+				break;
+			case HILLY:
+				t.add(BiomeDictionary.Type.HILLS);
+				break;
+			case MOUNTAINOUS:
+				t.add(BiomeDictionary.Type.MOUNTAIN);
+				break;
+			default: break;
+		}
+		
+		return t.toArray(new BiomeDictionary.Type[0]);
 	}
 	
 	protected static float getBaseHeight(BiomeModifier biomeMod) {

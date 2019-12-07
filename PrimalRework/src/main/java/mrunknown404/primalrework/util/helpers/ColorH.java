@@ -8,8 +8,8 @@ public class ColorH {
 				b[i] = '\u00A7';
 			}
 		}
-		return new String(b);
 		
+		return new String(b);
 	}
 	
 	public static String getAllColorCodes() {

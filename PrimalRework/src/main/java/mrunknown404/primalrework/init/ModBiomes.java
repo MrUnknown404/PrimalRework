@@ -20,8 +20,8 @@ public class ModBiomes {
 	public static final Biome PRIMAL_HILLY_BIRCH_FOREST       = new BiomePrimalForest(BiomeModifier.HILLY,       BiomePrimalForest.ForestType.BIRCH, 8, 6);
 	public static final Biome PRIMAL_MOUNTAINOUS_BIRCH_FOREST = new BiomePrimalForest(BiomeModifier.MOUNTAINOUS, BiomePrimalForest.ForestType.BIRCH, 6, 4);
 	
-	public static final Biome PRIMAL_FLAT_MUSHROOM_FOREST =        new BiomePrimalForest(BiomeModifier.FLAT,        BiomePrimalForest.ForestType.MUSHROOM, 4, 6);
-	public static final Biome PRIMAL_MODERATE_MUSHROOM_FOREST =    new BiomePrimalForest(BiomeModifier.MODERATE,    BiomePrimalForest.ForestType.MUSHROOM, 8, 6);
-	public static final Biome PRIMAL_HILLY_MUSHROOM_FOREST =       new BiomePrimalForest(BiomeModifier.HILLY,       BiomePrimalForest.ForestType.MUSHROOM, 6, 4);
-	public static final Biome PRIMAL_MOUNTAINOUS_MUSHROOM_FOREST = new BiomePrimalForest(BiomeModifier.MOUNTAINOUS, BiomePrimalForest.ForestType.MUSHROOM, 4, 2);
+	public static final Biome PRIMAL_FLAT_MUSHROOM_FOREST =        new BiomePrimalForest(BiomeModifier.FLAT,        BiomePrimalForest.ForestType.MUSHROOM, 4, 14);
+	public static final Biome PRIMAL_MODERATE_MUSHROOM_FOREST =    new BiomePrimalForest(BiomeModifier.MODERATE,    BiomePrimalForest.ForestType.MUSHROOM, 8, 14);
+	public static final Biome PRIMAL_HILLY_MUSHROOM_FOREST =       new BiomePrimalForest(BiomeModifier.HILLY,       BiomePrimalForest.ForestType.MUSHROOM, 6, 12);
+	public static final Biome PRIMAL_MOUNTAINOUS_MUSHROOM_FOREST = new BiomePrimalForest(BiomeModifier.MOUNTAINOUS, BiomePrimalForest.ForestType.MUSHROOM, 4, 10);
 }

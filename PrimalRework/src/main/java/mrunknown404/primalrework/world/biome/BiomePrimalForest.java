@@ -28,7 +28,9 @@ public class BiomePrimalForest extends BiomeBase {
 	// TODO add mushrooms to ground & more cool trees
 	
 	public BiomePrimalForest(BiomeModifier biomeMod, ForestType forestType, int weight, int treesPerChunk) {
-		super(forestType.toString().toLowerCase() + "_forest", BiomeType.WARM, biomeMod, new BiomeDictionary.Type[] { BiomeDictionary.Type.FOREST }, weight, true, false);
+		super(forestType.toString().toLowerCase() + "_forest", BiomeType.WARM, biomeMod, forestType == ForestType.MUSHROOM ?
+				new BiomeDictionary.Type[] { BiomeDictionary.Type.FOREST, BiomeDictionary.Type.DENSE, BiomeDictionary.Type.MUSHROOM } :
+				new BiomeDictionary.Type[] { BiomeDictionary.Type.FOREST }, weight, true, false);
 		this.forestType = forestType;
 		this.decorator.treesPerChunk = treesPerChunk;
 		this.decorator.grassPerChunk = 3;
@@ -122,6 +124,6 @@ public class BiomePrimalForest extends BiomeBase {
 	}
 	
 	public static enum ForestType {
-		NORMAL, BIRCH, MUSHROOM; //TODO add dead, spruce, big forest
+		NORMAL, BIRCH, MUSHROOM; // TODO add dead, spruce, big forest
 	}
 }
