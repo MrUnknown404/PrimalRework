@@ -54,7 +54,7 @@ public class ClientProxy extends CommonProxy {
 			public int colorMultiplier(IBlockState state, IBlockAccess world, BlockPos pos, int tintIndex) {
 				return colors(state, world, pos, tintIndex);
 			}
-		}, ModBlocks.GRASS_SLAB, ModBlocks.GRASS_DOUBLE_SLAB);
+		}, ModBlocks.GRASS_SLAB, ModBlocks.GRASS_DOUBLE_SLAB, ModBlocks.MUSHROOM_GRASS, ModBlocks.MUSHROOM_GRASS_SLAB, ModBlocks.MUSHROOM_GRASS_DOUBLE_SLAB);
 		
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new IItemColor() {
 			@Override
@@ -62,7 +62,7 @@ public class ClientProxy extends CommonProxy {
 				IBlockState iblockstate = ((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata());
 				return colors(iblockstate, null, null, tintIndex);
 			}
-		}, ModBlocks.GRASS_SLAB, ModBlocks.GRASS_DOUBLE_SLAB);
+		}, ModBlocks.GRASS_SLAB, ModBlocks.GRASS_DOUBLE_SLAB, ModBlocks.MUSHROOM_GRASS, ModBlocks.MUSHROOM_GRASS_SLAB, ModBlocks.MUSHROOM_GRASS_DOUBLE_SLAB);
 	}
 	
 	private int colors(IBlockState state, IBlockAccess world, BlockPos pos, int tintIndex) {

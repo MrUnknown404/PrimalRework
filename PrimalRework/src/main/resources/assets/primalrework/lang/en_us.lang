@@ -118,6 +118,8 @@ tile.copper_ore_medium.name=Copper Ore
 tile.copper_ore_good.name=Copper Ore
 tile.copper_ore_high.name=Copper Ore
 tile.copper_block.name=Copper Block
+tile.mushroom_grass.name=Mushroom Grass
+tile.mushroom_grass_slab.name=Mushroom Grass Slab
 
 tile.stripped_oak_log.name=Stripped Oak Log
 tile.stripped_spruce_log.name=Stripped Spruce Log

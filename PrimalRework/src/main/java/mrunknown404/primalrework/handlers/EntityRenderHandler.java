@@ -4,8 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import mrunknown404.primalrework.entity.EntityItemDrop;
 import mrunknown404.primalrework.entity.EntityPigeon;
 import mrunknown404.primalrework.entity.render.RenderBase;
+import mrunknown404.primalrework.entity.render.RenderItemDrop;
 import mrunknown404.primalrework.entity.render.RenderPigeon;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -23,6 +25,8 @@ public class EntityRenderHandler {
 		for (Entry<Class<? extends EntityLiving>, RenderBase<? extends EntityLiving>> info : ENTITY_RENDERS.entrySet()) {
 			RenderingRegistry.registerEntityRenderingHandler(info.getKey(), new EntityRenderFactory((RenderBase<? super EntityLiving>) info.getValue()));
 		}
+		
+		RenderingRegistry.registerEntityRenderingHandler(EntityItemDrop.class, new RenderItemDrop.Factory());
 	}
 	
 	private static RenderBase<? extends EntityLiving> addRender(Class<? extends EntityLiving> clazz, RenderBase<? extends EntityLiving> render) {

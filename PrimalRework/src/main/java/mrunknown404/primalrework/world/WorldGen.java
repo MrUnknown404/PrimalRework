@@ -41,14 +41,14 @@ public class WorldGen implements IWorldGenerator {
 					BlockPos bpos = new BlockPos(pos.getX() + xx, yy, pos.getZ() + zz);
 					Block b = w.getBlockState(bpos).getBlock();
 					
-					if ((b == Blocks.GRASS || b == Blocks.SNOW_LAYER) && w.getBlockState(bpos.up()).getMaterial().isReplaceable()) {
-						BlockPos toCheck = b == Blocks.GRASS ? bpos.up() : bpos;
+					if ((b == Blocks.GRASS || b == Blocks.SNOW_LAYER || b == ModBlocks.MUSHROOM_GRASS) && w.getBlockState(bpos.up()).getMaterial().isReplaceable()) {
+						BlockPos toCheck = b == Blocks.GRASS || b == ModBlocks.MUSHROOM_GRASS ? bpos.up() : bpos;
 						int amount = 0;
 						
-						if (w.getBlockState(toCheck.north()).getBlock() == Blocks.GRASS || w.getBlockState(toCheck.north()).getBlock() == Blocks.DIRT) {amount++;}
-						if (w.getBlockState(toCheck.east()).getBlock() == Blocks.GRASS || w.getBlockState(toCheck.east()).getBlock() == Blocks.DIRT) {amount++;}
-						if (w.getBlockState(toCheck.south()).getBlock() == Blocks.GRASS || w.getBlockState(toCheck.south()).getBlock() == Blocks.DIRT) {amount++;}
-						if (w.getBlockState(toCheck.west()).getBlock() == Blocks.GRASS || w.getBlockState(toCheck.west()).getBlock() == Blocks.DIRT) {amount++;}
+						if (w.getBlockState(toCheck.north()).getBlock() == Blocks.GRASS || w.getBlockState(toCheck.north()).getBlock() == Blocks.DIRT || w.getBlockState(toCheck.north()).getBlock() == ModBlocks.MUSHROOM_GRASS) {amount++;}
+						if (w.getBlockState(toCheck.east()).getBlock() == Blocks.GRASS || w.getBlockState(toCheck.east()).getBlock() == Blocks.DIRT || w.getBlockState(toCheck.east()).getBlock() == ModBlocks.MUSHROOM_GRASS) {amount++;}
+						if (w.getBlockState(toCheck.south()).getBlock() == Blocks.GRASS || w.getBlockState(toCheck.south()).getBlock() == Blocks.DIRT || w.getBlockState(toCheck.south()).getBlock() == ModBlocks.MUSHROOM_GRASS) {amount++;}
+						if (w.getBlockState(toCheck.west()).getBlock() == Blocks.GRASS || w.getBlockState(toCheck.west()).getBlock() == Blocks.DIRT || w.getBlockState(toCheck.west()).getBlock() == ModBlocks.MUSHROOM_GRASS) {amount++;}
 						
 						if (b == Blocks.SNOW_LAYER) {
 							if (w.getBlockState(toCheck.north()).getBlock() == Blocks.STONE) {amount++;}
@@ -58,8 +58,8 @@ public class WorldGen implements IWorldGenerator {
 						}
 						
 						if (amount >= 2) {
-							if (b == Blocks.GRASS) {
-								w.setBlockState(bpos.up(), ModBlocks.GRASS_SLAB.getStateFromMeta(0), 2);
+							if (b == Blocks.GRASS || b == ModBlocks.MUSHROOM_GRASS) {
+								w.setBlockState(bpos.up(), (b == Blocks.GRASS ? ModBlocks.GRASS_SLAB : ModBlocks.MUSHROOM_GRASS_SLAB).getStateFromMeta(0), 2);
 								w.setBlockState(bpos, Blocks.DIRT.getDefaultState(), 2);
 								
 								if (w.getBlockState(bpos.up().up()).getMaterial().isReplaceable()) {

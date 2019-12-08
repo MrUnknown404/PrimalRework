@@ -5,6 +5,7 @@ import mrunknown404.primalrework.blocks.util.BlockBase;
 import mrunknown404.primalrework.blocks.util.BlockSlabBase;
 import mrunknown404.primalrework.blocks.util.IBlockBase;
 import mrunknown404.primalrework.blocks.util.ISlabBase;
+import mrunknown404.primalrework.entity.EntityItemDrop;
 import mrunknown404.primalrework.init.ModBiomes;
 import mrunknown404.primalrework.init.ModBlocks;
 import mrunknown404.primalrework.init.ModEntities;
@@ -83,6 +84,8 @@ public class RegistryHandler {
 		for (EntityInfo info : ModEntities.ENTITIES) {
 			registerEntity(info.name, info.clazz, info.id, info.range, info.color1, info.color2);
 		}
+		
+		EntityRegistry.registerModEntity(new ResourceLocation(Main.MOD_ID, "item_drop"), EntityItemDrop.class, "item_drop", 0, Main.main, 64, 1, true);
 	}
 	
 	private static void registerEntity(String name, Class<? extends Entity> clazz, int id, int range, int color1, int color2) {

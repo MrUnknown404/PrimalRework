@@ -10,6 +10,7 @@ import mrunknown404.primalrework.blocks.BlockFirePit;
 import mrunknown404.primalrework.blocks.BlockGrassSlab;
 import mrunknown404.primalrework.blocks.BlockGroundItem;
 import mrunknown404.primalrework.blocks.BlockLoom;
+import mrunknown404.primalrework.blocks.BlockMushroomGrassSlab;
 import mrunknown404.primalrework.blocks.BlockOre;
 import mrunknown404.primalrework.blocks.BlockPrimalEnchantingTable;
 import mrunknown404.primalrework.blocks.BlockPrimalTorchLit;
@@ -19,6 +20,7 @@ import mrunknown404.primalrework.blocks.BlockStoneSlab;
 import mrunknown404.primalrework.blocks.BlockStrippedLog;
 import mrunknown404.primalrework.blocks.BlockThatchSlab;
 import mrunknown404.primalrework.blocks.util.BlockBase;
+import mrunknown404.primalrework.blocks.util.BlockMushroomGrass;
 import mrunknown404.primalrework.util.DoubleValue;
 import mrunknown404.primalrework.util.enums.EnumAlloy;
 import mrunknown404.primalrework.util.enums.EnumOreValue;
@@ -66,6 +68,9 @@ public class ModBlocks {
 	public static final Block COPPER_ORE_GOOD = new BlockOre(2, 2, EnumStage.stage2, EnumAlloy.copper, EnumOreValue.good, BlockOre.COPPER_TYPES);
 	public static final Block COPPER_ORE_HIGH = new BlockOre(2, 2, EnumStage.stage2, EnumAlloy.copper, EnumOreValue.high, BlockOre.COPPER_TYPES);
 	public static final Block COPPER_BLOCK = new BlockOre(3, 3, EnumStage.stage2, EnumAlloy.copper, BlockOre.COPPER_TYPES);
+	public static final Block MUSHROOM_GRASS = new BlockMushroomGrass();
+	public static final Block MUSHROOM_GRASS_DOUBLE_SLAB = new BlockMushroomGrassSlab("mushroom_grass_double_slab", true);
+	public static final Block MUSHROOM_GRASS_SLAB = new BlockMushroomGrassSlab("mushroom_grass_slab", false);
 	
 	public static final Block STRIPPED_OAK_LOG = new BlockStrippedLog("oak");
 	public static final Block STRIPPED_SPRUCE_LOG = new BlockStrippedLog("spruce");

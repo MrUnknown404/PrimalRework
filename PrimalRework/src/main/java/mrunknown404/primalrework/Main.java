@@ -5,6 +5,7 @@ import mrunknown404.primalrework.commands.CommandStage;
 import mrunknown404.primalrework.handlers.BlockEventHandler;
 import mrunknown404.primalrework.handlers.EntityEventHandler;
 import mrunknown404.primalrework.handlers.GuiEventHandler;
+import mrunknown404.primalrework.handlers.ItemEntityHandler;
 import mrunknown404.primalrework.handlers.PlayerEventHandler;
 import mrunknown404.primalrework.handlers.WorldEventHandler;
 import mrunknown404.primalrework.network.FireStarterMessage;
@@ -66,6 +67,7 @@ public class Main {
 		MinecraftForge.EVENT_BUS.register(new WorldEventHandler());
 		MinecraftForge.EVENT_BUS.register(new EntityEventHandler());
 		MinecraftForge.EVENT_BUS.register(new GuiEventHandler());
+		MinecraftForge.EVENT_BUS.register(new ItemEntityHandler());
 	}
 	
 	@EventHandler
