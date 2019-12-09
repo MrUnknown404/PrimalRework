@@ -1,16 +1,16 @@
 {
-  "type": "primalrework:staged_shaped",
-  "stage": "stage2",
-  "pattern": [
-    "R",
-    "R"
-  ],
-  "key": {
-    "R": {
-      "item": "primalrework:rock"
-    }
-  },
-  "result": {
-    "item": "primalrework:stone_knife_head"
-  }
+	"type": "primalrework:staged_shaped",
+	"stage": "stage2",
+	"pattern": [
+		"R",
+		"R"
+	],
+	"key": {
+		"R": {
+			"item": "primalrework:rock"
+		}
+	},
+	"result": {
+		"item": "primalrework:stone_knife_head"
+	}
 }

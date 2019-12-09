@@ -1,17 +1,16 @@
 {
-  "type": "primalrework:staged_shaped",
-  "stage": "stage1",
-  "pattern": [
-    "SS",
-    "SS"
-  ],
-  "key": {
-    "S": {
-      "item": "primalrework:salt"
-    }
-  },
-  "result": {
-    "item": "primalrework:salt_block",
-    "count": 1
-  }
+	"type": "primalrework:staged_shaped",
+	"stage": "stage1",
+	"pattern": [
+		"SS",
+		"SS"
+	],
+	"key": {
+		"S": {
+			"item": "primalrework:salt"
+		}
+	},
+	"result": {
+		"item": "primalrework:salt_block"
+	}
 }

@@ -1,8 +1,8 @@
 {
-    "recipes": {
-        "staged_shaped": "mrunknown404.primalrework.recipes.StagedShapedRecipe$Factory",
-        "staged_shapeless": "mrunknown404.primalrework.recipes.StagedShapelessRecipe$Factory",
-        "staged_ore_shaped": "mrunknown404.primalrework.recipes.StagedOreShapedRecipe$Factory",
-        "staged_ore_shapeless": "mrunknown404.primalrework.recipes.StagedOreShapelessRecipe$Factory"
-    }
+	"recipes": {
+		"staged_shaped": "mrunknown404.primalrework.recipes.StagedShapedRecipe$Factory",
+		"staged_shapeless": "mrunknown404.primalrework.recipes.StagedShapelessRecipe$Factory",
+		"staged_ore_shaped": "mrunknown404.primalrework.recipes.StagedOreShapedRecipe$Factory",
+		"staged_ore_shapeless": "mrunknown404.primalrework.recipes.StagedOreShapelessRecipe$Factory"
+	}
 }

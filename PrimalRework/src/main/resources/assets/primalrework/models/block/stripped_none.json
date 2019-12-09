@@ -1,6 +1,6 @@
 {
-    "parent": "block/cube_all",
-    "textures": {
-        "all": "primalrework:blocks/stripped_oak_log"
-    }
+	"parent": "block/cube_all",
+	"textures": {
+		"all": "primalrework:blocks/stripped_oak_log"
+	}
 }

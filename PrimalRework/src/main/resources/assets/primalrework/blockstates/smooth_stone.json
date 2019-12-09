@@ -1,5 +1,5 @@
 {
-    "variants": {
-        "normal": { "model": "primalrework:smooth_stone" }
-    }
+	"variants": {
+		"normal": { "model": "primalrework:smooth_stone" }
+	}
 }

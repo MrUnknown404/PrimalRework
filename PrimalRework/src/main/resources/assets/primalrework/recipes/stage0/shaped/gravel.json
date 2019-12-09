@@ -1,16 +1,16 @@
 {
-  "type": "primalrework:staged_shaped",
-  "stage": "stage0",
-  "pattern": [
-    "GG",
-    "GG"
-  ],
-  "key": {
-    "G": {
-      "item": "primalrework:gravel"
-    }
-  },
-  "result": {
-    "item": "minecraft:gravel"
-  }
+	"type": "primalrework:staged_shaped",
+	"stage": "stage0",
+	"pattern": [
+		"GG",
+		"GG"
+	],
+	"key": {
+		"G": {
+			"item": "primalrework:gravel"
+		}
+	},
+	"result": {
+		"item": "minecraft:gravel"
+	}
 }

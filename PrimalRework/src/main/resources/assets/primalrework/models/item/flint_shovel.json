@@ -1,6 +1,6 @@
 {
-    "parent": "item/handheld",
-    "textures": {
-        "layer0": "primalrework:items/flint_shovel"
-    }
+	"parent": "item/handheld",
+	"textures": {
+		"layer0": "primalrework:items/flint_shovel"
+	}
 }

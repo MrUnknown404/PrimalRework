@@ -1,16 +1,15 @@
 {
-  "type": "primalrework:staged_ore_shapeless",
-  "stage": "stage1",
-  "ingredients": [
-    {
-      "item": "primalrework:cleaned_hide"
-    },
-    {
-      "item": "primalrework:salt"
-    }
-  ],
-  "result": {
-    "item": "primalrework:salted_hide",
-    "count": 1
-  }
+	"type": "primalrework:staged_ore_shapeless",
+	"stage": "stage1",
+	"ingredients": [
+		{
+			"item": "primalrework:cleaned_hide"
+		},
+		{
+			"item": "primalrework:salt"
+		}
+	],
+	"result": {
+		"item": "primalrework:salted_hide"
+	}
 }

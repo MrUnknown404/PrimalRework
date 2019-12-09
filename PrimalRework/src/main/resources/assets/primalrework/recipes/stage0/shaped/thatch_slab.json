@@ -1,17 +1,17 @@
 {
-  "type": "primalrework:staged_shaped",
-  "stage": "stage0",
-  "pattern": [
-    "TT"
-  ],
-  "key": {
-    "T": {
-      "item": "primalrework:thatch"
-    }
-  },
-  "result": {
-    "item": "primalrework:thatch_slab",
-    "count": 4,
-	"data": 0
-  }
+	"type": "primalrework:staged_shaped",
+	"stage": "stage0",
+	"pattern": [
+		"TT"
+	],
+	"key": {
+		"T": {
+			"item": "primalrework:thatch"
+		}
+	},
+	"result": {
+		"item": "primalrework:thatch_slab",
+		"count": 4,
+		"data": 0
+	}
 }

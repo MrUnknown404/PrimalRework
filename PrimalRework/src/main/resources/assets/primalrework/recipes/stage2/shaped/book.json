@@ -1,22 +1,22 @@
 {
-  "type": "primalrework:staged_shaped",
-  "stage": "stage2",
-  "pattern": [
-    "LP",
-    "SP"
-  ],
-  "key": {
-    "L": {
-      "item": "minecraft:leather"
-    },
-    "S": {
-      "item": "primalrework:leather_strip"
-    },
-    "P": {
-      "item": "minecraft:paper"
-    }
-  },
-  "result": {
-    "item": "minecraft:book"
-  }
+	"type": "primalrework:staged_shaped",
+	"stage": "stage2",
+	"pattern": [
+		"LP",
+		"SP"
+	],
+	"key": {
+		"L": {
+			"item": "minecraft:leather"
+		},
+		"S": {
+			"item": "primalrework:leather_strip"
+		},
+		"P": {
+			"item": "minecraft:paper"
+		}
+	},
+	"result": {
+		"item": "minecraft:book"
+	}
 }

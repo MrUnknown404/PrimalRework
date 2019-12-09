@@ -1,5 +1,5 @@
 {
-    "variants": {
-        "normal": { "model": "primalrework:primal_enchanting_table" }
-    }
+	"variants": {
+		"normal": { "model": "primalrework:primal_enchanting_table" }
+	}
 }

@@ -37,6 +37,9 @@ public class TileEntityCharcoalKiln extends TileEntityBase implements ITickable 
 					for (int i = 0; i < 9; i++) {
 						setInventorySlotContents(i, ItemStack.EMPTY);
 					}
+					
+					world.notifyBlockUpdate(pos, ModBlocks.CHARCOAL_KILN.getDefaultState(), ModBlocks.CHARCOAL_KILN.getDefaultState(), 3);
+					world.scheduleBlockUpdate(pos, ModBlocks.CHARCOAL_KILN, 0, 0);
 				}
 			}
 		} else {

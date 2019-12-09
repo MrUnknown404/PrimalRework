@@ -77,11 +77,11 @@ public class ContainerCharcoalKiln extends Container {
 	public void detectAndSendChanges() {
 		super.detectAndSendChanges();
 		
-		for (int i = 0; i < this.listeners.size(); ++i) {
-			IContainerListener icontainerlistener = this.listeners.get(i);
+		for (int i = 0; i < listeners.size(); ++i) {
+			IContainerListener listen = listeners.get(i);
 			
 			if (cookTime != te.getCookTime()) {
-				icontainerlistener.sendWindowProperty(this, 2, te.getCookTime());
+				listen.sendWindowProperty(this, 2, te.getCookTime());
 			}
 		}
 		

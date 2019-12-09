@@ -1,18 +1,18 @@
 {
-  "type": "primalrework:staged_shapeless",
-  "stage": "stage1",
-  "ingredients": [
-    {
-      "item": "minecraft:dye",
-	  "data": 0
-    },
-	{
-      "item": "primalrework:mortar_pestle",
-	  "data": 32767
-    }
-  ],
-  "result": {
-    "item": "primalrework:black_dye",
-	"count": 2
-  }
+	"type": "primalrework:staged_shapeless",
+	"stage": "stage1",
+	"ingredients": [
+		{
+			"item": "minecraft:dye",
+			"data": 0
+		},
+		{
+			"item": "primalrework:mortar_pestle",
+			"data": 32767
+		}
+	],
+	"result": {
+		"item": "primalrework:black_dye",
+		"count": 2
+	}
 }

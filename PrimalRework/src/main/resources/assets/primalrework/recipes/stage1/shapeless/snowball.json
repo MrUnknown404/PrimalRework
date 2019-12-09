@@ -1,13 +1,13 @@
 {
-  "type": "primalrework:staged_shapeless",
-  "stage": "stage1",
-  "ingredients": [
-    {
-      "item": "minecraft:snow"
-    }
-  ],
-  "result": {
-    "item": "minecraft:snowball",
-    "count": 4
-  }
+	"type": "primalrework:staged_shapeless",
+	"stage": "stage1",
+	"ingredients": [
+		{
+			"item": "minecraft:snow"
+		}
+	],
+	"result": {
+		"item": "minecraft:snowball",
+		"count": 4
+	}
 }

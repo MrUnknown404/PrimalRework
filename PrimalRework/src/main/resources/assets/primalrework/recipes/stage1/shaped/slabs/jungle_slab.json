@@ -1,17 +1,17 @@
 {
-  "type": "primalrework:staged_shaped",
-  "stage": "stage1",
-  "pattern": [
-    "SSS"
-  ],
-  "key": {
-    "S": {
-      "item": "primalrework:jungle_plank"
-    }
-  },
-  "result": {
-    "item": "minecraft:wooden_slab",
-	"count": 2,
-	"data": 3
-  }
+	"type": "primalrework:staged_shaped",
+	"stage": "stage1",
+	"pattern": [
+		"SSS"
+	],
+	"key": {
+		"S": {
+			"item": "primalrework:jungle_plank"
+		}
+	},
+	"result": {
+		"item": "minecraft:wooden_slab",
+		"count": 2,
+		"data": 3
+	}
 }

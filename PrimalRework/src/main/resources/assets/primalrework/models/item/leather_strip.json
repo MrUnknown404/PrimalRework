@@ -1,6 +1,6 @@
 {
-    "parent": "item/generated",
-    "textures": {
-        "layer0": "primalrework:items/leather_strip"
-    }
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "primalrework:items/leather_strip"
+	}
 }

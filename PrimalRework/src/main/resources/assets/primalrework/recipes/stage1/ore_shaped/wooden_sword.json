@@ -1,21 +1,21 @@
 {
-  "type": "primalrework:staged_ore_shaped",
-  "stage": "stage1",
-  "pattern": [
-    "P",
-    "P",
-    "I"
-  ],
-  "key": {
-    "P": {
-      "type": "forge:ore_dict",
-      "ore": "plankItem"
-    },
-    "I": {
-      "item": "minecraft:stick"
-    }
-  },
-  "result": {
-    "item": "minecraft:wooden_sword"
-  }
+	"type": "primalrework:staged_ore_shaped",
+	"stage": "stage1",
+	"pattern": [
+		"P",
+		"P",
+		"I"
+	],
+	"key": {
+		"P": {
+			"type": "forge:ore_dict",
+			"ore": "plankItem"
+		},
+		"I": {
+			"item": "minecraft:stick"
+		}
+	},
+	"result": {
+		"item": "minecraft:wooden_sword"
+	}
 }

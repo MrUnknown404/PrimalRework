@@ -1,22 +1,22 @@
 {
-  "type": "primalrework:staged_shaped",
-  "stage": "stage1",
-  "pattern": [
-    "FS",
-    "I "
-  ],
-  "key": {
-    "F": {
-      "item": "primalrework:flint_point"
-    },
-    "S": {
-      "item": "primalrework:plant_rope"
-    },
-    "I": {
-      "item": "minecraft:stick"
-    }
-  },
-  "result": {
-    "item": "primalrework:flint_crafting_hammer"
-  }
+	"type": "primalrework:staged_shaped",
+	"stage": "stage1",
+	"pattern": [
+		"FS",
+		"I "
+	],
+	"key": {
+		"F": {
+			"item": "primalrework:flint_point"
+		},
+		"S": {
+			"item": "primalrework:plant_rope"
+		},
+		"I": {
+			"item": "minecraft:stick"
+		}
+	},
+	"result": {
+		"item": "primalrework:flint_crafting_hammer"
+	}
 }

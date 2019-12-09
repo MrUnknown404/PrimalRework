@@ -1,8 +1,8 @@
 {
-    "variants": {
-        "axis=y":  { "model": "primalrework:stripped_spruce_log" },
-        "axis=z":   { "model": "primalrework:stripped_spruce_log", "x": 90 },
-        "axis=x":   { "model": "primalrework:stripped_spruce_log", "x": 90, "y": 90 },
-        "axis=none": { "model": "primalrework:stripped_none" }
-    }
+	"variants": {
+		"axis=y":  { "model": "primalrework:stripped_spruce_log" },
+		"axis=z":   { "model": "primalrework:stripped_spruce_log", "x": 90 },
+		"axis=x":   { "model": "primalrework:stripped_spruce_log", "x": 90, "y": 90 },
+		"axis=none": { "model": "primalrework:stripped_none" }
+	}
 }

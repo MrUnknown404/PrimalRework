@@ -1,7 +1,7 @@
 {
-    "parent": "primalrework:block/stripped_log",
-    "textures": {
-        "side": "primalrework:blocks/stripped_acacia_log",
-        "top": "blocks/log_acacia_top"
-    }
+	"parent": "primalrework:block/stripped_log",
+	"textures": {
+		"side": "primalrework:blocks/stripped_acacia_log",
+		"top": "blocks/log_acacia_top"
+	}
 }

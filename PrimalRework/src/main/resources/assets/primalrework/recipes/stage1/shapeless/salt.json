@@ -1,13 +1,13 @@
 {
-  "type": "primalrework:staged_shapeless",
-  "stage": "stage1",
-  "ingredients": [
-    {
-      "item": "primalrework:salt_block"
-    }
-  ],
-  "result": {
-    "item": "primalrework:salt",
-    "count": 4
-  }
+	"type": "primalrework:staged_shapeless",
+	"stage": "stage1",
+	"ingredients": [
+		{
+			"item": "primalrework:salt_block"
+		}
+	],
+	"result": {
+		"item": "primalrework:salt",
+		"count": 4
+	}
 }

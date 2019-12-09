@@ -1,6 +1,6 @@
 {
-    "variants": {
-        "half=bottom,variant=default": { "model": "primalrework:half_slab_dirt" },
-        "half=top,variant=default": { "model": "primalrework:upper_slab_dirt" }
-    }
+	"variants": {
+		"half=bottom,variant=default": { "model": "primalrework:half_slab_dirt" },
+		"half=top,variant=default": { "model": "primalrework:upper_slab_dirt" }
+	}
 }

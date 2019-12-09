@@ -1,22 +1,22 @@
 {
-  "type": "primalrework:staged_shaped",
-  "stage": "stage0",
-  "pattern": [
-    "BS",
-    "I "
-  ],
-  "key": {
-    "B": {
-      "item": "primalrework:bone_shard"
-    },
-    "S": {
-      "item": "primalrework:plant_fiber"
-    },
-    "I": {
-      "item": "minecraft:stick"
-    }
-  },
-  "result": {
-    "item": "primalrework:bone_knife"
-  }
+	"type": "primalrework:staged_shaped",
+	"stage": "stage0",
+	"pattern": [
+		"BS",
+		"I "
+	],
+	"key": {
+		"B": {
+			"item": "primalrework:bone_shard"
+		},
+		"S": {
+			"item": "primalrework:plant_fiber"
+		},
+		"I": {
+			"item": "minecraft:stick"
+		}
+	},
+	"result": {
+		"item": "primalrework:bone_knife"
+	}
 }

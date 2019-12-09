@@ -1,19 +1,18 @@
 {
-  "type": "primalrework:staged_shapeless",
-  "stage": "stage0",
-  "ingredients": [
-    {
-      "item": "primalrework:plant_fiber"
-    },
-    {
-      "item": "primalrework:plant_fiber"
-    },
-    {
-      "item": "primalrework:plant_fiber"
-    }
-  ],
-  "result": {
-    "item": "primalrework:plant_rope",
-    "count": 1
-  }
+	"type": "primalrework:staged_shapeless",
+	"stage": "stage0",
+	"ingredients": [
+		{
+			"item": "primalrework:plant_fiber"
+		},
+		{
+			"item": "primalrework:plant_fiber"
+		},
+		{
+			"item": "primalrework:plant_fiber"
+		}
+	],
+	"result": {
+		"item": "primalrework:plant_rope"
+	}
 }

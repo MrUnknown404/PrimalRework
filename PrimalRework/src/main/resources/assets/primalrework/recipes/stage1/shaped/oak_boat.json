@@ -1,16 +1,16 @@
 {
-  "type": "primalrework:staged_shaped",
-  "stage": "stage1",
-  "pattern": [
-    "P P",
-    "PPP"
-  ],
-  "key": {
-    "P": {
-      "item": "primalrework:oak_plank"
-    }
-  },
-  "result": {
-    "item": "minecraft:boat"
-  }
+	"type": "primalrework:staged_shaped",
+	"stage": "stage1",
+	"pattern": [
+		"P P",
+		"PPP"
+	],
+	"key": {
+		"P": {
+			"item": "primalrework:oak_plank"
+		}
+	},
+	"result": {
+		"item": "minecraft:boat"
+	}
 }

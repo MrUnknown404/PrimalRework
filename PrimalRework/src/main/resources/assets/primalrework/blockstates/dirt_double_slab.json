@@ -1,6 +1,6 @@
 {
-    "variants": {
-        "half=top,variant=default": { "model": "minecraft:dirt" },
-        "half=bottom,variant=default": { "model": "minecraft:dirt" }
-    }
+	"variants": {
+		"half=top,variant=default": { "model": "minecraft:dirt" },
+		"half=bottom,variant=default": { "model": "minecraft:dirt" }
+	}
 }

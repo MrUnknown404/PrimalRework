@@ -1,5 +1,5 @@
 {
-    "variants": {
-        "normal": { "model": "primalrework:thatch" }
-    }
+	"variants": {
+		"normal": { "model": "primalrework:thatch" }
+	}
 }

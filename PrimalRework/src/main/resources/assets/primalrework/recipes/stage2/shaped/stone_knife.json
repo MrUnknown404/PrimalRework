@@ -1,22 +1,22 @@
 {
-  "type": "primalrework:staged_shaped",
-  "stage": "stage2",
-  "pattern": [
-    "SR",
-    "I "
-  ],
-  "key": {
-    "S": {
-      "item": "primalrework:stone_knife_head"
-    },
-    "R": {
-      "item": "primalrework:rope"
-    },
-    "I": {
-      "item": "minecraft:stick"
-    }
-  },
-  "result": {
-    "item": "primalrework:stone_knife"
-  }
+	"type": "primalrework:staged_shaped",
+	"stage": "stage2",
+	"pattern": [
+		"SR",
+		"I "
+	],
+	"key": {
+		"S": {
+			"item": "primalrework:stone_knife_head"
+		},
+		"R": {
+			"item": "primalrework:rope"
+		},
+		"I": {
+			"item": "minecraft:stick"
+		}
+	},
+	"result": {
+		"item": "primalrework:stone_knife"
+	}
 }

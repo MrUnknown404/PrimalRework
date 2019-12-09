@@ -1,6 +1,6 @@
 {
-    "parent": "item/generated",
-    "textures": {
-        "layer0": "primalrework:items/spruce_plank"
-    }
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "primalrework:items/spruce_plank"
+	}
 }

@@ -1,18 +1,18 @@
 {
-  "type": "primalrework:staged_shapeless",
-  "stage": "stage1",
-  "ingredients": [
-    {
-      "item": "minecraft:red_flower",
-	  "data": 8
-    },
-	{
-      "item": "primalrework:mortar_pestle",
-	  "data": 32767
-    }
-  ],
-  "result": {
-    "item": "primalrework:white_dye",
-	"count": 2
-  }
+	"type": "primalrework:staged_shapeless",
+	"stage": "stage1",
+	"ingredients": [
+		{
+			"item": "minecraft:red_flower",
+			"data": 8
+		},
+		{
+			"item": "primalrework:mortar_pestle",
+			"data": 32767
+		}
+	],
+	"result": {
+		"item": "primalrework:white_dye",
+		"count": 2
+	}
 }

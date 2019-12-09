@@ -1,22 +1,21 @@
 {
-  "type": "primalrework:staged_ore_shapeless",
-  "stage": "stage1",
-  "ingredients": [
-    {
-      "type": "forge:ore_dict",
-      "ore": "logWood"
-    },
-    {
-      "type": "forge:ore_dict",
-      "ore": "toolAxe"
-    },
-    {
-      "type": "forge:ore_dict",
-      "ore": "toolKnife"
-    }
-  ],
-  "result": {
-    "item": "primalrework:crafting_stump",
-    "count": 1
-  }
+	"type": "primalrework:staged_ore_shapeless",
+	"stage": "stage1",
+	"ingredients": [
+		{
+			"type": "forge:ore_dict",
+			"ore": "logWood"
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "toolAxe"
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "toolKnife"
+		}
+	],
+	"result": {
+		"item": "primalrework:crafting_stump"
+	}
 }

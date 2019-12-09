@@ -1,17 +1,17 @@
 {
-  "type": "primalrework:staged_ore_shapeless",
-  "stage": "stage2",
-  "ingredients": [
-    {
-      "item": "minecraft:reeds"
-    },
-    {
-      "type": "forge:ore_dict",
-      "ore": "toolKnife"
-    }
-  ],
-  "result": {
-    "item": "minecraft:sugar",
-    "count": 2
-  }
+	"type": "primalrework:staged_ore_shapeless",
+	"stage": "stage2",
+	"ingredients": [
+		{
+			"item": "minecraft:reeds"
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "toolKnife"
+		}
+	],
+	"result": {
+		"item": "minecraft:sugar",
+		"count": 2
+	}
 }

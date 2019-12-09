@@ -1,27 +1,27 @@
 {
-  "type": "primalrework:staged_ore_shaped",
-  "stage": "stage1",
-  "pattern": [
-    " S ",
-    "SFS",
-    "CLC"
-  ],
-  "key": {
-    "S": {
-      "item": "minecraft:stick"
-    },
-    "F": {
-      "item": "primalrework:fire_starter"
-    },
-    "C": {
-      "item": "minecraft:cobblestone"
-    },
-    "L": {
-      "type": "forge:ore_dict",
-      "ore": "logWood"
-    }
-  },
-  "result": {
-    "item": "primalrework:fire_pit"
-  }
+	"type": "primalrework:staged_ore_shaped",
+	"stage": "stage1",
+	"pattern": [
+		" S ",
+		"SFS",
+		"CLC"
+	],
+	"key": {
+		"S": {
+			"item": "minecraft:stick"
+		},
+		"F": {
+			"item": "primalrework:fire_starter"
+		},
+		"C": {
+			"item": "minecraft:cobblestone"
+		},
+		"L": {
+			"type": "forge:ore_dict",
+			"ore": "logWood"
+		}
+	},
+	"result": {
+		"item": "primalrework:fire_pit"
+	}
 }

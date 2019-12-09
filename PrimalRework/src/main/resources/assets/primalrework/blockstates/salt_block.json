@@ -1,5 +1,5 @@
 {
-    "variants": {
-        "normal": { "model": "primalrework:salt_block" }
-    }
+	"variants": {
+		"normal": { "model": "primalrework:salt_block" }
+	}
 }

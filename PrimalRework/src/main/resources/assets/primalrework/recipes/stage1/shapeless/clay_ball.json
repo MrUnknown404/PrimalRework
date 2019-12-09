@@ -1,13 +1,13 @@
 {
-  "type": "primalrework:staged_shapeless",
-  "stage": "stage1",
-  "ingredients": [
-    {
-      "item": "minecraft:clay"
-    }
-  ],
-  "result": {
-    "item": "minecraft:clay_ball",
-    "count": 4
-  }
+	"type": "primalrework:staged_shapeless",
+	"stage": "stage1",
+	"ingredients": [
+		{
+			"item": "minecraft:clay"
+		}
+	],
+	"result": {
+		"item": "minecraft:clay_ball",
+		"count": 4
+	}
 }

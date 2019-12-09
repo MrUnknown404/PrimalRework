@@ -9,6 +9,7 @@ import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -29,7 +30,7 @@ public class ItemClayBucketMilk extends ItemDamageableBase {
 	@Override
 	public ItemStack onItemUseFinish(ItemStack stack, World world, EntityLivingBase entity) {
 		if (!world.isRemote) {
-			entity.curePotionEffects(stack);
+			entity.curePotionEffects(new ItemStack(Items.MILK_BUCKET));
 		}
 		
 		if (entity instanceof EntityPlayerMP) {

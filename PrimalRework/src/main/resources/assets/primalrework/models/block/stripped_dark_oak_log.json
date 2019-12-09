@@ -1,7 +1,7 @@
 {
-    "parent": "primalrework:block/stripped_log",
-    "textures": {
-        "side": "primalrework:blocks/stripped_dark_oak_log",
-        "top": "blocks/log_big_oak_top"
-    }
+	"parent": "primalrework:block/stripped_log",
+	"textures": {
+		"side": "primalrework:blocks/stripped_dark_oak_log",
+		"top": "blocks/log_big_oak_top"
+	}
 }

@@ -1,19 +1,19 @@
 {
-  "type": "primalrework:staged_ore_shapeless",
-  "stage": "stage1",
-  "ingredients": [
-    {
-      "type": "forge:ore_dict",
-      "ore": "dyeRed"
-    },
-	{
-      "type": "forge:ore_dict",
-      "ore": "dyeYellow"
-    }
-  ],
-  "result": {
-    "item": "minecraft:dye",
-	"data": 14,
-	"count": 2
-  }
+	"type": "primalrework:staged_ore_shapeless",
+	"stage": "stage1",
+	"ingredients": [
+		{
+			"type": "forge:ore_dict",
+			"ore": "dyeRed"
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "dyeYellow"
+		}
+	],
+	"result": {
+		"item": "minecraft:dye",
+		"data": 14,
+		"count": 2
+	}
 }

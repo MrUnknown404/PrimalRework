@@ -1,5 +1,5 @@
 {
-    "variants": {
-        "normal": { "model": "primalrework:copper_ore_low" }
-    }
+	"variants": {
+		"normal": { "model": "primalrework:copper_ore_low" }
+	}
 }

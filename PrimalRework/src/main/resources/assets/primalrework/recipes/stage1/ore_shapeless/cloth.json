@@ -1,18 +1,18 @@
 {
-  "type": "primalrework:staged_ore_shapeless",
-  "stage": "stage1",
-  "ingredients": [
-    {
-      "type": "forge:ore_dict",
-      "ore": "wool"
-    },
-    {
-      "type": "forge:ore_dict",
-      "ore": "toolKnife"
-    }
-  ],
-  "result": {
-    "item": "primalrework:cloth",
-    "count": 4
-  }
+	"type": "primalrework:staged_ore_shapeless",
+	"stage": "stage1",
+	"ingredients": [
+		{
+			"type": "forge:ore_dict",
+			"ore": "wool"
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "toolKnife"
+		}
+	],
+	"result": {
+		"item": "primalrework:cloth",
+		"count": 4
+	}
 }
