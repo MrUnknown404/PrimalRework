@@ -13,6 +13,7 @@ import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -20,6 +21,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -38,35 +40,36 @@ public class BlockDryingTable extends BlockDirectionalBase implements ITileEntit
 	
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		if (world.isRemote) {
-			return true;
-		}
-		
-		EnumFacing direction = state.getValue(FACING);
-		ItemStack stack = player.getHeldItemMainhand();
-		
 		if (world.getTileEntity(pos) instanceof TileEntityDryingTable) {
 			TileEntityDryingTable tile = (TileEntityDryingTable) world.getTileEntity(pos);
+			ItemStack stack = player.getHeldItemMainhand();
+			
 			if (facing.getIndex() == 1) {
-				if (getSlotClicked(direction, hitX, hitZ) == -1) {
+				int slot = getSlotClicked(state.getValue(FACING), hitX, hitZ);
+				if (slot == -1) {
 					return true;
 				}
 				
-				if (!stack.isEmpty() && tile.getStackInSlot(getSlotClicked(direction, hitX, hitZ)).isEmpty()) {
+				if (!stack.isEmpty() && tile.getStackInSlot(slot).isEmpty()) {
 					if (!world.isRemote) {
-						tile.setInventorySlotContents(getSlotClicked(direction, hitX, hitZ), stack.splitStack(1));
+						tile.setInventorySlotContents(slot, stack.splitStack(1));
 						tile.markForUpdate();
-						return true;
+					} else {
+						world.playSound(player, pos, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.25f, 1);
 					}
 				} else {
-					ItemStack stack2 = tile.getStackInSlot(getSlotClicked(direction, hitX, hitZ));
+					ItemStack stack2 = tile.getStackInSlot(slot);
 					if (!stack2.isEmpty()) {
 						if (!player.inventory.addItemStackToInventory(stack2)) {
 							ForgeHooks.onPlayerTossEvent(player, stack2, false);
 						}
 						
-						tile.setInventorySlotContents(getSlotClicked(direction, hitX, hitZ), ItemStack.EMPTY);
-						tile.markForUpdate();
+						if (!world.isRemote) {
+							tile.setInventorySlotContents(slot, ItemStack.EMPTY);
+							tile.markForUpdate();
+						} else {
+							world.playSound(player, pos, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.25f, 1);
+						}
 					}
 				}
 			}

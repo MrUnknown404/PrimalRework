@@ -1,6 +1,5 @@
 package mrunknown404.primalrework.inventory;
 
-import mrunknown404.primalrework.init.ModRecipes;
 import mrunknown404.primalrework.tileentity.TileEntityFirePit;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -89,40 +88,14 @@ public class ContainerFirePit extends Container {
 		
 		if (slot != null && slot.getHasStack()) {
 			ItemStack stack1 = slot.getStack();
-			stack = stack1;
+			stack = stack1.copy();
 			
 			if (index == SLOT_FUEL || index == SLOT_ITEM) {
-				for (int i = 29; i < 38; i++) {
-					if (inventorySlots.get(i).getStack().isItemEqual(stack1) && inventorySlots.get(i).getStack().getCount() != inventorySlots.get(i).getStack().getMaxStackSize()) {
-						if (!mergeItemStack(stack1, i, i + 1, true)) {
-							return ItemStack.EMPTY;
-						}
-					}
+				if (!mergeItemStack(stack1, 2, 36 + 2, true)) {
+					return ItemStack.EMPTY;
 				}
-				
-				for (int i = 2; i < 29; i++) {
-					if (inventorySlots.get(i).getStack().isItemEqual(stack1) && inventorySlots.get(i).getStack().getCount() != inventorySlots.get(i).getStack().getMaxStackSize()) {
-						if (!mergeItemStack(stack1, i, i + 1, true)) {
-							return ItemStack.EMPTY;
-						}
-					}
-				}
-				
-				if (!mergeItemStack(stack1, 29, 38, false)) {
-					if (!mergeItemStack(stack1, 2, 29, false)) {
-						return ItemStack.EMPTY;
-					}
-				}
-			} else {
-				if (ModRecipes.isItemFirePitFuel(stack1)) {
-					if (!mergeItemStack(stack1, SLOT_FUEL, SLOT_FUEL + 1, false)) {
-						return ItemStack.EMPTY;
-					}
-				} else if (ModRecipes.doesItemHaveFirePitRecipe(stack1)) {
-					if (!mergeItemStack(stack1, SLOT_ITEM, SLOT_ITEM + 1, false)) {
-						return ItemStack.EMPTY;
-					}
-				}
+			} else if (!mergeItemStack(stack1, 0, 2, false)) {
+				return ItemStack.EMPTY;
 			}
 			
 			if (stack1.isEmpty()) {

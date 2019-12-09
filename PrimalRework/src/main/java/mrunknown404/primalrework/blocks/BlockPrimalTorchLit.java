@@ -26,15 +26,14 @@ public class BlockPrimalTorchLit extends BlockPrimalTorchUnlit {
 		
 		if (face.getAxis().isHorizontal()) {
 			EnumFacing face1 = face.getOpposite();
-			world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 + 0.3D * (double) face1.getFrontOffsetX(), d1 + 0.14D, d2 + 0.3D * (double) face1.getFrontOffsetZ(), 0.0D, 0.0D,
-					0.0D);
+			world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0 + 0.3D * (double) face1.getFrontOffsetX(), d1 + 0.14D, d2 + 0.3D * (double) face1.getFrontOffsetZ(), 0, 0, 0);
 			if (new Random().nextBoolean()) {
-				world.spawnParticle(EnumParticleTypes.FLAME, d0 + 0.3D * (double) face1.getFrontOffsetX(), d1 + 0.14D, d2 + 0.3D * (double) face1.getFrontOffsetZ(), 0.0D, 0.0D, 0.0D);
+				world.spawnParticle(EnumParticleTypes.FLAME, d0 + 0.3D * (double) face1.getFrontOffsetX(), d1 + 0.14D, d2 + 0.3D * (double) face1.getFrontOffsetZ(), 0, 0, 0);
 			}
 		} else {
-			world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0, d1, d2, 0.0D, 0.0D, 0.0D);
+			world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0, d1, d2, 0, 0, 0);
 			if (new Random().nextBoolean()) {
-				world.spawnParticle(EnumParticleTypes.FLAME, d0, d1, d2, 0.0D, 0.0D, 0.0D);
+				world.spawnParticle(EnumParticleTypes.FLAME, d0, d1, d2, 0, 0, 0);
 			}
 		}
 	}

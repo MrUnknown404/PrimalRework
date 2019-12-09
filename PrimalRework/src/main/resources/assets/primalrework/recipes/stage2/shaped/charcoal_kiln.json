@@ -1,0 +1,22 @@
+{
+  "type": "primalrework:staged_shaped",
+  "stage": "stage2",
+  "pattern": [
+    "CCC",
+    "SFS"
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:clay"
+    },
+    "S": {
+      "item": "minecraft:cobblestone"
+    },
+    "F": {
+      "item": "primalrework:fire_pit"
+    }
+  },
+  "result": {
+    "item": "primalrework:charcoal_kiln"
+  }
+}

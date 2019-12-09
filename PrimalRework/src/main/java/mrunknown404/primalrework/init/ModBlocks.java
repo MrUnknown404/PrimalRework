@@ -3,6 +3,7 @@ package mrunknown404.primalrework.init;
 import java.util.ArrayList;
 import java.util.List;
 
+import mrunknown404.primalrework.blocks.BlockCharcoalKiln;
 import mrunknown404.primalrework.blocks.BlockCraftingStump;
 import mrunknown404.primalrework.blocks.BlockDirtSlab;
 import mrunknown404.primalrework.blocks.BlockDryingTable;
@@ -71,6 +72,7 @@ public class ModBlocks {
 	public static final Block MUSHROOM_GRASS = new BlockMushroomGrass();
 	public static final Block MUSHROOM_GRASS_DOUBLE_SLAB = new BlockMushroomGrassSlab("mushroom_grass_double_slab", true);
 	public static final Block MUSHROOM_GRASS_SLAB = new BlockMushroomGrassSlab("mushroom_grass_slab", false);
+	public static final Block CHARCOAL_KILN = new BlockCharcoalKiln();
 	
 	public static final Block STRIPPED_OAK_LOG = new BlockStrippedLog("oak");
 	public static final Block STRIPPED_SPRUCE_LOG = new BlockStrippedLog("spruce");

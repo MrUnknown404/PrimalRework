@@ -96,7 +96,10 @@ public class ContainerPrimalEnchanting extends Container {
 		te.markDirty();
 		xpSeed = player.getXPSeed();
 		onCraftMatrixChanged(te);
-		world.playSound(null, te.getPos(), SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE, SoundCategory.BLOCKS, 1.0F, world.rand.nextFloat() * 0.1F + 0.9F);
+		
+		if (world.isRemote) {
+			world.playSound(player, te.getPos(), SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE, SoundCategory.BLOCKS, 1, world.rand.nextFloat() * 0.1f + 0.9f);
+		}
 		
 		return level;
 	}

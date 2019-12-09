@@ -29,7 +29,7 @@ public class BlockDirectionalBase extends BlockBase {
 	}
 	
 	protected BlockDirectionalBase(String name, Material material, SoundType soundType, float hardness, float resistance, EnumStage stage,
-			DoubleValue<EnumToolType, EnumToolMaterial>[] types) {
+			DoubleValue<EnumToolType, EnumToolMaterial>... types) {
 		this(name, material, soundType, BlockRenderLayer.SOLID, hardness, resistance, FULL_BLOCK_AABB, FULL_BLOCK_AABB, stage, types);
 	}
 	

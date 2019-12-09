@@ -1,0 +1,12 @@
+{
+    "variants": {
+        "burning=false,facing=north": { "model": "primalrework:charcoal_kiln" },
+        "burning=false,facing=east": { "model": "primalrework:charcoal_kiln", "y": 90 },
+        "burning=false,facing=south":  { "model": "primalrework:charcoal_kiln", "y": 180 },
+        "burning=false,facing=west":  { "model": "primalrework:charcoal_kiln" , "y": 270 },
+		"burning=true,facing=north": { "model": "primalrework:charcoal_kiln_burning" },
+        "burning=true,facing=east": { "model": "primalrework:charcoal_kiln_burning", "y": 90 },
+        "burning=true,facing=south":  { "model": "primalrework:charcoal_kiln_burning", "y": 180 },
+        "burning=true,facing=west":  { "model": "primalrework:charcoal_kiln_burning" , "y": 270 }
+    }
+}

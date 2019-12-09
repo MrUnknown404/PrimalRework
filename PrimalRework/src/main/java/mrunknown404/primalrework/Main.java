@@ -42,6 +42,7 @@ public class Main {
 	public static final int GUI_ID_FIRE_PIT = 1;
 	public static final int GUI_ID_ENCHANTING = 2;
 	public static final int GUI_ID_PRIMAL_ENCHANTING = 3;
+	public static final int GUI_ID_CHARCOAL_KILN = 4;
 	
 	public static final WorldType PRIMAL_WORLD = new WorldTypePrimal();
 	
