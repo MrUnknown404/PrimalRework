@@ -11,14 +11,16 @@ public class FireStarterMessage implements IMessage {
 	int dimension, playerID;
 	BlockPos pos;
 	EnumHand hand;
+	boolean createdCharcoalPit;
 	
 	public FireStarterMessage() {}
 	
-	public FireStarterMessage(EntityPlayer player, BlockPos pos, EnumHand hand) {
+	public FireStarterMessage(EntityPlayer player, BlockPos pos, EnumHand hand, boolean createdCharcoalPit) {
 		this.dimension = player.dimension;
 		this.playerID = player.getEntityId();
 		this.pos = pos;
 		this.hand = hand;
+		this.createdCharcoalPit = createdCharcoalPit;
 	}
 	
 	@Override
@@ -27,6 +29,7 @@ public class FireStarterMessage implements IMessage {
 		playerID = buf.readInt();
 		pos = new BlockPos(buf.readInt(), buf.readInt(), buf.readInt());
 		hand = EnumHand.values()[buf.readInt()];
+		createdCharcoalPit = buf.readBoolean();
 	}
 	
 	@Override
@@ -36,10 +39,7 @@ public class FireStarterMessage implements IMessage {
 		buf.writeInt(pos.getX());
 		buf.writeInt(pos.getY());
 		buf.writeInt(pos.getZ());
-		buf.writeInt(convert(hand));
-	}
-	
-	private int convert(EnumHand hand) {
-		return hand == EnumHand.MAIN_HAND ? 0 : hand == EnumHand.OFF_HAND ? 1 : -1;
+		buf.writeInt(hand == EnumHand.MAIN_HAND ? 0 : hand == EnumHand.OFF_HAND ? 1 : -1);
+		buf.writeBoolean(createdCharcoalPit);
 	}
 }

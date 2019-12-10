@@ -3,6 +3,8 @@ package mrunknown404.primalrework.items;
 import javax.annotation.Nullable;
 
 import mrunknown404.primalrework.Main;
+import mrunknown404.primalrework.blocks.BlockDenseLog;
+import mrunknown404.primalrework.init.ModBlocks;
 import mrunknown404.primalrework.init.ModItems;
 import mrunknown404.primalrework.items.util.ItemDamageableBase;
 import mrunknown404.primalrework.network.FireStarterMessage;
@@ -66,7 +68,9 @@ public class ItemFireStarter extends ItemDamageableBase {
 					BlockPos targetPos = clickPos.offset(ray.sideHit);
 					
 					if (player.canPlayerEdit(targetPos, ray.sideHit, stack)) {
-						Main.networkWrapper.sendToServer(new FireStarterMessage(player, targetPos, player.getActiveHand()));
+						boolean flag = world.getBlockState(targetPos.down(2)).getBlock() == ModBlocks.DENSE_LOG && BlockDenseLog.isValidCharcoalPit(world, targetPos.down(2));
+						
+						Main.networkWrapper.sendToServer(new FireStarterMessage(player, targetPos, player.getActiveHand(), flag));
 					}
 				}
 			}

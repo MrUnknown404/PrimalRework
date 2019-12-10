@@ -23,11 +23,11 @@ public class TileEntityCraftingStumpRenderer extends TileEntitySpecialRenderer<T
 		GlStateManager.scale(0.2125F, 0.2125F, 0.2125F);
 		
 		if (te.facing == EnumFacing.NORTH) {
-			GlStateManager.rotate(180.0F, 0.0F, 1.0F, 0.0F);
+			GlStateManager.rotate(180f, 0f, 1f, 0f);
 		} else if (te.facing == EnumFacing.EAST) {
-			GlStateManager.rotate(90.0F, 0.0F, 1.0F, 0.0F);
+			GlStateManager.rotate(90f, 0f, 1f, 0f);
 		} else if (te.facing == EnumFacing.WEST) {
-			GlStateManager.rotate(270.0F, 0.0F, 1.0F, 0.0F);
+			GlStateManager.rotate(270f, 0f, 1f, 0f);
 		}
 		
 		GlStateManager.translate(-1F, 0, -1F);
@@ -54,8 +54,8 @@ public class TileEntityCraftingStumpRenderer extends TileEntitySpecialRenderer<T
 			GlStateManager.translate(x, y, z);
 			GlStateManager.translate(0.115F, 0.52F + jumpUP, 0.115F);
 			GlStateManager.scale(-0.5f, -0.5f, 0.5f);
-			GlStateManager.rotate(180.0F, 0.0F, 1.0F, 0.0F);
-			GlStateManager.rotate(90F, 1.0F, 0.0F, 0.0F);
+			GlStateManager.rotate(180f, 0f, 1f, 0f);
+			GlStateManager.rotate(90F, 1f, 0f, 0f);
 			bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
 			Minecraft.getMinecraft().getTextureManager().getTexture(TextureMap.LOCATION_BLOCKS_TEXTURE).setBlurMipmap(false, false);
 			RenderHelper.disableStandardItemLighting();
@@ -64,7 +64,7 @@ public class TileEntityCraftingStumpRenderer extends TileEntitySpecialRenderer<T
 			Minecraft.getMinecraft().getRenderItem().renderItem(stack, Minecraft.getMinecraft().getRenderItem().getItemModelWithOverrides(stack, null, null));
 			GlStateManager.enableLighting();
 			GlStateManager.disableBlend();
-			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+			GlStateManager.color(1f, 1f, 1f, 1f);
 			GlStateManager.popMatrix();
 		}
 	}

@@ -3,11 +3,12 @@ package mrunknown404.primalrework.tileentity;
 import java.util.Random;
 
 import mrunknown404.primalrework.inventory.ContainerPrimalEnchanting;
+import mrunknown404.primalrework.tileentity.util.TileEntityInventoryBase;
 import net.minecraft.item.Item;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 
-public class TileEntityPrimalEnchanting extends TileEntityBase implements ITickable {
+public class TileEntityPrimalEnchanting extends TileEntityInventoryBase implements ITickable {
 	
 	private ContainerPrimalEnchanting container;
 	

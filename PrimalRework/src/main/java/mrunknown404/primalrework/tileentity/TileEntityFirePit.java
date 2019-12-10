@@ -2,11 +2,12 @@ package mrunknown404.primalrework.tileentity;
 
 import mrunknown404.primalrework.init.ModRecipes;
 import mrunknown404.primalrework.inventory.ContainerFirePit;
+import mrunknown404.primalrework.tileentity.util.TileEntityInventoryBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ITickable;
 
-public class TileEntityFirePit extends TileEntityBase implements ITickable {
+public class TileEntityFirePit extends TileEntityInventoryBase implements ITickable {
 	
 	private int cookTime, totalCookTime, burnTime, totalBurnTime;
 	

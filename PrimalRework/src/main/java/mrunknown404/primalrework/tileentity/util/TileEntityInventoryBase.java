@@ -1,4 +1,4 @@
-package mrunknown404.primalrework.tileentity;
+package mrunknown404.primalrework.tileentity.util;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -14,12 +14,12 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 
-public abstract class TileEntityBase extends TileEntity implements IInventory {
+public abstract class TileEntityInventoryBase extends TileEntity implements IInventory {
 	
 	protected NonNullList<ItemStack> inv;
 	protected String customName;
 	
-	public TileEntityBase(int size) {
+	public TileEntityInventoryBase(int size) {
 		this.inv = NonNullList.<ItemStack>withSize(size, ItemStack.EMPTY);
 	}
 	
@@ -107,8 +107,7 @@ public abstract class TileEntityBase extends TileEntity implements IInventory {
 	@Override
 	public void readFromNBT(NBTTagCompound c) {
 		super.readFromNBT(c);
-		inv = NonNullList.<ItemStack>withSize(getSizeInventory(), ItemStack.EMPTY);
-		ItemStackHelper.loadAllItems(c, inv);
+		ItemStackHelper.loadAllItems(c, inv = NonNullList.<ItemStack>withSize(getSizeInventory(), ItemStack.EMPTY));
 		
 		if (c.hasKey("CustomName", 8)) {
 			setCustomName(c.getString("CustomName"));

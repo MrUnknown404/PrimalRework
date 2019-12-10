@@ -4,6 +4,7 @@ import mrunknown404.primalrework.Main;
 import mrunknown404.primalrework.handlers.RegistryHandler;
 import mrunknown404.primalrework.init.ModRecipes;
 import mrunknown404.primalrework.tileentity.TileEntityCharcoalKiln;
+import mrunknown404.primalrework.tileentity.TileEntityCharcoalPitMaster;
 import mrunknown404.primalrework.tileentity.TileEntityCraftingStump;
 import mrunknown404.primalrework.tileentity.TileEntityDryingTable;
 import mrunknown404.primalrework.tileentity.TileEntityFirePit;
@@ -32,6 +33,7 @@ public class CommonProxy {
 		GameRegistry.registerTileEntity(TileEntityDryingTable.class, new ResourceLocation(Main.MOD_ID, "drying_table"));
 		GameRegistry.registerTileEntity(TileEntityPrimalEnchanting.class, new ResourceLocation(Main.MOD_ID, "primal_enchanting_table"));
 		GameRegistry.registerTileEntity(TileEntityLoom.class, new ResourceLocation(Main.MOD_ID, "loom"));
-		GameRegistry.registerTileEntity(TileEntityCharcoalKiln.class, new ResourceLocation(Main.MOD_ID, "charcoal_pit"));
+		GameRegistry.registerTileEntity(TileEntityCharcoalKiln.class, new ResourceLocation(Main.MOD_ID, "charcoal_kiln"));
+		GameRegistry.registerTileEntity(TileEntityCharcoalPitMaster.class, new ResourceLocation(Main.MOD_ID, "charcoal_pit_master"));
 	}
 }

@@ -103,6 +103,7 @@ tile.salt_block.name=Salt Block
 tile.smooth_stone.name=Smooth Stone
 tile.mushroom_grass.name=Mushroom Grass
 tile.dense_log.name=Dense Log
+tile.charcoal_block.name=Charcoal Block
 
 //ORE
 tile.copper_ore_poor.name=Copper Ore

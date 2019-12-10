@@ -743,7 +743,7 @@ public class VanillaOverrides {
 		StageHelper.addStagedItem(EnumStage.do_later, Items.ARROW);
 		StageHelper.addStagedItem(EnumStage.do_later, Items.SPECTRAL_ARROW);
 		StageHelper.addStagedItem(EnumStage.do_later, Items.COAL, 0);
-		StageHelper.addStagedItem(EnumStage.do_later, Items.COAL, 1);
+		StageHelper.addStagedItem(EnumStage.stage2, Items.COAL, 1);
 		StageHelper.addStagedItem(EnumStage.do_later, Items.DIAMOND);
 		StageHelper.addStagedItem(EnumStage.do_later, Items.IRON_INGOT);
 		StageHelper.addStagedItem(EnumStage.do_later, Items.GOLD_INGOT);

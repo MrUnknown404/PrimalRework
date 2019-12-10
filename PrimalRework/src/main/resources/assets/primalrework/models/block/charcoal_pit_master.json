@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:block/cube_all",
+	"textures": {
+		"all": "primalrework:blocks/charcoal_pit_master"
+	}
+}

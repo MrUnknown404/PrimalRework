@@ -2,6 +2,7 @@ package mrunknown404.primalrework.network;
 
 import java.util.Random;
 
+import mrunknown404.primalrework.init.ModBlocks;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
@@ -24,10 +25,15 @@ public class FireStarterPacketHandler implements IMessageHandler<FireStarterMess
 				player.getServer().addScheduledTask(new Runnable() {
 					public void run() {
 						world.playSound(null, message.pos, SoundEvents.ITEM_FIRECHARGE_USE, SoundCategory.BLOCKS, 0.5f, 0.75f);
-						world.setBlockState(message.pos, Blocks.FIRE.getDefaultState(), 11);
 						
 						if (!player.getHeldItem(message.hand).isEmpty()) {
 							player.getHeldItem(message.hand).damageItem(new Random().nextInt(3) + 1, player);
+						}
+						
+						if (message.createdCharcoalPit) {
+							world.setBlockState(message.pos.down(2), ModBlocks.CHARCOAL_PIT_MASTER.getDefaultState(), 11);
+						} else {
+							world.setBlockState(message.pos, Blocks.FIRE.getDefaultState(), 11);
 						}
 					}
 				});

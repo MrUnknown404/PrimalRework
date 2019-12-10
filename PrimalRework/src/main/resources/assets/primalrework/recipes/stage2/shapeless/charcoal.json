@@ -1,0 +1,14 @@
+{
+	"type": "primalrework:staged_shapeless",
+	"stage": "stage2",
+	"ingredients": [
+		{
+			"item": "primalrework:charcoal_block"
+		}
+	],
+	"result": {
+		"item": "minecraft:coal",
+		"count": 4,
+		"data": 1
+	}
+}

@@ -3,7 +3,9 @@ package mrunknown404.primalrework.init;
 import java.util.ArrayList;
 import java.util.List;
 
+import mrunknown404.primalrework.blocks.BlockCharcoalBlock;
 import mrunknown404.primalrework.blocks.BlockCharcoalKiln;
+import mrunknown404.primalrework.blocks.BlockCharcoalPitMaster;
 import mrunknown404.primalrework.blocks.BlockCraftingStump;
 import mrunknown404.primalrework.blocks.BlockDenseLog;
 import mrunknown404.primalrework.blocks.BlockDirtSlab;
@@ -12,6 +14,7 @@ import mrunknown404.primalrework.blocks.BlockFirePit;
 import mrunknown404.primalrework.blocks.BlockGrassSlab;
 import mrunknown404.primalrework.blocks.BlockGroundItem;
 import mrunknown404.primalrework.blocks.BlockLoom;
+import mrunknown404.primalrework.blocks.BlockMushroomGrass;
 import mrunknown404.primalrework.blocks.BlockMushroomGrassSlab;
 import mrunknown404.primalrework.blocks.BlockOre;
 import mrunknown404.primalrework.blocks.BlockPrimalEnchantingTable;
@@ -22,7 +25,6 @@ import mrunknown404.primalrework.blocks.BlockStoneSlab;
 import mrunknown404.primalrework.blocks.BlockStrippedLog;
 import mrunknown404.primalrework.blocks.BlockThatchSlab;
 import mrunknown404.primalrework.blocks.util.BlockBase;
-import mrunknown404.primalrework.blocks.util.BlockMushroomGrass;
 import mrunknown404.primalrework.util.DoubleValue;
 import mrunknown404.primalrework.util.enums.EnumAlloy;
 import mrunknown404.primalrework.util.enums.EnumOreValue;
@@ -55,6 +57,8 @@ public class ModBlocks {
 			new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.pickaxe, EnumToolMaterial.flint));
 	public static final Block MUSHROOM_GRASS = new BlockMushroomGrass();
 	public static final Block DENSE_LOG = new BlockDenseLog();
+	public static final Block CHARCOAL_PIT_MASTER = new BlockCharcoalPitMaster();
+	public static final Block CHARCOAL_BLOCK = new BlockCharcoalBlock();
 	
 	//ORE
 	public static final Block COPPER_ORE_POOR = new BlockOre(2, 2, EnumStage.stage2, EnumAlloy.copper, EnumOreValue.poor, BlockOre.COPPER_TYPES);

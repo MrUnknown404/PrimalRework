@@ -26,6 +26,7 @@ public abstract class BlockRotatedPillarBase extends BlockBase {
 	protected BlockRotatedPillarBase(String name, Material material, SoundType soundType, BlockRenderLayer renderType, float hardness, float resistance, AxisAlignedBB collisionAABB,
 			AxisAlignedBB visualAABB, EnumStage stage, DoubleValue<EnumToolType, EnumToolMaterial>... types) {
 		super(name, material, soundType, renderType, hardness, resistance, collisionAABB, visualAABB, stage, types);
+		setDefaultState(blockState.getBaseState().withProperty(BlockLog.LOG_AXIS, EnumAxis.Y));
 	}
 	
 	protected BlockRotatedPillarBase(String name, Material material, SoundType soundType, float hardness, float resistance, EnumStage stage,
