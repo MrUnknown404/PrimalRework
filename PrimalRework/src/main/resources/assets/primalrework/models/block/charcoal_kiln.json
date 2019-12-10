@@ -1,5 +1,5 @@
 {
-	"parent": "block/cube_all",
+	"parent": "minecraft:block/cube_all",
 	"textures": {
 		"0": "primalrework:blocks/charcoal_kiln_top",
 		"1": "primalrework:blocks/charcoal_kiln_bottom",

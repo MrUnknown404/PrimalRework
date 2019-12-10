@@ -5,6 +5,12 @@ import java.util.List;
 
 import mrunknown404.primalrework.util.DoubleValue;
 
+/**<pre>
+ * unknown
+ * copper
+ * tin
+ * bronze
+ * </pre> */
 public enum EnumAlloy {
 	unknown,
 	copper,

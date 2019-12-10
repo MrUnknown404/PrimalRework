@@ -1,0 +1,10 @@
+setIcon(<primalrework:copper_nugget_high>)
+setTitle("Stage 3 (Copper)")
+setDescription("write later")
+setBackground("minecraft:textures/gui/advancements/backgrounds/adventure.png")
+setShowToast(false)
+setAnnounceToChat(false)
+
+setPos(0,0)
+
+addCriteria("location", "minecraft:location")

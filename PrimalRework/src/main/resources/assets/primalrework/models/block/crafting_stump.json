@@ -1,10 +1,10 @@
 {
-	"parent": "block/cube_all",
+	"parent": "minecraft:block/cube_all",
 	"textures": {
-		"0": "blocks/log_oak",
+		"0": "minecraft:blocks/log_oak",
 		"2": "primalrework:blocks/crafting_stump_top",
 		"3": "primalrework:blocks/crafting_stump_bottom",
-		"particle": "blocks/log_oak"
+		"particle": "minecraft:blocks/log_oak"
 	},
 	"elements": [
 		{

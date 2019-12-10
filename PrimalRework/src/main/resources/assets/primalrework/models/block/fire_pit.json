@@ -1,10 +1,10 @@
 {
-	"parent": "block/cube_all",
+	"parent": "minecraft:block/cube_all",
 	"textures": {
-		"0": "blocks/cobblestone",
-		"2": "blocks/planks_oak",
-		"3": "blocks/coal_block",
-		"particle": "blocks/planks_oak"
+		"0": "minecraft:blocks/cobblestone",
+		"2": "minecraft:blocks/planks_oak",
+		"3": "minecraft:blocks/coal_block",
+		"particle": "minecraft:blocks/planks_oak"
 	},
 	"elements": [
 		{

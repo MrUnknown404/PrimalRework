@@ -1,17 +1,16 @@
-// ITEMS
+//--ITEMS
+//MISC
 item.plant_fiber.name=Plant Fiber
 item.plant_rope.name=Plant Rope
 item.gravel.name=Gravel
 item.flint_knapped.name=Knapped Flint
 item.flint_point.name=Flint Point
 item.bone_shard.name=Bone Shard
-item.fire_starter.name=Fire Starter
 item.bark.name=Bark
 item.magic_dust_red.name=Red Magic Dust
 item.magic_dust_green.name=Green Magic Dust
 item.magic_dust_blue.name=Blue Magic Dust
 item.cloth.name=Cloth
-item.mortar_pestle.name=Mortar & Pestle
 item.oak_plank.name=Oak Plank
 item.birch_plank.name=Birch Plank
 item.spruce_plank.name=Spruce Plank
@@ -34,35 +33,19 @@ item.blue_dye.name=Blue Dye
 item.black_dye.name=Black Dye
 item.brown_dye.name=Brown Dye
 
+//ORE NUGGETS
 item.copper_nugget_poor.name=Copper Nugget
 item.copper_nugget_low.name=Copper Nugget
 item.copper_nugget_medium.name=Copper Nugget
 item.copper_nugget_good.name=Copper Nugget
 item.copper_nugget_high.name=Copper Nugget
 
-item.raw_hide.tooltip_0=Right click water while holding this item to wet it
-item.dry_tanned_hide.tooltip_0=Right click water while holding this item to wet it
-item.magic_dust_red.tooltip_0=Level 1 Magic Dust
-item.magic_dust_green.tooltip_0=Level 2 Magic Dust
-item.magic_dust_blue.tooltip_0=Level 3 Magic Dust
-
-item.ore_units.tooltip=Units
-
-// FOOD
+//FOOD
 item.dough.name=Dough
 item.cooked_carrot.name=Cooked Carrot
 item.cooked_beetroot.name=Cooked Beetroot
 
-// ITEMS WITH DURABILITY
-item.plant_mesh.name=Plant Mesh
-item.string_mesh.name=String Mesh
-item.flint_crafting_hammer.name=Flint Crafting Hammer
-item.flint_saw.name=Flint Saw
-item.clay_bucket_empty.name=Clay Bucket
-item.clay_bucket_water.name=Water Clay Bucket
-item.clay_bucket_milk.name=Milk Clay Bucket
-
-// TOOL HEADS
+//TOOL HEADS
 item.stone_pickaxe_head.name=Stone Pickaxe Head
 item.stone_axe_head.name=Stone Axe Head
 item.stone_shovel_head.name=Stone Shovel Head
@@ -70,19 +53,31 @@ item.stone_sword_head.name=Stone Sword Head
 item.stone_knife_head.name=Stone Knife Head
 item.stone_hoe_head.name=Stone Hoe Head
 
-// TOOLS
+//ITEMS WITH DURABILITY
+item.plant_mesh.name=Plant Mesh
+item.string_mesh.name=String Mesh
+item.flint_crafting_hammer.name=Flint Crafting Hammer
+item.mortar_pestle.name=Mortar & Pestle
+item.clay_bucket_empty.name=Clay Bucket
+item.clay_bucket_water.name=Water Clay Bucket
+item.clay_bucket_milk.name=Milk Clay Bucket
+
+//TOOLS
+item.fire_starter.name=Fire Starter
+
 item.flint_pickaxe.name=Flint Pickaxe
 item.flint_axe.name=Flint Hatchet
 item.flint_shovel.name=Flint Shovel
 item.flint_knife.name=Flint Knife
 item.flint_hoe.name=Flint Hoe
+item.flint_saw.name=Flint Saw
 item.flint_shears.name=Flint Shears
 
 item.bone_knife.name=Bone Knife
 
 item.stone_knife.name=Stone Knife
 
-// VANILLA REPLACEMENTS
+//VANILLA REPLACEMENTS
 item.diamond_axe.name=Diamond Axe
 item.iron_axe.name=Iron Axe
 item.stone_axe.name=Stone Axe
@@ -94,34 +89,37 @@ item.stone_hoe.name=Stone Hoe
 item.golden_hoe.name=Golden Hoe
 item.wooden_hoe.name=Wooden Hoe
 
-// BLOCKS
+//--BLOCKS
+//GROUND ITEMS
 tile.rock.name=Rock
 tile.stick.name=Placeable Stick
 tile.flint.name=Placeable Flint
-tile.fire_pit.name=Fire Pit
+
+//MISC
 tile.primal_torch_lit.name=Lit Primal Torch
 tile.primal_torch_unlit.name=Unlit Primal Torch
-tile.crafting_stump.name=Crafting Stump
-tile.primal_enchanting_table.name=Primal Enchanting Table
 tile.thatch.name=Thatch
-tile.thatch_slab.name=Thatch Slab
 tile.salt_block.name=Salt Block
 tile.smooth_stone.name=Smooth Stone
-tile.pr_stone_slab.name=Stone Slab
-tile.dirt_slab.name=Dirt Slab
-tile.grass_slab.name=Grass Slab
-tile.drying_table.name=Drying Table
-tile.loom.name=Loom
+tile.mushroom_grass.name=Mushroom Grass
+tile.dense_log.name=Dense Log
+
+//ORE
 tile.copper_ore_poor.name=Copper Ore
 tile.copper_ore_low.name=Copper Ore
 tile.copper_ore_medium.name=Copper Ore
 tile.copper_ore_good.name=Copper Ore
 tile.copper_ore_high.name=Copper Ore
 tile.copper_block.name=Copper Block
-tile.mushroom_grass.name=Mushroom Grass
-tile.mushroom_grass_slab.name=Mushroom Grass Slab
-tile.charcoal_kiln.name=Charcoal Kiln
 
+//SLABS
+tile.thatch_slab.name=Thatch Slab
+tile.pr_stone_slab.name=Stone Slab
+tile.dirt_slab.name=Dirt Slab
+tile.grass_slab.name=Grass Slab
+tile.mushroom_grass_slab.name=Mushroom Grass Slab
+
+//LOGS
 tile.stripped_oak_log.name=Stripped Oak Log
 tile.stripped_spruce_log.name=Stripped Spruce Log
 tile.stripped_birch_log.name=Stripped Birch Log
@@ -129,36 +127,58 @@ tile.stripped_jungle_log.name=Stripped Jungle Log
 tile.stripped_dark_oak_log.name=Stripped Dark Oak Log
 tile.stripped_acacia_log.name=Stripped Acacia Log
 
-tile.primal_torch_unlit.tooltip_0=&7Right click on a fire source while holding this item or
-tile.primal_torch_unlit.tooltip_1=&7put the unlit torch inside a fire pit to light it
+//"MACHINES"
+tile.fire_pit.name=Fire Pit
+tile.crafting_stump.name=Crafting Stump
+tile.primal_enchanting_table.name=Primal Enchanting Table
+tile.drying_table.name=Drying Table
+tile.loom.name=Loom
+tile.charcoal_kiln.name=Charcoal Kiln
 
-// ENTITIES
+//--ENTITIES
 entity.pigeon.name=Pigeon
 
-// COMMANDS
+//--COMMANDS
 commands.stage.usage=/stage add [stage name]
 
-// STAGE
+//--STAGE
 stage.before.name=Stage 0 (Before)
 stage.early_stone.name=Stage 1 (Early Stone)
 stage.late_stone.name=Stage 2 (Late Stone)
+stage.copper.name=Stage 3 (Copper)
 
-// GUI
+//--GUI
+//ITEM TABS
 itemGroup.primalrework_items=Primal.R Items
 itemGroup.primalrework_tools=Primal.R Tools
 itemGroup.primalrework_food=Primal.R Food
 itemGroup.primalrework_blocks=Primal.R Blocks
 
+//CONTAINERS
 container.fire_pit=Camp Fire
 container.primal_enchantment_table=Primal Enchanting
 container.loom=Loom
 container.charcoal_kiln=Charcoal Kiln
 
+//GUI
 gui.fire_pit_cook=Fuel
 gui.drying_table_time=Drying Time
 
 generator.primal=Primal World
 
+item.ore_units.tooltip=Units
+
+//TOOLTIPS
+item.raw_hide.tooltip_0=Right click water while holding this item to wet it
+item.dry_tanned_hide.tooltip_0=Right click water while holding this item to wet it
+item.magic_dust_red.tooltip_0=Level 1 Magic Dust
+item.magic_dust_green.tooltip_0=Level 2 Magic Dust
+item.magic_dust_blue.tooltip_0=Level 3 Magic Dust
+
+tile.primal_torch_unlit.tooltip_0=&7Right click on a fire source while holding this item or
+tile.primal_torch_unlit.tooltip_1=&7put the unlit torch inside a fire pit to light it
+
+//JEI
 jei.info.flint_knapped=Can be obtained by left clicking a piece of flint onto a stone block (1/3 chance)
 jei.info.flint_point=Can be obtained by left clicking a knapped flint onto a stone block (1/3 chance)
 jei.info.bone_shard=Can be obtained by left clicking a bone onto a stone block (1/3 chance)
@@ -167,6 +187,7 @@ jei.info.wet_hide=Can be obtained by right clicking raw hide while looking at wa
 jei.info.wet_tanned_hide=Can be obtained by right clicking dry tanned hide while looking at water
 jei.info.cloth=Right click 7 string onto a loom to make cloth
 
+//SUBTITLES
 subtitles.entity.pigeon.ambient=Pigeon Cooing
 subtitles.entity.pigeon.hurt=Pigeon hurts
 subtitles.entity.pigeon.death=Pigeon dies

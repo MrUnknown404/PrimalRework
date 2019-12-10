@@ -39,14 +39,13 @@ public class ModItems {
 	
 	// TODO add copper ingots/tools
 	
-	// ITEMS
+	//MISC
 	public static final Item PLANT_FIBER = new ItemBase("plant_fiber", EnumStage.stage0);
 	public static final Item PLANT_ROPE = new ItemBase("plant_rope", EnumStage.stage0);
 	public static final Item GRAVEL = new ItemBase("gravel", EnumStage.stage0);
 	public static final Item FLINT_KNAPPED = new ItemBase("flint_knapped", EnumStage.stage0);
 	public static final Item FLINT_POINT = new ItemBase("flint_point", EnumStage.stage0);
 	public static final Item BONE_SHARD = new ItemBase("bone_shard", EnumStage.stage0);
-	public static final Item FIRE_STARTER = new ItemFireStarter();
 	public static final Item BARK = new ItemBase("bark", EnumStage.stage0);
 	public static final Item MAGIC_DUST_RED = new ItemBase("magic_dust_red", EnumStage.stage2).setAmountOfTooltops(1);
 	public static final Item MAGIC_DUST_GREEN = new ItemBase("magic_dust_green", EnumStage.stage2).setAmountOfTooltops(1);
@@ -73,26 +72,20 @@ public class ModItems {
 	public static final Item BLUE_DYE = new ItemBase("blue_dye", EnumStage.stage1);
 	public static final Item BLACK_DYE = new ItemBase("black_dye", EnumStage.stage1);
 	public static final Item BROWN_DYE = new ItemBase("brown_dye", EnumStage.stage1);
+	
+	//ORE NUGGETS
 	public static final Item COPPER_NUGGET_POOR = new ItemOreNugget(EnumStage.stage2, EnumAlloy.copper, EnumOreValue.poor);
 	public static final Item COPPER_NUGGET_LOW = new ItemOreNugget(EnumStage.stage2, EnumAlloy.copper, EnumOreValue.low);
 	public static final Item COPPER_NUGGET_MEDIUM = new ItemOreNugget(EnumStage.stage2, EnumAlloy.copper, EnumOreValue.medium);
 	public static final Item COPPER_NUGGET_GOOD = new ItemOreNugget(EnumStage.stage2, EnumAlloy.copper, EnumOreValue.good);
 	public static final Item COPPER_NUGGET_HIGH = new ItemOreNugget(EnumStage.stage2, EnumAlloy.copper, EnumOreValue.high);
 	
-	// ITEMS WITH DURABILITY
-	public static final Item PLANT_MESH = new ItemDamageableBase("plant_mesh", EnumToolMaterial.flint, EnumStage.stage0);
-	public static final Item STRING_MESH = new ItemDamageableBase("string_mesh", EnumToolMaterial.copper, EnumStage.stage1);
-	public static final Item FLINT_CRAFTING_HAMMER = new ItemDamageableBase("flint_crafting_hammer", EnumToolMaterial.flint, EnumStage.stage1);
-	public static final Item MORTAR_PESTLE = new ItemDamageableBase("mortar_pestle", EnumToolMaterial.wood, EnumStage.stage1);
-	public static final Item CLAY_BUCKET_EMPTY = new ItemClayBucket(null);
-	public static final Item CLAY_BUCKET_MILK = new ItemClayBucketMilk();
-	
-	// FOOD
+	//FOOD
 	public static final Item DOUGH = new ItemFoodBase("dough", EnumStage.stage1, 1, 1f);
 	public static final Item COOKED_CARROT = new ItemFoodBase("cooked_carrot", EnumStage.stage0, 5, 0.6f);
 	public static final Item COOKED_BEETROOT = new ItemFoodBase("cooked_beetroot", EnumStage.stage0, 5, 0.6f);
 	
-	// TOOL HEADS
+	//TOOL HEADS
 	public static final Item STONE_PICKAXE_HEAD = new ItemBase("stone_pickaxe_head", 1, EnumStage.stage2);
 	public static final Item STONE_AXE_HEAD = new ItemBase("stone_axe_head", 1, EnumStage.stage2);
 	public static final Item STONE_SHOVEL_HEAD = new ItemBase("stone_shovel_head", 1, EnumStage.stage2);
@@ -100,7 +93,17 @@ public class ModItems {
 	public static final Item STONE_KNIFE_HEAD = new ItemBase("stone_knife_head", 1, EnumStage.stage2);
 	public static final Item STONE_HOE_HEAD = new ItemBase("stone_hoe_head", 1, EnumStage.stage2);
 	
-	// TOOLS
+	//ITEMS WITH DURABILITY
+	public static final Item PLANT_MESH = new ItemDamageableBase("plant_mesh", EnumToolMaterial.flint, EnumStage.stage0);
+	public static final Item STRING_MESH = new ItemDamageableBase("string_mesh", EnumToolMaterial.copper, EnumStage.stage1);
+	public static final Item FLINT_CRAFTING_HAMMER = new ItemDamageableBase("flint_crafting_hammer", EnumToolMaterial.flint, EnumStage.stage1);
+	public static final Item MORTAR_PESTLE = new ItemDamageableBase("mortar_pestle", EnumToolMaterial.wood, EnumStage.stage1);
+	public static final Item CLAY_BUCKET_EMPTY = new ItemClayBucket(null);
+	public static final Item CLAY_BUCKET_MILK = new ItemClayBucketMilk();
+	
+	//TOOLS
+	public static final Item FIRE_STARTER = new ItemFireStarter();
+	
 	public static final Item FLINT_PICKAXE = new ItemToolBase("flint_pickaxe", EnumToolType.pickaxe, EnumToolMaterial.flint, EnumStage.stage1);
 	public static final Item FLINT_AXE = new ItemToolBase("flint_axe", EnumToolType.axe, EnumToolMaterial.flint, EnumStage.stage0);
 	public static final Item FLINT_SHOVEL = new ItemToolBase("flint_shovel", EnumToolType.shovel, EnumToolMaterial.flint, EnumStage.stage1);
@@ -113,7 +116,7 @@ public class ModItems {
 	
 	public static final Item STONE_KNIFE = new ItemToolBase("stone_knife", EnumToolType.knife, EnumToolMaterial.stone, EnumStage.stage2);
 	
-	// VANILLA REPLACEMENTS
+	//VANILLA REPLACEMENTS
 	public static final Item DIAMOND_AXE = new ItemToolBase("diamond_axe", EnumToolType.axe, EnumToolMaterial.diamond, EnumStage.do_later).setCreativeTab(CreativeTabs.TOOLS);
 	public static final Item IRON_AXE = new ItemToolBase("iron_axe", EnumToolType.axe, EnumToolMaterial.iron, EnumStage.do_later).setCreativeTab(CreativeTabs.TOOLS);
 	public static final Item STONE_AXE = new ItemToolBase("stone_axe", EnumToolType.axe, EnumToolMaterial.stone, EnumStage.stage2).setCreativeTab(CreativeTabs.TOOLS);

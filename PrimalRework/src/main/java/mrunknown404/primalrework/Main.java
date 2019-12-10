@@ -16,7 +16,6 @@ import mrunknown404.primalrework.network.RecipeTransferMessage;
 import mrunknown404.primalrework.network.RecipeTransferMessagePacketHandler;
 import mrunknown404.primalrework.util.OreDict;
 import mrunknown404.primalrework.util.VanillaOverrides;
-import mrunknown404.primalrework.util.helpers.StageHelper;
 import mrunknown404.primalrework.util.proxy.CommonProxy;
 import mrunknown404.primalrework.world.WorldGen;
 import mrunknown404.primalrework.world.WorldTypePrimal;
@@ -95,8 +94,6 @@ public class Main {
 		WorldType.WORLD_TYPES = new WorldType[16];
 		WorldType.WORLD_TYPES[0] = PRIMAL_WORLD;
 		WorldType.WORLD_TYPES[1] = WorldType.FLAT;
-		
-		StageHelper.setupItemStages();
 	}
 	
 	@EventHandler

@@ -3,13 +3,22 @@ package mrunknown404.primalrework.util.enums;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 
+/**<pre> String name, int id <br>
+ * stage0  ("before", 0)
+ * stage1  ("early_stone", 1)
+ * stage2  ("late_stone", 2)
+ * stage3  ("copper", 3)
+ * do_later("do_later", 98)
+ * no_show ("no_show", 99)
+ * </pre> */
 public enum EnumStage {
-	stage0("before", 0),
-	stage1("early_stone", 1),
-	stage2("late_stone", 2),
+	stage0  ("before", 0),
+	stage1  ("early_stone", 1),
+	stage2  ("late_stone", 2),
+	stage3  ("copper", 3),
 	
 	do_later("do_later", 98),
-	no_show("no_show", 99);
+	no_show ("no_show", 99);
 	
 	public final ITextComponent name;
 	public final int id;

@@ -1,5 +1,5 @@
 {
-	"parent": "block/half_slab",
+	"parent": "minecraft:block/half_slab",
 	"textures": {
 		"bottom": "minecraft:blocks/stone",
 		"top": "minecraft:blocks/stone",

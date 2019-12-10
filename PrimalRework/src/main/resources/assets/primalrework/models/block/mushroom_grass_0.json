@@ -1,11 +1,6 @@
 {
 	"parent": "primalrework:block/mushroom_grass_base",
 	"textures": {
-		"particle": "minecraft:blocks/dirt",
-		"bottom": "minecraft:blocks/dirt",
-		"top": "minecraft:blocks/grass_top",
-		"top_overlay": "primalrework:blocks/mushroom_grass_top_0",
-		"side": "minecraft:blocks/grass_side",
-		"overlay": "minecraft:blocks/grass_side_overlay"
+		"top_overlay": "primalrework:blocks/mushroom_grass_top_0"
 	}
 }

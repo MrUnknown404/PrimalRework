@@ -37,7 +37,7 @@ public class BlockCharcoalKiln extends BlockDirectionalBase implements ITileEnti
 	private static final AxisAlignedBB bb = new AxisAlignedBB(0, 0, 0, 16 / 16, 15.05f / 16, 16 / 16);
 	
 	public BlockCharcoalKiln() {
-		super("charcoal_kiln", Material.ROCK, SoundType.STONE, BlockRenderLayer.CUTOUT_MIPPED, 2f, 4f, bb, bb, EnumStage.stage2,
+		super("charcoal_kiln", Material.ROCK, SoundType.STONE, BlockRenderLayer.CUTOUT_MIPPED, 2f, 4f, bb, bb, EnumStage.stage3,
 				new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.pickaxe, EnumToolMaterial.stone));
 		setTickRandomly(true);
 		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(IS_BURNING, false));
