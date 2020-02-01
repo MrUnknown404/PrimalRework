@@ -36,7 +36,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteract
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class PlayerEventHandler {
-
+	
 	private final List<Block> fire_blocks = Arrays.asList(ModBlocks.LIT_PRIMAL_TORCH, Blocks.TORCH);
 	
 	@SubscribeEvent
@@ -61,8 +61,8 @@ public class PlayerEventHandler {
 				if (!e.getWorld().isRemote && r.nextInt(3) == 0) {
 					item.shrink(1);
 					
-					e.getWorld().spawnEntity(new EntityItem(e.getWorld(), e.getHitVec().x, e.getHitVec().y, e.getHitVec().z, new ItemStack(ModItems.FLINT_KNAPPED,
-							1 + MathHelper.clamp(r.nextInt(3) - 1, 0, 1))));
+					e.getWorld().spawnEntity(new EntityItem(e.getWorld(), e.getHitVec().x, e.getHitVec().y, e.getHitVec().z,
+							new ItemStack(ModItems.FLINT_KNAPPED, 1 + MathHelper.clamp(r.nextInt(3) - 1, 0, 1))));
 				}
 			} else if (item.getItem() == ModItems.FLINT_KNAPPED) {
 				e.getWorld().playSound(e.getEntityPlayer(), e.getPos(), SoundEvents.BLOCK_STONE_BREAK, SoundCategory.PLAYERS, 1, 2);
@@ -70,8 +70,8 @@ public class PlayerEventHandler {
 				if (!e.getWorld().isRemote && r.nextInt(3) == 0) {
 					item.shrink(1);
 					
-					e.getWorld().spawnEntity(new EntityItem(e.getWorld(), e.getHitVec().x, e.getHitVec().y, e.getHitVec().z, new ItemStack(ModItems.FLINT_POINT,
-							1 + MathHelper.clamp(r.nextInt(3) - 1, 0, 1))));
+					e.getWorld().spawnEntity(new EntityItem(e.getWorld(), e.getHitVec().x, e.getHitVec().y, e.getHitVec().z,
+							new ItemStack(ModItems.FLINT_POINT, 1 + MathHelper.clamp(r.nextInt(3) - 1, 0, 1))));
 				}
 			} else if (item.getItem() == Items.BONE) {
 				e.getWorld().playSound(e.getEntityPlayer(), e.getPos(), SoundEvents.BLOCK_STONE_BREAK, SoundCategory.PLAYERS, 1, 2);
@@ -97,6 +97,7 @@ public class PlayerEventHandler {
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	@SubscribeEvent
 	public void onRightClickBlock(PlayerInteractEvent.RightClickBlock e) {
 		World w = e.getWorld();
@@ -133,6 +134,25 @@ public class PlayerEventHandler {
 					}
 					
 					w.setBlockState(pos, Blocks.GRASS_PATH.getDefaultState());
+				}
+			} else if (w.getBlockState(pos.up()).getMaterial() == Material.AIR &&
+					(w.getBlockState(pos).getBlock() == ModBlocks.DIRT_SLAB || w.getBlockState(pos).getBlock() == ModBlocks.DIRT_DOUBLE_SLAB ||
+							w.getBlockState(pos).getBlock() == ModBlocks.GRASS_SLAB || w.getBlockState(pos).getBlock() == ModBlocks.GRASS_DOUBLE_SLAB ||
+							w.getBlockState(pos).getBlock() == ModBlocks.MUSHROOM_GRASS_SLAB || w.getBlockState(pos).getBlock() == ModBlocks.MUSHROOM_GRASS_DOUBLE_SLAB)) {
+				w.playSound(p, pos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0f, 1.0f);
+				p.swingArm(e.getHand());
+				
+				if (!w.isRemote) {
+					if (!p.isCreative()) {
+						e.getItemStack().damageItem(1, p);
+					}
+					
+					if (w.getBlockState(pos).getBlock() == ModBlocks.DIRT_SLAB || w.getBlockState(pos).getBlock() == ModBlocks.GRASS_SLAB ||
+							w.getBlockState(pos).getBlock() == ModBlocks.MUSHROOM_GRASS_SLAB) {
+						w.setBlockState(pos, ModBlocks.PATH_SLAB.getStateFromMeta(w.getBlockState(pos).getBlock().getMetaFromState(w.getBlockState(pos))));
+					} else {
+						w.setBlockState(pos, ModBlocks.PATH_DOUBLE_SLAB.getDefaultState());
+					}
 				}
 			}
 		}

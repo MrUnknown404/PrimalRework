@@ -17,6 +17,7 @@ import mrunknown404.primalrework.blocks.BlockLoom;
 import mrunknown404.primalrework.blocks.BlockMushroomGrass;
 import mrunknown404.primalrework.blocks.BlockMushroomGrassSlab;
 import mrunknown404.primalrework.blocks.BlockOre;
+import mrunknown404.primalrework.blocks.BlockPathSlab;
 import mrunknown404.primalrework.blocks.BlockPrimalEnchantingTable;
 import mrunknown404.primalrework.blocks.BlockPrimalTorchLit;
 import mrunknown404.primalrework.blocks.BlockPrimalTorchUnlit;
@@ -79,6 +80,8 @@ public class ModBlocks {
 	public static final Block GRASS_SLAB = new BlockGrassSlab("grass_slab", false);
 	public static final Block MUSHROOM_GRASS_DOUBLE_SLAB = new BlockMushroomGrassSlab("mushroom_grass_double_slab", true);
 	public static final Block MUSHROOM_GRASS_SLAB = new BlockMushroomGrassSlab("mushroom_grass_slab", false);
+	public static final Block PATH_DOUBLE_SLAB = new BlockPathSlab("path_double_slab", true);
+	public static final Block PATH_SLAB = new BlockPathSlab("path_slab", false);
 	
 	//LOGS
 	public static final Block STRIPPED_OAK_LOG = new BlockStrippedLog("oak");

@@ -1,5 +1,6 @@
 package mrunknown404.primalrework.items.util;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -50,7 +51,7 @@ public class ItemToolBase extends ItemTool implements IItemBase<ItemToolBase> {
 	private int amountOfTooltops = 0;
 	
 	public ItemToolBase(String modid, String name, EnumToolType toolType, EnumToolMaterial harvestLevel, EnumStage stage) {
-		super(toolType.baseDamage + harvestLevel.extraDamage, toolType.swingSpeed, M, null);
+		super(toolType.baseDamage + harvestLevel.extraDamage, toolType.swingSpeed, M, Collections.emptySet());
 		setUnlocalizedName(name);
 		setRegistryName(new ResourceLocation(modid, name));
 		setCreativeTab(ModCreativeTabs.PRIMALREWORK_TOOLS);

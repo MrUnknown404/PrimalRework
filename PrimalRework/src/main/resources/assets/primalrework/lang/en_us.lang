@@ -119,6 +119,7 @@ tile.pr_stone_slab.name=Stone Slab
 tile.dirt_slab.name=Dirt Slab
 tile.grass_slab.name=Grass Slab
 tile.mushroom_grass_slab.name=Mushroom Grass Slab
+tile.path_slab.name=Path Slab
 
 //LOGS
 tile.stripped_oak_log.name=Stripped Oak Log
