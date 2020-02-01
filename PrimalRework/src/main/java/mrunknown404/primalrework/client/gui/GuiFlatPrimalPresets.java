@@ -211,14 +211,14 @@ public class GuiFlatPrimalPresets extends GuiScreen {
 			Tessellator tessellator = Tessellator.getInstance();
 			BufferBuilder bufferbuilder = tessellator.getBuffer();
 			bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX);
-			bufferbuilder.pos((double) (p_148171_1_ + 0), (double) (p_148171_2_ + 18), (double) GuiFlatPrimalPresets.this.zLevel)
-					.tex((double) ((float) (p_148171_3_ + 0) * 0.0078125F), (double) ((float) (p_148171_4_ + 18) * 0.0078125F)).endVertex();
-			bufferbuilder.pos((double) (p_148171_1_ + 18), (double) (p_148171_2_ + 18), (double) GuiFlatPrimalPresets.this.zLevel)
-					.tex((double) ((float) (p_148171_3_ + 18) * 0.0078125F), (double) ((float) (p_148171_4_ + 18) * 0.0078125F)).endVertex();
-			bufferbuilder.pos((double) (p_148171_1_ + 18), (double) (p_148171_2_ + 0), (double) GuiFlatPrimalPresets.this.zLevel)
-					.tex((double) ((float) (p_148171_3_ + 18) * 0.0078125F), (double) ((float) (p_148171_4_ + 0) * 0.0078125F)).endVertex();
-			bufferbuilder.pos((double) (p_148171_1_ + 0), (double) (p_148171_2_ + 0), (double) GuiFlatPrimalPresets.this.zLevel)
-					.tex((double) ((float) (p_148171_3_ + 0) * 0.0078125F), (double) ((float) (p_148171_4_ + 0) * 0.0078125F)).endVertex();
+			bufferbuilder.pos(p_148171_1_ + 0, p_148171_2_ + 18, GuiFlatPrimalPresets.this.zLevel)
+					.tex((p_148171_3_ + 0) * 0.0078125F, (p_148171_4_ + 18) * 0.0078125F).endVertex();
+			bufferbuilder.pos(p_148171_1_ + 18, p_148171_2_ + 18, GuiFlatPrimalPresets.this.zLevel)
+					.tex((p_148171_3_ + 18) * 0.0078125F, (p_148171_4_ + 18) * 0.0078125F).endVertex();
+			bufferbuilder.pos(p_148171_1_ + 18, p_148171_2_ + 0, GuiFlatPrimalPresets.this.zLevel)
+					.tex((p_148171_3_ + 18) * 0.0078125F, (p_148171_4_ + 0) * 0.0078125F).endVertex();
+			bufferbuilder.pos(p_148171_1_ + 0, p_148171_2_ + 0, GuiFlatPrimalPresets.this.zLevel)
+					.tex((p_148171_3_ + 0) * 0.0078125F, (p_148171_4_ + 0) * 0.0078125F).endVertex();
 			tessellator.draw();
 		}
 		

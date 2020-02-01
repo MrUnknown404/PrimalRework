@@ -81,14 +81,14 @@ public class EntityPigeon extends EntityAnimal implements EntityFlying {
 	}
 	
 	private void calculateFlapping() {
-		flapSpeed = (float) ((double) flapSpeed + (double) (onGround ? -1 : 4) * 0.3D);
+		flapSpeed = (float) (flapSpeed + (onGround ? -1 : 4) * 0.3D);
 		flapSpeed = MathHelper.clamp(flapSpeed, 0.0F, 1.0F);
 		
 		if (!onGround && flapping < 1.0F) {
 			flapping = 1.0F;
 		}
 		
-		flapping = (float) ((double) flapping * 0.9D);
+		flapping = (float) (flapping * 0.9D);
 		
 		if (!onGround && motionY < 0.0D) {
 			motionY *= 0.6D;

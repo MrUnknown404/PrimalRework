@@ -2,6 +2,7 @@ package mrunknown404.primalrework.entity.render;
 
 import mrunknown404.primalrework.Main;
 import mrunknown404.primalrework.entity.model.ModelPigeon;
+import mrunknown404.unknownlibs.entity.render.RenderBase;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
 

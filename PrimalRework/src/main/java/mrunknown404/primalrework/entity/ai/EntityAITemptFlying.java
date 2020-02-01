@@ -42,11 +42,11 @@ public class EntityAITemptFlying extends EntityAIBase {
 		if (delayTemptCounter > 0) {
 			--delayTemptCounter;
 			return false;
-		} else {
-			temptingPlayer = temptedEntity.world.getClosestPlayerToEntity(temptedEntity, 10.0D);
-			
-			return temptingPlayer == null ? false : isTempting(temptingPlayer.getHeldItemMainhand()) || isTempting(temptingPlayer.getHeldItemOffhand());
 		}
+		
+		temptingPlayer = temptedEntity.world.getClosestPlayerToEntity(temptedEntity, 10.0D);
+		
+		return temptingPlayer == null ? false : isTempting(temptingPlayer.getHeldItemMainhand()) || isTempting(temptingPlayer.getHeldItemOffhand());
 	}
 	
 	private boolean isTempting(ItemStack stack) {
@@ -60,7 +60,7 @@ public class EntityAITemptFlying extends EntityAIBase {
 					return false;
 				}
 				
-				if (Math.abs((double) temptingPlayer.rotationPitch - pitch) > 5.0D || Math.abs((double) temptingPlayer.rotationYaw - yaw) > 5.0D) {
+				if (Math.abs(temptingPlayer.rotationPitch - pitch) > 5.0D || Math.abs(temptingPlayer.rotationYaw - yaw) > 5.0D) {
 					return false;
 				}
 			} else {
@@ -69,8 +69,8 @@ public class EntityAITemptFlying extends EntityAIBase {
 				targetZ = temptingPlayer.posZ;
 			}
 			
-			pitch = (double) temptingPlayer.rotationPitch;
-			yaw = (double) temptingPlayer.rotationYaw;
+			pitch = temptingPlayer.rotationPitch;
+			yaw = temptingPlayer.rotationYaw;
 		}
 		
 		return shouldExecute();
@@ -91,7 +91,7 @@ public class EntityAITemptFlying extends EntityAIBase {
 	}
 	
 	public void updateTask() {
-		temptedEntity.getLookHelper().setLookPositionWithEntity(temptingPlayer, (float) (temptedEntity.getHorizontalFaceSpeed() + 20), (float) temptedEntity.getVerticalFaceSpeed());
+		temptedEntity.getLookHelper().setLookPositionWithEntity(temptingPlayer, temptedEntity.getHorizontalFaceSpeed() + 20, temptedEntity.getVerticalFaceSpeed());
 		
 		if (temptedEntity.getDistanceSq(temptingPlayer) < 6.25D) {
 			temptedEntity.getNavigator().clearPath();

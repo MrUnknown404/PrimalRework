@@ -5,16 +5,13 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
 
 public class InventoryCraftingStump extends InventoryCrafting {
-	private NonNullList<ItemStack> stackList;
-	private final TileEntityCraftingStump tile;
+	private final TileEntityCraftingStump te;
 
-	public InventoryCraftingStump(Container container, TileEntityCraftingStump tile) {
+	public InventoryCraftingStump(Container container, TileEntityCraftingStump te) {
 		super(container, 3, 3);
-		this.stackList = tile.getItems();
-		this.tile = tile;
+		this.te = te;
 	}
 	
 	@Override
@@ -24,7 +21,7 @@ public class InventoryCraftingStump extends InventoryCrafting {
 	
 	@Override
 	public ItemStack getStackInSlot(int index) {
-		return index >= this.getSizeInventory() ? ItemStack.EMPTY : stackList.get(index);
+		return index >= getSizeInventory() ? ItemStack.EMPTY : te.getStackInSlot(index);
 	}
 	
 	public ItemStack getStackInRowAndColumn(int row, int column) {
@@ -33,12 +30,12 @@ public class InventoryCraftingStump extends InventoryCrafting {
 	
 	@Override
 	public String getName() {
-		return tile.getName();
+		return te.getName();
 	}
 	
 	@Override
 	public boolean hasCustomName() {
-		return tile.hasCustomName();
+		return te.hasCustomName();
 	}
 	
 	@Override
@@ -48,9 +45,9 @@ public class InventoryCraftingStump extends InventoryCrafting {
 	
 	@Override
 	public void markDirty() {
-		tile.markDirty();
-		IBlockState state = tile.getWorld().getBlockState(tile.getPos());
-		tile.getWorld().notifyBlockUpdate(tile.getPos(), state, state, 3);
+		te.markDirty();
+		IBlockState state = te.getWorld().getBlockState(te.getPos());
+		te.getWorld().notifyBlockUpdate(te.getPos(), state, state, 3);
 	}
 	
 	@Override

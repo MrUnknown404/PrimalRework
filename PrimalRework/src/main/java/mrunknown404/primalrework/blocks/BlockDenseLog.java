@@ -2,10 +2,10 @@ package mrunknown404.primalrework.blocks;
 
 import mrunknown404.primalrework.blocks.util.BlockRotatedPillarBase;
 import mrunknown404.primalrework.init.ModBlocks;
-import mrunknown404.primalrework.util.DoubleValue;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import mrunknown404.primalrework.util.enums.EnumToolType;
+import mrunknown404.unknownlibs.utils.DoubleValue;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -74,16 +74,14 @@ public class BlockDenseLog extends BlockRotatedPillarBase {
 				} else if (shouldBe == Blocks.DIRT) {
 					if (toCheck == Blocks.GRASS || toCheck == Blocks.DIRT || toCheck == ModBlocks.MUSHROOM_GRASS) {
 						continue;
-					} else {
-						return false;
 					}
+					return false;
 				} else if (shouldBe == ModBlocks.DENSE_LOG && (toCheck == ModBlocks.DENSE_LOG || toCheck == ModBlocks.CHARCOAL_PIT_MASTER)) {
 					Block nb = w.getBlockState(center.add(x, 1, z)).getBlock();
 					if (nb == Blocks.GRASS || nb == Blocks.DIRT || nb == ModBlocks.MUSHROOM_GRASS) {
 						continue;
-					} else {
-						return false;
 					}
+					return false;
 				} else {
 					return false;
 				}

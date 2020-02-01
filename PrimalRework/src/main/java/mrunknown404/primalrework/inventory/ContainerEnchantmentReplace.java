@@ -61,7 +61,7 @@ public class ContainerEnchantmentReplace extends ContainerEnchantment {
 						}
 					}
 					
-					rand.setSeed((long) xpSeed);
+					rand.setSeed(xpSeed);
 					
 					for (int i1 = 0; i1 < 3; ++i1) {
 						enchantLevels[i1] = EnchantHelper.calcItemStackEnchantability(rand, i1, (int) power, itemstack.getItem());
@@ -100,7 +100,7 @@ public class ContainerEnchantmentReplace extends ContainerEnchantment {
 	}
 	
 	private List<EnchantmentData> getEnchantmentList(ItemStack item, int enchantSlot, int level) {
-		rand.setSeed((long) (xpSeed + enchantSlot));
+		rand.setSeed(xpSeed + enchantSlot);
 		List<EnchantmentData> list = EnchantHelper.buildVanillaEnchantmentList(rand, item, level);
 		
 		if (item.getItem() == Items.BOOK && list.size() > 1) {

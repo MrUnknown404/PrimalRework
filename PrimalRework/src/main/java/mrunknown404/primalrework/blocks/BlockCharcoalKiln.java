@@ -5,10 +5,10 @@ import java.util.Random;
 import mrunknown404.primalrework.Main;
 import mrunknown404.primalrework.blocks.util.BlockDirectionalBase;
 import mrunknown404.primalrework.tileentity.TileEntityCharcoalKiln;
-import mrunknown404.primalrework.util.DoubleValue;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import mrunknown404.primalrework.util.enums.EnumToolType;
+import mrunknown404.unknownlibs.utils.DoubleValue;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -50,14 +50,14 @@ public class BlockCharcoalKiln extends BlockDirectionalBase implements ITileEnti
 		
 		if (te instanceof TileEntityCharcoalKiln) {
 			if (((TileEntityCharcoalKiln) te).isBurning()) {
-				EnumFacing facing = (EnumFacing) state.getValue(FACING);
-				double d0 = (double) pos.getX() + 0.5;
-				double d1 = (double) pos.getY() + r.nextDouble() * 6 / 16;
-				double d2 = (double) pos.getZ() + 0.5;
+				EnumFacing facing = state.getValue(FACING);
+				double d0 = pos.getX() + 0.5;
+				double d1 = pos.getY() + r.nextDouble() * 6 / 16;
+				double d2 = pos.getZ() + 0.5;
 				double d4 = r.nextDouble() * 0.6 - 0.3;
 				
 				if (r.nextDouble() < 0.1) {
-					w.playSound((double) pos.getX() + 0.5, (double) pos.getY(), (double) pos.getZ() + 0.5, SoundEvents.BLOCK_FURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1, 1, false);
+					w.playSound(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, SoundEvents.BLOCK_FURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1, 1, false);
 				}
 				
 				switch (facing) {

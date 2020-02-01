@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mrunknown404.primalrework.util.enums.EnumStage;
-import mrunknown404.primalrework.util.helpers.ColorH;
+import mrunknown404.unknownlibs.utils.ColorUtils;
 import net.minecraft.util.text.TextComponentTranslation;
 
 public interface IThingBase<T, R> {
@@ -18,9 +18,9 @@ public interface IThingBase<T, R> {
 		List<String> tooltip = new ArrayList<String>();
 		
 		for (int i = 0; i < getAmountOfTooltips(); i++) {
-			TextComponentTranslation tip = new TextComponentTranslation(name + ".tooltip_" + i);
-			tooltip.add(ColorH.addColor(tip.getUnformattedText().trim()));
+			tooltip.add(ColorUtils.addColor(new TextComponentTranslation(name + ".tooltip_" + i).getUnformattedText().trim()));
 		}
+		
 		return tooltip;
 	}
 }

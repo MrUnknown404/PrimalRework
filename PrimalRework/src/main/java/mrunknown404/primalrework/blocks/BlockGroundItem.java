@@ -5,10 +5,10 @@ import java.util.Random;
 import javax.annotation.Nullable;
 
 import mrunknown404.primalrework.blocks.util.BlockBase;
-import mrunknown404.primalrework.util.DoubleValue;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import mrunknown404.primalrework.util.enums.EnumToolType;
+import mrunknown404.unknownlibs.utils.DoubleValue;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -65,9 +65,9 @@ public class BlockGroundItem extends BlockBase {
 			dropBlockAsItem(worldIn, pos, state, 0);
 			worldIn.setBlockToAir(pos);
 			return false;
-		} else {
-			return true;
 		}
+		
+		return true;
 	}
 	
 	@Override

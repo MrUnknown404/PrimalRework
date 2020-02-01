@@ -3,7 +3,7 @@ package mrunknown404.primalrework.util.enums;
 import java.util.ArrayList;
 import java.util.List;
 
-import mrunknown404.primalrework.util.DoubleValue;
+import mrunknown404.unknownlibs.utils.DoubleValue;
 
 /**<pre>
  * unknown

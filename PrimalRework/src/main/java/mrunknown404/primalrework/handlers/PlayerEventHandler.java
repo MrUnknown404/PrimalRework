@@ -34,7 +34,6 @@ import net.minecraftforge.event.entity.player.BonemealEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteract;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 
 public class PlayerEventHandler {
 
@@ -43,37 +42,6 @@ public class PlayerEventHandler {
 	@SubscribeEvent
 	public void onBonemeal(BonemealEvent e) {
 		e.setCanceled(true);
-	}
-	
-	@SubscribeEvent
-	public void onPlayerTick(PlayerTickEvent e) {
-		if (!e.player.isDead) {
-			for (int i = 0; i < e.player.inventory.mainInventory.size(); i++) {
-				ItemStack item = e.player.inventory.mainInventory.get(i);
-				
-				if (item.getItem() == Items.DIAMOND_AXE) {
-					e.player.inventory.setInventorySlotContents(i, new ItemStack(ModItems.DIAMOND_AXE, 1, item.getItemDamage()));
-				} else if (item.getItem() == Items.IRON_AXE) {
-					e.player.inventory.setInventorySlotContents(i, new ItemStack(ModItems.IRON_AXE, 1, item.getItemDamage()));
-				} else if (item.getItem() == Items.STONE_AXE) {
-					e.player.inventory.setInventorySlotContents(i, new ItemStack(ModItems.STONE_AXE, 1, item.getItemDamage()));
-				} else if (item.getItem() == Items.GOLDEN_AXE) {
-					e.player.inventory.setInventorySlotContents(i, new ItemStack(ModItems.GOLDEN_AXE, 1, item.getItemDamage()));
-				} else if (item.getItem() == Items.WOODEN_AXE) {
-					e.player.inventory.setInventorySlotContents(i, new ItemStack(ModItems.WOODEN_AXE, 1, item.getItemDamage()));
-				} else if (item.getItem() == Items.DIAMOND_HOE) {
-					e.player.inventory.setInventorySlotContents(i, new ItemStack(ModItems.DIAMOND_HOE, 1, item.getItemDamage()));
-				} else if (item.getItem() == Items.IRON_HOE) {
-					e.player.inventory.setInventorySlotContents(i, new ItemStack(ModItems.IRON_HOE, 1, item.getItemDamage()));
-				} else if (item.getItem() == Items.STONE_HOE) {
-					e.player.inventory.setInventorySlotContents(i, new ItemStack(ModItems.STONE_HOE, 1, item.getItemDamage()));
-				} else if (item.getItem() == Items.GOLDEN_HOE) {
-					e.player.inventory.setInventorySlotContents(i, new ItemStack(ModItems.GOLDEN_HOE, 1, item.getItemDamage()));
-				} else if (item.getItem() == Items.WOODEN_HOE) {
-					e.player.inventory.setInventorySlotContents(i, new ItemStack(ModItems.WOODEN_HOE, 1, item.getItemDamage()));
-				}
-			}
-		}
 	}
 	
 	@SubscribeEvent

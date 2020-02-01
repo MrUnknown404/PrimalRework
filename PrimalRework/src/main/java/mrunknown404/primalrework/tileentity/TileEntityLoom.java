@@ -57,23 +57,23 @@ public class TileEntityLoom extends TileEntity {
 				}
 				
 				return false;
-			} else {
-				stringLevel++;
-				markDirty();
-				return true;
-			}
-		} else {
-			if (stringLevel == 7) {
-				stringLevel = 0;
-				markDirty();
-				
-				if (!world.isRemote) {
-					world.spawnEntity(new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, new ItemStack(ModItems.CLOTH)));
-				}
 			}
 			
-			return false;
+			stringLevel++;
+			markDirty();
+			return true;
 		}
+		
+		if (stringLevel == 7) {
+			stringLevel = 0;
+			markDirty();
+			
+			if (!world.isRemote) {
+				world.spawnEntity(new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, new ItemStack(ModItems.CLOTH)));
+			}
+		}
+		
+		return false;
 	}
 	
 	@Override

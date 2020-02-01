@@ -5,10 +5,10 @@ import java.util.Random;
 import mrunknown404.primalrework.Main;
 import mrunknown404.primalrework.blocks.util.BlockBase;
 import mrunknown404.primalrework.tileentity.TileEntityFirePit;
-import mrunknown404.primalrework.util.DoubleValue;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import mrunknown404.primalrework.util.enums.EnumToolType;
+import mrunknown404.unknownlibs.utils.DoubleValue;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
@@ -42,8 +42,8 @@ public class BlockFirePit extends BlockBase implements ITileEntityProvider {
 			Random r = new Random();
 			
 			for (int i = 0; i < 5; i++) {
-				float xAdd = (float) r.nextInt(21) / 100f, yAdd = (float) r.nextInt(11) / 100f, zAdd = (float) r.nextInt(21) / 100f;
-				float xsAdd = (float) r.nextInt(11) / 5000f, ysAdd = (float) r.nextInt(11) / 5000f, zsAdd = (float) r.nextInt(11) / 5000f;
+				float xAdd = r.nextInt(21) / 100f, yAdd = r.nextInt(11) / 100f, zAdd = r.nextInt(21) / 100f;
+				float xsAdd = r.nextInt(11) / 5000f, ysAdd = r.nextInt(11) / 5000f, zsAdd = r.nextInt(11) / 5000f;
 				
 				if (r.nextBoolean()) {
 					xAdd = -xAdd;
@@ -116,9 +116,9 @@ public class BlockFirePit extends BlockBase implements ITileEntityProvider {
 			dropBlockAsItem(worldIn, pos, state, 0);
 			worldIn.setBlockToAir(pos);
 			return false;
-		} else {
-			return true;
 		}
+		
+		return true;
 	}
 	
 	@Override

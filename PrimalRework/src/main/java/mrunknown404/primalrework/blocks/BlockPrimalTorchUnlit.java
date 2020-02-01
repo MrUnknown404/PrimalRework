@@ -7,10 +7,10 @@ import javax.annotation.Nullable;
 import com.google.common.base.Predicate;
 
 import mrunknown404.primalrework.blocks.util.BlockBase;
-import mrunknown404.primalrework.util.DoubleValue;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import mrunknown404.primalrework.util.enums.EnumToolType;
+import mrunknown404.unknownlibs.utils.DoubleValue;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -65,7 +65,7 @@ public class BlockPrimalTorchUnlit extends BlockBase {
 	
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-		switch ((EnumFacing) state.getValue(FACING)) {
+		switch (state.getValue(FACING)) {
 			case EAST:
 				return TORCH_EAST_AABB;
 			case WEST:
@@ -114,15 +114,15 @@ public class BlockPrimalTorchUnlit extends BlockBase {
 	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
 		if (canPlaceAt(worldIn, pos, facing)) {
 			return this.getDefaultState().withProperty(FACING, facing);
-		} else {
-			for (EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL) {
-				if (canPlaceAt(worldIn, pos, enumfacing)) {
-					return this.getDefaultState().withProperty(FACING, enumfacing);
-				}
-			}
-			
-			return this.getDefaultState();
 		}
+		
+		for (EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL) {
+			if (canPlaceAt(worldIn, pos, enumfacing)) {
+				return this.getDefaultState().withProperty(FACING, enumfacing);
+			}
+		}
+		
+		return this.getDefaultState();
 	}
 	
 	@Override
@@ -134,37 +134,37 @@ public class BlockPrimalTorchUnlit extends BlockBase {
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
 		if (!checkForDrop(worldIn, pos, state)) {
 			return;
-		} else {
-			EnumFacing enumfacing = (EnumFacing) state.getValue(FACING);
-			EnumFacing.Axis enumfacing$axis = enumfacing.getAxis();
-			EnumFacing enumfacing1 = enumfacing.getOpposite();
-			BlockPos blockpos = pos.offset(enumfacing1);
-			boolean flag = false;
-			
-			if (enumfacing$axis.isHorizontal() && worldIn.getBlockState(blockpos).getBlockFaceShape(worldIn, blockpos, enumfacing) != BlockFaceShape.SOLID) {
-				flag = true;
-			} else if (enumfacing$axis.isVertical() && !canPlaceOn(worldIn, blockpos)) {
-				flag = true;
-			}
-			
-			if (flag) {
-				dropBlockAsItem(worldIn, pos, state, 0);
-				worldIn.setBlockToAir(pos);
-			}
+		}
+		
+		EnumFacing enumfacing = state.getValue(FACING);
+		EnumFacing.Axis enumfacing$axis = enumfacing.getAxis();
+		EnumFacing enumfacing1 = enumfacing.getOpposite();
+		BlockPos blockpos = pos.offset(enumfacing1);
+		boolean flag = false;
+		
+		if (enumfacing$axis.isHorizontal() && worldIn.getBlockState(blockpos).getBlockFaceShape(worldIn, blockpos, enumfacing) != BlockFaceShape.SOLID) {
+			flag = true;
+		} else if (enumfacing$axis.isVertical() && !canPlaceOn(worldIn, blockpos)) {
+			flag = true;
+		}
+		
+		if (flag) {
+			dropBlockAsItem(worldIn, pos, state, 0);
+			worldIn.setBlockToAir(pos);
 		}
 	}
 	
 	protected boolean checkForDrop(World worldIn, BlockPos pos, IBlockState state) {
-		if (state.getBlock() == this && canPlaceAt(worldIn, pos, (EnumFacing) state.getValue(FACING))) {
+		if (state.getBlock() == this && canPlaceAt(worldIn, pos, state.getValue(FACING))) {
 			return true;
-		} else {
-			if (worldIn.getBlockState(pos).getBlock() == this) {
-				dropBlockAsItem(worldIn, pos, state, 0);
-				worldIn.setBlockToAir(pos);
-			}
-			
-			return false;
 		}
+		
+		if (worldIn.getBlockState(pos).getBlock() == this) {
+			dropBlockAsItem(worldIn, pos, state, 0);
+			worldIn.setBlockToAir(pos);
+		}
+		
+		return false;
 	}
 	
 	@Override
@@ -196,7 +196,7 @@ public class BlockPrimalTorchUnlit extends BlockBase {
 	public int getMetaFromState(IBlockState state) {
 		int i = 0;
 		
-		switch ((EnumFacing) state.getValue(FACING)) {
+		switch (state.getValue(FACING)) {
 			case EAST:
 				i = i | 1;
 				break;
@@ -220,12 +220,12 @@ public class BlockPrimalTorchUnlit extends BlockBase {
 	
 	@Override
 	public IBlockState withRotation(IBlockState state, Rotation rot) {
-		return state.withProperty(FACING, rot.rotate((EnumFacing) state.getValue(FACING)));
+		return state.withProperty(FACING, rot.rotate(state.getValue(FACING)));
 	}
 	
 	@Override
 	public IBlockState withMirror(IBlockState state, Mirror mirrorIn) {
-		return state.withRotation(mirrorIn.toRotation((EnumFacing) state.getValue(FACING)));
+		return state.withRotation(mirrorIn.toRotation(state.getValue(FACING)));
 	}
 	
 	@Override

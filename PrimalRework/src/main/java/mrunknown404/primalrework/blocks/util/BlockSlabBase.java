@@ -4,11 +4,11 @@ import java.util.List;
 import java.util.Random;
 
 import mrunknown404.primalrework.init.ModCreativeTabs;
-import mrunknown404.primalrework.util.DoubleValue;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import mrunknown404.primalrework.util.enums.EnumToolType;
 import mrunknown404.primalrework.util.harvest.BlockHarvestInfo;
+import mrunknown404.unknownlibs.utils.DoubleValue;
 import net.minecraft.block.BlockPurpurSlab;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.SoundType;

@@ -82,7 +82,7 @@ public class GuiPrimalEnchantment extends GuiContainer {
 		}
 		
 		if (te.getStackInSlot(0) != null && !te.getStackInSlot(0).isEmpty()) {
-			EnchantmentNameParts.getInstance().reseedRandomGenerator((long) te.getContainer().xpSeed);
+			EnchantmentNameParts.getInstance().reseedRandomGenerator(te.getContainer().xpSeed);
 			String s1 = EnchantmentNameParts.getInstance().generateNewRandomName(fontRenderer, 144);
 			
 			if (hover) {

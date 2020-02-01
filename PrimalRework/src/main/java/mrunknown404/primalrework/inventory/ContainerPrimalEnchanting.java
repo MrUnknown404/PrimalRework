@@ -52,7 +52,7 @@ public class ContainerPrimalEnchanting extends Container {
 			
 			if (!itemstack.isEmpty() && EnchantHelper.isEnchantable(itemstack)) {
 				if (!world.isRemote) {
-					rand.setSeed((long) xpSeed);
+					rand.setSeed(xpSeed);
 					detectAndSendChanges();
 				}
 			}
@@ -60,7 +60,7 @@ public class ContainerPrimalEnchanting extends Container {
 	}
 	
 	private List<EnchantmentData> getEnchantmentList(ItemStack item, int level) {
-		rand.setSeed((long) (xpSeed + level));
+		rand.setSeed(xpSeed + level);
 		return EnchantHelper.buildPrimalEnchantmentList(rand, item, level);
 	}
 	

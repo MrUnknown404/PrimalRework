@@ -18,7 +18,7 @@ build
 .gradle
 
 # other
-lib
+libs
 eclipse
 *.lnk
 

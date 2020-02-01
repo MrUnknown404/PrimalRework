@@ -120,14 +120,14 @@ public class TileEntityDryingTableRenderer extends TileEntitySpecialRenderer<Til
 		GlStateManager.matrixMode(5890);
 		GlStateManager.pushMatrix();
 		GlStateManager.scale(8f, 8f, 8f);
-		float f = (float) (Minecraft.getSystemTime() % 3000l) / 3000f / 8f;
+		float f = (Minecraft.getSystemTime() % 3000l) / 3000f / 8f;
 		GlStateManager.translate(f, 0f, 0f);
 		GlStateManager.rotate(-50f, 0f, 0f, 1f);
 		renderModel(model, -8372020);
 		GlStateManager.popMatrix();
 		GlStateManager.pushMatrix();
 		GlStateManager.scale(8f, 8f, 8f);
-		float f1 = (float) (Minecraft.getSystemTime() % 4873l) / 4873f / 8f;
+		float f1 = (Minecraft.getSystemTime() % 4873l) / 4873f / 8f;
 		GlStateManager.translate(-f1, 0f, 0f);
 		GlStateManager.rotate(10f, 0f, 0f, 1f);
 		renderModel(model, -8372020);

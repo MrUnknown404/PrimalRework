@@ -1,7 +1,7 @@
 package mrunknown404.primalrework.tileentity;
 
 import mrunknown404.primalrework.inventory.InventoryCraftingStump;
-import mrunknown404.primalrework.tileentity.util.TileEntityInventoryBase;
+import mrunknown404.unknownlibs.tileentity.TileEntityInventory;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,7 +19,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class TileEntityCraftingStump extends TileEntityInventoryBase implements ITickable {
+public class TileEntityCraftingStump extends TileEntityInventory implements ITickable {
 	
 	public EnumFacing facing;
 	protected float[] itemRotation = { 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F, 0F };

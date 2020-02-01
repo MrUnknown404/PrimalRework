@@ -67,7 +67,7 @@ public class ChunkGeneratorPrimal implements IChunkGenerator {
 		
 		for (int i = -2; i <= 2; ++i) {
 			for (int j = -2; j <= 2; ++j) {
-				float f = 10.0F / MathHelper.sqrt((float) (i * i + j * j) + 0.2F);
+				float f = 10.0F / MathHelper.sqrt(i * i + j * j + 0.2F);
 				biomeWeights[i + 2 + (j + 2) * 5] = f;
 			}
 		}
@@ -145,7 +145,7 @@ public class ChunkGeneratorPrimal implements IChunkGenerator {
 			return;
 		}
 		
-		depthBuffer = surfaceNoise.getRegion(depthBuffer, (double) (x * 16), (double) (z * 16), 16, 16, 0.0625D, 0.0625D, 1.0D);
+		depthBuffer = surfaceNoise.getRegion(depthBuffer, x * 16, z * 16, 16, 16, 0.0625D, 0.0625D, 1.0D);
 		for (int i = 0; i < 16; ++i) {
 			for (int j = 0; j < 16; ++j) {
 				Biome biome = biomes[j + i * 16];
@@ -156,7 +156,7 @@ public class ChunkGeneratorPrimal implements IChunkGenerator {
 	
 	@Override
 	public Chunk generateChunk(int x, int z) {
-		rand.setSeed((long) x * 341873128712L + (long) z * 132897987541L);
+		rand.setSeed(x * 341873128712L + z * 132897987541L);
 		ChunkPrimer chunkprimer = new ChunkPrimer();
 		setBlocksInChunk(x, z, chunkprimer);
 		biomesForGeneration = this.world.getBiomeProvider().getBiomes(biomesForGeneration, x * 16, z * 16, 16, 16);
@@ -177,14 +177,14 @@ public class ChunkGeneratorPrimal implements IChunkGenerator {
 	}
 	
 	private void generateHeightmap(int xOffset, int yOffset, int zOffset) {
-		depthRegion = depthNoise.generateNoiseOctaves(depthRegion, xOffset, zOffset, 5, 5, (double) WorldInfo.depthNoiseScaleX, (double) WorldInfo.depthNoiseScaleZ,
-				(double) WorldInfo.depthNoiseScaleExponent);
+		depthRegion = depthNoise.generateNoiseOctaves(depthRegion, xOffset, zOffset, 5, 5, WorldInfo.depthNoiseScaleX, WorldInfo.depthNoiseScaleZ,
+				WorldInfo.depthNoiseScaleExponent);
 		float f = WorldInfo.coordinateScale;
 		float f1 = WorldInfo.heightScale;
-		mainNoiseRegion = mainPerlinNoise.generateNoiseOctaves(mainNoiseRegion, xOffset, yOffset, zOffset, 5, 33, 5, (double) (f / WorldInfo.mainNoiseScaleX),
-				(double) (f1 / WorldInfo.mainNoiseScaleY), (double) (f / WorldInfo.mainNoiseScaleZ));
-		minLimitRegion = minLimitPerlinNoise.generateNoiseOctaves(minLimitRegion, xOffset, yOffset, zOffset, 5, 33, 5, (double) f, (double) f1, (double) f);
-		maxLimitRegion = maxLimitPerlinNoise.generateNoiseOctaves(maxLimitRegion, xOffset, yOffset, zOffset, 5, 33, 5, (double) f, (double) f1, (double) f);
+		mainNoiseRegion = mainPerlinNoise.generateNoiseOctaves(mainNoiseRegion, xOffset, yOffset, zOffset, 5, 33, 5, f / WorldInfo.mainNoiseScaleX,
+				f1 / WorldInfo.mainNoiseScaleY, f / WorldInfo.mainNoiseScaleZ);
+		minLimitRegion = minLimitPerlinNoise.generateNoiseOctaves(minLimitRegion, xOffset, yOffset, zOffset, 5, 33, 5, f, f1, f);
+		maxLimitRegion = maxLimitPerlinNoise.generateNoiseOctaves(maxLimitRegion, xOffset, yOffset, zOffset, 5, 33, 5, f, f1, f);
 		int i = 0;
 		int j = 0;
 		
@@ -241,26 +241,26 @@ public class ChunkGeneratorPrimal implements IChunkGenerator {
 				}
 				
 				++j;
-				double d8 = (double) f3;
-				double d9 = (double) f2;
+				double d8 = f3;
+				double d9 = f2;
 				d8 = d8 + d7 * 0.2D;
-				d8 = d8 * (double) WorldInfo.baseSize / 8.0D;
-				double d0 = (double) WorldInfo.baseSize + d8 * 4.0D;
+				d8 = d8 * WorldInfo.baseSize / 8.0D;
+				double d0 = WorldInfo.baseSize + d8 * 4.0D;
 				
 				for (int l1 = 0; l1 < 33; ++l1) {
-					double d1 = ((double) l1 - d0) * (double) WorldInfo.stretchY * 128.0D / 256.0D / d9;
+					double d1 = (l1 - d0) * WorldInfo.stretchY * 128.0D / 256.0D / d9;
 					
 					if (d1 < 0.0D) {
 						d1 *= 4.0D;
 					}
 					
-					double d2 = minLimitRegion[i] / (double) WorldInfo.lowerLimitScale;
-					double d3 = maxLimitRegion[i] / (double) WorldInfo.upperLimitScale;
+					double d2 = minLimitRegion[i] / WorldInfo.lowerLimitScale;
+					double d3 = maxLimitRegion[i] / WorldInfo.upperLimitScale;
 					double d4 = (mainNoiseRegion[i] / 10.0D + 1.0D) / 2.0D;
 					double d5 = MathHelper.clampedLerp(d2, d3, d4) - d1;
 					
 					if (l1 > 29) {
-						double d6 = (double) ((float) (l1 - 29) / 3.0F);
+						double d6 = (l1 - 29) / 3.0F;
 						d5 = d5 * (1.0D - d6) + -10.0D * d6;
 					}
 					
@@ -281,7 +281,7 @@ public class ChunkGeneratorPrimal implements IChunkGenerator {
 		rand.setSeed(world.getSeed());
 		long k = rand.nextLong() / 2L * 2L + 1L;
 		long l = rand.nextLong() / 2L * 2L + 1L;
-		rand.setSeed((long) x * k + (long) z * l ^ world.getSeed());
+		rand.setSeed(x * k + z * l ^ world.getSeed());
 		boolean flag = false;
 		
 		ForgeEventFactory.onChunkPopulate(true, this, world, rand, x, z, flag);

@@ -3,12 +3,12 @@ package mrunknown404.primalrework.tileentity;
 import java.util.Random;
 
 import mrunknown404.primalrework.inventory.ContainerPrimalEnchanting;
-import mrunknown404.primalrework.tileentity.util.TileEntityInventoryBase;
+import mrunknown404.unknownlibs.tileentity.TileEntityInventory;
 import net.minecraft.item.Item;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 
-public class TileEntityPrimalEnchanting extends TileEntityInventoryBase implements ITickable {
+public class TileEntityPrimalEnchanting extends TileEntityInventory implements ITickable {
 	
 	private ContainerPrimalEnchanting container;
 	
@@ -20,9 +20,9 @@ public class TileEntityPrimalEnchanting extends TileEntityInventoryBase implemen
 	public void update() {
 		if (world.isRemote && !getStackInSlot(0).isEmpty() && !getStackInSlot(1).isEmpty()) {
 			Random r = new Random();
-			float yspd = (float) r.nextInt(10) * 0.01f;
-			float xspd = (float) (r.nextInt(10) - 5) * 0.01f;
-			float zspd = (float) (r.nextInt(10) - 5) * 0.01f;
+			float yspd = r.nextInt(10) * 0.01f;
+			float xspd = (r.nextInt(10) - 5) * 0.01f;
+			float zspd = (r.nextInt(10) - 5) * 0.01f;
 			
 			if (r.nextInt(8) == 0) {
 				world.spawnParticle(EnumParticleTypes.ITEM_CRACK, pos.getX() + 0.5, pos.getY() + 0.7, pos.getZ() + 0.5, xspd, yspd, zspd,

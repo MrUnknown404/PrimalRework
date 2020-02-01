@@ -2,7 +2,7 @@ package mrunknown404.primalrework.tileentity;
 
 import mrunknown404.primalrework.init.ModRecipes;
 import mrunknown404.primalrework.recipes.DryingTableRecipe;
-import mrunknown404.primalrework.tileentity.util.TileEntityInventoryBase;
+import mrunknown404.unknownlibs.tileentity.TileEntityInventory;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -11,7 +11,7 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class TileEntityDryingTable extends TileEntityInventoryBase implements ITickable {
+public class TileEntityDryingTable extends TileEntityInventory implements ITickable {
 	public EnumFacing facing;
 	private int[] dryingProgress = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 	

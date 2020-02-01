@@ -2,10 +2,10 @@ package mrunknown404.primalrework.blocks;
 
 import mrunknown404.primalrework.blocks.util.BlockDirectionalBase;
 import mrunknown404.primalrework.tileentity.TileEntityDryingTable;
-import mrunknown404.primalrework.util.DoubleValue;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import mrunknown404.primalrework.util.enums.EnumToolType;
+import mrunknown404.unknownlibs.utils.DoubleValue;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -173,7 +173,7 @@ public class BlockDryingTable extends BlockDirectionalBase implements ITileEntit
 	public void onBlockHarvested(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
 		if (!world.isRemote) {
 			TileEntityDryingTable tile = (TileEntityDryingTable) world.getTileEntity(pos);
-			if (tile instanceof TileEntityDryingTable) {
+			if (tile != null) {
 				InventoryHelper.dropInventoryItems(world, pos, tile);
 				
 				for (int i = 0; i < tile.getSizeInventory(); ++i) {

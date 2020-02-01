@@ -146,14 +146,14 @@ public class GuiCreatePrimalFlatWorld extends GuiScreen {
 			Tessellator tessellator = Tessellator.getInstance();
 			BufferBuilder bufferbuilder = tessellator.getBuffer();
 			bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX);
-			bufferbuilder.pos((double) (x + 0), (double) (z + 18), (double) GuiCreatePrimalFlatWorld.this.zLevel)
-					.tex((double) ((float) (textureX + 0) * 0.0078125F), (double) ((float) (textureY + 18) * 0.0078125F)).endVertex();
-			bufferbuilder.pos((double) (x + 18), (double) (z + 18), (double) GuiCreatePrimalFlatWorld.this.zLevel)
-					.tex((double) ((float) (textureX + 18) * 0.0078125F), (double) ((float) (textureY + 18) * 0.0078125F)).endVertex();
-			bufferbuilder.pos((double) (x + 18), (double) (z + 0), (double) GuiCreatePrimalFlatWorld.this.zLevel)
-					.tex((double) ((float) (textureX + 18) * 0.0078125F), (double) ((float) (textureY + 0) * 0.0078125F)).endVertex();
-			bufferbuilder.pos((double) (x + 0), (double) (z + 0), (double) GuiCreatePrimalFlatWorld.this.zLevel)
-					.tex((double) ((float) (textureX + 0) * 0.0078125F), (double) ((float) (textureY + 0) * 0.0078125F)).endVertex();
+			bufferbuilder.pos(x + 0, z + 18, GuiCreatePrimalFlatWorld.this.zLevel)
+					.tex((textureX + 0) * 0.0078125F, (textureY + 18) * 0.0078125F).endVertex();
+			bufferbuilder.pos(x + 18, z + 18, GuiCreatePrimalFlatWorld.this.zLevel)
+					.tex((textureX + 18) * 0.0078125F, (textureY + 18) * 0.0078125F).endVertex();
+			bufferbuilder.pos(x + 18, z + 0, GuiCreatePrimalFlatWorld.this.zLevel)
+					.tex((textureX + 18) * 0.0078125F, (textureY + 0) * 0.0078125F).endVertex();
+			bufferbuilder.pos(x + 0, z + 0, GuiCreatePrimalFlatWorld.this.zLevel)
+					.tex((textureX + 0) * 0.0078125F, (textureY + 0) * 0.0078125F).endVertex();
 			tessellator.draw();
 		}
 		
@@ -178,7 +178,7 @@ public class GuiCreatePrimalFlatWorld extends GuiScreen {
 		
 		@Override
 		protected void drawSlot(int slotIndex, int xPos, int yPos, int heightIn, int mouseXIn, int mouseYIn, float partialTicks) {
-			FlatLayerInfo flatlayerinfo = (FlatLayerInfo) GuiCreatePrimalFlatWorld.this.generatorInfo.getFlatLayers()
+			FlatLayerInfo flatlayerinfo = GuiCreatePrimalFlatWorld.this.generatorInfo.getFlatLayers()
 					.get(GuiCreatePrimalFlatWorld.this.generatorInfo.getFlatLayers().size() - slotIndex - 1);
 			IBlockState iblockstate = flatlayerinfo.getLayerMaterial();
 			Block block = iblockstate.getBlock();

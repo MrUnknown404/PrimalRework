@@ -45,7 +45,7 @@ public class GenLayerPrimal extends GenLayer {
 		
 		for (int i = 0; i < areaHeight; ++i) {
 			for (int j = 0; j < areaWidth; ++j) {
-				initChunkSeed((long) (j + areaX), (long) (i + areaY));
+				initChunkSeed(j + areaX, i + areaY);
 				int k = aint[j + i * areaWidth];
 				k = k & -3841;
 				
@@ -71,6 +71,6 @@ public class GenLayerPrimal extends GenLayer {
 	private BiomeManager.BiomeEntry getWeightedBiomeEntry(BiomeManager.BiomeType type) {
 		int totalWeight = WeightedRandom.getTotalWeight(biomes[type.ordinal()]);
 		int weight = BiomeManager.isTypeListModded(type) ? nextInt(totalWeight) : nextInt(totalWeight / 10) * 10;
-		return (BiomeManager.BiomeEntry) WeightedRandom.getRandomItem(biomes[type.ordinal()], weight);
+		return WeightedRandom.getRandomItem(biomes[type.ordinal()], weight);
 	}
 }

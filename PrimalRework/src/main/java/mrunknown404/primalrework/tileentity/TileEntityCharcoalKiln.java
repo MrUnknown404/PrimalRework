@@ -2,14 +2,14 @@ package mrunknown404.primalrework.tileentity;
 
 import mrunknown404.primalrework.init.ModBlocks;
 import mrunknown404.primalrework.inventory.ContainerCharcoalKiln;
-import mrunknown404.primalrework.tileentity.util.TileEntityInventoryBase;
+import mrunknown404.unknownlibs.tileentity.TileEntityInventory;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class TileEntityCharcoalKiln extends TileEntityInventoryBase implements ITickable {
+public class TileEntityCharcoalKiln extends TileEntityInventory implements ITickable {
 	
 	public static final int MAX_COOK_TIME = 6000;
 	private int cookTime;

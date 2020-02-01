@@ -34,7 +34,7 @@ public class ItemFireStarter extends ItemDamageableBase {
 			@SideOnly(Side.CLIENT)
 			public float apply(ItemStack stack, @Nullable World world, @Nullable EntityLivingBase entity) {
 				if (entity != null) {
-					return entity.getActiveItemStack().getItem() != ModItems.FIRE_STARTER ? 0f : (float) (stack.getMaxItemUseDuration() - entity.getItemInUseCount()) / 20f / 4f;
+					return entity.getActiveItemStack().getItem() != ModItems.FIRE_STARTER ? 0f : (stack.getMaxItemUseDuration() - entity.getItemInUseCount()) / 20f / 4f;
 				}
 				
 				return 0f;

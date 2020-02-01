@@ -19,14 +19,13 @@ import mrunknown404.primalrework.util.harvest.HarvestDropInfo;
 import mrunknown404.primalrework.util.harvest.HarvestDropInfo.ItemDropInfo;
 import mrunknown404.primalrework.util.helpers.HarvestHelper;
 import mrunknown404.primalrework.util.helpers.StageHelper;
+import mrunknown404.unknownlibs.utils.DoubleValue;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemSword;
 import net.minecraft.item.ItemTool;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
@@ -96,12 +95,6 @@ public class VanillaOverrides {
 	}
 	
 	private static void overrideTools() {
-		setupVanillaHoe((ItemHoe) Items.DIAMOND_HOE, EnumToolMaterial.diamond);
-		setupVanillaHoe((ItemHoe) Items.IRON_HOE, EnumToolMaterial.iron);
-		setupVanillaHoe((ItemHoe) Items.STONE_HOE, EnumToolMaterial.stone);
-		setupVanillaHoe((ItemHoe) Items.WOODEN_HOE, EnumToolMaterial.wood);
-		setupVanillaHoe((ItemHoe) Items.GOLDEN_HOE, EnumToolMaterial.gold);
-		
 		setupVanillaSword((ItemSword) Items.DIAMOND_SWORD, EnumToolMaterial.diamond);
 		setupVanillaSword((ItemSword) Items.IRON_SWORD, EnumToolMaterial.iron);
 		setupVanillaSword((ItemSword) Items.STONE_SWORD, EnumToolMaterial.stone);
@@ -119,17 +112,6 @@ public class VanillaOverrides {
 		setupVanillaTool((ItemTool) Items.STONE_SHOVEL, EnumToolType.shovel, EnumToolMaterial.stone);
 		setupVanillaTool((ItemTool) Items.WOODEN_SHOVEL, EnumToolType.shovel, EnumToolMaterial.wood);
 		setupVanillaTool((ItemTool) Items.GOLDEN_SHOVEL, EnumToolType.shovel, EnumToolMaterial.gold);
-		
-		setupVanillaTool((ItemTool) Items.DIAMOND_AXE, EnumToolType.axe, EnumToolMaterial.diamond);
-		setupVanillaTool((ItemTool) Items.IRON_AXE, EnumToolType.axe, EnumToolMaterial.iron);
-		setupVanillaTool((ItemTool) Items.STONE_AXE, EnumToolType.axe, EnumToolMaterial.stone);
-		setupVanillaTool((ItemTool) Items.WOODEN_AXE, EnumToolType.axe, EnumToolMaterial.wood);
-		setupVanillaTool((ItemTool) Items.GOLDEN_AXE, EnumToolType.axe, EnumToolMaterial.gold);
-	}
-	
-	private static void setupVanillaHoe(ItemHoe item, EnumToolMaterial level) {
-		ReflectionHelper.setPrivateValue(ItemHoe.class, item, 2, "speed", "field_185072_b");
-		setupTool(item, level);
 	}
 	
 	private static void setupVanillaSword(ItemSword item, EnumToolMaterial level) {
@@ -148,10 +130,6 @@ public class VanillaOverrides {
 		item.setHarvestLevel("axe", EnumToolMaterial.unbreakable.level);
 		item.setHarvestLevel("shovel", EnumToolMaterial.unbreakable.level);
 		item.setMaxDamage(level.durability);
-		
-		if (item instanceof ItemAxe || item instanceof ItemHoe) {
-			item.setCreativeTab(null);
-		}
 	}
 	
 	private static final BlockHarvestInfo STONE_HARVEST_INFO = setupBlockInfo(Arrays.asList(

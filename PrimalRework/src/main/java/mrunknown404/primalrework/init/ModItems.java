@@ -117,17 +117,17 @@ public class ModItems {
 	public static final Item STONE_KNIFE = new ItemToolBase("stone_knife", EnumToolType.knife, EnumToolMaterial.stone, EnumStage.stage2);
 	
 	//VANILLA REPLACEMENTS
-	public static final Item DIAMOND_AXE = new ItemToolBase("diamond_axe", EnumToolType.axe, EnumToolMaterial.diamond, EnumStage.do_later).setCreativeTab(CreativeTabs.TOOLS);
-	public static final Item IRON_AXE = new ItemToolBase("iron_axe", EnumToolType.axe, EnumToolMaterial.iron, EnumStage.do_later).setCreativeTab(CreativeTabs.TOOLS);
-	public static final Item STONE_AXE = new ItemToolBase("stone_axe", EnumToolType.axe, EnumToolMaterial.stone, EnumStage.stage2).setCreativeTab(CreativeTabs.TOOLS);
-	public static final Item GOLDEN_AXE = new ItemToolBase("golden_axe", EnumToolType.axe, EnumToolMaterial.gold, EnumStage.do_later).setCreativeTab(CreativeTabs.TOOLS);
-	public static final Item WOODEN_AXE = new ItemToolBase("wooden_axe", EnumToolType.axe, EnumToolMaterial.wood, EnumStage.stage0).setCreativeTab(CreativeTabs.TOOLS);
+	public static final Item DIAMOND_AXE = new ItemToolBase("minecraft", "diamond_axe", EnumToolType.axe, EnumToolMaterial.diamond, EnumStage.do_later).setCreativeTab(CreativeTabs.TOOLS);
+	public static final Item IRON_AXE = new ItemToolBase("minecraft", "iron_axe", EnumToolType.axe, EnumToolMaterial.iron, EnumStage.do_later).setCreativeTab(CreativeTabs.TOOLS);
+	public static final Item STONE_AXE = new ItemToolBase("minecraft", "stone_axe", EnumToolType.axe, EnumToolMaterial.stone, EnumStage.stage2).setCreativeTab(CreativeTabs.TOOLS);
+	public static final Item GOLDEN_AXE = new ItemToolBase("minecraft", "golden_axe", EnumToolType.axe, EnumToolMaterial.gold, EnumStage.do_later).setCreativeTab(CreativeTabs.TOOLS);
+	public static final Item WOODEN_AXE = new ItemToolBase("minecraft", "wooden_axe", EnumToolType.axe, EnumToolMaterial.wood, EnumStage.stage0).setCreativeTab(CreativeTabs.TOOLS);
 	
-	public static final Item DIAMOND_HOE = new ItemToolBase("diamond_hoe", EnumToolType.hoe, EnumToolMaterial.diamond, EnumStage.do_later).setCreativeTab(CreativeTabs.TOOLS);
-	public static final Item IRON_HOE = new ItemToolBase("iron_hoe", EnumToolType.hoe, EnumToolMaterial.iron, EnumStage.do_later).setCreativeTab(CreativeTabs.TOOLS);
-	public static final Item STONE_HOE = new ItemToolBase("stone_hoe", EnumToolType.hoe, EnumToolMaterial.stone, EnumStage.stage2).setCreativeTab(CreativeTabs.TOOLS);
-	public static final Item GOLDEN_HOE = new ItemToolBase("golden_hoe", EnumToolType.hoe, EnumToolMaterial.gold, EnumStage.do_later).setCreativeTab(CreativeTabs.TOOLS);
-	public static final Item WOODEN_HOE = new ItemToolBase("wooden_hoe", EnumToolType.hoe, EnumToolMaterial.wood, EnumStage.stage0).setCreativeTab(CreativeTabs.TOOLS);
+	public static final Item DIAMOND_HOE = new ItemToolBase("minecraft", "diamond_hoe", EnumToolType.hoe, EnumToolMaterial.diamond, EnumStage.do_later).setCreativeTab(CreativeTabs.TOOLS);
+	public static final Item IRON_HOE = new ItemToolBase("minecraft", "iron_hoe", EnumToolType.hoe, EnumToolMaterial.iron, EnumStage.do_later).setCreativeTab(CreativeTabs.TOOLS);
+	public static final Item STONE_HOE = new ItemToolBase("minecraft", "stone_hoe", EnumToolType.hoe, EnumToolMaterial.stone, EnumStage.stage2).setCreativeTab(CreativeTabs.TOOLS);
+	public static final Item GOLDEN_HOE = new ItemToolBase("minecraft", "golden_hoe", EnumToolType.hoe, EnumToolMaterial.gold, EnumStage.do_later).setCreativeTab(CreativeTabs.TOOLS);
+	public static final Item WOODEN_HOE = new ItemToolBase("minecraft", "wooden_hoe", EnumToolType.hoe, EnumToolMaterial.wood, EnumStage.stage0).setCreativeTab(CreativeTabs.TOOLS);
 	
 	public static Item findBlock(Block block) {
 		for (Item item : ITEMS) {

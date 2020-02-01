@@ -181,7 +181,7 @@ public class GuiCreatePrimalWorld extends GuiScreen {
 							i = j;
 						}
 					} catch (NumberFormatException var7) {
-						i = (long) s.hashCode();
+						i = s.hashCode();
 					}
 				}
 				
@@ -285,9 +285,9 @@ public class GuiCreatePrimalWorld extends GuiScreen {
 		
 		if (worldtype != null && worldtype.canBeCreated()) {
 			return worldtype == WorldType.DEBUG_ALL_BLOCK_STATES ? isShiftKeyDown() : true;
-		} else {
-			return false;
 		}
+		
+		return false;
 	}
 	
 	private void toggleMoreWorldOptions() {

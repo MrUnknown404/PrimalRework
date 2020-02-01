@@ -47,15 +47,15 @@ public interface IStagedFactoryBase {
 		
 		if (strs.length == l) {
 			return new String[0];
-		} else {
-			String[] astring = new String[strs.length - l - k];
-			
-			for (int k1 = 0; k1 < astring.length; ++k1) {
-				astring[k1] = strs[k1 + k].substring(i, j + 1);
-			}
-			
-			return astring;
 		}
+		
+		String[] astring = new String[strs.length - l - k];
+		
+		for (int k1 = 0; k1 < astring.length; ++k1) {
+			astring[k1] = strs[k1 + k].substring(i, j + 1);
+		}
+		
+		return astring;
 	}
 	
 	public default String[] patternFromJson(JsonArray p_192407_0_) {
@@ -105,9 +105,9 @@ public interface IStagedFactoryBase {
 		
 		if (!set.isEmpty()) {
 			throw new JsonSyntaxException("Key defines symbols that aren't used in pattern: " + set);
-		} else {
-			return nonnulllist;
 		}
+		
+		return nonnulllist;
 	}
 	
 	public default Map<String, Ingredient> deserializeKey(JsonObject json) {
@@ -140,19 +140,18 @@ public interface IStagedFactoryBase {
 				
 				if (jsonarray.size() == 0) {
 					throw new JsonSyntaxException("Item array cannot be empty, at least one item must be defined");
-				} else {
-					ItemStack[] aitemstack = new ItemStack[jsonarray.size()];
-					
-					for (int i = 0; i < jsonarray.size(); ++i) {
-						aitemstack[i] = deserializeItem(JsonUtils.getJsonObject(jsonarray.get(i), "item"), false);
-					}
-					
-					return Ingredient.fromStacks(aitemstack);
 				}
+				
+				ItemStack[] aitemstack = new ItemStack[jsonarray.size()];
+				for (int i = 0; i < jsonarray.size(); ++i) {
+					aitemstack[i] = deserializeItem(JsonUtils.getJsonObject(jsonarray.get(i), "item"), false);
+				}
+				
+				return Ingredient.fromStacks(aitemstack);
 			}
-		} else {
-			throw new JsonSyntaxException("Item cannot be null");
 		}
+		
+		throw new JsonSyntaxException("Item cannot be null");
 	}
 	
 	public default NonNullList<Ingredient> deserializeIngredients(JsonArray array) {

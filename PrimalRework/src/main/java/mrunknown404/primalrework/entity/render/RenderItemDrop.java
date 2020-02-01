@@ -40,30 +40,29 @@ public class RenderItemDrop extends Render<EntityItemDrop> {
 		
 		if (itemstack.isEmpty()) {
 			return 0;
-		} else {
-			GlStateManager.translate(x, y, z);
-			
-			if (model.isGui3d() || renderManager.options != null) {
-				IBlockState stateDown = ent.world.getBlockState(new BlockPos(ent.posX, ent.posY - 0.25D, ent.posZ));
-				
-				if (!(ent.onGround || (ent.isInWater() || stateDown.getBlock() instanceof BlockLiquid || stateDown.getBlock() instanceof IFluidBlock))) {
-					GlStateManager.rotate(ent.hoverStart * 360f, 0, 1, 0);
-				} else {
-					GlStateManager.translate(0, 0.05f, 0);
-					GlStateManager.rotate(90f, 1, 0, 0);
-					GlStateManager.rotate(ent.hoverStart * 360f, 0, 0, 1);
-					GlStateManager.translate(0f, itemstack.getItem() instanceof ItemBlock ? -0.175f : -0.1f, 0.0f);
-				}
-			}
-			
-			GlStateManager.color(1, 1, 1, 1);
-			return getModelCount(itemstack);
 		}
+		GlStateManager.translate(x, y, z);
+		
+		if (model.isGui3d() || renderManager.options != null) {
+			IBlockState stateDown = ent.world.getBlockState(new BlockPos(ent.posX, ent.posY - 0.25D, ent.posZ));
+			
+			if (!(ent.onGround || (ent.isInWater() || stateDown.getBlock() instanceof BlockLiquid || stateDown.getBlock() instanceof IFluidBlock))) {
+				GlStateManager.rotate(ent.hoverStart * 360f, 0, 1, 0);
+			} else {
+				GlStateManager.translate(0, 0.05f, 0);
+				GlStateManager.rotate(90f, 1, 0, 0);
+				GlStateManager.rotate(ent.hoverStart * 360f, 0, 0, 1);
+				GlStateManager.translate(0f, itemstack.getItem() instanceof ItemBlock ? -0.175f : -0.1f, 0.0f);
+			}
+		}
+		
+		GlStateManager.color(1, 1, 1, 1);
+		return getModelCount(itemstack);
 	}
 	
 	@Override
 	public void doRender(EntityItemDrop entity, double x, double y, double z, float entityYaw, float partialTicks) {
-		r.setSeed((long) (!entity.getItem().isEmpty() ? Item.getIdFromItem(entity.getItem().getItem()) + entity.getItem().getMetadata() : 187));
+		r.setSeed(!entity.getItem().isEmpty() ? Item.getIdFromItem(entity.getItem().getItem()) + entity.getItem().getMetadata() : 187);
 		boolean flag = bindEntityTexture(entity);
 		
 		if (flag) {
@@ -81,9 +80,9 @@ public class RenderItemDrop extends Render<EntityItemDrop> {
 		int j = transformModelCount(entity, x, y, z, model);
 		
 		if (!model.isGui3d()) {
-			float f3 = -0f * (float) (j - 1) * 0.5f;
-			float f4 = -0f * (float) (j - 1) * 0.5f;
-			float f5 = -0.09375f * (float) (j - 1) * 0.5f;
+			float f3 = -0f * (j - 1) * 0.5f;
+			float f4 = -0f * (j - 1) * 0.5f;
+			float f5 = -0.09375f * (j - 1) * 0.5f;
 			GlStateManager.translate(f3, f4, f5);
 		}
 		

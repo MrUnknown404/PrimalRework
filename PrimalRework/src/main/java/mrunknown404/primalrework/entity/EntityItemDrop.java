@@ -135,8 +135,8 @@ public class EntityItemDrop extends EntityItem {
 			if (flag || ticksExisted % 25 == 0) {
 				if (world.getBlockState(new BlockPos(this)).getMaterial() == Material.LAVA) {
 					motionY = 0.20000000298023224D;
-					motionX = (double) ((rand.nextFloat() - rand.nextFloat()) * 0.2F);
-					motionZ = (double) ((rand.nextFloat() - rand.nextFloat()) * 0.2F);
+					motionX = (rand.nextFloat() - rand.nextFloat()) * 0.2F;
+					motionZ = (rand.nextFloat() - rand.nextFloat()) * 0.2F;
 					playSound(SoundEvents.ENTITY_GENERIC_BURN, 0.4F, 2.0F + rand.nextFloat() * 0.4F);
 				}
 				
@@ -153,9 +153,9 @@ public class EntityItemDrop extends EntityItem {
 				f = underState.getBlock().getSlipperiness(underState, world, underPos, this) * 0.98F;
 			}
 			
-			motionX *= (double) f;
+			motionX *= f;
 			motionY *= 0.9800000190734863D;
-			motionZ *= (double) f;
+			motionZ *= f;
 			
 			if (onGround) {
 				motionY *= -0.5D;
@@ -215,8 +215,8 @@ public class EntityItemDrop extends EntityItem {
 						
 						if (iblockstate.getMaterial() == Material.WATER) {
 							float f = BlockLiquid.getLiquidHeight(iblockstate, this.world, blockpos$pooledmutableblockpos);
-							waterLevel = Math.max((double) f, waterLevel);
-							flag |= axisalignedbb.minY < (double) f;
+							waterLevel = Math.max(f, waterLevel);
+							flag |= axisalignedbb.minY < f;
 						}
 					}
 				}
@@ -267,12 +267,12 @@ public class EntityItemDrop extends EntityItem {
 						setDead();
 						return true;
 					}
-				} else {
-					return false;
 				}
-			} else {
+				
 				return false;
 			}
+			
+			return false;
 		} else {
 			return false;
 		}

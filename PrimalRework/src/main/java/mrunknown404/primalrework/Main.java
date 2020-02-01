@@ -2,23 +2,37 @@ package mrunknown404.primalrework;
 
 import mrunknown404.primalrework.client.gui.GuiHandler;
 import mrunknown404.primalrework.commands.CommandStage;
+import mrunknown404.primalrework.entity.EntityItemDrop;
 import mrunknown404.primalrework.handlers.BlockEventHandler;
 import mrunknown404.primalrework.handlers.EntityEventHandler;
 import mrunknown404.primalrework.handlers.GuiEventHandler;
 import mrunknown404.primalrework.handlers.ItemEntityHandler;
 import mrunknown404.primalrework.handlers.PlayerEventHandler;
 import mrunknown404.primalrework.handlers.WorldEventHandler;
+import mrunknown404.primalrework.init.ModEntities;
+import mrunknown404.primalrework.init.ModRecipes;
+import mrunknown404.primalrework.init.ModSoundEvents;
 import mrunknown404.primalrework.network.FireStarterMessage;
 import mrunknown404.primalrework.network.FireStarterPacketHandler;
 import mrunknown404.primalrework.network.PrimalEnchantingMessage;
 import mrunknown404.primalrework.network.PrimalEnchantingPacketHandler;
 import mrunknown404.primalrework.network.RecipeTransferMessage;
 import mrunknown404.primalrework.network.RecipeTransferMessagePacketHandler;
+import mrunknown404.primalrework.tileentity.TileEntityCharcoalKiln;
+import mrunknown404.primalrework.tileentity.TileEntityCharcoalPitMaster;
+import mrunknown404.primalrework.tileentity.TileEntityCraftingStump;
+import mrunknown404.primalrework.tileentity.TileEntityDryingTable;
+import mrunknown404.primalrework.tileentity.TileEntityFirePit;
+import mrunknown404.primalrework.tileentity.TileEntityLoom;
+import mrunknown404.primalrework.tileentity.TileEntityPrimalEnchanting;
 import mrunknown404.primalrework.util.OreDict;
 import mrunknown404.primalrework.util.VanillaOverrides;
-import mrunknown404.primalrework.util.proxy.CommonProxy;
 import mrunknown404.primalrework.world.WorldGen;
 import mrunknown404.primalrework.world.WorldTypePrimal;
+import mrunknown404.unknownlibs.entity.EntityRegisterHelper;
+import mrunknown404.unknownlibs.utils.ICommonProxy;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.WorldType;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
@@ -31,10 +45,12 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 
-@Mod(modid = Main.MOD_ID, useMetadata = true)
+@Mod(modid = Main.MOD_ID, useMetadata = true, dependencies = "required-after:unknownlibs@[1.0.3,)")
 public class Main {
 	
 	public static final String MOD_ID = "primalrework";
@@ -50,8 +66,8 @@ public class Main {
 	@Instance
 	public static Main main;
 	
-	@SidedProxy(clientSide = "mrunknown404.primalrework.util.proxy.ClientProxy", serverSide = "mrunknown404.primalrework.util.proxy.CommonProxy")
-	public static CommonProxy proxy;
+	@SidedProxy(clientSide = "mrunknown404.primalrework.util.proxy.ClientProxy", serverSide = "mrunknown404.primalrework.util.proxy.ServerProxy")
+	public static ICommonProxy proxy;
 	
 	// TODO add map system similar to antique atlas
 	// TODO think of a metal working system
@@ -59,8 +75,18 @@ public class Main {
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent e) {
-		proxy.registerEntities();
-		proxy.registerRenders();
+		proxy.preInit();
+		
+		EntityRegisterHelper.registerEntities(ModEntities.ENTITIES, Main.main, Main.MOD_ID);
+		EntityRegistry.registerModEntity(new ResourceLocation(Main.MOD_ID, "item_drop"), EntityItemDrop.class, "item_drop", 0, Main.main, 64, 1, true);
+		
+		GameRegistry.registerTileEntity(TileEntityFirePit.class, new ResourceLocation(Main.MOD_ID, "fire_pit"));
+		GameRegistry.registerTileEntity(TileEntityCraftingStump.class, new ResourceLocation(Main.MOD_ID, "crafting_stump"));
+		GameRegistry.registerTileEntity(TileEntityDryingTable.class, new ResourceLocation(Main.MOD_ID, "drying_table"));
+		GameRegistry.registerTileEntity(TileEntityPrimalEnchanting.class, new ResourceLocation(Main.MOD_ID, "primal_enchanting_table"));
+		GameRegistry.registerTileEntity(TileEntityLoom.class, new ResourceLocation(Main.MOD_ID, "loom"));
+		GameRegistry.registerTileEntity(TileEntityCharcoalKiln.class, new ResourceLocation(Main.MOD_ID, "charcoal_kiln"));
+		GameRegistry.registerTileEntity(TileEntityCharcoalPitMaster.class, new ResourceLocation(Main.MOD_ID, "charcoal_pit_master"));
 		
 		MinecraftForge.EVENT_BUS.register(new PlayerEventHandler());
 		MinecraftForge.EVENT_BUS.register(new BlockEventHandler());
@@ -72,14 +98,18 @@ public class Main {
 	
 	@EventHandler
 	public void init(FMLInitializationEvent e) {
+		proxy.init();
+		
 		NetworkRegistry.INSTANCE.registerGuiHandler(main, new GuiHandler());
 		networkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel(MOD_ID);
 		networkWrapper.registerMessage(FireStarterPacketHandler.class, FireStarterMessage.class, 0, Side.SERVER);
 		networkWrapper.registerMessage(PrimalEnchantingPacketHandler.class, PrimalEnchantingMessage.class, 1, Side.SERVER);
 		networkWrapper.registerMessage(RecipeTransferMessagePacketHandler.class, RecipeTransferMessage.class, 2, Side.SERVER);
 		
-		proxy.registerSounds();
-		proxy.setupRecipes();
+		ForgeRegistries.SOUND_EVENTS.registerAll(ModSoundEvents.SOUNDS.toArray(new SoundEvent[0]));
+		
+		ModRecipes.removeRecipes();
+		ModRecipes.addRecipes();
 		
 		VanillaOverrides.overrideAll();
 		OreDict.register();
@@ -89,7 +119,7 @@ public class Main {
 	
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent e) {
-		proxy.registerColors();
+		proxy.postInit();
 		
 		WorldType.WORLD_TYPES = new WorldType[16];
 		WorldType.WORLD_TYPES[0] = PRIMAL_WORLD;

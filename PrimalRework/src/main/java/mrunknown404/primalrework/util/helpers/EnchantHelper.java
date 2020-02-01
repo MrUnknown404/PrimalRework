@@ -15,7 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandom;
 import net.minecraft.util.math.MathHelper;
 
-// TODO rewrite all enchanting this (maybe write equation that gives % chance for half/etc of the possible enchants)
+// TODO rewrite all enchanting (maybe write equation that gives % chance for half/etc of the possible enchants)
 
 public class EnchantHelper {
 	public static List<EnchantmentData> buildVanillaEnchantmentList(Random random, ItemStack item, int level) {
@@ -24,31 +24,31 @@ public class EnchantHelper {
 		
 		if (i <= 0) {
 			return list;
-		} else {
-			level = level + 1 + random.nextInt(i / 4 + 1) + random.nextInt(i / 4 + 1);
-			float f = (random.nextFloat() + random.nextFloat() - 1.0F) * 0.15F;
-			level = MathHelper.clamp(Math.round((float) level + (float) level * f), 1, Integer.MAX_VALUE);
-			List<EnchantmentData> list1 = getVanillaEnchantmentDatas(level, item);
-			
-			if (!list1.isEmpty()) {
-				EnchantmentData re1 = WeightedRandom.getRandomItem(random, list1);
-				list.add(re1);
-				list1.remove(re1);
-				
-				while (random.nextInt(50) <= level) {
-					if (list1.isEmpty()) {
-						break;
-					}
-					
-					EnchantmentData re2 = WeightedRandom.getRandomItem(random, list1);
-					list.add(re2);
-					list1.remove(re2);
-					level /= 2;
-				}
-			}
-			
-			return list;
 		}
+		
+		level = level + 1 + random.nextInt(i / 4 + 1) + random.nextInt(i / 4 + 1);
+		float f = (random.nextFloat() + random.nextFloat() - 1.0F) * 0.15F;
+		level = MathHelper.clamp(Math.round(level + level * f), 1, Integer.MAX_VALUE);
+		List<EnchantmentData> list1 = getVanillaEnchantmentDatas(level, item);
+		
+		if (!list1.isEmpty()) {
+			EnchantmentData re1 = WeightedRandom.getRandomItem(random, list1);
+			list.add(re1);
+			list1.remove(re1);
+			
+			while (random.nextInt(50) <= level) {
+				if (list1.isEmpty()) {
+					break;
+				}
+				
+				EnchantmentData re2 = WeightedRandom.getRandomItem(random, list1);
+				list.add(re2);
+				list1.remove(re2);
+				level /= 2;
+			}
+		}
+		
+		return list;
 	}
 	
 	public static List<EnchantmentData> buildPrimalEnchantmentList(Random rand, ItemStack item, int level) {
@@ -57,34 +57,34 @@ public class EnchantHelper {
 		
 		if (enchantability <= 0) {
 			return list;
-		} else {
-			if (enchantability < 5) {
-				level *= (enchantability * 4);
-			} else {
-				level *= enchantability;
-			}
-			
-			List<EnchantmentData> list1 = getPrimalEnchantmentDatas(level, item);
-			
-			if (!list1.isEmpty()) {
-				EnchantmentData re1 = WeightedRandom.getRandomItem(rand, list1);
-				list.add(re1);
-				list1.remove(re1);
-				
-				while (rand.nextInt(30) <= level) {
-					if (list1.isEmpty()) {
-						break;
-					}
-					
-					EnchantmentData re2 = WeightedRandom.getRandomItem(rand, list1);
-					list.add(re2);
-					list1.remove(re2);
-					level /= 2;
-				}
-			}
-			
-			return list;
 		}
+		
+		if (enchantability < 5) {
+			level *= (enchantability * 4);
+		} else {
+			level *= enchantability;
+		}
+		
+		List<EnchantmentData> list1 = getPrimalEnchantmentDatas(level, item);
+		
+		if (!list1.isEmpty()) {
+			EnchantmentData re1 = WeightedRandom.getRandomItem(rand, list1);
+			list.add(re1);
+			list1.remove(re1);
+			
+			while (rand.nextInt(30) <= level) {
+				if (list1.isEmpty()) {
+					break;
+				}
+				
+				EnchantmentData re2 = WeightedRandom.getRandomItem(rand, list1);
+				list.add(re2);
+				list1.remove(re2);
+				level /= 2;
+			}
+		}
+		
+		return list;
 	}
 	
 	private static List<EnchantmentData> getVanillaEnchantmentDatas(int enchantability, ItemStack item) {
@@ -160,19 +160,19 @@ public class EnchantHelper {
 		
 		if (i <= 0) {
 			return 0;
-		} else {
-			if (power > 15) {
-				power = 15;
-			}
-			
-			int j = rand.nextInt(8) + 1 + (power >> 1) + rand.nextInt(power + 1);
-			
-			if (enchantNum == 0) {
-				return Math.max(j / 3, 1);
-			} else {
-				return enchantNum == 1 ? j * 2 / 3 + 1 : Math.max(j, power * 2);
-			}
 		}
+		
+		if (power > 15) {
+			power = 15;
+		}
+		
+		int j = rand.nextInt(8) + 1 + (power >> 1) + rand.nextInt(power + 1);
+		
+		if (enchantNum == 0) {
+			return Math.max(j / 3, 1);
+		}
+		
+		return enchantNum == 1 ? j * 2 / 3 + 1 : Math.max(j, power * 2);
 	}
 	
 	public static boolean isMagicDust(Item item) {

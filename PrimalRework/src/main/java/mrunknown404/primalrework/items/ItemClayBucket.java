@@ -73,9 +73,9 @@ public class ItemClayBucket extends ItemDamageableBase {
 					}
 					
 					return new ActionResult<ItemStack>(EnumActionResult.FAIL, item);
-				} else {
-					return new ActionResult<ItemStack>(EnumActionResult.FAIL, item);
 				}
+				
+				return new ActionResult<ItemStack>(EnumActionResult.FAIL, item);
 			} else {
 				BlockPos pos1 = world.getBlockState(pos).getBlock().isReplaceable(world, pos) && ray.sideHit == EnumFacing.UP ? pos : pos.offset(ray.sideHit);
 				
@@ -90,15 +90,15 @@ public class ItemClayBucket extends ItemDamageableBase {
 					
 					if (player.isCreative()) {
 						return new ActionResult<>(EnumActionResult.SUCCESS, item);
-					} else {
-						item.damageItem(1, player);
-						
-						if (item.isEmpty()) {
-							return new ActionResult<>(EnumActionResult.SUCCESS, ItemStack.EMPTY);
-						} else {
-							return new ActionResult<>(EnumActionResult.SUCCESS, new ItemStack(ModItems.CLAY_BUCKET_EMPTY, 1, item.getItemDamage()));
-						}
 					}
+					
+					item.damageItem(1, player);
+					
+					if (item.isEmpty()) {
+						return new ActionResult<>(EnumActionResult.SUCCESS, ItemStack.EMPTY);
+					}
+					
+					return new ActionResult<>(EnumActionResult.SUCCESS, new ItemStack(ModItems.CLAY_BUCKET_EMPTY, 1, item.getItemDamage()));
 				} else {
 					return new ActionResult<ItemStack>(EnumActionResult.FAIL, item);
 				}
@@ -109,9 +109,9 @@ public class ItemClayBucket extends ItemDamageableBase {
 	private ItemStack fillBucket(ItemStack emptyBucket, EntityPlayer player, Item fullBucket) {
 		if (player.isCreative()) {
 			return emptyBucket;
-		} else {
-			return new ItemStack(fullBucket, 1, emptyBucket.getItemDamage());
 		}
+		
+		return new ItemStack(fullBucket, 1, emptyBucket.getItemDamage());
 	}
 	
 	private boolean tryPlaceContainedLiquid(@Nullable EntityPlayer player, World world, BlockPos pos) {
@@ -122,29 +122,29 @@ public class ItemClayBucket extends ItemDamageableBase {
 			
 			if (!world.isAirBlock(pos) && isSolid && !isReplaceable) {
 				return false;
+			}
+			
+			if (world.provider.doesWaterVaporize() && fluid.doesVaporize(new FluidStack(fluid, Fluid.BUCKET_VOLUME))) {
+				world.playSound(player, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
+				
+				for (int k = 0; k < 8; ++k) {
+					world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() + Math.random(), pos.getY() + Math.random(),
+							pos.getZ() + Math.random(), 0, 0, 0);
+				}
 			} else {
-				if (world.provider.doesWaterVaporize() && fluid.doesVaporize(new FluidStack(fluid, Fluid.BUCKET_VOLUME))) {
-					world.playSound(player, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
-					
-					for (int k = 0; k < 8; ++k) {
-						world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, (double) pos.getX() + Math.random(), (double) pos.getY() + Math.random(),
-								(double) pos.getZ() + Math.random(), 0, 0, 0);
-					}
-				} else {
-					if (!world.isRemote && (!isSolid || isReplaceable) && !state.getMaterial().isLiquid()) {
-						world.destroyBlock(pos, true);
-					}
-					
-					world.playSound(player, pos, fluid.getEmptySound(), SoundCategory.BLOCKS, 1f, 1f);
-					world.setBlockState(pos, fluid.getBlock().getDefaultState(), 11);
-					world.getBlockState(pos).neighborChanged(world, pos, world.getBlockState(pos).getBlock(), pos);
+				if (!world.isRemote && (!isSolid || isReplaceable) && !state.getMaterial().isLiquid()) {
+					world.destroyBlock(pos, true);
 				}
 				
-				return true;
+				world.playSound(player, pos, fluid.getEmptySound(), SoundCategory.BLOCKS, 1f, 1f);
+				world.setBlockState(pos, fluid.getBlock().getDefaultState(), 11);
+				world.getBlockState(pos).neighborChanged(world, pos, world.getBlockState(pos).getBlock(), pos);
 			}
-		} else {
-			return false;
+			
+			return true;
 		}
+		
+		return false;
 	}
 	
 	@Override
