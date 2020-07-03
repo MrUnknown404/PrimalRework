@@ -38,6 +38,7 @@ public class EntityAITemptFlying extends EntityAIBase {
 		}
 	}
 	
+	@Override
 	public boolean shouldExecute() {
 		if (delayTemptCounter > 0) {
 			--delayTemptCounter;
@@ -53,6 +54,7 @@ public class EntityAITemptFlying extends EntityAIBase {
 		return temptItem.contains(stack.getItem());
 	}
 	
+	@Override
 	public boolean shouldContinueExecuting() {
 		if (scaredByPlayerMovement) {
 			if (temptedEntity.getDistanceSq(temptingPlayer) < 36.0D) {
@@ -76,6 +78,7 @@ public class EntityAITemptFlying extends EntityAIBase {
 		return shouldExecute();
 	}
 	
+	@Override
 	public void startExecuting() {
 		targetX = temptingPlayer.posX;
 		targetY = temptingPlayer.posY;
@@ -83,6 +86,7 @@ public class EntityAITemptFlying extends EntityAIBase {
 		isRunning = true;
 	}
 	
+	@Override
 	public void resetTask() {
 		temptingPlayer = null;
 		temptedEntity.getNavigator().clearPath();
@@ -90,6 +94,7 @@ public class EntityAITemptFlying extends EntityAIBase {
 		isRunning = false;
 	}
 	
+	@Override
 	public void updateTask() {
 		temptedEntity.getLookHelper().setLookPositionWithEntity(temptingPlayer, temptedEntity.getHorizontalFaceSpeed() + 20, temptedEntity.getVerticalFaceSpeed());
 		

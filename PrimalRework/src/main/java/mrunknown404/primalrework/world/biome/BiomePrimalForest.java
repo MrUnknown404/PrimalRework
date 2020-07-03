@@ -122,6 +122,7 @@ public class BiomePrimalForest extends BiomeBase {
 	}
 	
 	@SideOnly(Side.CLIENT)
+	@Override
 	public int getGrassColorAtPos(BlockPos pos) {
 		return forestType == ForestType.MUSHROOM ? (super.getGrassColorAtPos(pos) & 16711422) + 2634762 >> 1 : super.getGrassColorAtPos(pos);
 	}

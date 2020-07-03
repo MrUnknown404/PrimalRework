@@ -40,6 +40,7 @@ public class BlockPrimalTorchUnlit extends BlockBase {
 	protected static final AxisAlignedBB TORCH_EAST_AABB = new AxisAlignedBB(0.0D, 0.2D, 0.35D, 0.3D, 0.7D, 0.65D);
 	
 	public static final PropertyDirection FACING = PropertyDirection.create("facing", new Predicate<EnumFacing>() {
+		@Override
 		public boolean apply(@Nullable EnumFacing p_apply_1_) {
 			return p_apply_1_ != EnumFacing.DOWN;
 		}

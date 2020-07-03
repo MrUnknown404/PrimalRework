@@ -32,6 +32,7 @@ public class ItemFireStarter extends ItemDamageableBase {
 		
 		addPropertyOverride(new ResourceLocation("pull"), new IItemPropertyGetter() {
 			@SideOnly(Side.CLIENT)
+			@Override
 			public float apply(ItemStack stack, @Nullable World world, @Nullable EntityLivingBase entity) {
 				if (entity != null) {
 					return entity.getActiveItemStack().getItem() != ModItems.FIRE_STARTER ? 0f : (stack.getMaxItemUseDuration() - entity.getItemInUseCount()) / 20f / 4f;
@@ -43,6 +44,7 @@ public class ItemFireStarter extends ItemDamageableBase {
 		
 		addPropertyOverride(new ResourceLocation("pulling"), new IItemPropertyGetter() {
 			@SideOnly(Side.CLIENT)
+			@Override
 			public float apply(ItemStack stack, @Nullable World world, @Nullable EntityLivingBase entity) {
 				return entity != null && entity.isHandActive() && entity.getActiveItemStack() == stack ? 1f : 0f;
 			}

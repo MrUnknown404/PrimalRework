@@ -82,7 +82,7 @@ public class ModItems {
 	
 	//FOOD
 	public static final Item DOUGH = new ItemFoodBase("dough", EnumStage.stage1, 1, 1f);
-	public static final Item COOKED_CARROT = new ItemFoodBase("cooked_carrot", EnumStage.stage0, 5, 0.6f);
+	public static final Item COOKED_CARROT = new ItemFoodBase("cooked_carrot", EnumStage.stage0, 5, 1);
 	public static final Item COOKED_BEETROOT = new ItemFoodBase("cooked_beetroot", EnumStage.stage0, 5, 0.6f);
 	
 	//TOOL HEADS

@@ -278,6 +278,7 @@ public class EntityItemDrop extends EntityItem {
 		}
 	}
 	
+	@Override
 	public void writeEntityToNBT(NBTTagCompound compound) {
 		super.writeEntityToNBT(compound);
 		compound.setShort("Age", (short) age);

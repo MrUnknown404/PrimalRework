@@ -24,6 +24,7 @@ public class InventoryCraftingStump extends InventoryCrafting {
 		return index >= getSizeInventory() ? ItemStack.EMPTY : te.getStackInSlot(index);
 	}
 	
+	@Override
 	public ItemStack getStackInRowAndColumn(int row, int column) {
 		return row >= 0 && row < 3 && column >= 0 && column <= 3 ? getStackInSlot(row + column * 3) : ItemStack.EMPTY;
 	}

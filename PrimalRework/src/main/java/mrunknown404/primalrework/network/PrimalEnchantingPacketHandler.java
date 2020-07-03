@@ -18,6 +18,7 @@ public class PrimalEnchantingPacketHandler implements IMessageHandler<PrimalEnch
 				EntityPlayerMP player = ctx.getServerHandler().player;
 				
 				player.getServer().addScheduledTask(new Runnable() {
+					@Override
 					public void run() {
 						((TileEntityPrimalEnchanting) world.getTileEntity(message.pos)).getContainer().enchantItem(player);
 					}

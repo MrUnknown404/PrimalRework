@@ -23,6 +23,7 @@ public class FireStarterPacketHandler implements IMessageHandler<FireStarterMess
 				EntityPlayerMP player = ctx.getServerHandler().player;
 				
 				player.getServer().addScheduledTask(new Runnable() {
+					@Override
 					public void run() {
 						world.playSound(null, message.pos, SoundEvents.ITEM_FIRECHARGE_USE, SoundCategory.BLOCKS, 0.5f, 0.75f);
 						
