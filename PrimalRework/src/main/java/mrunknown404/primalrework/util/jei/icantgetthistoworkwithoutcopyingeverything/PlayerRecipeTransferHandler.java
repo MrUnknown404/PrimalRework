@@ -20,7 +20,7 @@ import mezz.jei.api.recipe.transfer.IRecipeTransferHandlerHelper;
 import mezz.jei.api.recipe.transfer.IRecipeTransferInfo;
 import mrunknown404.primalrework.Main;
 import mrunknown404.primalrework.init.ModRecipes;
-import mrunknown404.primalrework.network.RecipeTransferMessage;
+import mrunknown404.primalrework.network.message.RecipeTransferMessage;
 import mrunknown404.primalrework.util.jei.JEICompat;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -153,7 +153,7 @@ public class PlayerRecipeTransferHandler implements IRecipeTransferHandler<Conta
 		}
 		
 		if (doTransfer) {
-			Main.networkWrapper.sendToServer(new RecipeTransferMessage(player, matchingItemsResult.matchingItems, craftingSlotIndexes, inventorySlotIndexes, maxTransfer, false));
+			Main.NETWORK.sendToServer(new RecipeTransferMessage(player, matchingItemsResult.matchingItems, craftingSlotIndexes, inventorySlotIndexes, maxTransfer, false));
 		}
 		
 		return null;

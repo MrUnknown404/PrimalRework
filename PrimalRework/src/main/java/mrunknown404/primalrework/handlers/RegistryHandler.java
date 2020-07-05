@@ -1,17 +1,14 @@
 package mrunknown404.primalrework.handlers;
 
-import mrunknown404.primalrework.blocks.util.BlockBase;
-import mrunknown404.primalrework.blocks.util.BlockSlabBase;
-import mrunknown404.primalrework.blocks.util.IBlockBase;
+import mrunknown404.primalrework.Main;
 import mrunknown404.primalrework.blocks.util.ISlabBase;
 import mrunknown404.primalrework.init.ModBiomes;
 import mrunknown404.primalrework.init.ModBlocks;
 import mrunknown404.primalrework.init.ModItems;
 import mrunknown404.primalrework.init.ModSoundEvents;
-import mrunknown404.primalrework.items.util.IItemBase;
-import mrunknown404.primalrework.items.util.ItemBase;
 import mrunknown404.primalrework.world.biome.BiomeBase;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockSlab;
 import net.minecraft.item.Item;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.biome.Biome;
@@ -66,16 +63,16 @@ public class RegistryHandler {
 	@SubscribeEvent
 	public static void onModelRegister(ModelRegistryEvent e) {
 		for (Item item : ModItems.ITEMS) {
-			if (item instanceof IItemBase) {
-				((IItemBase<ItemBase>) item).registerModels(item);
-			}
+			Main.proxy.registerItemRenderer(item, 0, "inventory");
 		}
 		
 		for (Block block : ModBlocks.BLOCKS) {
-			if (block instanceof IBlockBase) {
-				((IBlockBase<BlockBase>) block).registerModels(block);
-			} else if (block instanceof ISlabBase) {
-				((ISlabBase<BlockSlabBase>) block).registerModels(block);
+			if (block instanceof ISlabBase) {
+				if (!((ISlabBase<BlockSlab>) block).isDouble()) {
+					Main.proxy.registerItemRenderer(Item.getItemFromBlock(block), 0, "inventory");
+				}
+			} else {
+				Main.proxy.registerItemRenderer(Item.getItemFromBlock(block), 0, "inventory");
 			}
 		}
 	}

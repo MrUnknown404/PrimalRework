@@ -5,7 +5,7 @@ import java.io.IOException;
 import mrunknown404.primalrework.Main;
 import mrunknown404.primalrework.init.ModItems;
 import mrunknown404.primalrework.inventory.ContainerPrimalEnchanting;
-import mrunknown404.primalrework.network.PrimalEnchantingMessage;
+import mrunknown404.primalrework.network.message.PrimalEnchantingMessage;
 import mrunknown404.primalrework.tileentity.TileEntityPrimalEnchanting;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -40,7 +40,7 @@ public class GuiPrimalEnchantment extends GuiContainer {
 			int lvl = te.getContainer().enchantItem(mc.player);
 			
 			if (lvl != -1) {
-				Main.networkWrapper.sendToServer(new PrimalEnchantingMessage(player.player, te.getPos()));
+				Main.NETWORK.sendToServer(new PrimalEnchantingMessage(player.player, te.getPos()));
 			}
 		}
 	}

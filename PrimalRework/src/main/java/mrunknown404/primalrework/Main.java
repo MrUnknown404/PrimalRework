@@ -12,12 +12,9 @@ import mrunknown404.primalrework.handlers.WorldEventHandler;
 import mrunknown404.primalrework.init.ModEntities;
 import mrunknown404.primalrework.init.ModRecipes;
 import mrunknown404.primalrework.init.ModSoundEvents;
-import mrunknown404.primalrework.network.FireStarterMessage;
-import mrunknown404.primalrework.network.FireStarterPacketHandler;
-import mrunknown404.primalrework.network.PrimalEnchantingMessage;
-import mrunknown404.primalrework.network.PrimalEnchantingPacketHandler;
-import mrunknown404.primalrework.network.RecipeTransferMessage;
-import mrunknown404.primalrework.network.RecipeTransferMessagePacketHandler;
+import mrunknown404.primalrework.network.message.FireStarterMessage;
+import mrunknown404.primalrework.network.message.PrimalEnchantingMessage;
+import mrunknown404.primalrework.network.message.RecipeTransferMessage;
 import mrunknown404.primalrework.tileentity.TileEntityCharcoalKiln;
 import mrunknown404.primalrework.tileentity.TileEntityCharcoalPitMaster;
 import mrunknown404.primalrework.tileentity.TileEntityCraftingStump;
@@ -61,7 +58,7 @@ public class Main {
 	
 	public static final WorldType PRIMAL_WORLD = new WorldTypePrimal();
 	
-	public static SimpleNetworkWrapper networkWrapper;
+	public static final SimpleNetworkWrapper NETWORK = NetworkRegistry.INSTANCE.newSimpleChannel(MOD_ID);
 	
 	@Instance
 	public static Main main;
@@ -101,10 +98,9 @@ public class Main {
 		proxy.init();
 		
 		NetworkRegistry.INSTANCE.registerGuiHandler(main, new GuiHandler());
-		networkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel(MOD_ID);
-		networkWrapper.registerMessage(FireStarterPacketHandler.class, FireStarterMessage.class, 0, Side.SERVER);
-		networkWrapper.registerMessage(PrimalEnchantingPacketHandler.class, PrimalEnchantingMessage.class, 1, Side.SERVER);
-		networkWrapper.registerMessage(RecipeTransferMessagePacketHandler.class, RecipeTransferMessage.class, 2, Side.SERVER);
+		NETWORK.registerMessage(FireStarterMessage.class, FireStarterMessage.class, 0, Side.SERVER);
+		NETWORK.registerMessage(PrimalEnchantingMessage.class, PrimalEnchantingMessage.class, 1, Side.SERVER);
+		NETWORK.registerMessage(RecipeTransferMessage.class, RecipeTransferMessage.class, 2, Side.SERVER);
 		
 		ForgeRegistries.SOUND_EVENTS.registerAll(ModSoundEvents.SOUNDS.toArray(new SoundEvent[0]));
 		

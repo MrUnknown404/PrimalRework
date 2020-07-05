@@ -7,7 +7,7 @@ import mrunknown404.primalrework.blocks.BlockDenseLog;
 import mrunknown404.primalrework.init.ModBlocks;
 import mrunknown404.primalrework.init.ModItems;
 import mrunknown404.primalrework.items.util.ItemDamageableBase;
-import mrunknown404.primalrework.network.FireStarterMessage;
+import mrunknown404.primalrework.network.message.FireStarterMessage;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import net.minecraft.entity.EntityLivingBase;
@@ -72,7 +72,7 @@ public class ItemFireStarter extends ItemDamageableBase {
 					if (player.canPlayerEdit(targetPos, ray.sideHit, stack)) {
 						boolean flag = world.getBlockState(targetPos.down(2)).getBlock() == ModBlocks.DENSE_LOG && BlockDenseLog.isValidCharcoalPit(world, targetPos.down(2));
 						
-						Main.networkWrapper.sendToServer(new FireStarterMessage(player, targetPos, player.getActiveHand(), flag));
+						Main.NETWORK.sendToServer(new FireStarterMessage(player, targetPos, player.getActiveHand(), flag));
 					}
 				}
 			}

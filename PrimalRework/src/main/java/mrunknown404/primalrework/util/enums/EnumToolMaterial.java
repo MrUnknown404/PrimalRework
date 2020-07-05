@@ -33,6 +33,7 @@ public enum EnumToolMaterial {
 	diamond    (7,  1536, 11.75f, 4.25f, 14),
 	//is
 	unbreakable(99, 0,     0.00f, 0.00f, 0 );
+	//haha jojo
 	
 	public final int level, durability, enchantability;
 	public final float speed, extraDamage;

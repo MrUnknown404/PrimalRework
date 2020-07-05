@@ -8,7 +8,6 @@ import mrunknown404.unknownlibs.utils.ColorUtils;
 import net.minecraft.util.text.TextComponentTranslation;
 
 public interface IThingBase<T, R> {
-	public abstract void registerModels(T t);
 	public abstract void addToModList(T t);
 	public abstract int getAmountOfTooltips();
 	public abstract R setAmountOfTooltops(int amountOfToolTips);
