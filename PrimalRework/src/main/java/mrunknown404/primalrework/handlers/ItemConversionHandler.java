@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ServerTickEvent;
 
-public class ItemEntityHandler {
+public class ItemConversionHandler {
 	private final ArrayDeque<PendingItemDrop> items = new ArrayDeque<>();
 	
 	@SubscribeEvent(priority = EventPriority.LOWEST)
@@ -22,10 +22,10 @@ public class ItemEntityHandler {
 		
 		if (event.getEntity().getClass() == EntityItem.class) {
 			EntityItem item = (EntityItem) event.getEntity();
+			
 			if (!item.getItem().isEmpty()) {
 				items.add(new PendingItemDrop(item, new EntityItemDrop(item)));
 			}
-			
 		}
 	}
 	

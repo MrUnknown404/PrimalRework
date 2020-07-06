@@ -12,7 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-public class EntityEventHandler {
+public class EntityItemDropHandler {
 	@SubscribeEvent
 	public void onEntityDrop(LivingDropsEvent e) {
 		if (e.getEntity() instanceof EntityCow || e.getEntity() instanceof EntityHorse) {

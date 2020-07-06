@@ -3,12 +3,15 @@ package mrunknown404.primalrework;
 import mrunknown404.primalrework.client.gui.GuiHandler;
 import mrunknown404.primalrework.commands.CommandStage;
 import mrunknown404.primalrework.entity.EntityItemDrop;
-import mrunknown404.primalrework.handlers.BlockEventHandler;
-import mrunknown404.primalrework.handlers.EntityEventHandler;
-import mrunknown404.primalrework.handlers.GuiEventHandler;
-import mrunknown404.primalrework.handlers.ItemEntityHandler;
-import mrunknown404.primalrework.handlers.PlayerEventHandler;
-import mrunknown404.primalrework.handlers.WorldEventHandler;
+import mrunknown404.primalrework.handlers.BlockBreakingHandler;
+import mrunknown404.primalrework.handlers.BlockHarvestHandler;
+import mrunknown404.primalrework.handlers.BlockPunchHandler;
+import mrunknown404.primalrework.handlers.BlockRightClickHandler;
+import mrunknown404.primalrework.handlers.EntityItemDropHandler;
+import mrunknown404.primalrework.handlers.EntityRightClickHandler;
+import mrunknown404.primalrework.handlers.ItemConversionHandler;
+import mrunknown404.primalrework.handlers.MiscEventHandler;
+import mrunknown404.primalrework.handlers.RegistryHandler;
 import mrunknown404.primalrework.init.ModEntities;
 import mrunknown404.primalrework.init.ModRecipes;
 import mrunknown404.primalrework.init.ModSoundEvents;
@@ -71,7 +74,7 @@ public class Main {
 	
 	// TODO add map system similar to antique atlas
 	// TODO think of a metal working system
-	// TODO create biome decorator
+	// TODO completely redo world gen
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent e) {
@@ -89,13 +92,15 @@ public class Main {
 		GameRegistry.registerTileEntity(TileEntityCharcoalPitMaster.class, new ResourceLocation(Main.MOD_ID, "charcoal_pit_master"));
 		GameRegistry.registerTileEntity(TileEntityClayFurnace.class, new ResourceLocation(Main.MOD_ID, "clay_furnace"));
 		
-		//TODO split these up a bit better
-		MinecraftForge.EVENT_BUS.register(new PlayerEventHandler());
-		MinecraftForge.EVENT_BUS.register(new BlockEventHandler());
-		MinecraftForge.EVENT_BUS.register(new WorldEventHandler());
-		MinecraftForge.EVENT_BUS.register(new EntityEventHandler());
-		MinecraftForge.EVENT_BUS.register(new GuiEventHandler());
-		MinecraftForge.EVENT_BUS.register(new ItemEntityHandler());
+		MinecraftForge.EVENT_BUS.register(new BlockBreakingHandler());
+		MinecraftForge.EVENT_BUS.register(new BlockHarvestHandler());
+		MinecraftForge.EVENT_BUS.register(new BlockPunchHandler());
+		MinecraftForge.EVENT_BUS.register(new BlockRightClickHandler());
+		MinecraftForge.EVENT_BUS.register(new EntityItemDropHandler());
+		MinecraftForge.EVENT_BUS.register(new EntityRightClickHandler());
+		MinecraftForge.EVENT_BUS.register(new ItemConversionHandler());
+		MinecraftForge.EVENT_BUS.register(new MiscEventHandler());
+		MinecraftForge.EVENT_BUS.register(new RegistryHandler());
 	}
 	
 	@EventHandler
