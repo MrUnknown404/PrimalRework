@@ -1,11 +1,8 @@
 package mrunknown404.primalrework.inventory.slot;
 
-import mrunknown404.primalrework.init.ModBlocks;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
+import mrunknown404.primalrework.init.ModRecipes;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class SlotClayFurnaceFuel extends Slot {
@@ -16,11 +13,7 @@ public class SlotClayFurnaceFuel extends Slot {
 	
 	@Override
 	public boolean isItemValid(ItemStack stack) {
-		if (stack.getItem() == Items.COAL || stack.getItem() == Item.getItemFromBlock(ModBlocks.CHARCOAL_BLOCK) || stack.getItem() == Item.getItemFromBlock(Blocks.COAL_BLOCK)) {
-			return true;
-		}
-		
-		return false;
+		return ModRecipes.isItemClayFurnaceFuel(stack);
 	}
 	
 	@Override

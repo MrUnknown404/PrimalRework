@@ -2,5 +2,9 @@
 	"parent": "minecraft:item/generated",
 	"textures": {
 		"layer0": "primalrework:items/clay_vessel"
-	}
+	},
+	"overrides": [
+		{ "predicate": { "liquid": 0 }, "model": "primalrework:item/clay_vessel" },
+		{ "predicate": { "liquid": 1 }, "model": "primalrework:item/clay_vessel_liquid" }
+	]
 }

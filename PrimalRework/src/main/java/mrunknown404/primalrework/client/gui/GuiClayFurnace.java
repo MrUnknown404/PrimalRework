@@ -41,7 +41,7 @@ public class GuiClayFurnace extends GuiContainer {
 		
 		if (te.isBurning()) {
 			int l = getCookProgressScale(13);
-			drawTexturedModalRect(guiLeft + 95, guiTop + 36 + l, 176, l, 14, 14 - l);
+			drawTexturedModalRect(guiLeft + 80, guiTop + 36 + l, 176, l, 14, 14 - l);
 		}
 	}
 	

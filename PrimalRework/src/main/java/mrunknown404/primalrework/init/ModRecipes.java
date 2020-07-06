@@ -39,6 +39,7 @@ public class ModRecipes {
 	private static final List<DryingTableRecipe> DRYING_TABLE_RECIPES = new ArrayList<DryingTableRecipe>();
 	
 	private static final List<DoubleValue<ItemStack, Integer>> FIRE_PIT_FUELS = new ArrayList<>();
+	private static final List<DoubleValue<ItemStack, Integer>> CLAY_FURNACE_FUELS = new ArrayList<>();
 	
 	public static void addRecipes() {
 		FIRE_PIT_FUELS.add(new DoubleValue<ItemStack, Integer>(new ItemStack(Items.COAL), 1200));
@@ -60,7 +61,14 @@ public class ModRecipes {
 			}
 		}
 		
-		FIRE_PIT_FUELS.sort(new CompareFirePitFuel());
+		FIRE_PIT_FUELS.sort(new CompareItemStack());
+		
+		CLAY_FURNACE_FUELS.add(new DoubleValue<ItemStack, Integer>(new ItemStack(Items.COAL, 1, 0), 1200));
+		CLAY_FURNACE_FUELS.add(new DoubleValue<ItemStack, Integer>(new ItemStack(Items.COAL, 1, 1), 1200));
+		CLAY_FURNACE_FUELS.add(new DoubleValue<ItemStack, Integer>(new ItemStack(Blocks.COAL_BLOCK, 1, 1), 1200 * 9));
+		CLAY_FURNACE_FUELS.add(new DoubleValue<ItemStack, Integer>(new ItemStack(ModBlocks.CHARCOAL_BLOCK, 1, 1), 1200 * 4));
+		
+		CLAY_FURNACE_FUELS.sort(new CompareItemStack());
 		
 		FIRE_PIT_RECIPES.add(new FirePitRecipe(EnumStage.stage0, ModBlocks.UNLIT_PRIMAL_TORCH, ModBlocks.LIT_PRIMAL_TORCH, 10));
 		FIRE_PIT_RECIPES.add(new FirePitRecipe(EnumStage.stage0, Items.PORKCHOP, Items.COOKED_PORKCHOP, 100));
@@ -109,6 +117,16 @@ public class ModRecipes {
 	
 	public static boolean isItemFirePitFuel(ItemStack stack) {
 		for (DoubleValue<ItemStack, Integer> dv : FIRE_PIT_FUELS) {
+			if (compareItemStacks(dv.getLeft(), stack)) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	public static boolean isItemClayFurnaceFuel(ItemStack stack) {
+		for (DoubleValue<ItemStack, Integer> dv : CLAY_FURNACE_FUELS) {
 			if (compareItemStacks(dv.getLeft(), stack)) {
 				return true;
 			}
@@ -187,7 +205,7 @@ public class ModRecipes {
 		return fuels;
 	}
 	
-	private static class CompareFirePitFuel implements Comparator<DoubleValue<ItemStack, Integer>> {
+	private static class CompareItemStack implements Comparator<DoubleValue<ItemStack, Integer>> {
 		@Override
 		public int compare(DoubleValue<ItemStack, Integer> o1, DoubleValue<ItemStack, Integer> o2) {
 			return o1.getL().getDisplayName().compareTo(o2.getL().getDisplayName()) - (o1.getR() - o2.getR());
