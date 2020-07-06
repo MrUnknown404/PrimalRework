@@ -17,6 +17,7 @@ import mrunknown404.primalrework.network.message.PrimalEnchantingMessage;
 import mrunknown404.primalrework.network.message.RecipeTransferMessage;
 import mrunknown404.primalrework.tileentity.TileEntityCharcoalKiln;
 import mrunknown404.primalrework.tileentity.TileEntityCharcoalPitMaster;
+import mrunknown404.primalrework.tileentity.TileEntityClayFurnace;
 import mrunknown404.primalrework.tileentity.TileEntityCraftingStump;
 import mrunknown404.primalrework.tileentity.TileEntityDryingTable;
 import mrunknown404.primalrework.tileentity.TileEntityFirePit;
@@ -55,6 +56,7 @@ public class Main {
 	public static final int GUI_ID_ENCHANTING = 2;
 	public static final int GUI_ID_PRIMAL_ENCHANTING = 3;
 	public static final int GUI_ID_CHARCOAL_KILN = 4;
+	public static final int GUI_ID_CLAY_FURNACE = 5;
 	
 	public static final WorldType PRIMAL_WORLD = new WorldTypePrimal();
 	
@@ -84,6 +86,7 @@ public class Main {
 		GameRegistry.registerTileEntity(TileEntityLoom.class, new ResourceLocation(Main.MOD_ID, "loom"));
 		GameRegistry.registerTileEntity(TileEntityCharcoalKiln.class, new ResourceLocation(Main.MOD_ID, "charcoal_kiln"));
 		GameRegistry.registerTileEntity(TileEntityCharcoalPitMaster.class, new ResourceLocation(Main.MOD_ID, "charcoal_pit_master"));
+		GameRegistry.registerTileEntity(TileEntityClayFurnace.class, new ResourceLocation(Main.MOD_ID, "clay_furnace"));
 		
 		MinecraftForge.EVENT_BUS.register(new PlayerEventHandler());
 		MinecraftForge.EVENT_BUS.register(new BlockEventHandler());

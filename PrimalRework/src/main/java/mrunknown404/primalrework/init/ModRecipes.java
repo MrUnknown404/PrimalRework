@@ -43,6 +43,12 @@ public class ModRecipes {
 	public static void addRecipes() {
 		FIRE_PIT_FUELS.add(new DoubleValue<ItemStack, Integer>(new ItemStack(Items.COAL), 1200));
 		FIRE_PIT_FUELS.add(new DoubleValue<ItemStack, Integer>(new ItemStack(Items.STICK), 25));
+		FIRE_PIT_FUELS.add(new DoubleValue<ItemStack, Integer>(new ItemStack(ModBlocks.STRIPPED_ACACIA_LOG), 400));
+		FIRE_PIT_FUELS.add(new DoubleValue<ItemStack, Integer>(new ItemStack(ModBlocks.STRIPPED_BIRCH_LOG), 400));
+		FIRE_PIT_FUELS.add(new DoubleValue<ItemStack, Integer>(new ItemStack(ModBlocks.STRIPPED_DARK_OAK_LOG), 400));
+		FIRE_PIT_FUELS.add(new DoubleValue<ItemStack, Integer>(new ItemStack(ModBlocks.STRIPPED_JUNGLE_LOG), 400));
+		FIRE_PIT_FUELS.add(new DoubleValue<ItemStack, Integer>(new ItemStack(ModBlocks.STRIPPED_OAK_LOG), 400));
+		FIRE_PIT_FUELS.add(new DoubleValue<ItemStack, Integer>(new ItemStack(ModBlocks.STRIPPED_SPRUCE_LOG), 400));
 		
 		for (EnumType t : EnumType.values()) {
 			FIRE_PIT_FUELS.add(new DoubleValue<ItemStack, Integer>(new ItemStack(Blocks.PLANKS, 1, t.getMetadata()), 100));

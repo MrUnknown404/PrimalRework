@@ -104,6 +104,7 @@ tile.smooth_stone.name=Smooth Stone
 tile.mushroom_grass.name=Mushroom Grass
 tile.dense_log.name=Dense Log
 tile.charcoal_block.name=Charcoal Block
+tile.clay_pot.name=Clay Pot
 
 //ORE
 tile.copper_ore_poor.name=Copper Ore
@@ -136,6 +137,7 @@ tile.primal_enchanting_table.name=Primal Enchanting Table
 tile.drying_table.name=Drying Table
 tile.loom.name=Loom
 tile.charcoal_kiln.name=Charcoal Kiln
+tile.clay_furnace.name=Clay Furnace
 
 //--ENTITIES
 entity.pigeon.name=Pigeon
@@ -161,6 +163,7 @@ container.fire_pit=Camp Fire
 container.primal_enchantment_table=Primal Enchanting
 container.loom=Loom
 container.charcoal_kiln=Charcoal Kiln
+container.clay_furnace=Clay Furnace
 
 //GUI
 gui.fire_pit_cook=Fuel

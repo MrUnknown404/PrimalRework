@@ -1,23 +1,23 @@
-package mrunknown404.primalrework.inventory;
+package mrunknown404.primalrework.inventory.slot;
 
-import mrunknown404.primalrework.util.helpers.EnchantHelper;
+import mrunknown404.primalrework.init.ModRecipes;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class SlotMagicDust extends Slot {
+public class SlotFirePitFuel extends Slot {
 	
-	public SlotMagicDust(IInventory inventoryIn, int index, int x, int y) {
+	public SlotFirePitFuel(IInventory inventoryIn, int index, int x, int y) {
 		super(inventoryIn, index, x, y);
 	}
 	
 	@Override
 	public boolean isItemValid(ItemStack stack) {
-		return EnchantHelper.isMagicDust(stack.getItem());
+		return ModRecipes.isItemFirePitFuel(stack);
 	}
 	
 	@Override
 	public int getItemStackLimit(ItemStack stack) {
-		return 64;
+		return 1;
 	}
 }

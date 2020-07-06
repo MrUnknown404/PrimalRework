@@ -1,4 +1,4 @@
-package mrunknown404.primalrework.inventory;
+package mrunknown404.primalrework.inventory.slot;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;

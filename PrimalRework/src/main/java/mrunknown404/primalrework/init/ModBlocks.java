@@ -6,6 +6,8 @@ import java.util.List;
 import mrunknown404.primalrework.blocks.BlockCharcoalBlock;
 import mrunknown404.primalrework.blocks.BlockCharcoalKiln;
 import mrunknown404.primalrework.blocks.BlockCharcoalPitMaster;
+import mrunknown404.primalrework.blocks.BlockClayFurnace;
+import mrunknown404.primalrework.blocks.BlockClayPot;
 import mrunknown404.primalrework.blocks.BlockCraftingStump;
 import mrunknown404.primalrework.blocks.BlockDenseLog;
 import mrunknown404.primalrework.blocks.BlockDirtSlab;
@@ -60,6 +62,7 @@ public class ModBlocks {
 	public static final Block DENSE_LOG = new BlockDenseLog();
 	public static final Block CHARCOAL_PIT_MASTER = new BlockCharcoalPitMaster();
 	public static final Block CHARCOAL_BLOCK = new BlockCharcoalBlock();
+	public static final Block CLAY_POT = new BlockClayPot();
 	
 	//ORE
 	public static final Block COPPER_ORE_POOR = new BlockOre(2, 2, EnumStage.stage2, EnumAlloy.copper, EnumOreValue.poor, BlockOre.COPPER_TYPES);
@@ -98,4 +101,5 @@ public class ModBlocks {
 	public static final Block DRYING_TABLE = new BlockDryingTable();
 	public static final Block LOOM = new BlockLoom();
 	public static final Block CHARCOAL_KILN = new BlockCharcoalKiln();
+	public static final Block CLAY_FURNACE = new BlockClayFurnace();
 }

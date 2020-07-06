@@ -1,19 +1,19 @@
-package mrunknown404.primalrework.inventory;
+package mrunknown404.primalrework.inventory.slot;
 
-import mrunknown404.primalrework.init.ModRecipes;
+import mrunknown404.primalrework.util.helpers.EnchantHelper;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class SlotFirePitItem extends Slot {
+public class SlotPrimalEnchantable extends Slot {
 	
-	public SlotFirePitItem(IInventory inventoryIn, int index, int x, int y) {
+	public SlotPrimalEnchantable(IInventory inventoryIn, int index, int x, int y) {
 		super(inventoryIn, index, x, y);
 	}
 	
 	@Override
 	public boolean isItemValid(ItemStack stack) {
-		return ModRecipes.doesItemHaveFirePitRecipe(stack);
+		return EnchantHelper.isEnchantable(stack);
 	}
 	
 	@Override

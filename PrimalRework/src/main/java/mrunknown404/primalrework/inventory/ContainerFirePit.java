@@ -1,5 +1,7 @@
 package mrunknown404.primalrework.inventory;
 
+import mrunknown404.primalrework.inventory.slot.SlotFirePitFuel;
+import mrunknown404.primalrework.inventory.slot.SlotFirePitItem;
 import mrunknown404.primalrework.tileentity.TileEntityFirePit;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

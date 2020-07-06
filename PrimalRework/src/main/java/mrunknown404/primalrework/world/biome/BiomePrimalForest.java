@@ -77,7 +77,7 @@ public class BiomePrimalForest extends BiomeBase {
 				int l = j * 4 + 1 + 8 + r.nextInt(3);
 				BlockPos blockpos = w.getHeight(pos.add(k, 0, l));
 				
-				if (r.nextInt(20) == 0 && TerrainGen.decorate(w, r, new ChunkPos(pos), blockpos, DecorateBiomeEvent.Decorate.EventType.BIG_SHROOM)) {
+				if (r.nextInt(10) == 0 && TerrainGen.decorate(w, r, new ChunkPos(pos), blockpos, DecorateBiomeEvent.Decorate.EventType.BIG_SHROOM)) {
 					WorldGenBigMushroom worldgenbigmushroom = new WorldGenBigMushroom();
 					worldgenbigmushroom.generate(w, r, blockpos);
 				} else if (TerrainGen.decorate(w, r, new ChunkPos(pos), blockpos, DecorateBiomeEvent.Decorate.EventType.TREE)) {

@@ -11,6 +11,7 @@ import javax.annotation.Nullable;
 import mrunknown404.primalrework.items.ItemChangeWithWater;
 import mrunknown404.primalrework.items.ItemClayBucket;
 import mrunknown404.primalrework.items.ItemClayBucketMilk;
+import mrunknown404.primalrework.items.ItemClayVessel;
 import mrunknown404.primalrework.items.ItemFireStarter;
 import mrunknown404.primalrework.items.ItemOreNugget;
 import mrunknown404.primalrework.items.util.ItemBase;
@@ -72,6 +73,7 @@ public class ModItems {
 	public static final Item BLUE_DYE = new ItemBase("blue_dye", EnumStage.stage1);
 	public static final Item BLACK_DYE = new ItemBase("black_dye", EnumStage.stage1);
 	public static final Item BROWN_DYE = new ItemBase("brown_dye", EnumStage.stage1);
+	public static final Item CLAY_VESSEL = new ItemClayVessel();
 	
 	//ORE NUGGETS
 	public static final Item COPPER_NUGGET_POOR = new ItemOreNugget(EnumStage.stage2, EnumAlloy.copper, EnumOreValue.poor);

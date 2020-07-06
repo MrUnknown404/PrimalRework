@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Random;
 
 import mrunknown404.primalrework.init.ModItems;
+import mrunknown404.primalrework.inventory.slot.SlotMagicDust;
+import mrunknown404.primalrework.inventory.slot.SlotPrimalEnchantable;
 import mrunknown404.primalrework.tileentity.TileEntityPrimalEnchanting;
 import mrunknown404.primalrework.util.helpers.EnchantHelper;
 import net.minecraft.enchantment.EnchantmentData;
@@ -105,46 +107,20 @@ public class ContainerPrimalEnchanting extends Container {
 	}
 	
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
+	public ItemStack transferStackInSlot(EntityPlayer player, int index) {
 		ItemStack stack = ItemStack.EMPTY;
 		Slot slot = inventorySlots.get(index);
 		
 		if (slot != null && slot.getHasStack()) {
 			ItemStack stack1 = slot.getStack();
-			stack = stack1;
+			stack = stack1.copy();
 			
-			if (index == 0 || index == 1) {
-				for (int i = 29; i < 38; i++) {
-					if (inventorySlots.get(i).getStack().isItemEqual(stack1) && inventorySlots.get(i).getStack().getCount() != inventorySlots.get(i).getStack().getMaxStackSize()) {
-						if (!mergeItemStack(stack1, i, i + 1, true)) {
-							return ItemStack.EMPTY;
-						}
-					}
+			if (index <= 2) {
+				if (!mergeItemStack(stack1, 2, 36 + 2, true)) {
+					return ItemStack.EMPTY;
 				}
-				
-				for (int i = 2; i < 29; i++) {
-					if (inventorySlots.get(i).getStack().isItemEqual(stack1) && inventorySlots.get(i).getStack().getCount() != inventorySlots.get(i).getStack().getMaxStackSize()) {
-						if (!mergeItemStack(stack1, i, i + 1, true)) {
-							return ItemStack.EMPTY;
-						}
-					}
-				}
-				
-				if (!mergeItemStack(stack1, 29, 38, false)) {
-					if (!mergeItemStack(stack1, 2, 29, false)) {
-						return ItemStack.EMPTY;
-					}
-				}
-			} else {
-				if (EnchantHelper.isEnchantable(stack1)) {
-					if (!mergeItemStack(stack1, 0, 1, false)) {
-						return ItemStack.EMPTY;
-					}
-				} else if (EnchantHelper.isMagicDust(stack1.getItem())) {
-					if (!mergeItemStack(stack1, 1, 2, false)) {
-						return ItemStack.EMPTY;
-					}
-				}
+			} else if (!mergeItemStack(stack1, 0, 2, false)) {
+				return ItemStack.EMPTY;
 			}
 			
 			if (stack1.isEmpty()) {
@@ -157,7 +133,7 @@ public class ContainerPrimalEnchanting extends Container {
 				return ItemStack.EMPTY;
 			}
 			
-			slot.onTake(playerIn, stack1);
+			slot.onTake(player, stack1);
 		}
 		
 		return stack;

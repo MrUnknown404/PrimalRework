@@ -1,7 +1,9 @@
 package mrunknown404.primalrework.inventory;
 
-import mrunknown404.primalrework.inventory.slot.SlotCharcoalKilnInput;
-import mrunknown404.primalrework.tileentity.TileEntityCharcoalKiln;
+import mrunknown404.primalrework.init.ModItems;
+import mrunknown404.primalrework.inventory.slot.SlotBase;
+import mrunknown404.primalrework.inventory.slot.SlotClayFurnaceFuel;
+import mrunknown404.primalrework.tileentity.TileEntityClayFurnace;
 import mrunknown404.unknownlibs.inventory.SlotOutput;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -12,24 +14,19 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ContainerCharcoalKiln extends Container {
+public class ContainerClayFurnace extends Container {
 	
-	public static final int[] SLOT_INPUT = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
-	public static final int SLOT_OUTPUT = 9;
+	public static final int SLOT_FUEL = 0, SLOT_INPUT = 1, SLOT_OUTPUT = 2;
 	
-	private final TileEntityCharcoalKiln te;
+	private final TileEntityClayFurnace te;
 	private int cookTime;
 	
-	public ContainerCharcoalKiln(InventoryPlayer player, TileEntityCharcoalKiln te) {
+	public ContainerClayFurnace(InventoryPlayer player, TileEntityClayFurnace te) {
 		this.te = te;
 		
-		for (int y = 0; y < 3; y++) {
-			for (int x = 0; x < 3; x++) {
-				addSlotToContainer(new SlotCharcoalKilnInput(te, x + y * 3, 39 + x * 18, 17 + y * 18));
-			}
-		}
-		
-		addSlotToContainer(new SlotOutput(te, SLOT_OUTPUT, 117, 35));
+		addSlotToContainer(new SlotClayFurnaceFuel(te, SLOT_FUEL, 80, 54));
+		addSlotToContainer(new SlotBase(new ItemStack(ModItems.CLAY_VESSEL), 1, te, SLOT_INPUT, 59, 28));
+		addSlotToContainer(new SlotOutput(te, SLOT_OUTPUT, 105, 28));
 		
 		for (int y = 0; y < 3; y++) {
 			for (int x = 0; x < 9; x++) {
@@ -51,11 +48,12 @@ public class ContainerCharcoalKiln extends Container {
 			ItemStack stack1 = slot.getStack();
 			stack = stack1.copy();
 			
+			
 			if (index <= SLOT_OUTPUT) {
-				if (!mergeItemStack(stack1, 9, 36 + 10, true)) {
+				if (!mergeItemStack(stack1, 2, 36 + 3, true)) {
 					return ItemStack.EMPTY;
 				}
-			} else if (!mergeItemStack(stack1, 0, 10, false)) {
+			} else if (!mergeItemStack(stack1, 0, 3, false)) {
 				return ItemStack.EMPTY;
 			}
 			
