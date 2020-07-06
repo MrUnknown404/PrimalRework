@@ -1,4 +1,4 @@
-package mrunknown404.primalrework.inventory;
+package mrunknown404.primalrework.inventory.container;
 
 import mrunknown404.primalrework.inventory.slot.SlotFirePitFuel;
 import mrunknown404.primalrework.inventory.slot.SlotFirePitItem;
@@ -84,7 +84,7 @@ public class ContainerFirePit extends Container {
 	}
 	
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
+	public ItemStack transferStackInSlot(EntityPlayer player, int index) {
 		ItemStack stack = ItemStack.EMPTY;
 		Slot slot = inventorySlots.get(index);
 		
@@ -110,7 +110,7 @@ public class ContainerFirePit extends Container {
 				return ItemStack.EMPTY;
 			}
 			
-			slot.onTake(playerIn, stack1);
+			slot.onTake(player, stack1);
 		}
 		
 		return stack;

@@ -32,6 +32,7 @@ item.white_dye.name=White Dye
 item.blue_dye.name=Blue Dye
 item.black_dye.name=Black Dye
 item.brown_dye.name=Brown Dye
+item.clay_vessel.name=Clay Vessel
 
 //ORE NUGGETS
 item.copper_nugget_poor.name=Copper Nugget
@@ -39,6 +40,7 @@ item.copper_nugget_low.name=Copper Nugget
 item.copper_nugget_medium.name=Copper Nugget
 item.copper_nugget_good.name=Copper Nugget
 item.copper_nugget_high.name=Copper Nugget
+item.copper_nugget_perfect.name=Copper Nugget
 
 //FOOD
 item.dough.name=Dough
@@ -112,6 +114,7 @@ tile.copper_ore_low.name=Copper Ore
 tile.copper_ore_medium.name=Copper Ore
 tile.copper_ore_good.name=Copper Ore
 tile.copper_ore_high.name=Copper Ore
+tile.copper_ore_perfect.name=Copper Ore
 tile.copper_block.name=Copper Block
 
 //SLABS

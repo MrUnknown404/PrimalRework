@@ -1,7 +1,7 @@
 package mrunknown404.primalrework.client.gui;
 
 import mrunknown404.primalrework.Main;
-import mrunknown404.primalrework.inventory.ContainerClayFurnace;
+import mrunknown404.primalrework.inventory.container.ContainerClayFurnace;
 import mrunknown404.primalrework.tileentity.TileEntityClayFurnace;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;

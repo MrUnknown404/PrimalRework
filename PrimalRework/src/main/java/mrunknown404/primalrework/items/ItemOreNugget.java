@@ -29,4 +29,12 @@ public class ItemOreNugget extends ItemBase {
 	public List<String> getTooltips(String name) {
 		return Arrays.asList("" + value.units + " " + new TextComponentTranslation("item.ore_units.tooltip").getUnformattedText());
 	}
+	
+	public EnumAlloy getAlloy() {
+		return alloy;
+	}
+	
+	public EnumOreValue getOreValue() {
+		return value;
+	}
 }

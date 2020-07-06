@@ -1,4 +1,4 @@
-package mrunknown404.primalrework.inventory;
+package mrunknown404.primalrework.inventory.container;
 
 import mrunknown404.primalrework.init.ModItems;
 import mrunknown404.primalrework.inventory.slot.SlotBase;

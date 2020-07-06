@@ -1,7 +1,7 @@
 package mrunknown404.primalrework.client.gui;
 
 import mrunknown404.primalrework.Main;
-import mrunknown404.primalrework.inventory.ContainerFirePit;
+import mrunknown404.primalrework.inventory.container.ContainerFirePit;
 import mrunknown404.primalrework.tileentity.TileEntityFirePit;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;

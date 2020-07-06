@@ -1,4 +1,4 @@
-package mrunknown404.primalrework.blocks;
+package mrunknown404.primalrework.blocks.slabs;
 
 import mrunknown404.primalrework.blocks.util.BlockSlabBase;
 import mrunknown404.primalrework.init.ModBlocks;
@@ -9,20 +9,21 @@ import mrunknown404.unknownlibs.utils.DoubleValue;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 
-public class BlockStoneSlab extends BlockSlabBase {
+public class BlockThatchSlab extends BlockSlabBase {
 	
-	public BlockStoneSlab(String name, boolean isDouble) {
-		super(name, Material.ROCK, SoundType.STONE, 1.5f, 1.5f, isDouble, EnumStage.stage1,
-				new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.pickaxe, EnumToolMaterial.flint));
+	public BlockThatchSlab(String name, boolean isDouble) {
+		super(name, Material.LEAVES, SoundType.PLANT, 0.15f, 0.15f, isDouble, EnumStage.stage0,
+				new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.none, EnumToolMaterial.hand),
+				new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.knife, EnumToolMaterial.flint));
 	}
 	
 	@Override
 	public BlockSlabBase getSingleVersion() {
-		return (BlockSlabBase) ModBlocks.STONE_SLAB;
+		return (BlockSlabBase) ModBlocks.THATCH_SLAB;
 	}
 	
 	@Override
 	public BlockSlabBase getDoubleVersion() {
-		return (BlockSlabBase) ModBlocks.STONE_DOUBLE_SLAB;
+		return (BlockSlabBase) ModBlocks.THATCH_DOUBLE_SLAB;
 	}
 }

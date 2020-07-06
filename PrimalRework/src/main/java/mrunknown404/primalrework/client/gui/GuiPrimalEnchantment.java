@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import mrunknown404.primalrework.Main;
 import mrunknown404.primalrework.init.ModItems;
-import mrunknown404.primalrework.inventory.ContainerPrimalEnchanting;
+import mrunknown404.primalrework.inventory.container.ContainerPrimalEnchanting;
 import mrunknown404.primalrework.network.message.PrimalEnchantingMessage;
 import mrunknown404.primalrework.tileentity.TileEntityPrimalEnchanting;
 import net.minecraft.client.gui.inventory.GuiContainer;

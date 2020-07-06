@@ -2,7 +2,7 @@ package mrunknown404.primalrework.tileentity;
 
 import java.util.Random;
 
-import mrunknown404.primalrework.inventory.ContainerPrimalEnchanting;
+import mrunknown404.primalrework.inventory.container.ContainerPrimalEnchanting;
 import mrunknown404.unknownlibs.tileentity.TileEntityInventory;
 import net.minecraft.item.Item;
 import net.minecraft.util.EnumParticleTypes;

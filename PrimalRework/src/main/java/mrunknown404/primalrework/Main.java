@@ -57,6 +57,7 @@ public class Main {
 	public static final int GUI_ID_PRIMAL_ENCHANTING = 3;
 	public static final int GUI_ID_CHARCOAL_KILN = 4;
 	public static final int GUI_ID_CLAY_FURNACE = 5;
+	public static final int GUI_ID_CLAY_VESSEL = 6;
 	
 	public static final WorldType PRIMAL_WORLD = new WorldTypePrimal();
 	
@@ -88,6 +89,7 @@ public class Main {
 		GameRegistry.registerTileEntity(TileEntityCharcoalPitMaster.class, new ResourceLocation(Main.MOD_ID, "charcoal_pit_master"));
 		GameRegistry.registerTileEntity(TileEntityClayFurnace.class, new ResourceLocation(Main.MOD_ID, "clay_furnace"));
 		
+		//TODO split these up a bit better
 		MinecraftForge.EVENT_BUS.register(new PlayerEventHandler());
 		MinecraftForge.EVENT_BUS.register(new BlockEventHandler());
 		MinecraftForge.EVENT_BUS.register(new WorldEventHandler());

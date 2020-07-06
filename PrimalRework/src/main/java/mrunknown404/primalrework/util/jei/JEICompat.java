@@ -25,7 +25,7 @@ import mrunknown404.primalrework.client.gui.GuiFirePit;
 import mrunknown404.primalrework.init.ModBlocks;
 import mrunknown404.primalrework.init.ModItems;
 import mrunknown404.primalrework.init.ModRecipes;
-import mrunknown404.primalrework.inventory.ContainerFirePit;
+import mrunknown404.primalrework.inventory.container.ContainerFirePit;
 import mrunknown404.primalrework.recipes.util.IRecipeBase;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.helpers.StageHelper;

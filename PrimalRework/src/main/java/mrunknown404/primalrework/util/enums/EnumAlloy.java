@@ -1,9 +1,13 @@
 package mrunknown404.primalrework.util.enums;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import mrunknown404.unknownlibs.utils.DoubleValue;
+import mrunknown404.unknownlibs.utils.MathUtils;
 
 /**<pre>
  * unknown
@@ -23,9 +27,14 @@ public enum EnumAlloy {
 				List<AlloyRequirement> reqs = alloy.getAlloyRequirements();
 				int matched = 0;
 				
+				float total = 0;
+				for (DoubleValue<EnumAlloy, Integer> dv : metals) {
+					total += dv.getR();
+				}
+				
 				for (AlloyRequirement req : reqs) {
 					for (DoubleValue<EnumAlloy, Integer> dv : metals) {
-						if (req.alloy == dv.getL() && req.within(dv.getR())) {
+						if (req.alloy == dv.getL() && req.within(MathUtils.floor(((float) dv.getR() / total) * 100))) {
 							matched++;
 						}
 					}
@@ -38,6 +47,18 @@ public enum EnumAlloy {
 		}
 		
 		return unknown;
+	}
+	
+	public static EnumAlloy getAlloy(Map<EnumAlloy, Integer> metalsIn) {
+		List<DoubleValue<EnumAlloy, Integer>> metalsOut = new ArrayList<DoubleValue<EnumAlloy, Integer>>();
+		
+		Iterator<Entry<EnumAlloy, Integer>> it = metalsIn.entrySet().iterator();
+		while (it.hasNext()) {
+			Entry<EnumAlloy, Integer> pair = it.next();
+			metalsOut.add(new DoubleValue<EnumAlloy, Integer>(pair.getKey(), pair.getValue()));
+		}
+		
+		return getAlloy(metalsOut);
 	}
 	
 	public List<AlloyRequirement> getAlloyRequirements() {

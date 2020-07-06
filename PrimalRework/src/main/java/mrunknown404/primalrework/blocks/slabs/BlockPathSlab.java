@@ -1,4 +1,4 @@
-package mrunknown404.primalrework.blocks;
+package mrunknown404.primalrework.blocks.slabs;
 
 import java.util.Random;
 

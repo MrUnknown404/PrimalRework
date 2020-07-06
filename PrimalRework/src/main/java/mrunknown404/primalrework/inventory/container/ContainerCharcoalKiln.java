@@ -1,4 +1,4 @@
-package mrunknown404.primalrework.inventory;
+package mrunknown404.primalrework.inventory.container;
 
 import mrunknown404.primalrework.inventory.slot.SlotCharcoalKilnInput;
 import mrunknown404.primalrework.tileentity.TileEntityCharcoalKiln;

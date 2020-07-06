@@ -4,6 +4,7 @@ import org.apache.commons.lang3.text.WordUtils;
 
 import mrunknown404.primalrework.init.ModBlocks;
 import mrunknown404.primalrework.init.ModItems;
+import mrunknown404.primalrework.items.ItemOreNugget;
 import mrunknown404.primalrework.util.enums.EnumToolType;
 import mrunknown404.primalrework.util.harvest.ItemHarvestInfo;
 import mrunknown404.primalrework.util.helpers.HarvestHelper;
@@ -26,6 +27,12 @@ public class OreDict {
 		for (int i = 0; i < 16; i++) {
 			OreDictionary.registerOre("wool", new ItemStack(Blocks.WOOL, 1, i));
 			OreDictionary.registerOre("bed", new ItemStack(Items.BED, 1, i));
+		}
+		
+		for (Item item : ModItems.ITEMS) {
+			if (item instanceof ItemOreNugget) {
+				OreDictionary.registerOre("nuggetOre", item);
+			}
 		}
 		
 		OreDictionary.registerOre("prDyeWhite", ModItems.WHITE_DYE);

@@ -1,4 +1,4 @@
-package mrunknown404.primalrework.inventory;
+package mrunknown404.primalrework.inventory.container;
 
 import java.util.List;
 import java.util.Random;

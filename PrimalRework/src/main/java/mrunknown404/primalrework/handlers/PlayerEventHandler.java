@@ -1,15 +1,19 @@
 package mrunknown404.primalrework.handlers;
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Random;
 
 import mrunknown404.primalrework.Main;
 import mrunknown404.primalrework.init.ModBlocks;
 import mrunknown404.primalrework.init.ModItems;
+import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolType;
 import mrunknown404.primalrework.util.helpers.HarvestHelper;
+import mrunknown404.primalrework.util.helpers.StageHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.Enchantment;
@@ -31,6 +35,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.BonemealEvent;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteract;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -38,6 +43,20 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class PlayerEventHandler {
 	
 	private final List<Block> fire_blocks = Arrays.asList(ModBlocks.LIT_PRIMAL_TORCH, Blocks.TORCH);
+	
+	@SubscribeEvent
+	public void tooltip(ItemTooltipEvent e) {
+		Iterator<Entry<EnumStage, List<ItemStack>>> it = StageHelper.ITEM_STAGE_MAP.entrySet().iterator();
+		while (it.hasNext()) {
+			Entry<EnumStage, List<ItemStack>> pair = it.next();
+			for (ItemStack item : pair.getValue()) {
+				if (item.getItem() == e.getItemStack().getItem() && item.getMetadata() == e.getItemStack().getMetadata()) {
+					e.getToolTip().add("Stage: " + pair.getKey().getName());
+					return;
+				}
+			}
+		}
+	}
 	
 	@SubscribeEvent
 	public void onBonemeal(BonemealEvent e) {

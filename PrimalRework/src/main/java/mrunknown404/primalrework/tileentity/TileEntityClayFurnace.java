@@ -1,6 +1,6 @@
 package mrunknown404.primalrework.tileentity;
 
-import mrunknown404.primalrework.inventory.ContainerCharcoalKiln;
+import mrunknown404.primalrework.inventory.container.ContainerCharcoalKiln;
 import mrunknown404.unknownlibs.tileentity.TileEntityInventory;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;

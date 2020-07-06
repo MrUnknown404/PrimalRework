@@ -10,23 +10,23 @@ import mrunknown404.primalrework.blocks.BlockClayFurnace;
 import mrunknown404.primalrework.blocks.BlockClayPot;
 import mrunknown404.primalrework.blocks.BlockCraftingStump;
 import mrunknown404.primalrework.blocks.BlockDenseLog;
-import mrunknown404.primalrework.blocks.BlockDirtSlab;
 import mrunknown404.primalrework.blocks.BlockDryingTable;
 import mrunknown404.primalrework.blocks.BlockFirePit;
-import mrunknown404.primalrework.blocks.BlockGrassSlab;
 import mrunknown404.primalrework.blocks.BlockGroundItem;
 import mrunknown404.primalrework.blocks.BlockLoom;
 import mrunknown404.primalrework.blocks.BlockMushroomGrass;
-import mrunknown404.primalrework.blocks.BlockMushroomGrassSlab;
 import mrunknown404.primalrework.blocks.BlockOre;
-import mrunknown404.primalrework.blocks.BlockPathSlab;
 import mrunknown404.primalrework.blocks.BlockPrimalEnchantingTable;
 import mrunknown404.primalrework.blocks.BlockPrimalTorchLit;
 import mrunknown404.primalrework.blocks.BlockPrimalTorchUnlit;
 import mrunknown404.primalrework.blocks.BlockSalt;
-import mrunknown404.primalrework.blocks.BlockStoneSlab;
 import mrunknown404.primalrework.blocks.BlockStrippedLog;
-import mrunknown404.primalrework.blocks.BlockThatchSlab;
+import mrunknown404.primalrework.blocks.slabs.BlockDirtSlab;
+import mrunknown404.primalrework.blocks.slabs.BlockGrassSlab;
+import mrunknown404.primalrework.blocks.slabs.BlockMushroomGrassSlab;
+import mrunknown404.primalrework.blocks.slabs.BlockPathSlab;
+import mrunknown404.primalrework.blocks.slabs.BlockStoneSlab;
+import mrunknown404.primalrework.blocks.slabs.BlockThatchSlab;
 import mrunknown404.primalrework.blocks.util.BlockBase;
 import mrunknown404.primalrework.util.enums.EnumAlloy;
 import mrunknown404.primalrework.util.enums.EnumOreValue;
@@ -70,6 +70,7 @@ public class ModBlocks {
 	public static final Block COPPER_ORE_MEDIUM = new BlockOre(2, 2, EnumStage.stage2, EnumAlloy.copper, EnumOreValue.medium, BlockOre.COPPER_TYPES);
 	public static final Block COPPER_ORE_GOOD = new BlockOre(2, 2, EnumStage.stage2, EnumAlloy.copper, EnumOreValue.good, BlockOre.COPPER_TYPES);
 	public static final Block COPPER_ORE_HIGH = new BlockOre(2, 2, EnumStage.stage2, EnumAlloy.copper, EnumOreValue.high, BlockOre.COPPER_TYPES);
+	public static final Block COPPER_ORE_PERFECT = new BlockOre(2, 2, EnumStage.stage2, EnumAlloy.copper, EnumOreValue.perfect, BlockOre.COPPER_TYPES);
 	public static final Block COPPER_BLOCK = new BlockOre(3, 3, EnumStage.stage2, EnumAlloy.copper, BlockOre.COPPER_TYPES);
 	
 	//SLABS

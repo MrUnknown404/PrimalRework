@@ -1,7 +1,7 @@
 package mrunknown404.primalrework.tileentity;
 
 import mrunknown404.primalrework.init.ModRecipes;
-import mrunknown404.primalrework.inventory.ContainerFirePit;
+import mrunknown404.primalrework.inventory.container.ContainerFirePit;
 import mrunknown404.unknownlibs.tileentity.TileEntityInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
