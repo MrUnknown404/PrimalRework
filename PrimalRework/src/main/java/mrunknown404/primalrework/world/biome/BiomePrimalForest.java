@@ -9,6 +9,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenBigMushroom;
 import net.minecraft.world.gen.feature.WorldGenBirchTree;
@@ -29,9 +30,10 @@ public class BiomePrimalForest extends BiomeBase {
 	// TODO add mushrooms to ground
 	
 	public BiomePrimalForest(BiomeModifier biomeMod, ForestType forestType, int weight, int treesPerChunk) {
-		super(forestType.toString().toLowerCase() + "_forest", BiomeType.WARM, biomeMod, forestType == ForestType.MUSHROOM ?
-				new BiomeDictionary.Type[] { BiomeDictionary.Type.FOREST, BiomeDictionary.Type.DENSE, BiomeDictionary.Type.MUSHROOM } :
-				new BiomeDictionary.Type[] { BiomeDictionary.Type.FOREST }, weight, true, false);
+		super(forestType.toString().toLowerCase() + "_forest", BiomeType.WARM, biomeMod,
+				forestType == ForestType.MUSHROOM ? new BiomeDictionary.Type[] { BiomeDictionary.Type.FOREST, BiomeDictionary.Type.DENSE, BiomeDictionary.Type.MUSHROOM } :
+						new BiomeDictionary.Type[] { BiomeDictionary.Type.FOREST },
+				weight, true, false);
 		this.forestType = forestType;
 		this.decorator.treesPerChunk = treesPerChunk;
 		this.decorator.grassPerChunk = 3;
@@ -41,6 +43,11 @@ public class BiomePrimalForest extends BiomeBase {
 		} else if (forestType == ForestType.NORMAL) {
 			spawnableCreatureList.add(new SpawnListEntry(EntityWolf.class, 5, 2, 4));
 		}
+	}
+	
+	@Override
+	public BiomeDecorator createBiomeDecorator() {
+		return getModdedBiomeDecorator(new PrimalBiomeDecorator());
 	}
 	
 	@Override

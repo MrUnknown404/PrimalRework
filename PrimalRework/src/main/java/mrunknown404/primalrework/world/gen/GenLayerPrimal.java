@@ -5,7 +5,6 @@ import java.util.List;
 
 import mrunknown404.primalrework.init.ModBiomes;
 import mrunknown404.primalrework.world.biome.BiomeBase;
-import net.minecraft.init.Biomes;
 import net.minecraft.util.WeightedRandom;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
@@ -16,14 +15,14 @@ import net.minecraftforge.common.BiomeManager.BiomeEntry;
 import net.minecraftforge.common.BiomeManager.BiomeType;
 
 public class GenLayerPrimal extends GenLayer {
-	private List<BiomeManager.BiomeEntry>[] biomes = new ArrayList[BiomeManager.BiomeType.values().length];
+	private List<BiomeEntry>[] biomes = new ArrayList[BiomeType.values().length];
 	
 	public GenLayerPrimal(long seed, GenLayer parent, WorldType worldType) {
 		super(seed);
 		this.parent = parent;
 		
-		for (BiomeManager.BiomeType type : BiomeManager.BiomeType.values()) {
-			biomes[type.ordinal()] = new ArrayList<BiomeManager.BiomeEntry>();
+		for (BiomeType type : BiomeType.values()) {
+			biomes[type.ordinal()] = new ArrayList<BiomeEntry>();
 		}
 		
 		for (Biome b2 : ModBiomes.BIOMES) {
@@ -49,18 +48,16 @@ public class GenLayerPrimal extends GenLayer {
 				int k = aint[j + i * areaWidth];
 				k = k & -3841;
 				
-				if (isBiomeOceanic(k)) {
-					aint1[j + i * areaWidth] = k;
-				} else if (k == Biome.getIdForBiome(Biomes.MUSHROOM_ISLAND)) {
+				if (isBiomeOceanic(k)) { //REPLACE
 					aint1[j + i * areaWidth] = k;
 				} else if (k == 1) {
-					aint1[j + i * areaWidth] = Biome.getIdForBiome(getWeightedBiomeEntry(BiomeManager.BiomeType.DESERT).biome);
+					aint1[j + i * areaWidth] = Biome.getIdForBiome(getWeightedBiomeEntry(BiomeType.DESERT).biome);
 				} else if (k == 2) {
-					aint1[j + i * areaWidth] = Biome.getIdForBiome(getWeightedBiomeEntry(BiomeManager.BiomeType.WARM).biome);
+					aint1[j + i * areaWidth] = Biome.getIdForBiome(getWeightedBiomeEntry(BiomeType.WARM).biome);
 				} else if (k == 3) {
-					aint1[j + i * areaWidth] = Biome.getIdForBiome(getWeightedBiomeEntry(BiomeManager.BiomeType.COOL).biome);
+					aint1[j + i * areaWidth] = Biome.getIdForBiome(getWeightedBiomeEntry(BiomeType.COOL).biome);
 				} else if (k == 4) {
-					aint1[j + i * areaWidth] = Biome.getIdForBiome(getWeightedBiomeEntry(BiomeManager.BiomeType.ICY).biome);
+					aint1[j + i * areaWidth] = Biome.getIdForBiome(getWeightedBiomeEntry(BiomeType.ICY).biome);
 				}
 			}
 		}
@@ -68,7 +65,7 @@ public class GenLayerPrimal extends GenLayer {
 		return aint1;
 	}
 	
-	private BiomeManager.BiomeEntry getWeightedBiomeEntry(BiomeManager.BiomeType type) {
+	private BiomeEntry getWeightedBiomeEntry(BiomeType type) {
 		int totalWeight = WeightedRandom.getTotalWeight(biomes[type.ordinal()]);
 		int weight = BiomeManager.isTypeListModded(type) ? nextInt(totalWeight) : nextInt(totalWeight / 10) * 10;
 		return WeightedRandom.getRandomItem(biomes[type.ordinal()], weight);

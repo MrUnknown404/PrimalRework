@@ -14,13 +14,9 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.IChunkGenerator;
-import net.minecraft.world.gen.MapGenBase;
-import net.minecraft.world.gen.MapGenCaves;
-import net.minecraft.world.gen.MapGenRavine;
 import net.minecraft.world.gen.NoiseGeneratorOctaves;
 import net.minecraft.world.gen.NoiseGeneratorPerlin;
 import net.minecraftforge.event.ForgeEventFactory;
-import net.minecraftforge.event.terraingen.InitMapGenEvent;
 import net.minecraftforge.event.terraingen.InitNoiseGensEvent;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.event.terraingen.TerrainGen;
@@ -40,8 +36,6 @@ public class ChunkGeneratorPrimal implements IChunkGenerator {
 	private final float[] biomeWeights;
 	private final Random rand;
 	
-	private MapGenBase caveGenerator = new MapGenCaves();
-	private MapGenBase ravineGenerator = new MapGenRavine();
 	private Biome[] biomesForGeneration;
 	private double[] depthBuffer = new double[256];
 	private double[] mainNoiseRegion;
@@ -50,9 +44,6 @@ public class ChunkGeneratorPrimal implements IChunkGenerator {
 	private double[] depthRegion;
 	
 	public ChunkGeneratorPrimal(World w, long seed) {
-		caveGenerator = TerrainGen.getModdedMapGen(caveGenerator, InitMapGenEvent.EventType.CAVE);
-		ravineGenerator = TerrainGen.getModdedMapGen(ravineGenerator, InitMapGenEvent.EventType.RAVINE);
-		
 		world = w;
 		rand = new Random(seed);
 		minLimitPerlinNoise = new NoiseGeneratorOctaves(rand, 16);
@@ -159,11 +150,8 @@ public class ChunkGeneratorPrimal implements IChunkGenerator {
 		rand.setSeed(x * 341873128712L + z * 132897987541L);
 		ChunkPrimer chunkprimer = new ChunkPrimer();
 		setBlocksInChunk(x, z, chunkprimer);
-		biomesForGeneration = this.world.getBiomeProvider().getBiomes(biomesForGeneration, x * 16, z * 16, 16, 16);
+		biomesForGeneration = world.getBiomeProvider().getBiomes(biomesForGeneration, x * 16, z * 16, 16, 16);
 		replaceBiomeBlocks(x, z, chunkprimer, biomesForGeneration);
-		
-		caveGenerator.generate(world, x, z, chunkprimer);
-		ravineGenerator.generate(world, x, z, chunkprimer);
 		
 		Chunk chunk = new Chunk(world, chunkprimer, x, z);
 		byte[] abyte = chunk.getBiomeArray();
@@ -177,12 +165,11 @@ public class ChunkGeneratorPrimal implements IChunkGenerator {
 	}
 	
 	private void generateHeightmap(int xOffset, int yOffset, int zOffset) {
-		depthRegion = depthNoise.generateNoiseOctaves(depthRegion, xOffset, zOffset, 5, 5, WorldInfo.depthNoiseScaleX, WorldInfo.depthNoiseScaleZ,
-				WorldInfo.depthNoiseScaleExponent);
+		depthRegion = depthNoise.generateNoiseOctaves(depthRegion, xOffset, zOffset, 5, 5, WorldInfo.depthNoiseScaleX, WorldInfo.depthNoiseScaleZ, WorldInfo.depthNoiseScaleExponent);
 		float f = WorldInfo.coordinateScale;
 		float f1 = WorldInfo.heightScale;
-		mainNoiseRegion = mainPerlinNoise.generateNoiseOctaves(mainNoiseRegion, xOffset, yOffset, zOffset, 5, 33, 5, f / WorldInfo.mainNoiseScaleX,
-				f1 / WorldInfo.mainNoiseScaleY, f / WorldInfo.mainNoiseScaleZ);
+		mainNoiseRegion = mainPerlinNoise.generateNoiseOctaves(mainNoiseRegion, xOffset, yOffset, zOffset, 5, 33, 5, f / WorldInfo.mainNoiseScaleX, f1 / WorldInfo.mainNoiseScaleY,
+				f / WorldInfo.mainNoiseScaleZ);
 		minLimitRegion = minLimitPerlinNoise.generateNoiseOctaves(minLimitRegion, xOffset, yOffset, zOffset, 5, 33, 5, f, f1, f);
 		maxLimitRegion = maxLimitPerlinNoise.generateNoiseOctaves(maxLimitRegion, xOffset, yOffset, zOffset, 5, 33, 5, f, f1, f);
 		int i = 0;

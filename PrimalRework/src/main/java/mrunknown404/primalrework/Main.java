@@ -28,7 +28,6 @@ import mrunknown404.primalrework.tileentity.TileEntityLoom;
 import mrunknown404.primalrework.tileentity.TileEntityPrimalEnchanting;
 import mrunknown404.primalrework.util.OreDict;
 import mrunknown404.primalrework.util.VanillaOverrides;
-import mrunknown404.primalrework.world.WorldGen;
 import mrunknown404.primalrework.world.WorldTypePrimal;
 import mrunknown404.unknownlibs.entity.EntityRegisterHelper;
 import mrunknown404.unknownlibs.utils.ICommonProxy;
@@ -73,7 +72,7 @@ public class Main {
 	public static ICommonProxy proxy;
 	
 	// TODO add map system similar to antique atlas
-	// TODO completely redo world gen
+	// TODO replace river/ocean biomes
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent e) {
@@ -118,8 +117,6 @@ public class Main {
 		
 		VanillaOverrides.overrideAll();
 		OreDict.register();
-		
-		GameRegistry.registerWorldGenerator(new WorldGen(), 0);
 	}
 	
 	@EventHandler

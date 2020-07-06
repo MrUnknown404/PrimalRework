@@ -42,6 +42,13 @@ item.copper_nugget_good.name=Copper Nugget
 item.copper_nugget_high.name=Copper Nugget
 item.copper_nugget_perfect.name=Copper Nugget
 
+item.tin_nugget_poor.name=Tin Nugget
+item.tin_nugget_low.name=Tin Nugget
+item.tin_nugget_medium.name=Tin Nugget
+item.tin_nugget_good.name=Tin Nugget
+item.tin_nugget_high.name=Tin Nugget
+item.tin_nugget_perfect.name=Tin Nugget
+
 //FOOD
 item.dough.name=Dough
 item.cooked_carrot.name=Cooked Carrot

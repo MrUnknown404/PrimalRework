@@ -83,6 +83,13 @@ public class ModItems {
 	public static final Item COPPER_NUGGET_HIGH = new ItemOreNugget(EnumStage.stage2, EnumAlloy.copper, EnumOreValue.high);
 	public static final Item COPPER_NUGGET_PERFECT = new ItemOreNugget(EnumStage.stage2, EnumAlloy.copper, EnumOreValue.perfect);
 	
+	public static final Item TIN_NUGGET_POOR = new ItemOreNugget(EnumStage.stage2, EnumAlloy.tin, EnumOreValue.poor);
+	public static final Item TIN_NUGGET_LOW = new ItemOreNugget(EnumStage.stage2, EnumAlloy.tin, EnumOreValue.low);
+	public static final Item TIN_NUGGET_MEDIUM = new ItemOreNugget(EnumStage.stage2, EnumAlloy.tin, EnumOreValue.medium);
+	public static final Item TIN_NUGGET_GOOD = new ItemOreNugget(EnumStage.stage2, EnumAlloy.tin, EnumOreValue.good);
+	public static final Item TIN_NUGGET_HIGH = new ItemOreNugget(EnumStage.stage2, EnumAlloy.tin, EnumOreValue.high);
+	public static final Item TIN_NUGGET_PERFECT = new ItemOreNugget(EnumStage.stage2, EnumAlloy.tin, EnumOreValue.perfect);
+	
 	//FOOD
 	public static final Item DOUGH = new ItemFoodBase("dough", EnumStage.stage1, 1, 1f);
 	public static final Item COOKED_CARROT = new ItemFoodBase("cooked_carrot", EnumStage.stage0, 5, 0.6f);

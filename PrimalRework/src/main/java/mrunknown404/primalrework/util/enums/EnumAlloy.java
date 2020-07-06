@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import mrunknown404.unknownlibs.utils.DoubleValue;
-import mrunknown404.unknownlibs.utils.MathUtils;
 
 /**<pre>
  * unknown
@@ -34,7 +33,7 @@ public enum EnumAlloy {
 				
 				for (AlloyRequirement req : reqs) {
 					for (DoubleValue<EnumAlloy, Integer> dv : metals) {
-						if (req.alloy == dv.getL() && req.within(MathUtils.floor(((float) dv.getR() / total) * 100))) {
+						if (req.alloy == dv.getL() && req.within(Math.round(((float) dv.getR() / total) * 100))) {
 							matched++;
 						}
 					}
