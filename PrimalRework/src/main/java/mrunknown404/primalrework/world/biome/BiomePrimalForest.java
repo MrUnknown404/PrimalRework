@@ -26,7 +26,7 @@ public class BiomePrimalForest extends BiomeBase {
 	private static final WorldGenTaiga1 SPRUCE_TREE = new WorldGenTaiga1();
 	private final ForestType forestType;
 	
-	// TODO add mushrooms to ground & more cool trees
+	// TODO add mushrooms to ground
 	
 	public BiomePrimalForest(BiomeModifier biomeMod, ForestType forestType, int weight, int treesPerChunk) {
 		super(forestType.toString().toLowerCase() + "_forest", BiomeType.WARM, biomeMod, forestType == ForestType.MUSHROOM ?

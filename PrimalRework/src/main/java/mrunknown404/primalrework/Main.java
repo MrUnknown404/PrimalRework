@@ -73,7 +73,6 @@ public class Main {
 	public static ICommonProxy proxy;
 	
 	// TODO add map system similar to antique atlas
-	// TODO think of a metal working system
 	// TODO completely redo world gen
 	
 	@EventHandler

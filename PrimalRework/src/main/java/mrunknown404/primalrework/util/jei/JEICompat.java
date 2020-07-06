@@ -48,8 +48,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 @JEIPlugin
 public class JEICompat implements IModPlugin {
 	
-	// TODO replace vanilla crafting GUI with custom GUI
-	// TODO add vanilla enchanting, primal enchanting, charcoal kiln (and charcoal pit)
+	// TODO add vanilla enchanting, primal enchanting, charcoal kiln (and charcoal pit), clay furnace
 	
 	public static final Map<String, List<IRecipeWrapperBase<?>>> RECIPE_MAP = new HashMap<String, List<IRecipeWrapperBase<?>>>();
 	
