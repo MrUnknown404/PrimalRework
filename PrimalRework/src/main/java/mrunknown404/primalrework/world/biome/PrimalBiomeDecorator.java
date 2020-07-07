@@ -80,7 +80,7 @@ public class PrimalBiomeDecorator extends BiomeDecorator {
 		
 		for (int x = 0; x < 16; x++) {
 			for (int z = 0; z < 16; z++) {
-				slabsGen.generate(w, r, w.getTopSolidOrLiquidBlock(chunkPos.add(x + 8, -1, z + 8)));
+				slabsGen.generate(w, r, w.getTopSolidOrLiquidBlock(chunkPos.add(x + 8, 0, z + 8)));
 			}
 		}
 		

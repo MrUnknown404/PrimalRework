@@ -65,8 +65,8 @@ public class ModRecipes {
 		
 		CLAY_FURNACE_FUELS.add(new DoubleValue<ItemStack, Integer>(new ItemStack(Items.COAL, 1, 0), 1200));
 		CLAY_FURNACE_FUELS.add(new DoubleValue<ItemStack, Integer>(new ItemStack(Items.COAL, 1, 1), 1200));
-		CLAY_FURNACE_FUELS.add(new DoubleValue<ItemStack, Integer>(new ItemStack(Blocks.COAL_BLOCK, 1, 1), 1200 * 9));
-		CLAY_FURNACE_FUELS.add(new DoubleValue<ItemStack, Integer>(new ItemStack(ModBlocks.CHARCOAL_BLOCK, 1, 1), 1200 * 4));
+		CLAY_FURNACE_FUELS.add(new DoubleValue<ItemStack, Integer>(new ItemStack(Blocks.COAL_BLOCK), 1200 * 9));
+		CLAY_FURNACE_FUELS.add(new DoubleValue<ItemStack, Integer>(new ItemStack(ModBlocks.CHARCOAL_BLOCK), 1200 * 4));
 		
 		CLAY_FURNACE_FUELS.sort(new CompareItemStack());
 		

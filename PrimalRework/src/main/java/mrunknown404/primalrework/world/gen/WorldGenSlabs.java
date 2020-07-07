@@ -13,6 +13,7 @@ public class WorldGenSlabs extends WorldGenerator {
 	@SuppressWarnings("deprecation")
 	@Override
 	public boolean generate(World w, Random r, BlockPos pos) {
+		pos = pos.down();
 		Block b = w.getBlockState(pos).getBlock();
 		
 		if ((b == Blocks.GRASS || b == Blocks.SNOW_LAYER || b == ModBlocks.MUSHROOM_GRASS) && w.getBlockState(pos.up()).getMaterial().isReplaceable()) {
