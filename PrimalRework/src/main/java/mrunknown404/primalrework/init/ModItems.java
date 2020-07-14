@@ -8,6 +8,7 @@ import java.util.Map.Entry;
 
 import javax.annotation.Nullable;
 
+import mrunknown404.primalrework.items.ItemCastable;
 import mrunknown404.primalrework.items.ItemChangeWithWater;
 import mrunknown404.primalrework.items.ItemClayBucket;
 import mrunknown404.primalrework.items.ItemClayBucketMilk;
@@ -37,6 +38,7 @@ public class ModItems {
 	
 	public static final List<Item> ITEMS = new ArrayList<Item>();
 	public static final Map<Fluid, ItemClayBucket> CLAY_BUCKETS = new HashMap<Fluid, ItemClayBucket>();
+	public static final Map<EnumToolType, ItemCastable> CASTABLES = new HashMap<EnumToolType, ItemCastable>();
 	
 	// TODO add copper ingots/tools
 	
@@ -152,6 +154,10 @@ public class ModItems {
 	static {
 		//CLAY_BUCKETS.put(FluidRegistry.LAVA, new ItemClayBucket(FluidRegistry.LAVA));
 		CLAY_BUCKETS.put(FluidRegistry.WATER, new ItemClayBucket(FluidRegistry.WATER));
+		
+		for (EnumToolType type : EnumToolType.values()) {
+			CASTABLES.put(type, new ItemCastable(type, EnumStage.stage3));
+		}
 	}
 	
 	public static ItemClayBucket getClayBucket(@Nullable Fluid f) {

@@ -183,6 +183,9 @@ generator.primal=Primal World
 
 item.ore_units.tooltip=Units
 
+//MESSAGES
+message.to_hot=The Clay Vessel is too hot to open!
+
 //TOOLTIPS
 item.raw_hide.tooltip_0=Right click water while holding this item to wet it
 item.dry_tanned_hide.tooltip_0=Right click water while holding this item to wet it

@@ -7,6 +7,7 @@ import javax.annotation.Nullable;
 
 import mrunknown404.primalrework.Main;
 import mrunknown404.primalrework.capabilities.ClayVesselInventoryProvider;
+import mrunknown404.primalrework.client.gui.GuiHandler;
 import mrunknown404.primalrework.items.util.ItemBase;
 import mrunknown404.primalrework.util.enums.EnumAlloy;
 import mrunknown404.primalrework.util.enums.EnumStage;
@@ -18,7 +19,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.items.IItemHandler;
@@ -51,9 +52,9 @@ public class ItemClayVessel extends ItemBase {
 			ItemStack stack = player.getHeldItem(hand);
 			
 			if (!stack.hasTagCompound() || !stack.getTagCompound().hasKey("isLiquid") || !stack.getTagCompound().getBoolean("isLiquid")) {
-				player.openGui(Main.main, Main.GUI_ID_CLAY_VESSEL, world, (int) player.posX, (int) player.posY, (int) player.posZ);
-			} else {
-				player.sendMessage(new TextComponentString("too hot!")); //TODO open different GUI
+				player.openGui(Main.main, GuiHandler.GuiID.CLAY_VESSEL.toID(), world, (int) player.posX, (int) player.posY, (int) player.posZ);
+			} else if (stack.hasTagCompound() && stack.getTagCompound().hasKey("isLiquid") && stack.getTagCompound().getBoolean("isLiquid")) {
+				player.sendMessage(new TextComponentTranslation("message.to_hot"));
 			}
 		}
 		

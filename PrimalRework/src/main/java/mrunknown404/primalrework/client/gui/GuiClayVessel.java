@@ -43,7 +43,7 @@ public class GuiClayVessel extends GuiContainer {
 		int total = 0;
 		Iterator<Entry<EnumAlloy, Integer>> it = metals.entrySet().iterator();
 		while (it.hasNext()) {
-			total +=  it.next().getValue();
+			total += it.next().getValue();
 		}
 		
 		String alloy = total + " Units of " + StringUtils.capitalize(EnumAlloy.getAlloy(metals).toString());

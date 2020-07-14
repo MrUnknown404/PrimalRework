@@ -4,6 +4,7 @@ import java.util.Random;
 
 import mrunknown404.primalrework.Main;
 import mrunknown404.primalrework.blocks.util.BlockDirectionalBase;
+import mrunknown404.primalrework.client.gui.GuiHandler;
 import mrunknown404.primalrework.tileentity.TileEntityCharcoalKiln;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
@@ -100,7 +101,7 @@ public class BlockCharcoalKiln extends BlockDirectionalBase implements ITileEnti
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (!worldIn.isRemote) {
-			playerIn.openGui(Main.main, Main.GUI_ID_CHARCOAL_KILN, worldIn, pos.getX(), pos.getY(), pos.getZ());
+			playerIn.openGui(Main.main, GuiHandler.GuiID.CHARCOAL_KILN.toID(), worldIn, pos.getX(), pos.getY(), pos.getZ());
 		}
 		
 		return true;

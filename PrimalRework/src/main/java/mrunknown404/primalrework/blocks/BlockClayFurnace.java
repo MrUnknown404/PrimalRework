@@ -4,6 +4,7 @@ import java.util.Random;
 
 import mrunknown404.primalrework.Main;
 import mrunknown404.primalrework.blocks.util.BlockDirectionalBase;
+import mrunknown404.primalrework.client.gui.GuiHandler;
 import mrunknown404.primalrework.tileentity.TileEntityClayFurnace;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
@@ -101,7 +102,7 @@ public class BlockClayFurnace extends BlockDirectionalBase implements ITileEntit
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (!worldIn.isRemote) {
-			playerIn.openGui(Main.main, Main.GUI_ID_CLAY_FURNACE, worldIn, pos.getX(), pos.getY(), pos.getZ());
+			playerIn.openGui(Main.main, GuiHandler.GuiID.CLAY_FURNACE.toID(), worldIn, pos.getX(), pos.getY(), pos.getZ());
 		}
 		
 		return true;

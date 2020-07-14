@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import mrunknown404.primalrework.Main;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.jei.JEICompat;
 import mrunknown404.primalrework.world.StageWorldSaveData;
@@ -29,7 +30,9 @@ public class StageHelper {
 	public static void setStage(EnumStage stage) {
 		StageHelper.stage = stage;
 		StageWorldSaveData.load(world).markDirty();
-		JEICompat.setupRecipesAndItems();
+		if (Main.isJEILoaded()) {
+			JEICompat.setupRecipesAndItems();
+		}
 	}
 	
 	public static EnumStage getStage() {
@@ -38,7 +41,9 @@ public class StageHelper {
 	
 	public static void setStageFromNBT(EnumStage stage) {
 		StageHelper.stage = stage;
-		JEICompat.setupRecipesAndItems();
+		if (Main.isJEILoaded()) {
+			JEICompat.setupRecipesAndItems();
+		}
 	}
 	
 	public static boolean hasAccessToStage(EnumStage stage) {

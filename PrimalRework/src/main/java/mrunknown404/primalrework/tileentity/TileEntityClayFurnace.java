@@ -5,11 +5,15 @@ import mrunknown404.primalrework.init.ModItems;
 import mrunknown404.primalrework.init.ModRecipes;
 import mrunknown404.primalrework.inventory.container.ContainerCharcoalKiln;
 import mrunknown404.primalrework.inventory.container.ContainerClayFurnace;
+import mrunknown404.primalrework.items.ItemOreNugget;
+import mrunknown404.primalrework.util.enums.EnumAlloy;
 import mrunknown404.unknownlibs.tileentity.TileEntityInventory;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ITickable;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 
 public class TileEntityClayFurnace extends TileEntityInventory implements ITickable {
 	
@@ -57,8 +61,30 @@ public class TileEntityClayFurnace extends TileEntityInventory implements ITicka
 			cookTime--;
 			
 			if (cookTime == 0) {
-				input.getTagCompound().setBoolean("isLiquid", true);
-				setInventorySlotContents(ContainerClayFurnace.SLOT_OUTPUT, input);
+				IItemHandler inv = input.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+				
+				EnumAlloy alloy = null;
+				int units = 0;
+				for (int i = 0; i < inv.getSlots(); i++) {
+					if (inv.getStackInSlot(i).isEmpty()) {
+						continue;
+					}
+					
+					ItemOreNugget item = (ItemOreNugget) inv.getStackInSlot(i).getItem();
+					if (alloy == null) {
+						alloy = item.getAlloy();
+					}
+					units += item.getOreValue().units;
+				}
+				
+				ItemStack stack = new ItemStack(ModItems.CLAY_VESSEL);
+				NBTTagCompound tag = new NBTTagCompound();
+				tag.setBoolean("isLiquid", true);
+				tag.setInteger("units", units);
+				tag.setString("alloy", alloy.toString());
+				stack.setTagCompound(tag);
+				
+				setInventorySlotContents(ContainerClayFurnace.SLOT_OUTPUT, stack);
 				setInventorySlotContents(ContainerClayFurnace.SLOT_INPUT, ItemStack.EMPTY);
 				world.notifyBlockUpdate(pos, ModBlocks.CHARCOAL_KILN.getDefaultState(), ModBlocks.CHARCOAL_KILN.getDefaultState(), 3);
 				world.scheduleBlockUpdate(pos, ModBlocks.CHARCOAL_KILN, 0, 0);

@@ -35,6 +35,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.WorldType;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -54,12 +55,6 @@ import net.minecraftforge.fml.relauncher.Side;
 public class Main {
 	
 	public static final String MOD_ID = "primalrework";
-	public static final int GUI_ID_FIRE_PIT = 1;
-	public static final int GUI_ID_ENCHANTING = 2;
-	public static final int GUI_ID_PRIMAL_ENCHANTING = 3;
-	public static final int GUI_ID_CHARCOAL_KILN = 4;
-	public static final int GUI_ID_CLAY_FURNACE = 5;
-	public static final int GUI_ID_CLAY_VESSEL = 6;
 	
 	public static final WorldType PRIMAL_WORLD = new WorldTypePrimal();
 	
@@ -74,9 +69,13 @@ public class Main {
 	// TODO add map system similar to antique atlas
 	// TODO replace river/ocean biomes
 	
+	private static boolean isJEILoaded;
+	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent e) {
 		proxy.preInit();
+		
+		isJEILoaded = Loader.isModLoaded("jei");
 		
 		EntityRegisterHelper.registerEntities(ModEntities.ENTITIES, Main.main, Main.MOD_ID);
 		EntityRegistry.registerModEntity(new ResourceLocation(Main.MOD_ID, "item_drop"), EntityItemDrop.class, "item_drop", 0, Main.main, 64, 1, true);
@@ -131,5 +130,9 @@ public class Main {
 	@EventHandler
 	public void serverStart(FMLServerStartingEvent e) {
 		e.registerServerCommand(new CommandStage());
+	}
+	
+	public static boolean isJEILoaded() {
+		return isJEILoaded;
 	}
 }

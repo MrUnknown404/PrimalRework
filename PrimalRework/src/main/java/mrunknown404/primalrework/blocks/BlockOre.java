@@ -6,6 +6,7 @@ import java.util.Random;
 
 import mrunknown404.primalrework.blocks.util.BlockBase;
 import mrunknown404.primalrework.init.ModItems;
+import mrunknown404.primalrework.items.ItemOreNugget;
 import mrunknown404.primalrework.util.enums.EnumAlloy;
 import mrunknown404.primalrework.util.enums.EnumOreValue;
 import mrunknown404.primalrework.util.enums.EnumStage;
@@ -39,9 +40,16 @@ public class BlockOre extends BlockBase {
 	
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		for (Item item : ModItems.ITEMS) {
-			if (item.getUnlocalizedName().contains(alloy.toString()) && item.getUnlocalizedName().contains(value.toString())) {
-				return item;
+		if (value == EnumOreValue.block) {
+			return super.getItemDropped(state, rand, fortune);
+		}
+		
+		for (Item item1 : ModItems.ITEMS) {
+			if (item1 instanceof ItemOreNugget) {
+				ItemOreNugget item = (ItemOreNugget) item1;
+				if (item.getAlloy() == alloy && item.getOreValue() == value) {
+					return item1;
+				}
 			}
 		}
 		

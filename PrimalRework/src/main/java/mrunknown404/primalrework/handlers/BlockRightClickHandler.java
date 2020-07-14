@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import mrunknown404.primalrework.Main;
+import mrunknown404.primalrework.client.gui.GuiHandler;
 import mrunknown404.primalrework.init.ModBlocks;
 import mrunknown404.primalrework.util.enums.EnumToolType;
 import mrunknown404.primalrework.util.helpers.HarvestHelper;
@@ -98,7 +99,7 @@ public class BlockRightClickHandler {
 		
 		if (!w.isRemote) {
 			if (w.getTileEntity(pos) instanceof TileEntityEnchantmentTable) {
-				e.getEntityPlayer().openGui(Main.main, Main.GUI_ID_ENCHANTING, w, pos.getX(), pos.getY(), pos.getZ());
+				e.getEntityPlayer().openGui(Main.main, GuiHandler.GuiID.ENCHANTING.toID(), w, pos.getX(), pos.getY(), pos.getZ());
 				e.setCanceled(true);
 				return;
 			}
