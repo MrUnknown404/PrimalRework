@@ -1,0 +1,30 @@
+{
+	"display": {
+		"title": {
+			"text": "Plant Fiber"
+		},
+		"description": {
+			"text": "Break grass for plant fiber"
+		},
+		"icon": {
+			"item": "primalrework:plant_fiber"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"criteria": {
+		"get": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "primalrework:plant_fiber"
+					}
+				]
+			}
+		}
+	},
+	"parent": "primalrework:stage0/root"
+}

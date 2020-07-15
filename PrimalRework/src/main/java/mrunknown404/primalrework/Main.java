@@ -26,6 +26,7 @@ import mrunknown404.primalrework.tileentity.TileEntityDryingTable;
 import mrunknown404.primalrework.tileentity.TileEntityFirePit;
 import mrunknown404.primalrework.tileentity.TileEntityLoom;
 import mrunknown404.primalrework.tileentity.TileEntityPrimalEnchanting;
+import mrunknown404.primalrework.util.ModAdvancementList;
 import mrunknown404.primalrework.util.OreDict;
 import mrunknown404.primalrework.util.VanillaOverrides;
 import mrunknown404.primalrework.world.WorldTypePrimal;
@@ -57,6 +58,8 @@ public class Main {
 	public static final String MOD_ID = "primalrework";
 	
 	public static final WorldType PRIMAL_WORLD = new WorldTypePrimal();
+	
+	public static final ModAdvancementList ADV_LIST = new ModAdvancementList();
 	
 	public static final SimpleNetworkWrapper NETWORK = NetworkRegistry.INSTANCE.newSimpleChannel(MOD_ID);
 	

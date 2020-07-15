@@ -1,0 +1,89 @@
+{
+	"display": {
+		"title": {
+			"text": "Planks"
+		},
+		"description": {
+			"text": "Craft planks"
+		},
+		"icon": {
+			"item": "primalrework:oak_plank"
+		},
+		"frame": "goal",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"criteria": {
+		"get1": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "primalrework:oak_plank"
+					}
+				]
+			}
+		},
+		"get2": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "primalrework:spruce_plank"
+					}
+				]
+			}
+		},"get3": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "primalrework:birch_plank"
+					}
+				]
+			}
+		},
+		"get4": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "primalrework:jungle_plank"
+					}
+				]
+			}
+		},
+		"get5": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "primalrework:acacia_plank"
+					}
+				]
+			}
+		},
+		"get6": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "primalrework:dark_oak_plank"
+					}
+				]
+			}
+		}
+	},
+	"requirements": [
+		[
+			"get1",
+			"get2",
+			"get3",
+			"get4",
+			"get5",
+			"get6"
+		]
+	],
+	"parent": "primalrework:stage1/get_flint_saw"
+}

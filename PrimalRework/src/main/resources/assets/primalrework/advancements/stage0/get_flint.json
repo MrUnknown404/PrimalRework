@@ -1,0 +1,30 @@
+{
+	"display": {
+		"title": {
+			"text": "Flint"
+		},
+		"description": {
+			"text": "Pickup a flint off the ground"
+		},
+		"icon": {
+			"item": "minecraft:flint"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"criteria": {
+		"get": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "minecraft:flint"
+					}
+				]
+			}
+		}
+	},
+	"parent": "primalrework:stage0/root"
+}

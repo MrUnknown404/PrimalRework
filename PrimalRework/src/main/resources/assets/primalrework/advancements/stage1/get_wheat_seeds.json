@@ -1,0 +1,30 @@
+{
+	"display": {
+		"title": {
+			"text": "Wheat Seeds"
+		},
+		"description": {
+			"text": "Get some wheat seeds"
+		},
+		"icon": {
+			"item": "minecraft:wheat_seeds"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"criteria": {
+		"get": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "minecraft:wheat_seeds"
+					}
+				]
+			}
+		}
+	},
+	"parent": "primalrework:stage1/get_flint_hoe"
+}

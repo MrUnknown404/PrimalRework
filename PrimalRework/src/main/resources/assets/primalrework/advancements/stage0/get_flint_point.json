@@ -1,0 +1,30 @@
+{
+	"display": {
+		"title": {
+			"text": "Flint Point"
+		},
+		"description": {
+			"text": "Smash a knapped flint on a stone block for a chance to get a flint point"
+		},
+		"icon": {
+			"item": "primalrework:flint_point"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"criteria": {
+		"get": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "primalrework:flint_point"
+					}
+				]
+			}
+		}
+	},
+	"parent": "primalrework:stage0/get_knapped_flint"
+}

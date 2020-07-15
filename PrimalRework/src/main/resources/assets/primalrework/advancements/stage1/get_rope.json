@@ -1,0 +1,30 @@
+{
+	"display": {
+		"title": {
+			"text": "Rope"
+		},
+		"description": {
+			"text": "Craft rope"
+		},
+		"icon": {
+			"item": "primalrework:rope"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"criteria": {
+		"get": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "primalrework:rope"
+					}
+				]
+			}
+		}
+	},
+	"parent": "primalrework:stage1/get_string"
+}

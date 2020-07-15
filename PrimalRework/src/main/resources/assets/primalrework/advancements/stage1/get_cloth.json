@@ -1,0 +1,30 @@
+{
+	"display": {
+		"title": {
+			"text": "Cloth"
+		},
+		"description": {
+			"text": "Craft a piece of cloth"
+		},
+		"icon": {
+			"item": "primalrework:cloth"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"criteria": {
+		"get": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "primalrework:cloth"
+					}
+				]
+			}
+		}
+	},
+	"parent": "primalrework:stage1/get_loom"
+}

@@ -1,0 +1,30 @@
+{
+	"display": {
+		"title": {
+			"text": "Deforestation"
+		},
+		"description": {
+			"text": "Cut down your first tree"
+		},
+		"icon": {
+			"item": "minecraft:log"
+		},
+		"frame": "challenge",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"criteria": {
+		"get": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "minecraft:log"
+					}
+				]
+			}
+		}
+	},
+	"parent": "primalrework:stage0/get_flint_axe"
+}

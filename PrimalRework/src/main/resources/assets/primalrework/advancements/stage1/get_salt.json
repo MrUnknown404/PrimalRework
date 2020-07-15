@@ -1,0 +1,30 @@
+{
+	"display": {
+		"title": {
+			"text": "Salt"
+		},
+		"description": {
+			"text": "Mine some salt"
+		},
+		"icon": {
+			"item": "primalrework:salt"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"criteria": {
+		"get": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "primalrework:salt"
+					}
+				]
+			}
+		}
+	},
+	"parent": "primalrework:stage1/get_flint_shovel"
+}

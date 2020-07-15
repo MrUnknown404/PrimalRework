@@ -1,0 +1,30 @@
+{
+	"display": {
+		"title": {
+			"text": "Thatch"
+		},
+		"description": {
+			"text": "Craft thatch"
+		},
+		"icon": {
+			"item": "primalrework:thatch"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"criteria": {
+		"get": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "primalrework:thatch"
+					}
+				]
+			}
+		}
+	},
+	"parent": "primalrework:stage0/get_plant_fiber"
+}

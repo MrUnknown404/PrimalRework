@@ -1,0 +1,30 @@
+{
+	"display": {
+		"title": {
+			"text": "Animal Pelt"
+		},
+		"description": {
+			"text": "Get an animal pelt"
+		},
+		"icon": {
+			"item": "primalrework:animal_pelt"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"criteria": {
+		"get": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "primalrework:animal_pelt"
+					}
+				]
+			}
+		}
+	},
+	"parent": "primalrework:stage1/root"
+}

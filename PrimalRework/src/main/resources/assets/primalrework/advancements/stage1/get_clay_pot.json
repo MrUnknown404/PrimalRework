@@ -1,0 +1,30 @@
+{
+	"display": {
+		"title": {
+			"text": "Made with love"
+		},
+		"description": {
+			"text": "Craft a clay pot (With love)"
+		},
+		"icon": {
+			"item": "primalrework:clay_pot"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"criteria": {
+		"get": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "primalrework:clay_pot"
+					}
+				]
+			}
+		}
+	},
+	"parent": "primalrework:stage1/get_flint_shovel"
+}

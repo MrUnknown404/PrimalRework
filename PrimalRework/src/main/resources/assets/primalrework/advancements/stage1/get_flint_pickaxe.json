@@ -1,0 +1,30 @@
+{
+	"display": {
+		"title": {
+			"text": "Flint Pickaxe"
+		},
+		"description": {
+			"text": "Craft a flint pickaxe"
+		},
+		"icon": {
+			"item": "primalrework:flint_pickaxe"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"criteria": {
+		"get": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "primalrework:flint_pickaxe"
+					}
+				]
+			}
+		}
+	},
+	"parent": "primalrework:stage1/get_crafting_stump"
+}

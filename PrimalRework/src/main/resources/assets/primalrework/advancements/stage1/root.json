@@ -1,0 +1,26 @@
+{
+	"display": {
+		"title": {
+			"text": "Stage 1 (Early Stone)"
+		},
+		"description": {
+			"text": "write later"
+		},
+		"icon": {
+			"item": "minecraft:log"
+		},
+		"frame": "task",
+		"show_toast": false,
+		"announce_to_chat": false,
+		"hidden": false,
+		"background": "minecraft:textures/gui/advancements/backgrounds/adventure.png"
+	},
+	"criteria": {
+		"root": {
+			"trigger": "minecraft:location",
+			"conditions": {
+				"dimension": "overworld"
+			}
+		}
+	}
+}

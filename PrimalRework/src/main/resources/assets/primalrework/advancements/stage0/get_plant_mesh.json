@@ -1,0 +1,30 @@
+{
+	"display": {
+		"title": {
+			"text": "Plant Mesh"
+		},
+		"description": {
+			"text": "Craft a plant mesh"
+		},
+		"icon": {
+			"item": "primalrework:plant_mesh"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"criteria": {
+		"get": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "primalrework:plant_mesh"
+					}
+				]
+			}
+		}
+	},
+	"parent": "primalrework:stage0/get_plant_fiber"
+}

@@ -1,0 +1,30 @@
+{
+	"display": {
+		"title": {
+			"text": "Flint Saw"
+		},
+		"description": {
+			"text": "Craft a flint saw"
+		},
+		"icon": {
+			"item": "primalrework:flint_saw"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"criteria": {
+		"get": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "primalrework:flint_saw"
+					}
+				]
+			}
+		}
+	},
+	"parent": "primalrework:stage1/get_crafting_stump"
+}
