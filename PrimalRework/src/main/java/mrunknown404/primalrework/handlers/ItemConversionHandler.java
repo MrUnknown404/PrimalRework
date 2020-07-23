@@ -30,7 +30,7 @@ public class ItemConversionHandler {
 	}
 	
 	@SubscribeEvent
-	public void onServerTick(ServerTickEvent event) {
+	public void onServerTick(@SuppressWarnings("unused") ServerTickEvent e) {
 		while (!items.isEmpty()) {
 			PendingItemDrop pend = items.poll();
 			

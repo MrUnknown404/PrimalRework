@@ -6,7 +6,6 @@ import java.util.List;
 import mrunknown404.primalrework.init.ModBiomes;
 import mrunknown404.primalrework.world.biome.BiomeBase;
 import net.minecraft.util.WeightedRandom;
-import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.world.gen.layer.IntCache;
@@ -17,7 +16,7 @@ import net.minecraftforge.common.BiomeManager.BiomeType;
 public class GenLayerPrimal extends GenLayer {
 	private List<BiomeEntry>[] biomes = new ArrayList[BiomeType.values().length];
 	
-	public GenLayerPrimal(long seed, GenLayer parent, WorldType worldType) {
+	public GenLayerPrimal(long seed, GenLayer parent) {
 		super(seed);
 		this.parent = parent;
 		

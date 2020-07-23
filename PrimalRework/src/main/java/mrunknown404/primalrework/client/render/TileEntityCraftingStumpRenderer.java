@@ -36,8 +36,7 @@ public class TileEntityCraftingStumpRenderer extends TileEntitySpecialRenderer<T
 		for (int h = 0; h < 3; h++) {
 			for (int w = 0; w < 3; w++) {
 				if (!te.getStackInSlot(i).isEmpty()) {
-					renderItemInSlot(te, te.getStackInSlot(i), (w * 14.2f) / 16f, 0.3F, (h * 14.2f) / 16f, te.getItemRotation()[i], te.getItemJump()[i], te.getItemJumpPrev()[i],
-							partialTicks);
+					renderItemInSlot(te.getStackInSlot(i), (w * 14.2f) / 16f, 0.3F, (h * 14.2f) / 16f, te.getItemJump()[i], te.getItemJumpPrev()[i], partialTicks);
 				}
 				
 				i++;
@@ -47,7 +46,7 @@ public class TileEntityCraftingStumpRenderer extends TileEntitySpecialRenderer<T
 		GlStateManager.popMatrix();
 	}
 	
-	private void renderItemInSlot(TileEntityCraftingStump te, ItemStack stack, float x, float y, float z, float rotation, float jump, float prevJump, float partialTicks) {
+	private void renderItemInSlot(ItemStack stack, float x, float y, float z, float jump, float prevJump, float partialTicks) {
 		if (!stack.isEmpty()) {
 			float jumpUP = jump * 0.05F + (jump * 0.05F - prevJump * 0.05F) * partialTicks;
 			GlStateManager.pushMatrix();

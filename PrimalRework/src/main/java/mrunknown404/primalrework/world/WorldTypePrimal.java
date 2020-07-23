@@ -28,7 +28,7 @@ public class WorldTypePrimal extends WorldType {
 	
 	@Override
 	public GenLayer getBiomeLayer(long seed, GenLayer parent, ChunkGeneratorSettings settings) {
-		return new GenLayerPrimal(seed, parent, this);
+		return new GenLayerPrimal(seed, parent);
 	}
 	
 	@Override

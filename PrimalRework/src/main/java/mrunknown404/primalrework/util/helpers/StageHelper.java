@@ -1,11 +1,10 @@
 package mrunknown404.primalrework.util.helpers;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import mrunknown404.primalrework.Main;
+import mrunknown404.primalrework.util.ItemStackWrapper;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.jei.JEICompat;
 import mrunknown404.primalrework.world.StageWorldSaveData;
@@ -16,15 +15,33 @@ import net.minecraft.world.World;
 
 public class StageHelper {
 	
-	public static final Map<EnumStage, List<ItemStack>> ITEM_STAGE_MAP = new HashMap<EnumStage, List<ItemStack>>();
+	private static final Map<ItemStackWrapper, EnumStage> STAGED_ITEM_CACHE = new HashMap<ItemStackWrapper, EnumStage>();
 	
 	private static EnumStage stage = EnumStage.stage0;
 	private static World world;
 	
-	static {
-		for (EnumStage stage : EnumStage.values()) {
-			ITEM_STAGE_MAP.put(stage, new ArrayList<ItemStack>());
-		}
+	private static EnumStage getItemStage(ItemStackWrapper item) {
+		return STAGED_ITEM_CACHE.get(item);
+	}
+	
+	public static EnumStage getItemStage(ItemStack item) {
+		return getItemStage(new ItemStackWrapper(item));
+	}
+	
+	public static EnumStage getItemStage(Item item) {
+		return getItemStage(new ItemStackWrapper(item));
+	}
+	
+	public static EnumStage getItemStage(Block block) {
+		return getItemStage(new ItemStackWrapper(block));
+	}
+	
+	public static EnumStage getItemStage(Item item, int meta) {
+		return getItemStage(new ItemStackWrapper(item, meta));
+	}
+	
+	public static EnumStage getItemStage(Block block, int meta) {
+		return getItemStage(new ItemStackWrapper(block, meta));
 	}
 	
 	public static void setStage(EnumStage stage) {
@@ -61,7 +78,10 @@ public class StageHelper {
 			return;
 		}
 		
-		ITEM_STAGE_MAP.get(stage).add(new ItemStack(item, 1, meta));
+		STAGED_ITEM_CACHE.put(new ItemStackWrapper(item, meta), stage);
+		if (Main.isJEILoaded()) {
+			JEICompat.ITEM_STAGE_MAP.get(stage).add(new ItemStack(item, 1, meta));
+		}
 	}
 	
 	public static void addStagedItem(EnumStage stage, Item item) {
@@ -74,7 +94,10 @@ public class StageHelper {
 			return;
 		}
 		
-		ITEM_STAGE_MAP.get(stage).add(new ItemStack(block, 1, meta));
+		STAGED_ITEM_CACHE.put(new ItemStackWrapper(block, meta), stage);
+		if (Main.isJEILoaded()) {
+			JEICompat.ITEM_STAGE_MAP.get(stage).add(new ItemStack(block, 1, meta));
+		}
 	}
 	
 	public static void addStagedItem(EnumStage stage, Block block) {

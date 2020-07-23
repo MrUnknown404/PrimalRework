@@ -75,7 +75,7 @@ public class Main {
 	private static boolean isJEILoaded;
 	
 	@EventHandler
-	public void preInit(FMLPreInitializationEvent e) {
+	public void preInit(@SuppressWarnings("unused") FMLPreInitializationEvent e) {
 		proxy.preInit();
 		
 		isJEILoaded = Loader.isModLoaded("jei");
@@ -104,7 +104,7 @@ public class Main {
 	}
 	
 	@EventHandler
-	public void init(FMLInitializationEvent e) {
+	public void init(@SuppressWarnings("unused") FMLInitializationEvent e) {
 		proxy.init();
 		
 		NetworkRegistry.INSTANCE.registerGuiHandler(main, new GuiHandler());
@@ -122,7 +122,7 @@ public class Main {
 	}
 	
 	@EventHandler
-	public void postInit(FMLPostInitializationEvent e) {
+	public void postInit(@SuppressWarnings("unused") FMLPostInitializationEvent e) {
 		proxy.postInit();
 		
 		WorldType.WORLD_TYPES = new WorldType[16];

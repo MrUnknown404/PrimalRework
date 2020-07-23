@@ -1,5 +1,6 @@
 package mrunknown404.primalrework.client.gui;
 
+import mrunknown404.primalrework.client.gui.quest.GuiQuestMenu;
 import mrunknown404.primalrework.inventory.container.ContainerCharcoalKiln;
 import mrunknown404.primalrework.inventory.container.ContainerClayFurnace;
 import mrunknown404.primalrework.inventory.container.ContainerClayVessel;
@@ -29,6 +30,8 @@ public class GuiHandler implements IGuiHandler {
 		GuiID guiID = GuiID.get(ID);
 		
 		switch (guiID) {
+			case QUESTS:
+				break;
 			case FIRE_PIT:
 				return new ContainerFirePit(player.inventory, (TileEntityFirePit) world.getTileEntity(new BlockPos(x, y, z)));
 			case ENCHANTING:
@@ -59,6 +62,8 @@ public class GuiHandler implements IGuiHandler {
 		GuiID guiID = GuiID.get(ID);
 		
 		switch (guiID) {
+			case QUESTS:
+				return new GuiQuestMenu();
 			case FIRE_PIT:
 				return new GuiFirePit(player.inventory, (TileEntityFirePit) world.getTileEntity(new BlockPos(x, y, z)));
 			case ENCHANTING:
@@ -85,6 +90,7 @@ public class GuiHandler implements IGuiHandler {
 	}
 	
 	public static enum GuiID {
+		QUESTS,
 		FIRE_PIT,
 		ENCHANTING,
 		PRIMAL_ENCHANTING,

@@ -61,7 +61,7 @@ public class RegistryHandler {
 	}
 	
 	@SubscribeEvent
-	public static void onModelRegister(ModelRegistryEvent e) {
+	public static void onModelRegister(@SuppressWarnings("unused") ModelRegistryEvent e) {
 		for (Item item : ModItems.ITEMS) {
 			Main.proxy.registerItemRenderer(item, 0, "inventory");
 		}

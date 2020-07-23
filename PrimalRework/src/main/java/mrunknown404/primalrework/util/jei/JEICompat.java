@@ -50,6 +50,7 @@ public class JEICompat implements IModPlugin {
 	
 	// TODO add vanilla enchanting, primal enchanting, charcoal kiln (and charcoal pit), clay furnace
 	
+	public static final Map<EnumStage, List<ItemStack>> ITEM_STAGE_MAP = new HashMap<EnumStage, List<ItemStack>>();
 	public static final Map<String, List<IRecipeWrapperBase<?>>> RECIPE_MAP = new HashMap<String, List<IRecipeWrapperBase<?>>>();
 	
 	public static IRecipeRegistry rr;
@@ -57,6 +58,12 @@ public class JEICompat implements IModPlugin {
 	public static IIngredientRegistry ingReg;
 	public static IIngredientBlacklist ib;
 	public static StackHelper stackHelper;
+	
+	static {
+		for (EnumStage stage : EnumStage.values()) {
+			ITEM_STAGE_MAP.put(stage, new ArrayList<ItemStack>());
+		}
+	}
 	
 	@Override
 	public void registerItemSubtypes(ISubtypeRegistry reg) {
@@ -143,7 +150,7 @@ public class JEICompat implements IModPlugin {
 					}
 				}
 				
-				Iterator<Entry<EnumStage, List<ItemStack>>> it2 = StageHelper.ITEM_STAGE_MAP.entrySet().iterator();
+				Iterator<Entry<EnumStage, List<ItemStack>>> it2 = ITEM_STAGE_MAP.entrySet().iterator();
 				
 				while (it2.hasNext()) {
 					Entry<EnumStage, List<ItemStack>> pair = it2.next();

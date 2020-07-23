@@ -55,7 +55,7 @@ public class TileEntityDryingTableRenderer extends TileEntitySpecialRenderer<Til
 					int cur = te.getDryProgress()[i];
 					int max = ModRecipes.doesItemHaveDryingTableRecipe(item) ? ModRecipes.getDryingTableRecipeFromInput(item).getDryTime() : 1;
 					
-					renderItemInSlot(te, item, w, 0.25F, h, cur, max, partialTicks);
+					renderItemInSlot(item, w, 0.25F, h, cur, max);
 				}
 				
 				i++;
@@ -65,7 +65,7 @@ public class TileEntityDryingTableRenderer extends TileEntitySpecialRenderer<Til
 		GlStateManager.popMatrix();
 	}
 	
-	private void renderItemInSlot(TileEntityDryingTable te, ItemStack stack, float x, float y, float z, int curDryTime, int dryTime, float partialTicks) {
+	private void renderItemInSlot(ItemStack stack, float x, float y, float z, int curDryTime, int dryTime) {
 		if (!stack.isEmpty()) {
 			GlStateManager.pushMatrix();
 			GlStateManager.translate(x, y, z);
