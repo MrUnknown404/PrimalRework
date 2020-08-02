@@ -11,7 +11,8 @@ import mrunknown404.primalrework.handlers.EntityItemDropHandler;
 import mrunknown404.primalrework.handlers.EntityRightClickHandler;
 import mrunknown404.primalrework.handlers.ItemConversionHandler;
 import mrunknown404.primalrework.handlers.MiscEventHandler;
-import mrunknown404.primalrework.handlers.RegistryHandler;
+import mrunknown404.primalrework.handlers.QuestHandler;
+import mrunknown404.primalrework.init.InitQuests;
 import mrunknown404.primalrework.init.ModEntities;
 import mrunknown404.primalrework.init.ModRecipes;
 import mrunknown404.primalrework.init.ModSoundEvents;
@@ -52,7 +53,7 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 
-@Mod(modid = Main.MOD_ID, useMetadata = true, dependencies = "required-after:unknownlibs@[1.0.4,)")
+@Mod(modid = Main.MOD_ID, useMetadata = true, dependencies = "required-after:unknownlibs@[1.0.5,)")
 public class Main {
 	
 	public static final String MOD_ID = "primalrework";
@@ -100,7 +101,7 @@ public class Main {
 		MinecraftForge.EVENT_BUS.register(new EntityRightClickHandler());
 		MinecraftForge.EVENT_BUS.register(new ItemConversionHandler());
 		MinecraftForge.EVENT_BUS.register(new MiscEventHandler());
-		MinecraftForge.EVENT_BUS.register(new RegistryHandler());
+		MinecraftForge.EVENT_BUS.register(new QuestHandler());
 	}
 	
 	@EventHandler
@@ -116,6 +117,8 @@ public class Main {
 		
 		ModRecipes.removeRecipes();
 		ModRecipes.addRecipes();
+		
+		InitQuests.load();
 		
 		VanillaOverrides.overrideAll();
 		OreDict.register();

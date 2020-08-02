@@ -1,13 +1,15 @@
 package mrunknown404.primalrework.util.helpers;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import mrunknown404.primalrework.Main;
 import mrunknown404.primalrework.util.ItemStackWrapper;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.jei.JEICompat;
-import mrunknown404.primalrework.world.StageWorldSaveData;
+import mrunknown404.primalrework.world.storage.WorldSaveDataStage;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -46,7 +48,7 @@ public class StageHelper {
 	
 	public static void setStage(EnumStage stage) {
 		StageHelper.stage = stage;
-		StageWorldSaveData.load(world).markDirty();
+		WorldSaveDataStage.load(world).markDirty();
 		if (Main.isJEILoaded()) {
 			JEICompat.setupRecipesAndItems();
 		}
@@ -69,7 +71,7 @@ public class StageHelper {
 	
 	public static void setWorld(World world) {
 		StageHelper.world = world;
-		StageWorldSaveData.load(world);
+		WorldSaveDataStage.load(world);
 	}
 	
 	public static void addStagedItem(EnumStage stage, Item item, int meta) {
@@ -102,5 +104,14 @@ public class StageHelper {
 	
 	public static void addStagedItem(EnumStage stage, Block block) {
 		addStagedItem(stage, block, 0);
+	}
+	
+	public static List<EnumStage> getAllPrevStages() {
+		List<EnumStage> list = new ArrayList<EnumStage>();
+		for (int i = 0; i <= stage.id; i++) {
+			list.add(EnumStage.values()[i]);
+		}
+		
+		return list;
 	}
 }

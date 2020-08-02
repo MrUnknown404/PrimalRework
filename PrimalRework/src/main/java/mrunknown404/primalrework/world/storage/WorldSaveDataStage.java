@@ -1,4 +1,4 @@
-package mrunknown404.primalrework.world;
+package mrunknown404.primalrework.world.storage;
 
 import mrunknown404.primalrework.Main;
 import mrunknown404.primalrework.util.enums.EnumStage;
@@ -8,15 +8,15 @@ import net.minecraft.world.World;
 import net.minecraft.world.storage.MapStorage;
 import net.minecraft.world.storage.WorldSavedData;
 
-public class StageWorldSaveData extends WorldSavedData {
+public class WorldSaveDataStage extends WorldSavedData {
 	
 	private static final String DATA_NAME = Main.MOD_ID + "_StageData";
 	
-	public StageWorldSaveData() {
+	public WorldSaveDataStage() {
 		super(DATA_NAME);
 	}
 	
-	public StageWorldSaveData(String name) {
+	public WorldSaveDataStage(String name) {
 		super(name);
 	}
 	
@@ -31,12 +31,12 @@ public class StageWorldSaveData extends WorldSavedData {
 		return c;
 	}
 	
-	public static StageWorldSaveData load(World world) {
+	public static WorldSaveDataStage load(World world) {
 		MapStorage storage = world.getMapStorage();
-		StageWorldSaveData instance = (StageWorldSaveData) world.getMapStorage().getOrLoadData(StageWorldSaveData.class, DATA_NAME);
+		WorldSaveDataStage instance = (WorldSaveDataStage) world.getMapStorage().getOrLoadData(WorldSaveDataStage.class, DATA_NAME);
 		
 		if (instance == null) {
-			instance = new StageWorldSaveData();
+			instance = new WorldSaveDataStage();
 			storage.setData(DATA_NAME, instance);
 		}
 		

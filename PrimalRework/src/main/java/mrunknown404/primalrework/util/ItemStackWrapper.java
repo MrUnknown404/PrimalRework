@@ -5,7 +5,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class ItemStackWrapper {
-	public final ItemStack item;
+	private final ItemStack item;
 	
 	public ItemStackWrapper(ItemStack item, int meta) {
 		this.item = new ItemStack(item.getItem(), 1, meta);

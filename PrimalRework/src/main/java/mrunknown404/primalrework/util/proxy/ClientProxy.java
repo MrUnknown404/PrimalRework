@@ -22,6 +22,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ColorizerGrass;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.biome.BiomeColorHelper;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 
@@ -58,7 +59,7 @@ public class ClientProxy implements ICommonProxy {
 		Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler(new IBlockColor() {
 			@Override
 			public int colorMultiplier(IBlockState state, IBlockAccess world, BlockPos pos, int tintIndex) {
-				return ColorizerGrass.getGrassColor(0.5D, 1.0D);
+				return BiomeColorHelper.getGrassColorAtPos(world, pos);
 			}
 		}, ModBlocks.GRASS_SLAB, ModBlocks.GRASS_DOUBLE_SLAB, ModBlocks.MUSHROOM_GRASS, ModBlocks.MUSHROOM_GRASS_SLAB, ModBlocks.MUSHROOM_GRASS_DOUBLE_SLAB);
 		
