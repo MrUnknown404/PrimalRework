@@ -1,6 +1,7 @@
 package mrunknown404.primalrework.client.gui.quest;
 
 import mrunknown404.primalrework.Main;
+import mrunknown404.primalrework.quests.Quest;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.ResourceLocation;
@@ -14,16 +15,15 @@ public class GuiQuestMenu extends GuiScreen {
 	@Override
 	public void initGui() {
 		tabScroll = new GuiQuestTabScrolling(mc, this, width / 2 - 420 / 2, height / 2 - 240 / 2);
-		questTree = new GuiQuestTree(mc, EnumStage.stage0, width / 2 - 420 / 2, height / 2 - 240 / 2);
+		questTree = new GuiQuestTree(mc, this, EnumStage.stage0, width / 2 - 420 / 2, height / 2 - 240 / 2);
 	}
 	
 	void setupQuestTree(EnumStage stage) {
-		questTree = new GuiQuestTree(mc, stage, width / 2 - 420 / 2, height / 2 - 240 / 2);
+		questTree = new GuiQuestTree(mc, this, stage, width / 2 - 420 / 2, height / 2 - 240 / 2);
 	}
 	
-	@Override
-	public void updateScreen() {
-		
+	void selectQuest(Quest q) { // TODO do this
+		System.out.println("Quest '" + q.getName() + "' was clicked!");
 	}
 	
 	@Override

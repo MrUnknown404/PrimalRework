@@ -4,7 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class QuestRequirement {
+public class QuestRequirement { //TODO setup ore dict?
 	private final QuestReq req;
 	private final int amountNeeded;
 	
@@ -40,7 +40,7 @@ public class QuestRequirement {
 	}
 	
 	public Item getItemToCollect() {
-		return item.getItem();
+		return item == null ? Item.getItemFromBlock(block) : item.getItem();
 	}
 	
 	public enum QuestReq {
