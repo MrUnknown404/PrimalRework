@@ -6,7 +6,6 @@ import mrunknown404.primalrework.init.InitQuests;
 import mrunknown404.primalrework.quests.rewards.IQuestReward;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.world.storage.WorldSaveDataQuest;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
@@ -77,21 +76,21 @@ public class Quest {
 		return stage.toString() + "_" + name_key;
 	}
 	
-	public String getNameKey() {
-		return name_key;
-	}
-	
 	public ITextComponent getFancyName() {
-		return new TextComponentTranslation(I18n.format("quest." + getName() + ".name")).setStyle(name_style);
+		return new TextComponentTranslation("quest." + stage + "." + name_key + ".name").setStyle(name_style);
 	}
 	
 	public ITextComponent getFancyDesc() {
-		return new TextComponentTranslation(I18n.format("quest." + getName() + ".desc")).setStyle(name_style);
+		return new TextComponentTranslation("quest." + stage + "." + name_key + ".desc").setStyle(name_style);
 	}
 	
 	@Override
 	public String toString() {
 		return getName();
+	}
+	
+	public ItemStack getIcon() {
+		return itemIcon;
 	}
 	
 	/** Used for loading only! */

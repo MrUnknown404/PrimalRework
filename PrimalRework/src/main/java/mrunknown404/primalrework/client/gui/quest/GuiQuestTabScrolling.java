@@ -30,6 +30,7 @@ public class GuiQuestTabScrolling extends Gui {
 	private final Minecraft mc;
 	private final RenderItem itemRender;
 	private final FontRenderer fontRenderer;
+	private final GuiQuestMenu parent;
 	
 	private final int listWidth;
 	private final int top;
@@ -39,13 +40,13 @@ public class GuiQuestTabScrolling extends Gui {
 	private float initialMouseClickY = -2;
 	private float scrollFactor;
 	private float scrollDistance;
-	
 	private int selectedTab;
 	
 	private final boolean[] buttonsClicked = new boolean[SIZE];
 	
-	public GuiQuestTabScrolling(Minecraft mc, int xMod, int yMod) {
+	public GuiQuestTabScrolling(Minecraft mc, GuiQuestMenu parent, int xMod, int yMod) {
 		this.mc = mc;
+		this.parent = parent;
 		this.xMod = xMod;
 		this.fontRenderer = mc.fontRenderer;
 		this.itemRender = mc.getRenderItem();
@@ -65,6 +66,7 @@ public class GuiQuestTabScrolling extends Gui {
 		if (Mouse.isButtonDown(0)) {
 			buttonsClicked[i] = true;
 			selectedTab = i;
+			parent.setupQuestTree(EnumStage.values()[i]);
 		}
 	}
 	
@@ -123,11 +125,10 @@ public class GuiQuestTabScrolling extends Gui {
 	}
 	
 	void drawScreen(int mouseX, int mouseY) {
-		boolean isHoveringScrollbar = mouseX >= left + listWidth - 6 && mouseX <= left + listWidth && mouseY >= top && mouseY <= bottom;
 		boolean isHovering = mouseX >= left && mouseX <= left + listWidth && mouseY >= top && mouseY <= bottom;
+		boolean isHoveringScrollbar = isHovering && mouseX >= left + listWidth - 6;
 		int scrollBarRight = left + listWidth;
 		int scrollBarLeft = scrollBarRight - 6;
-		int entryLeft = left;
 		int entryRight = scrollBarLeft - 1;
 		int viewHeight = bottom - top;
 		
@@ -138,7 +139,7 @@ public class GuiQuestTabScrolling extends Gui {
 					int mouseListY = mouseY - top - -1 + (int) scrollDistance - 4;
 					int slotIndex = mouseListY / slotHeight;
 					
-					if (mouseX >= entryLeft && mouseX <= entryRight && slotIndex >= 0 && mouseListY >= 0 && slotIndex < SIZE) {
+					if (mouseX >= left && mouseX <= entryRight && slotIndex >= 0 && mouseListY >= 0 && slotIndex < SIZE) {
 						elementClicked(slotIndex);
 					}
 					
@@ -172,7 +173,7 @@ public class GuiQuestTabScrolling extends Gui {
 					int mouseListY = mouseY - top - -1 + (int) scrollDistance - 4;
 					int slotIndex = mouseListY / slotHeight;
 					
-					if (mouseX >= entryLeft && mouseX <= entryRight && slotIndex >= 0 && mouseListY >= 0 && slotIndex < SIZE) {
+					if (mouseX >= left && mouseX <= entryRight && slotIndex >= 0 && mouseListY >= 0 && slotIndex < SIZE) {
 						elementClicked(slotIndex);
 					}
 				}

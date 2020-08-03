@@ -20,7 +20,7 @@ public class InitQuests {
 	public static final List<Quest> QUESTS = new ArrayList<Quest>();
 	private static List<Quest> questUnfinishedCache = new ArrayList<Quest>();
 	
-	public static final QuestTab TAB_STAGE_0 = addTab(new QuestTab(EnumStage.stage0, new ItemStack(Items.STICK)));
+	public static final QuestTab TAB_STAGE_0 = addTab(new QuestTab(EnumStage.stage0, new ItemStack(Blocks.LOG)));
 	public static final QuestTab TAB_STAGE_1 = addTab(new QuestTab(EnumStage.stage1, new ItemStack(Blocks.COBBLESTONE)));
 	public static final QuestTab TAB_STAGE_2 = addTab(new QuestTab(EnumStage.stage2, new ItemStack(ModBlocks.FIRE_PIT)));
 	public static final QuestTab TAB_STAGE_3 = addTab(new QuestTab(EnumStage.stage3, new ItemStack(ModBlocks.CLAY_FURNACE)));
