@@ -41,7 +41,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.event.ForgeEventFactory;
 
-public class ItemToolBase extends ItemTool implements IItemBase<ItemToolBase> {
+public class ItemStagedTool extends ItemTool implements IItemStaged<ItemStagedTool> {
 	
 	private static final ToolMaterial M = EnumHelper.addToolMaterial("e", 0, 0, 0, 0, 0);
 	
@@ -50,7 +50,7 @@ public class ItemToolBase extends ItemTool implements IItemBase<ItemToolBase> {
 	protected final EnumStage stage;
 	private int amountOfTooltops = 0;
 	
-	public ItemToolBase(String modid, String name, EnumToolType toolType, EnumToolMaterial harvestLevel, EnumStage stage) {
+	public ItemStagedTool(String modid, String name, EnumToolType toolType, EnumToolMaterial harvestLevel, EnumStage stage) {
 		super(toolType.baseDamage + harvestLevel.extraDamage, toolType.swingSpeed, M, Collections.emptySet());
 		setUnlocalizedName(name);
 		setRegistryName(new ResourceLocation(modid, name));
@@ -66,7 +66,7 @@ public class ItemToolBase extends ItemTool implements IItemBase<ItemToolBase> {
 		addToModList(this);
 	}
 	
-	public ItemToolBase(String name, EnumToolType toolType, EnumToolMaterial harvestLevel, EnumStage stage) {
+	public ItemStagedTool(String name, EnumToolType toolType, EnumToolMaterial harvestLevel, EnumStage stage) {
 		this(Main.MOD_ID, name, toolType, harvestLevel, stage);
 	}
 	
@@ -274,7 +274,7 @@ public class ItemToolBase extends ItemTool implements IItemBase<ItemToolBase> {
 	}
 	
 	@Override
-	public ItemToolBase setAmountOfTooltops(int amountOfTooltops) {
+	public ItemStagedTool setAmountOfTooltops(int amountOfTooltops) {
 		this.amountOfTooltops = amountOfTooltops;
 		return this;
 	}

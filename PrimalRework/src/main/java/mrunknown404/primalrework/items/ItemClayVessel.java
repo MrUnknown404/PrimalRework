@@ -8,7 +8,7 @@ import javax.annotation.Nullable;
 import mrunknown404.primalrework.Main;
 import mrunknown404.primalrework.capabilities.ClayVesselInventoryProvider;
 import mrunknown404.primalrework.client.gui.GuiHandler;
-import mrunknown404.primalrework.items.util.ItemBase;
+import mrunknown404.primalrework.items.util.ItemStaged;
 import mrunknown404.primalrework.util.enums.EnumAlloy;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import net.minecraft.entity.EntityLivingBase;
@@ -24,7 +24,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.items.IItemHandler;
 
-public class ItemClayVessel extends ItemBase {
+public class ItemClayVessel extends ItemStaged {
 	public ItemClayVessel() {
 		super("clay_vessel", 1, EnumStage.stage2);
 		addPropertyOverride(new ResourceLocation("liquid"), new IItemPropertyGetter() {

@@ -22,14 +22,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public abstract class BlockRotatedPillarBase extends BlockBase {
-	protected BlockRotatedPillarBase(String name, Material material, SoundType soundType, BlockRenderLayer renderType, float hardness, float resistance, AxisAlignedBB collisionAABB,
+public abstract class BlockStagedRotatedPillar extends BlockStaged {
+	protected BlockStagedRotatedPillar(String name, Material material, SoundType soundType, BlockRenderLayer renderType, float hardness, float resistance, AxisAlignedBB collisionAABB,
 			AxisAlignedBB visualAABB, EnumStage stage, DoubleValue<EnumToolType, EnumToolMaterial>... types) {
 		super(name, material, soundType, renderType, hardness, resistance, collisionAABB, visualAABB, stage, types);
 		setDefaultState(blockState.getBaseState().withProperty(BlockLog.LOG_AXIS, EnumAxis.Y));
 	}
 	
-	protected BlockRotatedPillarBase(String name, Material material, SoundType soundType, float hardness, float resistance, EnumStage stage,
+	protected BlockStagedRotatedPillar(String name, Material material, SoundType soundType, float hardness, float resistance, EnumStage stage,
 			DoubleValue<EnumToolType, EnumToolMaterial>... types) {
 		this(name, material, soundType, BlockRenderLayer.SOLID, hardness, resistance, FULL_BLOCK_AABB, FULL_BLOCK_AABB, stage, types);
 	}

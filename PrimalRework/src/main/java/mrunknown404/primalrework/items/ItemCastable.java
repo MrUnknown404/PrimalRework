@@ -1,6 +1,6 @@
 package mrunknown404.primalrework.items;
 
-import mrunknown404.primalrework.items.util.ItemBase;
+import mrunknown404.primalrework.items.util.ItemStaged;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolType;
 import net.minecraft.entity.player.EntityPlayer;
@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-public class ItemCastable extends ItemBase {
+public class ItemCastable extends ItemStaged {
 	public ItemCastable(EnumToolType type, EnumStage stage) {
 		super((type == EnumToolType.none ? "ingot" : type) + "_cast", 1, stage);
 		setHasSubtypes(true);

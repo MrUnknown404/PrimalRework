@@ -3,14 +3,14 @@ package mrunknown404.primalrework.util;
 import java.util.Arrays;
 import java.util.List;
 
-import mrunknown404.primalrework.blocks.util.BlockBase;
-import mrunknown404.primalrework.blocks.util.BlockSlabBase;
-import mrunknown404.primalrework.blocks.util.IBlockBase;
-import mrunknown404.primalrework.blocks.util.ISlabBase;
+import mrunknown404.primalrework.blocks.util.BlockStaged;
+import mrunknown404.primalrework.blocks.util.BlockStagedSlab;
+import mrunknown404.primalrework.blocks.util.IBlockStaged;
+import mrunknown404.primalrework.blocks.util.ISlabStaged;
 import mrunknown404.primalrework.init.ModBlocks;
 import mrunknown404.primalrework.init.ModItems;
-import mrunknown404.primalrework.items.util.IItemBase;
-import mrunknown404.primalrework.items.util.ItemBase;
+import mrunknown404.primalrework.items.util.IItemStaged;
+import mrunknown404.primalrework.items.util.ItemStaged;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import mrunknown404.primalrework.util.enums.EnumToolType;
@@ -46,18 +46,18 @@ public class VanillaOverrides {
 	
 	private static void resetHarvestLevels() {
 		for (Block block : Block.REGISTRY) {
-			if (block instanceof IBlockBase) {
-				HarvestHelper.setHarvestLevel(block, ((IBlockBase<BlockBase>) block).getHarvestInfo());
-			} else if (block instanceof ISlabBase) {
-				HarvestHelper.setHarvestLevel(block, ((ISlabBase<BlockSlabBase>) block).getHarvestInfo());
+			if (block instanceof IBlockStaged) {
+				HarvestHelper.setHarvestLevel(block, ((IBlockStaged<BlockStaged>) block).getHarvestInfo());
+			} else if (block instanceof ISlabStaged) {
+				HarvestHelper.setHarvestLevel(block, ((ISlabStaged<BlockStagedSlab>) block).getHarvestInfo());
 			} else {
 				HarvestHelper.setHarvestLevel(block, EnumToolType.none, EnumToolMaterial.unbreakable);
 			}
 		}
 		
 		for (Item item : Item.REGISTRY) {
-			if (item instanceof IItemBase) {
-				HarvestHelper.setHarvestLevel(item, ((IItemBase<ItemBase>) item).getToolType(), ((IItemBase<ItemBase>) item).getHarvestLevel());
+			if (item instanceof IItemStaged) {
+				HarvestHelper.setHarvestLevel(item, ((IItemStaged<ItemStaged>) item).getToolType(), ((IItemStaged<ItemStaged>) item).getHarvestLevel());
 			} else {
 				HarvestHelper.setHarvestLevel(item, EnumToolType.none, EnumToolMaterial.hand);
 			}
@@ -466,9 +466,9 @@ public class VanillaOverrides {
 	private static void setupItemStages() {
 		for (Item item : ModItems.ITEMS) {
 			if (item instanceof ItemBlock) {
-				StageHelper.addStagedItem(((IBlockBase<BlockBase>) ((ItemBlock) item).getBlock()).getStage(), item);
+				StageHelper.addStagedItem(((IBlockStaged<BlockStaged>) ((ItemBlock) item).getBlock()).getStage(), item);
 			} else {
-				StageHelper.addStagedItem(((IItemBase<ItemBase>) item).getStage(), item);
+				StageHelper.addStagedItem(((IItemStaged<ItemStaged>) item).getStage(), item);
 			}
 		}
 		

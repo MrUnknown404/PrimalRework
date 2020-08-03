@@ -7,10 +7,10 @@ import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.unknownlibs.utils.ColorUtils;
 import net.minecraft.util.text.TextComponentTranslation;
 
-public interface IThingBase<T, R> {
+public interface IStaged<T> {
 	public abstract void addToModList(T t);
 	public abstract int getAmountOfTooltips();
-	public abstract R setAmountOfTooltops(int amountOfToolTips);
+	public abstract T setAmountOfTooltops(int amountOfToolTips);
 	public abstract EnumStage getStage();
 	
 	public default List<String> getTooltips(String name) {

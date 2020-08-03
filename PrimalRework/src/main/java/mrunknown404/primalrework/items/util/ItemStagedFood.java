@@ -7,36 +7,39 @@ import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import mrunknown404.primalrework.util.enums.EnumToolType;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class ItemBase extends Item implements IItemBase<ItemBase> {
+public class ItemStagedFood extends ItemFood implements IItemStaged<ItemStagedFood> {
 	
 	protected final EnumStage stage;
+	protected final int eatTime;
 	private int amountOfTooltops = 0;
 	
-	protected ItemBase(String name, CreativeTabs tab, int maxStackSize, EnumStage stage) {
+	public ItemStagedFood(String name, int maxStackSize, EnumStage stage, int healAmount, float saturationModifier, int eatTime, boolean isWolfFood) {
+		super(healAmount, saturationModifier, isWolfFood);
 		setUnlocalizedName(name);
 		setRegistryName(name);
-		setCreativeTab(tab);
+		setCreativeTab(ModCreativeTabs.PRIMALREWORK_FOOD);
 		setMaxStackSize(maxStackSize);
 		this.stage = stage;
+		this.eatTime = eatTime;
 		
 		addToModList(this);
 	}
 	
-	public ItemBase(String name, int maxStackSize, EnumStage stage) {
-		this(name, ModCreativeTabs.PRIMALREWORK_ITEMS, maxStackSize, stage);
-	}
-	
-	public ItemBase(String name, EnumStage stage) {
-		this(name, ModCreativeTabs.PRIMALREWORK_ITEMS, 64, stage);
+	public ItemStagedFood(String name, EnumStage stage, int healAmount, float saturationModifier) {
+		this(name, 64, stage, healAmount, saturationModifier, 32, false);
 	}
 	
 	@Override
-	public ItemBase setAmountOfTooltops(int amountOfTooltops) {
+	public int getMaxItemUseDuration(ItemStack stack) {
+		return eatTime;
+	}
+	
+	@Override
+	public ItemStagedFood setAmountOfTooltops(int amountOfTooltops) {
 		this.amountOfTooltops = amountOfTooltops;
 		return this;
 	}

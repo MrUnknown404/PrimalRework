@@ -38,6 +38,8 @@ public class GuiQuestTree extends Gui {
 	private int difX, difY, prevMouseX, prevMouseY, prevDifX, prevDifY;
 	private boolean isMouseDown, canDrag = true, didClick;
 	
+	//TODO add checkmark to finished quests
+	
 	public GuiQuestTree(Minecraft mc, GuiQuestMenu parent, EnumStage stage, int guiLeft, int guiTop) {
 		this.mc = mc;
 		this.parent = parent;

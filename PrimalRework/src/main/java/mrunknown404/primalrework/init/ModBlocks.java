@@ -27,7 +27,7 @@ import mrunknown404.primalrework.blocks.slabs.BlockMushroomGrassSlab;
 import mrunknown404.primalrework.blocks.slabs.BlockPathSlab;
 import mrunknown404.primalrework.blocks.slabs.BlockStoneSlab;
 import mrunknown404.primalrework.blocks.slabs.BlockThatchSlab;
-import mrunknown404.primalrework.blocks.util.BlockBase;
+import mrunknown404.primalrework.blocks.util.BlockStaged;
 import mrunknown404.primalrework.util.enums.EnumAlloy;
 import mrunknown404.primalrework.util.enums.EnumOreValue;
 import mrunknown404.primalrework.util.enums.EnumStage;
@@ -52,11 +52,11 @@ public class ModBlocks {
 	//MISC
 	public static final Block UNLIT_PRIMAL_TORCH = new BlockPrimalTorchUnlit().setAmountOfTooltops(2);
 	public static final Block LIT_PRIMAL_TORCH = new BlockPrimalTorchLit();
-	public static final Block THATCH = new BlockBase("thatch", Material.LEAVES, SoundType.PLANT, 0.2f, 0.2f, EnumStage.stage0,
+	public static final Block THATCH = new BlockStaged("thatch", Material.LEAVES, SoundType.PLANT, 0.2f, 0.2f, EnumStage.stage0,
 			new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.none, EnumToolMaterial.hand),
 			new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.knife, EnumToolMaterial.flint));
 	public static final Block SALT = new BlockSalt();
-	public static final Block SMOOTH_STONE = new BlockBase("smooth_stone", Material.ROCK, SoundType.STONE, 2, 2, EnumStage.stage1,
+	public static final Block SMOOTH_STONE = new BlockStaged("smooth_stone", Material.ROCK, SoundType.STONE, 2, 2, EnumStage.stage1,
 			new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.pickaxe, EnumToolMaterial.flint));
 	public static final Block MUSHROOM_GRASS = new BlockMushroomGrass();
 	public static final Block DENSE_LOG = new BlockDenseLog();

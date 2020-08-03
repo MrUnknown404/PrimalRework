@@ -3,7 +3,7 @@ package mrunknown404.primalrework.blocks;
 import java.util.Random;
 
 import mrunknown404.primalrework.Main;
-import mrunknown404.primalrework.blocks.util.BlockDirectionalBase;
+import mrunknown404.primalrework.blocks.util.BlockStagedDirectional;
 import mrunknown404.primalrework.client.gui.GuiHandler;
 import mrunknown404.primalrework.tileentity.TileEntityClayFurnace;
 import mrunknown404.primalrework.util.enums.EnumStage;
@@ -33,7 +33,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockClayFurnace extends BlockDirectionalBase implements ITileEntityProvider {
+public class BlockClayFurnace extends BlockStagedDirectional implements ITileEntityProvider {
 	
 	private static final PropertyBool IS_BURNING = PropertyBool.create("burning");
 	private static final AxisAlignedBB bb = new AxisAlignedBB(1.05f / 16, 0, 1.05f / 16, 15.05f / 16, 15.05f / 16, 15.05f / 16);

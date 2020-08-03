@@ -2,8 +2,8 @@ package mrunknown404.primalrework.blocks.slabs;
 
 import java.util.Random;
 
-import mrunknown404.primalrework.blocks.util.BlockSlabBase;
-import mrunknown404.primalrework.blocks.util.ISlabBase;
+import mrunknown404.primalrework.blocks.util.BlockStagedSlab;
+import mrunknown404.primalrework.blocks.util.ISlabStaged;
 import mrunknown404.primalrework.init.ModBlocks;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
@@ -22,7 +22,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
-public class BlockPathSlab extends BlockSlabBase {
+public class BlockPathSlab extends BlockStagedSlab {
 	
 	public BlockPathSlab(String name, boolean isDouble) {
 		super(name, Material.GROUND, SoundType.PLANT, 0.75f, 0.75f, isDouble, EnumStage.stage1,
@@ -35,18 +35,18 @@ public class BlockPathSlab extends BlockSlabBase {
 	}
 	
 	@Override
-	public BlockSlabBase getSingleVersion() {
-		return (BlockSlabBase) ModBlocks.PATH_SLAB;
+	public BlockStagedSlab getSingleVersion() {
+		return (BlockStagedSlab) ModBlocks.PATH_SLAB;
 	}
 	
 	@Override
-	public BlockSlabBase getDoubleVersion() {
-		return (BlockSlabBase) ModBlocks.PATH_DOUBLE_SLAB;
+	public BlockStagedSlab getDoubleVersion() {
+		return (BlockStagedSlab) ModBlocks.PATH_DOUBLE_SLAB;
 	}
 	
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return Item.getItemFromBlock(((ISlabBase<BlockSlabBase>) ModBlocks.DIRT_SLAB).getSingleVersion());
+		return Item.getItemFromBlock(((ISlabStaged<BlockStagedSlab>) ModBlocks.DIRT_SLAB).getSingleVersion());
 	}
 	
 	protected static final AxisAlignedBB AABB_FULL = new AxisAlignedBB(0, 0, 0, 1, 15d / 16d, 1);

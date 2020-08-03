@@ -2,7 +2,7 @@ package mrunknown404.primalrework.blocks;
 
 import java.util.Random;
 
-import mrunknown404.primalrework.blocks.util.BlockBase;
+import mrunknown404.primalrework.blocks.util.BlockStaged;
 import mrunknown404.primalrework.init.ModBlocks;
 import mrunknown404.primalrework.tileentity.TileEntityCharcoalPitMaster;
 import mrunknown404.primalrework.util.enums.EnumStage;
@@ -19,7 +19,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class BlockCharcoalPitMaster extends BlockBase implements ITileEntityProvider {
+public class BlockCharcoalPitMaster extends BlockStaged implements ITileEntityProvider {
 	
 	public BlockCharcoalPitMaster() {
 		super("charcoal_pit_master", Material.WOOD, SoundType.WOOD, 3, 6, EnumStage.no_show, new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.axe, EnumToolMaterial.flint));

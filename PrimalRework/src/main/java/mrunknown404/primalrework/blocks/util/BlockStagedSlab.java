@@ -24,7 +24,7 @@ import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public abstract class BlockSlabBase extends BlockSlab implements ISlabBase<BlockSlabBase> {
+public abstract class BlockStagedSlab extends BlockSlab implements ISlabStaged<BlockStagedSlab> {
 	
 	private final BlockRenderLayer renderType;
 	private final boolean isDouble;
@@ -32,7 +32,7 @@ public abstract class BlockSlabBase extends BlockSlab implements ISlabBase<Block
 	private int amountOfTooltops = 0;
 	protected BlockHarvestInfo harvestInfo;
 	
-	public BlockSlabBase(String name, Material material, SoundType soundType, float hardness, float resistance, boolean isDouble, EnumStage stage,
+	public BlockStagedSlab(String name, Material material, SoundType soundType, float hardness, float resistance, boolean isDouble, EnumStage stage,
 			DoubleValue<EnumToolType, EnumToolMaterial>... types) {
 		super(material);
 		setUnlocalizedName(name);
@@ -122,7 +122,7 @@ public abstract class BlockSlabBase extends BlockSlab implements ISlabBase<Block
 	}
 	
 	@Override
-	public BlockSlabBase setAmountOfTooltops(int amountOfTooltops) {
+	public BlockStagedSlab setAmountOfTooltops(int amountOfTooltops) {
 		this.amountOfTooltops = amountOfTooltops;
 		return this;
 	}

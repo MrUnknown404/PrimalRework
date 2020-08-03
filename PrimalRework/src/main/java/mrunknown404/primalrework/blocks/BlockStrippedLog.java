@@ -1,6 +1,6 @@
 package mrunknown404.primalrework.blocks;
 
-import mrunknown404.primalrework.blocks.util.BlockRotatedPillarBase;
+import mrunknown404.primalrework.blocks.util.BlockStagedRotatedPillar;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import mrunknown404.primalrework.util.enums.EnumToolType;
@@ -16,7 +16,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
-public class BlockStrippedLog extends BlockRotatedPillarBase {
+public class BlockStrippedLog extends BlockStagedRotatedPillar {
 	
 	private static final AxisAlignedBB VERTICAL_BB = new AxisAlignedBB(1.05 / 16, 0, 1.05 / 16, 15.05 / 16, 1, 15.05 / 16);
 	private static final AxisAlignedBB NS_BB = new AxisAlignedBB(1.05 / 16, 1.05 / 16, 0, 15.05 / 16, 15.05 / 16, 1);

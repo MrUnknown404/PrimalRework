@@ -3,7 +3,7 @@ package mrunknown404.primalrework.blocks;
 import java.util.Random;
 
 import mrunknown404.primalrework.Main;
-import mrunknown404.primalrework.blocks.util.BlockBase;
+import mrunknown404.primalrework.blocks.util.BlockStaged;
 import mrunknown404.primalrework.client.gui.GuiHandler;
 import mrunknown404.primalrework.tileentity.TileEntityFirePit;
 import mrunknown404.primalrework.util.enums.EnumStage;
@@ -27,7 +27,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class BlockFirePit extends BlockBase implements ITileEntityProvider {
+public class BlockFirePit extends BlockStaged implements ITileEntityProvider {
 	
 	private static final AxisAlignedBB bb = new AxisAlignedBB(2.05 / 16, 0, 2.05 / 16, 14.05 / 16, 13.05 / 16, 14.05 / 16);
 	

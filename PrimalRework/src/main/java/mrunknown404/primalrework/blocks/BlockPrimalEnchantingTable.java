@@ -1,7 +1,7 @@
 package mrunknown404.primalrework.blocks;
 
 import mrunknown404.primalrework.Main;
-import mrunknown404.primalrework.blocks.util.BlockBase;
+import mrunknown404.primalrework.blocks.util.BlockStaged;
 import mrunknown404.primalrework.client.gui.GuiHandler;
 import mrunknown404.primalrework.tileentity.TileEntityPrimalEnchanting;
 import mrunknown404.primalrework.util.enums.EnumStage;
@@ -24,7 +24,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockPrimalEnchantingTable extends BlockBase implements ITileEntityProvider {
+public class BlockPrimalEnchantingTable extends BlockStaged implements ITileEntityProvider {
 	
 	private static final AxisAlignedBB bb = new AxisAlignedBB(1.05 / 16, 0, 1.05 / 16, 15.05 / 16, 9.05 / 16, 15.05 / 16);
 	

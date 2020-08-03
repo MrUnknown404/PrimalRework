@@ -6,14 +6,14 @@ import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 
-public class ItemDamageableBase extends ItemBase {
+public class ItemDamageable extends ItemStaged {
 	
-	protected ItemDamageableBase(String name, CreativeTabs tab, EnumToolMaterial level, EnumStage stage) {
+	protected ItemDamageable(String name, CreativeTabs tab, EnumToolMaterial level, EnumStage stage) {
 		super(name, tab, 1, stage);
 		setMaxDamage(level.durability);
 	}
 	
-	public ItemDamageableBase(String name, EnumToolMaterial level, EnumStage stage) {
+	public ItemDamageable(String name, EnumToolMaterial level, EnumStage stage) {
 		this(name, ModCreativeTabs.PRIMALREWORK_TOOLS, level, stage);
 	}
 	

@@ -5,7 +5,7 @@ import java.util.Map.Entry;
 import javax.annotation.Nullable;
 
 import mrunknown404.primalrework.init.ModItems;
-import mrunknown404.primalrework.items.util.ItemDamageableBase;
+import mrunknown404.primalrework.items.util.ItemDamageable;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -33,7 +33,7 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.wrappers.FluidBucketWrapper;
 
-public class ItemClayBucket extends ItemDamageableBase {
+public class ItemClayBucket extends ItemDamageable {
 	
 	protected final Fluid fluid;
 	

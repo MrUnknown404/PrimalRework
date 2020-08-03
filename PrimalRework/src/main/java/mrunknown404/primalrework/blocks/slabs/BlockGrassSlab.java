@@ -2,8 +2,8 @@ package mrunknown404.primalrework.blocks.slabs;
 
 import java.util.Random;
 
-import mrunknown404.primalrework.blocks.util.BlockSlabBase;
-import mrunknown404.primalrework.blocks.util.ISlabBase;
+import mrunknown404.primalrework.blocks.util.BlockStagedSlab;
+import mrunknown404.primalrework.blocks.util.ISlabStaged;
 import mrunknown404.primalrework.init.ModBlocks;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
@@ -19,7 +19,7 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class BlockGrassSlab extends BlockSlabBase {
+public class BlockGrassSlab extends BlockStagedSlab {
 	
 	public BlockGrassSlab(String name, boolean isDouble) {
 		super(name, Material.GROUND, SoundType.PLANT, 0.75f, 0.75f, isDouble, EnumStage.stage1,
@@ -28,18 +28,18 @@ public class BlockGrassSlab extends BlockSlabBase {
 	}
 	
 	@Override
-	public BlockSlabBase getSingleVersion() {
-		return (BlockSlabBase) ModBlocks.GRASS_SLAB;
+	public BlockStagedSlab getSingleVersion() {
+		return (BlockStagedSlab) ModBlocks.GRASS_SLAB;
 	}
 	
 	@Override
-	public BlockSlabBase getDoubleVersion() {
-		return (BlockSlabBase) ModBlocks.GRASS_DOUBLE_SLAB;
+	public BlockStagedSlab getDoubleVersion() {
+		return (BlockStagedSlab) ModBlocks.GRASS_DOUBLE_SLAB;
 	}
 	
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return Item.getItemFromBlock(((ISlabBase<BlockSlabBase>) ModBlocks.DIRT_SLAB).getSingleVersion());
+		return Item.getItemFromBlock(((ISlabStaged<BlockStagedSlab>) ModBlocks.DIRT_SLAB).getSingleVersion());
 	}
 	
 	@Override

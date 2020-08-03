@@ -1,6 +1,6 @@
 package mrunknown404.primalrework.blocks;
 
-import mrunknown404.primalrework.blocks.util.BlockBase;
+import mrunknown404.primalrework.blocks.util.BlockStaged;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import mrunknown404.primalrework.util.enums.EnumToolType;
@@ -11,7 +11,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
-public class BlockCharcoalBlock extends BlockBase {
+public class BlockCharcoalBlock extends BlockStaged {
 
 	public BlockCharcoalBlock() {
 		super("charcoal_block", Material.ROCK, SoundType.STONE, 4, 20, EnumStage.stage2, new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.axe, EnumToolMaterial.flint));

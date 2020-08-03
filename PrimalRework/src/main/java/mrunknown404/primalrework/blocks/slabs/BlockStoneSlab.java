@@ -1,6 +1,6 @@
 package mrunknown404.primalrework.blocks.slabs;
 
-import mrunknown404.primalrework.blocks.util.BlockSlabBase;
+import mrunknown404.primalrework.blocks.util.BlockStagedSlab;
 import mrunknown404.primalrework.init.ModBlocks;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
@@ -9,7 +9,7 @@ import mrunknown404.unknownlibs.utils.DoubleValue;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 
-public class BlockStoneSlab extends BlockSlabBase {
+public class BlockStoneSlab extends BlockStagedSlab {
 	
 	public BlockStoneSlab(String name, boolean isDouble) {
 		super(name, Material.ROCK, SoundType.STONE, 1.5f, 1.5f, isDouble, EnumStage.stage1,
@@ -17,12 +17,12 @@ public class BlockStoneSlab extends BlockSlabBase {
 	}
 	
 	@Override
-	public BlockSlabBase getSingleVersion() {
-		return (BlockSlabBase) ModBlocks.STONE_SLAB;
+	public BlockStagedSlab getSingleVersion() {
+		return (BlockStagedSlab) ModBlocks.STONE_SLAB;
 	}
 	
 	@Override
-	public BlockSlabBase getDoubleVersion() {
-		return (BlockSlabBase) ModBlocks.STONE_DOUBLE_SLAB;
+	public BlockStagedSlab getDoubleVersion() {
+		return (BlockStagedSlab) ModBlocks.STONE_DOUBLE_SLAB;
 	}
 }

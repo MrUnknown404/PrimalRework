@@ -2,7 +2,7 @@ package mrunknown404.primalrework.blocks.slabs;
 
 import java.util.Random;
 
-import mrunknown404.primalrework.blocks.util.BlockSlabBase;
+import mrunknown404.primalrework.blocks.util.BlockStagedSlab;
 import mrunknown404.primalrework.init.ModBlocks;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
@@ -15,7 +15,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class BlockDirtSlab extends BlockSlabBase {
+public class BlockDirtSlab extends BlockStagedSlab {
 	
 	public BlockDirtSlab(String name, boolean isDouble) {
 		super(name, Material.GROUND, SoundType.GROUND, 0.75f, 0.75f, isDouble, EnumStage.stage1,
@@ -24,13 +24,13 @@ public class BlockDirtSlab extends BlockSlabBase {
 	}
 	
 	@Override
-	public BlockSlabBase getSingleVersion() {
-		return (BlockSlabBase) ModBlocks.DIRT_SLAB;
+	public BlockStagedSlab getSingleVersion() {
+		return (BlockStagedSlab) ModBlocks.DIRT_SLAB;
 	}
 	
 	@Override
-	public BlockSlabBase getDoubleVersion() {
-		return (BlockSlabBase) ModBlocks.DIRT_DOUBLE_SLAB;
+	public BlockStagedSlab getDoubleVersion() {
+		return (BlockStagedSlab) ModBlocks.DIRT_DOUBLE_SLAB;
 	}
 	
 	@SuppressWarnings("deprecation")

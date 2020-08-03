@@ -6,7 +6,7 @@ import javax.annotation.Nullable;
 
 import com.google.common.base.Predicate;
 
-import mrunknown404.primalrework.blocks.util.BlockBase;
+import mrunknown404.primalrework.blocks.util.BlockStaged;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import mrunknown404.primalrework.util.enums.EnumToolType;
@@ -31,7 +31,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockPrimalTorchUnlit extends BlockBase {
+public class BlockPrimalTorchUnlit extends BlockStaged {
 	
 	protected static final AxisAlignedBB STANDING_AABB = new AxisAlignedBB(0.4D, 0.0D, 0.4D, 0.6D, 0.5D, 0.6D);
 	protected static final AxisAlignedBB TORCH_NORTH_AABB = new AxisAlignedBB(0.35D, 0.2D, 0.7D, 0.65D, 0.7D, 1.0D);

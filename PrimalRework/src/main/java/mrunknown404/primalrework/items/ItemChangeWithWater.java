@@ -1,6 +1,6 @@
 package mrunknown404.primalrework.items;
 
-import mrunknown404.primalrework.items.util.ItemBase;
+import mrunknown404.primalrework.items.util.ItemStaged;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,7 +12,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-public class ItemChangeWithWater extends ItemBase {
+public class ItemChangeWithWater extends ItemStaged {
 	
 	private final Item changeInto;
 	

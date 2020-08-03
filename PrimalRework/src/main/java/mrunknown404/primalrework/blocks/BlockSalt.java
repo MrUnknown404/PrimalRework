@@ -2,7 +2,7 @@ package mrunknown404.primalrework.blocks;
 
 import java.util.Arrays;
 
-import mrunknown404.primalrework.blocks.util.BlockBase;
+import mrunknown404.primalrework.blocks.util.BlockStaged;
 import mrunknown404.primalrework.init.ModItems;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
@@ -13,7 +13,7 @@ import mrunknown404.unknownlibs.utils.DoubleValue;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 
-public class BlockSalt extends BlockBase {
+public class BlockSalt extends BlockStaged {
 	
 	public BlockSalt() {
 		super("salt_block", Material.GROUND, SoundType.GROUND, 1.25f, 1.25f, EnumStage.stage1,

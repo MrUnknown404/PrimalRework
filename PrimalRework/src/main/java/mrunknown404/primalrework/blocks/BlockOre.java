@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import mrunknown404.primalrework.blocks.util.BlockBase;
+import mrunknown404.primalrework.blocks.util.BlockStaged;
 import mrunknown404.primalrework.init.ModItems;
 import mrunknown404.primalrework.items.ItemOreNugget;
 import mrunknown404.primalrework.util.enums.EnumAlloy;
@@ -19,7 +19,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.util.text.TextComponentTranslation;
 
-public class BlockOre extends BlockBase {
+public class BlockOre extends BlockStaged {
 	
 	public static final DoubleValue<EnumToolType, EnumToolMaterial> COPPER_TYPES = new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.pickaxe, EnumToolMaterial.stone);
 	

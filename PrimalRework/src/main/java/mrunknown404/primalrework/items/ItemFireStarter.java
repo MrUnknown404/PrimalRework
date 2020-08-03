@@ -6,7 +6,7 @@ import mrunknown404.primalrework.Main;
 import mrunknown404.primalrework.blocks.BlockDenseLog;
 import mrunknown404.primalrework.init.ModBlocks;
 import mrunknown404.primalrework.init.ModItems;
-import mrunknown404.primalrework.items.util.ItemDamageableBase;
+import mrunknown404.primalrework.items.util.ItemDamageable;
 import mrunknown404.primalrework.network.message.FireStarterMessage;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
@@ -25,7 +25,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemFireStarter extends ItemDamageableBase {
+public class ItemFireStarter extends ItemDamageable {
 	
 	public ItemFireStarter() {
 		super("fire_starter", EnumToolMaterial.wood, EnumStage.stage1);

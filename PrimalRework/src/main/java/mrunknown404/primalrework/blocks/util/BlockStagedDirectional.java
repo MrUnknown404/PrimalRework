@@ -18,17 +18,17 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class BlockDirectionalBase extends BlockBase {
+public class BlockStagedDirectional extends BlockStaged {
 	
 	protected static final PropertyDirection FACING = BlockHorizontal.FACING;
 	
-	protected BlockDirectionalBase(String name, Material material, SoundType soundType, BlockRenderLayer renderType, float hardness, float resistance, AxisAlignedBB collisionAABB,
+	protected BlockStagedDirectional(String name, Material material, SoundType soundType, BlockRenderLayer renderType, float hardness, float resistance, AxisAlignedBB collisionAABB,
 			AxisAlignedBB visualAABB, EnumStage stage, DoubleValue<EnumToolType, EnumToolMaterial>... types) {
 		super(name, material, soundType, renderType, hardness, resistance, collisionAABB, visualAABB, stage, types);
 		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 	}
 	
-	protected BlockDirectionalBase(String name, Material material, SoundType soundType, float hardness, float resistance, EnumStage stage,
+	protected BlockStagedDirectional(String name, Material material, SoundType soundType, float hardness, float resistance, EnumStage stage,
 			DoubleValue<EnumToolType, EnumToolMaterial>... types) {
 		this(name, material, soundType, BlockRenderLayer.SOLID, hardness, resistance, FULL_BLOCK_AABB, FULL_BLOCK_AABB, stage, types);
 	}

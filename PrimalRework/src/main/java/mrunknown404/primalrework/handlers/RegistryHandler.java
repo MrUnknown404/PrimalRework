@@ -1,7 +1,7 @@
 package mrunknown404.primalrework.handlers;
 
 import mrunknown404.primalrework.Main;
-import mrunknown404.primalrework.blocks.util.ISlabBase;
+import mrunknown404.primalrework.blocks.util.ISlabStaged;
 import mrunknown404.primalrework.init.ModBiomes;
 import mrunknown404.primalrework.init.ModBlocks;
 import mrunknown404.primalrework.init.ModItems;
@@ -67,8 +67,8 @@ public class RegistryHandler {
 		}
 		
 		for (Block block : ModBlocks.BLOCKS) {
-			if (block instanceof ISlabBase) {
-				if (!((ISlabBase<BlockSlab>) block).isDouble()) {
+			if (block instanceof ISlabStaged) {
+				if (!((ISlabStaged<BlockSlab>) block).isDouble()) {
 					Main.proxy.registerItemRenderer(Item.getItemFromBlock(block), 0, "inventory");
 				}
 			} else {

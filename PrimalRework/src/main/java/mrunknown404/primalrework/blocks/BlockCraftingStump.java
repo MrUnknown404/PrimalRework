@@ -1,6 +1,6 @@
 package mrunknown404.primalrework.blocks;
 
-import mrunknown404.primalrework.blocks.util.BlockDirectionalBase;
+import mrunknown404.primalrework.blocks.util.BlockStagedDirectional;
 import mrunknown404.primalrework.init.ModItems;
 import mrunknown404.primalrework.tileentity.TileEntityCraftingStump;
 import mrunknown404.primalrework.util.enums.EnumStage;
@@ -27,7 +27,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 
-public class BlockCraftingStump extends BlockDirectionalBase implements ITileEntityProvider {
+public class BlockCraftingStump extends BlockStagedDirectional implements ITileEntityProvider {
 	
 	private static final AxisAlignedBB bb = new AxisAlignedBB(2.05 / 16, 0, 2.05 / 16, 14.05 / 16, 15.05f / 16, 14.05 / 16);
 	

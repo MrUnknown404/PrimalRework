@@ -2,7 +2,7 @@ package mrunknown404.primalrework.items;
 
 import mrunknown404.primalrework.init.ModCreativeTabs;
 import mrunknown404.primalrework.init.ModItems;
-import mrunknown404.primalrework.items.util.ItemDamageableBase;
+import mrunknown404.primalrework.items.util.ItemDamageable;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -21,7 +21,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fluids.capability.wrappers.FluidBucketWrapper;
 
-public class ItemClayBucketMilk extends ItemDamageableBase {
+public class ItemClayBucketMilk extends ItemDamageable {
 	
 	public ItemClayBucketMilk() {
 		super("clay_bucket_milk", ModCreativeTabs.PRIMALREWORK_FOOD, EnumToolMaterial.clay, EnumStage.stage1);

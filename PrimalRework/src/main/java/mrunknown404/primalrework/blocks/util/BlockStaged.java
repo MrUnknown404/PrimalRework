@@ -20,7 +20,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockBase extends Block implements IBlockBase<BlockBase> {
+public class BlockStaged extends Block implements IBlockStaged<BlockStaged> {
 	
 	private final BlockRenderLayer renderType;
 	private final AxisAlignedBB collisionAABB, visualAABB;
@@ -29,7 +29,7 @@ public class BlockBase extends Block implements IBlockBase<BlockBase> {
 	protected final EnumStage stage;
 	protected BlockHarvestInfo harvestInfo;
 	
-	protected BlockBase(String name, Material material, SoundType soundType, BlockRenderLayer renderType, float hardness, float resistance, AxisAlignedBB collisionAABB,
+	protected BlockStaged(String name, Material material, SoundType soundType, BlockRenderLayer renderType, float hardness, float resistance, AxisAlignedBB collisionAABB,
 			AxisAlignedBB visualAABB, EnumStage stage, DoubleValue<EnumToolType, EnumToolMaterial>... types) {
 		super(material);
 		setUnlocalizedName(name);
@@ -54,12 +54,12 @@ public class BlockBase extends Block implements IBlockBase<BlockBase> {
 		}
 	}
 	
-	public BlockBase(String name, Material material, SoundType soundType, float hardness, float resistance, EnumStage stage, DoubleValue<EnumToolType, EnumToolMaterial>... types) {
+	public BlockStaged(String name, Material material, SoundType soundType, float hardness, float resistance, EnumStage stage, DoubleValue<EnumToolType, EnumToolMaterial>... types) {
 		this(name, material, soundType, BlockRenderLayer.SOLID, hardness, resistance, FULL_BLOCK_AABB, FULL_BLOCK_AABB, stage, types);
 	}
 	
 	@Override
-	public BlockBase setAmountOfTooltops(int amountOfTooltops) {
+	public BlockStaged setAmountOfTooltops(int amountOfTooltops) {
 		this.amountOfTooltops = amountOfTooltops;
 		return this;
 	}

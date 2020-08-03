@@ -1,6 +1,6 @@
 package mrunknown404.primalrework.blocks;
 
-import mrunknown404.primalrework.blocks.util.BlockDirectionalBase;
+import mrunknown404.primalrework.blocks.util.BlockStagedDirectional;
 import mrunknown404.primalrework.tileentity.TileEntityLoom;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
@@ -28,7 +28,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockLoom extends BlockDirectionalBase implements ITileEntityProvider {
+public class BlockLoom extends BlockStagedDirectional implements ITileEntityProvider {
 	
 	public static final PropertyInteger STRING_LEVEL = PropertyInteger.create("stringlevel", 0, 7);
 	

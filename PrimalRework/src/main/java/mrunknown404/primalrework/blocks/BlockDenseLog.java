@@ -1,6 +1,6 @@
 package mrunknown404.primalrework.blocks;
 
-import mrunknown404.primalrework.blocks.util.BlockRotatedPillarBase;
+import mrunknown404.primalrework.blocks.util.BlockStagedRotatedPillar;
 import mrunknown404.primalrework.init.ModBlocks;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
@@ -16,7 +16,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockDenseLog extends BlockRotatedPillarBase {
+public class BlockDenseLog extends BlockStagedRotatedPillar {
 	
 	public BlockDenseLog() {
 		super("dense_log", Material.WOOD, SoundType.WOOD, 3, 6, EnumStage.stage2, new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.axe, EnumToolMaterial.flint));

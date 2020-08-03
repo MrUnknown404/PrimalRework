@@ -1,6 +1,6 @@
 package mrunknown404.primalrework.blocks;
 
-import mrunknown404.primalrework.blocks.util.BlockBase;
+import mrunknown404.primalrework.blocks.util.BlockStaged;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import mrunknown404.primalrework.util.enums.EnumToolType;
@@ -18,7 +18,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockClayPot extends BlockBase {
+public class BlockClayPot extends BlockStaged {
 	private static final AxisAlignedBB bb = new AxisAlignedBB(4.05f / 16, 0, 4.05f / 16, 12.05f / 16, 10.05f / 16, 12.05f / 16);
 	
 	public BlockClayPot() {
