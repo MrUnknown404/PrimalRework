@@ -26,6 +26,7 @@ import net.minecraftforge.fml.client.config.GuiUtils;
 public class GuiQuestTree extends Gui {
 	private static final ResourceLocation ICON_LOC = new ResourceLocation(Main.MOD_ID, "textures/gui/quest/quest_icon.png");
 	private static final ResourceLocation ICON_SEL_LOC = new ResourceLocation(Main.MOD_ID, "textures/gui/quest/quest_icon_selected.png");
+	private static final ResourceLocation ICON_CHECK_MARK_LOC = new ResourceLocation(Main.MOD_ID, "textures/gui/quest/quest_icon_checkmark.png");
 	
 	private final Minecraft mc;
 	private final RenderItem itemRender;
@@ -36,9 +37,8 @@ public class GuiQuestTree extends Gui {
 	
 	private Quest selectedQuest;
 	private int difX, difY, prevMouseX, prevMouseY, prevDifX, prevDifY;
-	private boolean isMouseDown, canDrag = true, didClick;
-	
-	//TODO add checkmark to finished quests
+	private boolean isMouseDown, didClick;
+	boolean canDrag = true;
 	
 	public GuiQuestTree(Minecraft mc, GuiQuestMenu parent, EnumStage stage, int guiLeft, int guiTop) {
 		this.mc = mc;
@@ -66,16 +66,28 @@ public class GuiQuestTree extends Gui {
 			}
 		}
 		
-		GlStateManager.color(1, 1, 1);
 		for (Quest q : tab.get()) {
 			int x = MathUtils.ceil(q.getXPos() * 32f), y = MathUtils.ceil(q.getYPos() * 32f);
+			
+			if (didClick && MathUtils.within(mouseX, xRootBase + x, xRootBase + x + 22) && MathUtils.within(mouseY, yRootBase + y, yRootBase + y + 22)) {
+				GlStateManager.color(0.75f, 0.75f, 0.75f);
+			} else {
+				GlStateManager.color(1, 1, 1);
+			}
 			
 			mc.getTextureManager().bindTexture(selectedQuest == q ? ICON_SEL_LOC : ICON_LOC);
 			drawModalRectWithCustomSizedTexture(xRootBase + x, yRootBase + y, 0, 0, 22, 22, 22, 22);
 			
 			RenderHelper.disableStandardItemLighting();
 			RenderHelper.enableGUIStandardItemLighting();
+			GlStateManager.enableDepth();
 			itemRender.renderItemAndEffectIntoGUI(mc.player, q.getIcon(), xRootBase + 3 + x, yRootBase + 3 + y);
+			GlStateManager.disableDepth();
+			
+			if (q.isFinished()) {
+				mc.getTextureManager().bindTexture(ICON_CHECK_MARK_LOC);
+				drawModalRectWithCustomSizedTexture(xRootBase + x, yRootBase + y, 0, 0, 22, 22, 22, 22);
+			}
 		}
 		
 		GL11.glDisable(GL11.GL_SCISSOR_TEST);

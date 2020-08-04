@@ -7,7 +7,7 @@ import net.minecraft.world.World;
 
 public class QuestRoot extends Quest {
 	public QuestRoot(EnumStage stage) {
-		super(stage, "root", 0, 0, null, null, null, null);
+		super(stage, "root", null, null, null, null);
 	}
 	
 	@Override

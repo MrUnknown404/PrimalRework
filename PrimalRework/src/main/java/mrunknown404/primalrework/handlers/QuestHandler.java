@@ -68,16 +68,18 @@ public class QuestHandler {
 				itemCheck:
 				for (EntityPlayer pl : e.world.playerEntities) {
 					for (ItemStack item : pl.inventory.mainInventory) {
-						if (item.getItem() == q.getRequirement().getItemToCollect()) {
-							amount += item.getCount();
-							
-							if (item.getCount() > highest) {
-								highest = item.getCount();
-								highestPlayer = pl;
-							}
-							
-							if (amount >= q.getRequirement().getAmountNeeded()) {
-								break itemCheck;
+						for (ItemStack stack : q.getRequirement().getItemToCollect()) {
+							if (item.getItem() == stack.getItem() && item.getMetadata() == stack.getMetadata()) {
+								amount += item.getCount();
+								
+								if (item.getCount() > highest) {
+									highest = item.getCount();
+									highestPlayer = pl;
+								}
+								
+								if (amount >= q.getRequirement().getAmountNeeded()) {
+									break itemCheck;
+								}
 							}
 						}
 					}

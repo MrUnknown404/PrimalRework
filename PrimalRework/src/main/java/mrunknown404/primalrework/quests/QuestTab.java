@@ -1,6 +1,7 @@
 package mrunknown404.primalrework.quests;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import mrunknown404.primalrework.util.enums.EnumStage;
@@ -53,5 +54,16 @@ public class QuestTab {
 	
 	public ItemStack getIcon() {
 		return itemIcon;
+	}
+
+	public void sort() {
+		quests.sort(new CompareQuest());
+	}
+	
+	private static class CompareQuest implements Comparator<Quest> {
+		@Override
+		public int compare(Quest o1, Quest o2) {
+			return o1.name_key.compareTo(o2.name_key);
+		}
 	}
 }

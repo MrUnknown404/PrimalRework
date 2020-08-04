@@ -118,10 +118,9 @@ public class Main {
 		ModRecipes.removeRecipes();
 		ModRecipes.addRecipes();
 		
-		InitQuests.load();
-		
 		VanillaOverrides.overrideAll();
 		OreDict.register();
+		InitQuests.load();
 	}
 	
 	@EventHandler

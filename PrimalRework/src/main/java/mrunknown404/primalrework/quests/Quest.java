@@ -1,5 +1,8 @@
 package mrunknown404.primalrework.quests;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Nullable;
 
 import mrunknown404.primalrework.init.InitQuests;
@@ -20,48 +23,33 @@ public class Quest {
 	protected final QuestRequirement req;
 	protected final IQuestReward reward;
 	protected final EnumStage stage;
+	
 	/** Grid pos! */
-	protected final float xOffset, xPos, yPos; //TODO look into making this fully automatic
+	protected float xPos, yPos, xOffset, yOffset;
 	
 	protected boolean isFinished;
+	protected List<Quest> children = new ArrayList<Quest>();
 	
-	public Quest(EnumStage stage, String name_key, float xOffset, float yPos, Quest parent, @Nullable ItemStack itemIcon, QuestRequirement req,
-			@Nullable IQuestReward reward) {
+	public Quest(EnumStage stage, String name_key, Quest parent, @Nullable ItemStack itemIcon, QuestRequirement req, @Nullable IQuestReward reward) {
 		this.stage = stage;
 		this.name_key = name_key;
-		this.xOffset = xOffset;
-		this.yPos = yPos;
 		this.tab = InitQuests.QUEST_TABS.get(stage);
 		this.parent = parent;
 		this.itemIcon = itemIcon == null ? tab.getIcon() : itemIcon;
 		this.req = req;
 		this.reward = reward;
-		
-		Quest q = parent;
-		int xx = 0;
-		if (parent != null) {
-			while (true) {
-				xx++;
-				if (!q.hasParent()) {
-					break;
-				}
-				q = q.parent;
-			}
-		}
-		
-		this.xPos = xx;
 	}
 	
-	public Quest(String name_key, Quest parent, int xOffset, int yOffset, ItemStack itemIcon, QuestRequirement req) {
-		this(parent.stage, name_key, xOffset, yOffset, parent, itemIcon, req, null);
+	public Quest(String name_key, Quest parent, ItemStack itemIcon, QuestRequirement req) {
+		this(parent.stage, name_key, parent, itemIcon, req, null);
 	}
 	
-	public Quest(String name_key, Quest parent, int xOffset, int yOffset, QuestRequirement req) {
-		this(parent.stage, name_key, xOffset, yOffset, parent, new ItemStack(req.getItemToCollect()), req, null);
+	public Quest(String name_key, Quest parent, QuestRequirement req) {
+		this(parent.stage, name_key, parent, req.getItemToCollect().get(0), req, null);
 	}
 	
-	public Quest(String name_key, Quest parent, int yOffset, QuestRequirement req) {
-		this(parent.stage, name_key, 0, yOffset, parent, new ItemStack(req.getItemToCollect()), req, null);
+	public void addChild(Quest q) {
+		children.add(q);
 	}
 	
 	public void checkRequirements(World world, EntityPlayer player, int amount) {
@@ -133,8 +121,24 @@ public class Quest {
 		return parent != null;
 	}
 	
+	public void setupPositions() { //TODO setup!
+		Quest q = parent;
+		int xx = 0;
+		if (parent != null) {
+			while (true) {
+				xx++;
+				if (!q.hasParent()) {
+					break;
+				}
+				q = q.parent;
+			}
+		}
+		
+		this.xPos = xx;
+	}
+	
 	public float getXPos() {
-		return xPos + xOffset;
+		return xPos;
 	}
 	
 	public float getYPos() {

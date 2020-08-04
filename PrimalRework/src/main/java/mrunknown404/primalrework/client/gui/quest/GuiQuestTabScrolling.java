@@ -53,7 +53,7 @@ public class GuiQuestTabScrolling extends Gui {
 		
 		this.listWidth = 105;
 		this.top = yMod + 1;
-		this.bottom = yMod + 238;
+		this.bottom = yMod + 239;
 		this.slotHeight = 48;
 		this.left = 1 + xMod;
 		
@@ -73,6 +73,8 @@ public class GuiQuestTabScrolling extends Gui {
 	private void drawSlot(int slotIdx, int slotTop) {
 		if (!Mouse.isButtonDown(0)) {
 			buttonsClicked[slotIdx] = false;
+		} else if (buttonsClicked[slotIdx]) {
+			parent.questTree.canDrag = false;
 		}
 		
 		if (buttonsClicked[slotIdx]) {
@@ -135,6 +137,7 @@ public class GuiQuestTabScrolling extends Gui {
 		if (Mouse.isButtonDown(0)) {
 			if (initialMouseClickY == -1) {
 				if (isHoveringScrollbar) {
+					parent.questTree.canDrag = false;
 					isHovering = false;
 					int mouseListY = mouseY - top - -1 + (int) scrollDistance - 4;
 					int slotIndex = mouseListY / slotHeight;

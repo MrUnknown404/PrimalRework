@@ -9,8 +9,8 @@ import net.minecraft.util.ResourceLocation;
 public class GuiQuestMenu extends GuiScreen {
 	private static final ResourceLocation LOC = new ResourceLocation(Main.MOD_ID, "textures/gui/quest/quest_menu_background.png");
 	
-	private GuiQuestTabScrolling tabScroll;
-	private GuiQuestTree questTree;
+	GuiQuestTabScrolling tabScroll;
+	GuiQuestTree questTree;
 	
 	@Override
 	public void initGui() {
