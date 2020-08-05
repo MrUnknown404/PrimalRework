@@ -20,11 +20,5 @@ build
 # other
 libs
 eclipse
+run
 *.lnk
-
-**/run/*
-!**/run/config/
-**/run/config/*
-!**/run/config/triumph/
-**/run/config/triumph/*
-!**/run/config/triumph/script/

@@ -121,32 +121,63 @@ public class Quest {
 		return parent != null;
 	}
 	
-	public void setupPositions() { //TODO setup!
-		Quest q = parent;
-		int xx = 0;
-		if (parent != null) {
-			while (true) {
-				xx++;
-				if (!q.hasParent()) {
-					break;
-				}
-				q = q.parent;
-			}
+	public float getXPos() {
+		float xx = 0;
+		if (hasParent()) {
+			xx = parent.getXPos();
 		}
 		
-		this.xPos = xx;
-	}
-	
-	public float getXPos() {
-		return xPos;
+		return xPos + xOffset + xx + (hasParent() ? 1 : 0);
 	}
 	
 	public float getYPos() {
-		return yPos;
+		float yy = 0;
+		if (hasParent()) {
+			yy = parent.getYPos();
+		}
+		
+		return yPos + yOffset + yy;
 	}
 	
 	public Quest getParent() {
 		return parent;
+	}
+	
+	public void setupPositions() { //TODO ugh make work better
+		int yy = 0;
+		
+		for (Quest c : children) {
+			c.yPos = yy;
+			List<List<Quest>> childs1 = new ArrayList<List<Quest>>();
+			childs1.add(children);
+			
+			for (int i = 0; i < childs1.size(); i++) {
+				List<Quest> qq = childs1.get(i);
+				
+				for (int j = 0; j < qq.size(); j++) {
+					Quest q = qq.get(j);
+					childs1.add(q.children);
+					
+					if (q.children.size() > 1) {
+						int childrenz = 0;
+						for (int k = 0; k < q.children.size(); k++) {
+							Quest qc = q.children.get(k);
+							
+							if (k > 0 && q.children.get(k - 1).children.size() > 1) {
+								childrenz = qc.children.size() + 1;
+							}
+							qc.yOffset = k + childrenz;
+						}
+						
+						if (j < qq.size() - 1) {
+							q.xOffset = 1;
+						}
+					}
+				}
+			}
+			
+			yy++;
+		}
 	}
 	
 	@Override
@@ -167,10 +198,8 @@ public class Quest {
 		}
 		
 		Quest other = (Quest) obj;
-		if (name_key == null) {
-			if (other.name_key != null) {
-				return false;
-			}
+		if (name_key == null || other.name_key != null) {
+			return false;
 		} else if (!name_key.equals(other.name_key)) {
 			return false;
 		}

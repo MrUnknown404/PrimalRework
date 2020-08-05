@@ -30,8 +30,6 @@ public class InitQuests {
 	public static final QuestRoot STAGE_2_ROOT = addRoot(new QuestRoot(EnumStage.stage2));
 	public static final QuestRoot STAGE_3_ROOT = addRoot(new QuestRoot(EnumStage.stage3));
 	
-	//TODO convert all advancements to quests
-	
 	//@formatter:off
 	public static final Quest STAGE_0_GET_PLANT_FIBER =           addQuest(new Quest("get_plant_fiber",           STAGE_0_ROOT,                      new QuestRequirement(new ItemStack(ModItems.PLANT_FIBER))));
 	public static final Quest STAGE_0_GET_PLANT_ROPE =            addQuest(new Quest("get_plant_rope",            STAGE_0_GET_PLANT_FIBER,           new QuestRequirement(new ItemStack(ModItems.PLANT_ROPE))));
@@ -76,7 +74,7 @@ public class InitQuests {
 	public static final Quest STAGE_1_GET_BREAD =                 addQuest(new Quest("get_bread",                 STAGE_1_GET_DOUGH,                 new QuestRequirement(new ItemStack(Items.BREAD))));
 	public static final Quest STAGE_1_GET_BED =                   addQuest(new Quest("get_bed",                   STAGE_1_GET_WOOL,                  new QuestRequirement("bed")));
 	public static final Quest STAGE_1_GET_SALTED_HIDE =           addQuest(new Quest("get_salted_hide",           STAGE_1_GET_SALT,                  new QuestRequirement(new ItemStack(ModItems.SALTED_HIDE))));
-	public static final Quest STAGE_1_GET_LEATHER =               addQuest(new Quest("get_leather",                   STAGE_1_GET_SALTED_HIDE,           new QuestRequirement(new ItemStack(Items.LEATHER))));
+	public static final Quest STAGE_1_GET_LEATHER =               addQuest(new Quest("get_leather",               STAGE_1_GET_SALTED_HIDE,           new QuestRequirement(new ItemStack(Items.LEATHER))));
 	//@formatter:on
 	
 	private static Quest addQuest(Quest q) {
@@ -105,9 +103,7 @@ public class InitQuests {
 		System.out.println("Loaded " + QUESTS.size() + " quests!");
 		for (QuestTab tab : QUEST_TABS.values()) {
 			tab.sort();
-		}
-		for (Quest q : QUESTS) {
-			q.setupPositions();
+			tab.getRoot().setupPositions();
 		}
 	}
 	
