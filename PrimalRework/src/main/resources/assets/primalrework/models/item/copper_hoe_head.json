@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:item/handheld",
+	"textures": {
+		"layer0": "primalrework:items/copper_hoe_head"
+	}
+}

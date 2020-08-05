@@ -12,6 +12,8 @@ public class GuiQuestMenu extends GuiScreen {
 	GuiQuestTabScrolling tabScroll;
 	GuiQuestTree questTree;
 	
+	//TODO add quest info box
+	
 	@Override
 	public void initGui() {
 		tabScroll = new GuiQuestTabScrolling(mc, this, width / 2 - 420 / 2, height / 2 - 240 / 2);

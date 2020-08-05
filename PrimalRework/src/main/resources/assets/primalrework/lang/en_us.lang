@@ -34,6 +34,10 @@ item.black_dye.name=Black Dye
 item.brown_dye.name=Brown Dye
 item.clay_vessel.name=Clay Vessel
 
+//INGOTS
+item.copper_ingot.name=Copper Ingot
+item.tin_ingot.name=Tin Ingot
+
 //ORE NUGGETS
 item.copper_nugget_poor.name=Copper Nugget
 item.copper_nugget_low.name=Copper Nugget
@@ -58,21 +62,52 @@ item.cooked_beetroot.name=Cooked Beetroot
 item.stone_pickaxe_head.name=Stone Pickaxe Head
 item.stone_axe_head.name=Stone Axe Head
 item.stone_shovel_head.name=Stone Shovel Head
-item.stone_sword_head.name=Stone Sword Head
 item.stone_knife_head.name=Stone Knife Head
 item.stone_hoe_head.name=Stone Hoe Head
+item.stone_saw_head.name=Stone Saw Head
+item.stone_shears_head.name=Stone Shears Head
+item.stone_sword_head.name=Stone Sword Head
+
+item.copper_pickaxe_head.name=Copper Pickaxe Head
+item.copper_axe_head.name=Copper Axe Head
+item.copper_shovel_head.name=Copper Shovel Head
+item.copper_knife_head.name=Copper Knife Head
+item.copper_hoe_head.name=Copper Hoe Head
+item.copper_saw_head.name=Copper Saw Head
+item.copper_shears_head.name=Copper Shears Head
+item.copper_sword_head.name=Copper Sword Head
+
+item.tin_pickaxe_head.name=Tin Pickaxe Head
+item.tin_axe_head.name=Tin Axe Head
+item.tin_shovel_head.name=Tin Shovel Head
+item.tin_knife_head.name=Tin Knife Head
+item.tin_hoe_head.name=Tin Hoe Head
+item.tin_saw_head.name=Tin Saw Head
+item.tin_shears_head.name=Tin Shears Head
+item.tin_sword_head.name=Tin Sword Head
+
+item.copper_crafting_hammer_head.name=Tin Crafting Hammer Head
+item.tin_crafting_hammer_head.name=Tin Crafting Hammer Head
 
 //ITEMS WITH DURABILITY
 item.plant_mesh.name=Plant Mesh
 item.string_mesh.name=String Mesh
-item.flint_crafting_hammer.name=Flint Crafting Hammer
 item.mortar_pestle.name=Mortar & Pestle
 item.clay_bucket_empty.name=Clay Bucket
 item.clay_bucket_water.name=Water Clay Bucket
 item.clay_bucket_milk.name=Milk Clay Bucket
 
+item.flint_crafting_hammer.name=Flint Crafting Hammer
+item.copper_crafting_hammer.name=Copper Crafting Hammer
+item.tin_crafting_hammer.name=Tin Crafting Hammer
+
 //TOOLS
 item.fire_starter.name=Fire Starter
+
+item.clay_pickaxe.name=Clay Pickaxe
+item.clay_axe.name=Clay Axe
+item.clay_shovel.name=Clay Shovel
+item.clay_hoe.name=Clay Hoe
 
 item.flint_pickaxe.name=Flint Pickaxe
 item.flint_axe.name=Flint Hatchet
@@ -85,6 +120,26 @@ item.flint_shears.name=Flint Shears
 item.bone_knife.name=Bone Knife
 
 item.stone_knife.name=Stone Knife
+item.stone_saw.name=Stone Saw
+item.stone_shears.name=Stone Shears
+
+item.copper_pickaxe.name=Copper Pickaxe
+item.copper_axe.name=Copper Axe
+item.copper_shovel.name=Copper Shovel
+item.copper_knife.name=Copper Knife
+item.copper_hoe.name=Copper Hoe
+item.copper_saw.name=Copper Saw
+item.copper_shears.name=Copper Shears
+item.copper_sword.name=Copper Sword
+
+item.tin_pickaxe.name=Tin Pickaxe
+item.tin_axe.name=Tin Axe
+item.tin_shovel.name=Tin Shovel
+item.tin_knife.name=Tin Knife
+item.tin_hoe.name=Tin Hoe
+item.tin_saw.name=Tin Saw
+item.tin_shears.name=Tin Shears
+item.tin_sword.name=Tin Sword
 
 //VANILLA REPLACEMENTS
 item.diamond_axe.name=Diamond Axe

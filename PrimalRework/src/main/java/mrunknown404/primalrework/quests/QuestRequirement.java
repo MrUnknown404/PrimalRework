@@ -58,7 +58,6 @@ public class QuestRequirement {
 		} else if (block != null) {
 			return Arrays.asList(new ItemStack(block));
 		} else {
-			System.out.println(OreDictionary.getOres(oreDict));
 			return OreDictionary.getOres(oreDict);
 		}
 	}

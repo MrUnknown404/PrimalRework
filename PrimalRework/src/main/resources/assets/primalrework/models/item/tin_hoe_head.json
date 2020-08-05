@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:item/handheld",
+	"textures": {
+		"layer0": "primalrework:items/tin_hoe_head"
+	}
+}

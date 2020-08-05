@@ -46,7 +46,7 @@ public class GuiHandler implements IGuiHandler {
 				ItemStack item = (player.getHeldItemMainhand().getItem() instanceof ItemClayVessel) ? player.getHeldItemMainhand() : player.getHeldItemOffhand();
 				NBTTagCompound tag = item.getTagCompound();
 				
-				if (!(item.getItem() instanceof ItemClayVessel) || (tag == null || (tag.hasKey("isLiquid") && tag.getBoolean("isLiquid")))) {
+				if (!(item.getItem() instanceof ItemClayVessel) || (tag != null && (tag.hasKey("isLiquid") && tag.getBoolean("isLiquid")))) {
 					return null;
 				}
 				
@@ -78,7 +78,7 @@ public class GuiHandler implements IGuiHandler {
 				ItemStack item = (player.getHeldItemMainhand().getItem() instanceof ItemClayVessel) ? player.getHeldItemMainhand() : player.getHeldItemOffhand();
 				NBTTagCompound tag = item.getTagCompound();
 				
-				if (!(item.getItem() instanceof ItemClayVessel) || (tag == null || (tag.hasKey("isLiquid") && tag.getBoolean("isLiquid")))) {
+				if (!(item.getItem() instanceof ItemClayVessel) || (tag != null && (tag.hasKey("isLiquid") && tag.getBoolean("isLiquid")))) {
 					return null;
 				}
 				

@@ -1,0 +1,20 @@
+{
+	"type": "primalrework:staged_shaped",
+	"stage": "stage2",
+	"pattern": [
+		"CR ",
+		"R R",
+		" R "
+	],
+	"key": {
+		"R": {
+			"item": "primalrework:rock"
+		},
+		"C": {
+			"item": "minecraft:cobblestone"
+		}
+	},
+	"result": {
+		"item": "primalrework:stone_shears_head"
+	}
+}

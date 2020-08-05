@@ -1,0 +1,17 @@
+{
+	"type": "primalrework:staged_shaped",
+	"stage": "stage3",
+	"pattern": [
+		" C ",
+		"C C",
+		"CCC"
+	],
+	"key": {
+		"C": {
+			"item": "minecraft:clay_ball"
+		}
+	},
+	"result": {
+		"item": "primalrework:clay_vessel"
+	}
+}

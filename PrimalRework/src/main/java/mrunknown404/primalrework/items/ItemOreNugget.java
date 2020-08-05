@@ -21,11 +21,6 @@ public class ItemOreNugget extends ItemStaged {
 	}
 	
 	@Override
-	public int getAmountOfTooltips() {
-		return 1;
-	}
-	
-	@Override
 	public List<String> getTooltips(String name) {
 		return Arrays.asList("" + value.units + " " + new TextComponentTranslation("item.ore_units.tooltip").getUnformattedText());
 	}

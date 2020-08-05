@@ -15,7 +15,7 @@ import net.minecraft.init.Enchantments;
  * shovel (1.50f, 1.50f)
  * axe    (0.90f, 4.50f)
  * hoe    (1.25f, 0.50f)
- * sword  (1.50f, 3.00f)
+ * sword  (1.60f, 3.00f)
  * saw    (1.00f, 1.50f)
  * </pre> */
 public enum EnumToolType {
@@ -38,7 +38,7 @@ public enum EnumToolType {
 	hoe    (1.25f, 0.50f,
 			Arrays.asList(new EnchantmentData(Enchantments.UNBREAKING, 3), new EnchantmentData(Enchantments.KNOCKBACK, 2), new EnchantmentData(Enchantments.FORTUNE, 3)),
 			Arrays.asList(new EnchantmentData(Enchantments.UNBREAKING, 1), new EnchantmentData(Enchantments.KNOCKBACK, 1))),
-	sword  (1.50f, 3.00f,
+	sword  (1.60f, 3.00f,
 			combineEnchants(combineEnchants(Enchs.getWeaponBase(5, 2), Enchs.getWeaponSword(5, 5), Enchs.getWeaponSpecial(3, 2, 3)), new EnchantmentData(Enchantments.UNBREAKING, 3)),
 			combineEnchants(Enchs.getWeaponBase(2, 1), new EnchantmentData(Enchantments.UNBREAKING, 1))),
 	saw    (1.00f, 1.50f,

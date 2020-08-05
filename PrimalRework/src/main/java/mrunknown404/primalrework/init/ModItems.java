@@ -14,6 +14,7 @@ import mrunknown404.primalrework.items.ItemClayBucket;
 import mrunknown404.primalrework.items.ItemClayBucketMilk;
 import mrunknown404.primalrework.items.ItemClayVessel;
 import mrunknown404.primalrework.items.ItemFireStarter;
+import mrunknown404.primalrework.items.ItemIngot;
 import mrunknown404.primalrework.items.ItemOreNugget;
 import mrunknown404.primalrework.items.util.ItemStaged;
 import mrunknown404.primalrework.items.util.ItemDamageable;
@@ -39,8 +40,6 @@ public class ModItems {
 	public static final List<Item> ITEMS = new ArrayList<Item>();
 	public static final Map<Fluid, ItemClayBucket> CLAY_BUCKETS = new HashMap<Fluid, ItemClayBucket>();
 	public static final Map<EnumToolType, ItemCastable> CASTABLES = new HashMap<EnumToolType, ItemCastable>();
-	
-	// TODO add copper ingots/tools
 	
 	//MISC
 	public static final Item PLANT_FIBER = new ItemStaged("plant_fiber", EnumStage.stage0);
@@ -92,6 +91,10 @@ public class ModItems {
 	public static final Item TIN_NUGGET_HIGH = new ItemOreNugget(EnumStage.stage2, EnumAlloy.tin, EnumOreValue.high);
 	public static final Item TIN_NUGGET_PERFECT = new ItemOreNugget(EnumStage.stage2, EnumAlloy.tin, EnumOreValue.perfect);
 	
+	//INGOTS
+	public static final Item COPPER_INGOT = new ItemIngot(EnumStage.stage3, EnumAlloy.copper);
+	public static final Item TIN_INGOT = new ItemIngot(EnumStage.stage3, EnumAlloy.tin);
+	
 	//FOOD
 	public static final Item DOUGH = new ItemStagedFood("dough", EnumStage.stage1, 1, 0.5f);
 	public static final Item COOKED_CARROT = new ItemStagedFood("cooked_carrot", EnumStage.stage0, 5, 0.6f);
@@ -101,20 +104,51 @@ public class ModItems {
 	public static final Item STONE_PICKAXE_HEAD = new ItemStaged("stone_pickaxe_head", 1, EnumStage.stage2);
 	public static final Item STONE_AXE_HEAD = new ItemStaged("stone_axe_head", 1, EnumStage.stage2);
 	public static final Item STONE_SHOVEL_HEAD = new ItemStaged("stone_shovel_head", 1, EnumStage.stage2);
-	public static final Item STONE_SWORD_HEAD = new ItemStaged("stone_sword_head", 1, EnumStage.stage2);
 	public static final Item STONE_KNIFE_HEAD = new ItemStaged("stone_knife_head", 1, EnumStage.stage2);
 	public static final Item STONE_HOE_HEAD = new ItemStaged("stone_hoe_head", 1, EnumStage.stage2);
+	public static final Item STONE_SAW_HEAD = new ItemStaged("stone_saw_head", 1, EnumStage.stage2);
+	public static final Item STONE_SHEARS_HEAD = new ItemStaged("stone_shears_head", 1, EnumStage.stage2);
+	public static final Item STONE_SWORD_HEAD = new ItemStaged("stone_sword_head", 1, EnumStage.stage2);
+	
+	public static final Item COPPER_PICKAXE_HEAD = new ItemStaged("copper_pickaxe_head", 1, EnumStage.stage3);
+	public static final Item COPPER_AXE_HEAD = new ItemStaged("copper_axe_head", 1, EnumStage.stage3);
+	public static final Item COPPER_SHOVEL_HEAD = new ItemStaged("copper_shovel_head", 1, EnumStage.stage3);
+	public static final Item COPPER_KNIFE_HEAD = new ItemStaged("copper_knife_head", 1, EnumStage.stage3);
+	public static final Item COPPER_HOE_HEAD = new ItemStaged("copper_hoe_head", 1, EnumStage.stage3);
+	public static final Item COPPER_SAW_HEAD = new ItemStaged("copper_saw_head", 1, EnumStage.stage3);
+	public static final Item COPPER_SHEARS_HEAD = new ItemStaged("copper_shears_head", 1, EnumStage.stage3);
+	public static final Item COPPER_SWORD_HEAD = new ItemStaged("copper_sword_head", 1, EnumStage.stage3);
+	
+	public static final Item TIN_PICKAXE_HEAD = new ItemStaged("tin_pickaxe_head", 1, EnumStage.stage3);
+	public static final Item TIN_AXE_HEAD = new ItemStaged("tin_axe_head", 1, EnumStage.stage3);
+	public static final Item TIN_SHOVEL_HEAD = new ItemStaged("tin_shovel_head", 1, EnumStage.stage3);
+	public static final Item TIN_KNIFE_HEAD = new ItemStaged("tin_knife_head", 1, EnumStage.stage3);
+	public static final Item TIN_HOE_HEAD = new ItemStaged("tin_hoe_head", 1, EnumStage.stage3);
+	public static final Item TIN_SAW_HEAD = new ItemStaged("tin_saw_head", 1, EnumStage.stage3);
+	public static final Item TIN_SHEARS_HEAD = new ItemStaged("tin_shears_head", 1, EnumStage.stage3);
+	public static final Item TIN_SWORD_HEAD = new ItemStaged("tin_sword_head", 1, EnumStage.stage3);
+	
+	public static final Item COPPER_CRAFTING_HAMMER_HEAD = new ItemStaged("copper_crafting_hammer_head", 1, EnumStage.stage3);
+	public static final Item TIN_CRAFTING_HAMMER_HEAD = new ItemStaged("tin_crafting_hammer_head", 1, EnumStage.stage3);
 	
 	//ITEMS WITH DURABILITY
 	public static final Item PLANT_MESH = new ItemDamageable("plant_mesh", EnumToolMaterial.flint, EnumStage.stage0);
 	public static final Item STRING_MESH = new ItemDamageable("string_mesh", EnumToolMaterial.copper, EnumStage.stage1);
-	public static final Item FLINT_CRAFTING_HAMMER = new ItemDamageable("flint_crafting_hammer", EnumToolMaterial.flint, EnumStage.stage1);
 	public static final Item MORTAR_PESTLE = new ItemDamageable("mortar_pestle", EnumToolMaterial.wood, EnumStage.stage1);
 	public static final Item CLAY_BUCKET_EMPTY = new ItemClayBucket(null);
 	public static final Item CLAY_BUCKET_MILK = new ItemClayBucketMilk();
 	
+	public static final Item FLINT_CRAFTING_HAMMER = new ItemDamageable("flint_crafting_hammer", EnumToolMaterial.flint, EnumStage.stage1);
+	public static final Item COPPER_CRAFTING_HAMMER = new ItemDamageable("copper_crafting_hammer", EnumToolMaterial.copper, EnumStage.stage3);
+	public static final Item TIN_CRAFTING_HAMMER = new ItemDamageable("tin_crafting_hammer", EnumToolMaterial.tin, EnumStage.stage3);
+	
 	//TOOLS
 	public static final Item FIRE_STARTER = new ItemFireStarter();
+	
+	public static final Item CLAY_PICKAXE = new ItemStagedTool("clay_pickaxe", EnumToolType.pickaxe, EnumToolMaterial.clay, EnumStage.stage1);
+	public static final Item CLAY_AXE = new ItemStagedTool("clay_axe", EnumToolType.axe, EnumToolMaterial.clay, EnumStage.stage1);
+	public static final Item CLAY_SHOVEL = new ItemStagedTool("clay_shovel", EnumToolType.shovel, EnumToolMaterial.clay, EnumStage.stage1);
+	public static final Item CLAY_HOE = new ItemStagedTool("clay_hoe", EnumToolType.hoe, EnumToolMaterial.clay, EnumStage.stage1);
 	
 	public static final Item FLINT_PICKAXE = new ItemStagedTool("flint_pickaxe", EnumToolType.pickaxe, EnumToolMaterial.flint, EnumStage.stage1);
 	public static final Item FLINT_AXE = new ItemStagedTool("flint_axe", EnumToolType.axe, EnumToolMaterial.flint, EnumStage.stage0);
@@ -127,6 +161,26 @@ public class ModItems {
 	public static final Item BONE_KNIFE = new ItemStagedTool("bone_knife", EnumToolType.knife, EnumToolMaterial.bone, EnumStage.stage0);
 	
 	public static final Item STONE_KNIFE = new ItemStagedTool("stone_knife", EnumToolType.knife, EnumToolMaterial.stone, EnumStage.stage2);
+	public static final Item STONE_SAW = new ItemStagedTool("stone_saw", EnumToolType.saw, EnumToolMaterial.stone, EnumStage.stage2);
+	public static final Item STONE_SHEARS = new ItemStagedTool("stone_shears", EnumToolType.shears, EnumToolMaterial.stone, EnumStage.stage2);
+	
+	public static final Item COPPER_PICKAXE = new ItemStagedTool("copper_pickaxe", EnumToolType.pickaxe, EnumToolMaterial.copper, EnumStage.stage3);
+	public static final Item COPPER_AXE = new ItemStagedTool("copper_axe", EnumToolType.axe, EnumToolMaterial.copper, EnumStage.stage3);
+	public static final Item COPPER_SHOVEL = new ItemStagedTool("copper_shovel", EnumToolType.shovel, EnumToolMaterial.copper, EnumStage.stage3);
+	public static final Item COPPER_KNIFE = new ItemStagedTool("copper_knife", EnumToolType.knife, EnumToolMaterial.copper, EnumStage.stage3);
+	public static final Item COPPER_HOE = new ItemStagedTool("copper_hoe", EnumToolType.hoe, EnumToolMaterial.copper, EnumStage.stage3);
+	public static final Item COPPER_SAW = new ItemStagedTool("copper_saw", EnumToolType.saw, EnumToolMaterial.copper, EnumStage.stage3);
+	public static final Item COPPER_SHEARS = new ItemStagedTool("copper_shears", EnumToolType.shears, EnumToolMaterial.copper, EnumStage.stage3);
+	public static final Item COPPER_SWORD = new ItemStagedTool("copper_sword", EnumToolType.sword, EnumToolMaterial.copper, EnumStage.stage3);
+	
+	public static final Item TIN_PICKAXE = new ItemStagedTool("tin_pickaxe", EnumToolType.pickaxe, EnumToolMaterial.tin, EnumStage.stage3);
+	public static final Item TIN_AXE = new ItemStagedTool("tin_axe", EnumToolType.axe, EnumToolMaterial.tin, EnumStage.stage3);
+	public static final Item TIN_SHOVEL = new ItemStagedTool("tin_shovel", EnumToolType.shovel, EnumToolMaterial.tin, EnumStage.stage3);
+	public static final Item TIN_KNIFE = new ItemStagedTool("tin_knife", EnumToolType.knife, EnumToolMaterial.tin, EnumStage.stage3);
+	public static final Item TIN_HOE = new ItemStagedTool("tin_hoe", EnumToolType.hoe, EnumToolMaterial.tin, EnumStage.stage3);
+	public static final Item TIN_SAW = new ItemStagedTool("tin_saw", EnumToolType.saw, EnumToolMaterial.tin, EnumStage.stage3);
+	public static final Item TIN_SHEARS = new ItemStagedTool("tin_shears", EnumToolType.shears, EnumToolMaterial.tin, EnumStage.stage3);
+	public static final Item TIN_SWORD = new ItemStagedTool("tin_sword", EnumToolType.sword, EnumToolMaterial.tin, EnumStage.stage3);
 	
 	//VANILLA REPLACEMENTS
 	public static final Item DIAMOND_AXE = new ItemStagedTool("minecraft", "diamond_axe", EnumToolType.axe, EnumToolMaterial.diamond, EnumStage.do_later).setCreativeTab(CreativeTabs.TOOLS);
