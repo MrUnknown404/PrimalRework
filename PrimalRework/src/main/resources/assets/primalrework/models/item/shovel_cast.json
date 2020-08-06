@@ -1,6 +1,6 @@
 {
 	"parent": "minecraft:item/generated",
 	"textures": {
-		"layer0": "primalrework:items/shovels"
+		"layer0": "primalrework:items/shovel_cast"
 	}
 }
