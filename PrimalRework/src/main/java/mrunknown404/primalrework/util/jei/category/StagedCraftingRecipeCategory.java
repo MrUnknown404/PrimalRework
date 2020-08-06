@@ -19,7 +19,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class StagedCraftingRecipeCategory implements IRecipeCategory<StagedCraftingWrapper> {
 	
-	private static final ResourceLocation TEXTURES = new ResourceLocation(Main.MOD_ID, "textures/gui/crafting.png");
+	private static final ResourceLocation TEXTURES = new ResourceLocation(Main.MOD_ID, "textures/gui/jei/crafting.png");
 	private static final int craftOutputSlot = 0;
 	private static final int craftInputSlot1 = 1;
 	

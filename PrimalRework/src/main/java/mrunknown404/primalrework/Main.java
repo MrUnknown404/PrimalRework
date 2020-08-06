@@ -53,7 +53,7 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 
-@Mod(modid = Main.MOD_ID, useMetadata = true, dependencies = "required-after:unknownlibs@[1.0.5,)")
+@Mod(modid = Main.MOD_ID, useMetadata = true, dependencies = "required-after:unknownlibs@[1.1.0,)")
 public class Main {
 	
 	public static final String MOD_ID = "primalrework";
@@ -72,6 +72,7 @@ public class Main {
 	
 	// TODO add map system similar to antique atlas
 	// TODO replace river/ocean biomes
+	// TODO redo pause screen (remove advancement button)
 	
 	private static boolean isJEILoaded;
 	

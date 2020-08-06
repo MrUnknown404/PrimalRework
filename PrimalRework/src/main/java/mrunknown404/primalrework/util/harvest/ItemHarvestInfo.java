@@ -24,10 +24,6 @@ public class ItemHarvestInfo {
 		return material;
 	}
 	
-	public int getEnchantability() {
-		return material.enchantability;
-	}
-	
 	public List<EnumToolType> getToolTypes() {
 		return toolTypes;
 	}

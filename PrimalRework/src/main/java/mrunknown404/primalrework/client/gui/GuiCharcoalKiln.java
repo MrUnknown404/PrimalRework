@@ -10,7 +10,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class GuiCharcoalKiln extends GuiContainer {
 	
-	private static final ResourceLocation LOC = new ResourceLocation(Main.MOD_ID, "textures/gui/charcoal_kiln.png");
+	private static final ResourceLocation LOC = new ResourceLocation(Main.MOD_ID, "textures/gui/container/charcoal_kiln.png");
 	private final InventoryPlayer player;
 	private final TileEntityCharcoalKiln te;
 	

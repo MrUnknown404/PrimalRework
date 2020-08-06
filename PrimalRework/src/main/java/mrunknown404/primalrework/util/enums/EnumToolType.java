@@ -19,31 +19,32 @@ import net.minecraft.init.Enchantments;
  * saw    (1.00f, 1.50f)
  * </pre> */
 public enum EnumToolType {
-	none   (0.00f, 0.00f, new ArrayList<EnchantmentData>(), new ArrayList<EnchantmentData>()),
-	shears (1.75f, 1.50f,
-			combineEnchants(Enchs.getToolBase(5, 3), Enchs.getToolSpecials(3, 1)),
-			Enchs.getToolBase(2, 1)),
-	knife  (1.75f, 2.00f,
-			combineEnchants(Enchs.getToolBase(5, 3), Enchs.getToolSpecials(3, 1), Enchs.getWeaponBase(5, 2)),
-			combineEnchants(Enchs.getToolBase(2, 1), Enchs.getWeaponBase(2, 1))),
-	pickaxe(1.25f, 1.00f,
-			combineEnchants(Enchs.getToolBase(5, 3), Enchs.getToolSpecials(3, 1)),
-			Enchs.getToolBase(2, 1)),
-	shovel (1.50f, 1.50f,
-			combineEnchants(Enchs.getToolBase(5, 3), Enchs.getToolSpecials(3, 1)),
-			Enchs.getToolBase(2, 1)),
-	axe    (0.90f, 4.50f,
-			combineEnchants(Enchs.getToolBase(5, 3), Enchs.getToolSpecials(3, 1), Enchs.getWeaponBase(5, 2)),
-			combineEnchants(Enchs.getToolBase(2, 1), Enchs.getWeaponBase(2, 1))),
-	hoe    (1.25f, 0.50f,
-			Arrays.asList(new EnchantmentData(Enchantments.UNBREAKING, 3), new EnchantmentData(Enchantments.KNOCKBACK, 2), new EnchantmentData(Enchantments.FORTUNE, 3)),
-			Arrays.asList(new EnchantmentData(Enchantments.UNBREAKING, 1), new EnchantmentData(Enchantments.KNOCKBACK, 1))),
-	sword  (1.60f, 3.00f,
-			combineEnchants(combineEnchants(Enchs.getWeaponBase(5, 2), Enchs.getWeaponSword(5, 5), Enchs.getWeaponSpecial(3, 2, 3)), new EnchantmentData(Enchantments.UNBREAKING, 3)),
-			combineEnchants(Enchs.getWeaponBase(2, 1), new EnchantmentData(Enchantments.UNBREAKING, 1))),
-	saw    (1.00f, 1.50f,
-			combineEnchants(Enchs.getToolBase(5, 3), new EnchantmentData(Enchantments.SHARPNESS, 5)),
-			combineEnchants(Enchs.getToolBase(2, 1), new EnchantmentData(Enchantments.SHARPNESS, 2)));
+	none           (0.00f, 0.00f, new ArrayList<EnchantmentData>(), new ArrayList<EnchantmentData>()),
+	shears         (1.75f, 1.50f,
+					combineEnchants(Enchs.getToolBase(5, 3), Enchs.getToolSpecials(3, 1)),
+					Enchs.getToolBase(2, 1)),
+	knife          (1.75f, 2.00f,
+					combineEnchants(Enchs.getToolBase(5, 3), Enchs.getToolSpecials(3, 1), Enchs.getWeaponBase(5, 2)),
+					combineEnchants(Enchs.getToolBase(2, 1), Enchs.getWeaponBase(2, 1))),
+	pickaxe        (1.25f, 1.00f,
+					combineEnchants(Enchs.getToolBase(5, 3), Enchs.getToolSpecials(3, 1)),
+					Enchs.getToolBase(2, 1)),
+	shovel         (1.50f, 1.50f,
+					combineEnchants(Enchs.getToolBase(5, 3), Enchs.getToolSpecials(3, 1)),
+					Enchs.getToolBase(2, 1)),
+	axe            (0.90f, 4.50f,
+					combineEnchants(Enchs.getToolBase(5, 3), Enchs.getToolSpecials(3, 1), Enchs.getWeaponBase(5, 2)),
+					combineEnchants(Enchs.getToolBase(2, 1), Enchs.getWeaponBase(2, 1))),
+	hoe            (1.25f, 0.50f,
+					Arrays.asList(new EnchantmentData(Enchantments.UNBREAKING, 3), new EnchantmentData(Enchantments.KNOCKBACK, 2), new EnchantmentData(Enchantments.FORTUNE, 3)),
+					Arrays.asList(new EnchantmentData(Enchantments.UNBREAKING, 1), new EnchantmentData(Enchantments.KNOCKBACK, 1))),
+	sword          (1.60f, 3.00f,
+					combineEnchants(combineEnchants(Enchs.getWeaponBase(5, 2), Enchs.getWeaponSword(5, 5), Enchs.getWeaponSpecial(3, 2, 3)), new EnchantmentData(Enchantments.UNBREAKING, 3)),
+					combineEnchants(Enchs.getWeaponBase(2, 1), new EnchantmentData(Enchantments.UNBREAKING, 1))),
+	saw            (1.00f, 1.50f,
+					combineEnchants(Enchs.getToolBase(5, 3), new EnchantmentData(Enchantments.SHARPNESS, 5)),
+					combineEnchants(Enchs.getToolBase(2, 1), new EnchantmentData(Enchantments.SHARPNESS, 2))),
+	crafting_hammer(0.75f, 1.50f, Enchs.getToolBase(5, 3), Enchs.getToolBase(2, 1));
 	
 	public final float swingSpeed, baseDamage;
 	public final List<EnchantmentData> replaceEnchants, primalEnchants;
@@ -78,7 +79,7 @@ public enum EnumToolType {
 	}
 	
 	@SuppressWarnings("unused")
-	public static class Enchs { //TODO setup enchanting for fishing rod/bow
+	public static class Enchs {
 		/**@param i1 EFFICIENCY
 		 * @param i2 UNBREAKING
 		 */
@@ -112,8 +113,7 @@ public enum EnumToolType {
 		 * @param i3 SWEEPING
 		 */
 		private static List<EnchantmentData> getWeaponSpecial(int i1, int i2, int i3) {
-			return Arrays.asList(new EnchantmentData(Enchantments.LOOTING, i1), new EnchantmentData(Enchantments.FIRE_ASPECT, i2),
-					new EnchantmentData(Enchantments.SWEEPING, i3));
+			return Arrays.asList(new EnchantmentData(Enchantments.LOOTING, i1), new EnchantmentData(Enchantments.FIRE_ASPECT, i2), new EnchantmentData(Enchantments.SWEEPING, i3));
 		}
 		
 		/**@param i1 POWER
@@ -121,8 +121,8 @@ public enum EnumToolType {
 		 * @param i3 FLAME
 		 */
 		private static List<EnchantmentData> getBowBase(int i1, int i2, int i3) {
-			return Arrays.asList(new EnchantmentData(Enchantments.POWER, i1), new EnchantmentData(Enchantments.PUNCH, i2),
-					new EnchantmentData(Enchantments.FLAME, i3), new EnchantmentData(Enchantments.INFINITY, 1));
+			return Arrays.asList(new EnchantmentData(Enchantments.POWER, i1), new EnchantmentData(Enchantments.PUNCH, i2), new EnchantmentData(Enchantments.FLAME, i3),
+					new EnchantmentData(Enchantments.INFINITY, 1));
 		}
 		
 		/**@param i1 LUCK_OF_THE_SEA

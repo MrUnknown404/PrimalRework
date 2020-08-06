@@ -2,19 +2,25 @@ package mrunknown404.primalrework.inventory.container;
 
 import java.util.List;
 
-import mrunknown404.primalrework.inventory.slot.SlotClayVesselOre;
+import mrunknown404.primalrework.tileentity.TileEntityClayPot;
 import mrunknown404.unknownlibs.inventory.container.IEasyTransferStack;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.items.IItemHandler;
 
-public class ContainerClayVessel extends Container implements IEasyTransferStack {
-	public ContainerClayVessel(InventoryPlayer player, IItemHandler item) {
-		for (int i = 0; i < 9; i++) {
-			addSlotToContainer(new SlotClayVesselOre(item, i, 8 + i * 18, 8));
+public class ContainerClayPot extends Container implements IEasyTransferStack {
+	private final TileEntityClayPot te;
+	
+	public ContainerClayPot(InventoryPlayer player, TileEntityClayPot te) {
+		this.te = te;
+		
+		for (int y = 0; y < 3; y++) {
+			for (int x = 0; x < 3; x++) {
+				addSlotToContainer(new Slot(te, x + y * 3, 62 + x * 18, 17 + y * 18));
+			}
 		}
 		
 		for (int y = 0; y < 3; y++) {
@@ -54,7 +60,13 @@ public class ContainerClayVessel extends Container implements IEasyTransferStack
 	}
 	
 	@Override
+	public void addListener(IContainerListener listener) {
+		super.addListener(listener);
+		listener.sendAllWindowProperties(this, te);
+	}
+	
+	@Override
 	public boolean canInteractWith(EntityPlayer player) {
-		return true;
+		return te.isUsableByPlayer(player);
 	}
 }

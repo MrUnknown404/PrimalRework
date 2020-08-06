@@ -18,7 +18,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 public class DryingTableRecipeCategory implements IRecipeCategory<DryingTableRecipeWrapper> {
-	private static final ResourceLocation TEXTURES = new ResourceLocation(Main.MOD_ID, "textures/gui/drying_table.png");
+	private static final ResourceLocation TEXTURES = new ResourceLocation(Main.MOD_ID, "textures/gui/jei/drying_table.png");
 	public static final int SLOT_INPUT = 0, SLOT_OUTPUT = 1;
 	
 	private final IDrawableAnimated animatedDryTime;

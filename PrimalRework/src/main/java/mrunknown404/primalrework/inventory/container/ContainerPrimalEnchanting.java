@@ -8,6 +8,7 @@ import mrunknown404.primalrework.inventory.slot.SlotMagicDust;
 import mrunknown404.primalrework.inventory.slot.SlotPrimalEnchantable;
 import mrunknown404.primalrework.tileentity.TileEntityPrimalEnchanting;
 import mrunknown404.primalrework.util.helpers.EnchantHelper;
+import mrunknown404.unknownlibs.inventory.container.IEasyTransferStack;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -19,7 +20,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 
-public class ContainerPrimalEnchanting extends Container {
+public class ContainerPrimalEnchanting extends Container implements IEasyTransferStack {
 	
 	private final TileEntityPrimalEnchanting te;
 	private final World world;
@@ -107,36 +108,28 @@ public class ContainerPrimalEnchanting extends Container {
 	}
 	
 	@Override
+	public List<Slot> getSlots() {
+		return inventorySlots;
+	}
+	
+	@Override
+	public int getAmountOfInputSlots() {
+		return 2;
+	}
+	
+	@Override
+	public int getAmountOfOutputSlots() {
+		return 0;
+	}
+	
+	@Override
+	public boolean IMergeItemStack(ItemStack stack, int startIndex, int endIndex, boolean reverseDirection) {
+		return mergeItemStack(stack, startIndex, endIndex, reverseDirection);
+	}
+	
+	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int index) {
-		ItemStack stack = ItemStack.EMPTY;
-		Slot slot = inventorySlots.get(index);
-		
-		if (slot != null && slot.getHasStack()) {
-			ItemStack stack1 = slot.getStack();
-			stack = stack1.copy();
-			
-			if (index <= 2) {
-				if (!mergeItemStack(stack1, 2, 36 + 2, true)) {
-					return ItemStack.EMPTY;
-				}
-			} else if (!mergeItemStack(stack1, 0, 2, false)) {
-				return ItemStack.EMPTY;
-			}
-			
-			if (stack1.isEmpty()) {
-				slot.putStack(ItemStack.EMPTY);
-			} else {
-				slot.onSlotChanged();
-			}
-			
-			if (stack1.getCount() == stack.getCount()) {
-				return ItemStack.EMPTY;
-			}
-			
-			slot.onTake(player, stack1);
-		}
-		
-		return stack;
+		return transferStack(player, index);
 	}
 	
 	@Override

@@ -1,8 +1,11 @@
 package mrunknown404.primalrework.inventory.container;
 
+import java.util.List;
+
 import mrunknown404.primalrework.inventory.slot.SlotCharcoalKilnInput;
 import mrunknown404.primalrework.tileentity.TileEntityCharcoalKiln;
-import mrunknown404.unknownlibs.inventory.SlotOutput;
+import mrunknown404.unknownlibs.inventory.container.IEasyTransferStack;
+import mrunknown404.unknownlibs.inventory.slot.SlotOutput;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -12,7 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ContainerCharcoalKiln extends Container {
+public class ContainerCharcoalKiln extends Container implements IEasyTransferStack {
 	
 	public static final int[] SLOT_INPUT = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
 	public static final int SLOT_OUTPUT = 9;
@@ -43,36 +46,23 @@ public class ContainerCharcoalKiln extends Container {
 	}
 	
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer player, int index) {
-		ItemStack stack = ItemStack.EMPTY;
-		Slot slot = inventorySlots.get(index);
-		
-		if (slot != null && slot.getHasStack()) {
-			ItemStack stack1 = slot.getStack();
-			stack = stack1.copy();
-			
-			if (index <= SLOT_OUTPUT) {
-				if (!mergeItemStack(stack1, 9, 36 + 10, true)) {
-					return ItemStack.EMPTY;
-				}
-			} else if (!mergeItemStack(stack1, 0, 10, false)) {
-				return ItemStack.EMPTY;
-			}
-			
-			if (stack1.isEmpty()) {
-				slot.putStack(ItemStack.EMPTY);
-			} else {
-				slot.onSlotChanged();
-			}
-			
-			if (stack1.getCount() == stack.getCount()) {
-				return ItemStack.EMPTY;
-			}
-			
-			slot.onTake(player, stack1);
-		}
-		
-		return stack;
+	public List<Slot> getSlots() {
+		return inventorySlots;
+	}
+	
+	@Override
+	public int getAmountOfInputSlots() {
+		return 9;
+	}
+	
+	@Override
+	public int getAmountOfOutputSlots() {
+		return 1;
+	}
+	
+	@Override
+	public boolean IMergeItemStack(ItemStack stack, int startIndex, int endIndex, boolean reverseDirection) {
+		return mergeItemStack(stack, startIndex, endIndex, reverseDirection);
 	}
 	
 	@Override

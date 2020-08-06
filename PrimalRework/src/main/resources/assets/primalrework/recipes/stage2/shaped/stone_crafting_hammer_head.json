@@ -1,0 +1,18 @@
+{
+	"type": "primalrework:staged_shaped",
+	"stage": "stage2",
+	"pattern": [
+		"CR"
+	],
+	"key": {
+		"C": {
+			"item": "minecraft:cobblestone"
+		},
+		"R": {
+			"item": "primalrework:rock"
+		}
+	},
+	"result": {
+		"item": "primalrework:stone_crafting_hammer_head"
+	}
+}

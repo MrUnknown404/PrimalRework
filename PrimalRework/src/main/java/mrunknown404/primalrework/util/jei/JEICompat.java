@@ -48,7 +48,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 @JEIPlugin
 public class JEICompat implements IModPlugin {
 	
-	// TODO add vanilla enchanting, primal enchanting, charcoal kiln (and charcoal pit), clay furnace, clay vessel
+	// TODO add primal enchanting, charcoal kiln (and charcoal pit), clay furnace, clay vessel
 	
 	public static final Map<EnumStage, List<ItemStack>> ITEM_STAGE_MAP = new HashMap<EnumStage, List<ItemStack>>();
 	public static final Map<String, List<IRecipeWrapperBase<?>>> RECIPE_MAP = new HashMap<String, List<IRecipeWrapperBase<?>>>();

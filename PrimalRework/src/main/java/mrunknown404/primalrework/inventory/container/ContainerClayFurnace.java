@@ -1,10 +1,13 @@
 package mrunknown404.primalrework.inventory.container;
 
+import java.util.List;
+
 import mrunknown404.primalrework.init.ModItems;
-import mrunknown404.primalrework.inventory.slot.SlotBase;
+import mrunknown404.primalrework.inventory.slot.SlotSingleItem;
 import mrunknown404.primalrework.inventory.slot.SlotClayFurnaceFuel;
 import mrunknown404.primalrework.tileentity.TileEntityClayFurnace;
-import mrunknown404.unknownlibs.inventory.SlotOutput;
+import mrunknown404.unknownlibs.inventory.container.IEasyTransferStack;
+import mrunknown404.unknownlibs.inventory.slot.SlotOutput;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -14,7 +17,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ContainerClayFurnace extends Container {
+public class ContainerClayFurnace extends Container implements IEasyTransferStack {
 	
 	public static final int SLOT_FUEL = 0, SLOT_INPUT = 1, SLOT_OUTPUT = 2;
 	
@@ -25,7 +28,7 @@ public class ContainerClayFurnace extends Container {
 		this.te = te;
 		
 		addSlotToContainer(new SlotClayFurnaceFuel(te, SLOT_FUEL, 80, 54));
-		addSlotToContainer(new SlotBase(new ItemStack(ModItems.CLAY_VESSEL), 1, te, SLOT_INPUT, 59, 28));
+		addSlotToContainer(new SlotSingleItem(new ItemStack(ModItems.CLAY_VESSEL), 1, te, SLOT_INPUT, 59, 28));
 		addSlotToContainer(new SlotOutput(te, SLOT_OUTPUT, 105, 28));
 		
 		for (int y = 0; y < 3; y++) {
@@ -40,37 +43,28 @@ public class ContainerClayFurnace extends Container {
 	}
 	
 	@Override
+	public List<Slot> getSlots() {
+		return inventorySlots;
+	}
+	
+	@Override
+	public int getAmountOfInputSlots() {
+		return 2;
+	}
+	
+	@Override
+	public int getAmountOfOutputSlots() {
+		return 1;
+	}
+	
+	@Override
+	public boolean IMergeItemStack(ItemStack stack, int startIndex, int endIndex, boolean reverseDirection) {
+		return mergeItemStack(stack, startIndex, endIndex, reverseDirection);
+	}
+	
+	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int index) {
-		ItemStack stack = ItemStack.EMPTY;
-		Slot slot = inventorySlots.get(index);
-		
-		if (slot != null && slot.getHasStack()) {
-			ItemStack stack1 = slot.getStack();
-			stack = stack1.copy();
-			
-			
-			if (index <= SLOT_OUTPUT) {
-				if (!mergeItemStack(stack1, 2, 36 + 3, true)) {
-					return ItemStack.EMPTY;
-				}
-			} else if (!mergeItemStack(stack1, 0, 3, false)) {
-				return ItemStack.EMPTY;
-			}
-			
-			if (stack1.isEmpty()) {
-				slot.putStack(ItemStack.EMPTY);
-			} else {
-				slot.onSlotChanged();
-			}
-			
-			if (stack1.getCount() == stack.getCount()) {
-				return ItemStack.EMPTY;
-			}
-			
-			slot.onTake(player, stack1);
-		}
-		
-		return stack;
+		return transferStack(player, index);
 	}
 	
 	@Override

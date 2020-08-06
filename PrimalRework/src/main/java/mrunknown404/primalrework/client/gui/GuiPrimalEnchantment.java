@@ -15,7 +15,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class GuiPrimalEnchantment extends GuiContainer {
 	
-	private static final ResourceLocation LOC = new ResourceLocation(Main.MOD_ID, "textures/gui/primal_enchanting_table.png");
+	private static final ResourceLocation LOC = new ResourceLocation(Main.MOD_ID, "textures/gui/container/primal_enchanting_table.png");
 	
 	private final TileEntityPrimalEnchanting te;
 	private final InventoryPlayer player;

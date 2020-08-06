@@ -4,12 +4,12 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class SlotBase extends Slot {
+public class SlotSingleItem extends Slot {
 
 	private final ItemStack item;
 	private final int stackSize;
 	
-	public SlotBase(ItemStack item, int stackSize, IInventory inventoryIn, int index, int x, int y) {
+	public SlotSingleItem(ItemStack item, int stackSize, IInventory inventoryIn, int index, int x, int y) {
 		super(inventoryIn, index, x, y);
 		this.item = item;
 		this.stackSize = stackSize;

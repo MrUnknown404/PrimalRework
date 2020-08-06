@@ -10,7 +10,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class GuiClayFurnace extends GuiContainer {
 	
-	private static final ResourceLocation LOC = new ResourceLocation(Main.MOD_ID, "textures/gui/clay_furnace.png");
+	private static final ResourceLocation LOC = new ResourceLocation(Main.MOD_ID, "textures/gui/container/clay_furnace.png");
 	private final InventoryPlayer player;
 	private final TileEntityClayFurnace te;
 	

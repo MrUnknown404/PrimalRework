@@ -63,16 +63,16 @@ public class OreDict {
 		
 		OreDictionary.registerOre("logOak", ModBlocks.STRIPPED_OAK_LOG);
 		OreDictionary.registerOre("logOak", new ItemStack(Blocks.LOG, 1, 0));
-		OreDictionary.registerOre("logBirch", ModBlocks.STRIPPED_BIRCH_LOG);
-		OreDictionary.registerOre("logBirch", new ItemStack(Blocks.LOG, 1, 1));
 		OreDictionary.registerOre("logSpruce", ModBlocks.STRIPPED_SPRUCE_LOG);
-		OreDictionary.registerOre("logSpruce", new ItemStack(Blocks.LOG, 1, 2));
+		OreDictionary.registerOre("logSpruce", new ItemStack(Blocks.LOG, 1, 1));
+		OreDictionary.registerOre("logBirch", ModBlocks.STRIPPED_BIRCH_LOG);
+		OreDictionary.registerOre("logBirch", new ItemStack(Blocks.LOG, 1, 2));
 		OreDictionary.registerOre("logJungle", ModBlocks.STRIPPED_JUNGLE_LOG);
 		OreDictionary.registerOre("logJungle", new ItemStack(Blocks.LOG, 1, 3));
-		OreDictionary.registerOre("logDarkOak", ModBlocks.STRIPPED_DARK_OAK_LOG);
-		OreDictionary.registerOre("logDarkOak", new ItemStack(Blocks.LOG2, 1, 0));
 		OreDictionary.registerOre("logAcacia", ModBlocks.STRIPPED_ACACIA_LOG);
-		OreDictionary.registerOre("logAcacia", new ItemStack(Blocks.LOG2, 1, 1));
+		OreDictionary.registerOre("logAcacia", new ItemStack(Blocks.LOG2, 1, 0));
+		OreDictionary.registerOre("logDarkOak", ModBlocks.STRIPPED_DARK_OAK_LOG);
+		OreDictionary.registerOre("logDarkOak", new ItemStack(Blocks.LOG2, 1, 1));
 	}
 	
 	private static void register(ItemHarvestInfo info, int meta) {

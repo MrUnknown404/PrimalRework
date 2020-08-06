@@ -18,7 +18,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 public class FirePitRecipeCategory implements IRecipeCategory<FirePitRecipeWrapper> {
-	private static final ResourceLocation TEXTURES = new ResourceLocation(Main.MOD_ID, "textures/gui/fire_pit.png");
+	private static final ResourceLocation TEXTURES = new ResourceLocation(Main.MOD_ID, "textures/gui/jei/fire_pit.png");
 	
 	private final IDrawableStatic staticFuel;
 	private final IDrawableAnimated animatedFuel;

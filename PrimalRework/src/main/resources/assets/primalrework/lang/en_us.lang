@@ -34,6 +34,17 @@ item.black_dye.name=Black Dye
 item.brown_dye.name=Brown Dye
 item.clay_vessel.name=Clay Vessel
 
+item.ingot_cast.name=Ingot Cast
+item.shears_cast.name=Shears Cast
+item.knife_cast.name=Knife Cast
+item.pickaxe_cast.name=Pickaxe Cast
+item.shovel_cast.name=Shovel Cast
+item.axe_cast.name=Axe Cast
+item.hoe_cast.name=Hoe Cast
+item.sword_cast.name=SwordCast
+item.saw_cast.name=Saw Cast
+item.crafting_hammer_cast.name=Crafting Hammer Cast
+
 //INGOTS
 item.copper_ingot.name=Copper Ingot
 item.tin_ingot.name=Tin Ingot
@@ -67,6 +78,7 @@ item.stone_hoe_head.name=Stone Hoe Head
 item.stone_saw_head.name=Stone Saw Head
 item.stone_shears_head.name=Stone Shears Head
 item.stone_sword_head.name=Stone Sword Head
+item.stone_crafting_hammer_head.name=Stone Crafting Hammer Head
 
 item.copper_pickaxe_head.name=Copper Pickaxe Head
 item.copper_axe_head.name=Copper Axe Head
@@ -76,6 +88,7 @@ item.copper_hoe_head.name=Copper Hoe Head
 item.copper_saw_head.name=Copper Saw Head
 item.copper_shears_head.name=Copper Shears Head
 item.copper_sword_head.name=Copper Sword Head
+item.copper_crafting_hammer_head.name=Tin Crafting Hammer Head
 
 item.tin_pickaxe_head.name=Tin Pickaxe Head
 item.tin_axe_head.name=Tin Axe Head
@@ -85,8 +98,6 @@ item.tin_hoe_head.name=Tin Hoe Head
 item.tin_saw_head.name=Tin Saw Head
 item.tin_shears_head.name=Tin Shears Head
 item.tin_sword_head.name=Tin Sword Head
-
-item.copper_crafting_hammer_head.name=Tin Crafting Hammer Head
 item.tin_crafting_hammer_head.name=Tin Crafting Hammer Head
 
 //ITEMS WITH DURABILITY
@@ -122,6 +133,7 @@ item.bone_knife.name=Bone Knife
 item.stone_knife.name=Stone Knife
 item.stone_saw.name=Stone Saw
 item.stone_shears.name=Stone Shears
+item.stone_crafting_hammer.name=Stone Crafting Hammer
 
 item.copper_pickaxe.name=Copper Pickaxe
 item.copper_axe.name=Copper Axe
@@ -131,6 +143,7 @@ item.copper_hoe.name=Copper Hoe
 item.copper_saw.name=Copper Saw
 item.copper_shears.name=Copper Shears
 item.copper_sword.name=Copper Sword
+item.copper_crafting_hammer.name=Copper Crafting Hammer
 
 item.tin_pickaxe.name=Tin Pickaxe
 item.tin_axe.name=Tin Axe
@@ -140,6 +153,7 @@ item.tin_hoe.name=Tin Hoe
 item.tin_saw.name=Tin Saw
 item.tin_shears.name=Tin Shears
 item.tin_sword.name=Tin Sword
+item.tin_crafting_hammer.name=Tin Crafting Hammer
 
 //VANILLA REPLACEMENTS
 item.diamond_axe.name=Diamond Axe
@@ -235,6 +249,7 @@ container.primal_enchantment_table=Primal Enchanting
 container.loom=Loom
 container.charcoal_kiln=Charcoal Kiln
 container.clay_furnace=Clay Furnace
+container.clay_pot=Clay Pot
 
 //GUI
 gui.fire_pit_cook=Fuel

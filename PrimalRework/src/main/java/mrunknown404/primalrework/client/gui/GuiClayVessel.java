@@ -18,7 +18,7 @@ import net.minecraftforge.items.IItemHandler;
 
 public class GuiClayVessel extends GuiContainer {
 	
-	private static final ResourceLocation LOC = new ResourceLocation(Main.MOD_ID, "textures/gui/clay_vessel.png");
+	private static final ResourceLocation LOC = new ResourceLocation(Main.MOD_ID, "textures/gui/container/clay_vessel.png");
 	private final InventoryPlayer player;
 	private final IItemHandler container;
 	
