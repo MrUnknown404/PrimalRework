@@ -231,12 +231,6 @@ stage.late_stone.name=Stage 2 (Late Stone)
 stage.copper.name=Stage 3 (Copper)
 
 //--GUI
-//QUESTS
-quest.stage0.root.name=Before
-quest.stage1.root.name=Early Stone
-quest.stage2.root.name=Late Stone
-quest.stage3.root.name=Copper
-
 //ITEM TABS
 itemGroup.primalrework_items=Primal.R Items
 itemGroup.primalrework_tools=Primal.R Tools
@@ -285,3 +279,13 @@ jei.info.cloth=Right click 7 string onto a loom to make cloth
 subtitles.entity.pigeon.ambient=Pigeon Cooing
 subtitles.entity.pigeon.hurt=Pigeon hurts
 subtitles.entity.pigeon.death=Pigeon dies
+
+//-//QUESTS
+//NAMES
+quest.stage0.root.name=Before
+quest.stage1.root.name=Early Stone
+quest.stage2.root.name=Late Stone
+quest.stage3.root.name=Copper
+
+//DESC
+quest.stage0.root.desc=Test line 1 \n Test line 2 \n \n Test line 3

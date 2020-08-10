@@ -1,13 +1,18 @@
 package mrunknown404.primalrework.client.gui.quest;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
 import mrunknown404.primalrework.Main;
-import mrunknown404.primalrework.init.InitQuests;
-import mrunknown404.primalrework.quests.QuestTab;
-import mrunknown404.primalrework.util.enums.EnumStage;
+import mrunknown404.primalrework.quests.Quest;
+import mrunknown404.primalrework.quests.QuestRequirement;
+import mrunknown404.primalrework.quests.QuestRequirement.QuestReq;
+import mrunknown404.primalrework.quests.QuestRoot;
 import mrunknown404.unknownlibs.utils.ColorUtils;
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
@@ -18,86 +23,59 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
-public class GuiQuestTabScrolling extends Gui {
-	
-	private static final ResourceLocation TAB_LOC = new ResourceLocation(Main.MOD_ID, "textures/gui/quest/quest_tab.png");
-	private static final ResourceLocation TAB_SEL_LOC = new ResourceLocation(Main.MOD_ID, "textures/gui/quest/quest_tab_selected.png");
-	private static final int SIZE = Math.max(InitQuests.QUEST_TABS.size(), 6);
+public class GuiQuestInfo extends Gui {
+	private static final ResourceLocation INFO_BG_LOC = new ResourceLocation(Main.MOD_ID, "textures/gui/quest/quest_info_background.png");
+	private static final ResourceLocation INFO_BORDER_LOC = new ResourceLocation(Main.MOD_ID, "textures/gui/quest/quest_info_border.png");
+	private static final ResourceLocation ICON_LOC = new ResourceLocation(Main.MOD_ID, "textures/gui/quest/quest_icon.png");
+	private static final ResourceLocation ICON_CHECK_MARK_LOC = new ResourceLocation(Main.MOD_ID, "textures/gui/quest/quest_icon_checkmark.png");
 	
 	private final Minecraft mc;
 	private final RenderItem itemRender;
 	private final FontRenderer fontRenderer;
 	private final GuiQuestMenu parent;
+	private final Quest quest;
 	
-	private final int xMod, listWidth, top, bottom, left, slotHeight;
+	private final int xMod, listWidth, top, bottom, left, size;
 	private float initialMouseClickY = -2, scrollFactor, scrollDistance;
 	
-	private final boolean[] buttonsClicked = new boolean[SIZE];
-	
-	public GuiQuestTabScrolling(Minecraft mc, GuiQuestMenu parent, int xMod, int yMod) {
+	public GuiQuestInfo(Minecraft mc, GuiQuestMenu parent, Quest quest, int xMod, int yMod) {
 		this.mc = mc;
 		this.parent = parent;
+		this.quest = quest;
 		this.xMod = xMod;
 		this.fontRenderer = mc.fontRenderer;
 		this.itemRender = mc.getRenderItem();
 		
-		this.listWidth = 105;
-		this.top = yMod + 1;
+		this.listWidth = 312;
+		this.top = yMod + 144;
 		this.bottom = yMod + 239;
-		this.slotHeight = 48;
-		this.left = 1 + xMod;
+		this.left = 107 + xMod;
 		
-		for (int i = 0; i < SIZE; i++) {
-			buttonsClicked[i] = false;
+		int size = 40;
+		
+		size += quest.getFancyDesc().size() * fontRenderer.FONT_HEIGHT;
+		size += 10;
+		if (!(quest instanceof QuestRoot)) {
+			int amount = 0;
+			
+			if (quest.getRequirement().getQuestReq() == QuestReq.block_break) {
+				amount = getDifferentBlocks(quest.getRequirement()).size();
+			} else {
+				amount = quest.getRequirement().getItemsToCollect().size();
+			}
+			
+			size += amount * fontRenderer.FONT_HEIGHT;
+			size += 22 + (amount > 1 ? 1 : 0);
 		}
 		
-		buttonsClicked[parent.selectedTab] = true;
-		parent.setupQuestTree(EnumStage.values()[parent.selectedTab]);
-	}
-	
-	private void elementClicked(int i) {
-		if (Mouse.isButtonDown(0)) {
-			buttonsClicked[i] = true;
-			parent.selectedTab = i;
-			parent.setupQuestTree(EnumStage.values()[i]);
-			parent.selectedQuest = null;
-			parent.selectQuest();
-		}
-	}
-	
-	private void drawSlot(int slotIdx, int slotTop) {
-		if (!Mouse.isButtonDown(0)) {
-			buttonsClicked[slotIdx] = false;
-		} else if (buttonsClicked[slotIdx]) {
-			parent.questTree.canDrag = false;
-		}
-		
-		if (buttonsClicked[slotIdx]) {
-			GlStateManager.color(0.75f, 0.75f, 0.75f);
-		} else {
-			GlStateManager.color(1, 1, 1);
-		}
-		
-		mc.getTextureManager().bindTexture(parent.selectedTab == slotIdx ? TAB_SEL_LOC : TAB_LOC);
-		drawModalRectWithCustomSizedTexture(xMod + 4, slotTop, 0, 0, 93, 45, 93, 45);
-		
-		QuestTab questTab = InitQuests.QUEST_TABS.get(EnumStage.values()[Math.min(slotIdx, EnumStage.values().length - 3)]);
-		String name = questTab.getName().substring(questTab.getName().indexOf('(') + 1, questTab.getName().length() - 1);
-		fontRenderer.drawStringWithShadow(name, xMod + 50 - fontRenderer.getStringWidth(name) / 2, slotTop + 5, ColorUtils.rgbaToInt(255, 255, 255, 255));
-		
-		RenderHelper.disableStandardItemLighting();
-		RenderHelper.enableGUIStandardItemLighting();
-		itemRender.renderItemAndEffectIntoGUI(mc.player, questTab.getIcon(), xMod + 4 + (93 / 2) - 8, slotTop + 20);
-	}
-	
-	private int getContentHeight() {
-		return SIZE * slotHeight + -1;
+		this.size = size;
 	}
 	
 	private void applyScrollLimits() {
-		int listHeight = getContentHeight() - (bottom - top - 4);
+		int listHeight = size - (bottom - top - 4);
 		
 		if (listHeight < 0) {
 			listHeight /= 2;
@@ -119,7 +97,7 @@ public class GuiQuestTabScrolling extends Gui {
 		
 		int scroll = Mouse.getEventDWheel();
 		if (scroll != 0) {
-			scrollDistance += (-1 * scroll / 120) * slotHeight / 4;
+			scrollDistance += (-1 * scroll / 120) * 8;
 		}
 	}
 	
@@ -128,7 +106,6 @@ public class GuiQuestTabScrolling extends Gui {
 		boolean isHoveringScrollbar = isHovering && mouseX >= left + listWidth - 6;
 		int scrollBarRight = left + listWidth;
 		int scrollBarLeft = scrollBarRight - 6;
-		int entryRight = scrollBarLeft - 1;
 		int viewHeight = bottom - top;
 		
 		if (Mouse.isButtonDown(0)) {
@@ -136,21 +113,15 @@ public class GuiQuestTabScrolling extends Gui {
 				if (isHoveringScrollbar) {
 					parent.questTree.canDrag = false;
 					isHovering = false;
-					int mouseListY = mouseY - top - -1 + (int) scrollDistance - 4;
-					int slotIndex = mouseListY / slotHeight;
-					
-					if (mouseX >= left && mouseX <= entryRight && slotIndex >= 0 && mouseListY >= 0 && slotIndex < SIZE) {
-						elementClicked(slotIndex);
-					}
 					
 					if (mouseX >= scrollBarLeft && mouseX <= scrollBarRight) {
 						scrollFactor = -1;
-						int scrollHeight = getContentHeight() - viewHeight - 4;
+						int scrollHeight = size - viewHeight - 4;
 						if (scrollHeight < 1) {
 							scrollHeight = 1;
 						}
 						
-						int var13 = (int) ((float) (viewHeight * viewHeight) / (float) getContentHeight());
+						int var13 = (int) ((float) (viewHeight * viewHeight) / (float) size);
 						
 						if (var13 < 32) {
 							var13 = 32;
@@ -167,15 +138,6 @@ public class GuiQuestTabScrolling extends Gui {
 					initialMouseClickY = mouseY;
 				} else {
 					initialMouseClickY = -2;
-				}
-				
-				if (isHovering) {
-					int mouseListY = mouseY - top - -1 + (int) scrollDistance - 4;
-					int slotIndex = mouseListY / slotHeight;
-					
-					if (mouseX >= left && mouseX <= entryRight && slotIndex >= 0 && mouseListY >= 0 && slotIndex < SIZE) {
-						elementClicked(slotIndex);
-					}
 				}
 			} else if (initialMouseClickY >= 0) {
 				scrollDistance -= (mouseY - initialMouseClickY) * scrollFactor;
@@ -196,22 +158,13 @@ public class GuiQuestTabScrolling extends Gui {
 		GL11.glEnable(GL11.GL_SCISSOR_TEST);
 		GL11.glScissor((int) (left * scaleW), (int) (mc.displayHeight - (bottom * scaleH)), (int) (listWidth * scaleW), (int) (viewHeight * scaleH));
 		
-		int baseY = top + 4 - (int) scrollDistance;
-		
-		for (int slotIdx = 0; slotIdx < SIZE; ++slotIdx) {
-			int slotTop = baseY + slotIdx * slotHeight + -1;
-			int slotBuffer = slotHeight - 4;
-			
-			if (slotTop <= bottom && slotTop + slotBuffer >= top) {
-				drawSlot(slotIdx, slotTop);
-			}
-		}
-		
 		GlStateManager.disableDepth();
+		mc.getTextureManager().bindTexture(INFO_BG_LOC);
+		drawModalRectWithCustomSizedTexture(left, top, 0, 0, 312, 95, 312, 95);
 		
-		int extraHeight = (getContentHeight() + 4) - viewHeight;
+		int extraHeight = (size + 4) - viewHeight;
 		if (extraHeight > 0) {
-			int height = (viewHeight * viewHeight) / getContentHeight();
+			int height = (viewHeight * viewHeight) / size;
 			
 			if (height < 32) {
 				height = 32;
@@ -248,9 +201,77 @@ public class GuiQuestTabScrolling extends Gui {
 		}
 		
 		GlStateManager.enableTexture2D();
+		RenderHelper.disableStandardItemLighting();
+		RenderHelper.enableGUIStandardItemLighting();
+		
+		int xLeft = xMod + 107, yTop = top - (int) scrollDistance;
+		if (scrollDistance < 0) {
+			yTop = top;
+		}
+		
+		mc.getTextureManager().bindTexture(ICON_LOC);
+		drawModalRectWithCustomSizedTexture(xLeft + 10, yTop + 10, 0, 0, 22, 22, 22, 22);
+		
+		GlStateManager.enableDepth();
+		itemRender.renderItemAndEffectIntoGUI(mc.player, quest.getIcon(), xLeft + 13, yTop + 13);
+		GlStateManager.disableDepth();
+		
+		if (quest.isFinished()) {
+			mc.getTextureManager().bindTexture(ICON_CHECK_MARK_LOC);
+			drawModalRectWithCustomSizedTexture(xLeft + 10, yTop + 10, 0, 0, 22, 22, 22, 22);
+		}
+		
+		int color = ColorUtils.rgbaToInt(255, 255, 255, 255);
+		drawString(fontRenderer, quest.getFancyName(), xLeft + 40, yTop + 18, color);
+		for (int i = 0; i < quest.getFancyDesc().size(); i++) {
+			drawString(fontRenderer, quest.getFancyDesc().get(i), xLeft + 10, yTop + 40 + (i * fontRenderer.FONT_HEIGHT), color);
+		}
+		
+		QuestRequirement req = quest.getRequirement();
+		if (req != null) {
+			drawString(fontRenderer, (req.getQuestReq() == QuestReq.block_break ? "Break one of the following blocks:" : "Collect one of the following items:"), xLeft + 10,
+					yTop + 40 + ((quest.getFancyDesc().size() + 2) * fontRenderer.FONT_HEIGHT), color);
+			
+			if (req.getQuestReq() == QuestReq.block_break) {
+				int i = 0;
+				for (String b : getDifferentBlocks(req)) {
+					drawString(fontRenderer, " " + req.getAmountNeeded() + " " + b, xLeft + 10, yTop + 50 + ((quest.getFancyDesc().size() + 2 + i) * fontRenderer.FONT_HEIGHT),
+							color);
+					i++;
+				}
+			} else {
+				int i = 0;
+				for (ItemStack it : req.getItemsToCollect()) {
+					drawString(fontRenderer, " " + req.getAmountNeeded() + " " + it.getDisplayName(), xLeft + 10,
+							yTop + 50 + ((quest.getFancyDesc().size() + 2 + i) * fontRenderer.FONT_HEIGHT), color);
+					i++;
+				}
+			}
+			
+		}
+		
+		mc.getTextureManager().bindTexture(INFO_BORDER_LOC);
+		drawModalRectWithCustomSizedTexture(left, top, 0, 0, 312, 95, 312, 95);
+		
 		GlStateManager.shadeModel(GL11.GL_FLAT);
 		GlStateManager.enableAlpha();
 		GlStateManager.disableBlend();
 		GL11.glDisable(GL11.GL_SCISSOR_TEST);
+	}
+	
+	private static final List<String> BLOCK_CACHE = new ArrayList<String>();
+	
+	private List<String> getDifferentBlocks(QuestRequirement req) {
+		if (BLOCK_CACHE.isEmpty()) {
+			for (Block b : req.getBlocksToBreak()) {
+				if (BLOCK_CACHE.isEmpty()) {
+					BLOCK_CACHE.add(b.getLocalizedName());
+				} else if (!BLOCK_CACHE.contains(b.getLocalizedName())) {
+					BLOCK_CACHE.add(b.getLocalizedName());
+				}
+			}
+		}
+		
+		return BLOCK_CACHE;
 	}
 }

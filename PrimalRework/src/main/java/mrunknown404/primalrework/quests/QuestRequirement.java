@@ -1,5 +1,6 @@
 package mrunknown404.primalrework.quests;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,7 +12,7 @@ public class QuestRequirement {
 	private final QuestReq req;
 	private final int amountNeeded;
 	
-	private QuestRequirement(QuestReq req, int amountNeeded, Block block, ItemStack item, String oreDict) {
+	private QuestRequirement(QuestReq req, int amountNeeded, List<Block> block, ItemStack item, String oreDict) {
 		this.req = req;
 		this.amountNeeded = amountNeeded;
 		
@@ -20,8 +21,12 @@ public class QuestRequirement {
 		this.oreDict = oreDict;
 	}
 	
-	public QuestRequirement(Block block) {
+	public QuestRequirement(List<Block> block) {
 		this(QuestReq.block_break, 1, block, null, "");
+	}
+	
+	public QuestRequirement(Block block) {
+		this(QuestReq.block_break, 1, Arrays.asList(block), null, "");
 	}
 	
 	public QuestRequirement(ItemStack item) {
@@ -44,21 +49,33 @@ public class QuestRequirement {
 		return req;
 	}
 	
-	private final Block block;
+	private final List<Block> block;
 	private final ItemStack item;
 	private final String oreDict;
 	
-	public Block getBlockToBreak() {
+	public List<Block> getBlocksToBreak() {
 		return block;
 	}
 	
-	public List<ItemStack> getItemToCollect() {
+	public List<ItemStack> getItemsToCollect() {
 		if (item != null) {
 			return Arrays.asList(item);
 		} else if (block != null) {
-			return Arrays.asList(new ItemStack(block));
+			List<ItemStack> items = new ArrayList<ItemStack>();
+			for (Block b : block) {
+				items.add(new ItemStack(b));
+			}
+			
+			return items;
 		} else {
-			return OreDictionary.getOres(oreDict);
+			List<ItemStack> items = new ArrayList<ItemStack>();
+			for (ItemStack i : OreDictionary.getOres(oreDict)) {
+				if (i.getMetadata() != OreDictionary.WILDCARD_VALUE) {
+					items.add(i);
+				}
+			}
+			
+			return items;
 		}
 	}
 	

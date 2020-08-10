@@ -98,7 +98,7 @@ public class EntityItemDrop extends EntityItem {
 					boolean liqAbove = bsAbove.getBlock() instanceof BlockLiquid || bsAbove.getBlock() instanceof IFluidBlock;
 					
 					if (!liqAbove) {
-						if (posY <= MathHelper.floor(posY + 0.25)) { //TODO fix this mess if possible
+						if (posY <= MathHelper.floor(posY + 0.25)) { //FIXME fix this mess if possible
 							motionY += Math.min(0.01D, 0.01D - motionY);
 						} else {
 							if (motionY < 0) {

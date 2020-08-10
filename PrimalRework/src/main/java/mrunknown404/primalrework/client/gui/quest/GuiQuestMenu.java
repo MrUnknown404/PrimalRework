@@ -11,21 +11,27 @@ public class GuiQuestMenu extends GuiScreen {
 	
 	GuiQuestTabScrolling tabScroll;
 	GuiQuestTree questTree;
+	GuiQuestInfo questInfo;
 	
-	//TODO add quest info box
+	Quest selectedQuest;
+	int selectedTab;
 	
 	@Override
 	public void initGui() {
 		tabScroll = new GuiQuestTabScrolling(mc, this, width / 2 - 420 / 2, height / 2 - 240 / 2);
-		questTree = new GuiQuestTree(mc, this, EnumStage.stage0, width / 2 - 420 / 2, height / 2 - 240 / 2);
+		questTree = new GuiQuestTree(mc, this, EnumStage.values()[selectedTab], width / 2 - 420 / 2, height / 2 - 240 / 2);
+		
+		if (questInfo != null && selectedQuest != null) {
+			questInfo = new GuiQuestInfo(mc, this, selectedQuest, width / 2 - 420 / 2, height / 2 - 240 / 2);
+		}
 	}
 	
 	void setupQuestTree(EnumStage stage) {
 		questTree = new GuiQuestTree(mc, this, stage, width / 2 - 420 / 2, height / 2 - 240 / 2);
 	}
 	
-	void selectQuest(Quest q) { // TODO do this
-		System.out.println("Quest '" + q.getName() + "' was clicked!");
+	void selectQuest() {
+		questInfo = selectedQuest == null ? null : new GuiQuestInfo(mc, this, selectedQuest, width / 2 - 420 / 2, height / 2 - 240 / 2);
 	}
 	
 	@Override
@@ -35,5 +41,10 @@ public class GuiQuestMenu extends GuiScreen {
 		tabScroll.handleMouseInput(mouseX, mouseY);
 		tabScroll.drawScreen(mouseX, mouseY);
 		questTree.drawScreen(mouseX, mouseY);
+		
+		if (questInfo != null) {
+			questInfo.handleMouseInput(mouseX, mouseY);
+			questInfo.drawScreen(mouseX, mouseY);
+		}
 	}
 }

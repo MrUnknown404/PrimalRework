@@ -11,8 +11,8 @@ import mrunknown404.primalrework.util.proxy.ClientProxy;
 import mrunknown404.primalrework.world.storage.WorldSaveDataQuest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
+import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
@@ -43,7 +43,7 @@ public class QuestHandler {
 	public void onBlockBreak(BreakEvent e) {
 		for (Quest q : InitQuests.getQuestCache()) {
 			if (q.getRequirement().getQuestReq() == QuestReq.block_break) {
-				if (e.getWorld().getBlockState(e.getPos()).getBlock() == q.getRequirement().getBlockToBreak()) {
+				if (q.getRequirement().getBlocksToBreak().contains(e.getWorld().getBlockState(e.getPos()).getBlock())) {
 					q.checkRequirements(e.getWorld(), e.getPlayer(), 1);
 				}
 			}
@@ -68,7 +68,7 @@ public class QuestHandler {
 				itemCheck:
 				for (EntityPlayer pl : e.world.playerEntities) {
 					for (ItemStack item : pl.inventory.mainInventory) {
-						for (ItemStack stack : q.getRequirement().getItemToCollect()) {
+						for (ItemStack stack : q.getRequirement().getItemsToCollect()) {
 							if (item.getItem() == stack.getItem() && item.getMetadata() == stack.getMetadata()) {
 								amount += item.getCount();
 								

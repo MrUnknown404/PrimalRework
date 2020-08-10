@@ -1,6 +1,7 @@
 package mrunknown404.primalrework.init;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,7 +45,7 @@ public class InitQuests {
 	public static final Quest STAGE_0_GET_FLINT_POINT =           addQuest(new Quest("get_flint_point",           STAGE_0_GET_KNAPPED_FLINT,         new QuestRequirement(new ItemStack(ModItems.FLINT_POINT))));
 	public static final Quest STAGE_0_GET_FLINT_KNIFE =           addQuest(new Quest("get_flint_knife",           STAGE_0_GET_FLINT_POINT,           new QuestRequirement(new ItemStack(ModItems.FLINT_KNIFE))));
 	public static final Quest STAGE_0_GET_FLINT_AXE =             addQuest(new Quest("get_flint_axe",             STAGE_0_GET_KNAPPED_FLINT,         new QuestRequirement(new ItemStack(ModItems.FLINT_AXE))));
-	public static final Quest STAGE_0_BREAK_LOG =                 addQuest(new Quest("break_log",                 STAGE_0_GET_FLINT_AXE,             new ItemStack(Blocks.LOG), new QuestRequirement("logWood")));
+	public static final Quest STAGE_0_BREAK_LOG =                 addQuest(new Quest("break_log",                 STAGE_0_GET_FLINT_AXE,             new QuestRequirement(Arrays.asList(Blocks.LOG, Blocks.LOG2))));
 	
 	public static final Quest STAGE_1_GET_STRING =                addQuest(new Quest("get_string",                STAGE_1_ROOT,                      new QuestRequirement(new ItemStack(Items.STRING))));
 	public static final Quest STAGE_1_GET_ROPE =                  addQuest(new Quest("get_rope",                  STAGE_1_GET_STRING,                new QuestRequirement(new ItemStack(ModItems.ROPE))));

@@ -35,7 +35,6 @@ public class GuiQuestTree extends Gui {
 	private final EnumStage stage;
 	private final int guiLeft, guiTop;
 	
-	private Quest selectedQuest;
 	private int difX, difY, prevMouseX, prevMouseY, prevDifX, prevDifY;
 	private boolean isMouseDown, didClick;
 	boolean canDrag = true;
@@ -75,7 +74,7 @@ public class GuiQuestTree extends Gui {
 				GlStateManager.color(1, 1, 1);
 			}
 			
-			mc.getTextureManager().bindTexture(selectedQuest == q ? ICON_SEL_LOC : ICON_LOC);
+			mc.getTextureManager().bindTexture(parent.selectedQuest == q ? ICON_SEL_LOC : ICON_LOC);
 			drawModalRectWithCustomSizedTexture(xRootBase + x, yRootBase + y, 0, 0, 22, 22, 22, 22);
 			
 			RenderHelper.disableStandardItemLighting();
@@ -95,47 +94,54 @@ public class GuiQuestTree extends Gui {
 		for (Quest q : tab.get()) {
 			int x = MathUtils.ceil(q.getXPos() * 32f), y = MathUtils.ceil(q.getYPos() * 32f);
 			
-			if (MathUtils.within(mouseX, guiLeft + 107, guiLeft + 418) && MathUtils.within(mouseY, guiTop + 1, guiTop + 238)) {
-				if (MathUtils.within(mouseX, xRootBase + x, xRootBase + x + 22) && MathUtils.within(mouseY, yRootBase + y, yRootBase + y + 22)) {
-					GuiUtils.drawHoveringText(Arrays.asList(q.getFancyName().getUnformattedText()), mouseX, mouseY, mc.displayWidth / 2 - guiLeft, mc.displayHeight, -1,
-							fontRenderer);
-					GlStateManager.disableLighting();
+			if (!MathUtils.within(mouseY, guiTop + 144, guiTop + 238) || parent.selectedQuest == null) {
+				if (MathUtils.within(mouseX, guiLeft + 107, guiLeft + 418) && MathUtils.within(mouseY, guiTop + 1, guiTop + 238)) {
+					if (MathUtils.within(mouseX, xRootBase + x, xRootBase + x + 22) && MathUtils.within(mouseY, yRootBase + y, yRootBase + y + 22)) {
+						GuiUtils.drawHoveringText(Arrays.asList(q.getFancyName()), mouseX, mouseY, mc.displayWidth / 2 - guiLeft, mc.displayHeight, -1,
+								fontRenderer);
+						GlStateManager.disableLighting();
+					}
 				}
 			}
 		}
 		
 		if (Mouse.isButtonDown(0)) {
-			if (MathUtils.within(mouseX, guiLeft + 107, guiLeft + 418) && MathUtils.within(mouseY, guiTop + 1, guiTop + 238)) {
-				if (!didClick) {
-					didClick = true;
-					
-					for (Quest q : tab.get()) {
-						int x = MathUtils.ceil(q.getXPos() * 32f), y = MathUtils.ceil(q.getYPos() * 32f);
+			if (!MathUtils.within(mouseY, guiTop + 144, guiTop + 238) || parent.selectedQuest == null) {
+				if (MathUtils.within(mouseX, guiLeft + 107, guiLeft + 418) && MathUtils.within(mouseY, guiTop + 1, guiTop + 238)) {
+					if (!didClick) {
+						didClick = true;
 						
-						if (MathUtils.within(mouseX, xRootBase + x, xRootBase + x + 22) && MathUtils.within(mouseY, yRootBase + y, yRootBase + y + 22)) {
-							canDrag = false;
-							if (selectedQuest == null || !selectedQuest.equals(q)) {
-								selectedQuest = q;
-								parent.selectQuest(q);
-							} else {
-								selectedQuest = null;
-							}
+						for (Quest q : tab.get()) {
+							int x = MathUtils.ceil(q.getXPos() * 32f), y = MathUtils.ceil(q.getYPos() * 32f);
 							
-							break;
+							if (MathUtils.within(mouseX, xRootBase + x, xRootBase + x + 22) && MathUtils.within(mouseY, yRootBase + y, yRootBase + y + 22)) {
+								canDrag = false;
+								if (parent.selectedQuest == null || !parent.selectedQuest.equals(q)) {
+									parent.selectedQuest = q;
+								} else {
+									parent.selectedQuest = null;
+								}
+								
+								parent.selectQuest();
+								break;
+							}
+						}
+					}
+					
+					if (canDrag) {
+						if (!isMouseDown) {
+							isMouseDown = true;
+							prevMouseX = mouseX;
+							prevMouseY = mouseY;
+						} else {
+							difX = prevMouseX - mouseX + prevDifX;
+							difY = prevMouseY - mouseY + prevDifY;
 						}
 					}
 				}
-				
-				if (canDrag) {
-					if (!isMouseDown) {
-						isMouseDown = true;
-						prevMouseX = mouseX;
-						prevMouseY = mouseY;
-					} else {
-						difX = prevMouseX - mouseX + prevDifX;
-						difY = prevMouseY - mouseY + prevDifY;
-					}
-				}
+			} else {
+				canDrag = false;
+				didClick = true;
 			}
 		} else {
 			isMouseDown = false;

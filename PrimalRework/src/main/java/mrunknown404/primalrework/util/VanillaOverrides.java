@@ -163,14 +163,14 @@ public class VanillaOverrides {
 	private static void registerBlocks() {
 		HarvestHelper.setHarvestLevel(Blocks.STONE,                         STONE_HARVEST_INFO);
 		HarvestHelper.setHarvestLevel(Blocks.GRASS,                         EnumToolType.shovel,  EnumToolMaterial.flint);
-		HarvestHelper.setHarvestLevel(Blocks.DIRT,                          EnumToolType.shovel,  EnumToolMaterial.flint);
+		HarvestHelper.setHarvestLevel(Blocks.DIRT,                          EnumToolType.shovel,  EnumToolMaterial.hand);
 		HarvestHelper.setHarvestLevel(Blocks.COBBLESTONE,                   EnumToolType.pickaxe, EnumToolMaterial.flint);
 		HarvestHelper.setHarvestLevel(Blocks.PLANKS,                        EnumToolType.axe,     EnumToolMaterial.flint);
 		HarvestHelper.setHarvestLevel(Blocks.SAPLING,                       EnumToolType.none,    EnumToolMaterial.hand);
 		HarvestHelper.setHarvestLevel(Blocks.BEDROCK,                       EnumToolType.none,    EnumToolMaterial.unbreakable);
-		HarvestHelper.setHarvestLevel(Blocks.SAND,                          EnumToolType.shovel,  EnumToolMaterial.flint);
+		HarvestHelper.setHarvestLevel(Blocks.SAND,                          EnumToolType.shovel,  EnumToolMaterial.hand);
 		HarvestHelper.setHarvestLevel(Blocks.GRAVEL, -1, Arrays.asList(
-				new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.shovel, EnumToolMaterial.flint)),
+				new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.shovel, EnumToolMaterial.hand)),
 				new HarvestDropInfo(EnumToolType.shovel, true,
 						new ItemDropInfo(ModItems.GRAVEL, false, true, 100, 2, 1, 2, 0f)));
 		HarvestHelper.setHarvestLevel(Blocks.GOLD_ORE,                      EnumToolType.pickaxe, EnumToolMaterial.bronze);

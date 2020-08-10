@@ -11,7 +11,6 @@ import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.world.storage.WorldSaveDataQuest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
@@ -40,12 +39,8 @@ public class Quest {
 		this.reward = reward;
 	}
 	
-	public Quest(String name_key, Quest parent, ItemStack itemIcon, QuestRequirement req) {
-		this(parent.stage, name_key, parent, itemIcon, req, null);
-	}
-	
 	public Quest(String name_key, Quest parent, QuestRequirement req) {
-		this(parent.stage, name_key, parent, req.getItemToCollect().get(0), req, null);
+		this(parent.stage, name_key, parent, req.getItemsToCollect().get(0), req, null);
 	}
 	
 	public void addChild(Quest q) {
@@ -92,12 +87,17 @@ public class Quest {
 		return stage.toString() + "_" + name_key;
 	}
 	
-	public ITextComponent getFancyName() {
-		return new TextComponentTranslation("quest." + stage + "." + name_key + ".name");
+	public String getFancyName() {
+		return new TextComponentTranslation("quest." + stage + "." + name_key + ".name").getUnformattedText();
 	}
 	
-	public ITextComponent getFancyDesc() {
-		return new TextComponentTranslation("quest." + stage + "." + name_key + ".desc");
+	public List<String> getFancyDesc() {
+		List<String> newStrs = new ArrayList<String>();
+		for (String s : new TextComponentTranslation("quest." + stage + "." + name_key + ".desc").getUnformattedText().split("\\\\n")) {
+			newStrs.add(s.trim());
+		}
+		
+		return newStrs;
 	}
 	
 	@Override
@@ -143,7 +143,7 @@ public class Quest {
 		return parent;
 	}
 	
-	public void setupPositions() { //TODO ugh make work better
+	public void setupPositions() { //FIXME ugh make work better
 		int yy = 0;
 		
 		for (Quest c : children) {
