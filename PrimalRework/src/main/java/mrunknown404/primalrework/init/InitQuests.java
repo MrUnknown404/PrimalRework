@@ -40,7 +40,7 @@ public class InitQuests {
 	public static final Quest STAGE_0_GET_PRIMAL_TORCH_UNLIT =    addQuest(new Quest("get_primal_torch_unlit",    STAGE_0_GET_STICKS,                new QuestRequirement(new ItemStack(ModBlocks.UNLIT_PRIMAL_TORCH))));
 	public static final Quest STAGE_0_GET_ROCK =                  addQuest(new Quest("get_rock",                  STAGE_0_ROOT,                      new QuestRequirement(new ItemStack(ModBlocks.ROCK))));
 	public static final Quest STAGE_0_GET_COBBLESTONE =           addQuest(new Quest("get_cobblestone",           STAGE_0_GET_ROCK,                  new QuestRequirement(new ItemStack(Blocks.COBBLESTONE))));
-	public static final Quest STAGE_0_GET_FLINT =                 addQuest(new Quest("get_fint",                  STAGE_0_ROOT,                      new QuestRequirement(new ItemStack(Items.FLINT))));
+	public static final Quest STAGE_0_GET_FLINT =                 addQuest(new Quest("get_flint",                 STAGE_0_ROOT,                      new QuestRequirement(new ItemStack(Items.FLINT))));
 	public static final Quest STAGE_0_GET_KNAPPED_FLINT =         addQuest(new Quest("get_knapped_flint",         STAGE_0_GET_FLINT,                 new QuestRequirement(new ItemStack(ModItems.FLINT_KNAPPED))));
 	public static final Quest STAGE_0_GET_FLINT_POINT =           addQuest(new Quest("get_flint_point",           STAGE_0_GET_KNAPPED_FLINT,         new QuestRequirement(new ItemStack(ModItems.FLINT_POINT))));
 	public static final Quest STAGE_0_GET_FLINT_KNIFE =           addQuest(new Quest("get_flint_knife",           STAGE_0_GET_FLINT_POINT,           new QuestRequirement(new ItemStack(ModItems.FLINT_KNIFE))));
