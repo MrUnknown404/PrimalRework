@@ -1,6 +1,5 @@
 package mrunknown404.primalrework.handlers;
 
-import java.util.List;
 import java.util.Map;
 
 import mrunknown404.primalrework.init.ModItems;
@@ -12,6 +11,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.init.Enchantments;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteract;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -35,12 +35,10 @@ public class EntityRightClickHandler {
 				}
 			}
 			
-			List<ItemStack> wools = ((EntitySheep) e.getTarget()).onSheared(e.getItemStack(), e.getWorld(), e.getPos(), fortune);
+			int amount = ((EntitySheep) e.getTarget()).onSheared(e.getItemStack(), e.getWorld(), e.getPos(), fortune).size();
 			
 			if (!e.getWorld().isRemote) {
-				for (ItemStack wool : wools) {
-					e.getWorld().spawnEntity(new EntityItem(e.getWorld(), e.getPos().getX(), e.getPos().getY(), e.getPos().getZ(), wool));
-				}
+				e.getWorld().spawnEntity(new EntityItem(e.getWorld(), e.getPos().getX(), e.getPos().getY(), e.getPos().getZ(), new ItemStack(Items.STRING, amount)));
 				
 				if (!e.getEntityPlayer().isCreative()) {
 					e.getItemStack().damageItem(1, e.getEntityLiving());

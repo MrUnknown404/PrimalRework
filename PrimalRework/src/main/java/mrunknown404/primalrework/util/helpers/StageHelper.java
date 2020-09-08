@@ -10,6 +10,7 @@ import mrunknown404.primalrework.util.ItemStackWrapper;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.jei.JEICompat;
 import mrunknown404.primalrework.world.storage.WorldSaveDataStage;
+import mrunknown404.unknownlibs.utils.DoubleValue;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -18,12 +19,22 @@ import net.minecraft.world.World;
 public class StageHelper {
 	
 	private static final Map<ItemStackWrapper, EnumStage> STAGED_ITEM_CACHE = new HashMap<ItemStackWrapper, EnumStage>();
+	private static DoubleValue<ItemStackWrapper, EnumStage> itemCache;
 	
 	private static EnumStage stage = EnumStage.stage0;
 	private static World world;
 	
 	private static EnumStage getItemStage(ItemStackWrapper item) {
-		return STAGED_ITEM_CACHE.get(item);
+		if (itemCache == null) {
+			itemCache = new DoubleValue<ItemStackWrapper, EnumStage>(item, STAGED_ITEM_CACHE.get(item));
+			return itemCache.getR();
+		}
+		if (item.equals(itemCache.getL())) {
+			return itemCache.getR();
+		}
+		
+		itemCache = new DoubleValue<ItemStackWrapper, EnumStage>(item, STAGED_ITEM_CACHE.get(item));
+		return itemCache.getR();
 	}
 	
 	public static EnumStage getItemStage(ItemStack item) {

@@ -22,6 +22,7 @@ import mrunknown404.primalrework.network.message.RecipeTransferMessage;
 import mrunknown404.primalrework.tileentity.TileEntityCharcoalKiln;
 import mrunknown404.primalrework.tileentity.TileEntityCharcoalPitMaster;
 import mrunknown404.primalrework.tileentity.TileEntityClayFurnace;
+import mrunknown404.primalrework.tileentity.TileEntityClayPot;
 import mrunknown404.primalrework.tileentity.TileEntityCraftingStump;
 import mrunknown404.primalrework.tileentity.TileEntityDryingTable;
 import mrunknown404.primalrework.tileentity.TileEntityFirePit;
@@ -94,6 +95,7 @@ public class Main {
 		GameRegistry.registerTileEntity(TileEntityCharcoalKiln.class, new ResourceLocation(Main.MOD_ID, "charcoal_kiln"));
 		GameRegistry.registerTileEntity(TileEntityCharcoalPitMaster.class, new ResourceLocation(Main.MOD_ID, "charcoal_pit_master"));
 		GameRegistry.registerTileEntity(TileEntityClayFurnace.class, new ResourceLocation(Main.MOD_ID, "clay_furnace"));
+		GameRegistry.registerTileEntity(TileEntityClayPot.class, new ResourceLocation(Main.MOD_ID, "clay_pot"));
 		
 		MinecraftForge.EVENT_BUS.register(new BlockBreakingHandler());
 		MinecraftForge.EVENT_BUS.register(new BlockHarvestHandler());

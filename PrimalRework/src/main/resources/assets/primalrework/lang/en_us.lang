@@ -292,7 +292,7 @@ quest.stage0.get_plant_rope.name=Rope us in
 quest.stage0.get_thatch.name=A step closer to shelter
 quest.stage0.get_plant_mesh.name=Weaving together
 quest.stage0.get_sticks.name=Stick to it
-quest.stage0.get_primal_torch_unlit.name=Innovatione
+quest.stage0.get_primal_torch_unlit.name=Innovation
 quest.stage0.get_rock.name=Starting from rock bottom
 quest.stage0.get_cobblestone.name=A rock but sightly bigger
 quest.stage0.get_flint.name=A sharp rock
@@ -333,4 +333,4 @@ quest.stage1.get_fire_pit.name=An old flame
 quest.stage1.get_primal_torch_lit.name=Let there be light!
 
 //DESC
-quest.stage0.root.desc=Test line 1 \n Test line 2 \n \n Test line 3
+quest.stage0.root.desc=Welcome to Primal Rework! \n \n This mod adds quests to the game which act kinda like a \n tutorial so if this is your first playthrough i recommend \n reading the quests as they sometimes hold important \n information \n \n I'll explain a few things down here to hopefully make your \n experience a lot better \n \n Primal Rework adds a bunch of 'stages' to the game that \n limit the content you have access to until you advance \n stages

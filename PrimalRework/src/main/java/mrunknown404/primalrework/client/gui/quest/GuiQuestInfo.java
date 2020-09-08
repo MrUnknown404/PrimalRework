@@ -54,10 +54,8 @@ public class GuiQuestInfo extends Gui {
 		this.bottom = yMod + 239;
 		this.left = 107 + xMod;
 		
-		int size = 40;
+		int size = 50 + ((quest.getFancyDesc().size() - 1) * fontRenderer.FONT_HEIGHT);
 		
-		size += quest.getFancyDesc().size() * fontRenderer.FONT_HEIGHT;
-		size += 10;
 		if (!(quest instanceof QuestRoot)) {
 			int amount = 0;
 			
@@ -67,7 +65,7 @@ public class GuiQuestInfo extends Gui {
 				amount = quest.getRequirement().getItemsToCollect().size();
 			}
 			
-			size += amount * fontRenderer.FONT_HEIGHT;
+			size += (amount + 1) * fontRenderer.FONT_HEIGHT;
 			size += 22 + (amount > 1 ? 1 : 0);
 		}
 		
