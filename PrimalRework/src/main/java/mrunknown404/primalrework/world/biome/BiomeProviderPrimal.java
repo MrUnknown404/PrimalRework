@@ -2,7 +2,7 @@ package mrunknown404.primalrework.world.biome;
 
 import java.util.List;
 
-import mrunknown404.primalrework.init.ModBiomes;
+import mrunknown404.primalrework.init.InitBiomes;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeProvider;
 import net.minecraft.world.storage.WorldInfo;
@@ -15,6 +15,6 @@ public class BiomeProviderPrimal extends BiomeProvider {
 	
 	@Override
 	public List<Biome> getBiomesToSpawnIn() {
-		return ModBiomes.BIOMES;
+		return InitBiomes.BIOMES;
 	}
 }

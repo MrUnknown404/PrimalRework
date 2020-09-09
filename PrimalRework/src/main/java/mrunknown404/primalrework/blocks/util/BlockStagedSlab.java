@@ -3,7 +3,7 @@ package mrunknown404.primalrework.blocks.util;
 import java.util.List;
 import java.util.Random;
 
-import mrunknown404.primalrework.init.ModCreativeTabs;
+import mrunknown404.primalrework.init.InitCreativeTabs;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import mrunknown404.primalrework.util.enums.EnumToolType;
@@ -37,7 +37,7 @@ public abstract class BlockStagedSlab extends BlockSlab implements ISlabStaged<B
 		super(material);
 		setUnlocalizedName(name);
 		setRegistryName(name);
-		setCreativeTab(ModCreativeTabs.PRIMALREWORK_BLOCKS);
+		setCreativeTab(InitCreativeTabs.PRIMALREWORK_BLOCKS);
 		setSoundType(soundType);
 		setHardness(hardness);
 		setResistance(resistance);

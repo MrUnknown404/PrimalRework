@@ -2,7 +2,7 @@ package mrunknown404.primalrework.handlers;
 
 import java.util.Map;
 
-import mrunknown404.primalrework.init.ModItems;
+import mrunknown404.primalrework.init.InitItems;
 import mrunknown404.primalrework.util.enums.EnumToolType;
 import mrunknown404.primalrework.util.helpers.HarvestHelper;
 import net.minecraft.enchantment.Enchantment;
@@ -19,8 +19,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class EntityRightClickHandler {
 	@SubscribeEvent
 	public void milkCow(EntityInteract e) {
-		if (e.getTarget() instanceof EntityCow && e.getItemStack().getItem() == ModItems.CLAY_BUCKET_EMPTY) {
-			e.getEntityPlayer().setHeldItem(e.getHand(), new ItemStack(ModItems.CLAY_BUCKET_MILK, 1, e.getItemStack().getItemDamage()));
+		if (e.getTarget() instanceof EntityCow && e.getItemStack().getItem() == InitItems.CLAY_BUCKET_EMPTY) {
+			e.getEntityPlayer().setHeldItem(e.getHand(), new ItemStack(InitItems.CLAY_BUCKET_MILK, 1, e.getItemStack().getItemDamage()));
 		}
 	}
 	

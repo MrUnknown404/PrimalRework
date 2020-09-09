@@ -162,7 +162,7 @@ public class GuiQuestTree extends Gui {
 		int k1 = xFrom < xTo ? 1 : 0;
 		int l1 = yFrom > yTo ? 0 : 1;
 		
-		int white = ColorUtils.rgbaToInt(255, 255, 255, 255), black = ColorUtils.rgbaToInt(0, 0, 0, 255);
+		int white = ColorUtils.rgba2Int(255, 255, 255, 255), black = ColorUtils.rgba2Int(0, 0, 0, 255);
 		
 		drawHorizontalLine(j - 1 + l1, i, k - 1, black);
 		drawHorizontalLine(j - l1, i, k + 1, black);

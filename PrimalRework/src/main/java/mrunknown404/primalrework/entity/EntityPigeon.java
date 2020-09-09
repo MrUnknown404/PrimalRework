@@ -1,7 +1,7 @@
 package mrunknown404.primalrework.entity;
 
 import mrunknown404.primalrework.entity.ai.EntityAITemptFlying;
-import mrunknown404.primalrework.init.ModSoundEvents;
+import mrunknown404.primalrework.init.InitSounds;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockLog;
@@ -128,17 +128,17 @@ public class EntityPigeon extends EntityAnimal implements EntityFlying {
 	
 	@Override
 	public SoundEvent getAmbientSound() {
-		return ModSoundEvents.ENTITY_PIGEON_AMBIENT;
+		return InitSounds.ENTITY_PIGEON_AMBIENT;
 	}
 	
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return ModSoundEvents.ENTITY_PIGEON_HURT;
+		return InitSounds.ENTITY_PIGEON_HURT;
 	}
 	
 	@Override
 	protected SoundEvent getDeathSound() {
-		return ModSoundEvents.ENTITY_PIGEON_DEATH;
+		return InitSounds.ENTITY_PIGEON_DEATH;
 	}
 	
 	@Override

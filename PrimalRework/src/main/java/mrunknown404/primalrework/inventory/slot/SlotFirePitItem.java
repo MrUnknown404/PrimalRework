@@ -1,6 +1,6 @@
 package mrunknown404.primalrework.inventory.slot;
 
-import mrunknown404.primalrework.init.ModRecipes;
+import mrunknown404.primalrework.init.InitRecipes;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -13,7 +13,7 @@ public class SlotFirePitItem extends Slot {
 	
 	@Override
 	public boolean isItemValid(ItemStack stack) {
-		return ModRecipes.doesItemHaveFirePitRecipe(stack);
+		return InitRecipes.doesItemHaveFirePitRecipe(stack);
 	}
 	
 	@Override

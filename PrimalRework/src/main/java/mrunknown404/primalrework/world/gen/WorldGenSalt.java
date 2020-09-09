@@ -2,7 +2,7 @@ package mrunknown404.primalrework.world.gen;
 
 import java.util.Random;
 
-import mrunknown404.primalrework.init.ModBlocks;
+import mrunknown404.primalrework.init.InitBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
 public class WorldGenSalt extends WorldGenerator {
-	private final Block block = ModBlocks.SALT;
+	private final Block block = InitBlocks.SALT;
 	private final int numberOfBlocks, rarity;
 	
 	public WorldGenSalt(int numberOfBlocks, int rarity) {

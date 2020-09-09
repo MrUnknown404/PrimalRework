@@ -4,8 +4,8 @@ import javax.annotation.Nullable;
 
 import mrunknown404.primalrework.Main;
 import mrunknown404.primalrework.blocks.BlockDenseLog;
-import mrunknown404.primalrework.init.ModBlocks;
-import mrunknown404.primalrework.init.ModItems;
+import mrunknown404.primalrework.init.InitBlocks;
+import mrunknown404.primalrework.init.InitItems;
 import mrunknown404.primalrework.items.util.ItemDamageable;
 import mrunknown404.primalrework.network.message.FireStarterMessage;
 import mrunknown404.primalrework.util.enums.EnumStage;
@@ -35,7 +35,7 @@ public class ItemFireStarter extends ItemDamageable {
 			@Override
 			public float apply(ItemStack stack, @Nullable World world, @Nullable EntityLivingBase entity) {
 				if (entity != null) {
-					return entity.getActiveItemStack().getItem() != ModItems.FIRE_STARTER ? 0f : (stack.getMaxItemUseDuration() - entity.getItemInUseCount()) / 20f / 4f;
+					return entity.getActiveItemStack().getItem() != InitItems.FIRE_STARTER ? 0f : (stack.getMaxItemUseDuration() - entity.getItemInUseCount()) / 20f / 4f;
 				}
 				
 				return 0f;
@@ -70,7 +70,7 @@ public class ItemFireStarter extends ItemDamageable {
 					BlockPos targetPos = clickPos.offset(ray.sideHit);
 					
 					if (player.canPlayerEdit(targetPos, ray.sideHit, stack)) {
-						boolean flag = world.getBlockState(targetPos.down(2)).getBlock() == ModBlocks.DENSE_LOG && BlockDenseLog.isValidCharcoalPit(world, targetPos.down(2));
+						boolean flag = world.getBlockState(targetPos.down(2)).getBlock() == InitBlocks.DENSE_LOG && BlockDenseLog.isValidCharcoalPit(world, targetPos.down(2));
 						
 						Main.NETWORK.sendToServer(new FireStarterMessage(player, targetPos, player.getActiveHand(), flag));
 					}

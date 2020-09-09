@@ -19,7 +19,7 @@ import mezz.jei.api.recipe.transfer.IRecipeTransferHandler;
 import mezz.jei.api.recipe.transfer.IRecipeTransferHandlerHelper;
 import mezz.jei.api.recipe.transfer.IRecipeTransferInfo;
 import mrunknown404.primalrework.Main;
-import mrunknown404.primalrework.init.ModRecipes;
+import mrunknown404.primalrework.init.InitRecipes;
 import mrunknown404.primalrework.network.message.RecipeTransferMessage;
 import mrunknown404.primalrework.util.jei.JEICompat;
 import net.minecraft.client.resources.I18n;
@@ -36,7 +36,7 @@ public class PlayerRecipeTransferHandler implements IRecipeTransferHandler<Conta
 	public PlayerRecipeTransferHandler(IRecipeTransferHandlerHelper handlerHelper) {
 		this.stackHelper = JEICompat.stackHelper;
 		this.handlerHelper = handlerHelper;
-		this.transferHelper = new BasicRecipeTransferInfo<>(ContainerPlayer.class, ModRecipes.CATEGORY_STAGED_CRAFTING, 1, 4, 9, 36);
+		this.transferHelper = new BasicRecipeTransferInfo<>(ContainerPlayer.class, InitRecipes.CATEGORY_STAGED_CRAFTING, 1, 4, 9, 36);
 	}
 	
 	@Override

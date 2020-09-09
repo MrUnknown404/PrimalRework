@@ -6,7 +6,7 @@ import java.util.Random;
 
 import com.google.common.collect.Lists;
 
-import mrunknown404.primalrework.init.ModItems;
+import mrunknown404.primalrework.init.InitItems;
 import mrunknown404.primalrework.util.enums.EnumToolType;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.item.Item;
@@ -82,6 +82,6 @@ public class EnchantHelper {
 	}
 	
 	public static boolean isMagicDust(Item item) {
-		return item == ModItems.MAGIC_DUST_RED || item == ModItems.MAGIC_DUST_GREEN || item == ModItems.MAGIC_DUST_BLUE ? true : false;
+		return item == InitItems.MAGIC_DUST_RED || item == InitItems.MAGIC_DUST_GREEN || item == InitItems.MAGIC_DUST_BLUE ? true : false;
 	}
 }

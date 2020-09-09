@@ -2,8 +2,8 @@ package mrunknown404.primalrework.util;
 
 import org.apache.commons.lang3.text.WordUtils;
 
-import mrunknown404.primalrework.init.ModBlocks;
-import mrunknown404.primalrework.init.ModItems;
+import mrunknown404.primalrework.init.InitBlocks;
+import mrunknown404.primalrework.init.InitItems;
 import mrunknown404.primalrework.items.ItemOreNugget;
 import mrunknown404.primalrework.util.enums.EnumToolType;
 import mrunknown404.primalrework.util.harvest.ItemHarvestInfo;
@@ -29,49 +29,49 @@ public class OreDict {
 			OreDictionary.registerOre("bed", new ItemStack(Items.BED, 1, i));
 		}
 		
-		for (Item item : ModItems.ITEMS) {
+		for (Item item : InitItems.ITEMS) {
 			if (item instanceof ItemOreNugget) {
 				OreDictionary.registerOre("nuggetOre", item);
 			}
 		}
 		
-		OreDictionary.registerOre("prDyeWhite", ModItems.WHITE_DYE);
-		OreDictionary.registerOre("prDyeBlue", ModItems.BLUE_DYE);
-		OreDictionary.registerOre("prDyeBlack", ModItems.BLACK_DYE);
-		OreDictionary.registerOre("prDyeBrown", ModItems.BROWN_DYE);
+		OreDictionary.registerOre("prDyeWhite", InitItems.WHITE_DYE);
+		OreDictionary.registerOre("prDyeBlue", InitItems.BLUE_DYE);
+		OreDictionary.registerOre("prDyeBlack", InitItems.BLACK_DYE);
+		OreDictionary.registerOre("prDyeBrown", InitItems.BROWN_DYE);
 		
-		OreDictionary.registerOre("logStripped", ModBlocks.STRIPPED_OAK_LOG);
-		OreDictionary.registerOre("logStripped", ModBlocks.STRIPPED_BIRCH_LOG);
-		OreDictionary.registerOre("logStripped", ModBlocks.STRIPPED_SPRUCE_LOG);
-		OreDictionary.registerOre("logStripped", ModBlocks.STRIPPED_JUNGLE_LOG);
-		OreDictionary.registerOre("logStripped", ModBlocks.STRIPPED_DARK_OAK_LOG);
-		OreDictionary.registerOre("logStripped", ModBlocks.STRIPPED_ACACIA_LOG);
+		OreDictionary.registerOre("logStripped", InitBlocks.STRIPPED_OAK_LOG);
+		OreDictionary.registerOre("logStripped", InitBlocks.STRIPPED_BIRCH_LOG);
+		OreDictionary.registerOre("logStripped", InitBlocks.STRIPPED_SPRUCE_LOG);
+		OreDictionary.registerOre("logStripped", InitBlocks.STRIPPED_JUNGLE_LOG);
+		OreDictionary.registerOre("logStripped", InitBlocks.STRIPPED_DARK_OAK_LOG);
+		OreDictionary.registerOre("logStripped", InitBlocks.STRIPPED_ACACIA_LOG);
 		
-		OreDictionary.registerOre("logWood", ModBlocks.STRIPPED_OAK_LOG);
-		OreDictionary.registerOre("logWood", ModBlocks.STRIPPED_BIRCH_LOG);
-		OreDictionary.registerOre("logWood", ModBlocks.STRIPPED_SPRUCE_LOG);
-		OreDictionary.registerOre("logWood", ModBlocks.STRIPPED_JUNGLE_LOG);
-		OreDictionary.registerOre("logWood", ModBlocks.STRIPPED_DARK_OAK_LOG);
-		OreDictionary.registerOre("logWood", ModBlocks.STRIPPED_ACACIA_LOG);
+		OreDictionary.registerOre("logWood", InitBlocks.STRIPPED_OAK_LOG);
+		OreDictionary.registerOre("logWood", InitBlocks.STRIPPED_BIRCH_LOG);
+		OreDictionary.registerOre("logWood", InitBlocks.STRIPPED_SPRUCE_LOG);
+		OreDictionary.registerOre("logWood", InitBlocks.STRIPPED_JUNGLE_LOG);
+		OreDictionary.registerOre("logWood", InitBlocks.STRIPPED_DARK_OAK_LOG);
+		OreDictionary.registerOre("logWood", InitBlocks.STRIPPED_ACACIA_LOG);
 		
-		OreDictionary.registerOre("plankItem", ModItems.OAK_PLANK);
-		OreDictionary.registerOre("plankItem", ModItems.SPRUCE_PLANK);
-		OreDictionary.registerOre("plankItem", ModItems.BIRCH_PLANK);
-		OreDictionary.registerOre("plankItem", ModItems.JUNGLE_PLANK);
-		OreDictionary.registerOre("plankItem", ModItems.DARK_OAK_PLANK);
-		OreDictionary.registerOre("plankItem", ModItems.ACACIA_PLANK);
+		OreDictionary.registerOre("plankItem", InitItems.OAK_PLANK);
+		OreDictionary.registerOre("plankItem", InitItems.SPRUCE_PLANK);
+		OreDictionary.registerOre("plankItem", InitItems.BIRCH_PLANK);
+		OreDictionary.registerOre("plankItem", InitItems.JUNGLE_PLANK);
+		OreDictionary.registerOre("plankItem", InitItems.DARK_OAK_PLANK);
+		OreDictionary.registerOre("plankItem", InitItems.ACACIA_PLANK);
 		
-		OreDictionary.registerOre("logOak", ModBlocks.STRIPPED_OAK_LOG);
+		OreDictionary.registerOre("logOak", InitBlocks.STRIPPED_OAK_LOG);
 		OreDictionary.registerOre("logOak", new ItemStack(Blocks.LOG, 1, 0));
-		OreDictionary.registerOre("logSpruce", ModBlocks.STRIPPED_SPRUCE_LOG);
+		OreDictionary.registerOre("logSpruce", InitBlocks.STRIPPED_SPRUCE_LOG);
 		OreDictionary.registerOre("logSpruce", new ItemStack(Blocks.LOG, 1, 1));
-		OreDictionary.registerOre("logBirch", ModBlocks.STRIPPED_BIRCH_LOG);
+		OreDictionary.registerOre("logBirch", InitBlocks.STRIPPED_BIRCH_LOG);
 		OreDictionary.registerOre("logBirch", new ItemStack(Blocks.LOG, 1, 2));
-		OreDictionary.registerOre("logJungle", ModBlocks.STRIPPED_JUNGLE_LOG);
+		OreDictionary.registerOre("logJungle", InitBlocks.STRIPPED_JUNGLE_LOG);
 		OreDictionary.registerOre("logJungle", new ItemStack(Blocks.LOG, 1, 3));
-		OreDictionary.registerOre("logAcacia", ModBlocks.STRIPPED_ACACIA_LOG);
+		OreDictionary.registerOre("logAcacia", InitBlocks.STRIPPED_ACACIA_LOG);
 		OreDictionary.registerOre("logAcacia", new ItemStack(Blocks.LOG2, 1, 0));
-		OreDictionary.registerOre("logDarkOak", ModBlocks.STRIPPED_DARK_OAK_LOG);
+		OreDictionary.registerOre("logDarkOak", InitBlocks.STRIPPED_DARK_OAK_LOG);
 		OreDictionary.registerOre("logDarkOak", new ItemStack(Blocks.LOG2, 1, 1));
 	}
 	

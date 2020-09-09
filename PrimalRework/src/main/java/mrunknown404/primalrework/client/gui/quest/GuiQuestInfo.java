@@ -93,9 +93,9 @@ public class GuiQuestInfo extends Gui {
 			return;
 		}
 		
-		int scroll = Mouse.getEventDWheel();
+		int scroll = Mouse.getDWheel();
 		if (scroll != 0) {
-			scrollDistance += (-1 * scroll / 120) * 8;
+			scrollDistance += (-1 * scroll / 120) * 12;
 		}
 	}
 	
@@ -219,7 +219,7 @@ public class GuiQuestInfo extends Gui {
 			drawModalRectWithCustomSizedTexture(xLeft + 10, yTop + 10, 0, 0, 22, 22, 22, 22);
 		}
 		
-		int color = ColorUtils.rgbaToInt(255, 255, 255, 255);
+		int color = ColorUtils.rgba2Int(255, 255, 255, 255);
 		drawString(fontRenderer, quest.getFancyName(), xLeft + 40, yTop + 18, color);
 		for (int i = 0; i < quest.getFancyDesc().size(); i++) {
 			drawString(fontRenderer, quest.getFancyDesc().get(i), xLeft + 10, yTop + 40 + (i * fontRenderer.FONT_HEIGHT), color);

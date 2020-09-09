@@ -4,7 +4,7 @@ import java.util.Map.Entry;
 
 import javax.annotation.Nullable;
 
-import mrunknown404.primalrework.init.ModItems;
+import mrunknown404.primalrework.init.InitItems;
 import mrunknown404.primalrework.items.util.ItemDamageable;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
@@ -62,7 +62,7 @@ public class ItemClayBucket extends ItemDamageable {
 				return new ActionResult<ItemStack>(EnumActionResult.FAIL, item);
 			} else if (isEmpty()) {
 				if (player.canPlayerEdit(pos.offset(ray.sideHit), ray.sideHit, item)) {
-					for (Entry<Fluid, ItemClayBucket> f : ModItems.CLAY_BUCKETS.entrySet()) {
+					for (Entry<Fluid, ItemClayBucket> f : InitItems.CLAY_BUCKETS.entrySet()) {
 						if (f.getKey() != null && f.getKey().getBlock() != null && f.getKey().getBlock() == world.getBlockState(pos).getBlock()) {
 							world.setBlockState(pos, Blocks.AIR.getDefaultState(), 11);
 							player.playSound(f.getKey().getFillSound(), 1f, 1f);
@@ -98,7 +98,7 @@ public class ItemClayBucket extends ItemDamageable {
 						return new ActionResult<>(EnumActionResult.SUCCESS, ItemStack.EMPTY);
 					}
 					
-					return new ActionResult<>(EnumActionResult.SUCCESS, new ItemStack(ModItems.CLAY_BUCKET_EMPTY, 1, item.getItemDamage()));
+					return new ActionResult<>(EnumActionResult.SUCCESS, new ItemStack(InitItems.CLAY_BUCKET_EMPTY, 1, item.getItemDamage()));
 				} else {
 					return new ActionResult<ItemStack>(EnumActionResult.FAIL, item);
 				}

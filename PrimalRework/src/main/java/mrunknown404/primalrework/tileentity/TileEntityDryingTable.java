@@ -1,6 +1,6 @@
 package mrunknown404.primalrework.tileentity;
 
-import mrunknown404.primalrework.init.ModRecipes;
+import mrunknown404.primalrework.init.InitRecipes;
 import mrunknown404.primalrework.recipes.DryingTableRecipe;
 import mrunknown404.unknownlibs.tileentity.TileEntityInventory;
 import net.minecraft.block.state.IBlockState;
@@ -30,8 +30,8 @@ public class TileEntityDryingTable extends TileEntityInventory implements ITicka
 			int curDryingProgress = dryingProgress[i];
 			
 			if (!item.isEmpty()) {
-				if (ModRecipes.doesItemHaveDryingTableRecipe(item)) {
-					DryingTableRecipe r = ModRecipes.getDryingTableRecipeFromInput(item);
+				if (InitRecipes.doesItemHaveDryingTableRecipe(item)) {
+					DryingTableRecipe r = InitRecipes.getDryingTableRecipeFromInput(item);
 					if (!world.isRemote) {
 						dryingProgress[i] = ++curDryingProgress;
 						

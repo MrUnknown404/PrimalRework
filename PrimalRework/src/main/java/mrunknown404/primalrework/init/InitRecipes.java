@@ -27,7 +27,7 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistry;
 
-public class ModRecipes {
+public class InitRecipes {
 	
 	public static final String CATEGORY_STAGED_CRAFTING = Main.MOD_ID + ".staged_crafting_jei";
 	public static final String CATEGORY_FIRE_PIT = Main.MOD_ID + ".fire_pit_jei";
@@ -44,12 +44,12 @@ public class ModRecipes {
 	public static void addRecipes() {
 		FIRE_PIT_FUELS.add(new DoubleValue<ItemStack, Integer>(new ItemStack(Items.COAL), 1200));
 		FIRE_PIT_FUELS.add(new DoubleValue<ItemStack, Integer>(new ItemStack(Items.STICK), 25));
-		FIRE_PIT_FUELS.add(new DoubleValue<ItemStack, Integer>(new ItemStack(ModBlocks.STRIPPED_ACACIA_LOG), 400));
-		FIRE_PIT_FUELS.add(new DoubleValue<ItemStack, Integer>(new ItemStack(ModBlocks.STRIPPED_BIRCH_LOG), 400));
-		FIRE_PIT_FUELS.add(new DoubleValue<ItemStack, Integer>(new ItemStack(ModBlocks.STRIPPED_DARK_OAK_LOG), 400));
-		FIRE_PIT_FUELS.add(new DoubleValue<ItemStack, Integer>(new ItemStack(ModBlocks.STRIPPED_JUNGLE_LOG), 400));
-		FIRE_PIT_FUELS.add(new DoubleValue<ItemStack, Integer>(new ItemStack(ModBlocks.STRIPPED_OAK_LOG), 400));
-		FIRE_PIT_FUELS.add(new DoubleValue<ItemStack, Integer>(new ItemStack(ModBlocks.STRIPPED_SPRUCE_LOG), 400));
+		FIRE_PIT_FUELS.add(new DoubleValue<ItemStack, Integer>(new ItemStack(InitBlocks.STRIPPED_ACACIA_LOG), 400));
+		FIRE_PIT_FUELS.add(new DoubleValue<ItemStack, Integer>(new ItemStack(InitBlocks.STRIPPED_BIRCH_LOG), 400));
+		FIRE_PIT_FUELS.add(new DoubleValue<ItemStack, Integer>(new ItemStack(InitBlocks.STRIPPED_DARK_OAK_LOG), 400));
+		FIRE_PIT_FUELS.add(new DoubleValue<ItemStack, Integer>(new ItemStack(InitBlocks.STRIPPED_JUNGLE_LOG), 400));
+		FIRE_PIT_FUELS.add(new DoubleValue<ItemStack, Integer>(new ItemStack(InitBlocks.STRIPPED_OAK_LOG), 400));
+		FIRE_PIT_FUELS.add(new DoubleValue<ItemStack, Integer>(new ItemStack(InitBlocks.STRIPPED_SPRUCE_LOG), 400));
 		
 		for (EnumType t : EnumType.values()) {
 			FIRE_PIT_FUELS.add(new DoubleValue<ItemStack, Integer>(new ItemStack(Blocks.PLANKS, 1, t.getMetadata()), 100));
@@ -66,11 +66,11 @@ public class ModRecipes {
 		CLAY_FURNACE_FUELS.add(new DoubleValue<ItemStack, Integer>(new ItemStack(Items.COAL, 1, 0), 1200));
 		CLAY_FURNACE_FUELS.add(new DoubleValue<ItemStack, Integer>(new ItemStack(Items.COAL, 1, 1), 1200));
 		CLAY_FURNACE_FUELS.add(new DoubleValue<ItemStack, Integer>(new ItemStack(Blocks.COAL_BLOCK), 1200 * 9));
-		CLAY_FURNACE_FUELS.add(new DoubleValue<ItemStack, Integer>(new ItemStack(ModBlocks.CHARCOAL_BLOCK), 1200 * 4));
+		CLAY_FURNACE_FUELS.add(new DoubleValue<ItemStack, Integer>(new ItemStack(InitBlocks.CHARCOAL_BLOCK), 1200 * 4));
 		
 		CLAY_FURNACE_FUELS.sort(new CompareItemStack());
 		
-		FIRE_PIT_RECIPES.add(new FirePitRecipe(EnumStage.stage0, ModBlocks.UNLIT_PRIMAL_TORCH, ModBlocks.LIT_PRIMAL_TORCH, 10));
+		FIRE_PIT_RECIPES.add(new FirePitRecipe(EnumStage.stage0, InitBlocks.UNLIT_PRIMAL_TORCH, InitBlocks.LIT_PRIMAL_TORCH, 10));
 		FIRE_PIT_RECIPES.add(new FirePitRecipe(EnumStage.stage0, Items.PORKCHOP, Items.COOKED_PORKCHOP, 100));
 		FIRE_PIT_RECIPES.add(new FirePitRecipe(EnumStage.stage0, Items.BEEF, Items.COOKED_BEEF, 100));
 		FIRE_PIT_RECIPES.add(new FirePitRecipe(EnumStage.stage0, Items.MUTTON, Items.COOKED_MUTTON, 100));
@@ -78,15 +78,15 @@ public class ModRecipes {
 		FIRE_PIT_RECIPES.add(new FirePitRecipe(EnumStage.stage0, Items.FISH, 1, Items.COOKED_FISH, 1, 100));
 		FIRE_PIT_RECIPES.add(new FirePitRecipe(EnumStage.stage0, Items.CHICKEN, Items.COOKED_CHICKEN, 100));
 		FIRE_PIT_RECIPES.add(new FirePitRecipe(EnumStage.stage0, Items.RABBIT, Items.COOKED_RABBIT, 100));
-		FIRE_PIT_RECIPES.add(new FirePitRecipe(EnumStage.stage0, Items.CARROT, ModItems.COOKED_CARROT, 100));
+		FIRE_PIT_RECIPES.add(new FirePitRecipe(EnumStage.stage0, Items.CARROT, InitItems.COOKED_CARROT, 100));
 		FIRE_PIT_RECIPES.add(new FirePitRecipe(EnumStage.stage0, Items.POTATO, Items.BAKED_POTATO, 100));
-		FIRE_PIT_RECIPES.add(new FirePitRecipe(EnumStage.stage0, Items.BEETROOT, ModItems.COOKED_BEETROOT, 100));
+		FIRE_PIT_RECIPES.add(new FirePitRecipe(EnumStage.stage0, Items.BEETROOT, InitItems.COOKED_BEETROOT, 100));
 		FIRE_PIT_RECIPES.add(new FirePitRecipe(EnumStage.stage1, Blocks.COBBLESTONE, Blocks.STONE, 100));
-		FIRE_PIT_RECIPES.add(new FirePitRecipe(EnumStage.stage1, Blocks.STONE, ModBlocks.SMOOTH_STONE, 100));
-		FIRE_PIT_RECIPES.add(new FirePitRecipe(EnumStage.stage1, ModItems.DOUGH, Items.BREAD, 100));
+		FIRE_PIT_RECIPES.add(new FirePitRecipe(EnumStage.stage1, Blocks.STONE, InitBlocks.SMOOTH_STONE, 100));
+		FIRE_PIT_RECIPES.add(new FirePitRecipe(EnumStage.stage1, InitItems.DOUGH, Items.BREAD, 100));
 		
-		DRYING_TABLE_RECIPES.add(new DryingTableRecipe(EnumStage.stage1, ModItems.SALTED_HIDE, ModItems.DRIED_HIDE, 1200));
-		DRYING_TABLE_RECIPES.add(new DryingTableRecipe(EnumStage.stage1, ModItems.WET_TANNED_HIDE, Items.LEATHER, 1200));
+		DRYING_TABLE_RECIPES.add(new DryingTableRecipe(EnumStage.stage1, InitItems.SALTED_HIDE, InitItems.DRIED_HIDE, 1200));
+		DRYING_TABLE_RECIPES.add(new DryingTableRecipe(EnumStage.stage1, InitItems.WET_TANNED_HIDE, Items.LEATHER, 1200));
 	}
 	
 	public static void removeRecipes() {

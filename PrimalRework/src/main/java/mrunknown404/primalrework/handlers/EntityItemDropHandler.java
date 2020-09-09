@@ -2,7 +2,7 @@ package mrunknown404.primalrework.handlers;
 
 import java.util.Random;
 
-import mrunknown404.primalrework.init.ModItems;
+import mrunknown404.primalrework.init.InitItems;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityCow;
@@ -26,7 +26,7 @@ public class EntityItemDropHandler {
 		if (e.getEntity() instanceof EntityAnimal) {
 			Random r = new Random();
 			e.getDrops().add(new EntityItem(e.getEntity().world, e.getEntity().posX, e.getEntity().posY, e.getEntity().posZ,
-					new ItemStack(ModItems.ANIMAL_PELT, r.nextInt(1) + (e.getLootingLevel() != 0 ? r.nextInt(e.getLootingLevel()) : 0))));
+					new ItemStack(InitItems.ANIMAL_PELT, r.nextInt(1) + (e.getLootingLevel() != 0 ? r.nextInt(e.getLootingLevel()) : 0))));
 		}
 	}
 }

@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.text.WordUtils;
 
-import mrunknown404.primalrework.init.ModBiomes;
+import mrunknown404.primalrework.init.InitBiomes;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
@@ -33,7 +33,7 @@ public class BiomeBase extends Biome {
 		this.isStrongholdBiome = isStrongholdBiome;
 		this.isVillageBiome = isVillageBiome;
 		
-		ModBiomes.BIOMES.add(this);
+		InitBiomes.BIOMES.add(this);
 	}
 	
 	protected static BiomeDictionary.Type[] getBiomeTypes(BiomeDictionary.Type[] types, BiomeModifier biomeMod) {

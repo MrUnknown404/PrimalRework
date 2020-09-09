@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Random;
 
 import mrunknown404.primalrework.Main;
-import mrunknown404.primalrework.init.ModBlocks;
-import mrunknown404.primalrework.init.ModCreativeTabs;
-import mrunknown404.primalrework.init.ModItems;
+import mrunknown404.primalrework.init.InitBlocks;
+import mrunknown404.primalrework.init.InitCreativeTabs;
+import mrunknown404.primalrework.init.InitItems;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import mrunknown404.primalrework.util.enums.EnumToolType;
@@ -54,7 +54,7 @@ public class ItemStagedTool extends ItemTool implements IItemStaged<ItemStagedTo
 		super(toolType.baseDamage + harvestLevel.extraDamage, toolType.swingSpeed, M, Collections.emptySet());
 		setUnlocalizedName(name);
 		setRegistryName(new ResourceLocation(modid, name));
-		setCreativeTab(ModCreativeTabs.PRIMALREWORK_TOOLS);
+		setCreativeTab(InitCreativeTabs.PRIMALREWORK_TOOLS);
 		setMaxDamage(harvestLevel.durability);
 		setMaxStackSize(1);
 		this.toolType = toolType;
@@ -93,7 +93,7 @@ public class ItemStagedTool extends ItemTool implements IItemStaged<ItemStagedTo
 					
 					if (b.getBlock() == Blocks.LOG) {
 						if (!world.isRemote) {
-							world.spawnEntity(new EntityItem(world, ray.hitVec.x, ray.hitVec.y, ray.hitVec.z, new ItemStack(ModItems.BARK, 2 + new Random().nextInt(3))));
+							world.spawnEntity(new EntityItem(world, ray.hitVec.x, ray.hitVec.y, ray.hitVec.z, new ItemStack(InitItems.BARK, 2 + new Random().nextInt(3))));
 							world.playSound(null, clickPos, SoundEvents.BLOCK_WOOD_BREAK, SoundCategory.BLOCKS, 1, 0);
 							
 							if (!player.isCreative()) {
@@ -103,24 +103,24 @@ public class ItemStagedTool extends ItemTool implements IItemStaged<ItemStagedTo
 						
 						switch (b.getValue(BlockOldLog.VARIANT)) {
 							case BIRCH:
-								world.setBlockState(clickPos, ModBlocks.STRIPPED_BIRCH_LOG.getDefaultState().withProperty(BlockLog.LOG_AXIS, b.getValue(BlockLog.LOG_AXIS)), 11);
+								world.setBlockState(clickPos, InitBlocks.STRIPPED_BIRCH_LOG.getDefaultState().withProperty(BlockLog.LOG_AXIS, b.getValue(BlockLog.LOG_AXIS)), 11);
 								break;
 							case JUNGLE:
-								world.setBlockState(clickPos, ModBlocks.STRIPPED_JUNGLE_LOG.getDefaultState().withProperty(BlockLog.LOG_AXIS, b.getValue(BlockLog.LOG_AXIS)), 11);
+								world.setBlockState(clickPos, InitBlocks.STRIPPED_JUNGLE_LOG.getDefaultState().withProperty(BlockLog.LOG_AXIS, b.getValue(BlockLog.LOG_AXIS)), 11);
 								break;
 							case OAK:
-								world.setBlockState(clickPos, ModBlocks.STRIPPED_OAK_LOG.getDefaultState().withProperty(BlockLog.LOG_AXIS, b.getValue(BlockLog.LOG_AXIS)), 11);
+								world.setBlockState(clickPos, InitBlocks.STRIPPED_OAK_LOG.getDefaultState().withProperty(BlockLog.LOG_AXIS, b.getValue(BlockLog.LOG_AXIS)), 11);
 								break;
 							case SPRUCE:
-								world.setBlockState(clickPos, ModBlocks.STRIPPED_SPRUCE_LOG.getDefaultState().withProperty(BlockLog.LOG_AXIS, b.getValue(BlockLog.LOG_AXIS)), 11);
+								world.setBlockState(clickPos, InitBlocks.STRIPPED_SPRUCE_LOG.getDefaultState().withProperty(BlockLog.LOG_AXIS, b.getValue(BlockLog.LOG_AXIS)), 11);
 								break;
 							default:
-								world.setBlockState(clickPos, ModBlocks.STRIPPED_OAK_LOG.getDefaultState(), 11);
+								world.setBlockState(clickPos, InitBlocks.STRIPPED_OAK_LOG.getDefaultState(), 11);
 								break;
 						}
 					} else if (b.getBlock() == Blocks.LOG2) {
 						if (!world.isRemote) {
-							world.spawnEntity(new EntityItem(world, ray.hitVec.x, ray.hitVec.y, ray.hitVec.z, new ItemStack(ModItems.BARK, 2 + new Random().nextInt(3))));
+							world.spawnEntity(new EntityItem(world, ray.hitVec.x, ray.hitVec.y, ray.hitVec.z, new ItemStack(InitItems.BARK, 2 + new Random().nextInt(3))));
 							world.playSound(null, clickPos, SoundEvents.BLOCK_WOOD_BREAK, SoundCategory.BLOCKS, 1, 0);
 							
 							if (!player.isCreative()) {
@@ -130,13 +130,13 @@ public class ItemStagedTool extends ItemTool implements IItemStaged<ItemStagedTo
 						
 						switch (b.getValue(BlockNewLog.VARIANT)) {
 							case ACACIA:
-								world.setBlockState(clickPos, ModBlocks.STRIPPED_ACACIA_LOG.getDefaultState().withProperty(BlockLog.LOG_AXIS, b.getValue(BlockLog.LOG_AXIS)), 11);
+								world.setBlockState(clickPos, InitBlocks.STRIPPED_ACACIA_LOG.getDefaultState().withProperty(BlockLog.LOG_AXIS, b.getValue(BlockLog.LOG_AXIS)), 11);
 								break;
 							case DARK_OAK:
-								world.setBlockState(clickPos, ModBlocks.STRIPPED_DARK_OAK_LOG.getDefaultState().withProperty(BlockLog.LOG_AXIS, b.getValue(BlockLog.LOG_AXIS)), 11);
+								world.setBlockState(clickPos, InitBlocks.STRIPPED_DARK_OAK_LOG.getDefaultState().withProperty(BlockLog.LOG_AXIS, b.getValue(BlockLog.LOG_AXIS)), 11);
 								break;
 							default:
-								world.setBlockState(clickPos, ModBlocks.STRIPPED_OAK_LOG.getDefaultState(), 11);
+								world.setBlockState(clickPos, InitBlocks.STRIPPED_OAK_LOG.getDefaultState(), 11);
 								break;
 						}
 					}

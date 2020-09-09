@@ -1,7 +1,7 @@
 package mrunknown404.primalrework.blocks.slabs;
 
 import mrunknown404.primalrework.blocks.util.BlockStagedSlab;
-import mrunknown404.primalrework.init.ModBlocks;
+import mrunknown404.primalrework.init.InitBlocks;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import mrunknown404.primalrework.util.enums.EnumToolType;
@@ -18,11 +18,11 @@ public class BlockStoneSlab extends BlockStagedSlab {
 	
 	@Override
 	public BlockStagedSlab getSingleVersion() {
-		return (BlockStagedSlab) ModBlocks.STONE_SLAB;
+		return (BlockStagedSlab) InitBlocks.STONE_SLAB;
 	}
 	
 	@Override
 	public BlockStagedSlab getDoubleVersion() {
-		return (BlockStagedSlab) ModBlocks.STONE_DOUBLE_SLAB;
+		return (BlockStagedSlab) InitBlocks.STONE_DOUBLE_SLAB;
 	}
 }

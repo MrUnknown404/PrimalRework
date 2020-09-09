@@ -13,9 +13,9 @@ import mrunknown404.primalrework.handlers.ItemConversionHandler;
 import mrunknown404.primalrework.handlers.MiscEventHandler;
 import mrunknown404.primalrework.handlers.QuestHandler;
 import mrunknown404.primalrework.init.InitQuests;
-import mrunknown404.primalrework.init.ModEntities;
-import mrunknown404.primalrework.init.ModRecipes;
-import mrunknown404.primalrework.init.ModSoundEvents;
+import mrunknown404.primalrework.init.InitEntities;
+import mrunknown404.primalrework.init.InitRecipes;
+import mrunknown404.primalrework.init.InitSounds;
 import mrunknown404.primalrework.network.message.FireStarterMessage;
 import mrunknown404.primalrework.network.message.PrimalEnchantingMessage;
 import mrunknown404.primalrework.network.message.RecipeTransferMessage;
@@ -84,7 +84,7 @@ public class Main {
 		
 		isJEILoaded = Loader.isModLoaded("jei");
 		
-		EntityRegisterHelper.registerEntities(ModEntities.ENTITIES, Main.main, Main.MOD_ID);
+		EntityRegisterHelper.registerEntities(InitEntities.ENTITIES, Main.main, Main.MOD_ID);
 		EntityRegistry.registerModEntity(new ResourceLocation(Main.MOD_ID, "item_drop"), EntityItemDrop.class, "item_drop", 0, Main.main, 64, 1, true);
 		
 		GameRegistry.registerTileEntity(TileEntityFirePit.class, new ResourceLocation(Main.MOD_ID, "fire_pit"));
@@ -117,10 +117,10 @@ public class Main {
 		NETWORK.registerMessage(PrimalEnchantingMessage.class, PrimalEnchantingMessage.class, 1, Side.SERVER);
 		NETWORK.registerMessage(RecipeTransferMessage.class, RecipeTransferMessage.class, 2, Side.SERVER);
 		
-		ForgeRegistries.SOUND_EVENTS.registerAll(ModSoundEvents.SOUNDS.toArray(new SoundEvent[0]));
+		ForgeRegistries.SOUND_EVENTS.registerAll(InitSounds.SOUNDS.toArray(new SoundEvent[0]));
 		
-		ModRecipes.removeRecipes();
-		ModRecipes.addRecipes();
+		InitRecipes.removeRecipes();
+		InitRecipes.addRecipes();
 		
 		VanillaOverrides.overrideAll();
 		OreDict.register();

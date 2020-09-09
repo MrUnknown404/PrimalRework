@@ -7,8 +7,8 @@ import mrunknown404.primalrework.blocks.util.BlockStaged;
 import mrunknown404.primalrework.blocks.util.BlockStagedSlab;
 import mrunknown404.primalrework.blocks.util.IBlockStaged;
 import mrunknown404.primalrework.blocks.util.ISlabStaged;
-import mrunknown404.primalrework.init.ModBlocks;
-import mrunknown404.primalrework.init.ModItems;
+import mrunknown404.primalrework.init.InitBlocks;
+import mrunknown404.primalrework.init.InitItems;
 import mrunknown404.primalrework.items.util.IItemStaged;
 import mrunknown404.primalrework.items.util.ItemStaged;
 import mrunknown404.primalrework.util.enums.EnumStage;
@@ -135,7 +135,7 @@ public class VanillaOverrides {
 	private static final BlockHarvestInfo STONE_HARVEST_INFO = setupBlockInfo(Arrays.asList(
 			new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.pickaxe, EnumToolMaterial.flint)),
 			new HarvestDropInfo(EnumToolType.pickaxe, true,
-					new ItemDropInfo(ModBlocks.ROCK, false, true, 100, 4, 0, 5, 0f),
+					new ItemDropInfo(InitBlocks.ROCK, false, true, 100, 4, 0, 5, 0f),
 					new ItemDropInfo(Blocks.COBBLESTONE, false, false, 10, 1, 0, 0, 0.1f)));
 	private static final BlockHarvestInfo LEAVES_HARVEST_INFO = setupBlockInfo(Arrays.asList(
 			new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.none, EnumToolMaterial.hand),
@@ -148,9 +148,9 @@ public class VanillaOverrides {
 				new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.none, EnumToolMaterial.hand),
 				new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.knife, EnumToolMaterial.flint)),
 				new HarvestDropInfo(EnumToolType.none, true,
-						new ItemDropInfo(ModItems.PLANT_FIBER, false, false, 50, 1, 0, 0, 0f)),
+						new ItemDropInfo(InitItems.PLANT_FIBER, false, false, 50, 1, 0, 0, 0f)),
 				new HarvestDropInfo(EnumToolType.knife, false,
-						new ItemDropInfo(ModItems.PLANT_FIBER, false, true, 100, 1, 1, 2, 0f)));
+						new ItemDropInfo(InitItems.PLANT_FIBER, false, true, 100, 1, 1, 2, 0f)));
 	
 	private static final List<DoubleValue<EnumToolType, EnumToolMaterial>> PLANT_DV = Arrays.asList(
 			new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.none, EnumToolMaterial.hand),
@@ -172,7 +172,7 @@ public class VanillaOverrides {
 		HarvestHelper.setHarvestLevel(Blocks.GRAVEL, -1, Arrays.asList(
 				new DoubleValue<EnumToolType, EnumToolMaterial>(EnumToolType.shovel, EnumToolMaterial.hand)),
 				new HarvestDropInfo(EnumToolType.shovel, true,
-						new ItemDropInfo(ModItems.GRAVEL, false, true, 100, 2, 1, 2, 0f)));
+						new ItemDropInfo(InitItems.GRAVEL, false, true, 100, 2, 1, 2, 0f)));
 		HarvestHelper.setHarvestLevel(Blocks.GOLD_ORE,                      EnumToolType.pickaxe, EnumToolMaterial.bronze);
 		HarvestHelper.setHarvestLevel(Blocks.IRON_ORE,                      EnumToolType.pickaxe, EnumToolMaterial.bronze);
 		HarvestHelper.setHarvestLevel(Blocks.COAL_ORE, new BlockHarvestInfo(EnumToolType.pickaxe, EnumToolMaterial.stone).setDrops(
@@ -464,7 +464,7 @@ public class VanillaOverrides {
 	}
 	
 	private static void setupItemStages() {
-		for (Item item : ModItems.ITEMS) {
+		for (Item item : InitItems.ITEMS) {
 			if (item instanceof ItemBlock) {
 				StageHelper.addStagedItem(((IBlockStaged<BlockStaged>) ((ItemBlock) item).getBlock()).getStage(), item);
 			} else {

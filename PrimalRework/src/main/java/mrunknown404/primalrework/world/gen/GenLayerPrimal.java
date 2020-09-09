@@ -3,7 +3,7 @@ package mrunknown404.primalrework.world.gen;
 import java.util.ArrayList;
 import java.util.List;
 
-import mrunknown404.primalrework.init.ModBiomes;
+import mrunknown404.primalrework.init.InitBiomes;
 import mrunknown404.primalrework.world.biome.BiomeBase;
 import net.minecraft.util.WeightedRandom;
 import net.minecraft.world.biome.Biome;
@@ -24,16 +24,16 @@ public class GenLayerPrimal extends GenLayer {
 			biomes[type.ordinal()] = new ArrayList<BiomeEntry>();
 		}
 		
-		for (Biome b2 : ModBiomes.BIOMES) {
+		for (Biome b2 : InitBiomes.BIOMES) {
 			BiomeBase b = (BiomeBase) b2;
 			biomes[b.getBiomeType().ordinal()].add(new BiomeEntry(b, b.getWeight()));
 		}
 		
 		//TODO remove later
-		biomes[BiomeType.DESERT.ordinal()].add(new BiomeEntry(ModBiomes.PRIMAL_FLAT_FOREST, 10));
+		biomes[BiomeType.DESERT.ordinal()].add(new BiomeEntry(InitBiomes.PRIMAL_FLAT_FOREST, 10));
 		//biomes[BiomeType.WARM.ordinal()].add(new BiomeEntry(ModBiomes.PRIMAL_FLAT_FOREST, 10));
-		biomes[BiomeType.COOL.ordinal()].add(new BiomeEntry(ModBiomes.PRIMAL_FLAT_FOREST, 10));
-		biomes[BiomeType.ICY.ordinal()].add(new BiomeEntry(ModBiomes.PRIMAL_FLAT_FOREST, 10));
+		biomes[BiomeType.COOL.ordinal()].add(new BiomeEntry(InitBiomes.PRIMAL_FLAT_FOREST, 10));
+		biomes[BiomeType.ICY.ordinal()].add(new BiomeEntry(InitBiomes.PRIMAL_FLAT_FOREST, 10));
 	}
 	
 	@Override

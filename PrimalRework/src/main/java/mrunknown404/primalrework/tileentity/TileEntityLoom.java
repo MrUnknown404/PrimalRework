@@ -1,6 +1,6 @@
 package mrunknown404.primalrework.tileentity;
 
-import mrunknown404.primalrework.init.ModItems;
+import mrunknown404.primalrework.init.InitItems;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
@@ -53,7 +53,7 @@ public class TileEntityLoom extends TileEntity {
 				markDirty();
 				
 				if (!world.isRemote) {
-					world.spawnEntity(new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, new ItemStack(ModItems.CLOTH)));
+					world.spawnEntity(new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, new ItemStack(InitItems.CLOTH)));
 				}
 				
 				return false;
@@ -69,7 +69,7 @@ public class TileEntityLoom extends TileEntity {
 			markDirty();
 			
 			if (!world.isRemote) {
-				world.spawnEntity(new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, new ItemStack(ModItems.CLOTH)));
+				world.spawnEntity(new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, new ItemStack(InitItems.CLOTH)));
 			}
 		}
 		

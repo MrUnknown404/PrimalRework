@@ -13,7 +13,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 
-import mrunknown404.primalrework.init.ModRecipes;
+import mrunknown404.primalrework.init.InitRecipes;
 import mrunknown404.primalrework.recipes.util.IStagedFactoryBase;
 import mrunknown404.primalrework.recipes.util.IStagedRecipeBase;
 import mrunknown404.primalrework.util.enums.EnumStage;
@@ -43,7 +43,7 @@ public class StagedOreShapedRecipe extends ShapedOreRecipe implements IStagedRec
 		this.stage = stage;
 		this.output = result;
 		
-		ModRecipes.addStagedRecipe(this);
+		InitRecipes.addStagedRecipe(this);
 	}
 	
 	@Override

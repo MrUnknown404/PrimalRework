@@ -39,7 +39,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Items;
 
-public class ModBlocks {
+public class InitBlocks {
 	public static final List<Block> BLOCKS = new ArrayList<Block>();
 	
 	// TODO add new wood types, cotton crop, add blue mushroom (also add to mushroom grass block)

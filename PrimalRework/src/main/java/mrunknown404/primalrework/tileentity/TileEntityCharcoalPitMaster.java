@@ -1,6 +1,6 @@
 package mrunknown404.primalrework.tileentity;
 
-import mrunknown404.primalrework.init.ModBlocks;
+import mrunknown404.primalrework.init.InitBlocks;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -24,14 +24,14 @@ public class TileEntityCharcoalPitMaster extends TileEntity implements ITickable
 				for (int z = -1; z < 2; z++) {
 					for (int x = -1; x < 2; x++) {
 						BlockPos npos = pos.add(x, 0, z);
-						world.setBlockState(npos, ModBlocks.CHARCOAL_BLOCK.getDefaultState());
+						world.setBlockState(npos, InitBlocks.CHARCOAL_BLOCK.getDefaultState());
 						
 						if (world.getBlockState(npos.up()).getBlock() == Blocks.GRASS) {
-							world.setBlockState(npos.up(), ModBlocks.GRASS_SLAB.getStateFromMeta(0));
-						} else if (world.getBlockState(npos.up()).getBlock() == ModBlocks.MUSHROOM_GRASS) {
-							world.setBlockState(npos.up(), ModBlocks.MUSHROOM_GRASS_SLAB.getStateFromMeta(0));
+							world.setBlockState(npos.up(), InitBlocks.GRASS_SLAB.getStateFromMeta(0));
+						} else if (world.getBlockState(npos.up()).getBlock() == InitBlocks.MUSHROOM_GRASS) {
+							world.setBlockState(npos.up(), InitBlocks.MUSHROOM_GRASS_SLAB.getStateFromMeta(0));
 						} else {
-							world.setBlockState(npos.up(), ModBlocks.DIRT_SLAB.getStateFromMeta(0));
+							world.setBlockState(npos.up(), InitBlocks.DIRT_SLAB.getStateFromMeta(0));
 						}
 					}
 				}

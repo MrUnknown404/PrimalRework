@@ -3,7 +3,7 @@ package mrunknown404.primalrework.client.gui;
 import java.io.IOException;
 
 import mrunknown404.primalrework.Main;
-import mrunknown404.primalrework.init.ModItems;
+import mrunknown404.primalrework.init.InitItems;
 import mrunknown404.primalrework.inventory.container.ContainerPrimalEnchanting;
 import mrunknown404.primalrework.network.message.PrimalEnchantingMessage;
 import mrunknown404.primalrework.tileentity.TileEntityPrimalEnchanting;
@@ -72,11 +72,11 @@ public class GuiPrimalEnchantment extends GuiContainer {
 		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 		
 		if (te.getStackInSlot(1) != null && !te.getStackInSlot(1).isEmpty()) {
-			if (te.getStackInSlot(1).getItem() == ModItems.MAGIC_DUST_RED) {
+			if (te.getStackInSlot(1).getItem() == InitItems.MAGIC_DUST_RED) {
 				drawTexturedModalRect(guiLeft + 6, guiTop + 7, 176, 0, 19, 19);
-			} else if (te.getStackInSlot(1).getItem() == ModItems.MAGIC_DUST_GREEN) {
+			} else if (te.getStackInSlot(1).getItem() == InitItems.MAGIC_DUST_GREEN) {
 				drawTexturedModalRect(guiLeft + 6, guiTop + 7, 195, 0, 19, 19);
-			} else if (te.getStackInSlot(1).getItem() == ModItems.MAGIC_DUST_BLUE) {
+			} else if (te.getStackInSlot(1).getItem() == InitItems.MAGIC_DUST_BLUE) {
 				drawTexturedModalRect(guiLeft + 6, guiTop + 7, 214, 0, 19, 19);
 			}
 		}

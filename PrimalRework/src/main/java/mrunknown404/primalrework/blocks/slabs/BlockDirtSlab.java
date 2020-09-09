@@ -3,7 +3,7 @@ package mrunknown404.primalrework.blocks.slabs;
 import java.util.Random;
 
 import mrunknown404.primalrework.blocks.util.BlockStagedSlab;
-import mrunknown404.primalrework.init.ModBlocks;
+import mrunknown404.primalrework.init.InitBlocks;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import mrunknown404.primalrework.util.enums.EnumToolType;
@@ -25,12 +25,12 @@ public class BlockDirtSlab extends BlockStagedSlab {
 	
 	@Override
 	public BlockStagedSlab getSingleVersion() {
-		return (BlockStagedSlab) ModBlocks.DIRT_SLAB;
+		return (BlockStagedSlab) InitBlocks.DIRT_SLAB;
 	}
 	
 	@Override
 	public BlockStagedSlab getDoubleVersion() {
-		return (BlockStagedSlab) ModBlocks.DIRT_DOUBLE_SLAB;
+		return (BlockStagedSlab) InitBlocks.DIRT_DOUBLE_SLAB;
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -54,16 +54,16 @@ public class BlockDirtSlab extends BlockStagedSlab {
 					
 					if (iblockstate1.getBlock() == Blocks.GRASS && world.getLightFromNeighbors(blockpos.up()) >= 4 && iblockstate.getLightOpacity(world, pos.up()) <= 2) {
 						if (!isDouble()) {
-							world.setBlockState(pos, ModBlocks.GRASS_SLAB.getStateFromMeta(world.getBlockState(pos).getBlock().getMetaFromState(world.getBlockState(pos))));
+							world.setBlockState(pos, InitBlocks.GRASS_SLAB.getStateFromMeta(world.getBlockState(pos).getBlock().getMetaFromState(world.getBlockState(pos))));
 						} else {
-							world.setBlockState(pos, ModBlocks.GRASS_DOUBLE_SLAB.getDefaultState());
+							world.setBlockState(pos, InitBlocks.GRASS_DOUBLE_SLAB.getDefaultState());
 						}
-					} else if ((iblockstate1.getBlock() == ModBlocks.GRASS_SLAB || iblockstate1.getBlock() == ModBlocks.GRASS_DOUBLE_SLAB) &&
+					} else if ((iblockstate1.getBlock() == InitBlocks.GRASS_SLAB || iblockstate1.getBlock() == InitBlocks.GRASS_DOUBLE_SLAB) &&
 							world.getLightFromNeighbors(blockpos.up()) >= 4 && iblockstate.getLightOpacity(world, pos.up()) <= 2) {
 						if (!isDouble()) {
-							world.setBlockState(pos, ModBlocks.GRASS_SLAB.getStateFromMeta(world.getBlockState(pos).getBlock().getMetaFromState(world.getBlockState(pos))));
+							world.setBlockState(pos, InitBlocks.GRASS_SLAB.getStateFromMeta(world.getBlockState(pos).getBlock().getMetaFromState(world.getBlockState(pos))));
 						} else {
-							world.setBlockState(pos, ModBlocks.GRASS_DOUBLE_SLAB.getDefaultState());
+							world.setBlockState(pos, InitBlocks.GRASS_DOUBLE_SLAB.getDefaultState());
 						}
 					}
 				}

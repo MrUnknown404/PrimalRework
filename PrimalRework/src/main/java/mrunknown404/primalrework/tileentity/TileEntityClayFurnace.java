@@ -1,8 +1,8 @@
 package mrunknown404.primalrework.tileentity;
 
-import mrunknown404.primalrework.init.ModBlocks;
-import mrunknown404.primalrework.init.ModItems;
-import mrunknown404.primalrework.init.ModRecipes;
+import mrunknown404.primalrework.init.InitBlocks;
+import mrunknown404.primalrework.init.InitItems;
+import mrunknown404.primalrework.init.InitRecipes;
 import mrunknown404.primalrework.inventory.container.ContainerCharcoalKiln;
 import mrunknown404.primalrework.inventory.container.ContainerClayFurnace;
 import mrunknown404.primalrework.items.ItemOreNugget;
@@ -31,8 +31,8 @@ public class TileEntityClayFurnace extends TileEntityInventory implements ITicka
 		ItemStack output = getStackInSlot(ContainerClayFurnace.SLOT_OUTPUT);
 		
 		if (!fuel.isEmpty() && !input.isEmpty() && output.isEmpty()) {
-			if (ModRecipes.isItemClayFurnaceFuel(fuel)) {
-				if (input.getItem() == ModItems.CLAY_VESSEL) {
+			if (InitRecipes.isItemClayFurnaceFuel(fuel)) {
+				if (input.getItem() == InitItems.CLAY_VESSEL) {
 					if (!input.hasTagCompound() || !input.getTagCompound().hasKey("isLiquid")) {
 						NBTTagCompound c = input.hasTagCompound() ? input.getTagCompound() : new NBTTagCompound();
 						c.setBoolean("isLiquid", false);
@@ -43,8 +43,8 @@ public class TileEntityClayFurnace extends TileEntityInventory implements ITicka
 						if (cookTime == 0) {
 							cookTime = MAX_COOK_TIME;
 							fuel.shrink(1);
-							world.notifyBlockUpdate(pos, ModBlocks.CHARCOAL_KILN.getDefaultState(), ModBlocks.CHARCOAL_KILN.getDefaultState(), 3);
-							world.scheduleBlockUpdate(pos, ModBlocks.CHARCOAL_KILN, 0, 0);
+							world.notifyBlockUpdate(pos, InitBlocks.CHARCOAL_KILN.getDefaultState(), InitBlocks.CHARCOAL_KILN.getDefaultState(), 3);
+							world.scheduleBlockUpdate(pos, InitBlocks.CHARCOAL_KILN, 0, 0);
 						}
 					}
 				}
@@ -53,8 +53,8 @@ public class TileEntityClayFurnace extends TileEntityInventory implements ITicka
 		
 		if (input.isEmpty() || !output.isEmpty()) {
 			cookTime = 0;
-			world.notifyBlockUpdate(pos, ModBlocks.CHARCOAL_KILN.getDefaultState(), ModBlocks.CHARCOAL_KILN.getDefaultState(), 3);
-			world.scheduleBlockUpdate(pos, ModBlocks.CHARCOAL_KILN, 0, 0);
+			world.notifyBlockUpdate(pos, InitBlocks.CHARCOAL_KILN.getDefaultState(), InitBlocks.CHARCOAL_KILN.getDefaultState(), 3);
+			world.scheduleBlockUpdate(pos, InitBlocks.CHARCOAL_KILN, 0, 0);
 		}
 		
 		if (cookTime > 0) {
@@ -77,7 +77,7 @@ public class TileEntityClayFurnace extends TileEntityInventory implements ITicka
 					units += item.getOreValue().units;
 				}
 				
-				ItemStack stack = new ItemStack(ModItems.CLAY_VESSEL);
+				ItemStack stack = new ItemStack(InitItems.CLAY_VESSEL);
 				NBTTagCompound tag = new NBTTagCompound();
 				tag.setBoolean("isLiquid", true);
 				tag.setInteger("units", units);
@@ -86,8 +86,8 @@ public class TileEntityClayFurnace extends TileEntityInventory implements ITicka
 				
 				setInventorySlotContents(ContainerClayFurnace.SLOT_OUTPUT, stack);
 				setInventorySlotContents(ContainerClayFurnace.SLOT_INPUT, ItemStack.EMPTY);
-				world.notifyBlockUpdate(pos, ModBlocks.CHARCOAL_KILN.getDefaultState(), ModBlocks.CHARCOAL_KILN.getDefaultState(), 3);
-				world.scheduleBlockUpdate(pos, ModBlocks.CHARCOAL_KILN, 0, 0);
+				world.notifyBlockUpdate(pos, InitBlocks.CHARCOAL_KILN.getDefaultState(), InitBlocks.CHARCOAL_KILN.getDefaultState(), 3);
+				world.scheduleBlockUpdate(pos, InitBlocks.CHARCOAL_KILN, 0, 0);
 			}
 		}
 	}

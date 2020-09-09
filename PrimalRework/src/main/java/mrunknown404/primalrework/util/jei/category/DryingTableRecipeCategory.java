@@ -10,8 +10,8 @@ import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mrunknown404.primalrework.Main;
-import mrunknown404.primalrework.init.ModBlocks;
-import mrunknown404.primalrework.init.ModRecipes;
+import mrunknown404.primalrework.init.InitBlocks;
+import mrunknown404.primalrework.init.InitRecipes;
 import mrunknown404.primalrework.util.jei.wrappers.DryingTableRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
@@ -29,7 +29,7 @@ public class DryingTableRecipeCategory implements IRecipeCategory<DryingTableRec
 		animatedDryTime = helper.createAnimatedDrawable(staticDryTime, 100, StartDirection.LEFT, false);
 		
 		background = helper.createDrawable(TEXTURES, 0, 0, 115, 45);
-		icon = helper.createDrawableIngredient(new ItemStack(ModBlocks.DRYING_TABLE));
+		icon = helper.createDrawableIngredient(new ItemStack(InitBlocks.DRYING_TABLE));
 	}
 	
 	@Override
@@ -44,12 +44,12 @@ public class DryingTableRecipeCategory implements IRecipeCategory<DryingTableRec
 	
 	@Override
 	public String getTitle() {
-		return ModBlocks.DRYING_TABLE.getLocalizedName();
+		return InitBlocks.DRYING_TABLE.getLocalizedName();
 	}
 	
 	@Override
 	public String getUid() {
-		return ModRecipes.CATEGORY_DRYING_TABLE;
+		return InitRecipes.CATEGORY_DRYING_TABLE;
 	}
 	
 	@Override

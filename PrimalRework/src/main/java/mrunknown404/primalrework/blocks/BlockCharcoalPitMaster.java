@@ -3,7 +3,7 @@ package mrunknown404.primalrework.blocks;
 import java.util.Random;
 
 import mrunknown404.primalrework.blocks.util.BlockStaged;
-import mrunknown404.primalrework.init.ModBlocks;
+import mrunknown404.primalrework.init.InitBlocks;
 import mrunknown404.primalrework.tileentity.TileEntityCharcoalPitMaster;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
@@ -55,7 +55,7 @@ public class BlockCharcoalPitMaster extends BlockStaged implements ITileEntityPr
 	
 	public void checkValid(World w, BlockPos pos) {
 		if (!BlockDenseLog.isValidCharcoalPit(w, pos)) {
-			w.setBlockState(pos, ModBlocks.DENSE_LOG.getDefaultState(), 11);
+			w.setBlockState(pos, InitBlocks.DENSE_LOG.getDefaultState(), 11);
 		}
 	}
 	

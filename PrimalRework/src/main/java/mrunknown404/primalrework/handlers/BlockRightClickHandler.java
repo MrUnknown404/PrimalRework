@@ -3,7 +3,7 @@ package mrunknown404.primalrework.handlers;
 import java.util.Arrays;
 import java.util.List;
 
-import mrunknown404.primalrework.init.ModBlocks;
+import mrunknown404.primalrework.init.InitBlocks;
 import mrunknown404.primalrework.util.enums.EnumToolType;
 import mrunknown404.primalrework.util.helpers.HarvestHelper;
 import net.minecraft.block.Block;
@@ -22,7 +22,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBloc
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class BlockRightClickHandler {
-	private static final List<Block> FIRE_BLOCKS = Arrays.asList(ModBlocks.LIT_PRIMAL_TORCH, Blocks.TORCH);
+	private static final List<Block> FIRE_BLOCKS = Arrays.asList(InitBlocks.LIT_PRIMAL_TORCH, Blocks.TORCH);
 	
 	@SubscribeEvent
 	public void onTorchRightClick(RightClickBlock e) {
@@ -34,10 +34,10 @@ public class BlockRightClickHandler {
 			return;
 		}
 		
-		if (e.getItemStack().getItem() == Item.getItemFromBlock(ModBlocks.UNLIT_PRIMAL_TORCH)) {
+		if (e.getItemStack().getItem() == Item.getItemFromBlock(InitBlocks.UNLIT_PRIMAL_TORCH)) {
 			if (FIRE_BLOCKS.contains(w.getBlockState(pos).getBlock())) {
 				e.getItemStack().shrink(1);
-				p.addItemStackToInventory(new ItemStack(ModBlocks.LIT_PRIMAL_TORCH));
+				p.addItemStackToInventory(new ItemStack(InitBlocks.LIT_PRIMAL_TORCH));
 				e.setCanceled(true);
 				return;
 			}
@@ -68,9 +68,9 @@ public class BlockRightClickHandler {
 					w.setBlockState(pos, Blocks.GRASS_PATH.getDefaultState());
 				}
 			} else if (w.getBlockState(pos.up()).getMaterial() == Material.AIR &&
-					(w.getBlockState(pos).getBlock() == ModBlocks.DIRT_SLAB || w.getBlockState(pos).getBlock() == ModBlocks.DIRT_DOUBLE_SLAB ||
-							w.getBlockState(pos).getBlock() == ModBlocks.GRASS_SLAB || w.getBlockState(pos).getBlock() == ModBlocks.GRASS_DOUBLE_SLAB ||
-							w.getBlockState(pos).getBlock() == ModBlocks.MUSHROOM_GRASS_SLAB || w.getBlockState(pos).getBlock() == ModBlocks.MUSHROOM_GRASS_DOUBLE_SLAB)) {
+					(w.getBlockState(pos).getBlock() == InitBlocks.DIRT_SLAB || w.getBlockState(pos).getBlock() == InitBlocks.DIRT_DOUBLE_SLAB ||
+							w.getBlockState(pos).getBlock() == InitBlocks.GRASS_SLAB || w.getBlockState(pos).getBlock() == InitBlocks.GRASS_DOUBLE_SLAB ||
+							w.getBlockState(pos).getBlock() == InitBlocks.MUSHROOM_GRASS_SLAB || w.getBlockState(pos).getBlock() == InitBlocks.MUSHROOM_GRASS_DOUBLE_SLAB)) {
 				w.playSound(p, pos, SoundEvents.ITEM_HOE_TILL, SoundCategory.BLOCKS, 1.0f, 1.0f);
 				p.swingArm(e.getHand());
 				
@@ -79,11 +79,11 @@ public class BlockRightClickHandler {
 						e.getItemStack().damageItem(1, p);
 					}
 					
-					if (w.getBlockState(pos).getBlock() == ModBlocks.DIRT_SLAB || w.getBlockState(pos).getBlock() == ModBlocks.GRASS_SLAB ||
-							w.getBlockState(pos).getBlock() == ModBlocks.MUSHROOM_GRASS_SLAB) {
-						w.setBlockState(pos, ModBlocks.PATH_SLAB.getStateFromMeta(w.getBlockState(pos).getBlock().getMetaFromState(w.getBlockState(pos))));
+					if (w.getBlockState(pos).getBlock() == InitBlocks.DIRT_SLAB || w.getBlockState(pos).getBlock() == InitBlocks.GRASS_SLAB ||
+							w.getBlockState(pos).getBlock() == InitBlocks.MUSHROOM_GRASS_SLAB) {
+						w.setBlockState(pos, InitBlocks.PATH_SLAB.getStateFromMeta(w.getBlockState(pos).getBlock().getMetaFromState(w.getBlockState(pos))));
 					} else {
-						w.setBlockState(pos, ModBlocks.PATH_DOUBLE_SLAB.getDefaultState());
+						w.setBlockState(pos, InitBlocks.PATH_DOUBLE_SLAB.getDefaultState());
 					}
 				}
 			}

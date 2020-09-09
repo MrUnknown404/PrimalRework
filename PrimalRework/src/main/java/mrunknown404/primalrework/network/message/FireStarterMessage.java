@@ -3,7 +3,7 @@ package mrunknown404.primalrework.network.message;
 import java.util.Random;
 
 import io.netty.buffer.ByteBuf;
-import mrunknown404.primalrework.init.ModBlocks;
+import mrunknown404.primalrework.init.InitBlocks;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
@@ -72,7 +72,7 @@ public class FireStarterMessage implements IMessage, IMessageHandler<FireStarter
 						}
 						
 						if (message.createdCharcoalPit) {
-							world.setBlockState(message.pos.down(2), ModBlocks.CHARCOAL_PIT_MASTER.getDefaultState(), 11);
+							world.setBlockState(message.pos.down(2), InitBlocks.CHARCOAL_PIT_MASTER.getDefaultState(), 11);
 						} else {
 							world.setBlockState(message.pos, Blocks.FIRE.getDefaultState(), 11);
 						}

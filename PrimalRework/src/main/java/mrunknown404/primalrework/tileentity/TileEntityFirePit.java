@@ -1,6 +1,6 @@
 package mrunknown404.primalrework.tileentity;
 
-import mrunknown404.primalrework.init.ModRecipes;
+import mrunknown404.primalrework.init.InitRecipes;
 import mrunknown404.primalrework.inventory.container.ContainerFirePit;
 import mrunknown404.unknownlibs.tileentity.TileEntityInventory;
 import net.minecraft.item.ItemStack;
@@ -18,9 +18,9 @@ public class TileEntityFirePit extends TileEntityInventory implements ITickable 
 	@Override
 	public void update() {
 		if (!isBurning()) {
-			if (ModRecipes.isItemFirePitFuel(inv.get(ContainerFirePit.SLOT_FUEL))) {
+			if (InitRecipes.isItemFirePitFuel(inv.get(ContainerFirePit.SLOT_FUEL))) {
 				ItemStack fuel = inv.get(ContainerFirePit.SLOT_FUEL);
-				totalBurnTime = ModRecipes.getFirePitBurnTime(fuel);
+				totalBurnTime = InitRecipes.getFirePitBurnTime(fuel);
 				burnTime = totalBurnTime;
 				fuel.shrink(1);
 			} else {
@@ -30,18 +30,18 @@ public class TileEntityFirePit extends TileEntityInventory implements ITickable 
 		}
 		
 		if (isBurning()) {
-			if (!isCookingItem() && ModRecipes.doesItemHaveFirePitRecipe(inv.get(ContainerFirePit.SLOT_ITEM))) {
-				totalCookTime = ModRecipes.getFirePitRecipeFromInput(inv.get(ContainerFirePit.SLOT_ITEM)).getCookTime();
+			if (!isCookingItem() && InitRecipes.doesItemHaveFirePitRecipe(inv.get(ContainerFirePit.SLOT_ITEM))) {
+				totalCookTime = InitRecipes.getFirePitRecipeFromInput(inv.get(ContainerFirePit.SLOT_ITEM)).getCookTime();
 				cookTime = totalCookTime;
 			}
 			
 			if (isCookingItem()) {
-				if (ModRecipes.doesItemHaveFirePitRecipe(inv.get(ContainerFirePit.SLOT_ITEM))) {
+				if (InitRecipes.doesItemHaveFirePitRecipe(inv.get(ContainerFirePit.SLOT_ITEM))) {
 					if (cookTime > 0) {
 						cookTime--;
 						
 						if (cookTime == 0) {
-							ItemStack out = ModRecipes.getFirePitRecipeFromInput(inv.get(ContainerFirePit.SLOT_ITEM)).getOutput();
+							ItemStack out = InitRecipes.getFirePitRecipeFromInput(inv.get(ContainerFirePit.SLOT_ITEM)).getOutput();
 							setInventorySlotContents(ContainerFirePit.SLOT_ITEM, out);
 							totalCookTime = 0;
 						}
@@ -83,9 +83,9 @@ public class TileEntityFirePit extends TileEntityInventory implements ITickable 
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack stack) {
 		if (index == ContainerFirePit.SLOT_FUEL) {
-			return ModRecipes.isItemFirePitFuel(stack);
+			return InitRecipes.isItemFirePitFuel(stack);
 		} else if (index == ContainerFirePit.SLOT_ITEM) {
-			return ModRecipes.doesItemHaveFirePitRecipe(stack);
+			return InitRecipes.doesItemHaveFirePitRecipe(stack);
 		}
 		
 		return false;

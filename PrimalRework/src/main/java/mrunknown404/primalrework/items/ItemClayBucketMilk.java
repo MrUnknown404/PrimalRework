@@ -1,7 +1,7 @@
 package mrunknown404.primalrework.items;
 
-import mrunknown404.primalrework.init.ModCreativeTabs;
-import mrunknown404.primalrework.init.ModItems;
+import mrunknown404.primalrework.init.InitCreativeTabs;
+import mrunknown404.primalrework.init.InitItems;
 import mrunknown404.primalrework.items.util.ItemDamageable;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
@@ -24,7 +24,7 @@ import net.minecraftforge.fluids.capability.wrappers.FluidBucketWrapper;
 public class ItemClayBucketMilk extends ItemDamageable {
 	
 	public ItemClayBucketMilk() {
-		super("clay_bucket_milk", ModCreativeTabs.PRIMALREWORK_FOOD, EnumToolMaterial.clay, EnumStage.stage1);
+		super("clay_bucket_milk", InitCreativeTabs.PRIMALREWORK_FOOD, EnumToolMaterial.clay, EnumStage.stage1);
 	}
 	
 	@Override
@@ -45,7 +45,7 @@ public class ItemClayBucketMilk extends ItemDamageable {
 			return stack;
 		}
 		
-		return stack.isEmpty() ? ItemStack.EMPTY : new ItemStack(ModItems.CLAY_BUCKET_EMPTY, 1, stack.getItemDamage());
+		return stack.isEmpty() ? ItemStack.EMPTY : new ItemStack(InitItems.CLAY_BUCKET_EMPTY, 1, stack.getItemDamage());
 	}
 	
 	@Override

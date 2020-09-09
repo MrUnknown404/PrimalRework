@@ -2,7 +2,7 @@ package mrunknown404.primalrework.inventory.container;
 
 import java.util.List;
 
-import mrunknown404.primalrework.init.ModItems;
+import mrunknown404.primalrework.init.InitItems;
 import mrunknown404.primalrework.inventory.slot.SlotSingleItem;
 import mrunknown404.primalrework.inventory.slot.SlotClayFurnaceFuel;
 import mrunknown404.primalrework.tileentity.TileEntityClayFurnace;
@@ -28,7 +28,7 @@ public class ContainerClayFurnace extends Container implements IEasyTransferStac
 		this.te = te;
 		
 		addSlotToContainer(new SlotClayFurnaceFuel(te, SLOT_FUEL, 80, 54));
-		addSlotToContainer(new SlotSingleItem(new ItemStack(ModItems.CLAY_VESSEL), 1, te, SLOT_INPUT, 59, 28));
+		addSlotToContainer(new SlotSingleItem(new ItemStack(InitItems.CLAY_VESSEL), 1, te, SLOT_INPUT, 59, 28));
 		addSlotToContainer(new SlotOutput(te, SLOT_OUTPUT, 105, 28));
 		
 		for (int y = 0; y < 3; y++) {

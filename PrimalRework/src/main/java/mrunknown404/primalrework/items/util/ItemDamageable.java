@@ -1,6 +1,6 @@
 package mrunknown404.primalrework.items.util;
 
-import mrunknown404.primalrework.init.ModCreativeTabs;
+import mrunknown404.primalrework.init.InitCreativeTabs;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import net.minecraft.creativetab.CreativeTabs;
@@ -14,7 +14,7 @@ public class ItemDamageable extends ItemStaged {
 	}
 	
 	public ItemDamageable(String name, EnumToolMaterial level, EnumStage stage) {
-		this(name, ModCreativeTabs.PRIMALREWORK_TOOLS, level, stage);
+		this(name, InitCreativeTabs.PRIMALREWORK_TOOLS, level, stage);
 	}
 	
 	@Override

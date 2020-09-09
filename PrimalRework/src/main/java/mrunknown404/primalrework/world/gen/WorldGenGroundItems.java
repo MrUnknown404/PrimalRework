@@ -3,7 +3,7 @@ package mrunknown404.primalrework.world.gen;
 import java.util.Random;
 
 import mrunknown404.primalrework.blocks.BlockGroundItem;
-import mrunknown404.primalrework.init.ModBlocks;
+import mrunknown404.primalrework.init.InitBlocks;
 import mrunknown404.unknownlibs.utils.MathUtils;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -32,11 +32,11 @@ public class WorldGenGroundItems extends WorldGenerator {
 		int ri = r.nextInt(7);
 		
 		if (MathUtils.within(ri, 0, 3)) {
-			return (BlockGroundItem) ModBlocks.STICK;
+			return (BlockGroundItem) InitBlocks.STICK;
 		} else if (ri == 6) {
-			return (BlockGroundItem) ModBlocks.FLINT;
+			return (BlockGroundItem) InitBlocks.FLINT;
 		} else {
-			return (BlockGroundItem) ModBlocks.ROCK;
+			return (BlockGroundItem) InitBlocks.ROCK;
 		}
 	}
 }

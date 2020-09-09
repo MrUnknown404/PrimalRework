@@ -1,6 +1,6 @@
 package mrunknown404.primalrework.tileentity;
 
-import mrunknown404.primalrework.init.ModBlocks;
+import mrunknown404.primalrework.init.InitBlocks;
 import mrunknown404.primalrework.inventory.container.ContainerCharcoalKiln;
 import mrunknown404.unknownlibs.tileentity.TileEntityInventory;
 import net.minecraft.init.Items;
@@ -26,8 +26,8 @@ public class TileEntityCharcoalKiln extends TileEntityInventory implements ITick
 				
 				if (!hasAll()) {
 					cookTime = 0;
-					world.notifyBlockUpdate(pos, ModBlocks.CHARCOAL_KILN.getDefaultState(), ModBlocks.CHARCOAL_KILN.getDefaultState(), 3);
-					world.scheduleBlockUpdate(pos, ModBlocks.CHARCOAL_KILN, 0, 0);
+					world.notifyBlockUpdate(pos, InitBlocks.CHARCOAL_KILN.getDefaultState(), InitBlocks.CHARCOAL_KILN.getDefaultState(), 3);
+					world.scheduleBlockUpdate(pos, InitBlocks.CHARCOAL_KILN, 0, 0);
 					return;
 				}
 				
@@ -39,16 +39,16 @@ public class TileEntityCharcoalKiln extends TileEntityInventory implements ITick
 						setInventorySlotContents(i, ItemStack.EMPTY);
 					}
 					
-					world.notifyBlockUpdate(pos, ModBlocks.CHARCOAL_KILN.getDefaultState(), ModBlocks.CHARCOAL_KILN.getDefaultState(), 3);
-					world.scheduleBlockUpdate(pos, ModBlocks.CHARCOAL_KILN, 0, 0);
+					world.notifyBlockUpdate(pos, InitBlocks.CHARCOAL_KILN.getDefaultState(), InitBlocks.CHARCOAL_KILN.getDefaultState(), 3);
+					world.scheduleBlockUpdate(pos, InitBlocks.CHARCOAL_KILN, 0, 0);
 				}
 			}
 		} else {
 			if (!isEmpty()) {
 				if (hasAll()) {
 					cookTime = MAX_COOK_TIME;
-					world.notifyBlockUpdate(pos, ModBlocks.CHARCOAL_KILN.getDefaultState(), ModBlocks.CHARCOAL_KILN.getDefaultState(), 3);
-					world.scheduleBlockUpdate(pos, ModBlocks.CHARCOAL_KILN, 0, 0);
+					world.notifyBlockUpdate(pos, InitBlocks.CHARCOAL_KILN.getDefaultState(), InitBlocks.CHARCOAL_KILN.getDefaultState(), 3);
+					world.scheduleBlockUpdate(pos, InitBlocks.CHARCOAL_KILN, 0, 0);
 				}
 			}
 		}

@@ -1,7 +1,7 @@
 package mrunknown404.primalrework.blocks;
 
 import mrunknown404.primalrework.blocks.util.BlockStagedDirectional;
-import mrunknown404.primalrework.init.ModItems;
+import mrunknown404.primalrework.init.InitItems;
 import mrunknown404.primalrework.tileentity.TileEntityCraftingStump;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
@@ -49,7 +49,7 @@ public class BlockCraftingStump extends BlockStagedDirectional implements ITileE
 		if (world.getTileEntity(pos) instanceof TileEntityCraftingStump) {
 			TileEntityCraftingStump tile = (TileEntityCraftingStump) world.getTileEntity(pos);
 			if (facing.getIndex() == 1) {
-				if (stack.getItem() != ModItems.FLINT_CRAFTING_HAMMER) {
+				if (stack.getItem() != InitItems.FLINT_CRAFTING_HAMMER) {
 					if (getSlotClicked(direction, hitX, hitZ) == -1) {
 						return true;
 					}
@@ -73,7 +73,7 @@ public class BlockCraftingStump extends BlockStagedDirectional implements ITileE
 							tile.markForUpdate();
 						}
 					}
-				} else if (!stack.isEmpty() && stack.getItem() == ModItems.FLINT_CRAFTING_HAMMER) {
+				} else if (!stack.isEmpty() && stack.getItem() == InitItems.FLINT_CRAFTING_HAMMER) {
 					tile.setStrikes(tile.getStrikes() + 1);
 					stack.damageItem(1, player);
 					tile.setHit(true);

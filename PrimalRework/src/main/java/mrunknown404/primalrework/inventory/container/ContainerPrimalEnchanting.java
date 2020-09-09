@@ -3,7 +3,7 @@ package mrunknown404.primalrework.inventory.container;
 import java.util.List;
 import java.util.Random;
 
-import mrunknown404.primalrework.init.ModItems;
+import mrunknown404.primalrework.init.InitItems;
 import mrunknown404.primalrework.inventory.slot.SlotMagicDust;
 import mrunknown404.primalrework.inventory.slot.SlotPrimalEnchantable;
 import mrunknown404.primalrework.tileentity.TileEntityPrimalEnchanting;
@@ -76,11 +76,11 @@ public class ContainerPrimalEnchanting extends Container implements IEasyTransfe
 		ItemStack dust = te.getStackInSlot(1);
 		int level = 0;
 		
-		if (dust.getItem() == ModItems.MAGIC_DUST_RED) {
+		if (dust.getItem() == InitItems.MAGIC_DUST_RED) {
 			level = 1;
-		} else if (dust.getItem() == ModItems.MAGIC_DUST_GREEN) {
+		} else if (dust.getItem() == InitItems.MAGIC_DUST_GREEN) {
 			level = 2;
-		} else if (dust.getItem() == ModItems.MAGIC_DUST_BLUE) {
+		} else if (dust.getItem() == InitItems.MAGIC_DUST_BLUE) {
 			level = 3;
 		}
 		

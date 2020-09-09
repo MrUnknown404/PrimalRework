@@ -10,8 +10,8 @@ import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mrunknown404.primalrework.Main;
-import mrunknown404.primalrework.init.ModBlocks;
-import mrunknown404.primalrework.init.ModRecipes;
+import mrunknown404.primalrework.init.InitBlocks;
+import mrunknown404.primalrework.init.InitRecipes;
 import mrunknown404.primalrework.util.jei.wrappers.FirePitRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
@@ -36,7 +36,7 @@ public class FirePitRecipeCategory implements IRecipeCategory<FirePitRecipeWrapp
 		animatedCookTime = helper.createAnimatedDrawable(staticCookTime, 100, StartDirection.BOTTOM, false);
 		
 		background = helper.createDrawable(TEXTURES, 0, 166, 115, 45);
-		icon = helper.createDrawableIngredient(new ItemStack(ModBlocks.FIRE_PIT));
+		icon = helper.createDrawableIngredient(new ItemStack(InitBlocks.FIRE_PIT));
 	}
 	
 	@Override
@@ -52,12 +52,12 @@ public class FirePitRecipeCategory implements IRecipeCategory<FirePitRecipeWrapp
 	
 	@Override
 	public String getTitle() {
-		return ModBlocks.FIRE_PIT.getLocalizedName();
+		return InitBlocks.FIRE_PIT.getLocalizedName();
 	}
 	
 	@Override
 	public String getUid() {
-		return ModRecipes.CATEGORY_FIRE_PIT;
+		return InitRecipes.CATEGORY_FIRE_PIT;
 	}
 	
 	@Override
@@ -70,7 +70,7 @@ public class FirePitRecipeCategory implements IRecipeCategory<FirePitRecipeWrapp
 		stacks.set(ingredients);
 		
 		stacks.init(SLOT_FUEL, false, 21, 4);
-		stacks.set(SLOT_FUEL, ModRecipes.getFirePitFuels());
+		stacks.set(SLOT_FUEL, InitRecipes.getFirePitFuels());
 	}
 	
 	@Override

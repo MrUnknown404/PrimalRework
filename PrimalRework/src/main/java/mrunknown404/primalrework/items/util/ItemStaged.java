@@ -2,7 +2,7 @@ package mrunknown404.primalrework.items.util;
 
 import java.util.List;
 
-import mrunknown404.primalrework.init.ModCreativeTabs;
+import mrunknown404.primalrework.init.InitCreativeTabs;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import mrunknown404.primalrework.util.enums.EnumToolType;
@@ -28,11 +28,11 @@ public class ItemStaged extends Item implements IItemStaged<ItemStaged> {
 	}
 	
 	public ItemStaged(String name, int maxStackSize, EnumStage stage) {
-		this(name, ModCreativeTabs.PRIMALREWORK_ITEMS, maxStackSize, stage);
+		this(name, InitCreativeTabs.PRIMALREWORK_ITEMS, maxStackSize, stage);
 	}
 	
 	public ItemStaged(String name, EnumStage stage) {
-		this(name, ModCreativeTabs.PRIMALREWORK_ITEMS, 64, stage);
+		this(name, InitCreativeTabs.PRIMALREWORK_ITEMS, 64, stage);
 	}
 	
 	@Override

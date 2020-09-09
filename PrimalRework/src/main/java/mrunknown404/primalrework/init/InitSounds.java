@@ -7,7 +7,7 @@ import mrunknown404.primalrework.Main;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 
-public class ModSoundEvents {
+public class InitSounds {
 	public static final List<SoundEvent> SOUNDS = new ArrayList<SoundEvent>();
 	
 	public static final SoundEvent ENTITY_PIGEON_AMBIENT = createSound("entity.pigeon.ambient");

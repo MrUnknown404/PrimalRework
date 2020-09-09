@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 
-import mrunknown404.primalrework.init.ModRecipes;
+import mrunknown404.primalrework.init.InitRecipes;
 import mrunknown404.primalrework.tileentity.TileEntityDryingTable;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -53,7 +53,7 @@ public class TileEntityDryingTableRenderer extends TileEntitySpecialRenderer<Til
 				
 				if (!item.isEmpty()) {
 					int cur = te.getDryProgress()[i];
-					int max = ModRecipes.doesItemHaveDryingTableRecipe(item) ? ModRecipes.getDryingTableRecipeFromInput(item).getDryTime() : 1;
+					int max = InitRecipes.doesItemHaveDryingTableRecipe(item) ? InitRecipes.getDryingTableRecipeFromInput(item).getDryTime() : 1;
 					
 					renderItemInSlot(item, w, 0.25F, h, cur, max);
 				}

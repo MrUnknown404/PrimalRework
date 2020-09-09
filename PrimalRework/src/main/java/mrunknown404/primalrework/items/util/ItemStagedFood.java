@@ -2,7 +2,7 @@ package mrunknown404.primalrework.items.util;
 
 import java.util.List;
 
-import mrunknown404.primalrework.init.ModCreativeTabs;
+import mrunknown404.primalrework.init.InitCreativeTabs;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import mrunknown404.primalrework.util.enums.EnumToolType;
@@ -21,7 +21,7 @@ public class ItemStagedFood extends ItemFood implements IItemStaged<ItemStagedFo
 		super(healAmount, saturationModifier, isWolfFood);
 		setUnlocalizedName(name);
 		setRegistryName(name);
-		setCreativeTab(ModCreativeTabs.PRIMALREWORK_FOOD);
+		setCreativeTab(InitCreativeTabs.PRIMALREWORK_FOOD);
 		setMaxStackSize(maxStackSize);
 		this.stage = stage;
 		this.eatTime = eatTime;

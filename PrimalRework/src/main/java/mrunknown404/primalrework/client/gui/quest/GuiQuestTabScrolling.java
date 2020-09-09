@@ -85,7 +85,7 @@ public class GuiQuestTabScrolling extends Gui {
 		
 		QuestTab questTab = InitQuests.QUEST_TABS.get(EnumStage.values()[Math.min(slotIdx, EnumStage.values().length - 3)]);
 		String name = questTab.getName().substring(questTab.getName().indexOf('(') + 1, questTab.getName().length() - 1);
-		fontRenderer.drawStringWithShadow(name, xMod + 50 - fontRenderer.getStringWidth(name) / 2, slotTop + 5, ColorUtils.rgbaToInt(255, 255, 255, 255));
+		fontRenderer.drawStringWithShadow(name, xMod + 50 - fontRenderer.getStringWidth(name) / 2, slotTop + 5, ColorUtils.rgba2Int(255, 255, 255, 255));
 		
 		RenderHelper.disableStandardItemLighting();
 		RenderHelper.enableGUIStandardItemLighting();

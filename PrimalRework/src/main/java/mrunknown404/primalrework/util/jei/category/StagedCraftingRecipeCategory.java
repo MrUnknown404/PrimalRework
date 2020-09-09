@@ -11,7 +11,7 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mrunknown404.primalrework.Main;
-import mrunknown404.primalrework.init.ModRecipes;
+import mrunknown404.primalrework.init.InitRecipes;
 import mrunknown404.primalrework.util.jei.wrappers.StagedCraftingWrapper;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -44,7 +44,7 @@ public class StagedCraftingRecipeCategory implements IRecipeCategory<StagedCraft
 	
 	@Override
 	public String getUid() {
-		return ModRecipes.CATEGORY_STAGED_CRAFTING;
+		return InitRecipes.CATEGORY_STAGED_CRAFTING;
 	}
 	
 	@Override

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import mrunknown404.primalrework.blocks.util.BlockStaged;
-import mrunknown404.primalrework.init.ModItems;
+import mrunknown404.primalrework.init.InitItems;
 import mrunknown404.primalrework.items.ItemOreNugget;
 import mrunknown404.primalrework.util.enums.EnumAlloy;
 import mrunknown404.primalrework.util.enums.EnumOreValue;
@@ -44,7 +44,7 @@ public class BlockOre extends BlockStaged {
 			return super.getItemDropped(state, rand, fortune);
 		}
 		
-		for (Item item1 : ModItems.ITEMS) {
+		for (Item item1 : InitItems.ITEMS) {
 			if (item1 instanceof ItemOreNugget) {
 				ItemOreNugget item = (ItemOreNugget) item1;
 				if (item.getAlloy() == alloy && item.getOreValue() == value) {

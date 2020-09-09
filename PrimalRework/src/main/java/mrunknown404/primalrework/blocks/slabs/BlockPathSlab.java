@@ -4,7 +4,7 @@ import java.util.Random;
 
 import mrunknown404.primalrework.blocks.util.BlockStagedSlab;
 import mrunknown404.primalrework.blocks.util.ISlabStaged;
-import mrunknown404.primalrework.init.ModBlocks;
+import mrunknown404.primalrework.init.InitBlocks;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import mrunknown404.primalrework.util.enums.EnumToolType;
@@ -36,17 +36,17 @@ public class BlockPathSlab extends BlockStagedSlab {
 	
 	@Override
 	public BlockStagedSlab getSingleVersion() {
-		return (BlockStagedSlab) ModBlocks.PATH_SLAB;
+		return (BlockStagedSlab) InitBlocks.PATH_SLAB;
 	}
 	
 	@Override
 	public BlockStagedSlab getDoubleVersion() {
-		return (BlockStagedSlab) ModBlocks.PATH_DOUBLE_SLAB;
+		return (BlockStagedSlab) InitBlocks.PATH_DOUBLE_SLAB;
 	}
 	
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return Item.getItemFromBlock(((ISlabStaged<BlockStagedSlab>) ModBlocks.DIRT_SLAB).getSingleVersion());
+		return Item.getItemFromBlock(((ISlabStaged<BlockStagedSlab>) InitBlocks.DIRT_SLAB).getSingleVersion());
 	}
 	
 	protected static final AxisAlignedBB AABB_FULL = new AxisAlignedBB(0, 0, 0, 1, 15d / 16d, 1);

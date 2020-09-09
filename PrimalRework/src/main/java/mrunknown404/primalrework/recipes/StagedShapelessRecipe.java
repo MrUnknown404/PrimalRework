@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.google.gson.JsonObject;
 
-import mrunknown404.primalrework.init.ModRecipes;
+import mrunknown404.primalrework.init.InitRecipes;
 import mrunknown404.primalrework.recipes.util.IStagedFactoryBase;
 import mrunknown404.primalrework.recipes.util.IStagedRecipeBase;
 import mrunknown404.primalrework.util.enums.EnumStage;
@@ -33,7 +33,7 @@ public class StagedShapelessRecipe extends ShapelessRecipes implements IStagedRe
 		this.stage = stage;
 		this.output = output;
 		
-		ModRecipes.addStagedRecipe(this);
+		InitRecipes.addStagedRecipe(this);
 	}
 	
 	@Override

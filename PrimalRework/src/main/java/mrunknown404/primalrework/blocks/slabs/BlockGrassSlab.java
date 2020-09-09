@@ -4,7 +4,7 @@ import java.util.Random;
 
 import mrunknown404.primalrework.blocks.util.BlockStagedSlab;
 import mrunknown404.primalrework.blocks.util.ISlabStaged;
-import mrunknown404.primalrework.init.ModBlocks;
+import mrunknown404.primalrework.init.InitBlocks;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import mrunknown404.primalrework.util.enums.EnumToolType;
@@ -29,17 +29,17 @@ public class BlockGrassSlab extends BlockStagedSlab {
 	
 	@Override
 	public BlockStagedSlab getSingleVersion() {
-		return (BlockStagedSlab) ModBlocks.GRASS_SLAB;
+		return (BlockStagedSlab) InitBlocks.GRASS_SLAB;
 	}
 	
 	@Override
 	public BlockStagedSlab getDoubleVersion() {
-		return (BlockStagedSlab) ModBlocks.GRASS_DOUBLE_SLAB;
+		return (BlockStagedSlab) InitBlocks.GRASS_DOUBLE_SLAB;
 	}
 	
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return Item.getItemFromBlock(((ISlabStaged<BlockStagedSlab>) ModBlocks.DIRT_SLAB).getSingleVersion());
+		return Item.getItemFromBlock(((ISlabStaged<BlockStagedSlab>) InitBlocks.DIRT_SLAB).getSingleVersion());
 	}
 	
 	@Override
@@ -56,7 +56,7 @@ public class BlockGrassSlab extends BlockStagedSlab {
 			}
 			
 			if (world.getLightFromNeighbors(pos.up()) < 4 && world.getBlockState(pos.up()).getLightOpacity(world, pos.up()) > 2) {
-				world.setBlockState(pos, ModBlocks.DIRT_SLAB.getStateFromMeta(world.getBlockState(pos).getBlock().getMetaFromState(world.getBlockState(pos))));
+				world.setBlockState(pos, InitBlocks.DIRT_SLAB.getStateFromMeta(world.getBlockState(pos).getBlock().getMetaFromState(world.getBlockState(pos))));
 			} else {
 				if (world.getLightFromNeighbors(pos.up()) >= 9) {
 					for (int i = 0; i < 4; ++i) {

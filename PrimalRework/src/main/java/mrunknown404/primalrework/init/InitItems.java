@@ -34,7 +34,7 @@ import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 
-public class ModItems {
+public class InitItems {
 	public static final ToolMaterial MATERIAL = EnumHelper.addToolMaterial("MATERIAL", 0, 0, 0, 0, 0);
 	
 	public static final List<Item> ITEMS = new ArrayList<Item>();

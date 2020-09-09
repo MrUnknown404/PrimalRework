@@ -7,7 +7,7 @@ import mrunknown404.primalrework.world.biome.BiomeBase.BiomeModifier;
 import mrunknown404.primalrework.world.biome.BiomePrimalForest;
 import net.minecraft.world.biome.Biome;
 
-public class ModBiomes {
+public class InitBiomes {
 	public static final List<Biome> BIOMES = new ArrayList<Biome>();
 	
 	public static final Biome PRIMAL_FLAT_FOREST =        new BiomePrimalForest(BiomeModifier.FLAT,        BiomePrimalForest.ForestType.NORMAL, 8, 10);

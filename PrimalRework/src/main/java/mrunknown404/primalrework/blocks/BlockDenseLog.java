@@ -1,7 +1,7 @@
 package mrunknown404.primalrework.blocks;
 
 import mrunknown404.primalrework.blocks.util.BlockStagedRotatedPillar;
-import mrunknown404.primalrework.init.ModBlocks;
+import mrunknown404.primalrework.init.InitBlocks;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import mrunknown404.primalrework.util.enums.EnumToolType;
@@ -32,7 +32,7 @@ public class BlockDenseLog extends BlockStagedRotatedPillar {
 					BlockPos npos = pos.add(x, 0, z);
 					Block b = w.getBlockState(npos).getBlock();
 					
-					if (b == ModBlocks.CHARCOAL_PIT_MASTER) {
+					if (b == InitBlocks.CHARCOAL_PIT_MASTER) {
 						((BlockCharcoalPitMaster) b).checkValid(w, npos);
 						break loop;
 					}
@@ -45,7 +45,7 @@ public class BlockDenseLog extends BlockStagedRotatedPillar {
 	
 	public static boolean isValidCharcoalPit(World w, BlockPos center) {
 		Block b = w.getBlockState(center).getBlock();
-		if (b != ModBlocks.DENSE_LOG && b != ModBlocks.CHARCOAL_PIT_MASTER) {
+		if (b != InitBlocks.DENSE_LOG && b != InitBlocks.CHARCOAL_PIT_MASTER) {
 			return false;
 		}
 		
@@ -63,7 +63,7 @@ public class BlockDenseLog extends BlockStagedRotatedPillar {
 					if (x == -2 || x == 2) {
 						shouldBe = Blocks.DIRT;
 					} else {
-						shouldBe = ModBlocks.DENSE_LOG;
+						shouldBe = InitBlocks.DENSE_LOG;
 					}
 				} else if (z == 2 && within(x, -1, 1)) {
 					shouldBe = Blocks.DIRT;
@@ -72,13 +72,13 @@ public class BlockDenseLog extends BlockStagedRotatedPillar {
 				if (shouldBe == null) {
 					return false;
 				} else if (shouldBe == Blocks.DIRT) {
-					if (toCheck == Blocks.GRASS || toCheck == Blocks.DIRT || toCheck == ModBlocks.MUSHROOM_GRASS) {
+					if (toCheck == Blocks.GRASS || toCheck == Blocks.DIRT || toCheck == InitBlocks.MUSHROOM_GRASS) {
 						continue;
 					}
 					return false;
-				} else if (shouldBe == ModBlocks.DENSE_LOG && (toCheck == ModBlocks.DENSE_LOG || toCheck == ModBlocks.CHARCOAL_PIT_MASTER)) {
+				} else if (shouldBe == InitBlocks.DENSE_LOG && (toCheck == InitBlocks.DENSE_LOG || toCheck == InitBlocks.CHARCOAL_PIT_MASTER)) {
 					Block nb = w.getBlockState(center.add(x, 1, z)).getBlock();
-					if (nb == Blocks.GRASS || nb == Blocks.DIRT || nb == ModBlocks.MUSHROOM_GRASS) {
+					if (nb == Blocks.GRASS || nb == Blocks.DIRT || nb == InitBlocks.MUSHROOM_GRASS) {
 						continue;
 					}
 					return false;

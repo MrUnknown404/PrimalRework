@@ -2,7 +2,7 @@ package mrunknown404.primalrework.world.biome;
 
 import java.util.Random;
 
-import mrunknown404.primalrework.init.ModBlocks;
+import mrunknown404.primalrework.init.InitBlocks;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.util.math.BlockPos;
@@ -37,7 +37,7 @@ public class BiomePrimalForest extends BiomeBase {
 		this.decorator.grassPerChunk = 3;
 		
 		if (forestType == ForestType.MUSHROOM) {
-			topBlock = ModBlocks.MUSHROOM_GRASS.getDefaultState();
+			topBlock = InitBlocks.MUSHROOM_GRASS.getDefaultState();
 		} else if (forestType == ForestType.NORMAL) {
 			spawnableCreatureList.add(new SpawnListEntry(EntityWolf.class, 5, 2, 4));
 		}

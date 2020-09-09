@@ -5,7 +5,7 @@ import org.lwjgl.input.Keyboard;
 import mrunknown404.primalrework.client.render.TileEntityCraftingStumpRenderer;
 import mrunknown404.primalrework.client.render.TileEntityDryingTableRenderer;
 import mrunknown404.primalrework.client.render.TileEntityPrimalEnchantingRenderer;
-import mrunknown404.primalrework.init.ModBlocks;
+import mrunknown404.primalrework.init.InitBlocks;
 import mrunknown404.primalrework.tileentity.TileEntityCraftingStump;
 import mrunknown404.primalrework.tileentity.TileEntityDryingTable;
 import mrunknown404.primalrework.tileentity.TileEntityPrimalEnchanting;
@@ -61,13 +61,13 @@ public class ClientProxy implements ICommonProxy {
 			public int colorMultiplier(IBlockState state, IBlockAccess world, BlockPos pos, int tintIndex) {
 				return BiomeColorHelper.getGrassColorAtPos(world, pos);
 			}
-		}, ModBlocks.GRASS_SLAB, ModBlocks.GRASS_DOUBLE_SLAB, ModBlocks.MUSHROOM_GRASS, ModBlocks.MUSHROOM_GRASS_SLAB, ModBlocks.MUSHROOM_GRASS_DOUBLE_SLAB);
+		}, InitBlocks.GRASS_SLAB, InitBlocks.GRASS_DOUBLE_SLAB, InitBlocks.MUSHROOM_GRASS, InitBlocks.MUSHROOM_GRASS_SLAB, InitBlocks.MUSHROOM_GRASS_DOUBLE_SLAB);
 		
 		Minecraft.getMinecraft().getItemColors().registerItemColorHandler(new IItemColor() {
 			@Override
 			public int colorMultiplier(ItemStack stack, int tintIndex) {
 				return ColorizerGrass.getGrassColor(0.5D, 1.0D);
 			}
-		}, ModBlocks.GRASS_SLAB, ModBlocks.GRASS_DOUBLE_SLAB, ModBlocks.MUSHROOM_GRASS, ModBlocks.MUSHROOM_GRASS_SLAB, ModBlocks.MUSHROOM_GRASS_DOUBLE_SLAB);
+		}, InitBlocks.GRASS_SLAB, InitBlocks.GRASS_DOUBLE_SLAB, InitBlocks.MUSHROOM_GRASS, InitBlocks.MUSHROOM_GRASS_SLAB, InitBlocks.MUSHROOM_GRASS_DOUBLE_SLAB);
 	}
 }
