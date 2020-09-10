@@ -223,6 +223,7 @@ entity.pigeon.name=Pigeon
 
 //--COMMANDS
 commands.stage.usage=/stage add [stage name]
+commands.quest.usage=/quest (check/finish/forget) [quest name]
 
 //--STAGE
 stage.before.name=Stage 0 (Before)

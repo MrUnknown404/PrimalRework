@@ -9,10 +9,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class QuestRequirement {
-	private final QuestReq req;
+	private final RequirementType req;
 	private final int amountNeeded;
 	
-	private QuestRequirement(QuestReq req, int amountNeeded, List<Block> block, ItemStack item, String oreDict) {
+	private QuestRequirement(RequirementType req, int amountNeeded, List<Block> block, ItemStack item, String oreDict) {
 		this.req = req;
 		this.amountNeeded = amountNeeded;
 		
@@ -22,30 +22,30 @@ public class QuestRequirement {
 	}
 	
 	public QuestRequirement(List<Block> block) {
-		this(QuestReq.block_break, 1, block, null, "");
+		this(RequirementType.block_break, 1, block, null, "");
 	}
 	
 	public QuestRequirement(Block block) {
-		this(QuestReq.block_break, 1, Arrays.asList(block), null, "");
+		this(RequirementType.block_break, 1, Arrays.asList(block), null, "");
 	}
 	
 	public QuestRequirement(ItemStack item) {
-		this(QuestReq.item_collect, item.getCount(), null, item, "");
+		this(RequirementType.item_collect, item.getCount(), null, item, "");
 	}
 	
 	public QuestRequirement(String oreDict) {
-		this(QuestReq.item_collect, 1, null, null, oreDict);
+		this(RequirementType.item_collect, 1, null, null, oreDict);
 	}
 	
 	public QuestRequirement(String oreDict, int count) {
-		this(QuestReq.item_collect, count, null, null, oreDict);
+		this(RequirementType.item_collect, count, null, null, oreDict);
 	}
 	
 	public int getAmountNeeded() {
 		return amountNeeded;
 	}
 	
-	public QuestReq getQuestReq() {
+	public RequirementType getQuestReq() {
 		return req;
 	}
 	
@@ -79,7 +79,7 @@ public class QuestRequirement {
 		}
 	}
 	
-	public enum QuestReq {
+	public enum RequirementType {
 		block_break,
 		item_collect;
 	}

@@ -1,5 +1,9 @@
 package mrunknown404.primalrework.util.proxy;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.lwjgl.input.Keyboard;
 
 import mrunknown404.primalrework.client.render.TileEntityCraftingStumpRenderer;
@@ -16,6 +20,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
+import net.minecraft.client.settings.GameSettings;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -42,7 +47,13 @@ public class ClientProxy implements ICommonProxy {
 	
 	@Override
 	public void init() {
-		
+		GameSettings set = Minecraft.getMinecraft().gameSettings;
+		List<KeyBinding> list = new ArrayList<KeyBinding>();
+		list.addAll(Arrays.asList(set.keyBindings));
+		list.remove(set.keyBindAdvancements);
+		set.keyBindAdvancements = new KeyBinding("n", -1, "o");
+		list.remove(set.keyBindAdvancements);
+		set.keyBindings = list.toArray(new KeyBinding[list.size()]);
 	}
 	
 	@Override

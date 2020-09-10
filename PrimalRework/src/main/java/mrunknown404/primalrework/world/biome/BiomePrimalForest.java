@@ -132,7 +132,7 @@ public class BiomePrimalForest extends BiomeBase {
 		return forestType == ForestType.MUSHROOM ? (super.getGrassColorAtPos(pos) & 16711422) + 2634762 >> 1 : super.getGrassColorAtPos(pos);
 	}
 	
-	public static enum ForestType { // TODO add mushrooms to ground
-		NORMAL, BIRCH, MUSHROOM;    // TODO add dead, spruce, big forest
+	public static enum ForestType { // TODO WorldGen: add mushrooms to ground
+		NORMAL, BIRCH, MUSHROOM;    // TODO WorldGen: add dead, spruce, big forest
 	}
 }

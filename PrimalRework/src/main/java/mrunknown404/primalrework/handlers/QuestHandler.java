@@ -4,7 +4,7 @@ import mrunknown404.primalrework.Main;
 import mrunknown404.primalrework.client.gui.GuiHandler;
 import mrunknown404.primalrework.init.InitQuests;
 import mrunknown404.primalrework.quests.Quest;
-import mrunknown404.primalrework.quests.QuestRequirement.QuestReq;
+import mrunknown404.primalrework.quests.QuestRequirement.RequirementType;
 import mrunknown404.primalrework.util.enums.EnumStage;
 import mrunknown404.primalrework.util.helpers.StageHelper;
 import mrunknown404.primalrework.util.proxy.ClientProxy;
@@ -42,7 +42,7 @@ public class QuestHandler {
 	@SubscribeEvent
 	public void onBlockBreak(BreakEvent e) {
 		for (Quest q : InitQuests.getQuestCache()) {
-			if (q.getRequirement().getQuestReq() == QuestReq.block_break) {
+			if (q.getRequirement().getQuestReq() == RequirementType.block_break) {
 				if (q.getRequirement().getBlocksToBreak().contains(e.getWorld().getBlockState(e.getPos()).getBlock())) {
 					q.checkRequirements(e.getWorld(), e.getPlayer(), 1);
 				}
@@ -61,7 +61,7 @@ public class QuestHandler {
 		}
 		
 		for (Quest q : InitQuests.getQuestCache()) {
-			if (q.getRequirement().getQuestReq() == QuestReq.item_collect) {
+			if (q.getRequirement().getQuestReq() == RequirementType.item_collect) {
 				int amount = 0, highest = 0;
 				EntityPlayer highestPlayer = null;
 				

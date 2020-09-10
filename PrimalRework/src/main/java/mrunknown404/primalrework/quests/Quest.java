@@ -64,13 +64,20 @@ public class Quest {
 			System.out.println("Someone has finished the quest '" + getName() + "'!");
 		}
 		
-		WorldSaveDataQuest.load(world).markDirty();
-		
 		isFinished = true;
 		InitQuests.resetQuestCache();
+		WorldSaveDataQuest.load(world).markDirty();
 		if (reward != null && player != null) {
 			reward.giveRewardsToPlayer(player);
 		}
+	}
+	
+	public final void forgetQuest(World world) {
+		System.out.println("Quest '" + getName() + "' was forgotten!");
+		
+		isFinished = false;
+		InitQuests.resetQuestCache();
+		WorldSaveDataQuest.load(world).markDirty();
 	}
 	
 	/** Used for loading only! */

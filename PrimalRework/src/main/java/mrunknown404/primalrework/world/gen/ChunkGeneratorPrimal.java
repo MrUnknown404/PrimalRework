@@ -324,7 +324,7 @@ public class ChunkGeneratorPrimal implements IChunkGenerator {
 	
 	@Override
 	public void recreateStructures(Chunk chunk, int x, int z) {
-		// TODO setup structures
+		// TODO WorldGen: setup structures
 	}
 	
 	public static final class WorldInfo {

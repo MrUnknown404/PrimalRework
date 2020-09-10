@@ -136,4 +136,23 @@ public class InitQuests {
 			}
 		}
 	}
+	
+	public static Quest findQuest(String name) {
+		for (Quest q : QUESTS) {
+			if (q.getName().equalsIgnoreCase(name)) {
+				return q;
+			}
+		}
+		
+		return null;
+	}
+	
+	public static List<String> getAllQuestNames() {
+		List<String> str = new ArrayList<String>();
+		for (Quest q : QUESTS) {
+			str.add(q.getName());
+		}
+		
+		return str;
+	}
 }

@@ -9,7 +9,7 @@ import org.lwjgl.opengl.GL11;
 import mrunknown404.primalrework.Main;
 import mrunknown404.primalrework.quests.Quest;
 import mrunknown404.primalrework.quests.QuestRequirement;
-import mrunknown404.primalrework.quests.QuestRequirement.QuestReq;
+import mrunknown404.primalrework.quests.QuestRequirement.RequirementType;
 import mrunknown404.primalrework.quests.QuestRoot;
 import mrunknown404.unknownlibs.utils.ColorUtils;
 import net.minecraft.block.Block;
@@ -59,7 +59,7 @@ public class GuiQuestInfo extends Gui {
 		if (!(quest instanceof QuestRoot)) {
 			int amount = 0;
 			
-			if (quest.getRequirement().getQuestReq() == QuestReq.block_break) {
+			if (quest.getRequirement().getQuestReq() == RequirementType.block_break) {
 				amount = getDifferentBlocks(quest.getRequirement()).size();
 			} else {
 				amount = quest.getRequirement().getItemsToCollect().size();
@@ -227,10 +227,10 @@ public class GuiQuestInfo extends Gui {
 		
 		QuestRequirement req = quest.getRequirement();
 		if (req != null) {
-			drawString(fontRenderer, (req.getQuestReq() == QuestReq.block_break ? "Break one of the following blocks:" : "Collect one of the following items:"), xLeft + 10,
+			drawString(fontRenderer, (req.getQuestReq() == RequirementType.block_break ? "Break one of the following blocks:" : "Collect one of the following items:"), xLeft + 10,
 					yTop + 40 + ((quest.getFancyDesc().size() + 2) * fontRenderer.FONT_HEIGHT), color);
 			
-			if (req.getQuestReq() == QuestReq.block_break) {
+			if (req.getQuestReq() == RequirementType.block_break) {
 				int i = 0;
 				for (String b : getDifferentBlocks(req)) {
 					drawString(fontRenderer, " " + req.getAmountNeeded() + " " + b, xLeft + 10, yTop + 50 + ((quest.getFancyDesc().size() + 2 + i) * fontRenderer.FONT_HEIGHT),

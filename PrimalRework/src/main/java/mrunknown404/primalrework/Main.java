@@ -1,6 +1,7 @@
 package mrunknown404.primalrework;
 
 import mrunknown404.primalrework.client.gui.GuiHandler;
+import mrunknown404.primalrework.commands.CommandQuest;
 import mrunknown404.primalrework.commands.CommandStage;
 import mrunknown404.primalrework.entity.EntityItemDrop;
 import mrunknown404.primalrework.handlers.BlockBreakingHandler;
@@ -12,8 +13,8 @@ import mrunknown404.primalrework.handlers.EntityRightClickHandler;
 import mrunknown404.primalrework.handlers.ItemConversionHandler;
 import mrunknown404.primalrework.handlers.MiscEventHandler;
 import mrunknown404.primalrework.handlers.QuestHandler;
-import mrunknown404.primalrework.init.InitQuests;
 import mrunknown404.primalrework.init.InitEntities;
+import mrunknown404.primalrework.init.InitQuests;
 import mrunknown404.primalrework.init.InitRecipes;
 import mrunknown404.primalrework.init.InitSounds;
 import mrunknown404.primalrework.network.message.FireStarterMessage;
@@ -28,7 +29,6 @@ import mrunknown404.primalrework.tileentity.TileEntityDryingTable;
 import mrunknown404.primalrework.tileentity.TileEntityFirePit;
 import mrunknown404.primalrework.tileentity.TileEntityLoom;
 import mrunknown404.primalrework.tileentity.TileEntityPrimalEnchanting;
-import mrunknown404.primalrework.util.ModAdvancementList;
 import mrunknown404.primalrework.util.OreDict;
 import mrunknown404.primalrework.util.VanillaOverrides;
 import mrunknown404.primalrework.world.WorldTypePrimal;
@@ -61,8 +61,6 @@ public class Main {
 	
 	public static final WorldType PRIMAL_WORLD = new WorldTypePrimal();
 	
-	public static final ModAdvancementList ADV_LIST = new ModAdvancementList();
-	
 	public static final SimpleNetworkWrapper NETWORK = NetworkRegistry.INSTANCE.newSimpleChannel(MOD_ID);
 	
 	@Instance
@@ -72,7 +70,7 @@ public class Main {
 	public static ICommonProxy proxy;
 	
 	// TODO add map system similar to antique atlas
-	// TODO replace river/ocean biomes
+	// TODO WorldGen: replace river/ocean biomes
 	// TODO redo pause screen (remove advancement button)
 	// TODO add quest command
 	
@@ -139,6 +137,7 @@ public class Main {
 	@EventHandler
 	public void serverStart(FMLServerStartingEvent e) {
 		e.registerServerCommand(new CommandStage());
+		e.registerServerCommand(new CommandQuest());
 	}
 	
 	public static boolean isJEILoaded() {

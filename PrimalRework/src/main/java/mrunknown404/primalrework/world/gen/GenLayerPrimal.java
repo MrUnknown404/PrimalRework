@@ -29,7 +29,7 @@ public class GenLayerPrimal extends GenLayer {
 			biomes[b.getBiomeType().ordinal()].add(new BiomeEntry(b, b.getWeight()));
 		}
 		
-		//TODO remove later
+		//TODO WorldGen: remove later
 		biomes[BiomeType.DESERT.ordinal()].add(new BiomeEntry(InitBiomes.PRIMAL_FLAT_FOREST, 10));
 		//biomes[BiomeType.WARM.ordinal()].add(new BiomeEntry(ModBiomes.PRIMAL_FLAT_FOREST, 10));
 		biomes[BiomeType.COOL.ordinal()].add(new BiomeEntry(InitBiomes.PRIMAL_FLAT_FOREST, 10));
