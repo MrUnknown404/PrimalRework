@@ -33,6 +33,7 @@ item.blue_dye.name=Blue Dye
 item.black_dye.name=Black Dye
 item.brown_dye.name=Brown Dye
 item.clay_vessel.name=Clay Vessel
+item.blank_cast.name=Blank Cast
 
 item.ingot_cast.name=Ingot Cast
 item.shears_cast.name=Shears Cast

@@ -119,10 +119,20 @@ public class StageHelper {
 	
 	public static List<EnumStage> getAllPrevStages() {
 		List<EnumStage> list = new ArrayList<EnumStage>();
-		for (int i = 0; i <= stage.id; i++) {
-			list.add(EnumStage.values()[i]);
+		if (stage.id < 98) {
+			for (int i = 0; i <= stage.id; i++) {
+				list.add(EnumStage.values()[i]);
+			}
+		} else {
+			for (EnumStage stage : EnumStage.values()) {
+				list.add(stage);
+			}
 		}
 		
 		return list;
+	}
+	
+	public static EnumStage getNextStage() {
+		return stage == EnumStage.no_show ? stage : EnumStage.values()[stage.ordinal() + 1];
 	}
 }

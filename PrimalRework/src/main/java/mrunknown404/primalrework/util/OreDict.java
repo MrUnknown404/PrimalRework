@@ -5,6 +5,7 @@ import org.apache.commons.lang3.text.WordUtils;
 import mrunknown404.primalrework.init.InitBlocks;
 import mrunknown404.primalrework.init.InitItems;
 import mrunknown404.primalrework.items.ItemOreNugget;
+import mrunknown404.primalrework.util.enums.EnumToolMaterial;
 import mrunknown404.primalrework.util.enums.EnumToolType;
 import mrunknown404.primalrework.util.harvest.ItemHarvestInfo;
 import mrunknown404.primalrework.util.helpers.HarvestHelper;
@@ -19,8 +20,17 @@ import net.minecraftforge.oredict.OreDictionary;
 public class OreDict {
 	public static void register() {
 		for (Item item : Item.REGISTRY) {
+			ItemHarvestInfo info = HarvestHelper.getHarvestInfo(item);
 			if (!(item instanceof ItemHoe) && !(item instanceof ItemAxe)) {
-				register(HarvestHelper.getHarvestInfo(item), item.isDamageable() ? OreDictionary.WILDCARD_VALUE : 0);
+				register(info, item.isDamageable() ? OreDictionary.WILDCARD_VALUE : 0);
+			}
+			
+			if (info.getMaterial() != EnumToolMaterial.hand) {
+				for (EnumToolType type : info.getToolTypes()) {
+					if (type != EnumToolType.none) {
+						OreDictionary.registerOre("toolMat" + WordUtils.capitalizeFully(info.getMaterial().toString()), new ItemStack(item, 1, OreDictionary.WILDCARD_VALUE));
+					}
+				}
 			}
 		}
 		

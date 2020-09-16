@@ -75,6 +75,7 @@ public class InitItems {
 	public static final Item BLACK_DYE = new ItemStaged("black_dye", EnumStage.stage1);
 	public static final Item BROWN_DYE = new ItemStaged("brown_dye", EnumStage.stage1);
 	public static final Item CLAY_VESSEL = new ItemClayVessel();
+	public static final Item BLANK_CAST = new ItemStaged("blank_cast", EnumStage.stage3);
 	
 	//ORE NUGGETS
 	public static final Item COPPER_NUGGET_POOR = new ItemOreNugget(EnumStage.stage2, EnumAlloy.copper, EnumOreValue.poor);

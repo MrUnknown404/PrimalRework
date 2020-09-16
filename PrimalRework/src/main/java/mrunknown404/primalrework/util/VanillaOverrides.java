@@ -719,6 +719,7 @@ public class VanillaOverrides {
 		StageHelper.addStagedItem(EnumStage.stage0, Items.APPLE);
 		StageHelper.addStagedItem(EnumStage.do_later, Items.BOW);
 		StageHelper.addStagedItem(EnumStage.do_later, Items.ARROW);
+		StageHelper.addStagedItem(EnumStage.do_later, Items.TIPPED_ARROW);
 		StageHelper.addStagedItem(EnumStage.do_later, Items.SPECTRAL_ARROW);
 		StageHelper.addStagedItem(EnumStage.do_later, Items.COAL, 0);
 		StageHelper.addStagedItem(EnumStage.stage2, Items.COAL, 1);

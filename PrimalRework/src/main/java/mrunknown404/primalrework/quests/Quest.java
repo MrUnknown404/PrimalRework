@@ -55,7 +55,7 @@ public class Quest {
 		}
 	}
 	
-	public final void finishQuest(World world, @Nullable EntityPlayer player) {
+	public void finishQuest(World world, @Nullable EntityPlayer player) {
 		if (this instanceof QuestRoot) {
 			System.out.println("Root quest '" + getName() + "' has been finished!");
 		} else if (player != null) {
@@ -72,7 +72,7 @@ public class Quest {
 		}
 	}
 	
-	public final void forgetQuest(World world) {
+	public void forgetQuest(World world) {
 		System.out.println("Quest '" + getName() + "' was forgotten!");
 		
 		isFinished = false;

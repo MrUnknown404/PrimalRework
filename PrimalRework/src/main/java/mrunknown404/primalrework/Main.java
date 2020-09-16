@@ -72,7 +72,6 @@ public class Main {
 	// TODO add map system similar to antique atlas
 	// TODO WorldGen: replace river/ocean biomes
 	// TODO redo pause screen (remove advancement button)
-	// TODO add quest command
 	
 	private static boolean isJEILoaded;
 	

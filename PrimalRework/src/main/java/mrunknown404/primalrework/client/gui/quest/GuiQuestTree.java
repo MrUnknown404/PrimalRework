@@ -8,6 +8,7 @@ import org.lwjgl.opengl.GL11;
 import mrunknown404.primalrework.Main;
 import mrunknown404.primalrework.init.InitQuests;
 import mrunknown404.primalrework.quests.Quest;
+import mrunknown404.primalrework.quests.QuestEnd;
 import mrunknown404.primalrework.quests.QuestRoot;
 import mrunknown404.primalrework.quests.QuestTab;
 import mrunknown404.primalrework.util.enums.EnumStage;
@@ -26,6 +27,8 @@ import net.minecraftforge.fml.client.config.GuiUtils;
 public class GuiQuestTree extends Gui {
 	private static final ResourceLocation ICON_LOC = new ResourceLocation(Main.MOD_ID, "textures/gui/quest/quest_icon.png");
 	private static final ResourceLocation ICON_SEL_LOC = new ResourceLocation(Main.MOD_ID, "textures/gui/quest/quest_icon_selected.png");
+	private static final ResourceLocation ICON_END_LOC = new ResourceLocation(Main.MOD_ID, "textures/gui/quest/quest_end_icon.png");
+	private static final ResourceLocation ICON_END_SEL_LOC = new ResourceLocation(Main.MOD_ID, "textures/gui/quest/quest_end_icon_selected.png");
 	private static final ResourceLocation ICON_CHECK_MARK_LOC = new ResourceLocation(Main.MOD_ID, "textures/gui/quest/quest_icon_checkmark.png");
 	
 	private final Minecraft mc;
@@ -74,7 +77,11 @@ public class GuiQuestTree extends Gui {
 				GlStateManager.color(1, 1, 1);
 			}
 			
-			mc.getTextureManager().bindTexture(parent.selectedQuest == q ? ICON_SEL_LOC : ICON_LOC);
+			if (q instanceof QuestEnd) {
+				mc.getTextureManager().bindTexture(parent.selectedQuest == q ? ICON_END_SEL_LOC : ICON_END_LOC);
+			} else {
+				mc.getTextureManager().bindTexture(parent.selectedQuest == q ? ICON_SEL_LOC : ICON_LOC);
+			}
 			drawModalRectWithCustomSizedTexture(xRootBase + x, yRootBase + y, 0, 0, 22, 22, 22, 22);
 			
 			RenderHelper.disableStandardItemLighting();
