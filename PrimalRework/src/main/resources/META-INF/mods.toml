@@ -1,0 +1,29 @@
+modLoader="javafml"
+loaderVersion="[36,)"
+license="GNU General Public License v3.0"
+issueTrackerURL="https://github.com/MrUnknown404/PrimalRework/issues"
+
+[[mods]]
+modId="primalrework"
+version="${file.jarVersion}"
+displayName="PrimalRework"
+displayURL="https://github.com/MrUnknown404/PrimalRework"
+#logoFile="examplemod.png"
+credits=""
+authors="-Unknown-"
+description='''
+Write Later!
+'''
+
+[[dependencies.primalrework]]
+    modId="forge"
+    mandatory=true
+    versionRange="[36,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.primalrework]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.16.5]"
+    ordering="NONE"
+    side="BOTH"

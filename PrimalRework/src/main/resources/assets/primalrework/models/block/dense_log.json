@@ -1,7 +1,0 @@
-{
-	"parent": "minecraft:block/cube_column",
-	"textures": {
-		"end": "primalrework:blocks/dense_log_top",
-		"side": "primalrework:blocks/dense_log_side"
-	}
-}

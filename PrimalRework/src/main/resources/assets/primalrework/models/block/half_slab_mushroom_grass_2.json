@@ -1,6 +1,0 @@
-{
-	"parent": "primalrework:block/half_slab_mushroom_grass_base",
-	"textures": {
-		"top_overlay": "primalrework:blocks/mushroom_grass_top_2"
-	}
-}

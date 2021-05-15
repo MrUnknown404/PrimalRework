@@ -1,6 +1,0 @@
-{
-	"parent": "minecraft:block/cube_all",
-	"textures": {
-		"all": "primalrework:blocks/copper_ore_perfect"
-	}
-}

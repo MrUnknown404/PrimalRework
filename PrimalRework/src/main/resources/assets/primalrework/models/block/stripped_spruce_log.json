@@ -1,7 +1,0 @@
-{
-	"parent": "primalrework:block/stripped_log",
-	"textures": {
-		"side": "primalrework:blocks/stripped_spruce_log",
-		"top": "minecraft:blocks/log_spruce_top"
-	}
-}

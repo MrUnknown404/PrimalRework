@@ -1,8 +1,0 @@
-{
-	"variants": {
-		"facing=north": { "model": "primalrework:drying_table" },
-		"facing=east": { "model": "primalrework:drying_table", "y": 90 },
-		"facing=south":  { "model": "primalrework:drying_table", "y": 180 },
-		"facing=west":  { "model": "primalrework:drying_table" , "y": 270 }
-	}
-}

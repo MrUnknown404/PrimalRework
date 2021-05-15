@@ -1,6 +1,0 @@
-{
-	"variants": {
-		"half=top,variant=default": { "model": "primalrework:thatch" },
-		"half=bottom,variant=default": { "model": "primalrework:thatch" }
-	}
-}

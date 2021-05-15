@@ -1,6 +1,0 @@
-{
-	"parent": "primalrework:block/charcoal_kiln",
-	"textures": {
-		"2": "primalrework:blocks/charcoal_kiln_front_burning"
-	}
-}

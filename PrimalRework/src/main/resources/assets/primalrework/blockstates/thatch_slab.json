@@ -1,6 +1,0 @@
-{
-	"variants": {
-		"half=bottom,variant=default": { "model": "primalrework:half_slab_thatch" },
-		"half=top,variant=default": { "model": "primalrework:upper_slab_thatch" }
-	}
-}

@@ -1,8 +1,0 @@
-{
-	"parent": "minecraft:block/half_slab",
-	"textures": {
-		"bottom": "primalrework:blocks/thatch",
-		"top": "primalrework:blocks/thatch",
-		"side": "primalrework:blocks/thatch"
-	}
-}

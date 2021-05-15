@@ -1,6 +1,0 @@
-{
-	"variants": {
-		"half=bottom,variant=default": { "model": "primalrework:half_slab_pr_stone" },
-		"half=top,variant=default": { "model": "primalrework:upper_slab_pr_stone" }
-	}
-}
