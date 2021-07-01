@@ -22,3 +22,5 @@ libs
 eclipse
 run
 *.lnk
+.cache
+generated

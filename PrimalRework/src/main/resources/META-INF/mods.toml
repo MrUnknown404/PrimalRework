@@ -5,7 +5,7 @@ issueTrackerURL="https://github.com/MrUnknown404/PrimalRework/issues"
 
 [[mods]]
 modId="primalrework"
-version="${file.jarVersion}"
+version="0.0.0-Alpha"
 displayName="PrimalRework"
 displayURL="https://github.com/MrUnknown404/PrimalRework"
 #logoFile="examplemod.png"

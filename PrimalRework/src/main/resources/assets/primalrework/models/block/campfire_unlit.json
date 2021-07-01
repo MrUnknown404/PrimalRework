@@ -1,0 +1,6 @@
+{
+	"parent": "primalrework:block/template_campfire",
+	"textures": {
+		"3": "minecraft:block/coal_block"
+	}
+}

@@ -1,0 +1,6 @@
+{
+	"parent": "primalrework:block/template_campfire",
+	"textures": {
+		"3": "primalrework:block/coal_block_lit"
+	}
+}

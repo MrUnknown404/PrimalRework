@@ -1,0 +1,7 @@
+{
+	"parent": "primalrework:block/template_stripped_log",
+	"textures": {
+		"side": "minecraft:block/stripped_birch_log",
+		"top": "minecraft:block/birch_log_top"
+	}
+}

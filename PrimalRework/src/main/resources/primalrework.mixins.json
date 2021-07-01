@@ -1,0 +1,11 @@
+{
+	"required": true,
+	"package": "mrunknown404.primalrework.mixin",
+	"compatibilityLevel": "JAVA_8",
+	"refmap": "primalrework.refmap.json",
+	"mixins": [
+		"MixinAbstractBlock",
+		"MixinForgeOnAdd"
+	],
+	"minVersion": "0.8"
+}

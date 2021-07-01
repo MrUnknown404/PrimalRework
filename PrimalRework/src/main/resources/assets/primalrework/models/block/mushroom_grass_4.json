@@ -1,0 +1,6 @@
+{
+	"parent": "primalrework:block/template_mushroom_grass",
+	"textures": {
+		"top_overlay": "primalrework:block/mushroom_grass_top_4"
+	}
+}
