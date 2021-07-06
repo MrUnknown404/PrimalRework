@@ -142,151 +142,174 @@ public class RICrafting3 extends RecipeInput<RICrafting3> {
 		return isEmpty;
 	}
 	
-	public static Builder create(boolean isShapeless) {
-		return new Builder(isShapeless);
+	public static SBuilder shapeless() {
+		return new SBuilder();
 	}
 	
-	public static Builder create() {
-		return new Builder(false);
+	public static Builder shaped() {
+		return new Builder();
 	}
 	
-	public static class Builder {
-		private final List<Ingredient> ingredients = new ArrayList<Ingredient>(9);
-		private final boolean isShapeless;
+	public static RICrafting3 fromInventory(List<Ingredient> i) {
+		if (i.size() > 9) {
+			System.out.println("Tried to feed in too much ingredients");
+			return null;
+		} else if (i.size() < 9) {
+			System.out.println("Tried to feed in too little ingredients");
+			return null;
+		}
 		
-		private Builder(boolean isShapeless) {
-			this.isShapeless = isShapeless;
+		return new RICrafting3(i, false);
+	}
+	
+	public static final class Builder {
+		private final List<Ingredient> ingredients = new ArrayList<Ingredient>(9);
+		
+		private Builder() {
 			for (int i = 0; i < 9; i++) {
 				ingredients.add(Ingredient.EMPTY);
 			}
 		}
 		
 		public RICrafting3 finish() {
-			return new RICrafting3(ingredients, isShapeless);
+			return new RICrafting3(ingredients, false);
 		}
 		
-		public Builder set(List<Ingredient> i) {
-			if (i.size() > 9) {
-				System.out.println("Tried to feed in too much ingredients");
-				return this;
-			} else if (i.size() < 9) {
-				System.out.println("Tried to feed in too little ingredients");
-				return this;
-			}
-			
-			ingredients.clear();
-			ingredients.addAll(i);
+		public Builder setRing(Object i) {
+			Ingredient ig = create(i);
+			ingredients.set(0, ig);
+			ingredients.set(1, ig);
+			ingredients.set(2, ig);
+			ingredients.set(3, ig);
+			ingredients.set(5, ig);
+			ingredients.set(6, ig);
+			ingredients.set(7, ig);
+			ingredients.set(8, ig);
 			return this;
 		}
 		
-		private Builder set(Ingredient... i) {
-			if (!isShapeless) {
-				System.out.println("Tried to use a shapeless method in a non shapeless recipe!");
-				return this;
-			} else if (i.length > 9) {
-				System.out.println("Tried to feed in too much ingredients");
-				return this;
-			}
-			
-			for (int j = 0; j < i.length; j++) {
-				ingredients.set(j, i[j]);
-			}
-			
+		public Builder set2x2(Object i0, Object i1, Object i2, Object i3) {
+			ingredients.set(0, create(i0));
+			ingredients.set(1, create(i1));
+			ingredients.set(3, create(i2));
+			ingredients.set(4, create(i3));
 			return this;
 		}
 		
-		public Builder set(Item... i) {
-			Ingredient[] items = new Ingredient[i.length];
-			for (int j = 0; j < i.length; j++) {
-				items[j] = new Ingredient(i[j]);
-			}
-			return set(items);
-		}
-		
-		public Builder set(StagedTag... i) {
-			Ingredient[] items = new Ingredient[i.length];
-			for (int j = 0; j < i.length; j++) {
-				items[j] = new Ingredient(i[j]);
-			}
-			return set(items);
-		}
-		
-		private Builder setRing(Ingredient i) {
-			ingredients.set(0, i);
-			ingredients.set(1, i);
-			ingredients.set(2, i);
-			ingredients.set(3, i);
-			ingredients.set(5, i);
-			ingredients.set(6, i);
-			ingredients.set(7, i);
-			ingredients.set(8, i);
-			return this;
-		}
-		
-		public Builder setRing(Item i) {
-			return setRing(new Ingredient(i));
-		}
-		
-		public Builder setRing(StagedTag i) {
-			return setRing(new Ingredient(i));
-		}
-		
-		private Builder set2x2(Ingredient i0, Ingredient i1, Ingredient i2, Ingredient i3) {
-			ingredients.set(0, i0);
-			ingredients.set(1, i1);
-			ingredients.set(3, i2);
-			ingredients.set(4, i3);
-			return this;
-		}
-		
-		public Builder set2x2(Item i0, Item i1, Item i2, Item i3) {
-			return set2x2(new Ingredient(i0), new Ingredient(i1), new Ingredient(i2), new Ingredient(i3));
-		}
-		
-		public Builder set2x2(StagedTag i0, StagedTag i1, StagedTag i2, StagedTag i3) {
-			return set2x2(new Ingredient(i0), new Ingredient(i1), new Ingredient(i2), new Ingredient(i3));
-		}
-		
-		public Builder set2x2(Ingredient i) {
-			return set2x2(i, i, i, i);
-		}
-		
-		public Builder set2x2(Item i) {
-			Ingredient ig = new Ingredient(i);
+		public Builder set2x2(Object i) {
+			Ingredient ig = create(i);
 			return set2x2(ig, ig, ig, ig);
 		}
 		
-		public Builder set2x2(StagedTag i) {
-			Ingredient ig = new Ingredient(i);
-			return set2x2(ig, ig, ig, ig);
-		}
-		
-		private Builder set1x2(Ingredient i0, Ingredient i1) {
-			ingredients.set(0, i0);
-			ingredients.set(3, i1);
+		public Builder set1x2(Object i0, Object i1) {
+			ingredients.set(0, create(i0));
+			ingredients.set(3, create(i1));
 			return this;
 		}
 		
-		public Builder set1x2(Item i0, Item i1) {
-			return set1x2(new Ingredient(i0), new Ingredient(i1));
-		}
-		
-		public Builder set1x2(StagedTag i0, StagedTag i1) {
-			return set1x2(new Ingredient(i0), new Ingredient(i1));
-		}
-		
-		public Builder set1x2(Ingredient i) {
-			return set1x2(i, i);
-		}
-		
-		public Builder set1x2(Item i) {
-			Ingredient ig = new Ingredient(i);
+		public Builder set1x2(Object i) {
+			Ingredient ig = create(i);
 			return set1x2(ig, ig);
 		}
 		
-		public Builder set1x2(StagedTag i) {
-			Ingredient ig = new Ingredient(i);
-			return set1x2(ig, ig);
+		public Builder set3x3(Object i0, Object i1, Object i2, Object i3, Object i4, Object i5, Object i6, Object i7, Object i8) {
+			ingredients.set(0, create(i0));
+			ingredients.set(1, create(i1));
+			ingredients.set(2, create(i2));
+			ingredients.set(3, create(i3));
+			ingredients.set(4, create(i4));
+			ingredients.set(5, create(i5));
+			ingredients.set(6, create(i6));
+			ingredients.set(7, create(i7));
+			ingredients.set(8, create(i8));
+			return this;
+		}
+		
+		public Builder set3x3(Object i) {
+			Ingredient ig = create(i);
+			return set3x3(ig, ig, ig, ig, ig, ig, ig, ig, ig);
+		}
+		
+		public Builder set2x3(Object i0, Object i1, Object i2, Object i3, Object i4, Object i5) {
+			ingredients.set(0, create(i0));
+			ingredients.set(1, create(i1));
+			ingredients.set(3, create(i2));
+			ingredients.set(4, create(i3));
+			ingredients.set(6, create(i4));
+			ingredients.set(7, create(i5));
+			return this;
+		}
+		
+		public Builder set2x3(Object i) {
+			Ingredient ig = create(i);
+			return set2x3(ig, ig, ig, ig, ig, ig);
+		}
+		
+		public Builder set1x3(Object i0, Object i1, Object i2) {
+			ingredients.set(0, create(i0));
+			ingredients.set(3, create(i1));
+			ingredients.set(6, create(i2));
+			return this;
+		}
+		
+		public Builder set1x3(Object i) {
+			Ingredient ig = create(i);
+			return set1x3(ig, ig, ig);
+		}
+		
+		public Builder setMiddle(Object i) {
+			ingredients.set(4, create(i));
+			return this;
+		}
+		
+		private static Ingredient create(Object obj) {
+			if (obj == null) {
+				return Ingredient.EMPTY;
+			} else if (obj instanceof Ingredient) {
+				return (Ingredient) obj;
+			} else if (obj instanceof Item) {
+				return new Ingredient((Item) obj);
+			} else if (obj instanceof StagedTag) {
+				return new Ingredient((StagedTag) obj);
+			}
+			
+			System.err.println("Invalid ingredient " + obj);
+			return null;
+		}
+	}
+	
+	public static final class SBuilder {
+		private final List<Ingredient> ingredients = new ArrayList<Ingredient>(9);
+		
+		private SBuilder() {
+			for (int i = 0; i < 9; i++) {
+				ingredients.add(Ingredient.EMPTY);
+			}
+		}
+		
+		public RICrafting3 finish() {
+			return new RICrafting3(ingredients, true);
+		}
+		
+		public SBuilder set(Object... i) {
+			if (i.length > 9) {
+				System.out.println("Tried to feed in too much ingredients");
+				return this;
+			}
+			
+			for (int j = 0; j < i.length; j++) {
+				if (i[j] instanceof Ingredient) {
+					ingredients.set(j, (Ingredient) i[j]);
+				} else if (i[j] instanceof Item) {
+					ingredients.set(j, new Ingredient((Item) i[j]));
+				} else if (i[j] instanceof StagedTag) {
+					ingredients.set(j, new Ingredient((StagedTag) i[j]));
+				} else {
+					System.out.println("Invalid ingredient " + i[j]);
+				}
+			}
+			
+			return this;
 		}
 	}
 	

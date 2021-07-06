@@ -7,10 +7,8 @@ import mrunknown404.primalrework.utils.enums.EnumToolType;
 import net.minecraftforge.fml.RegistryObject;
 
 public class InitTools {
-	public static final RegistryObject<SITool> CLAY_PICKAXE = register(new SITool(EnumStage.stage0, EnumToolType.pickaxe, EnumToolMaterial.clay));
 	public static final RegistryObject<SITool> CLAY_SHOVEL = register(new SITool(EnumStage.stage0, EnumToolType.shovel, EnumToolMaterial.clay));
 	public static final RegistryObject<SITool> CLAY_AXE = register(new SITool(EnumStage.stage0, EnumToolType.axe, EnumToolMaterial.clay));
-	public static final RegistryObject<SITool> WOOD_PICKAXE = register(new SITool(EnumStage.stage0, EnumToolType.pickaxe, EnumToolMaterial.wood));
 	public static final RegistryObject<SITool> WOOD_SHOVEL = register(new SITool(EnumStage.stage0, EnumToolType.shovel, EnumToolMaterial.wood));
 	public static final RegistryObject<SITool> WOOD_AXE = register(new SITool(EnumStage.stage0, EnumToolType.axe, EnumToolMaterial.wood));
 	public static final RegistryObject<SITool> FLINT_PICKAXE = register(new SITool(EnumStage.stage1, EnumToolType.pickaxe, EnumToolMaterial.flint));

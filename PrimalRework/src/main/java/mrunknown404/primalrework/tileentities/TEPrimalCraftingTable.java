@@ -42,7 +42,7 @@ public class TEPrimalCraftingTable extends TEInventory {
 			ingredients.add(new Ingredient(item, InitStagedTags.getItemsTags(item)));
 		}
 		
-		SRCrafting3 rec = (SRCrafting3) InitRecipes.getRecipeForInput(EnumRecipeType.crafting_3, RICrafting3.create().set(ingredients).finish());
+		SRCrafting3 rec = (SRCrafting3) InitRecipes.getRecipeForInput(EnumRecipeType.crafting_3, RICrafting3.fromInventory(ingredients));
 		ItemStack stack = rec == null ? ItemStack.EMPTY : rec.output.copy();
 		
 		if (!lastStack.equals(stack, false)) {

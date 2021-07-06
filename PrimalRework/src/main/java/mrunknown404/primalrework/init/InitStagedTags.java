@@ -28,6 +28,9 @@ public class InitStagedTags {
 	public static final StagedTag JUNGLE_LOGS = new StagedTag("jungle_logs").add(EnumStage.stage0, Items.JUNGLE_LOG, InitBlocks.STRIPPED_JUNGLE_LOG.get().asItem());
 	public static final StagedTag ACACIA_LOGS = new StagedTag("acacia_logs").add(EnumStage.stage0, Items.ACACIA_LOG, InitBlocks.STRIPPED_ACACIA_LOG.get().asItem());
 	public static final StagedTag DARK_OAK_LOGS = new StagedTag("dark_oak_logs").add(EnumStage.stage0, Items.DARK_OAK_LOG, InitBlocks.STRIPPED_DARK_OAK_LOG.get().asItem());
+	public static final StagedTag ALL_WOOL = new StagedTag("wools").add(EnumStage.stage2, Items.WHITE_WOOL, Items.ORANGE_WOOL, Items.MAGENTA_WOOL, Items.LIGHT_BLUE_WOOL,
+			Items.YELLOW_WOOL, Items.LIME_WOOL, Items.PINK_WOOL, Items.GRAY_WOOL, Items.LIGHT_GRAY_WOOL, Items.CYAN_WOOL, Items.PURPLE_WOOL, Items.BLUE_WOOL, Items.BROWN_WOOL,
+			Items.GREEN_WOOL, Items.RED_WOOL, Items.BLACK_WOOL);
 	
 	//TODO way of viewing tags!
 	

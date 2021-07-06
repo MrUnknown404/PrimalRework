@@ -13,7 +13,7 @@ import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerPrimalCraftingTable extends Container implements IEasyQuickMoveStack {
+public class ContainerPrimalCraftingTable extends Container implements IEasyQuickMoveStack { //TODO right click doesn't work properly! halves output stack instead of craft all
 	private final IInventory container;
 	private final PlayerEntity player;
 	

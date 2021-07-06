@@ -13,7 +13,7 @@ public class InitItemGroups {
 	public static final ModItemGroup MACHINES = new ModItemGroup("machines", () -> new ItemStack(InitBlocks.CAMPFIRE.get()));
 	public static final ModItemGroup ORES = new ModItemGroup("ores", () -> new ItemStack(InitBlocks.getOreOrBlock(EnumAlloy.copper, EnumOreValue.perfect)));
 	public static final ModItemGroup ITEMS = new ModItemGroup("items", () -> new ItemStack(InitItems.PLANT_FIBER.get()));
-	public static final ModItemGroup TOOLS = new ModItemGroup("tools", () -> new ItemStack(InitTools.CLAY_PICKAXE.get()));
+	public static final ModItemGroup TOOLS = new ModItemGroup("tools", () -> new ItemStack(InitTools.CLAY_SHOVEL.get()));
 	public static final ModItemGroup NUGGETS = new ModItemGroup("nuggets", () -> new ItemStack(InitItems.getOre(EnumAlloy.copper, EnumOreValue.perfect)));
 	public static final ModItemGroup FOOD = new ModItemGroup("food", () -> new ItemStack(InitItems.DOUGH.get()));
 	
