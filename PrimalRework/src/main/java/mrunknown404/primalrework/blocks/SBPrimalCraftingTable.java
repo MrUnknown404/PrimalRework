@@ -2,7 +2,7 @@ package mrunknown404.primalrework.blocks;
 
 import mrunknown404.primalrework.blocks.utils.SBContainer;
 import mrunknown404.primalrework.init.InitItemGroups;
-import mrunknown404.primalrework.tileentities.TEPrimalCraftingTable;
+import mrunknown404.primalrework.tileentities.TEIPrimalCraftingTable;
 import mrunknown404.primalrework.utils.HarvestInfo;
 import mrunknown404.primalrework.utils.enums.EnumStage;
 import net.minecraft.block.BlockRenderType;
@@ -38,7 +38,7 @@ public class SBPrimalCraftingTable extends SBContainer {
 		}
 		
 		TileEntity tileentity = world.getBlockEntity(pos);
-		if (tileentity instanceof TEPrimalCraftingTable) {
+		if (tileentity instanceof TEIPrimalCraftingTable) {
 			NetworkHooks.openGui((ServerPlayerEntity) player, (INamedContainerProvider) tileentity);
 		}
 		return ActionResultType.CONSUME;
@@ -46,15 +46,15 @@ public class SBPrimalCraftingTable extends SBContainer {
 	
 	@Override
 	public TileEntity newBlockEntity(IBlockReader reader) {
-		return new TEPrimalCraftingTable();
+		return new TEIPrimalCraftingTable();
 	}
 	
 	@Override
 	public void setPlacedBy(World world, BlockPos pos, BlockState state, LivingEntity entity, ItemStack stack) {
 		if (stack.hasCustomHoverName()) {
 			TileEntity tileentity = world.getBlockEntity(pos);
-			if (tileentity instanceof TEPrimalCraftingTable) {
-				((TEPrimalCraftingTable) tileentity).setCustomName(stack.getHoverName());
+			if (tileentity instanceof TEIPrimalCraftingTable) {
+				((TEIPrimalCraftingTable) tileentity).setCustomName(stack.getHoverName());
 			}
 		}
 	}
@@ -64,7 +64,7 @@ public class SBPrimalCraftingTable extends SBContainer {
 	public void onRemove(BlockState state, World world, BlockPos pos, BlockState state2, boolean flag) {
 		if (!state.is(state2.getBlock())) {
 			TileEntity tileentity = world.getBlockEntity(pos);
-			if (tileentity instanceof TEPrimalCraftingTable) {
+			if (tileentity instanceof TEIPrimalCraftingTable) {
 				InventoryHelper.dropContents(world, pos, (IInventory) tileentity);
 			}
 			

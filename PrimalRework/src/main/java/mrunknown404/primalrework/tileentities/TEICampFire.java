@@ -19,7 +19,7 @@ import net.minecraft.util.IIntArray;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 
-public class TECampFire extends TEInventory implements ITickableTileEntity {
+public class TEICampFire extends TEInventory implements ITickableTileEntity {
 	private int burnTimeLeft, maxBurnTime, cookTimeLeft, maxCookTime;
 	private final IIntArray dataAccess = new IIntArray() {
 		@Override
@@ -61,7 +61,7 @@ public class TECampFire extends TEInventory implements ITickableTileEntity {
 		}
 	};
 	
-	public TECampFire() {
+	public TEICampFire() {
 		super(InitTileEntities.CAMPFIRE.get(), 2);
 	}
 	

@@ -5,7 +5,7 @@ import java.util.Random;
 import mrunknown404.primalrework.blocks.utils.SBContainer;
 import mrunknown404.primalrework.init.InitItemGroups;
 import mrunknown404.primalrework.items.utils.StagedItem.ItemType;
-import mrunknown404.primalrework.tileentities.TECampFire;
+import mrunknown404.primalrework.tileentities.TEICampFire;
 import mrunknown404.primalrework.utils.HarvestInfo;
 import mrunknown404.primalrework.utils.enums.EnumStage;
 import net.minecraft.block.Block;
@@ -83,7 +83,7 @@ public class SBCampFire extends SBContainer {
 		}
 		
 		TileEntity tileentity = world.getBlockEntity(pos);
-		if (tileentity instanceof TECampFire) {
+		if (tileentity instanceof TEICampFire) {
 			NetworkHooks.openGui((ServerPlayerEntity) player, (INamedContainerProvider) tileentity);
 		}
 		return ActionResultType.CONSUME;
@@ -91,7 +91,7 @@ public class SBCampFire extends SBContainer {
 	
 	@Override
 	public TileEntity newBlockEntity(IBlockReader reader) {
-		return new TECampFire();
+		return new TEICampFire();
 	}
 	
 	@Override
@@ -103,8 +103,8 @@ public class SBCampFire extends SBContainer {
 	public void setPlacedBy(World world, BlockPos pos, BlockState state, LivingEntity entity, ItemStack stack) {
 		if (stack.hasCustomHoverName()) {
 			TileEntity tileentity = world.getBlockEntity(pos);
-			if (tileentity instanceof TECampFire) {
-				((TECampFire) tileentity).setCustomName(stack.getHoverName());
+			if (tileentity instanceof TEICampFire) {
+				((TEICampFire) tileentity).setCustomName(stack.getHoverName());
 			}
 		}
 	}
@@ -114,7 +114,7 @@ public class SBCampFire extends SBContainer {
 	public void onRemove(BlockState state, World world, BlockPos pos, BlockState state2, boolean flag) {
 		if (!state.is(state2.getBlock())) {
 			TileEntity tileentity = world.getBlockEntity(pos);
-			if (tileentity instanceof TECampFire) {
+			if (tileentity instanceof TEICampFire) {
 				InventoryHelper.dropContents(world, pos, (IInventory) tileentity);
 			}
 			

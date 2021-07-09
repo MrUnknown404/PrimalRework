@@ -77,6 +77,12 @@ public abstract class TEInventory extends TileEntity implements IInventory, INam
 		load(state, nbt);
 	}
 	
+	@Override
+	public void setChanged() {
+		super.setChanged();
+		level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
+	}
+	
 	//@formatter:off
 	protected abstract CompoundNBT saveNBT(CompoundNBT nbt);
 	protected abstract void loadNBT(BlockState state, CompoundNBT nbt);

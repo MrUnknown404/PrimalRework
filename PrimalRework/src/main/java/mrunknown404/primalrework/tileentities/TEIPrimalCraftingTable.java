@@ -23,9 +23,9 @@ import net.minecraft.network.play.server.SSetSlotPacket;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 
-public class TEPrimalCraftingTable extends TEInventory {
+public class TEIPrimalCraftingTable extends TEInventory {
 	
-	public TEPrimalCraftingTable() {
+	public TEIPrimalCraftingTable() {
 		super(InitTileEntities.PRIMAL_CRAFTING_TABLE.get(), 10);
 	}
 	

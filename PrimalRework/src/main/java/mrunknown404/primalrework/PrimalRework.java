@@ -51,7 +51,6 @@ public class PrimalRework {
 	 * --low
 	 * TODO add config for tooltips
 	 * TODO make harvest display position configurable
-	 * TODO render item in campfire
 	 * TODO right click crop harvesting (require hoe)
 	 * TODO change stack sizes of everything
 	 * 

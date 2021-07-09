@@ -8,12 +8,14 @@ import mrunknown404.primalrework.client.CraftingDisplayH;
 import mrunknown404.primalrework.client.gui.GuiNoToast;
 import mrunknown404.primalrework.client.gui.screen.container.ScreenCampFire;
 import mrunknown404.primalrework.client.gui.screen.container.ScreenPrimalCraftingTable;
+import mrunknown404.primalrework.client.tileentities.TERCampFire;
 import mrunknown404.primalrework.events.client.CraftingDisplayCEvents;
 import mrunknown404.primalrework.events.client.HarvestDisplayCEvents;
 import mrunknown404.primalrework.events.client.QuestCEvents;
 import mrunknown404.primalrework.events.client.TooltipCEvents;
 import mrunknown404.primalrework.init.InitBlocks;
 import mrunknown404.primalrework.init.InitContainers;
+import mrunknown404.primalrework.init.InitTileEntities;
 import mrunknown404.primalrework.items.utils.SIBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.GameSettings;
@@ -64,6 +66,8 @@ public class ClientProxy extends CommonProxy {
 		mc.options.keyMappings = ArrayUtils.remove(mc.options.keyMappings, index);
 		
 		ClientRegistry.registerKeyBinding(OPEN_QUESTS);
+		
+		ClientRegistry.bindTileEntityRenderer(InitTileEntities.CAMPFIRE.get(), TERCampFire::new);
 		
 		RenderTypeLookup.setRenderLayer(InitBlocks.MUSHROOM_GRASS.get(), RenderType.cutoutMipped()); //TODO automate this
 		RenderTypeLookup.setRenderLayer(InitBlocks.CAMPFIRE.get(), RenderType.cutoutMipped());
