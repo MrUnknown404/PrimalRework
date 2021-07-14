@@ -45,13 +45,11 @@ public class PrimalRework {
 	 * --high
 	 * TODO remove recipe book from inventory
 	 * TODO setup new crafting in vanilla inventory
-	 * TODO remove advancements button from pause screen
 	 * TODO setup config (see --low)
 	 * 
 	 * --low
 	 * TODO add config for tooltips
 	 * TODO make harvest display position configurable
-	 * TODO right click crop harvesting (require hoe)
 	 * TODO change stack sizes of everything
 	 * 
 	 * --a bit later

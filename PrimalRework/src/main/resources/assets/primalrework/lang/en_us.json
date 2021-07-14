@@ -67,6 +67,7 @@
 	"recipetype.crafting_3.name": "3x3 Crafting",
 	"commands.stage.success": "Successfully set the stage to",
 	"commands.stage.current": "The current stage is",
+	"generator.primalrework.primal_world": "Primal World",
 	"quest.finish.player": "has finished the quest",
 	"quest.finish.missing.pre": "The quest",
 	"quest.finish.missing.post": "has been finished!",

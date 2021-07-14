@@ -11,6 +11,7 @@ import mrunknown404.primalrework.client.gui.screen.container.ScreenPrimalCraftin
 import mrunknown404.primalrework.client.tileentities.TERCampFire;
 import mrunknown404.primalrework.events.client.CraftingDisplayCEvents;
 import mrunknown404.primalrework.events.client.HarvestDisplayCEvents;
+import mrunknown404.primalrework.events.client.MiscCEvents;
 import mrunknown404.primalrework.events.client.QuestCEvents;
 import mrunknown404.primalrework.events.client.TooltipCEvents;
 import mrunknown404.primalrework.init.InitBlocks;
@@ -45,6 +46,7 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForge.EVENT_BUS.register(new QuestCEvents());
 		MinecraftForge.EVENT_BUS.register(new HarvestDisplayCEvents());
 		MinecraftForge.EVENT_BUS.register(new CraftingDisplayCEvents());
+		MinecraftForge.EVENT_BUS.register(new MiscCEvents());
 	}
 	
 	@Override

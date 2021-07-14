@@ -48,9 +48,7 @@ public class HarvestEvents {
 			}
 			
 			if (block instanceof StagedBlock) {
-				if (((StagedBlock) block).getHarvest().containsKey(toolType)) {
-					info = ((StagedBlock) block).getHarvest().get(toolType);
-				}
+				info = ((StagedBlock) block).getHarvest().get(toolType);
 				if (info == null) {
 					info = ((StagedBlock) block).getHarvest().get(EnumToolType.none);
 				}
@@ -115,9 +113,7 @@ public class HarvestEvents {
 			}
 			
 			if (block instanceof StagedBlock) {
-				if (((StagedBlock) block).getHarvest().containsKey(toolType)) {
-					info = ((StagedBlock) block).getHarvest().get(toolType);
-				}
+				info = ((StagedBlock) block).getHarvest().get(toolType);
 				if (info == null) {
 					info = ((StagedBlock) block).getHarvest().get(EnumToolType.none);
 				}

@@ -5,6 +5,7 @@ import net.minecraft.block.Block;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntityType;
+import net.minecraftforge.common.world.ForgeWorldType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
@@ -15,6 +16,7 @@ public class Registry {
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, PrimalRework.MOD_ID);
 	public static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, PrimalRework.MOD_ID);
 	public static final DeferredRegister<ContainerType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, PrimalRework.MOD_ID);
+	public static final DeferredRegister<ForgeWorldType> WORLD_TYPES = DeferredRegister.create(ForgeRegistries.WORLD_TYPES, PrimalRework.MOD_ID);
 	
 	public static void register() {
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -22,11 +24,13 @@ public class Registry {
 		ITEMS.register(bus);
 		TILE_ENTITIES.register(bus);
 		CONTAINERS.register(bus);
+		WORLD_TYPES.register(bus);
 		
 		InitItems.register();
 		InitBlocks.register();
 		InitTools.register();
 		InitTileEntities.register();
 		InitContainers.register();
+		InitWorld.register();
 	}
 }
