@@ -2,10 +2,10 @@ package mrunknown404.primalrework.items;
 
 import java.util.Random;
 
-import mrunknown404.primalrework.init.InitBlocks;
-import mrunknown404.primalrework.init.InitItemGroups;
-import mrunknown404.primalrework.init.InitItems;
 import mrunknown404.primalrework.items.utils.SIDamageable;
+import mrunknown404.primalrework.registries.PRBlocks;
+import mrunknown404.primalrework.registries.PRItemGroups;
+import mrunknown404.primalrework.registries.PRItems;
 import mrunknown404.primalrework.utils.RayTraceH;
 import mrunknown404.primalrework.utils.enums.EnumStage;
 import mrunknown404.primalrework.utils.enums.EnumToolMaterial;
@@ -33,7 +33,7 @@ import net.minecraft.world.World;
 
 public class SITool extends SIDamageable {
 	public SITool(EnumStage stage, EnumToolType toolType, EnumToolMaterial toolMat) {
-		super(toolMat.toString() + "_" + toolType.toString(), stage, toolType, toolMat, InitItemGroups.TOOLS, toolType == EnumToolType.saw ? ItemType.handheld_rod : ItemType.handheld);
+		super(toolMat.toString() + "_" + toolType.toString(), stage, toolType, toolMat, PRItemGroups.TOOLS, toolType == EnumToolType.saw ? ItemType.handheld_rod : ItemType.handheld);
 	}
 	
 	@Override
@@ -77,7 +77,7 @@ public class SITool extends SIDamageable {
 					
 					if (!world.isClientSide) {
 						world.addFreshEntity(new ItemEntity(world, ray.getLocation().x, ray.getLocation().y, ray.getLocation().z,
-								new ItemStack(InitItems.BARK.get(), 2 + new Random().nextInt(3))));
+								new ItemStack(PRItems.BARK.get(), 2 + new Random().nextInt(3))));
 						world.playSound(null, pos, SoundEvents.WOOD_BREAK, SoundCategory.BLOCKS, 1, 0);
 					}
 					
@@ -88,22 +88,22 @@ public class SITool extends SIDamageable {
 					}
 					
 					if (b == Blocks.OAK_LOG) {
-						world.setBlock(pos, InitBlocks.STRIPPED_OAK_LOG.get().defaultBlockState().setValue(BlockStateProperties.AXIS,
+						world.setBlock(pos, PRBlocks.STRIPPED_OAK_LOG.get().defaultBlockState().setValue(BlockStateProperties.AXIS,
 								world.getBlockState(pos).getValue(BlockStateProperties.AXIS)), 11);
 					} else if (b == Blocks.SPRUCE_LOG) {
-						world.setBlock(pos, InitBlocks.STRIPPED_SPRUCE_LOG.get().defaultBlockState().setValue(BlockStateProperties.AXIS,
+						world.setBlock(pos, PRBlocks.STRIPPED_SPRUCE_LOG.get().defaultBlockState().setValue(BlockStateProperties.AXIS,
 								world.getBlockState(pos).getValue(BlockStateProperties.AXIS)), 11);
 					} else if (b == Blocks.BIRCH_LOG) {
-						world.setBlock(pos, InitBlocks.STRIPPED_BIRCH_LOG.get().defaultBlockState().setValue(BlockStateProperties.AXIS,
+						world.setBlock(pos, PRBlocks.STRIPPED_BIRCH_LOG.get().defaultBlockState().setValue(BlockStateProperties.AXIS,
 								world.getBlockState(pos).getValue(BlockStateProperties.AXIS)), 11);
 					} else if (b == Blocks.JUNGLE_LOG) {
-						world.setBlock(pos, InitBlocks.STRIPPED_JUNGLE_LOG.get().defaultBlockState().setValue(BlockStateProperties.AXIS,
+						world.setBlock(pos, PRBlocks.STRIPPED_JUNGLE_LOG.get().defaultBlockState().setValue(BlockStateProperties.AXIS,
 								world.getBlockState(pos).getValue(BlockStateProperties.AXIS)), 11);
 					} else if (b == Blocks.ACACIA_LOG) {
-						world.setBlock(pos, InitBlocks.STRIPPED_ACACIA_LOG.get().defaultBlockState().setValue(BlockStateProperties.AXIS,
+						world.setBlock(pos, PRBlocks.STRIPPED_ACACIA_LOG.get().defaultBlockState().setValue(BlockStateProperties.AXIS,
 								world.getBlockState(pos).getValue(BlockStateProperties.AXIS)), 11);
 					} else if (b == Blocks.DARK_OAK_LOG) {
-						world.setBlock(pos, InitBlocks.STRIPPED_DARK_OAK_LOG.get().defaultBlockState().setValue(BlockStateProperties.AXIS,
+						world.setBlock(pos, PRBlocks.STRIPPED_DARK_OAK_LOG.get().defaultBlockState().setValue(BlockStateProperties.AXIS,
 								world.getBlockState(pos).getValue(BlockStateProperties.AXIS)), 11);
 					}
 				}

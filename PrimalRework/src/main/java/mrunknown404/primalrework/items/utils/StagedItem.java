@@ -8,7 +8,7 @@ import com.google.common.collect.ImmutableMultimap.Builder;
 import com.google.common.collect.Multimap;
 
 import mrunknown404.primalrework.events.client.TooltipCEvents;
-import mrunknown404.primalrework.init.InitItemGroups;
+import mrunknown404.primalrework.registries.PRItemGroups;
 import mrunknown404.primalrework.utils.enums.EnumStage;
 import mrunknown404.primalrework.utils.enums.EnumToolMaterial;
 import mrunknown404.primalrework.utils.enums.EnumToolType;
@@ -46,11 +46,11 @@ public class StagedItem extends Item {
 	}
 	
 	public StagedItem(String name, EnumStage stage) {
-		this(name, stage, 64, EnumToolType.none, EnumToolMaterial.hand, InitItemGroups.ITEMS, Rarity.COMMON, null, false, false, ItemType.generated);
+		this(name, stage, 64, EnumToolType.none, EnumToolMaterial.hand, PRItemGroups.ITEMS, Rarity.COMMON, null, false, false, ItemType.generated);
 	}
 	
 	public StagedItem(String name, EnumStage stage, int stackSize) {
-		this(name, stage, stackSize, EnumToolType.none, EnumToolMaterial.hand, InitItemGroups.ITEMS, Rarity.COMMON, null, false, false, ItemType.generated);
+		this(name, stage, stackSize, EnumToolType.none, EnumToolMaterial.hand, PRItemGroups.ITEMS, Rarity.COMMON, null, false, false, ItemType.generated);
 	}
 	
 	public StagedItem addTooltip(int amount) {

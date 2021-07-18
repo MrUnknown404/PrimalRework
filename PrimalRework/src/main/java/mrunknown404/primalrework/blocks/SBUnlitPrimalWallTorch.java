@@ -5,7 +5,7 @@ import java.util.Map;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 
-import mrunknown404.primalrework.init.InitBlocks;
+import mrunknown404.primalrework.registries.PRBlocks;
 import mrunknown404.primalrework.utils.HarvestInfo;
 import mrunknown404.primalrework.utils.HarvestInfo.DropInfo;
 import mrunknown404.primalrework.utils.enums.EnumStage;
@@ -41,7 +41,7 @@ public class SBUnlitPrimalWallTorch extends SBUnlitPrimalTorch {
 	
 	public SBUnlitPrimalWallTorch() {
 		this("unlit_primal_wall_torch", EnumStage.stage0, 0,
-				new HarvestInfo(EnumToolType.none, EnumToolMaterial.hand, new DropInfo(() -> InitBlocks.UNLIT_PRIMAL_TORCH.get().asItem())));
+				new HarvestInfo(EnumToolType.none, EnumToolMaterial.hand, new DropInfo(() -> PRBlocks.UNLIT_PRIMAL_TORCH.get().asItem())));
 	}
 	
 	@Override

@@ -1,4 +1,4 @@
-package mrunknown404.primalrework.init;
+package mrunknown404.primalrework.registries;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,7 @@ import mrunknown404.primalrework.utils.enums.EnumToolType;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;
 
-public class InitItems {
+public class PRItems {
 	private static final List<RegistryObject<Item>> CASTS = new ArrayList<RegistryObject<Item>>();
 	private static final List<RegistryObject<Item>> INGOTS = new ArrayList<RegistryObject<Item>>();
 	
@@ -65,7 +65,7 @@ public class InitItems {
 	public static final RegistryObject<Item> COOKED_TROPICALFISH = register(new SIFood("cooked_tropicalfish", EnumStage.stage0, 5, 0.6f));
 	
 	private static RegistryObject<Item> register(StagedItem item) {
-		return Registry.ITEMS.register(item.getRegName(), () -> item);
+		return PRRegistry.ITEMS.register(item.getRegName(), () -> item);
 	}
 	
 	public static void register() {
@@ -97,7 +97,7 @@ public class InitItems {
 	
 	private static RegistryObject<Item> registerCast(EnumToolType type) {
 		StagedItem item = new StagedItem(type.name() + "_cast", EnumStage.stage3, 8);
-		RegistryObject<Item> reg = Registry.ITEMS.register(item.getRegName(), () -> item);
+		RegistryObject<Item> reg = PRRegistry.ITEMS.register(item.getRegName(), () -> item);
 		CASTS.add(reg);
 		return reg;
 	}

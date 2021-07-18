@@ -9,9 +9,9 @@ import mrunknown404.primalrework.PrimalRework;
 import mrunknown404.primalrework.client.gui.GuiQuestTree;
 import mrunknown404.primalrework.client.gui.widget.QuestInfoList;
 import mrunknown404.primalrework.client.gui.widget.QuestTabList;
-import mrunknown404.primalrework.init.InitQuests;
 import mrunknown404.primalrework.quests.Quest;
 import mrunknown404.primalrework.quests.QuestTab;
+import mrunknown404.primalrework.registries.PRQuests;
 import mrunknown404.primalrework.utils.MathH;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.item.Item;
@@ -49,12 +49,12 @@ public class ScreenQuestMenu extends Screen {
 		TREE_MAP.clear();
 		questInfo = null;
 		
-		for (QuestTab tab : InitQuests.getTabs()) {
+		for (QuestTab tab : PRQuests.getTabs()) {
 			TREE_MAP.put(tab.getIcon().getItem(), new GuiQuestTree(this, minecraft, tab));
 		}
 		scale = 1;
 		
-		selectedTab = InitQuests.TAB_STAGE_0.getIcon().getItem();
+		selectedTab = PRQuests.TAB_STAGE_0.getIcon().getItem();
 	}
 	
 	@Override

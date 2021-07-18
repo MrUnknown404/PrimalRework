@@ -2,7 +2,7 @@ package mrunknown404.primalrework.blocks;
 
 import java.util.Random;
 
-import mrunknown404.primalrework.init.InitBlocks;
+import mrunknown404.primalrework.registries.PRBlocks;
 import mrunknown404.primalrework.utils.HarvestInfo;
 import mrunknown404.primalrework.utils.HarvestInfo.DropInfo;
 import mrunknown404.primalrework.utils.enums.EnumStage;
@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 public class SBLitPrimalWallTorch extends SBUnlitPrimalWallTorch {
 	public SBLitPrimalWallTorch() {
 		super("lit_primal_wall_torch", EnumStage.stage1, 8,
-				new HarvestInfo(EnumToolType.none, EnumToolMaterial.hand, new DropInfo(() -> InitBlocks.LIT_PRIMAL_TORCH.get().asItem())));
+				new HarvestInfo(EnumToolType.none, EnumToolMaterial.hand, new DropInfo(() -> PRBlocks.LIT_PRIMAL_TORCH.get().asItem())));
 	}
 	
 	@Override

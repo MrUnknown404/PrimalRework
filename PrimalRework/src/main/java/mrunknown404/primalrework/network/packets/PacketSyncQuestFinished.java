@@ -1,7 +1,7 @@
 package mrunknown404.primalrework.network.packets;
 
-import mrunknown404.primalrework.init.InitQuests;
 import mrunknown404.primalrework.quests.Quest;
+import mrunknown404.primalrework.registries.PRQuests;
 import net.minecraftforge.fml.network.NetworkEvent.Context;
 
 public class PacketSyncQuestFinished implements IPacket {
@@ -19,7 +19,7 @@ public class PacketSyncQuestFinished implements IPacket {
 	
 	@Override
 	public void handle(Context ctx) {
-		InitQuests.findQuest(name).loadFinished(isFinished);
-		InitQuests.resetQuestCache();
+		PRQuests.findQuest(name).loadFinished(isFinished);
+		PRQuests.resetQuestCache();
 	}
 }

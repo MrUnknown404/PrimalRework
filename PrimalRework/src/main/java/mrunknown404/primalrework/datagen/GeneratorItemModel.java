@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import mrunknown404.primalrework.PrimalRework;
-import mrunknown404.primalrework.init.Registry;
 import mrunknown404.primalrework.items.utils.StagedItem;
 import mrunknown404.primalrework.items.utils.StagedItem.ItemType;
+import mrunknown404.primalrework.registries.PRRegistry;
 import mrunknown404.primalrework.utils.enums.EnumToolMaterial;
 import mrunknown404.primalrework.utils.enums.EnumToolType;
 import net.minecraft.data.DataGenerator;
@@ -32,7 +32,7 @@ class GeneratorItemModel extends ModelProvider<TexturelessModelBuilder> {
 	
 	@Override
 	protected void registerModels() {
-		for (RegistryObject<Item> regItem : Registry.ITEMS.getEntries()) {
+		for (RegistryObject<Item> regItem : PRRegistry.ITEMS.getEntries()) {
 			StagedItem i = (StagedItem) regItem.get();
 			if (i.getItemType() == ItemType.none) {
 				continue;

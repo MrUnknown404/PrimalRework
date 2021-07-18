@@ -1,7 +1,8 @@
-package mrunknown404.primalrework.client.gui.screen;
+package mrunknown404.primalrework.client.gui.screen.fixes;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 
+import mrunknown404.primalrework.client.gui.screen.ScreenPrimalShareToLan;
 import net.minecraft.client.gui.screen.DirtMessageScreen;
 import net.minecraft.client.gui.screen.MainMenuScreen;
 import net.minecraft.client.gui.screen.MultiplayerScreen;
@@ -12,8 +13,8 @@ import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.realms.RealmsBridgeScreen;
 import net.minecraft.util.text.TranslationTextComponent;
 
-public class ScreenPrimalPause extends Screen {
-	public ScreenPrimalPause(boolean pause) {
+public class PRPauseScreen extends Screen {
+	public PRPauseScreen(boolean pause) {
 		super(pause ? new TranslationTextComponent("menu.game") : new TranslationTextComponent("menu.paused"));
 	}
 	

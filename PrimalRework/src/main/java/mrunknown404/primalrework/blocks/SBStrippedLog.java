@@ -1,7 +1,7 @@
 package mrunknown404.primalrework.blocks;
 
 import mrunknown404.primalrework.blocks.utils.SBRotatedPillar;
-import mrunknown404.primalrework.init.InitItemGroups;
+import mrunknown404.primalrework.registries.PRItemGroups;
 import mrunknown404.primalrework.utils.HarvestInfo;
 import mrunknown404.primalrework.utils.enums.EnumStage;
 import net.minecraft.block.BlockState;
@@ -21,7 +21,7 @@ public class SBStrippedLog extends SBRotatedPillar {
 	private static final VoxelShape NONE = box(1, 1, 1, 15, 15, 15);
 	
 	public SBStrippedLog(String name) {
-		super("stripped_" + name + "_log", EnumStage.stage0, 64, InitItemGroups.BLOCKS, Material.WOOD, SoundType.WOOD, true, 0, 2, 2, false, HarvestInfo.AXE_MIN);
+		super("stripped_" + name + "_log", EnumStage.stage0, 64, PRItemGroups.BLOCKS, Material.WOOD, SoundType.WOOD, true, 0, 2, 2, false, HarvestInfo.AXE_MIN);
 	}
 	
 	@Override

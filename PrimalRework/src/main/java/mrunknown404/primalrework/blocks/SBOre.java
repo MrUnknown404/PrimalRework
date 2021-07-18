@@ -1,7 +1,7 @@
 package mrunknown404.primalrework.blocks;
 
 import mrunknown404.primalrework.blocks.utils.StagedBlock;
-import mrunknown404.primalrework.init.InitItemGroups;
+import mrunknown404.primalrework.registries.PRItemGroups;
 import mrunknown404.primalrework.utils.HarvestInfo;
 import mrunknown404.primalrework.utils.enums.EnumAlloy;
 import mrunknown404.primalrework.utils.enums.EnumOreValue;
@@ -27,7 +27,7 @@ public class SBOre extends StagedBlock {
 		boolean isBlock = value == EnumOreValue.block;
 		
 		return new SBOre(isBlock ? alloy.toString() + "_block" : alloy.toString() + "_ore_" + value.toString(), stage, isBlock ? 32 : 16,
-				isBlock ? InitItemGroups.BLOCKS : InitItemGroups.ORES, isBlock ? Material.METAL : Material.STONE, isBlock ? SoundType.METAL : SoundType.STONE, hardness,
+				isBlock ? PRItemGroups.BLOCKS : PRItemGroups.ORES, isBlock ? Material.METAL : Material.STONE, isBlock ? SoundType.METAL : SoundType.STONE, hardness,
 				blastResist, alloy, value, new HarvestInfo(EnumToolType.pickaxe, toolMat));
 	}
 }

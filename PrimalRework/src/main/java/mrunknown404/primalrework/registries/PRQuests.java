@@ -1,4 +1,4 @@
-package mrunknown404.primalrework.init;
+package mrunknown404.primalrework.registries;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -15,12 +15,12 @@ import mrunknown404.primalrework.utils.enums.EnumStage;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 
-public class InitQuests {
+public class PRQuests {
 	private static final Map<Item, QuestTab> QUEST_TABS = new LinkedHashMap<Item, QuestTab>();
 	private static final List<Quest> QUESTS = new ArrayList<Quest>();
 	private static List<Quest> questUnfinishedCache = new ArrayList<Quest>();
 	
-	public static final QuestTab TAB_STAGE_0 = addTab(new QuestTab(EnumStage.stage0, InitItems.PLANT_FIBER.get()));
+	public static final QuestTab TAB_STAGE_0 = addTab(new QuestTab(EnumStage.stage0, PRItems.PLANT_FIBER.get()));
 	public static final QuestTab TAB_STAGE_1 = addTab(new QuestTab(EnumStage.stage1, Items.OAK_LOG));
 	public static final QuestTab TAB_STAGE_2 = addTab(new QuestTab(EnumStage.stage2, Items.COBBLESTONE));
 	public static final QuestTab TAB_STAGE_3 = addTab(new QuestTab(EnumStage.stage3, Items.COBBLESTONE));
@@ -30,16 +30,16 @@ public class InitQuests {
 	
 	//@formatter:off
 	public static final Quest STAGE_0_ROOT =              addRoot(QuestBuilder.create(EnumStage.stage0).finish(TAB_STAGE_0));
-	public static final Quest GET_PLANT_FIBER =           addQuest(QuestBuilder.create("get_plant_fiber",   STAGE_0_ROOT,      0, -1.5f, new ItemRequirement(InitItems.PLANT_FIBER.get(), 8)).finish(                TAB_STAGE_0));
-	public static final Quest GET_PLANT_ROPE =            addQuest(QuestBuilder.create("get_plant_rope",    GET_PLANT_FIBER,   0, 0,     new ItemRequirement(InitItems.PLANT_ROPE.get(), 1)).finish(                 TAB_STAGE_0));
-	public static final Quest GET_PLANT_MESH =            addQuest(QuestBuilder.create("get_plant_mesh",    GET_PLANT_FIBER,   0, 1f,    new ItemRequirement(InitItems.PLANT_MESH.get(), 1)).finish(                 TAB_STAGE_0));
+	public static final Quest GET_PLANT_FIBER =           addQuest(QuestBuilder.create("get_plant_fiber",   STAGE_0_ROOT,      0, -1.5f, new ItemRequirement(PRItems.PLANT_FIBER.get(), 8)).finish(                TAB_STAGE_0));
+	public static final Quest GET_PLANT_ROPE =            addQuest(QuestBuilder.create("get_plant_rope",    GET_PLANT_FIBER,   0, 0,     new ItemRequirement(PRItems.PLANT_ROPE.get(), 1)).finish(                 TAB_STAGE_0));
+	public static final Quest GET_PLANT_MESH =            addQuest(QuestBuilder.create("get_plant_mesh",    GET_PLANT_FIBER,   0, 1f,    new ItemRequirement(PRItems.PLANT_MESH.get(), 1)).finish(                 TAB_STAGE_0));
 	public static final Quest GET_STICKS =                addQuest(QuestBuilder.create("get_sticks",        STAGE_0_ROOT,      0, -0.5f, new ItemRequirement(Items.STICK, 2)).finish(                                TAB_STAGE_0));
 	public static final Quest GET_FLINT =                 addQuest(QuestBuilder.create("get_flint",         STAGE_0_ROOT,      0, 0.5f,  new ItemRequirement(Items.FLINT, 4)).finish(                                TAB_STAGE_0));
-	public static final Quest GET_KNAPPED_FLINT =         addQuest(QuestBuilder.create("get_knapped_flint", GET_FLINT,         0, 0,     new ItemRequirement(InitItems.KNAPPED_FLINT.get(), 2)).finish(              TAB_STAGE_0));
-	public static final Quest GET_FLINT_POINT =           addQuest(QuestBuilder.create("get_flint_point",   GET_KNAPPED_FLINT, 0, 0,     new ItemRequirement(InitItems.FLINT_POINT.get(), 2)).finish(                TAB_STAGE_0));
+	public static final Quest GET_KNAPPED_FLINT =         addQuest(QuestBuilder.create("get_knapped_flint", GET_FLINT,         0, 0,     new ItemRequirement(PRItems.KNAPPED_FLINT.get(), 2)).finish(              TAB_STAGE_0));
+	public static final Quest GET_FLINT_POINT =           addQuest(QuestBuilder.create("get_flint_point",   GET_KNAPPED_FLINT, 0, 0,     new ItemRequirement(PRItems.FLINT_POINT.get(), 2)).finish(                TAB_STAGE_0));
 	public static final Quest GET_CLAY =                  addQuest(QuestBuilder.create("get_clay",          STAGE_0_ROOT,      0, 1.5f,  new ItemRequirement(Items.CLAY_BALL, 8)).finish(                            TAB_STAGE_0));
-	public static final Quest GET_LOG =                   addQuest(QuestBuilder.create("get_log",           GET_CLAY,          0, 0,     new StagedTagRequirement(InitStagedTags.ALL_LOGS, Items.OAK_LOG, 1)).finish(TAB_STAGE_0));
-	public static final Quest GET_CAMPFIRE =              addQuest(QuestBuilder.create("get_campfire",      GET_LOG,           0, 0,     new ItemRequirement(InitBlocks.CAMPFIRE.get().asItem(), 1)).setEnd().finish(TAB_STAGE_0));
+	public static final Quest GET_LOG =                   addQuest(QuestBuilder.create("get_log",           GET_CLAY,          0, 0,     new StagedTagRequirement(PRStagedTags.ALL_LOGS, Items.OAK_LOG, 1)).finish(TAB_STAGE_0));
+	public static final Quest GET_CAMPFIRE =              addQuest(QuestBuilder.create("get_campfire",      GET_LOG,           0, 0,     new ItemRequirement(PRBlocks.CAMPFIRE.get().asItem(), 1)).setEnd().finish(TAB_STAGE_0));
 	//@formatter:on
 	
 	private static Quest addQuest(Quest q) {

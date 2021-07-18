@@ -1,11 +1,14 @@
 {
-	"required": true,
 	"package": "mrunknown404.primalrework.mixin",
-	"compatibilityLevel": "JAVA_8",
 	"refmap": "primalrework.refmap.json",
+	"compatibilityLevel": "JAVA_8",
+	"minVersion": "0.8",
+	"required": true,
 	"mixins": [
 		"MixinAbstractBlock",
 		"MixinForgeOnAdd"
 	],
-	"minVersion": "0.8"
+	"client": [
+		"client.MixinServerWorldInfo"
+	]
 }

@@ -2,8 +2,8 @@ package mrunknown404.primalrework.inventory.container;
 
 import java.util.List;
 
-import mrunknown404.primalrework.init.InitContainers;
 import mrunknown404.primalrework.inventory.container.slot.SlotOutput;
+import mrunknown404.primalrework.registries.PRContainers;
 import mrunknown404.primalrework.tileentities.TEInventory;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -22,7 +22,7 @@ public class ContainerPrimalCraftingTable extends Container implements IEasyQuic
 	}
 	
 	public ContainerPrimalCraftingTable(int windowID, PlayerInventory inv, IInventory container) {
-		super(InitContainers.PRIMAL_CRAFTING_TABLE.get(), windowID);
+		super(PRContainers.PRIMAL_CRAFTING_TABLE.get(), windowID);
 		this.container = container;
 		this.player = inv.player;
 		

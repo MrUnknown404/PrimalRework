@@ -1,6 +1,6 @@
 package mrunknown404.primalrework.items.utils;
 
-import mrunknown404.primalrework.init.InitItemGroups;
+import mrunknown404.primalrework.registries.PRItemGroups;
 import mrunknown404.primalrework.utils.enums.EnumStage;
 import mrunknown404.primalrework.utils.enums.EnumToolMaterial;
 import mrunknown404.primalrework.utils.enums.EnumToolType;
@@ -13,6 +13,6 @@ public class SIDamageable extends StagedItem {
 	}
 	
 	public SIDamageable(String name, EnumStage stage, EnumToolMaterial mat) {
-		this(name, stage, EnumToolType.none, mat, InitItemGroups.ITEMS, ItemType.generated);
+		this(name, stage, EnumToolType.none, mat, PRItemGroups.ITEMS, ItemType.generated);
 	}
 }

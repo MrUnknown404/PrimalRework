@@ -3,8 +3,8 @@ package mrunknown404.primalrework.blocks;
 import java.util.Random;
 
 import mrunknown404.primalrework.blocks.utils.StagedBlock;
-import mrunknown404.primalrework.init.InitItemGroups;
 import mrunknown404.primalrework.items.utils.StagedItem.ItemType;
+import mrunknown404.primalrework.registries.PRItemGroups;
 import mrunknown404.primalrework.utils.HarvestInfo;
 import mrunknown404.primalrework.utils.HarvestInfo.DropInfo;
 import mrunknown404.primalrework.utils.enums.EnumStage;
@@ -33,7 +33,7 @@ import net.minecraftforge.common.IPlantable;
 public class SBMushroomGrass extends StagedBlock {
 	
 	public SBMushroomGrass() {
-		super("mushroom_grass", EnumStage.stage0, 64, InitItemGroups.BLOCKS, Material.GRASS, SoundType.GRASS, true, 0, 0.8f, 0.8f, true, BlockStateType.none, BlockModelType.none,
+		super("mushroom_grass", EnumStage.stage0, 64, PRItemGroups.BLOCKS, Material.GRASS, SoundType.GRASS, true, 0, 0.8f, 0.8f, true, BlockStateType.none, BlockModelType.none,
 				new HarvestInfo(EnumToolType.shovel, EnumToolMaterial.clay, new DropInfo(Items.DIRT)),
 				new HarvestInfo(EnumToolType.none, EnumToolMaterial.hand, new DropInfo(Items.DIRT)));
 		registerDefaultState(stateDefinition.any().setValue(BlockStateProperties.SNOWY, Boolean.valueOf(false)));

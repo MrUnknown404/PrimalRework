@@ -1,4 +1,4 @@
-package mrunknown404.primalrework.init;
+package mrunknown404.primalrework.registries;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,25 +9,25 @@ import mrunknown404.primalrework.utils.enums.EnumStage;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 
-public class InitStagedTags {
+public class PRStagedTags {
 	private static final List<StagedTag> TAGS = new ArrayList<StagedTag>();
 	
 	private static Cache<Item, List<StagedTag>> tagCache = new Cache<Item, List<StagedTag>>();
 	private static StagedTag tagSearchCache;
 	
 	public static final StagedTag ALL_LOGS = new StagedTag("logs").add(EnumStage.stage0, Items.OAK_LOG, Items.BIRCH_LOG, Items.SPRUCE_LOG, Items.JUNGLE_LOG, Items.DARK_OAK_LOG,
-			Items.ACACIA_LOG, InitBlocks.STRIPPED_OAK_LOG.get().asItem(), InitBlocks.STRIPPED_BIRCH_LOG.get().asItem(), InitBlocks.STRIPPED_SPRUCE_LOG.get().asItem(),
-			InitBlocks.STRIPPED_JUNGLE_LOG.get().asItem(), InitBlocks.STRIPPED_DARK_OAK_LOG.get().asItem(), InitBlocks.STRIPPED_ACACIA_LOG.get().asItem());
+			Items.ACACIA_LOG, PRBlocks.STRIPPED_OAK_LOG.get().asItem(), PRBlocks.STRIPPED_BIRCH_LOG.get().asItem(), PRBlocks.STRIPPED_SPRUCE_LOG.get().asItem(),
+			PRBlocks.STRIPPED_JUNGLE_LOG.get().asItem(), PRBlocks.STRIPPED_DARK_OAK_LOG.get().asItem(), PRBlocks.STRIPPED_ACACIA_LOG.get().asItem());
 	public static final StagedTag ALL_PLANK_BLOCKS = new StagedTag("plank_blocks").add(EnumStage.stage0, Items.OAK_PLANKS, Items.BIRCH_PLANKS, Items.SPRUCE_PLANKS,
 			Items.JUNGLE_PLANKS, Items.DARK_OAK_PLANKS, Items.ACACIA_PLANKS);
-	public static final StagedTag ALL_PLANKS = new StagedTag("planks").add(EnumStage.stage2, InitItems.OAK_PLANK.get(), InitItems.BIRCH_PLANK.get(), InitItems.SPRUCE_PLANK.get(),
-			InitItems.JUNGLE_PLANK.get(), InitItems.DARK_OAK_PLANK.get(), InitItems.ACACIA_PLANK.get());
-	public static final StagedTag OAK_LOGS = new StagedTag("oak_logs").add(EnumStage.stage0, Items.OAK_LOG, InitBlocks.STRIPPED_OAK_LOG.get().asItem());
-	public static final StagedTag BIRCH_LOGS = new StagedTag("birch_logs").add(EnumStage.stage0, Items.BIRCH_LOG, InitBlocks.STRIPPED_BIRCH_LOG.get().asItem());
-	public static final StagedTag SPRUCE_LOGS = new StagedTag("spruce_logs").add(EnumStage.stage0, Items.SPRUCE_LOG, InitBlocks.STRIPPED_SPRUCE_LOG.get().asItem());
-	public static final StagedTag JUNGLE_LOGS = new StagedTag("jungle_logs").add(EnumStage.stage0, Items.JUNGLE_LOG, InitBlocks.STRIPPED_JUNGLE_LOG.get().asItem());
-	public static final StagedTag ACACIA_LOGS = new StagedTag("acacia_logs").add(EnumStage.stage0, Items.ACACIA_LOG, InitBlocks.STRIPPED_ACACIA_LOG.get().asItem());
-	public static final StagedTag DARK_OAK_LOGS = new StagedTag("dark_oak_logs").add(EnumStage.stage0, Items.DARK_OAK_LOG, InitBlocks.STRIPPED_DARK_OAK_LOG.get().asItem());
+	public static final StagedTag ALL_PLANKS = new StagedTag("planks").add(EnumStage.stage2, PRItems.OAK_PLANK.get(), PRItems.BIRCH_PLANK.get(), PRItems.SPRUCE_PLANK.get(),
+			PRItems.JUNGLE_PLANK.get(), PRItems.DARK_OAK_PLANK.get(), PRItems.ACACIA_PLANK.get());
+	public static final StagedTag OAK_LOGS = new StagedTag("oak_logs").add(EnumStage.stage0, Items.OAK_LOG, PRBlocks.STRIPPED_OAK_LOG.get().asItem());
+	public static final StagedTag BIRCH_LOGS = new StagedTag("birch_logs").add(EnumStage.stage0, Items.BIRCH_LOG, PRBlocks.STRIPPED_BIRCH_LOG.get().asItem());
+	public static final StagedTag SPRUCE_LOGS = new StagedTag("spruce_logs").add(EnumStage.stage0, Items.SPRUCE_LOG, PRBlocks.STRIPPED_SPRUCE_LOG.get().asItem());
+	public static final StagedTag JUNGLE_LOGS = new StagedTag("jungle_logs").add(EnumStage.stage0, Items.JUNGLE_LOG, PRBlocks.STRIPPED_JUNGLE_LOG.get().asItem());
+	public static final StagedTag ACACIA_LOGS = new StagedTag("acacia_logs").add(EnumStage.stage0, Items.ACACIA_LOG, PRBlocks.STRIPPED_ACACIA_LOG.get().asItem());
+	public static final StagedTag DARK_OAK_LOGS = new StagedTag("dark_oak_logs").add(EnumStage.stage0, Items.DARK_OAK_LOG, PRBlocks.STRIPPED_DARK_OAK_LOG.get().asItem());
 	public static final StagedTag ALL_WOOL = new StagedTag("wools").add(EnumStage.stage2, Items.WHITE_WOOL, Items.ORANGE_WOOL, Items.MAGENTA_WOOL, Items.LIGHT_BLUE_WOOL,
 			Items.YELLOW_WOOL, Items.LIME_WOOL, Items.PINK_WOOL, Items.GRAY_WOOL, Items.LIGHT_GRAY_WOOL, Items.CYAN_WOOL, Items.PURPLE_WOOL, Items.BLUE_WOOL, Items.BROWN_WOOL,
 			Items.GREEN_WOOL, Items.RED_WOOL, Items.BLACK_WOOL);

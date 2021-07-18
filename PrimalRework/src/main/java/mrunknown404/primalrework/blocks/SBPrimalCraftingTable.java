@@ -1,7 +1,7 @@
 package mrunknown404.primalrework.blocks;
 
 import mrunknown404.primalrework.blocks.utils.SBContainer;
-import mrunknown404.primalrework.init.InitItemGroups;
+import mrunknown404.primalrework.registries.PRItemGroups;
 import mrunknown404.primalrework.tileentities.TEIPrimalCraftingTable;
 import mrunknown404.primalrework.utils.HarvestInfo;
 import mrunknown404.primalrework.utils.enums.EnumStage;
@@ -27,7 +27,7 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 public class SBPrimalCraftingTable extends SBContainer {
 	public SBPrimalCraftingTable() {
-		super("primal_crafting_table", EnumStage.do_later, 64, InitItemGroups.MACHINES, Material.WOOD, SoundType.WOOD, true, 0, 3, 3, false, BlockStateType.normal,
+		super("primal_crafting_table", EnumStage.do_later, 64, PRItemGroups.MACHINES, Material.WOOD, SoundType.WOOD, true, 0, 3, 3, false, BlockStateType.normal,
 				BlockModelType.normal, HarvestInfo.SAW_MIN);
 	}
 	

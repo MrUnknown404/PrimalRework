@@ -1,6 +1,6 @@
 package mrunknown404.primalrework.blocks.utils;
 
-import mrunknown404.primalrework.init.InitItemGroups;
+import mrunknown404.primalrework.registries.PRItemGroups;
 import mrunknown404.primalrework.utils.HarvestInfo;
 import mrunknown404.primalrework.utils.enums.EnumStage;
 import net.minecraft.block.BlockState;
@@ -25,7 +25,7 @@ public class SBFlammable extends StagedBlock {
 	
 	public SBFlammable(String name, EnumStage stage, Material material, SoundType sound, float hardness, float blastResist, int flammability, int fireSpreadSpeed,
 			HarvestInfo info, HarvestInfo... extraInfos) {
-		this(name, stage, 64, InitItemGroups.BLOCKS, material, sound, true, 0, hardness, blastResist, false, flammability, fireSpreadSpeed, BlockStateType.normal,
+		this(name, stage, 64, PRItemGroups.BLOCKS, material, sound, true, 0, hardness, blastResist, false, flammability, fireSpreadSpeed, BlockStateType.normal,
 				BlockModelType.normal, info, extraInfos);
 	}
 	

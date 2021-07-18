@@ -1,6 +1,6 @@
 package mrunknown404.primalrework.items.utils;
 
-import mrunknown404.primalrework.init.InitItemGroups;
+import mrunknown404.primalrework.registries.PRItemGroups;
 import mrunknown404.primalrework.utils.enums.EnumStage;
 import mrunknown404.primalrework.utils.enums.EnumToolMaterial;
 import mrunknown404.primalrework.utils.enums.EnumToolType;
@@ -10,7 +10,7 @@ import net.minecraft.item.Rarity;
 public class SIFood extends StagedItem {
 	
 	public SIFood(String name, EnumStage stage, int maxStackSize, int nutrition, float saturationModifier, boolean isMeat, boolean canAlwaysEat, boolean fastFood) {
-		super(name, stage, maxStackSize, EnumToolType.none, EnumToolMaterial.hand, InitItemGroups.FOOD, Rarity.COMMON,
+		super(name, stage, maxStackSize, EnumToolType.none, EnumToolMaterial.hand, PRItemGroups.FOOD, Rarity.COMMON,
 				toFood(nutrition, saturationModifier, isMeat, canAlwaysEat, fastFood), false, false, ItemType.generated);
 	}
 	

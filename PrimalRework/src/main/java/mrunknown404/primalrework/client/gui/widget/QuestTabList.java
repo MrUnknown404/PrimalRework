@@ -9,8 +9,8 @@ import com.mojang.blaze3d.systems.RenderSystem;
 
 import mrunknown404.primalrework.client.ColorH;
 import mrunknown404.primalrework.client.gui.screen.ScreenQuestMenu;
-import mrunknown404.primalrework.init.InitQuests;
 import mrunknown404.primalrework.quests.QuestTab;
+import mrunknown404.primalrework.registries.PRQuests;
 import mrunknown404.primalrework.utils.MathH;
 import mrunknown404.primalrework.utils.enums.EnumStage;
 import net.minecraft.client.Minecraft;
@@ -32,7 +32,7 @@ public class QuestTabList extends AbstractList<QuestTabList.QuestTabEntry> {
 		this.screen = screen;
 		this.x0 = 0;
 		
-		for (QuestTab tab : InitQuests.getTabs()) {
+		for (QuestTab tab : PRQuests.getTabs()) {
 			addEntry(new QuestTabList.QuestTabEntry(screen, tab));
 		}
 		

@@ -3,7 +3,7 @@ package mrunknown404.primalrework.events;
 import java.util.Random;
 
 import mrunknown404.primalrework.PrimalRework;
-import mrunknown404.primalrework.init.InitItems;
+import mrunknown404.primalrework.registries.PRItems;
 import mrunknown404.primalrework.stage.StageH;
 import mrunknown404.primalrework.stage.storage.StageDataProvider;
 import mrunknown404.primalrework.utils.NoAdvancementManager;
@@ -72,14 +72,14 @@ public class MiscEvents {
 			
 			if (item.getItem() == Items.FLINT) {
 				e.getWorld().playSound(e.getPlayer(), e.getPos(), SoundEvents.STONE_BREAK, SoundCategory.PLAYERS, 1, 2);
-				itemToAdd = InitItems.KNAPPED_FLINT.get();
-			} else if (item.getItem() == InitItems.KNAPPED_FLINT.get()) {
+				itemToAdd = PRItems.KNAPPED_FLINT.get();
+			} else if (item.getItem() == PRItems.KNAPPED_FLINT.get()) {
 				e.getWorld().playSound(e.getPlayer(), e.getPos(), SoundEvents.STONE_BREAK, SoundCategory.PLAYERS, 1, 2);
-				itemToAdd = InitItems.FLINT_POINT.get();
+				itemToAdd = PRItems.FLINT_POINT.get();
 			} else if (item.getItem() == Items.BONE) {
 				e.getWorld().playSound(e.getPlayer(), e.getPos(), SoundEvents.STONE_BREAK, SoundCategory.PLAYERS, 1, 2);
-				itemToAdd = InitItems.BONE_SHARD.get();
-			} else if (item.getItem() == InitItems.BONE_SHARD.get()) {
+				itemToAdd = PRItems.BONE_SHARD.get();
+			} else if (item.getItem() == PRItems.BONE_SHARD.get()) {
 				e.getWorld().playSound(e.getPlayer(), e.getPos(), SoundEvents.STONE_BREAK, SoundCategory.PLAYERS, 1, 2);
 				itemToAdd = Items.BONE_MEAL;
 			}

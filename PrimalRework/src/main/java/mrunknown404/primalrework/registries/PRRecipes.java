@@ -1,4 +1,4 @@
-package mrunknown404.primalrework.init;
+package mrunknown404.primalrework.registries;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,7 +18,7 @@ import mrunknown404.primalrework.utils.enums.EnumStage;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 
-public class InitRecipes {
+public class PRRecipes {
 	private static final Map<FuelType, Map<Item, Integer>> FUELS = new HashMap<FuelType, Map<Item, Integer>>();
 	private static final Map<EnumRecipeType, List<IStagedRecipe<?, ?>>> RECIPES = new HashMap<EnumRecipeType, List<IStagedRecipe<?, ?>>>();
 	
@@ -62,13 +62,13 @@ public class InitRecipes {
 		addFuel(FuelType.campfire, Items.STICK, oneCampfireItem / 4);
 		addFuel(FuelType.campfire, Items.COAL, oneCampfireItem * 8);
 		addFuel(FuelType.campfire, Items.CHARCOAL, oneCampfireItem * 8);
-		for (Item item : InitStagedTags.ALL_LOGS.getItemsFromAllStages()) {
+		for (Item item : PRStagedTags.ALL_LOGS.getItemsFromAllStages()) {
 			addFuel(FuelType.campfire, item, oneCampfireItem * 4);
 		}
-		for (Item item : InitStagedTags.ALL_PLANK_BLOCKS.getItemsFromAllStages()) {
+		for (Item item : PRStagedTags.ALL_PLANK_BLOCKS.getItemsFromAllStages()) {
 			addFuel(FuelType.campfire, item, oneCampfireItem);
 		}
-		for (Item item : InitStagedTags.ALL_PLANKS.getItemsFromAllStages()) {
+		for (Item item : PRStagedTags.ALL_PLANKS.getItemsFromAllStages()) {
 			addFuel(FuelType.campfire, item, oneCampfireItem / 8);
 		}
 		
@@ -80,69 +80,69 @@ public class InitRecipes {
 		addRecipe(EnumRecipeType.campfire, new SRCampFire(EnumStage.stage1, Items.COD, Items.COOKED_COD));
 		addRecipe(EnumRecipeType.campfire, new SRCampFire(EnumStage.stage1, Items.SALMON, Items.COOKED_SALMON));
 		addRecipe(EnumRecipeType.campfire, new SRCampFire(EnumStage.stage1, Items.POTATO, Items.BAKED_POTATO));
-		addRecipe(EnumRecipeType.campfire, new SRCampFire(EnumStage.stage1, Items.CARROT, InitItems.COOKED_CARROT.get()));
-		addRecipe(EnumRecipeType.campfire, new SRCampFire(EnumStage.stage1, Items.BEETROOT, InitItems.COOKED_BEETROOT.get()));
-		addRecipe(EnumRecipeType.campfire, new SRCampFire(EnumStage.stage1, InitBlocks.UNLIT_PRIMAL_TORCH.get().asItem(), InitBlocks.LIT_PRIMAL_TORCH.get().asItem(), 100));
+		addRecipe(EnumRecipeType.campfire, new SRCampFire(EnumStage.stage1, Items.CARROT, PRItems.COOKED_CARROT.get()));
+		addRecipe(EnumRecipeType.campfire, new SRCampFire(EnumStage.stage1, Items.BEETROOT, PRItems.COOKED_BEETROOT.get()));
+		addRecipe(EnumRecipeType.campfire, new SRCampFire(EnumStage.stage1, PRBlocks.UNLIT_PRIMAL_TORCH.get().asItem(), PRBlocks.LIT_PRIMAL_TORCH.get().asItem(), 100));
 		
-		addRecipe(EnumRecipeType.crafting_3, new SRCrafting3(EnumStage.stage0, InitItems.PLANT_ROPE.get(), 1,
-				RICrafting3.shapeless().set(InitItems.PLANT_FIBER.get(), InitItems.PLANT_FIBER.get(), InitItems.PLANT_FIBER.get()).finish()));
-		addRecipe(EnumRecipeType.crafting_3, new SRCrafting3(EnumStage.stage0, InitItems.PLANT_MESH.get(), 1,
-				RICrafting3.shaped().set2x2(Items.STICK, InitItems.PLANT_FIBER.get(), InitItems.PLANT_FIBER.get(), Items.STICK).finish()));
+		addRecipe(EnumRecipeType.crafting_3, new SRCrafting3(EnumStage.stage0, PRItems.PLANT_ROPE.get(), 1,
+				RICrafting3.shapeless().set(PRItems.PLANT_FIBER.get(), PRItems.PLANT_FIBER.get(), PRItems.PLANT_FIBER.get()).finish()));
+		addRecipe(EnumRecipeType.crafting_3, new SRCrafting3(EnumStage.stage0, PRItems.PLANT_MESH.get(), 1,
+				RICrafting3.shaped().set2x2(Items.STICK, PRItems.PLANT_FIBER.get(), PRItems.PLANT_FIBER.get(), Items.STICK).finish()));
 		addRecipe(EnumRecipeType.crafting_3,
-				new SRCrafting3(EnumStage.stage0, InitTools.CLAY_SHOVEL.get(), 1, RICrafting3.shaped().set1x2(Items.CLAY_BALL, Items.STICK).finish()));
-		addRecipe(EnumRecipeType.crafting_3, new SRCrafting3(EnumStage.stage0, InitTools.CLAY_AXE.get(), 1,
+				new SRCrafting3(EnumStage.stage0, PRTools.CLAY_SHOVEL.get(), 1, RICrafting3.shaped().set1x2(Items.CLAY_BALL, Items.STICK).finish()));
+		addRecipe(EnumRecipeType.crafting_3, new SRCrafting3(EnumStage.stage0, PRTools.CLAY_AXE.get(), 1,
 				RICrafting3.shaped().set2x2(Items.CLAY_BALL, Items.CLAY_BALL, Items.CLAY_BALL, Items.STICK).finish()));
 		addRecipe(EnumRecipeType.crafting_3,
-				new SRCrafting3(EnumStage.stage1, InitTools.WOOD_SHOVEL.get(), 1, RICrafting3.shaped().set1x3(InitStagedTags.ALL_LOGS, Items.STICK, Items.STICK).finish()));
-		addRecipe(EnumRecipeType.crafting_3, new SRCrafting3(EnumStage.stage1, InitTools.WOOD_AXE.get(), 1,
-				RICrafting3.shaped().set2x3(InitStagedTags.ALL_LOGS, InitStagedTags.ALL_LOGS, InitStagedTags.ALL_LOGS, Items.STICK, null, Items.STICK).finish()));
+				new SRCrafting3(EnumStage.stage1, PRTools.WOOD_SHOVEL.get(), 1, RICrafting3.shaped().set1x3(PRStagedTags.ALL_LOGS, Items.STICK, Items.STICK).finish()));
+		addRecipe(EnumRecipeType.crafting_3, new SRCrafting3(EnumStage.stage1, PRTools.WOOD_AXE.get(), 1,
+				RICrafting3.shaped().set2x3(PRStagedTags.ALL_LOGS, PRStagedTags.ALL_LOGS, PRStagedTags.ALL_LOGS, Items.STICK, null, Items.STICK).finish()));
 		addRecipe(EnumRecipeType.crafting_3,
-				new SRCrafting3(EnumStage.stage1, Items.COBBLESTONE, 1, RICrafting3.shaped().setRing(InitBlocks.GROUND_ROCK.get().asItem()).finish()));
+				new SRCrafting3(EnumStage.stage1, Items.COBBLESTONE, 1, RICrafting3.shaped().setRing(PRBlocks.GROUND_ROCK.get().asItem()).finish()));
 		addRecipe(EnumRecipeType.crafting_3,
-				new SRCrafting3(EnumStage.stage0, InitBlocks.THATCH.get().asItem(), 1, RICrafting3.shaped().set2x2(InitItems.PLANT_FIBER.get()).finish()));
+				new SRCrafting3(EnumStage.stage0, PRBlocks.THATCH.get().asItem(), 1, RICrafting3.shaped().set2x2(PRItems.PLANT_FIBER.get()).finish()));
 		addRecipe(EnumRecipeType.crafting_3,
-				new SRCrafting3(EnumStage.stage0, InitItems.PLANT_FIBER.get(), 4, RICrafting3.shapeless().set(InitBlocks.THATCH.get().asItem()).finish()));
+				new SRCrafting3(EnumStage.stage0, PRItems.PLANT_FIBER.get(), 4, RICrafting3.shapeless().set(PRBlocks.THATCH.get().asItem()).finish()));
 		addRecipe(EnumRecipeType.crafting_3,
-				new SRCrafting3(EnumStage.stage1, InitTools.BONE_SWORD.get(), 1, RICrafting3.shaped().set1x2(InitItems.BONE_SHARD.get(), Items.STICK).finish()));
-		addRecipe(EnumRecipeType.crafting_3, new SRCrafting3(EnumStage.stage1, Items.OAK_PLANKS, 1, RICrafting3.shaped().setRing(InitItems.OAK_PLANK.get()).finish()));
-		addRecipe(EnumRecipeType.crafting_3, new SRCrafting3(EnumStage.stage1, Items.BIRCH_PLANKS, 1, RICrafting3.shaped().setRing(InitItems.BIRCH_PLANK.get()).finish()));
-		addRecipe(EnumRecipeType.crafting_3, new SRCrafting3(EnumStage.stage1, Items.SPRUCE_PLANKS, 1, RICrafting3.shaped().setRing(InitItems.SPRUCE_PLANK.get()).finish()));
-		addRecipe(EnumRecipeType.crafting_3, new SRCrafting3(EnumStage.stage1, Items.JUNGLE_PLANKS, 1, RICrafting3.shaped().setRing(InitItems.JUNGLE_PLANK.get()).finish()));
-		addRecipe(EnumRecipeType.crafting_3, new SRCrafting3(EnumStage.stage1, Items.ACACIA_PLANKS, 1, RICrafting3.shaped().setRing(InitItems.ACACIA_PLANK.get()).finish()));
-		addRecipe(EnumRecipeType.crafting_3, new SRCrafting3(EnumStage.stage1, Items.DARK_OAK_PLANKS, 1, RICrafting3.shaped().setRing(InitItems.DARK_OAK_PLANK.get()).finish()));
-		addRecipe(EnumRecipeType.crafting_3, new SRCrafting3(EnumStage.stage2, Items.WHITE_WOOL, 1, RICrafting3.shaped().set2x2(InitItems.CLOTH.get()).finish()));
+				new SRCrafting3(EnumStage.stage1, PRTools.BONE_SWORD.get(), 1, RICrafting3.shaped().set1x2(PRItems.BONE_SHARD.get(), Items.STICK).finish()));
+		addRecipe(EnumRecipeType.crafting_3, new SRCrafting3(EnumStage.stage1, Items.OAK_PLANKS, 1, RICrafting3.shaped().setRing(PRItems.OAK_PLANK.get()).finish()));
+		addRecipe(EnumRecipeType.crafting_3, new SRCrafting3(EnumStage.stage1, Items.BIRCH_PLANKS, 1, RICrafting3.shaped().setRing(PRItems.BIRCH_PLANK.get()).finish()));
+		addRecipe(EnumRecipeType.crafting_3, new SRCrafting3(EnumStage.stage1, Items.SPRUCE_PLANKS, 1, RICrafting3.shaped().setRing(PRItems.SPRUCE_PLANK.get()).finish()));
+		addRecipe(EnumRecipeType.crafting_3, new SRCrafting3(EnumStage.stage1, Items.JUNGLE_PLANKS, 1, RICrafting3.shaped().setRing(PRItems.JUNGLE_PLANK.get()).finish()));
+		addRecipe(EnumRecipeType.crafting_3, new SRCrafting3(EnumStage.stage1, Items.ACACIA_PLANKS, 1, RICrafting3.shaped().setRing(PRItems.ACACIA_PLANK.get()).finish()));
+		addRecipe(EnumRecipeType.crafting_3, new SRCrafting3(EnumStage.stage1, Items.DARK_OAK_PLANKS, 1, RICrafting3.shaped().setRing(PRItems.DARK_OAK_PLANK.get()).finish()));
+		addRecipe(EnumRecipeType.crafting_3, new SRCrafting3(EnumStage.stage2, Items.WHITE_WOOL, 1, RICrafting3.shaped().set2x2(PRItems.CLOTH.get()).finish()));
 		addRecipe(EnumRecipeType.crafting_3,
-				new SRCrafting3(EnumStage.stage0, Items.WHITE_WOOL, 1, RICrafting3.shaped().setRing(InitStagedTags.ALL_WOOL).setMiddle(Items.WHITE_DYE).finish()));
+				new SRCrafting3(EnumStage.stage0, Items.WHITE_WOOL, 1, RICrafting3.shaped().setRing(PRStagedTags.ALL_WOOL).setMiddle(Items.WHITE_DYE).finish()));
 		addRecipe(EnumRecipeType.crafting_3,
-				new SRCrafting3(EnumStage.stage0, Items.ORANGE_WOOL, 1, RICrafting3.shaped().setRing(InitStagedTags.ALL_WOOL).setMiddle(Items.ORANGE_DYE).finish()));
+				new SRCrafting3(EnumStage.stage0, Items.ORANGE_WOOL, 1, RICrafting3.shaped().setRing(PRStagedTags.ALL_WOOL).setMiddle(Items.ORANGE_DYE).finish()));
 		addRecipe(EnumRecipeType.crafting_3,
-				new SRCrafting3(EnumStage.stage0, Items.MAGENTA_WOOL, 1, RICrafting3.shaped().setRing(InitStagedTags.ALL_WOOL).setMiddle(Items.MAGENTA_DYE).finish()));
+				new SRCrafting3(EnumStage.stage0, Items.MAGENTA_WOOL, 1, RICrafting3.shaped().setRing(PRStagedTags.ALL_WOOL).setMiddle(Items.MAGENTA_DYE).finish()));
 		addRecipe(EnumRecipeType.crafting_3,
-				new SRCrafting3(EnumStage.stage0, Items.LIGHT_BLUE_WOOL, 1, RICrafting3.shaped().setRing(InitStagedTags.ALL_WOOL).setMiddle(Items.LIGHT_BLUE_DYE).finish()));
+				new SRCrafting3(EnumStage.stage0, Items.LIGHT_BLUE_WOOL, 1, RICrafting3.shaped().setRing(PRStagedTags.ALL_WOOL).setMiddle(Items.LIGHT_BLUE_DYE).finish()));
 		addRecipe(EnumRecipeType.crafting_3,
-				new SRCrafting3(EnumStage.stage0, Items.YELLOW_WOOL, 1, RICrafting3.shaped().setRing(InitStagedTags.ALL_WOOL).setMiddle(Items.YELLOW_DYE).finish()));
+				new SRCrafting3(EnumStage.stage0, Items.YELLOW_WOOL, 1, RICrafting3.shaped().setRing(PRStagedTags.ALL_WOOL).setMiddle(Items.YELLOW_DYE).finish()));
 		addRecipe(EnumRecipeType.crafting_3,
-				new SRCrafting3(EnumStage.stage0, Items.LIME_WOOL, 1, RICrafting3.shaped().setRing(InitStagedTags.ALL_WOOL).setMiddle(Items.LIME_DYE).finish()));
+				new SRCrafting3(EnumStage.stage0, Items.LIME_WOOL, 1, RICrafting3.shaped().setRing(PRStagedTags.ALL_WOOL).setMiddle(Items.LIME_DYE).finish()));
 		addRecipe(EnumRecipeType.crafting_3,
-				new SRCrafting3(EnumStage.stage0, Items.PINK_WOOL, 1, RICrafting3.shaped().setRing(InitStagedTags.ALL_WOOL).setMiddle(Items.PINK_DYE).finish()));
+				new SRCrafting3(EnumStage.stage0, Items.PINK_WOOL, 1, RICrafting3.shaped().setRing(PRStagedTags.ALL_WOOL).setMiddle(Items.PINK_DYE).finish()));
 		addRecipe(EnumRecipeType.crafting_3,
-				new SRCrafting3(EnumStage.stage0, Items.GRAY_WOOL, 1, RICrafting3.shaped().setRing(InitStagedTags.ALL_WOOL).setMiddle(Items.GRAY_DYE).finish()));
+				new SRCrafting3(EnumStage.stage0, Items.GRAY_WOOL, 1, RICrafting3.shaped().setRing(PRStagedTags.ALL_WOOL).setMiddle(Items.GRAY_DYE).finish()));
 		addRecipe(EnumRecipeType.crafting_3,
-				new SRCrafting3(EnumStage.stage0, Items.LIGHT_GRAY_WOOL, 1, RICrafting3.shaped().setRing(InitStagedTags.ALL_WOOL).setMiddle(Items.LIGHT_GRAY_DYE).finish()));
+				new SRCrafting3(EnumStage.stage0, Items.LIGHT_GRAY_WOOL, 1, RICrafting3.shaped().setRing(PRStagedTags.ALL_WOOL).setMiddle(Items.LIGHT_GRAY_DYE).finish()));
 		addRecipe(EnumRecipeType.crafting_3,
-				new SRCrafting3(EnumStage.stage0, Items.CYAN_WOOL, 1, RICrafting3.shaped().setRing(InitStagedTags.ALL_WOOL).setMiddle(Items.CYAN_DYE).finish()));
+				new SRCrafting3(EnumStage.stage0, Items.CYAN_WOOL, 1, RICrafting3.shaped().setRing(PRStagedTags.ALL_WOOL).setMiddle(Items.CYAN_DYE).finish()));
 		addRecipe(EnumRecipeType.crafting_3,
-				new SRCrafting3(EnumStage.stage0, Items.PURPLE_WOOL, 1, RICrafting3.shaped().setRing(InitStagedTags.ALL_WOOL).setMiddle(Items.PURPLE_DYE).finish()));
+				new SRCrafting3(EnumStage.stage0, Items.PURPLE_WOOL, 1, RICrafting3.shaped().setRing(PRStagedTags.ALL_WOOL).setMiddle(Items.PURPLE_DYE).finish()));
 		addRecipe(EnumRecipeType.crafting_3,
-				new SRCrafting3(EnumStage.stage0, Items.BLUE_WOOL, 1, RICrafting3.shaped().setRing(InitStagedTags.ALL_WOOL).setMiddle(Items.BLUE_DYE).finish()));
+				new SRCrafting3(EnumStage.stage0, Items.BLUE_WOOL, 1, RICrafting3.shaped().setRing(PRStagedTags.ALL_WOOL).setMiddle(Items.BLUE_DYE).finish()));
 		addRecipe(EnumRecipeType.crafting_3,
-				new SRCrafting3(EnumStage.stage0, Items.BROWN_WOOL, 1, RICrafting3.shaped().setRing(InitStagedTags.ALL_WOOL).setMiddle(Items.BROWN_DYE).finish()));
+				new SRCrafting3(EnumStage.stage0, Items.BROWN_WOOL, 1, RICrafting3.shaped().setRing(PRStagedTags.ALL_WOOL).setMiddle(Items.BROWN_DYE).finish()));
 		addRecipe(EnumRecipeType.crafting_3,
-				new SRCrafting3(EnumStage.stage0, Items.GREEN_WOOL, 1, RICrafting3.shaped().setRing(InitStagedTags.ALL_WOOL).setMiddle(Items.GREEN_DYE).finish()));
+				new SRCrafting3(EnumStage.stage0, Items.GREEN_WOOL, 1, RICrafting3.shaped().setRing(PRStagedTags.ALL_WOOL).setMiddle(Items.GREEN_DYE).finish()));
 		addRecipe(EnumRecipeType.crafting_3,
-				new SRCrafting3(EnumStage.stage0, Items.RED_WOOL, 1, RICrafting3.shaped().setRing(InitStagedTags.ALL_WOOL).setMiddle(Items.RED_DYE).finish()));
+				new SRCrafting3(EnumStage.stage0, Items.RED_WOOL, 1, RICrafting3.shaped().setRing(PRStagedTags.ALL_WOOL).setMiddle(Items.RED_DYE).finish()));
 		addRecipe(EnumRecipeType.crafting_3,
-				new SRCrafting3(EnumStage.stage0, Items.BLACK_WOOL, 1, RICrafting3.shaped().setRing(InitStagedTags.ALL_WOOL).setMiddle(Items.BLACK_DYE).finish()));
+				new SRCrafting3(EnumStage.stage0, Items.BLACK_WOOL, 1, RICrafting3.shaped().setRing(PRStagedTags.ALL_WOOL).setMiddle(Items.BLACK_DYE).finish()));
 	}
 	
 	public static void addFuel(FuelType type, Item item, int cookTime) {

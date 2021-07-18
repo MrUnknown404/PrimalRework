@@ -5,11 +5,11 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import mrunknown404.primalrework.init.InitQuests;
 import mrunknown404.primalrework.network.NetworkHandler;
 import mrunknown404.primalrework.network.packets.PacketSyncQuestFinished;
 import mrunknown404.primalrework.quests.requirements.QuestRequirement;
 import mrunknown404.primalrework.quests.rewards.QuestReward;
+import mrunknown404.primalrework.registries.PRQuests;
 import mrunknown404.primalrework.stage.StageH;
 import mrunknown404.primalrework.utils.IDescription;
 import mrunknown404.primalrework.utils.IName;
@@ -87,7 +87,7 @@ public class Quest implements IName, IDescription {
 		}
 		
 		isFinished = true;
-		InitQuests.resetQuestCache();
+		PRQuests.resetQuestCache();
 		if (reward != null && player != null) {
 			reward.giveRewardsToPlayer(player);
 		}
@@ -104,7 +104,7 @@ public class Quest implements IName, IDescription {
 		System.out.println("Quest '" + getName() + "' was forgotten!");
 		
 		isFinished = false;
-		InitQuests.resetQuestCache();
+		PRQuests.resetQuestCache();
 	}
 	
 	public void loadFinished(boolean isFinished) {

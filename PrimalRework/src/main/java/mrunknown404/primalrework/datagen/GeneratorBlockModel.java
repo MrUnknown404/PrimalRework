@@ -3,7 +3,7 @@ package mrunknown404.primalrework.datagen;
 import mrunknown404.primalrework.PrimalRework;
 import mrunknown404.primalrework.blocks.utils.StagedBlock;
 import mrunknown404.primalrework.blocks.utils.StagedBlock.BlockModelType;
-import mrunknown404.primalrework.init.Registry;
+import mrunknown404.primalrework.registries.PRRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.client.model.generators.ModelProvider;
@@ -17,7 +17,7 @@ class GeneratorBlockModel extends ModelProvider<TexturelessModelBuilder> {
 	
 	@Override
 	protected void registerModels() {
-		for (RegistryObject<Block> regBlock : Registry.BLOCKS.getEntries()) {
+		for (RegistryObject<Block> regBlock : PRRegistry.BLOCKS.getEntries()) {
 			StagedBlock b = (StagedBlock) regBlock.get();
 			if (b.getBlockModelType() == BlockModelType.none) {
 				continue;

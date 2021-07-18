@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import mrunknown404.primalrework.init.InitStagedTags;
+import mrunknown404.primalrework.registries.PRStagedTags;
 import mrunknown404.primalrework.utils.enums.EnumStage;
 import net.minecraft.item.Item;
 import net.minecraft.util.text.ITextComponent;
@@ -20,7 +20,7 @@ public class StagedTag {
 	public StagedTag(String tag) {
 		this.tag = tag;
 		this.displayName = new TranslationTextComponent("staged_tag." + tag + ".name");
-		InitStagedTags.addToList(this);
+		PRStagedTags.addToList(this);
 	}
 	
 	public boolean hasItemWithCurrentStage(Item item) {

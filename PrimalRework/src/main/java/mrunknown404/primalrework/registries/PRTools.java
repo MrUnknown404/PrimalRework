@@ -1,4 +1,4 @@
-package mrunknown404.primalrework.init;
+package mrunknown404.primalrework.registries;
 
 import mrunknown404.primalrework.items.SITool;
 import mrunknown404.primalrework.utils.enums.EnumStage;
@@ -6,7 +6,7 @@ import mrunknown404.primalrework.utils.enums.EnumToolMaterial;
 import mrunknown404.primalrework.utils.enums.EnumToolType;
 import net.minecraftforge.fml.RegistryObject;
 
-public class InitTools {
+public class PRTools {
 	public static final RegistryObject<SITool> CLAY_SHOVEL = register(new SITool(EnumStage.stage0, EnumToolType.shovel, EnumToolMaterial.clay));
 	public static final RegistryObject<SITool> CLAY_AXE = register(new SITool(EnumStage.stage0, EnumToolType.axe, EnumToolMaterial.clay));
 	public static final RegistryObject<SITool> WOOD_SHOVEL = register(new SITool(EnumStage.stage0, EnumToolType.shovel, EnumToolMaterial.wood));
@@ -21,7 +21,7 @@ public class InitTools {
 	public static final RegistryObject<SITool> BONE_SWORD = register(new SITool(EnumStage.stage1, EnumToolType.sword, EnumToolMaterial.bone));
 	
 	private static RegistryObject<SITool> register(SITool item) {
-		return Registry.ITEMS.register(item.getRegName(), () -> item);
+		return PRRegistry.ITEMS.register(item.getRegName(), () -> item);
 	}
 	
 	//@formatter:off

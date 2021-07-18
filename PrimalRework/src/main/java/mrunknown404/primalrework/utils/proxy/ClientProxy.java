@@ -14,10 +14,10 @@ import mrunknown404.primalrework.events.client.HarvestDisplayCEvents;
 import mrunknown404.primalrework.events.client.MiscCEvents;
 import mrunknown404.primalrework.events.client.QuestCEvents;
 import mrunknown404.primalrework.events.client.TooltipCEvents;
-import mrunknown404.primalrework.init.InitBlocks;
-import mrunknown404.primalrework.init.InitContainers;
-import mrunknown404.primalrework.init.InitTileEntities;
 import mrunknown404.primalrework.items.utils.SIBlock;
+import mrunknown404.primalrework.registries.PRBlocks;
+import mrunknown404.primalrework.registries.PRContainers;
+import mrunknown404.primalrework.registries.PRTileEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.GameSettings;
 import net.minecraft.client.Minecraft;
@@ -69,21 +69,21 @@ public class ClientProxy extends CommonProxy {
 		
 		ClientRegistry.registerKeyBinding(OPEN_QUESTS);
 		
-		ClientRegistry.bindTileEntityRenderer(InitTileEntities.CAMPFIRE.get(), TERCampFire::new);
+		ClientRegistry.bindTileEntityRenderer(PRTileEntities.CAMPFIRE.get(), TERCampFire::new);
 		
-		RenderTypeLookup.setRenderLayer(InitBlocks.MUSHROOM_GRASS.get(), RenderType.cutoutMipped()); //TODO automate this
-		RenderTypeLookup.setRenderLayer(InitBlocks.CAMPFIRE.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(PRBlocks.MUSHROOM_GRASS.get(), RenderType.cutoutMipped()); //TODO automate this
+		RenderTypeLookup.setRenderLayer(PRBlocks.CAMPFIRE.get(), RenderType.cutoutMipped());
 		
-		ScreenManager.register(InitContainers.CAMPFIRE.get(), ScreenCampFire::new); //TODO automate this
-		ScreenManager.register(InitContainers.PRIMAL_CRAFTING_TABLE.get(), ScreenPrimalCraftingTable::new);
+		ScreenManager.register(PRContainers.CAMPFIRE.get(), ScreenCampFire::new); //TODO automate this
+		ScreenManager.register(PRContainers.PRIMAL_CRAFTING_TABLE.get(), ScreenPrimalCraftingTable::new);
 		
 		mc.getBlockColors().register((state, reader, pos, tintIndex) -> {
 			return reader != null && pos != null ? BiomeColors.getAverageGrassColor(reader, pos) : GrassColors.get(0.5, 1);
-		}, InitBlocks.MUSHROOM_GRASS.get());
+		}, PRBlocks.MUSHROOM_GRASS.get());
 		mc.getItemColors().register((itemstack, tintIndex) -> {
 			BlockState blockstate = ((SIBlock) itemstack.getItem()).getBlock().defaultBlockState();
 			return Minecraft.getInstance().getBlockColors().getColor(blockstate, null, null, tintIndex);
-		}, InitBlocks.MUSHROOM_GRASS.get());
+		}, PRBlocks.MUSHROOM_GRASS.get());
 		
 		for (Item item : GameRegistry.findRegistry(Item.class)) {
 			CraftingDisplayH.addItem(item);

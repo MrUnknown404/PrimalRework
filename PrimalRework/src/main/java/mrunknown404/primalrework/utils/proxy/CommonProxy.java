@@ -5,15 +5,15 @@ import mrunknown404.primalrework.events.HarvestEvents;
 import mrunknown404.primalrework.events.LeafEvents;
 import mrunknown404.primalrework.events.MiscEvents;
 import mrunknown404.primalrework.events.QuestEvents;
-import mrunknown404.primalrework.init.InitQuests;
-import mrunknown404.primalrework.init.InitRecipes;
-import mrunknown404.primalrework.init.InitStagedTags;
-import mrunknown404.primalrework.init.Registry;
 import mrunknown404.primalrework.network.NetworkHandler;
 import mrunknown404.primalrework.network.packets.PacketAllQuests;
 import mrunknown404.primalrework.network.packets.PacketRequestQuests;
 import mrunknown404.primalrework.network.packets.PacketSyncQuestFinished;
 import mrunknown404.primalrework.network.packets.PacketSyncStage;
+import mrunknown404.primalrework.registries.PRQuests;
+import mrunknown404.primalrework.registries.PRRecipes;
+import mrunknown404.primalrework.registries.PRRegistry;
+import mrunknown404.primalrework.registries.PRStagedTags;
 import mrunknown404.primalrework.stage.VanillaRegistry;
 import mrunknown404.primalrework.stage.storage.IStageData;
 import mrunknown404.primalrework.stage.storage.StageDataFactory;
@@ -24,7 +24,7 @@ import net.minecraftforge.fml.network.NetworkDirection;
 
 public class CommonProxy {
 	public void preSetup(PrimalRework main) {
-		Registry.register();
+		PRRegistry.register();
 		
 		MinecraftForge.EVENT_BUS.register(new HarvestEvents());
 		MinecraftForge.EVENT_BUS.register(new MiscEvents());
@@ -38,9 +38,9 @@ public class CommonProxy {
 		
 		CapabilityManager.INSTANCE.register(IStageData.class, new StageDataStorage(), StageDataFactory::new);
 		
-		InitStagedTags.load();
-		InitQuests.load();
-		InitRecipes.load();
+		PRStagedTags.load();
+		PRQuests.load();
+		PRRecipes.load();
 		
 		NetworkHandler.registerPacket(PacketSyncStage.class, NetworkDirection.PLAY_TO_CLIENT);
 		NetworkHandler.registerPacket(PacketSyncQuestFinished.class, NetworkDirection.PLAY_TO_CLIENT);

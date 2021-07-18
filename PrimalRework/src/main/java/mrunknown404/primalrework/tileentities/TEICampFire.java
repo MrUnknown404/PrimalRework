@@ -1,11 +1,11 @@
 package mrunknown404.primalrework.tileentities;
 
-import mrunknown404.primalrework.init.InitRecipes;
-import mrunknown404.primalrework.init.InitRecipes.FuelType;
-import mrunknown404.primalrework.init.InitTileEntities;
 import mrunknown404.primalrework.inventory.container.ContainerCampFire;
 import mrunknown404.primalrework.recipes.SRCampFire;
 import mrunknown404.primalrework.recipes.input.RISingle;
+import mrunknown404.primalrework.registries.PRRecipes;
+import mrunknown404.primalrework.registries.PRTileEntities;
+import mrunknown404.primalrework.registries.PRRecipes.FuelType;
 import mrunknown404.primalrework.utils.enums.EnumRecipeType;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -62,7 +62,7 @@ public class TEICampFire extends TEInventory implements ITickableTileEntity {
 	};
 	
 	public TEICampFire() {
-		super(InitTileEntities.CAMPFIRE.get(), 2);
+		super(PRTileEntities.CAMPFIRE.get(), 2);
 	}
 	
 	@Override
@@ -77,7 +77,7 @@ public class TEICampFire extends TEInventory implements ITickableTileEntity {
 		
 		if (!level.isClientSide) {
 			if (!isBurning()) {
-				int burnValue = InitRecipes.getBurnTime(FuelType.campfire, getItem(0).getItem());
+				int burnValue = PRRecipes.getBurnTime(FuelType.campfire, getItem(0).getItem());
 				if (burnValue > 0) {
 					maxBurnTime = burnValue;
 					burnTimeLeft = burnValue;
@@ -86,7 +86,7 @@ public class TEICampFire extends TEInventory implements ITickableTileEntity {
 			}
 			
 			if (isBurning()) {
-				SRCampFire rec = (SRCampFire) InitRecipes.getRecipeForInput(EnumRecipeType.campfire, new RISingle(getItem(1).getItem()));
+				SRCampFire rec = (SRCampFire) PRRecipes.getRecipeForInput(EnumRecipeType.campfire, new RISingle(getItem(1).getItem()));
 				
 				if (rec == null) {
 					cookTimeLeft = 0;

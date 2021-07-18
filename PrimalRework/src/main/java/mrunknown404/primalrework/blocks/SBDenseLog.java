@@ -1,8 +1,8 @@
 package mrunknown404.primalrework.blocks;
 
 import mrunknown404.primalrework.blocks.utils.SBRotatedPillar;
-import mrunknown404.primalrework.init.InitBlocks;
-import mrunknown404.primalrework.init.InitItemGroups;
+import mrunknown404.primalrework.registries.PRBlocks;
+import mrunknown404.primalrework.registries.PRItemGroups;
 import mrunknown404.primalrework.utils.HarvestInfo;
 import mrunknown404.primalrework.utils.MathH;
 import mrunknown404.primalrework.utils.enums.EnumStage;
@@ -19,7 +19,7 @@ import net.minecraft.world.World;
 public class SBDenseLog extends SBRotatedPillar {
 	
 	public SBDenseLog() {
-		super("dense_log", EnumStage.stage2, 16, InitItemGroups.BLOCKS, Material.WOOD, SoundType.WOOD, true, 0, 3, 6, false, HarvestInfo.AXE_MIN);
+		super("dense_log", EnumStage.stage2, 16, PRItemGroups.BLOCKS, Material.WOOD, SoundType.WOOD, true, 0, 3, 6, false, HarvestInfo.AXE_MIN);
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -46,7 +46,7 @@ public class SBDenseLog extends SBRotatedPillar {
 	
 	public static boolean isValidCharcoalPit(World w, BlockPos center) {
 		Block b = w.getBlockState(center).getBlock();
-		if (b != InitBlocks.DENSE_LOG.get()) {// && b != InitBlocks.CHARCOAL_PIT_MASTER) {
+		if (b != PRBlocks.DENSE_LOG.get()) {// && b != InitBlocks.CHARCOAL_PIT_MASTER) {
 			return false;
 		}
 		
@@ -64,7 +64,7 @@ public class SBDenseLog extends SBRotatedPillar {
 					if (x == -2 || x == 2) {
 						shouldBe = Blocks.DIRT;
 					} else {
-						shouldBe = InitBlocks.DENSE_LOG.get();
+						shouldBe = PRBlocks.DENSE_LOG.get();
 					}
 				} else if (z == 2 && MathH.within(x, -1, 1)) {
 					shouldBe = Blocks.DIRT;
@@ -73,13 +73,13 @@ public class SBDenseLog extends SBRotatedPillar {
 				if (shouldBe == null) {
 					return false;
 				} else if (shouldBe == Blocks.DIRT) {
-					if (toCheck == Blocks.GRASS || toCheck == Blocks.DIRT || toCheck == InitBlocks.MUSHROOM_GRASS.get()) {
+					if (toCheck == Blocks.GRASS || toCheck == Blocks.DIRT || toCheck == PRBlocks.MUSHROOM_GRASS.get()) {
 						continue;
 					}
 					return false;
-				} else if (shouldBe == InitBlocks.DENSE_LOG.get() && (toCheck == InitBlocks.DENSE_LOG.get())) {// || toCheck == InitBlocks.CHARCOAL_PIT_MASTER)) {
+				} else if (shouldBe == PRBlocks.DENSE_LOG.get() && (toCheck == PRBlocks.DENSE_LOG.get())) {// || toCheck == InitBlocks.CHARCOAL_PIT_MASTER)) {
 					Block nb = w.getBlockState(center.offset(x, 1, z)).getBlock();
-					if (nb == Blocks.GRASS || nb == Blocks.DIRT || nb == InitBlocks.MUSHROOM_GRASS.get()) {
+					if (nb == Blocks.GRASS || nb == Blocks.DIRT || nb == PRBlocks.MUSHROOM_GRASS.get()) {
 						continue;
 					}
 					return false;

@@ -1,11 +1,13 @@
-package mrunknown404.primalrework.client.gui.screen;
+package mrunknown404.primalrework.client.gui.screen.fixes;
 
 import java.util.OptionalLong;
+import java.util.Random;
 
 import org.apache.commons.lang3.StringUtils;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 
+import mrunknown404.primalrework.registries.PRWorld;
 import net.minecraft.client.gui.DialogTexts;
 import net.minecraft.client.gui.IGuiEventListener;
 import net.minecraft.client.gui.screen.DirtMessageScreen;
@@ -18,7 +20,6 @@ import net.minecraft.util.FileUtil;
 import net.minecraft.util.datafix.codec.DatapackCodec;
 import net.minecraft.util.registry.DynamicRegistries;
 import net.minecraft.util.registry.DynamicRegistries.Impl;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
@@ -29,7 +30,7 @@ import net.minecraft.world.GameType;
 import net.minecraft.world.WorldSettings;
 import net.minecraft.world.gen.settings.DimensionGeneratorSettings;
 
-public class ScreenCreatePrimalWorld extends Screen {
+public class PRCreateWorldScreen extends Screen {
 	private static final ITextComponent GAME_MODEL_LABEL = new TranslationTextComponent("selectWorld.gameMode");
 	private static final ITextComponent SEED_LABEL = new TranslationTextComponent("selectWorld.enterSeed");
 	private static final ITextComponent SEED_INFO = new TranslationTextComponent("selectWorld.seedInfo");
@@ -53,16 +54,13 @@ public class ScreenCreatePrimalWorld extends Screen {
 	private ITextComponent gameModeHelp2;
 	private String initName;
 	private GameRules gameRules = new GameRules();
-	private DimensionGeneratorSettings settings;
 	private final Impl impl;
 	
-	public ScreenCreatePrimalWorld(Screen lastScreen) {
+	public PRCreateWorldScreen(Screen lastScreen) {
 		super(new TranslationTextComponent("selectWorld.create"));
 		this.lastScreen = lastScreen;
 		this.initName = I18n.get("selectWorld.newWorld");
 		this.impl = DynamicRegistries.builtin();
-		this.settings = DimensionGeneratorSettings.makeDefault(impl.registryOrThrow(Registry.DIMENSION_TYPE_REGISTRY), impl.registryOrThrow(Registry.BIOME_REGISTRY),
-				impl.registryOrThrow(Registry.NOISE_GENERATOR_SETTINGS_REGISTRY));
 	}
 	
 	@Override
@@ -106,8 +104,7 @@ public class ScreenCreatePrimalWorld extends Screen {
 		}) {
 			@Override
 			public ITextComponent getMessage() {
-				return new TranslationTextComponent("options.generic_value", GAME_MODEL_LABEL,
-						new TranslationTextComponent("selectWorld.gameMode." + gameMode.gameType.getName()));
+				return new TranslationTextComponent("options.generic_value", GAME_MODEL_LABEL, new TranslationTextComponent("selectWorld.gameMode." + gameMode.name));
 			}
 			
 			@Override
@@ -222,7 +219,9 @@ public class ScreenCreatePrimalWorld extends Screen {
 		minecraft.forceSetScreen(new DirtMessageScreen(new TranslationTextComponent("createWorld.preparing")));
 		WorldSettings worldsettings = new WorldSettings(nameEdit.getValue().trim(), gameMode.gameType, hardCore, effectiveDifficulty, commands && !hardCore,
 				hardCore ? new GameRules() : gameRules, DatapackCodec.DEFAULT);
-		minecraft.createLevel(resultFolder, worldsettings, impl, settings.withSeed(hardCore, parseSeed()));
+		DimensionGeneratorSettings settings = PRWorld.PRIMAL_WORLD.get().createSettings(impl, 0, false, false, "");
+		minecraft.createLevel(resultFolder, worldsettings, impl,
+				settings.withSeed(hardCore, seedEdit.getValue().isEmpty() ? OptionalLong.of(new Random().nextLong()) : parseSeed()));
 	}
 	
 	private void setGameMode(GameMode gameMode) {
@@ -245,8 +244,8 @@ public class ScreenCreatePrimalWorld extends Screen {
 		}
 		
 		this.gameMode = gameMode;
-		gameModeHelp1 = new TranslationTextComponent("selectWorld.gameMode." + gameMode.gameType.getName() + ".line1");
-		gameModeHelp2 = new TranslationTextComponent("selectWorld.gameMode." + gameMode.gameType.getName() + ".line2");
+		gameModeHelp1 = new TranslationTextComponent("selectWorld.gameMode." + gameMode.name + ".line1");
+		gameModeHelp2 = new TranslationTextComponent("selectWorld.gameMode." + gameMode.name + ".line2");
 	}
 	
 	@Override
@@ -297,13 +296,15 @@ public class ScreenCreatePrimalWorld extends Screen {
 	}
 	
 	private static enum GameMode {
-		SURVIVAL(GameType.SURVIVAL),
-		HARDCORE(GameType.SURVIVAL),
-		CREATIVE(GameType.CREATIVE);
+		SURVIVAL("survival", GameType.SURVIVAL),
+		HARDCORE("hardcore", GameType.SURVIVAL),
+		CREATIVE("creative", GameType.CREATIVE);
 		
+		private final String name;
 		private final GameType gameType;
 		
-		private GameMode(GameType gameType) {
+		private GameMode(String name, GameType gameType) {
+			this.name = name;
 			this.gameType = gameType;
 		}
 	}

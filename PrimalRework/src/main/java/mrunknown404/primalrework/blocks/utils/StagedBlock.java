@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import mrunknown404.primalrework.events.client.TooltipCEvents;
-import mrunknown404.primalrework.init.InitItemGroups;
 import mrunknown404.primalrework.items.utils.StagedItem.ItemType;
+import mrunknown404.primalrework.registries.PRItemGroups;
 import mrunknown404.primalrework.utils.HarvestInfo;
 import mrunknown404.primalrework.utils.enums.EnumStage;
 import mrunknown404.primalrework.utils.enums.EnumToolType;
@@ -46,7 +46,7 @@ public class StagedBlock extends Block {
 	}
 	
 	public StagedBlock(String name, EnumStage stage, Material material, SoundType sound, float hardness, float blastResist, HarvestInfo info, HarvestInfo... extraInfos) {
-		this(name, stage, 64, InitItemGroups.BLOCKS, material, sound, true, 0, hardness, blastResist, false, BlockStateType.normal, BlockModelType.normal, info, extraInfos);
+		this(name, stage, 64, PRItemGroups.BLOCKS, material, sound, true, 0, hardness, blastResist, false, BlockStateType.normal, BlockModelType.normal, info, extraInfos);
 	}
 	
 	public StagedBlock addTooltip(int amount) {

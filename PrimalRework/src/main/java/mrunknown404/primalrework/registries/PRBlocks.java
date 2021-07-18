@@ -1,4 +1,4 @@
-package mrunknown404.primalrework.init;
+package mrunknown404.primalrework.registries;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +31,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.item.Items;
 import net.minecraftforge.fml.RegistryObject;
 
-public class InitBlocks {
+public class PRBlocks {
 	public static final List<RegistryObject<Block>> OREANDBLOCKS = new ArrayList<RegistryObject<Block>>();
 	
 	//MISC
@@ -45,7 +45,7 @@ public class InitBlocks {
 	public static final RegistryObject<Block> LIT_PRIMAL_TORCH;
 	public static final RegistryObject<Block> LIT_PRIMAL_WALL_TORCH;
 	public static final RegistryObject<Block> SALT = register(new StagedBlock("salt_block", EnumStage.stage1, Material.CLAY, SoundType.SAND, 1.25f, 1.25f,
-			new HarvestInfo(EnumToolType.shovel, EnumToolMaterial.clay, new DropInfo(() -> InitItems.SALT.get(), 4, 4))));
+			new HarvestInfo(EnumToolType.shovel, EnumToolMaterial.clay, new DropInfo(() -> PRItems.SALT.get(), 4, 4))));
 	public static final RegistryObject<Block> MUSHROOM_GRASS = register(new SBMushroomGrass());
 	public static final RegistryObject<Block> DENSE_LOG = register(new SBDenseLog());
 	public static final RegistryObject<Block> CHARCOAL_BLOCK = register(
@@ -73,9 +73,9 @@ public class InitBlocks {
 	}
 	
 	private static WallFloorWrap registerWallFloor(StagedBlock floorBlock, StagedBlock wallBlock) {
-		RegistryObject<Block> floor = Registry.BLOCKS.register(floorBlock.getRegName(), () -> floorBlock);
-		RegistryObject<Block> wall = Registry.BLOCKS.register(wallBlock.getRegName(), () -> wallBlock);
-		Registry.ITEMS.register(floorBlock.getRegName(), () -> new SIWallFloor(floorBlock, wallBlock));
+		RegistryObject<Block> floor = PRRegistry.BLOCKS.register(floorBlock.getRegName(), () -> floorBlock);
+		RegistryObject<Block> wall = PRRegistry.BLOCKS.register(wallBlock.getRegName(), () -> wallBlock);
+		PRRegistry.ITEMS.register(floorBlock.getRegName(), () -> new SIWallFloor(floorBlock, wallBlock));
 		return new WallFloorWrap(floor, wall);
 	}
 	
@@ -84,10 +84,10 @@ public class InitBlocks {
 	}
 	
 	private static RegistryObject<Block> register(StagedBlock block, boolean registerItem) {
-		RegistryObject<Block> reg = Registry.BLOCKS.register(block.getRegName(), () -> block);
+		RegistryObject<Block> reg = PRRegistry.BLOCKS.register(block.getRegName(), () -> block);
 		
 		if (registerItem) {
-			Registry.ITEMS.register(block.getRegName(), () -> new SIBlock(block));
+			PRRegistry.ITEMS.register(block.getRegName(), () -> new SIBlock(block));
 		}
 		return reg;
 	}

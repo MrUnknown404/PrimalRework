@@ -7,7 +7,7 @@ import mrunknown404.primalrework.blocks.SBStrippedLog;
 import mrunknown404.primalrework.blocks.SBUnlitPrimalWallTorch;
 import mrunknown404.primalrework.blocks.utils.StagedBlock;
 import mrunknown404.primalrework.blocks.utils.StagedBlock.BlockStateType;
-import mrunknown404.primalrework.init.Registry;
+import mrunknown404.primalrework.registries.PRRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.RotatedPillarBlock;
 import net.minecraft.data.DataGenerator;
@@ -36,7 +36,7 @@ class GeneratorBlockState extends BlockStateProvider {
 	
 	@Override
 	protected void registerStatesAndModels() {
-		for (RegistryObject<Block> regBlock : Registry.BLOCKS.getEntries()) {
+		for (RegistryObject<Block> regBlock : PRRegistry.BLOCKS.getEntries()) {
 			StagedBlock b = (StagedBlock) regBlock.get();
 			if (b.getBlockStateType() == BlockStateType.none) {
 				continue;

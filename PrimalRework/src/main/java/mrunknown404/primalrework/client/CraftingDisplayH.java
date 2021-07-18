@@ -8,11 +8,11 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import mrunknown404.primalrework.client.gui.screen.ScreenRecipeList;
-import mrunknown404.primalrework.init.InitRecipes;
-import mrunknown404.primalrework.init.InitStagedTags;
 import mrunknown404.primalrework.items.utils.StagedItem;
 import mrunknown404.primalrework.recipes.IStagedRecipe;
 import mrunknown404.primalrework.recipes.Ingredient;
+import mrunknown404.primalrework.registries.PRRecipes;
+import mrunknown404.primalrework.registries.PRStagedTags;
 import mrunknown404.primalrework.stage.StageH;
 import mrunknown404.primalrework.stage.VanillaRegistry;
 import mrunknown404.primalrework.utils.Cache;
@@ -88,14 +88,14 @@ public class CraftingDisplayH {
 	}
 	
 	public static void getLeftClick(Minecraft minecraft, Item item, ContainerScreen<?> lastScreen) {
-		Map<EnumRecipeType, List<IStagedRecipe<?, ?>>> recipes = InitRecipes.getRecipesForOutput(item);
+		Map<EnumRecipeType, List<IStagedRecipe<?, ?>>> recipes = PRRecipes.getRecipesForOutput(item);
 		if (!recipes.isEmpty()) {
 			minecraft.setScreen(new ScreenRecipeList(lastScreen, recipes, item));
 		}
 	}
 	
 	public static void getRightClick(Minecraft minecraft, Item item, ContainerScreen<?> lastScreen) {
-		Map<EnumRecipeType, List<IStagedRecipe<?, ?>>> recipes = InitRecipes.getRecipesContainingInput(new Ingredient(item, InitStagedTags.getItemsTags(item)));
+		Map<EnumRecipeType, List<IStagedRecipe<?, ?>>> recipes = PRRecipes.getRecipesContainingInput(new Ingredient(item, PRStagedTags.getItemsTags(item)));
 		if (!recipes.isEmpty()) {
 			minecraft.setScreen(new ScreenRecipeList(lastScreen, recipes, item));
 		}

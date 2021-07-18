@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import mrunknown404.primalrework.init.InitBlocks;
-import mrunknown404.primalrework.init.InitItems;
+import mrunknown404.primalrework.registries.PRBlocks;
+import mrunknown404.primalrework.registries.PRItems;
 import mrunknown404.primalrework.utils.HarvestInfo;
 import mrunknown404.primalrework.utils.HarvestInfo.DropInfo;
 import mrunknown404.primalrework.utils.enums.EnumStage;
@@ -1080,7 +1080,7 @@ public class VanillaRegistry {
 		registerItem(Items.CRACKED_POLISHED_BLACKSTONE_BRICKS, EnumStage.do_later);
 		registerItem(Items.RESPAWN_ANCHOR, EnumStage.do_later);
 		
-		registerBlock(Blocks.STONE, new HarvestInfo(EnumToolType.pickaxe, EnumToolMaterial.clay, new DropInfo(InitBlocks.GROUND_ROCK.get().asItem(), 4, 7)));
+		registerBlock(Blocks.STONE, new HarvestInfo(EnumToolType.pickaxe, EnumToolMaterial.clay, new DropInfo(PRBlocks.GROUND_ROCK.get().asItem(), 4, 7)));
 		registerBlock(Blocks.GRANITE, HarvestInfo.PICKAXE_MIN);
 		registerBlock(Blocks.POLISHED_GRANITE, HarvestInfo.PICKAXE_MIN);
 		registerBlock(Blocks.DIORITE, HarvestInfo.PICKAXE_MIN);
@@ -1107,8 +1107,8 @@ public class VanillaRegistry {
 		registerBlock(Blocks.BEDROCK, HarvestInfo.UNBREAKABLE);
 		registerBlock(Blocks.SAND, getDirts(Items.SAND));
 		registerBlock(Blocks.RED_SAND, getDirts(Items.SAND));
-		registerBlock(Blocks.GRAVEL, new HarvestInfo(EnumToolType.shovel, EnumToolMaterial.clay, new DropInfo(InitItems.GRAVEL.get(), 2, 4)),
-				new HarvestInfo(EnumToolType.none, EnumToolMaterial.hand, new DropInfo(InitItems.GRAVEL.get(), 1, 2)));
+		registerBlock(Blocks.GRAVEL, new HarvestInfo(EnumToolType.shovel, EnumToolMaterial.clay, new DropInfo(PRItems.GRAVEL.get(), 2, 4)),
+				new HarvestInfo(EnumToolType.none, EnumToolMaterial.hand, new DropInfo(PRItems.GRAVEL.get(), 1, 2)));
 		registerBlock(Blocks.GOLD_ORE, HarvestInfo.PICKAXE_MIN);
 		registerBlock(Blocks.IRON_ORE, HarvestInfo.PICKAXE_MIN);
 		registerBlock(Blocks.COAL_ORE, HarvestInfo.PICKAXE_MIN);
@@ -1173,8 +1173,8 @@ public class VanillaRegistry {
 		registerBlock(Blocks.DETECTOR_RAIL, HarvestInfo.PICKAXE_MIN);
 		registerBlock(Blocks.STICKY_PISTON, HarvestInfo.PICKAXE_MIN);
 		registerBlock(Blocks.COBWEB, new HarvestInfo(EnumToolType.knife, EnumToolMaterial.clay, new DropInfo(Items.STRING, 50)));
-		registerBlock(Blocks.GRASS, getGrasses(InitItems.PLANT_FIBER.get()));
-		registerBlock(Blocks.FERN, getGrasses(InitItems.PLANT_FIBER.get()));
+		registerBlock(Blocks.GRASS, getGrasses(PRItems.PLANT_FIBER.get()));
+		registerBlock(Blocks.FERN, getGrasses(PRItems.PLANT_FIBER.get()));
 		registerBlock(Blocks.DEAD_BUSH, getGrasses(Items.STICK));
 		registerBlock(Blocks.SEAGRASS, HarvestInfo.KNIFE_MIN, HarvestInfo.HAND);
 		registerBlock(Blocks.TALL_SEAGRASS, HarvestInfo.KNIFE_MIN, HarvestInfo.HAND);
@@ -1489,8 +1489,8 @@ public class VanillaRegistry {
 		registerBlock(Blocks.LILAC, HarvestInfo.HAND);
 		registerBlock(Blocks.ROSE_BUSH, HarvestInfo.HAND);
 		registerBlock(Blocks.PEONY, HarvestInfo.HAND);
-		registerBlock(Blocks.TALL_GRASS, getGrasses(InitItems.PLANT_FIBER.get()));
-		registerBlock(Blocks.LARGE_FERN, getGrasses(InitItems.PLANT_FIBER.get()));
+		registerBlock(Blocks.TALL_GRASS, getGrasses(PRItems.PLANT_FIBER.get()));
+		registerBlock(Blocks.LARGE_FERN, getGrasses(PRItems.PLANT_FIBER.get()));
 		registerBlock(Blocks.WHITE_BANNER, HarvestInfo.SAW_MIN);
 		registerBlock(Blocks.ORANGE_BANNER, HarvestInfo.SAW_MIN);
 		registerBlock(Blocks.MAGENTA_BANNER, HarvestInfo.SAW_MIN);

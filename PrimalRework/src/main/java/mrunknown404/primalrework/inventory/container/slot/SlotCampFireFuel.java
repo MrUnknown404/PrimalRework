@@ -1,7 +1,7 @@
 package mrunknown404.primalrework.inventory.container.slot;
 
-import mrunknown404.primalrework.init.InitRecipes;
-import mrunknown404.primalrework.init.InitRecipes.FuelType;
+import mrunknown404.primalrework.registries.PRRecipes;
+import mrunknown404.primalrework.registries.PRRecipes.FuelType;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
@@ -13,7 +13,7 @@ public class SlotCampFireFuel extends Slot {
 	
 	@Override
 	public boolean mayPlace(ItemStack stack) {
-		return InitRecipes.isFuelItem(FuelType.campfire, stack.getItem());
+		return PRRecipes.isFuelItem(FuelType.campfire, stack.getItem());
 	}
 	
 	@Override

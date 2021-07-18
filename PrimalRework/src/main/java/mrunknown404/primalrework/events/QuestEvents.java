@@ -1,10 +1,10 @@
 package mrunknown404.primalrework.events;
 
-import mrunknown404.primalrework.init.InitQuests;
 import mrunknown404.primalrework.quests.Quest;
 import mrunknown404.primalrework.quests.QuestTab;
 import mrunknown404.primalrework.quests.requirements.ItemRequirement;
 import mrunknown404.primalrework.quests.requirements.StagedTagRequirement;
+import mrunknown404.primalrework.registries.PRQuests;
 import mrunknown404.primalrework.stage.StageH;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -18,14 +18,14 @@ public class QuestEvents {
 			return;
 		}
 		
-		for (QuestTab tab : InitQuests.getTabs()) {
+		for (QuestTab tab : PRQuests.getTabs()) {
 			if (tab.getRoot() != null && StageH.hasAccessToStage(tab.getRoot().getStage()) && !tab.getRoot().isFinished()) {
 				tab.getRoot().finishQuest(e.world, null);
 			}
 		}
 		
 		all:
-		for (Quest q : InitQuests.getQuestCache()) {
+		for (Quest q : PRQuests.getQuestCache()) {
 			if (StageH.hasAccessToStage(q.getStage())) {
 				if (q.getRequirement() instanceof ItemRequirement) {
 					ItemRequirement req = (ItemRequirement) q.getRequirement();
