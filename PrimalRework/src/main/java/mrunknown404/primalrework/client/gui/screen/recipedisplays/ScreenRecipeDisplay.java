@@ -8,21 +8,24 @@ import mrunknown404.primalrework.client.gui.screen.ScreenRecipeList;
 import mrunknown404.primalrework.recipes.IStagedRecipe;
 import mrunknown404.primalrework.recipes.SRCampFire;
 import mrunknown404.primalrework.recipes.SRCrafting3;
+import mrunknown404.primalrework.utils.MathH;
 import mrunknown404.primalrework.utils.enums.EnumRecipeType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 public abstract class ScreenRecipeDisplay<T extends IStagedRecipe<T, ?>> {
-	
 	protected final List<T> recipes;
 	protected final Item output;
 	protected Minecraft mc;
 	protected FontRenderer font;
 	protected ItemRenderer ir;
-	protected int listWidth, listHeight;
+	protected ItemStack itemUnderMouse;
+	protected int listWidth, listHeight, maxPage;
+	public int maxRecipesSupported, page;
 	public final int thisHeight;
 	private ScreenRecipeList list;
 	
@@ -32,25 +35,34 @@ public abstract class ScreenRecipeDisplay<T extends IStagedRecipe<T, ?>> {
 		this.thisHeight = thisHeight;
 	}
 	
-	public final void init(Minecraft mc, ScreenRecipeList list) {
+	public final void init(Minecraft mc, ScreenRecipeList list, int maxRecipesSupported) {
 		this.mc = mc;
 		this.font = mc.font;
 		this.ir = mc.getItemRenderer();
 		this.list = list;
 		this.listWidth = list.width;
 		this.listHeight = list.height;
+		this.maxRecipesSupported = maxRecipesSupported;
+		this.page = 0;
+		this.maxPage = MathH.ceil((double) recipes.size() / (double) maxRecipesSupported);
 		
 		setup();
 	}
 	
 	public final void render(MatrixStack stack, int x, int y, int mouseX, int mouseY) {
-		draw(stack, x, y + 16, mouseX, mouseY);
+		itemUnderMouse = null;
+		int imin = page * maxRecipesSupported;
+		int imax = Math.min(recipes.size() - (page * maxRecipesSupported), maxRecipesSupported);
+		
+		for (int i = imin; i < imin + imax; i++) {
+			drawSlot(stack, x + (116 / 4), y + ((i - imin) * (thisHeight + 2)), mouseX, mouseY, i);
+		}
 	}
 	
 	//@formatter:off
 	protected abstract void setup();
 	public abstract void tick();
-	protected abstract void draw(MatrixStack stack, int x, int y, int mouseX, int mouseY);
+	protected abstract void drawSlot(MatrixStack stack, int left, int top, int mouseX, int mouseY, int drawSlot);
 	public abstract boolean mouseClicked(double mouseX, double mouseY, int button);
 	//@formatter:on
 	
@@ -82,7 +94,7 @@ public abstract class ScreenRecipeDisplay<T extends IStagedRecipe<T, ?>> {
 					}
 					
 					@Override
-					public void draw(MatrixStack stack, int x, int y, int mouseX, int mouseY) {
+					protected void drawSlot(MatrixStack stack, int left, int top, int mouseX, int mouseY, int drawSlot) {
 						
 					}
 					

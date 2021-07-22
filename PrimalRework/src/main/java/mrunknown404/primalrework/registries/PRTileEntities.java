@@ -19,6 +19,6 @@ public class PRTileEntities {
 	}
 	
 	//@formatter:off
-	public static void register() { }
+	static void register() { }
 	//@formatter:on
 }

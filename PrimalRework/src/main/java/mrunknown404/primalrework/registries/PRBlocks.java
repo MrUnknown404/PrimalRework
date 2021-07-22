@@ -92,7 +92,7 @@ public class PRBlocks {
 		return reg;
 	}
 	
-	public static void register() {
+	static void register() {
 		for (EnumAlloy alloy : EnumAlloy.values()) {
 			for (EnumOreValue value : EnumOreValue.values()) {
 				if (alloy.hasOre || value == EnumOreValue.block) {

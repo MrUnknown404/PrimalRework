@@ -17,7 +17,7 @@ class GeneratorBlockModel extends ModelProvider<TexturelessModelBuilder> {
 	
 	@Override
 	protected void registerModels() {
-		for (RegistryObject<Block> regBlock : PRRegistry.BLOCKS.getEntries()) {
+		for (RegistryObject<Block> regBlock : PRRegistry.getBlocks()) {
 			StagedBlock b = (StagedBlock) regBlock.get();
 			if (b.getBlockModelType() == BlockModelType.none) {
 				continue;

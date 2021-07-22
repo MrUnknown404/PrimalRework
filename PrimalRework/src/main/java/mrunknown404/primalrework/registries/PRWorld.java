@@ -19,6 +19,6 @@ public class PRWorld {
 			new ResourceLocation(PrimalRework.MOD_ID, "primal_world"));
 	
 	//@formatter:off
-	public static void register() { }
+	static void register() { }
 	//@formatter:on
 }

@@ -24,6 +24,6 @@ public class PRBiomes {
 	}
 	
 	//@formatter:off
-	public static void register() { }
+	static void register() { }
 	//@formatter:on
 }

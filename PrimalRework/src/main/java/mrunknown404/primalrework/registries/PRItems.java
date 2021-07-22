@@ -68,12 +68,13 @@ public class PRItems {
 		return PRRegistry.ITEMS.register(item.getRegName(), () -> item);
 	}
 	
-	public static void register() {
+	static void register() {
 		for (EnumToolType type : EnumToolType.values()) {
 			if (type != EnumToolType.none) {
 				registerCast(type);
 			}
 		}
+		
 		for (EnumAlloy alloy : EnumAlloy.values()) {
 			if (alloy.hasOre) {
 				for (EnumOreValue value : EnumOreValue.values()) {

@@ -32,7 +32,7 @@ class GeneratorItemModel extends ModelProvider<TexturelessModelBuilder> {
 	
 	@Override
 	protected void registerModels() {
-		for (RegistryObject<Item> regItem : PRRegistry.ITEMS.getEntries()) {
+		for (RegistryObject<Item> regItem : PRRegistry.getItems()) {
 			StagedItem i = (StagedItem) regItem.get();
 			if (i.getItemType() == ItemType.none) {
 				continue;

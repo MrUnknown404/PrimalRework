@@ -34,7 +34,7 @@ public class ScreenRecipeList extends Screen {
 	private int leftPos, topPos, curRecipe;
 	
 	//TODO make a max amount of tabs and add arrows for tabs
-	//TODO add a max for amount of recipes to display at once
+	//TODO add arrows to change pages
 	
 	public ScreenRecipeList(ContainerScreen<?> lastScreen, Map<EnumRecipeType, List<IStagedRecipe<?, ?>>> map, Item output) {
 		super(new TranslationTextComponent("screen.recipelist.title"));
@@ -55,7 +55,7 @@ public class ScreenRecipeList extends Screen {
 		topPos = 32;
 		
 		for (Data data : recipes) {
-			data.display.init(minecraft, this);
+			data.display.init(minecraft, this, MathH.floor((double) height / (double) (data.display.thisHeight + 18)));
 		}
 	}
 	
@@ -64,8 +64,8 @@ public class ScreenRecipeList extends Screen {
 		renderBackground(stack);
 		
 		Data curData = recipes.get(curRecipe);
-		int h = (curData.size * (curData.display.thisHeight + 2)) + 6;
-		int y = height < h ? topPos : (height - 150) / 2;
+		int h = Math.min(curData.size - (curData.display.page * curData.display.maxRecipesSupported), curData.display.maxRecipesSupported) * (curData.display.thisHeight + 2) + 6;
+		int y = height / 2 - h / 2;
 		
 		for (int i = 0; i < recipes.size(); i++) {
 			itemRenderer.renderGuiItem(recipes.get(i).type.icon, leftPos + 9 + (i * 29), y - 20);
@@ -89,7 +89,7 @@ public class ScreenRecipeList extends Screen {
 		ITextComponent text = curData.type.getFancyName();
 		font.draw(stack, text, leftPos + 90 - font.width(text) / 2, y + 4, ColorH.rgba2Int(45, 45, 45));
 		
-		curData.display.render(stack, leftPos, y, mouseX, mouseY);
+		curData.display.render(stack, leftPos, y + 16, mouseX, mouseY);
 	}
 	
 	@Override

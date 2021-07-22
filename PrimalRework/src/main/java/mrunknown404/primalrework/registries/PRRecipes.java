@@ -92,8 +92,8 @@ public class PRRecipes {
 				new SRCrafting3(EnumStage.stage0, PRTools.CLAY_SHOVEL.get(), 1, RICrafting3.shaped().set1x2(Items.CLAY_BALL, Items.STICK).finish()));
 		addRecipe(EnumRecipeType.crafting_3, new SRCrafting3(EnumStage.stage0, PRTools.CLAY_AXE.get(), 1,
 				RICrafting3.shaped().set2x2(Items.CLAY_BALL, Items.CLAY_BALL, Items.CLAY_BALL, Items.STICK).finish()));
-		addRecipe(EnumRecipeType.crafting_3,
-				new SRCrafting3(EnumStage.stage1, PRTools.WOOD_SHOVEL.get(), 1, RICrafting3.shaped().set1x3(PRStagedTags.ALL_LOGS, Items.STICK, Items.STICK).finish()));
+		//addRecipe(EnumRecipeType.crafting_3,
+		//		new SRCrafting3(EnumStage.stage1, PRTools.WOOD_SHOVEL.get(), 1, RICrafting3.shaped().set1x3(PRStagedTags.ALL_LOGS, Items.STICK, Items.STICK).finish()));
 		addRecipe(EnumRecipeType.crafting_3, new SRCrafting3(EnumStage.stage1, PRTools.WOOD_AXE.get(), 1,
 				RICrafting3.shaped().set2x3(PRStagedTags.ALL_LOGS, PRStagedTags.ALL_LOGS, PRStagedTags.ALL_LOGS, Items.STICK, null, Items.STICK).finish()));
 		addRecipe(EnumRecipeType.crafting_3,

@@ -43,7 +43,7 @@ public class BiomeProviderPrimal extends BiomeProvider {
 		this.seed = seed;
 		
 		List<Biome> biomes = new ArrayList<Biome>();
-		for (RegistryObject<Biome> b : PRRegistry.BIOMES.getEntries()) {
+		for (RegistryObject<Biome> b : PRRegistry.getBiomes()) {
 			biomes.add(b.get());
 		}
 		

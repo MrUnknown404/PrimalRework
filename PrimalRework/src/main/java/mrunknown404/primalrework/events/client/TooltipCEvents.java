@@ -31,10 +31,10 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 public class TooltipCEvents {
-	private Cache<ItemStack, List<ITextComponent>> tooltipCache = new Cache<ItemStack, List<ITextComponent>>() {
+	private static Cache<ItemStack, List<ITextComponent>> tooltipCache = new Cache<ItemStack, List<ITextComponent>>() {
 		@Override
 		public boolean is(ItemStack key) {
-			return this.key == null ? false : this.key.equals(key, false);
+			return this.key == null || key == null ? false : this.key.equals(key, false);
 		}
 	};
 	
@@ -44,17 +44,21 @@ public class TooltipCEvents {
 	@SubscribeEvent
 	public void onTooltip(ItemTooltipEvent e) {
 		ItemStack stack = e.getItemStack();
-		Item item = stack.getItem();
 		
 		List<ITextComponent> list = e.getToolTip();
-		IFormattableTextComponent name = (IFormattableTextComponent) list.get(0);
 		
-		list.clear();
-		
+		list = getTooltips(stack);
+		tooltipCache.set(stack, list);
+	}
+	
+	public static List<ITextComponent> getTooltips(ItemStack stack) {
 		if (tooltipCache.is(stack)) {
-			list.addAll(tooltipCache.get());
-			return;
+			return tooltipCache.get();
 		}
+		
+		IFormattableTextComponent name = (IFormattableTextComponent) stack.getDisplayName();
+		Item item = stack.getItem();
+		List<ITextComponent> list = new ArrayList<ITextComponent>();
 		
 		boolean isStaged = (item instanceof StagedItem);
 		
@@ -143,7 +147,7 @@ public class TooltipCEvents {
 			list.add(translate("tooltips.unknown").withStyle(STYLE_GRAY));
 		}
 		
-		tooltipCache.set(stack, list);
+		return list;
 	}
 	
 	//These are just used to make things neater

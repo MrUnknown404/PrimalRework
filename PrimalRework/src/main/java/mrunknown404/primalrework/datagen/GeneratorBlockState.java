@@ -36,7 +36,7 @@ class GeneratorBlockState extends BlockStateProvider {
 	
 	@Override
 	protected void registerStatesAndModels() {
-		for (RegistryObject<Block> regBlock : PRRegistry.BLOCKS.getEntries()) {
+		for (RegistryObject<Block> regBlock : PRRegistry.getBlocks()) {
 			StagedBlock b = (StagedBlock) regBlock.get();
 			if (b.getBlockStateType() == BlockStateType.none) {
 				continue;
