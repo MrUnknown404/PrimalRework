@@ -6,7 +6,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class SRCrafting3 implements IStagedRecipe<SRCrafting3, RICrafting3> {
-	
 	public final EnumStage stage;
 	public final ItemStack output;
 	public final RICrafting3 input;

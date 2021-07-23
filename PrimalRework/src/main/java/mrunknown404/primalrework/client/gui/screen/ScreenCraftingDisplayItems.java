@@ -203,23 +203,15 @@ public class ScreenCraftingDisplayItems extends Screen {
 		if (mouseX >= xStart) {
 			if (itemUnderMouse != null) {
 				if (button == 0) {
-					onLeftClick();
+					CraftingDisplayH.showHowToCraft(minecraft, itemUnderMouse, container);
 				} else if (button == 1) {
-					onRightClick();
+					CraftingDisplayH.showWhatCanBeMade(minecraft, itemUnderMouse, container);
 				}
 			}
 			return true;
 		}
 		
 		return false;
-	}
-	
-	private void onLeftClick() {
-		CraftingDisplayH.getLeftClick(minecraft, itemUnderMouse, container);
-	}
-	
-	private void onRightClick() {
-		CraftingDisplayH.getRightClick(minecraft, itemUnderMouse, container);
 	}
 	
 	private void renderGuiItem(ItemStack stack, IBakedModel model, MatrixStack matrixStack, IRenderTypeBuffer.Impl buffer, int x, int y) {

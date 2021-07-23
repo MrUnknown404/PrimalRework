@@ -87,14 +87,14 @@ public class CraftingDisplayH {
 		return ITEM_DATA.get(item.getItem()).is3D;
 	}
 	
-	public static void getLeftClick(Minecraft minecraft, Item item, ContainerScreen<?> lastScreen) {
+	public static void showHowToCraft(Minecraft minecraft, Item item, ContainerScreen<?> lastScreen) {
 		Map<EnumRecipeType, List<IStagedRecipe<?, ?>>> recipes = PRRecipes.getRecipesForOutput(item);
 		if (!recipes.isEmpty()) {
 			minecraft.setScreen(new ScreenRecipeList(lastScreen, recipes, item));
 		}
 	}
 	
-	public static void getRightClick(Minecraft minecraft, Item item, ContainerScreen<?> lastScreen) {
+	public static void showWhatCanBeMade(Minecraft minecraft, Item item, ContainerScreen<?> lastScreen) {
 		Map<EnumRecipeType, List<IStagedRecipe<?, ?>>> recipes = PRRecipes.getRecipesContainingInput(new Ingredient(item, PRStagedTags.getItemsTags(item)));
 		if (!recipes.isEmpty()) {
 			minecraft.setScreen(new ScreenRecipeList(lastScreen, recipes, item));

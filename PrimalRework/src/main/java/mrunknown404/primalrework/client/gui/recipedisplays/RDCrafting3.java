@@ -1,4 +1,4 @@
-package mrunknown404.primalrework.client.gui.screen.recipedisplays;
+package mrunknown404.primalrework.client.gui.recipedisplays;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.gui.GuiUtils;
 
-public class SRDCrafting3 extends ScreenRecipeDisplay<SRCrafting3> {
+public class RDCrafting3 extends RecipeDisplay<SRCrafting3> {
 	
 	private static final ResourceLocation BG = new ResourceLocation(PrimalRework.MOD_ID, "textures/gui/craftingdisplay/primal_crafting_table.png");
 	//TODO add shapeless symbol if the recipe's shapeless
@@ -26,7 +26,7 @@ public class SRDCrafting3 extends ScreenRecipeDisplay<SRCrafting3> {
 	private Ingredient lastIng;
 	private int ingSize, curIng, ti;
 	
-	protected SRDCrafting3(List<SRCrafting3> recipes, Item output) {
+	protected RDCrafting3(List<SRCrafting3> recipes, Item output) {
 		super(recipes, output, 54);
 	}
 	

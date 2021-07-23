@@ -10,20 +10,21 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 
 import mrunknown404.primalrework.PrimalRework;
 import mrunknown404.primalrework.client.ColorH;
-import mrunknown404.primalrework.client.CraftingDisplayH;
-import mrunknown404.primalrework.client.gui.screen.recipedisplays.ScreenRecipeDisplay;
+import mrunknown404.primalrework.client.gui.recipedisplays.RecipeDisplay;
 import mrunknown404.primalrework.recipes.IStagedRecipe;
 import mrunknown404.primalrework.utils.MathH;
 import mrunknown404.primalrework.utils.enums.EnumRecipeType;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
+import net.minecraft.client.gui.widget.button.Button;
+import net.minecraft.client.gui.widget.button.Button.IPressable;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 
 public class ScreenRecipeList extends Screen {
-	
 	private static final ResourceLocation BG = new ResourceLocation(PrimalRework.MOD_ID, "textures/gui/craftingdisplay/crafting_display_background.png");
 	private static final ResourceLocation TAB = new ResourceLocation(PrimalRework.MOD_ID, "textures/gui/craftingdisplay/crafting_display_tab.png");
 	
@@ -31,10 +32,11 @@ public class ScreenRecipeList extends Screen {
 	
 	private final ContainerScreen<?> lastScreen;
 	private final List<Data> recipes;
-	private int leftPos, topPos, curRecipe;
+	private int leftPos, topPos, curRecipeTab;
+	private Button leftButton, rightButton;
+	private ITextComponent recipeName, pageCount;
 	
 	//TODO make a max amount of tabs and add arrows for tabs
-	//TODO add arrows to change pages
 	
 	public ScreenRecipeList(ContainerScreen<?> lastScreen, Map<EnumRecipeType, List<IStagedRecipe<?, ?>>> map, Item output) {
 		super(new TranslationTextComponent("screen.recipelist.title"));
@@ -44,7 +46,7 @@ public class ScreenRecipeList extends Screen {
 		for (EnumRecipeType type : EnumRecipeType.values()) {
 			if (map.containsKey(type)) {
 				List<IStagedRecipe<?, ?>> list = map.get(type);
-				recipes.add(new Data(type, ScreenRecipeDisplay.createFrom(type, list, output), list.size()));
+				recipes.add(new Data(type, RecipeDisplay.createFrom(type, list, output), list.size()));
 			}
 		}
 	}
@@ -55,46 +57,66 @@ public class ScreenRecipeList extends Screen {
 		topPos = 32;
 		
 		for (Data data : recipes) {
-			data.display.init(minecraft, this, MathH.floor((double) height / (double) (data.display.thisHeight + 18)));
+			data.display.init(minecraft, this);
 		}
+		
+		curRecipeTab = 0;
+		addButton(leftButton = new Button(leftPos - 22, topPos + 4, 20, 20, new StringTextComponent("<"), new IPressable() {
+			@Override
+			public void onPress(Button button) {
+				recipes.get(curRecipeTab).display.decreasePage();
+			}
+		}));
+		
+		addButton(rightButton = new Button(leftPos + 182, topPos + 4, 20, 20, new StringTextComponent(">"), new IPressable() {
+			@Override
+			public void onPress(Button button) {
+				recipes.get(curRecipeTab).display.increasePage();
+			}
+		}));
+		
+		beforeTabChange();
+		afterTabChange();
 	}
 	
 	@Override
 	public void render(MatrixStack stack, int mouseX, int mouseY, float delta) {
 		renderBackground(stack);
 		
-		Data curData = recipes.get(curRecipe);
-		int h = Math.min(curData.size - (curData.display.page * curData.display.maxRecipesSupported), curData.display.maxRecipesSupported) * (curData.display.thisHeight + 2) + 6;
-		int y = height / 2 - h / 2;
+		Data curData = recipes.get(curRecipeTab);
+		int h = Math.min(curData.size - (curData.display.getPage() * curData.display.maxRecipesSupported), curData.display.maxRecipesSupported) *
+				(curData.display.thisHeight + 2) + 6;
 		
 		for (int i = 0; i < recipes.size(); i++) {
-			itemRenderer.renderGuiItem(recipes.get(i).type.icon, leftPos + 9 + (i * 29), y - 20);
+			itemRenderer.renderGuiItem(recipes.get(i).type.icon, leftPos + 9 + (i * 29), topPos - 20);
 		}
 		
 		minecraft.textureManager.bind(TAB);
 		for (int i = 0; i < recipes.size(); i++) {
-			if (i != curRecipe) {
-				blit(stack, leftPos + 3 + (i * 29), y - 26, 0, 0, 28, 29, 28, 29);
+			if (i != curRecipeTab) {
+				blit(stack, leftPos + 3 + (i * 29), topPos - 26, 0, 0, 28, 29, 28, 29);
 			}
 		}
 		
+		h += 8;
 		minecraft.textureManager.bind(BG);
-		blit(stack, leftPos, y, 0, 0, 180, 12, 180, 16);
-		blit(stack, leftPos, y + 12, 0, h, 180, h, 180, h * 3);
-		blit(stack, leftPos, y + 12 + h, 0, 12, 180, 4, 180, 16);
+		blit(stack, leftPos, topPos, 0, 0, 180, 12, 180, 16);
+		blit(stack, leftPos, topPos + 12, 0, h, 180, h, 180, (h) * 3);
+		blit(stack, leftPos, topPos + h + 12, 0, 12, 180, 4, 180, 16);
 		
 		minecraft.textureManager.bind(TAB);
-		blit(stack, leftPos + 3 + (curRecipe * 29), y - 26, 0, 0, 28, 29, 28, 29);
+		blit(stack, leftPos + 3 + (curRecipeTab * 29), topPos - 26, 0, 0, 28, 29, 28, 29);
 		
-		ITextComponent text = curData.type.getFancyName();
-		font.draw(stack, text, leftPos + 90 - font.width(text) / 2, y + 4, ColorH.rgba2Int(45, 45, 45));
+		font.draw(stack, recipeName, leftPos + 90 - font.width(recipeName) / 2, topPos + 5, ColorH.rgba2Int(45, 45, 45));
+		font.draw(stack, pageCount, leftPos + 90 - font.width(pageCount) / 2, topPos + h + 3, ColorH.rgba2Int(45, 45, 45));
 		
-		curData.display.render(stack, leftPos, y + 16, mouseX, mouseY);
+		curData.display.render(stack, leftPos, topPos + 16, mouseX, mouseY);
+		super.render(stack, mouseX, mouseY, delta);
 	}
 	
 	@Override
 	public void tick() {
-		recipes.get(curRecipe).display.tick();
+		recipes.get(curRecipeTab).display.tick();
 	}
 	
 	@Override
@@ -102,12 +124,21 @@ public class ScreenRecipeList extends Screen {
 		minecraft.setScreen(lastScreen);
 	}
 	
-	public void setLeftClickScreen(Item item) {
-		CraftingDisplayH.getLeftClick(minecraft, item, lastScreen);
+	private void beforeTabChange() {
+		Data curData = recipes.get(curRecipeTab);
+		boolean flag = curData.display.getMaxPages() != 1;
+		leftButton.active = flag;
+		rightButton.active = flag;
 	}
 	
-	public void setRightClickScreen(Item item) {
-		CraftingDisplayH.getRightClick(minecraft, item, lastScreen);
+	private void afterTabChange() {
+		Data curData = recipes.get(curRecipeTab);
+		recipeName = curData.type.getFancyName();
+		refreshPageCount(curData.display);
+	}
+	
+	public void refreshPageCount(RecipeDisplay<?> display) {
+		pageCount = new StringTextComponent((display.getPage() + 1) + "/" + display.getMaxPages());
 	}
 	
 	@Override
@@ -115,12 +146,14 @@ public class ScreenRecipeList extends Screen {
 		for (int i = 0; i < recipes.size(); i++) {
 			int x = leftPos + 3 + (i * 29), y = topPos - 26;
 			if (MathH.within(mouseX, x, x + 28) && MathH.within(mouseY, y, y + 26)) {
-				curRecipe = i;
+				beforeTabChange();
+				curRecipeTab = i;
+				afterTabChange();
 				break;
 			}
 		}
 		
-		return recipes.get(curRecipe).display.mouseClicked(mouseX, mouseY, button);
+		return super.mouseClicked(mouseX, mouseY, button) || recipes.get(curRecipeTab).display.mouseClicked(mouseX, mouseY, button);
 	}
 	
 	@Override
@@ -132,12 +165,16 @@ public class ScreenRecipeList extends Screen {
 		return super.keyPressed(key, p_231046_2_, p_231046_3_);
 	}
 	
+	public ContainerScreen<?> getLastScreen() {
+		return lastScreen;
+	}
+	
 	private static class Data {
 		private final EnumRecipeType type;
-		private final ScreenRecipeDisplay<?> display;
+		private final RecipeDisplay<?> display;
 		private final int size;
 		
-		private Data(EnumRecipeType type, ScreenRecipeDisplay<?> display, int size) {
+		private Data(EnumRecipeType type, RecipeDisplay<?> display, int size) {
 			this.type = type;
 			this.display = display;
 			this.size = size;

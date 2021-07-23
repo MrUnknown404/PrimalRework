@@ -1,9 +1,10 @@
-package mrunknown404.primalrework.client.gui.screen.recipedisplays;
+package mrunknown404.primalrework.client.gui.recipedisplays;
 
 import java.util.List;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 
+import mrunknown404.primalrework.client.CraftingDisplayH;
 import mrunknown404.primalrework.client.gui.screen.ScreenRecipeList;
 import mrunknown404.primalrework.recipes.IStagedRecipe;
 import mrunknown404.primalrework.recipes.SRCampFire;
@@ -17,34 +18,34 @@ import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public abstract class ScreenRecipeDisplay<T extends IStagedRecipe<T, ?>> {
+public abstract class RecipeDisplay<T extends IStagedRecipe<T, ?>> {
 	protected final List<T> recipes;
 	protected final Item output;
 	protected Minecraft mc;
 	protected FontRenderer font;
 	protected ItemRenderer ir;
 	protected ItemStack itemUnderMouse;
-	protected int listWidth, listHeight, maxPage;
-	public int maxRecipesSupported, page;
+	protected int listWidth, listHeight, maxPages, page;
+	public int maxRecipesSupported;
 	public final int thisHeight;
 	private ScreenRecipeList list;
 	
-	protected ScreenRecipeDisplay(List<T> recipes, Item output, int thisHeight) {
+	protected RecipeDisplay(List<T> recipes, Item output, int thisHeight) {
 		this.recipes = recipes;
 		this.output = output;
 		this.thisHeight = thisHeight;
 	}
 	
-	public final void init(Minecraft mc, ScreenRecipeList list, int maxRecipesSupported) {
+	public final void init(Minecraft mc, ScreenRecipeList list) {
 		this.mc = mc;
 		this.font = mc.font;
 		this.ir = mc.getItemRenderer();
 		this.list = list;
 		this.listWidth = list.width;
 		this.listHeight = list.height;
-		this.maxRecipesSupported = maxRecipesSupported;
+		this.maxRecipesSupported = MathH.floor((double) list.height / (double) (thisHeight + 26));
 		this.page = 0;
-		this.maxPage = MathH.ceil((double) recipes.size() / (double) maxRecipesSupported);
+		this.maxPages = MathH.ceil((double) recipes.size() / (double) maxRecipesSupported);
 		
 		setup();
 	}
@@ -70,19 +71,43 @@ public abstract class ScreenRecipeDisplay<T extends IStagedRecipe<T, ?>> {
 		AbstractGui.blit(stack, x, y, xuv, yuv, w, h, wuv, huv);
 	}
 	
+	public int getMaxPages() {
+		return maxPages;
+	}
+	
+	public int getPage() {
+		return page;
+	}
+	
+	public void increasePage() {
+		page++;
+		if (page > maxPages - 1) {
+			page = 0;
+		}
+		list.refreshPageCount(this);
+	}
+	
+	public void decreasePage() {
+		page--;
+		if (page < 0) {
+			page = maxPages - 1;
+		}
+		list.refreshPageCount(this);
+	}
+	
 	protected void setLeftClickScreen(Item item) {
-		list.setLeftClickScreen(item);
+		CraftingDisplayH.showHowToCraft(mc, item, list.getLastScreen());
 	}
 	
 	protected void setRightClickScreen(Item item) {
-		list.setRightClickScreen(item);
+		CraftingDisplayH.showWhatCanBeMade(mc, item, list.getLastScreen());
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static <T extends IStagedRecipe<?, ?>> ScreenRecipeDisplay<?> createFrom(EnumRecipeType type, List<T> recipes, Item output) {
+	public static <T extends IStagedRecipe<?, ?>> RecipeDisplay<?> createFrom(EnumRecipeType type, List<T> recipes, Item output) {
 		switch (type) {
 			case campfire:
-				return new ScreenRecipeDisplay<SRCampFire>((List<SRCampFire>) recipes, output, 1) { //TODO replace this with something permanent
+				return new RecipeDisplay<SRCampFire>((List<SRCampFire>) recipes, output, 1) { //TODO replace this with something permanent
 					@Override
 					protected void setup() {
 						
@@ -104,7 +129,7 @@ public abstract class ScreenRecipeDisplay<T extends IStagedRecipe<T, ?>> {
 					}
 				};
 			case crafting_3:
-				return new SRDCrafting3((List<SRCrafting3>) recipes, output);
+				return new RDCrafting3((List<SRCrafting3>) recipes, output);
 		}
 		
 		return null;

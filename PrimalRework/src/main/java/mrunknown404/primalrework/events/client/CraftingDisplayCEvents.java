@@ -21,10 +21,10 @@ public class CraftingDisplayCEvents {
 	public void onScreenToggle(GuiOpenEvent e) {
 		if (e.getGui() == null) {
 			screen = null;
+		} else if (e.getGui() instanceof ContainerScreen) {
+			screen = new ScreenCraftingDisplayItems((ContainerScreen<?>) e.getGui());
 		} else {
-			if (e.getGui() instanceof ContainerScreen) {
-				screen = new ScreenCraftingDisplayItems((ContainerScreen<?>) e.getGui());
-			}
+			screen = null;
 		}
 	}
 	
