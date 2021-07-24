@@ -43,7 +43,7 @@ public class TEIPrimalCraftingTable extends TEInventory {
 		}
 		
 		SRCrafting3 rec = (SRCrafting3) PRRecipes.getRecipeForInput(EnumRecipeType.crafting_3, RICrafting3.fromInventory(ingredients));
-		ItemStack stack = rec == null ? ItemStack.EMPTY : rec.output.copy();
+		ItemStack stack = rec == null ? ItemStack.EMPTY : rec.getOutput().copy();
 		
 		if (!lastStack.equals(stack, false)) {
 			setItem(9, stack);

@@ -12,14 +12,20 @@ import mrunknown404.primalrework.PrimalRework;
 import mrunknown404.primalrework.client.ColorH;
 import mrunknown404.primalrework.client.gui.recipedisplays.RecipeDisplay;
 import mrunknown404.primalrework.recipes.IStagedRecipe;
+import mrunknown404.primalrework.registries.PRFuels;
 import mrunknown404.primalrework.utils.MathH;
+import mrunknown404.primalrework.utils.Pair;
+import mrunknown404.primalrework.utils.enums.EnumFuelType;
 import mrunknown404.primalrework.utils.enums.EnumRecipeType;
+import mrunknown404.primalrework.utils.enums.ICraftingInput;
+import net.minecraft.client.audio.SimpleSound;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.client.gui.widget.button.Button.IPressable;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -38,15 +44,25 @@ public class ScreenRecipeList extends Screen {
 	
 	//TODO make a max amount of tabs and add arrows for tabs
 	
-	public ScreenRecipeList(ContainerScreen<?> lastScreen, Map<EnumRecipeType, List<IStagedRecipe<?, ?>>> map, Item output) {
+	public ScreenRecipeList(ContainerScreen<?> lastScreen, Map<EnumRecipeType, List<IStagedRecipe<?, ?>>> recipes, Map<EnumFuelType, Pair<Item, Integer>> fuels, Item output) {
 		super(new TranslationTextComponent("screen.recipelist.title"));
 		this.lastScreen = lastScreen;
 		this.recipes = new ArrayList<Data>();
 		
-		for (EnumRecipeType type : EnumRecipeType.values()) {
-			if (map.containsKey(type)) {
-				List<IStagedRecipe<?, ?>> list = map.get(type);
-				recipes.add(new Data(type, RecipeDisplay.createFrom(type, list, output), list.size()));
+		if (recipes != null) {
+			for (EnumRecipeType type : EnumRecipeType.values()) {
+				if (recipes.containsKey(type)) {
+					List<IStagedRecipe<?, ?>> list = recipes.get(type);
+					this.recipes.add(new Data(type, RecipeDisplay.createFrom(type, list, output), list.size()));
+				}
+			}
+		}
+		
+		if (fuels != null) {
+			for (EnumFuelType type : EnumFuelType.values()) {
+				if (fuels.containsKey(type)) {
+					this.recipes.add(new Data(type, RecipeDisplay.createFrom(type, PRFuels.convertToRecipes(type, fuels.get(type)), output), fuels.size()));
+				}
 			}
 		}
 	}
@@ -75,8 +91,7 @@ public class ScreenRecipeList extends Screen {
 			}
 		}));
 		
-		beforeTabChange();
-		afterTabChange();
+		onTabChange(true);
 	}
 	
 	@Override
@@ -84,11 +99,11 @@ public class ScreenRecipeList extends Screen {
 		renderBackground(stack);
 		
 		Data curData = recipes.get(curRecipeTab);
-		int h = Math.min(curData.size - (curData.display.getPage() * curData.display.maxRecipesSupported), curData.display.maxRecipesSupported) *
+		int h = Math.min(curData.size - (curData.display.getPage() * curData.display.getMaxRecipesSupported()), curData.display.getMaxRecipesSupported()) *
 				(curData.display.thisHeight + 2) + 6;
 		
 		for (int i = 0; i < recipes.size(); i++) {
-			itemRenderer.renderGuiItem(recipes.get(i).type.icon, leftPos + 9 + (i * 29), topPos - 20);
+			itemRenderer.renderGuiItem(recipes.get(i).type.getIcon(), leftPos + 9 + (i * 29), topPos - 20);
 		}
 		
 		minecraft.textureManager.bind(TAB);
@@ -124,17 +139,17 @@ public class ScreenRecipeList extends Screen {
 		minecraft.setScreen(lastScreen);
 	}
 	
-	private void beforeTabChange() {
+	private void onTabChange(boolean isSilent) {
 		Data curData = recipes.get(curRecipeTab);
 		boolean flag = curData.display.getMaxPages() != 1;
-		leftButton.active = flag;
-		rightButton.active = flag;
-	}
-	
-	private void afterTabChange() {
-		Data curData = recipes.get(curRecipeTab);
 		recipeName = curData.type.getFancyName();
 		refreshPageCount(curData.display);
+		leftButton.active = flag;
+		rightButton.active = flag;
+		
+		if (!isSilent) {
+			minecraft.getSoundManager().play(SimpleSound.forUI(SoundEvents.UI_BUTTON_CLICK, 1));
+		}
 	}
 	
 	public void refreshPageCount(RecipeDisplay<?> display) {
@@ -146,14 +161,13 @@ public class ScreenRecipeList extends Screen {
 		for (int i = 0; i < recipes.size(); i++) {
 			int x = leftPos + 3 + (i * 29), y = topPos - 26;
 			if (MathH.within(mouseX, x, x + 28) && MathH.within(mouseY, y, y + 26)) {
-				beforeTabChange();
 				curRecipeTab = i;
-				afterTabChange();
+				onTabChange(false);
 				break;
 			}
 		}
 		
-		return super.mouseClicked(mouseX, mouseY, button) || recipes.get(curRecipeTab).display.mouseClicked(mouseX, mouseY, button);
+		return super.mouseClicked(mouseX, mouseY, button) || recipes.get(curRecipeTab).display.mouseClicked(button);
 	}
 	
 	@Override
@@ -170,11 +184,11 @@ public class ScreenRecipeList extends Screen {
 	}
 	
 	private static class Data {
-		private final EnumRecipeType type;
+		private final ICraftingInput type;
 		private final RecipeDisplay<?> display;
 		private final int size;
 		
-		private Data(EnumRecipeType type, RecipeDisplay<?> display, int size) {
+		private Data(ICraftingInput type, RecipeDisplay<?> display, int size) {
 			this.type = type;
 			this.display = display;
 			this.size = size;

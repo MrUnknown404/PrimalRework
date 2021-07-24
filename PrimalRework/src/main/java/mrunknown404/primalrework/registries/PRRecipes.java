@@ -19,15 +19,14 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 
 public class PRRecipes {
-	private static final Map<FuelType, Map<Item, Integer>> FUELS = new HashMap<FuelType, Map<Item, Integer>>();
 	private static final Map<EnumRecipeType, List<IStagedRecipe<?, ?>>> RECIPES = new HashMap<EnumRecipeType, List<IStagedRecipe<?, ?>>>();
 	
 	//haha these names suck and won't be confusing later!
-	private static Map<EnumRecipeType, Cache<Item, List<IStagedRecipe<?, ?>>>> cacheRecipesForOutput0 = new HashMap<EnumRecipeType, Cache<Item, List<IStagedRecipe<?, ?>>>>();
-	private static Map<EnumRecipeType, Cache<RecipeInput<?>, IStagedRecipe<?, ?>>> cacheRecipesForInput = new HashMap<EnumRecipeType, Cache<RecipeInput<?>, IStagedRecipe<?, ?>>>();
-	private static Map<EnumRecipeType, Cache<Ingredient, List<IStagedRecipe<?, ?>>>> cacheRecipesContainingInput0 = new HashMap<EnumRecipeType, Cache<Ingredient, List<IStagedRecipe<?, ?>>>>();
-	private static Cache<Item, Map<EnumRecipeType, List<IStagedRecipe<?, ?>>>> cacheRecipesForOutput1 = new Cache<Item, Map<EnumRecipeType, List<IStagedRecipe<?, ?>>>>();
-	private static Cache<Ingredient, Map<EnumRecipeType, List<IStagedRecipe<?, ?>>>> cacheRecipesContainingInput1 = new Cache<Ingredient, Map<EnumRecipeType, List<IStagedRecipe<?, ?>>>>() {
+	private static final Map<EnumRecipeType, Cache<Item, List<IStagedRecipe<?, ?>>>> cacheRecipesForOutput0 = new HashMap<EnumRecipeType, Cache<Item, List<IStagedRecipe<?, ?>>>>();
+	private static final Map<EnumRecipeType, Cache<RecipeInput<?>, IStagedRecipe<?, ?>>> cacheRecipesForInput = new HashMap<EnumRecipeType, Cache<RecipeInput<?>, IStagedRecipe<?, ?>>>();
+	private static final Map<EnumRecipeType, Cache<Ingredient, List<IStagedRecipe<?, ?>>>> cacheRecipesContainingInput0 = new HashMap<EnumRecipeType, Cache<Ingredient, List<IStagedRecipe<?, ?>>>>();
+	private static final Cache<Item, Map<EnumRecipeType, List<IStagedRecipe<?, ?>>>> cacheRecipesForOutput1 = new Cache<Item, Map<EnumRecipeType, List<IStagedRecipe<?, ?>>>>();
+	private static final Cache<Ingredient, Map<EnumRecipeType, List<IStagedRecipe<?, ?>>>> cacheRecipesContainingInput1 = new Cache<Ingredient, Map<EnumRecipeType, List<IStagedRecipe<?, ?>>>>() {
 		@Override
 		public boolean is(Ingredient key) {
 			return this.key == null ? false : this.key.matches(key);
@@ -38,9 +37,6 @@ public class PRRecipes {
 	// TODO add dye recipes
 	
 	public static void load() {
-		for (FuelType type : FuelType.values()) {
-			FUELS.put(type, new HashMap<Item, Integer>());
-		}
 		for (EnumRecipeType type : EnumRecipeType.values()) {
 			RECIPES.put(type, new ArrayList<IStagedRecipe<?, ?>>());
 			cacheRecipesForOutput0.put(type, new Cache<Item, List<IStagedRecipe<?, ?>>>());
@@ -56,20 +52,6 @@ public class PRRecipes {
 					return this.key == null ? false : this.key.matches(key);
 				}
 			});
-		}
-		
-		int oneCampfireItem = 200;
-		addFuel(FuelType.campfire, Items.STICK, oneCampfireItem / 4);
-		addFuel(FuelType.campfire, Items.COAL, oneCampfireItem * 8);
-		addFuel(FuelType.campfire, Items.CHARCOAL, oneCampfireItem * 8);
-		for (Item item : PRStagedTags.ALL_LOGS.getItemsFromAllStages()) {
-			addFuel(FuelType.campfire, item, oneCampfireItem * 4);
-		}
-		for (Item item : PRStagedTags.ALL_PLANK_BLOCKS.getItemsFromAllStages()) {
-			addFuel(FuelType.campfire, item, oneCampfireItem);
-		}
-		for (Item item : PRStagedTags.ALL_PLANKS.getItemsFromAllStages()) {
-			addFuel(FuelType.campfire, item, oneCampfireItem / 8);
 		}
 		
 		addRecipe(EnumRecipeType.campfire, new SRCampFire(EnumStage.stage1, Items.PORKCHOP, Items.COOKED_PORKCHOP));
@@ -88,16 +70,14 @@ public class PRRecipes {
 				RICrafting3.shapeless().set(PRItems.PLANT_FIBER.get(), PRItems.PLANT_FIBER.get(), PRItems.PLANT_FIBER.get()).finish()));
 		addRecipe(EnumRecipeType.crafting_3, new SRCrafting3(EnumStage.stage0, PRItems.PLANT_MESH.get(), 1,
 				RICrafting3.shaped().set2x2(Items.STICK, PRItems.PLANT_FIBER.get(), PRItems.PLANT_FIBER.get(), Items.STICK).finish()));
-		addRecipe(EnumRecipeType.crafting_3,
-				new SRCrafting3(EnumStage.stage0, PRTools.CLAY_SHOVEL.get(), 1, RICrafting3.shaped().set1x2(Items.CLAY_BALL, Items.STICK).finish()));
+		addRecipe(EnumRecipeType.crafting_3, new SRCrafting3(EnumStage.stage0, PRTools.CLAY_SHOVEL.get(), 1, RICrafting3.shaped().set1x2(Items.CLAY_BALL, Items.STICK).finish()));
 		addRecipe(EnumRecipeType.crafting_3, new SRCrafting3(EnumStage.stage0, PRTools.CLAY_AXE.get(), 1,
 				RICrafting3.shaped().set2x2(Items.CLAY_BALL, Items.CLAY_BALL, Items.CLAY_BALL, Items.STICK).finish()));
 		//addRecipe(EnumRecipeType.crafting_3,
 		//		new SRCrafting3(EnumStage.stage1, PRTools.WOOD_SHOVEL.get(), 1, RICrafting3.shaped().set1x3(PRStagedTags.ALL_LOGS, Items.STICK, Items.STICK).finish()));
 		addRecipe(EnumRecipeType.crafting_3, new SRCrafting3(EnumStage.stage1, PRTools.WOOD_AXE.get(), 1,
 				RICrafting3.shaped().set2x3(PRStagedTags.ALL_LOGS, PRStagedTags.ALL_LOGS, PRStagedTags.ALL_LOGS, Items.STICK, null, Items.STICK).finish()));
-		addRecipe(EnumRecipeType.crafting_3,
-				new SRCrafting3(EnumStage.stage1, Items.COBBLESTONE, 1, RICrafting3.shaped().setRing(PRBlocks.GROUND_ROCK.get().asItem()).finish()));
+		addRecipe(EnumRecipeType.crafting_3, new SRCrafting3(EnumStage.stage1, Items.COBBLESTONE, 1, RICrafting3.shaped().setRing(PRBlocks.GROUND_ROCK.get().asItem()).finish()));
 		addRecipe(EnumRecipeType.crafting_3,
 				new SRCrafting3(EnumStage.stage0, PRBlocks.THATCH.get().asItem(), 1, RICrafting3.shaped().set2x2(PRItems.PLANT_FIBER.get()).finish()));
 		addRecipe(EnumRecipeType.crafting_3,
@@ -143,10 +123,6 @@ public class PRRecipes {
 				new SRCrafting3(EnumStage.stage0, Items.RED_WOOL, 1, RICrafting3.shaped().setRing(PRStagedTags.ALL_WOOL).setMiddle(Items.RED_DYE).finish()));
 		addRecipe(EnumRecipeType.crafting_3,
 				new SRCrafting3(EnumStage.stage0, Items.BLACK_WOOL, 1, RICrafting3.shaped().setRing(PRStagedTags.ALL_WOOL).setMiddle(Items.BLACK_DYE).finish()));
-	}
-	
-	public static void addFuel(FuelType type, Item item, int cookTime) {
-		FUELS.get(type).put(item, cookTime);
 	}
 	
 	public static void addRecipe(EnumRecipeType type, IStagedRecipe<?, ?> recipe) {
@@ -250,17 +226,5 @@ public class PRRecipes {
 		
 		cacheRecipesForOutput1.set(item, map);
 		return map;
-	}
-	
-	public static boolean isFuelItem(FuelType type, Item item) {
-		return getBurnTime(type, item) > 0;
-	}
-	
-	public static int getBurnTime(FuelType type, Item item) {
-		return FUELS.get(type).getOrDefault(item, 0);
-	}
-	
-	public enum FuelType {
-		campfire;
 	}
 }

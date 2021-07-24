@@ -1,21 +1,18 @@
 package mrunknown404.primalrework.utils.enums;
 
-import mrunknown404.primalrework.registries.PRBlocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 
-public enum EnumRecipeType implements ICraftingInput {
-	//@formatter:off
-	crafting_3(PRBlocks.PRIMAL_CRAFTING_TABLE.get().asItem()),
-	campfire  (PRBlocks.CAMPFIRE.get().asItem());
-	//@formatter:on
+public enum EnumFuelType implements ICraftingInput {
+	campfire(Items.COAL);
 	
 	private final ItemStack icon;
 	private final IFormattableTextComponent name;
 	
-	private EnumRecipeType(Item icon) {
+	private EnumFuelType(Item icon) {
 		this.icon = new ItemStack(icon);
 		this.name = new TranslationTextComponent("recipetype." + name() + ".name");
 	}

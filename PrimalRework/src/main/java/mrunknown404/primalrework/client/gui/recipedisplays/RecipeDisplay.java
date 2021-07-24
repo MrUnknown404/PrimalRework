@@ -7,10 +7,15 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import mrunknown404.primalrework.client.CraftingDisplayH;
 import mrunknown404.primalrework.client.gui.screen.ScreenRecipeList;
 import mrunknown404.primalrework.recipes.IStagedRecipe;
+import mrunknown404.primalrework.recipes.Ingredient;
 import mrunknown404.primalrework.recipes.SRCampFire;
 import mrunknown404.primalrework.recipes.SRCrafting3;
+import mrunknown404.primalrework.recipes.SRFuel;
+import mrunknown404.primalrework.utils.Cache;
 import mrunknown404.primalrework.utils.MathH;
+import mrunknown404.primalrework.utils.enums.EnumFuelType;
 import mrunknown404.primalrework.utils.enums.EnumRecipeType;
+import mrunknown404.primalrework.utils.enums.ICraftingInput;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.FontRenderer;
@@ -19,16 +24,25 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public abstract class RecipeDisplay<T extends IStagedRecipe<T, ?>> {
+	public final int thisHeight;
 	protected final List<T> recipes;
 	protected final Item output;
 	protected Minecraft mc;
 	protected FontRenderer font;
-	protected ItemRenderer ir;
 	protected ItemStack itemUnderMouse;
-	protected int listWidth, listHeight, maxPages, page;
-	public int maxRecipesSupported;
-	public final int thisHeight;
+	protected int listWidth, listHeight, maxRecipesSupported, maxPages, page;
+	
+	private final Cache<Ingredient, ItemStack> lastIngCache = new Cache<Ingredient, ItemStack>() {
+		@Override
+		public boolean is(Ingredient key) {
+			return this.key != null && key != null ? this.key.matches(key) : false;
+		}
+	};
+	
+	private ItemRenderer ir;
 	private ScreenRecipeList list;
+	private Ingredient lastIng;
+	private int ti, ingSize, curIng;
 	
 	protected RecipeDisplay(List<T> recipes, Item output, int thisHeight) {
 		this.recipes = recipes;
@@ -60,12 +74,78 @@ public abstract class RecipeDisplay<T extends IStagedRecipe<T, ?>> {
 		}
 	}
 	
-	//@formatter:off
-	protected abstract void setup();
-	public abstract void tick();
 	protected abstract void drawSlot(MatrixStack stack, int left, int top, int mouseX, int mouseY, int drawSlot);
-	public abstract boolean mouseClicked(double mouseX, double mouseY, int button);
-	//@formatter:on
+	
+	protected void setup() {
+		
+	}
+	
+	protected void update() {
+		
+	}
+	
+	public final void tick() {
+		if (ti == 0) {
+			ti = 30;
+			if (curIng == 0) {
+				curIng = ingSize - 1;
+			} else {
+				curIng--;
+			}
+		} else {
+			ti--;
+		}
+		
+		update();
+	}
+	
+	protected ItemStack getIngToRender(Ingredient ing) {
+		if (lastIngCache.is(ing)) {
+			return lastIngCache.get();
+		}
+		
+		Item item = null;
+		List<Item> items = ing.getItems();
+		if (items.size() == 1) {
+			item = items.get(0);
+		} else {
+			if (lastIng == null || !lastIng.matches(ing)) {
+				lastIng = ing;
+				ingSize = items.size();
+				curIng = 0;
+				ti = 0;
+			}
+			
+			item = items.get(curIng);
+		}
+		
+		ItemStack stack = new ItemStack(item);
+		lastIngCache.set(ing, stack);
+		return stack;
+	}
+	
+	protected void drawOutputItem(ItemStack output, int x, int y) {
+		drawItem(output, x, y);
+		ir.renderGuiItemDecorations(font, output, x, y);
+	}
+	
+	protected void drawItem(ItemStack output, int x, int y) {
+		ir.renderGuiItem(output, x, y);
+	}
+	
+	public boolean mouseClicked(int button) {
+		if (itemUnderMouse != null) {
+			if (button == 0) {
+				CraftingDisplayH.showHowToCraft(mc, itemUnderMouse.getItem(), list.getLastScreen());
+				return true;
+			} else if (button == 1) {
+				CraftingDisplayH.showWhatCanBeMade(mc, itemUnderMouse.getItem(), list.getLastScreen());
+				return true;
+			}
+		}
+		
+		return false;
+	}
 	
 	protected void blit(MatrixStack stack, int x, int y, int xuv, int yuv, int w, int h, int wuv, int huv) {
 		AbstractGui.blit(stack, x, y, xuv, yuv, w, h, wuv, huv);
@@ -77,6 +157,10 @@ public abstract class RecipeDisplay<T extends IStagedRecipe<T, ?>> {
 	
 	public int getPage() {
 		return page;
+	}
+	
+	public int getMaxRecipesSupported() {
+		return maxRecipesSupported;
 	}
 	
 	public void increasePage() {
@@ -95,41 +179,27 @@ public abstract class RecipeDisplay<T extends IStagedRecipe<T, ?>> {
 		list.refreshPageCount(this);
 	}
 	
-	protected void setLeftClickScreen(Item item) {
-		CraftingDisplayH.showHowToCraft(mc, item, list.getLastScreen());
-	}
-	
-	protected void setRightClickScreen(Item item) {
-		CraftingDisplayH.showWhatCanBeMade(mc, item, list.getLastScreen());
-	}
-	
 	@SuppressWarnings("unchecked")
-	public static <T extends IStagedRecipe<?, ?>> RecipeDisplay<?> createFrom(EnumRecipeType type, List<T> recipes, Item output) {
-		switch (type) {
-			case campfire:
-				return new RecipeDisplay<SRCampFire>((List<SRCampFire>) recipes, output, 1) { //TODO replace this with something permanent
-					@Override
-					protected void setup() {
-						
-					}
-					
-					@Override
-					public void tick() {
-						
-					}
-					
-					@Override
-					protected void drawSlot(MatrixStack stack, int left, int top, int mouseX, int mouseY, int drawSlot) {
-						
-					}
-					
-					@Override
-					public boolean mouseClicked(double mouseX, double mouseY, int button) {
-						return false;
-					}
-				};
-			case crafting_3:
-				return new RDCrafting3((List<SRCrafting3>) recipes, output);
+	public static <T extends IStagedRecipe<?, ?>> RecipeDisplay<?> createFrom(ICraftingInput type, List<T> recipes, Item output) {
+		if (type instanceof EnumRecipeType) {
+			switch ((EnumRecipeType) type) {
+				case campfire:
+					return new RecipeDisplay<SRCampFire>((List<SRCampFire>) recipes, output, 1) { //TODO replace this with something permanent
+						@Override
+						protected void drawSlot(MatrixStack stack, int left, int top, int mouseX, int mouseY, int drawSlot) {
+							
+						}
+					};
+				case crafting_3:
+					return new RDCrafting3((List<SRCrafting3>) recipes, output);
+			}
+		} else if (type instanceof EnumFuelType) {
+			switch ((EnumFuelType) type) {
+				case campfire:
+					return new RDFuel((List<SRFuel>) recipes, output);
+			}
+		} else {
+			System.err.println("Invalid input type??");
 		}
 		
 		return null;

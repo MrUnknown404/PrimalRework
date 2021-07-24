@@ -299,35 +299,35 @@ public class NetworkHandler {
 		
 		if (clazz == Boolean.class) {
 			list.forEach(o -> {
-				buf.writeBoolean((boolean) o);
+				buf.writeBoolean(((Boolean) o).booleanValue());
 			});
 		} else if (clazz == Character.class) {
 			list.forEach(o -> {
-				buf.writeChar((int) o);
+				buf.writeChar(((Character) o).charValue());
 			});
 		} else if (clazz == Byte.class) {
 			list.forEach(o -> {
-				buf.writeByte((int) o);
+				buf.writeByte(((Byte) o).byteValue());
 			});
 		} else if (clazz == Short.class) {
 			list.forEach(o -> {
-				buf.writeShort((int) o);
+				buf.writeShort(((Short) o).shortValue());
 			});
 		} else if (clazz == Integer.class) {
 			list.forEach(o -> {
-				buf.writeInt((int) o);
+				buf.writeInt(((Integer) o).intValue());
 			});
 		} else if (clazz == Long.class) {
 			list.forEach(o -> {
-				buf.writeLong((long) o);
+				buf.writeLong(((Long) o).longValue());
 			});
 		} else if (clazz == Float.class) {
 			list.forEach(o -> {
-				buf.writeFloat((float) o);
+				buf.writeFloat(((Float) o).floatValue());
 			});
 		} else if (clazz == Double.class) {
 			list.forEach(o -> {
-				buf.writeDouble((double) o);
+				buf.writeDouble(((Double) o).doubleValue());
 			});
 		} else if (clazz == String.class) {
 			list.forEach(o -> {

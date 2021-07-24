@@ -3,9 +3,10 @@ package mrunknown404.primalrework.tileentities;
 import mrunknown404.primalrework.inventory.container.ContainerCampFire;
 import mrunknown404.primalrework.recipes.SRCampFire;
 import mrunknown404.primalrework.recipes.input.RISingle;
+import mrunknown404.primalrework.registries.PRFuels;
 import mrunknown404.primalrework.registries.PRRecipes;
 import mrunknown404.primalrework.registries.PRTileEntities;
-import mrunknown404.primalrework.registries.PRRecipes.FuelType;
+import mrunknown404.primalrework.utils.enums.EnumFuelType;
 import mrunknown404.primalrework.utils.enums.EnumRecipeType;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -77,7 +78,7 @@ public class TEICampFire extends TEInventory implements ITickableTileEntity {
 		
 		if (!level.isClientSide) {
 			if (!isBurning()) {
-				int burnValue = PRRecipes.getBurnTime(FuelType.campfire, getItem(0).getItem());
+				int burnValue = PRFuels.getBurnTime(EnumFuelType.campfire, getItem(0).getItem());
 				if (burnValue > 0) {
 					maxBurnTime = burnValue;
 					burnTimeLeft = burnValue;
@@ -99,7 +100,7 @@ public class TEICampFire extends TEInventory implements ITickableTileEntity {
 						cookTimeLeft--;
 						if (cookTimeLeft == 0) {
 							maxCookTime = 0;
-							setItem(1, rec.output.copy());
+							setItem(1, rec.getOutput().copy());
 						}
 					}
 				}

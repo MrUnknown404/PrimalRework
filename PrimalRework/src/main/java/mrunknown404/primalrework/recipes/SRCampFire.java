@@ -6,9 +6,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class SRCampFire implements IStagedRecipe<SRCampFire, RISingle> {
-	public final EnumStage stage;
-	public final ItemStack output;
-	public final RISingle input;
+	private final EnumStage stage;
+	private final ItemStack output;
+	private final RISingle input;
 	public final int time;
 	
 	public SRCampFire(EnumStage stage, Item input, Item output, int time) {

@@ -11,11 +11,14 @@ import mrunknown404.primalrework.client.gui.screen.ScreenRecipeList;
 import mrunknown404.primalrework.items.utils.StagedItem;
 import mrunknown404.primalrework.recipes.IStagedRecipe;
 import mrunknown404.primalrework.recipes.Ingredient;
+import mrunknown404.primalrework.registries.PRFuels;
 import mrunknown404.primalrework.registries.PRRecipes;
 import mrunknown404.primalrework.registries.PRStagedTags;
 import mrunknown404.primalrework.stage.StageH;
 import mrunknown404.primalrework.stage.VanillaRegistry;
 import mrunknown404.primalrework.utils.Cache;
+import mrunknown404.primalrework.utils.Pair;
+import mrunknown404.primalrework.utils.enums.EnumFuelType;
 import mrunknown404.primalrework.utils.enums.EnumRecipeType;
 import mrunknown404.primalrework.utils.enums.EnumStage;
 import net.minecraft.client.Minecraft;
@@ -90,14 +93,15 @@ public class CraftingDisplayH {
 	public static void showHowToCraft(Minecraft minecraft, Item item, ContainerScreen<?> lastScreen) {
 		Map<EnumRecipeType, List<IStagedRecipe<?, ?>>> recipes = PRRecipes.getRecipesForOutput(item);
 		if (!recipes.isEmpty()) {
-			minecraft.setScreen(new ScreenRecipeList(lastScreen, recipes, item));
+			minecraft.setScreen(new ScreenRecipeList(lastScreen, recipes, null, item));
 		}
 	}
 	
 	public static void showWhatCanBeMade(Minecraft minecraft, Item item, ContainerScreen<?> lastScreen) {
 		Map<EnumRecipeType, List<IStagedRecipe<?, ?>>> recipes = PRRecipes.getRecipesContainingInput(new Ingredient(item, PRStagedTags.getItemsTags(item)));
-		if (!recipes.isEmpty()) {
-			minecraft.setScreen(new ScreenRecipeList(lastScreen, recipes, item));
+		Map<EnumFuelType, Pair<Item, Integer>> fuels = PRFuels.getFuels(item);
+		if (!recipes.isEmpty() || !fuels.isEmpty()) {
+			minecraft.setScreen(new ScreenRecipeList(lastScreen, recipes, fuels, item));
 		}
 	}
 	

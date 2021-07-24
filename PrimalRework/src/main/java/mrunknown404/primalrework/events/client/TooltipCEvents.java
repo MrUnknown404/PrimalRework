@@ -45,10 +45,9 @@ public class TooltipCEvents {
 	public void onTooltip(ItemTooltipEvent e) {
 		ItemStack stack = e.getItemStack();
 		
-		List<ITextComponent> list = e.getToolTip();
-		
-		list = getTooltips(stack);
-		tooltipCache.set(stack, list);
+		e.getToolTip().clear();
+		e.getToolTip().addAll(getTooltips(stack));
+		tooltipCache.set(stack, e.getToolTip());
 	}
 	
 	public static List<ITextComponent> getTooltips(ItemStack stack) {
@@ -56,7 +55,7 @@ public class TooltipCEvents {
 			return tooltipCache.get();
 		}
 		
-		IFormattableTextComponent name = (IFormattableTextComponent) stack.getDisplayName();
+		IFormattableTextComponent name = (IFormattableTextComponent) stack.getHoverName();
 		Item item = stack.getItem();
 		List<ITextComponent> list = new ArrayList<ITextComponent>();
 		
