@@ -53,13 +53,14 @@ public class PrimalRework {
 	 * TODO change stack sizes of everything
 	 * 
 	 * --a bit later
-	 * TODO disable F3 screen (add fps display option)
 	 * TODO items for figuring out F3 data
 	 * TODO when i add the clay pot fix the texture
 	 * TODO make scroll wheel move items
 	 * TODO remove wool/leather drop (maybe setup something similar to HarvestInfo but for mobs?)
 	 * TODO disable xp? remove xp bar?
 	 * TODO redo farmland
+	 * TODO mushroom crop (edible)
+	 * TODO eat time based off of hunger value?
 	 * 
 	 * --way later
 	 * TODO add armor & edit vanilla armor

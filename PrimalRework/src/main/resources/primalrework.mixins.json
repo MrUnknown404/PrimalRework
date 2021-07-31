@@ -9,6 +9,8 @@
 		"MixinForgeOnAdd"
 	],
 	"client": [
-		"client.MixinServerWorldInfo"
+		"client.MixinServerWorldInfo",
+		"client.MixinDebugOverlayGui",
+		"client.MixinGuiOverlayDebugForge"
 	]
 }

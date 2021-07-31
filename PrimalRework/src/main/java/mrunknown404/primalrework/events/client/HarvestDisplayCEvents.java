@@ -49,7 +49,7 @@ public class HarvestDisplayCEvents {
 	@SubscribeEvent
 	public void onRender(RenderGameOverlayEvent.Post e) {
 		Minecraft mc = Minecraft.getInstance();
-		if (mc.screen != null) {
+		if (mc.screen != null || mc.options.renderDebug) {
 			return;
 		}
 		
