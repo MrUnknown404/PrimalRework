@@ -6,9 +6,9 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 
 import mrunknown404.primalrework.PrimalRework;
 import mrunknown404.primalrework.events.client.TooltipCEvents;
+import mrunknown404.primalrework.helpers.MathH;
 import mrunknown404.primalrework.recipes.Ingredient;
 import mrunknown404.primalrework.recipes.SRCrafting3;
-import mrunknown404.primalrework.utils.MathH;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;

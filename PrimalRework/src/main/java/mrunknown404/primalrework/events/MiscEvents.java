@@ -3,11 +3,11 @@ package mrunknown404.primalrework.events;
 import java.util.Random;
 
 import mrunknown404.primalrework.PrimalRework;
+import mrunknown404.primalrework.helpers.RayTraceH;
+import mrunknown404.primalrework.helpers.StageH;
 import mrunknown404.primalrework.registries.PRItems;
-import mrunknown404.primalrework.stage.StageH;
 import mrunknown404.primalrework.stage.storage.StageDataProvider;
 import mrunknown404.primalrework.utils.NoAdvancementManager;
-import mrunknown404.primalrework.utils.RayTraceH;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.item.ItemEntity;

@@ -8,14 +8,13 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import mrunknown404.primalrework.client.gui.screen.ScreenRecipeList;
-import mrunknown404.primalrework.items.utils.StagedItem;
+import mrunknown404.primalrework.helpers.ItemH;
+import mrunknown404.primalrework.helpers.StageH;
 import mrunknown404.primalrework.recipes.IStagedRecipe;
 import mrunknown404.primalrework.recipes.Ingredient;
 import mrunknown404.primalrework.registries.PRFuels;
 import mrunknown404.primalrework.registries.PRRecipes;
 import mrunknown404.primalrework.registries.PRStagedTags;
-import mrunknown404.primalrework.stage.StageH;
-import mrunknown404.primalrework.stage.VanillaRegistry;
 import mrunknown404.primalrework.utils.Cache;
 import mrunknown404.primalrework.utils.Pair;
 import mrunknown404.primalrework.utils.enums.EnumFuelType;
@@ -59,8 +58,7 @@ public class CraftingDisplayH {
 		if (!ITEM_CACHE.is(StageH.getStage())) {
 			List<ItemStack> list = new ArrayList<ItemStack>();
 			for (ItemStack stack : ALL_ITEMS) {
-				EnumStage stage = stack.getItem() instanceof StagedItem ? ((StagedItem) stack.getItem()).stage : VanillaRegistry.getStage(stack.getItem());
-				if (StageH.hasAccessToStage(stage)) {
+				if (StageH.hasAccessToStage(ItemH.getStage(stack.getItem()))) {
 					list.add(stack);
 				}
 			}

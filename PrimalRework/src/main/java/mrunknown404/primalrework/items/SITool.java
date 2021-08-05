@@ -2,11 +2,11 @@ package mrunknown404.primalrework.items;
 
 import java.util.Random;
 
+import mrunknown404.primalrework.helpers.RayTraceH;
 import mrunknown404.primalrework.items.utils.SIDamageable;
 import mrunknown404.primalrework.registries.PRBlocks;
 import mrunknown404.primalrework.registries.PRItemGroups;
 import mrunknown404.primalrework.registries.PRItems;
-import mrunknown404.primalrework.utils.RayTraceH;
 import mrunknown404.primalrework.utils.enums.EnumStage;
 import mrunknown404.primalrework.utils.enums.EnumToolMaterial;
 import mrunknown404.primalrework.utils.enums.EnumToolType;

@@ -6,13 +6,13 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 
 import mrunknown404.primalrework.client.CraftingDisplayH;
 import mrunknown404.primalrework.client.gui.screen.ScreenRecipeList;
+import mrunknown404.primalrework.helpers.MathH;
 import mrunknown404.primalrework.recipes.IStagedRecipe;
 import mrunknown404.primalrework.recipes.Ingredient;
 import mrunknown404.primalrework.recipes.SRCampFire;
 import mrunknown404.primalrework.recipes.SRCrafting3;
 import mrunknown404.primalrework.recipes.SRFuel;
 import mrunknown404.primalrework.utils.Cache;
-import mrunknown404.primalrework.utils.MathH;
 import mrunknown404.primalrework.utils.enums.EnumFuelType;
 import mrunknown404.primalrework.utils.enums.EnumRecipeType;
 import mrunknown404.primalrework.utils.enums.ICraftingInput;

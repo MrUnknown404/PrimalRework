@@ -1,6 +1,6 @@
 package mrunknown404.primalrework.network.packets;
 
-import mrunknown404.primalrework.stage.StageH;
+import mrunknown404.primalrework.helpers.StageH;
 import mrunknown404.primalrework.utils.enums.EnumStage;
 import net.minecraftforge.fml.network.NetworkEvent.Context;
 

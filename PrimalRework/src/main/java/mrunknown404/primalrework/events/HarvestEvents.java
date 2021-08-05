@@ -1,8 +1,7 @@
 package mrunknown404.primalrework.events;
 
-import mrunknown404.primalrework.blocks.utils.StagedBlock;
-import mrunknown404.primalrework.items.utils.StagedItem;
-import mrunknown404.primalrework.stage.VanillaRegistry;
+import mrunknown404.primalrework.helpers.BlockH;
+import mrunknown404.primalrework.helpers.ItemH;
 import mrunknown404.primalrework.utils.HarvestInfo;
 import mrunknown404.primalrework.utils.HarvestInfo.DropInfo;
 import mrunknown404.primalrework.utils.enums.EnumToolMaterial;
@@ -39,25 +38,9 @@ public class HarvestEvents {
 			info = bsInfo;
 		} else {
 			ItemStack hand = e.getPlayer().getMainHandItem();
-			if (hand.getItem() instanceof StagedItem) {
-				toolType = ((StagedItem) hand.getItem()).toolType;
-				toolMat = ((StagedItem) hand.getItem()).toolMat;
-			} else {
-				toolType = VanillaRegistry.getToolType(hand.getItem());
-				toolMat = VanillaRegistry.getToolMaterial(hand.getItem());
-			}
-			
-			if (block instanceof StagedBlock) {
-				info = ((StagedBlock) block).getHarvest().get(toolType);
-				if (info == null) {
-					info = ((StagedBlock) block).getHarvest().get(EnumToolType.none);
-				}
-			} else {
-				info = VanillaRegistry.getHarvestInfo(block, toolType);
-				if (info == null) {
-					info = VanillaRegistry.getHarvestInfo(block, EnumToolType.none);
-				}
-			}
+			toolType = ItemH.getItemToolType(hand.getItem());
+			toolMat = ItemH.getItemToolMaterial(hand.getItem());
+			info = BlockH.getBlockHarvestInfo(block, toolType);
 			
 			bsBlock = block;
 			bsToolType = toolType;
@@ -104,25 +87,9 @@ public class HarvestEvents {
 			info = obInfo;
 		} else {
 			ItemStack hand = e.getPlayer().getMainHandItem();
-			if (hand.getItem() instanceof StagedItem) {
-				toolType = ((StagedItem) hand.getItem()).toolType;
-				toolMat = ((StagedItem) hand.getItem()).toolMat;
-			} else {
-				toolType = VanillaRegistry.getToolType(hand.getItem());
-				toolMat = VanillaRegistry.getToolMaterial(hand.getItem());
-			}
-			
-			if (block instanceof StagedBlock) {
-				info = ((StagedBlock) block).getHarvest().get(toolType);
-				if (info == null) {
-					info = ((StagedBlock) block).getHarvest().get(EnumToolType.none);
-				}
-			} else {
-				info = VanillaRegistry.getHarvestInfo(block, toolType);
-				if (info == null) {
-					info = VanillaRegistry.getHarvestInfo(block, EnumToolType.none);
-				}
-			}
+			toolType = ItemH.getItemToolType(hand.getItem());
+			toolMat = ItemH.getItemToolMaterial(hand.getItem());
+			info = BlockH.getBlockHarvestInfo(block, toolType);
 			obBlock = block;
 		}
 		

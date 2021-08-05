@@ -5,12 +5,12 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import mrunknown404.primalrework.helpers.StageH;
 import mrunknown404.primalrework.network.NetworkHandler;
 import mrunknown404.primalrework.network.packets.PacketSyncQuestFinished;
 import mrunknown404.primalrework.quests.requirements.QuestRequirement;
 import mrunknown404.primalrework.quests.rewards.QuestReward;
 import mrunknown404.primalrework.registries.PRQuests;
-import mrunknown404.primalrework.stage.StageH;
 import mrunknown404.primalrework.utils.IDescription;
 import mrunknown404.primalrework.utils.IName;
 import mrunknown404.primalrework.utils.enums.EnumStage;

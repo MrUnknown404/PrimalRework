@@ -6,14 +6,13 @@ import java.util.List;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 
-import mrunknown404.primalrework.blocks.utils.StagedBlock;
 import mrunknown404.primalrework.client.ColorH;
-import mrunknown404.primalrework.items.utils.StagedItem;
-import mrunknown404.primalrework.stage.VanillaRegistry;
+import mrunknown404.primalrework.helpers.BlockH;
+import mrunknown404.primalrework.helpers.ItemH;
+import mrunknown404.primalrework.helpers.MathH;
+import mrunknown404.primalrework.helpers.RayTraceH;
 import mrunknown404.primalrework.utils.DoubleCache;
 import mrunknown404.primalrework.utils.HarvestInfo;
-import mrunknown404.primalrework.utils.MathH;
-import mrunknown404.primalrework.utils.RayTraceH;
 import mrunknown404.primalrework.utils.enums.EnumToolMaterial;
 import mrunknown404.primalrework.utils.enums.EnumToolType;
 import net.minecraft.block.AbstractBlock;
@@ -65,7 +64,7 @@ public class HarvestDisplayCEvents {
 		if (blockCache.is(b, item)) {
 			texts = blockCache.get();
 		} else if (b != null && b != Blocks.AIR) {
-			List<HarvestInfo> infos = b instanceof StagedBlock ? new ArrayList<HarvestInfo>(((StagedBlock) b).getHarvest().values()) : VanillaRegistry.getHarvestInfos(b);
+			List<HarvestInfo> infos = BlockH.getBlockHarvestInfos(b);
 			texts.add(new StringTextComponent("    ").append(b.getName()));
 			
 			if (infos == null) {
@@ -84,9 +83,8 @@ public class HarvestDisplayCEvents {
 				texts.add(new TranslationTextComponent("tooltips.block.unbreakable"));
 			}
 			
-			boolean isStaged = (item instanceof StagedItem);
-			EnumToolType toolType = isStaged ? ((StagedItem) item).toolType : VanillaRegistry.getToolType(item);
-			EnumToolMaterial toolMat = isStaged ? ((StagedItem) item).toolMat : VanillaRegistry.getToolMaterial(item);
+			EnumToolType toolType = ItemH.getItemToolType(item);
+			EnumToolMaterial toolMat = ItemH.getItemToolMaterial(item);
 			
 			for (HarvestInfo info : infos) {
 				if (info.toolMat != EnumToolMaterial.unbreakable) {
@@ -127,16 +125,12 @@ public class HarvestDisplayCEvents {
 				}
 			}
 			
-			int tooltipX = 4, tooltipY = 0;
+			int tooltipX = 4, tooltipY = 4;
 			int titleLinesCount = 1, tooltipHeight = 13;
 			
 			tooltipHeight += (textLines.size() - 1) * 10;
 			if (textLines.size() > titleLinesCount) {
 				tooltipHeight += 2;
-			}
-			
-			if (tooltipY < 4) {
-				tooltipY = 4;
 			}
 			
 			int backgroundColor = ColorH.rgba2Int(16, 0, 16, 30), borderColor = ColorH.rgba2Int(37, 0, 94, 30);

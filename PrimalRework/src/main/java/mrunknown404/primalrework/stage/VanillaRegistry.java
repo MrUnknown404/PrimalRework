@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import mrunknown404.primalrework.helpers.BlockH;
+import mrunknown404.primalrework.helpers.ItemH;
 import mrunknown404.primalrework.registries.PRBlocks;
 import mrunknown404.primalrework.registries.PRItems;
 import mrunknown404.primalrework.utils.HarvestInfo;
@@ -28,11 +30,15 @@ public class VanillaRegistry {
 	private static final Map<Item, EnumToolType> ITEM_TOOL_TYPES = new HashMap<Item, EnumToolType>();
 	private static final Map<Item, EnumToolMaterial> ITEM_TOOL_MATERIALS = new HashMap<Item, EnumToolMaterial>();
 	
+	/** Use {@link BlockH#getBlockHarvestInfo(Block, EnumToolType)} */
+	@Deprecated
 	public static HarvestInfo getHarvestInfo(Block block, EnumToolType hand) {
 		Map<EnumToolType, HarvestInfo> m0 = BLOCK_HARVEST_INFOS.get(block);
 		return m0 == null ? null : m0.get(hand);
 	}
 	
+	/** Use {@link BlockH#getBlockHarvestInfos(Block)} */
+	@Deprecated
 	public static List<HarvestInfo> getHarvestInfos(Block block) {
 		if (!BLOCK_HARVEST_INFOS.containsKey(block)) {
 			return null;
@@ -45,16 +51,22 @@ public class VanillaRegistry {
 		return infos;
 	}
 	
-	public static EnumStage getStage(Item item) {
-		return ITEM_STAGES.get(item);
-	}
-	
+	/** Use {@link ItemH#getItemToolType(Item)} */
+	@Deprecated
 	public static EnumToolType getToolType(Item item) {
 		return ITEM_TOOL_TYPES.get(item);
 	}
 	
+	/** Use {@link ItemH#getItemToolMaterial(Item)} */
+	@Deprecated
 	public static EnumToolMaterial getToolMaterial(Item item) {
 		return ITEM_TOOL_MATERIALS.get(item);
+	}
+	
+	@Deprecated
+	/** Use {@link ItemH#getStage(Item)} */
+	public static EnumStage getStage(Item item) {
+		return ITEM_STAGES.get(item);
 	}
 	
 	public static void registerItem(Item item, EnumStage stage) {

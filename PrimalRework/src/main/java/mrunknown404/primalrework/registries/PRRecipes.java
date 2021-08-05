@@ -5,13 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import mrunknown404.primalrework.helpers.StageH;
 import mrunknown404.primalrework.recipes.IStagedRecipe;
 import mrunknown404.primalrework.recipes.Ingredient;
 import mrunknown404.primalrework.recipes.SRCampFire;
 import mrunknown404.primalrework.recipes.SRCrafting3;
 import mrunknown404.primalrework.recipes.input.RICrafting3;
 import mrunknown404.primalrework.recipes.input.RecipeInput;
-import mrunknown404.primalrework.stage.StageH;
 import mrunknown404.primalrework.utils.Cache;
 import mrunknown404.primalrework.utils.enums.EnumRecipeType;
 import mrunknown404.primalrework.utils.enums.EnumStage;

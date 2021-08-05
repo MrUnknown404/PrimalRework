@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import mrunknown404.primalrework.stage.StageH;
+import mrunknown404.primalrework.helpers.StageH;
 import mrunknown404.primalrework.stage.StagedTag;
 import mrunknown404.primalrework.utils.Cache;
 import mrunknown404.primalrework.utils.enums.EnumStage;

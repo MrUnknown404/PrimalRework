@@ -1,4 +1,4 @@
-package mrunknown404.primalrework.utils;
+package mrunknown404.primalrework.helpers;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockRayTraceResult;

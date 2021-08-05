@@ -9,9 +9,9 @@ import com.mojang.blaze3d.systems.RenderSystem;
 
 import mrunknown404.primalrework.client.ColorH;
 import mrunknown404.primalrework.client.gui.screen.ScreenQuestMenu;
+import mrunknown404.primalrework.helpers.MathH;
 import mrunknown404.primalrework.quests.QuestTab;
 import mrunknown404.primalrework.registries.PRQuests;
-import mrunknown404.primalrework.utils.MathH;
 import mrunknown404.primalrework.utils.enums.EnumStage;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.IGuiEventListener;

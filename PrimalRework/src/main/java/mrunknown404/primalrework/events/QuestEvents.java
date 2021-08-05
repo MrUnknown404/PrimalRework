@@ -1,11 +1,11 @@
 package mrunknown404.primalrework.events;
 
+import mrunknown404.primalrework.helpers.StageH;
 import mrunknown404.primalrework.quests.Quest;
 import mrunknown404.primalrework.quests.QuestTab;
 import mrunknown404.primalrework.quests.requirements.ItemRequirement;
 import mrunknown404.primalrework.quests.requirements.StagedTagRequirement;
 import mrunknown404.primalrework.registries.PRQuests;
-import mrunknown404.primalrework.stage.StageH;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.TickEvent.WorldTickEvent;

@@ -3,19 +3,19 @@ package mrunknown404.primalrework.events.client;
 import java.util.ArrayList;
 import java.util.List;
 
-import mrunknown404.primalrework.items.utils.SIBlock;
+import mrunknown404.primalrework.helpers.BlockH;
+import mrunknown404.primalrework.helpers.ItemH;
+import mrunknown404.primalrework.helpers.MathH;
+import mrunknown404.primalrework.helpers.StageH;
+import mrunknown404.primalrework.items.utils.SIDamageable;
 import mrunknown404.primalrework.items.utils.StagedItem;
-import mrunknown404.primalrework.stage.StageH;
-import mrunknown404.primalrework.stage.VanillaRegistry;
 import mrunknown404.primalrework.utils.Cache;
 import mrunknown404.primalrework.utils.HarvestInfo;
-import mrunknown404.primalrework.utils.MathH;
 import mrunknown404.primalrework.utils.enums.EnumStage;
 import mrunknown404.primalrework.utils.enums.EnumToolMaterial;
 import mrunknown404.primalrework.utils.enums.EnumToolType;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
-import net.minecraft.item.BlockItem;
 import net.minecraft.item.Food;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -59,27 +59,25 @@ public class TooltipCEvents {
 		Item item = stack.getItem();
 		List<ITextComponent> list = new ArrayList<ITextComponent>();
 		
-		boolean isStaged = (item instanceof StagedItem);
-		
 		if (stack.getMaxStackSize() != 1) {
 			list.add(name.append(string(" [" + stack.getCount() + "/" + stack.getMaxStackSize() + "]").withStyle(Style.EMPTY.withItalic(false))));
 		} else {
 			list.add(name);
 		}
 		
-		EnumStage stage = isStaged ? ((StagedItem) item).stage : VanillaRegistry.getStage(item);
+		EnumStage stage = ItemH.getStage(item);
 		if (StageH.hasAccessToStage(stage)) {
-			if (isStaged) {
+			if (item instanceof StagedItem) {
 				List<ITextComponent> temp = ((StagedItem) item).getTooltips();
 				if (!temp.isEmpty()) {
 					list.addAll(temp);
-					if (item instanceof BlockItem || item instanceof SIBlock || stack.getMaxDamage() > 0) {
+					if (ItemH.isBlock(item) || ItemH.isDamageable(item) || ItemH.isFood(item)) {
 						list.add(StringTextComponent.EMPTY);
 					}
 				}
 			}
 			
-			if (item.getFoodProperties() != null) {
+			if (ItemH.isFood(item)) {
 				Food food = item.getFoodProperties();
 				
 				int nutrition = ObfuscationReflectionHelper.getPrivateValue(Food.class, food, "nutrition");
@@ -87,10 +85,9 @@ public class TooltipCEvents {
 				
 				list.add(string(nutrition + " ").append(translate("tooltips.food.nutrition")).withStyle(STYLE_GRAY));
 				list.add(string(MathH.roundTo(nutrition * saturation, 2) + " ").append(translate("tooltips.food.saturation")).withStyle(STYLE_GRAY));
-			} else if (item instanceof SIBlock || item instanceof BlockItem) {
-				Block block = item instanceof SIBlock ? ((SIBlock) item).getBlock() : ((BlockItem) item).getBlock();
-				List<HarvestInfo> infos = isStaged ? new ArrayList<HarvestInfo>(((SIBlock) item).getBlock().getHarvest().values()) :
-						VanillaRegistry.getHarvestInfos(((BlockItem) item).getBlock());
+			} else if (ItemH.isBlock(item)) {
+				Block block = BlockH.getBlockFromItem(item);
+				List<HarvestInfo> infos = BlockH.getBlockHarvestInfos(block);
 				
 				AbstractBlock.Properties prop = ObfuscationReflectionHelper.getPrivateValue(AbstractBlock.class, block, "properties");
 				float hardness = MathH.roundTo(ObfuscationReflectionHelper.getPrivateValue(AbstractBlock.Properties.class, prop, "destroyTime"), 2);
@@ -116,14 +113,15 @@ public class TooltipCEvents {
 					list.add(translate("tooltips.require.level").append(string(" " + info.toolMat.level + " " + info.toolType.getName())).withStyle(STYLE_GRAY));
 				}
 			} else {
-				EnumToolType toolType = isStaged ? ((StagedItem) item).toolType : VanillaRegistry.getToolType(item);
-				EnumToolMaterial toolMat = isStaged ? ((StagedItem) item).toolMat : VanillaRegistry.getToolMaterial(item);
+				EnumToolType toolType = ItemH.getItemToolType(item);
+				EnumToolMaterial toolMat = ItemH.getItemToolMaterial(item);
 				float dmg = MathH.roundTo((toolType.baseDamage + toolMat.extraDamage), 2);
 				float atkSpd = MathH.roundTo(toolType.swingSpeed + 4, 2);
 				float mineSpd = MathH.roundTo(toolMat.speed, 2);
 				
-				if (stack.getMaxDamage() > 0) {
-					list.add(string((stack.getMaxDamage() - stack.getDamageValue()) + "/" + stack.getMaxDamage() + " ").append(translate("tooltips.stat.durability"))
+				if (ItemH.isDamageable(item)) {
+					SIDamageable di = (SIDamageable) item;
+					list.add(string((ItemH.getMaxDamage(di) - stack.getDamageValue()) + "/" + ItemH.getMaxDamage(di) + " ").append(translate("tooltips.stat.durability"))
 							.withStyle(STYLE_GRAY));
 				}
 				
@@ -148,6 +146,8 @@ public class TooltipCEvents {
 		
 		return list;
 	}
+	
+	//TODO move this to a H class
 	
 	//These are just used to make things neater
 	private static StringTextComponent string(String str) {

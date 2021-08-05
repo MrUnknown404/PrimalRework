@@ -1,10 +1,10 @@
 package mrunknown404.primalrework.blocks;
 
 import mrunknown404.primalrework.blocks.utils.SBRotatedPillar;
+import mrunknown404.primalrework.helpers.MathH;
 import mrunknown404.primalrework.registries.PRBlocks;
 import mrunknown404.primalrework.registries.PRItemGroups;
 import mrunknown404.primalrework.utils.HarvestInfo;
-import mrunknown404.primalrework.utils.MathH;
 import mrunknown404.primalrework.utils.enums.EnumStage;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

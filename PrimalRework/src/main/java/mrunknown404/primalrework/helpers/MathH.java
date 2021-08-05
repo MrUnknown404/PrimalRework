@@ -1,4 +1,4 @@
-package mrunknown404.primalrework.utils;
+package mrunknown404.primalrework.helpers;
 
 public class MathH {
 	public static int floor(double value) {

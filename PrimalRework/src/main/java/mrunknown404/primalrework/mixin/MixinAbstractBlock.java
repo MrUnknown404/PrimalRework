@@ -8,8 +8,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import mrunknown404.primalrework.blocks.utils.StagedBlock;
-import mrunknown404.primalrework.stage.VanillaRegistry;
+import mrunknown404.primalrework.helpers.BlockH;
 import mrunknown404.primalrework.utils.HarvestInfo;
 import mrunknown404.primalrework.utils.HarvestInfo.DropInfo;
 import mrunknown404.primalrework.utils.enums.EnumToolType;
@@ -27,7 +26,7 @@ public class MixinAbstractBlock {
 		List<ItemStack> list = new ArrayList<ItemStack>();
 		
 		Block block = state.getBlock();
-		HarvestInfo info = block instanceof StagedBlock ? ((StagedBlock) block).getHarvest().get(EnumToolType.none) : VanillaRegistry.getHarvestInfo(block, EnumToolType.none);
+		HarvestInfo info = BlockH.getBlockHarvestInfo(block, EnumToolType.none);
 		
 		if (info == null) {
 			callback.setReturnValue(list);

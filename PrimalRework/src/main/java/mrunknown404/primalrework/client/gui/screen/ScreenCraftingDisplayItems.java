@@ -9,7 +9,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 
 import mrunknown404.primalrework.client.ColorH;
 import mrunknown404.primalrework.client.CraftingDisplayH;
-import mrunknown404.primalrework.utils.MathH;
+import mrunknown404.primalrework.helpers.MathH;
 import net.minecraft.client.MainWindow;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;

@@ -4,7 +4,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 
-import mrunknown404.primalrework.stage.StageH;
+import mrunknown404.primalrework.helpers.StageH;
 import mrunknown404.primalrework.utils.enums.EnumStage;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
