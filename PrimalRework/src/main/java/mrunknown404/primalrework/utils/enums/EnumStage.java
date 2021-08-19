@@ -22,7 +22,7 @@ public enum EnumStage implements IName {
 	stage3  ("copper", 3),
 	stage4  ("bronze", 4),
 	
-	do_later("do_later", 98), //TODO remove this eventually
+	do_later("do_later", 98),
 	no_show ("no_show", 99);
 	//@formatter:on
 	

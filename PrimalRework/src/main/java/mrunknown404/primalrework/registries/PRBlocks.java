@@ -57,8 +57,6 @@ public class PRBlocks {
 	public static final RegistryObject<Block> STRIPPED_DARK_OAK_LOG = register(new SBStrippedLog("dark_oak"));
 	public static final RegistryObject<Block> STRIPPED_ACACIA_LOG = register(new SBStrippedLog("acacia"));
 	
-	//TODO clay pot, all machines, charcoal pit master, slabs
-	
 	//MACHINES
 	public static final RegistryObject<Block> CAMPFIRE = register(new SBCampFire());
 	public static final RegistryObject<Block> PRIMAL_CRAFTING_TABLE = register(new SBPrimalCraftingTable());

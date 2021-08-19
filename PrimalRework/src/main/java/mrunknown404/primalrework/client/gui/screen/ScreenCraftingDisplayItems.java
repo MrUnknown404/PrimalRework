@@ -47,9 +47,6 @@ public class ScreenCraftingDisplayItems extends Screen {
 		this.container = container;
 	}
 	
-	//TODO add buttons to the right side to show you crafting station recipe & tags
-	//TODO add search bar!
-	
 	@Override
 	protected void init() {
 		ir = minecraft.getItemRenderer();

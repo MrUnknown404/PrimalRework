@@ -8,7 +8,7 @@ import mrunknown404.primalrework.utils.enums.EnumToolType;
 import net.minecraft.item.Rarity;
 
 public class SIClayVessel extends StagedItem {
-	public SIClayVessel() { //TODO this class (clay vessel)
+	public SIClayVessel() {
 		super("clay_vessel", EnumStage.stage2, 1, EnumToolType.none, EnumToolMaterial.hand, PRItemGroups.ITEMS, Rarity.COMMON, null, false, false, ItemType.generated);
 	}
 }

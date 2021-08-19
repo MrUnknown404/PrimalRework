@@ -42,8 +42,6 @@ public class ScreenRecipeList extends Screen {
 	private Button leftButton, rightButton;
 	private ITextComponent recipeName, pageCount;
 	
-	//TODO make a max amount of tabs and add arrows for tabs
-	
 	public ScreenRecipeList(ContainerScreen<?> lastScreen, Map<EnumRecipeType, List<IStagedRecipe<?, ?>>> recipes, Map<EnumFuelType, Pair<Item, Integer>> fuels, Item output) {
 		super(new TranslationTextComponent("screen.recipelist.title"));
 		this.lastScreen = lastScreen;

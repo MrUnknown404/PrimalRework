@@ -26,8 +26,6 @@ public class PRQuests {
 	public static final QuestTab TAB_STAGE_3 = addTab(new QuestTab(EnumStage.stage3, Items.COBBLESTONE));
 	public static final QuestTab TAB_STAGE_4 = addTab(new QuestTab(EnumStage.stage4, Items.COBBLESTONE));
 	
-	//TODO redo quests! (i deleted some and forgot them)
-	
 	//@formatter:off
 	public static final Quest STAGE_0_ROOT =              addRoot(QuestBuilder.create(EnumStage.stage0).finish(TAB_STAGE_0));
 	public static final Quest GET_PLANT_FIBER =           addQuest(QuestBuilder.create("get_plant_fiber",   STAGE_0_ROOT,      0, -1.5f, new ItemRequirement(PRItems.PLANT_FIBER.get(), 8)).finish(                TAB_STAGE_0));

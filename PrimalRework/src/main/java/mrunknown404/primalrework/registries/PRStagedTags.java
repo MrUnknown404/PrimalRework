@@ -32,8 +32,6 @@ public class PRStagedTags {
 			Items.YELLOW_WOOL, Items.LIME_WOOL, Items.PINK_WOOL, Items.GRAY_WOOL, Items.LIGHT_GRAY_WOOL, Items.CYAN_WOOL, Items.PURPLE_WOOL, Items.BLUE_WOOL, Items.BROWN_WOOL,
 			Items.GREEN_WOOL, Items.RED_WOOL, Items.BLACK_WOOL);
 	
-	//TODO way of viewing tags!
-	
 	public static List<StagedTag> getItemsTags(Item item) {
 		if (tagCache.is(item)) {
 			return tagCache.get();

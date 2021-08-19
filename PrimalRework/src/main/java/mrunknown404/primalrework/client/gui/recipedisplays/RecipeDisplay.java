@@ -184,7 +184,7 @@ public abstract class RecipeDisplay<T extends IStagedRecipe<T, ?>> {
 		if (type instanceof EnumRecipeType) {
 			switch ((EnumRecipeType) type) {
 				case campfire:
-					return new RecipeDisplay<SRCampFire>((List<SRCampFire>) recipes, output, 1) { //TODO replace this with something permanent
+					return new RecipeDisplay<SRCampFire>((List<SRCampFire>) recipes, output, 1) {
 						@Override
 						protected void drawSlot(MatrixStack stack, int left, int top, int mouseX, int mouseY, int drawSlot) {
 							

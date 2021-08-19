@@ -71,10 +71,10 @@ public class ClientProxy extends CommonProxy {
 		
 		ClientRegistry.bindTileEntityRenderer(PRTileEntities.CAMPFIRE.get(), TERCampFire::new);
 		
-		RenderTypeLookup.setRenderLayer(PRBlocks.MUSHROOM_GRASS.get(), RenderType.cutoutMipped()); //TODO automate this
+		RenderTypeLookup.setRenderLayer(PRBlocks.MUSHROOM_GRASS.get(), RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(PRBlocks.CAMPFIRE.get(), RenderType.cutoutMipped());
 		
-		ScreenManager.register(PRContainers.CAMPFIRE.get(), ScreenCampFire::new); //TODO automate this
+		ScreenManager.register(PRContainers.CAMPFIRE.get(), ScreenCampFire::new);
 		ScreenManager.register(PRContainers.PRIMAL_CRAFTING_TABLE.get(), ScreenPrimalCraftingTable::new);
 		
 		mc.getBlockColors().register((state, reader, pos, tintIndex) -> {

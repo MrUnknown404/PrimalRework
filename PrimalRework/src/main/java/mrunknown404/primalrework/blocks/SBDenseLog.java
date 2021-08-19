@@ -25,7 +25,7 @@ public class SBDenseLog extends SBRotatedPillar {
 	@SuppressWarnings("deprecation")
 	@Override
 	public void neighborChanged(BlockState state, World w, BlockPos pos, Block block, BlockPos fromPos, boolean flag) {
-		/* TODO add this feature! (charcoal pit)
+		/*
 		if (!w.isClientSide) {
 			//loop:
 			for (int z = -1; z < 2; z++) {

@@ -97,9 +97,6 @@ public class VanillaRegistry {
 		BLOCK_HARVEST_INFOS.put(block, infoMap);
 	}
 	
-	// TODO add stages to items/blocks
-	// TODO add proper harvest levels to all blocks (things like respawn anchors shouldn't be any pick level)
-	
 	public static void overrideStength(Block b, float hardness, float blast) {
 		BlockState state = ObfuscationReflectionHelper.getPrivateValue(Block.class, b, "defaultBlockState");
 		ObfuscationReflectionHelper.setPrivateValue(AbstractBlockState.class, state, hardness, "destroySpeed");

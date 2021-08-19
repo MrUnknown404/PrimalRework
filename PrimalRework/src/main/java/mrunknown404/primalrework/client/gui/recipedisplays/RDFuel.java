@@ -11,11 +11,11 @@ import net.minecraft.item.Item;
 public class RDFuel extends RecipeDisplay<SRFuel> {
 	
 	public RDFuel(List<SRFuel> recipes, Item output) {
-		super(recipes, output, 32); //TODO figure out height
+		super(recipes, output, 32); // figure out height
 	}
 	
 	@Override
-	protected void drawSlot(MatrixStack stack, int left, int top, int mouseX, int mouseY, int drawSlot) { //TODO actually render this
+	protected void drawSlot(MatrixStack stack, int left, int top, int mouseX, int mouseY, int drawSlot) { // actually render this
 		SRFuel recipe = recipes.get(drawSlot);
 		drawOutputItem(recipe.getOutput(), left, top);
 		font.draw(stack, "" + recipe.getCookTime(), left + 20, top, ColorH.rgba2Int(17, 150, 74));

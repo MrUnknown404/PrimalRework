@@ -40,34 +40,4 @@ public class PrimalRework {
 		CommandDispatcher<CommandSource> commandDispatcher = e.getDispatcher();
 		CommandStage.register(commandDispatcher);
 	}
-	
-	/*
-	 * --high
-	 * TODO remove recipe book from inventory
-	 * TODO setup new crafting in vanilla inventory
-	 * TODO setup config (see --low)
-	 * 
-	 * --low
-	 * TODO add config for tooltips
-	 * TODO make harvest display position configurable
-	 * TODO change stack sizes of everything
-	 * 
-	 * --a bit later
-	 * TODO items for figuring out F3 data
-	 * TODO when i add the clay pot fix the texture
-	 * TODO make scroll wheel move items
-	 * TODO remove wool/leather drop (maybe setup something similar to HarvestInfo but for mobs?)
-	 * TODO disable xp? remove xp bar?
-	 * TODO redo farmland
-	 * TODO mushroom crop (edible)
-	 * TODO eat time based off of hunger value?
-	 * 
-	 * --way later
-	 * TODO add armor & edit vanilla armor
-	 * TODO add worldgen (custom forced worldtype with custom biome system)
-	 * TODO add realistic item entity
-	 * TODO map system
-	 * TODO add quest command (check/set)
-	 * TODO when metal casting is added add fancy tools with xp and shit
-	 */
 }

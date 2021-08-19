@@ -24,8 +24,6 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
-//TODO save quests!
-
 public class Quest implements IName, IDescription {
 	protected final String name_key;
 	protected final ItemStack itemIcon;

@@ -54,9 +54,6 @@ public class PRItems {
 	public static final RegistryObject<Item> PLANT_MESH = register(new SIDamageable("plant_mesh", EnumStage.stage0, EnumToolMaterial.wood));
 	public static final RegistryObject<Item> STRING_MESH = register(new SIDamageable("string_mesh", EnumStage.stage0, EnumToolMaterial.flint));
 	
-	// TODO edit cooked beetroot texture
-	// TODO all these items -> clay buckets, fire starter
-	
 	//FOOD
 	public static final RegistryObject<Item> DOUGH = register(new SIFood("dough", EnumStage.stage1, 1, 0.5f));
 	public static final RegistryObject<Item> COOKED_CARROT = register(new SIFood("cooked_carrot", EnumStage.stage0, 5, 0.6f));
