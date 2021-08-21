@@ -2,10 +2,10 @@ package mrunknown404.primalrework.quests.requirements;
 
 import java.util.List;
 
+import mrunknown404.primalrework.helpers.WordH;
 import mrunknown404.primalrework.stage.StagedTag;
 import net.minecraft.item.Item;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
 
 public class StagedTagRequirement extends QuestRequirement<StagedTag, Item> {
 	private final Item icon;
@@ -32,7 +32,7 @@ public class StagedTagRequirement extends QuestRequirement<StagedTag, Item> {
 	
 	@Override
 	protected ITextComponent setupDescription() {
-		return requires.append(new StringTextComponent(" " + count + "x " + obj.displayName));
+		return requires.append(WordH.string(" " + count + "x " + obj.displayName));
 	}
 	
 	@Override

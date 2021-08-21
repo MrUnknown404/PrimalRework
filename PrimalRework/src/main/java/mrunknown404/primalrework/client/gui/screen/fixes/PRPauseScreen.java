@@ -3,6 +3,7 @@ package mrunknown404.primalrework.client.gui.screen.fixes;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import mrunknown404.primalrework.client.gui.screen.ScreenPrimalShareToLan;
+import mrunknown404.primalrework.helpers.WordH;
 import net.minecraft.client.gui.screen.DirtMessageScreen;
 import net.minecraft.client.gui.screen.MainMenuScreen;
 import net.minecraft.client.gui.screen.MultiplayerScreen;
@@ -11,40 +12,39 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.StatsScreen;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.realms.RealmsBridgeScreen;
-import net.minecraft.util.text.TranslationTextComponent;
 
 public class PRPauseScreen extends Screen {
 	public PRPauseScreen(boolean pause) {
-		super(pause ? new TranslationTextComponent("menu.game") : new TranslationTextComponent("menu.paused"));
+		super(pause ? WordH.translate("menu.game") : WordH.translate("menu.paused"));
 	}
 	
 	@Override
 	protected void init() {
-		addButton(new Button(width / 2 - 102, height / 4 + 24, 204, 20, new TranslationTextComponent("menu.returnToGame"), (button) -> {
+		addButton(new Button(width / 2 - 102, height / 4 + 24, 204, 20, WordH.translate("menu.returnToGame"), (button) -> {
 			minecraft.setScreen((Screen) null);
 			minecraft.mouseHandler.grabMouse();
 		}));
 		
-		addButton(new Button(width / 2 + 4, height / 4 + 48, 98, 20, new TranslationTextComponent("gui.stats"), (button) -> {
+		addButton(new Button(width / 2 + 4, height / 4 + 48, 98, 20, WordH.translate("gui.stats"), (button) -> {
 			minecraft.setScreen(new StatsScreen(this, minecraft.player.getStats()));
 		}));
 		
-		addButton(new Button(width / 2 - 102, height / 4 + 48, 98, 20, new TranslationTextComponent("menu.options"), (button) -> {
+		addButton(new Button(width / 2 - 102, height / 4 + 48, 98, 20, WordH.translate("menu.options"), (button) -> {
 			minecraft.setScreen(new OptionsScreen(this, minecraft.options));
 		}));
 		
-		Button button = addButton(new Button(width / 2 - 102, height / 4 + 72, 204, 20, new TranslationTextComponent("menu.shareToLan"), (button0) -> {
+		Button button = addButton(new Button(width / 2 - 102, height / 4 + 72, 204, 20, WordH.translate("menu.shareToLan"), (button0) -> {
 			minecraft.setScreen(new ScreenPrimalShareToLan(this));
 		}));
 		button.active = minecraft.hasSingleplayerServer() && !minecraft.getSingleplayerServer().isPublished();
 		
-		Button button1 = addButton(new Button(width / 2 - 102, height / 4 + 96, 204, 20, new TranslationTextComponent("menu.returnToMenu"), (button0) -> {
+		Button button1 = addButton(new Button(width / 2 - 102, height / 4 + 96, 204, 20, WordH.translate("menu.returnToMenu"), (button0) -> {
 			boolean flag = minecraft.isLocalServer();
 			boolean flag1 = minecraft.isConnectedToRealms();
 			button0.active = false;
 			minecraft.level.disconnect();
 			if (flag) {
-				minecraft.clearLevel(new DirtMessageScreen(new TranslationTextComponent("menu.savingLevel")));
+				minecraft.clearLevel(new DirtMessageScreen(WordH.translate("menu.savingLevel")));
 			} else {
 				minecraft.clearLevel();
 			}
@@ -60,7 +60,7 @@ public class PRPauseScreen extends Screen {
 		}));
 		
 		if (!minecraft.isLocalServer()) {
-			button1.setMessage(new TranslationTextComponent("menu.disconnect"));
+			button1.setMessage(WordH.translate("menu.disconnect"));
 		}
 	}
 	

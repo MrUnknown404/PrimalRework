@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 
+import mrunknown404.primalrework.helpers.WordH;
 import mrunknown404.primalrework.registries.PRWorld;
 import net.minecraft.client.gui.DialogTexts;
 import net.minecraft.client.gui.IGuiEventListener;
@@ -23,7 +24,6 @@ import net.minecraft.util.registry.DynamicRegistries.Impl;
 import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.GameType;
@@ -31,11 +31,11 @@ import net.minecraft.world.WorldSettings;
 import net.minecraft.world.gen.settings.DimensionGeneratorSettings;
 
 public class PRCreateWorldScreen extends Screen {
-	private static final ITextComponent GAME_MODEL_LABEL = new TranslationTextComponent("selectWorld.gameMode");
-	private static final ITextComponent SEED_LABEL = new TranslationTextComponent("selectWorld.enterSeed");
-	private static final ITextComponent SEED_INFO = new TranslationTextComponent("selectWorld.seedInfo");
-	private static final ITextComponent NAME_LABEL = new TranslationTextComponent("selectWorld.enterName");
-	private static final ITextComponent OUTPUT_DIR_INFO = new TranslationTextComponent("selectWorld.resultFolder");
+	private static final ITextComponent GAME_MODEL_LABEL = WordH.translate("selectWorld.gameMode");
+	private static final ITextComponent SEED_LABEL = WordH.translate("selectWorld.enterSeed");
+	private static final ITextComponent SEED_INFO = WordH.translate("selectWorld.seedInfo");
+	private static final ITextComponent NAME_LABEL = WordH.translate("selectWorld.enterName");
+	private static final ITextComponent OUTPUT_DIR_INFO = WordH.translate("selectWorld.resultFolder");
 	private final Screen lastScreen;
 	private TextFieldWidget nameEdit;
 	private TextFieldWidget seedEdit;
@@ -57,7 +57,7 @@ public class PRCreateWorldScreen extends Screen {
 	private final Impl impl;
 	
 	public PRCreateWorldScreen(Screen lastScreen) {
-		super(new TranslationTextComponent("selectWorld.create"));
+		super(WordH.translate("selectWorld.create"));
 		this.lastScreen = lastScreen;
 		this.initName = I18n.get("selectWorld.newWorld");
 		this.impl = DynamicRegistries.builtin();
@@ -66,10 +66,10 @@ public class PRCreateWorldScreen extends Screen {
 	@Override
 	protected void init() {
 		minecraft.keyboardHandler.setSendRepeatsToGui(true);
-		nameEdit = new TextFieldWidget(font, width / 2 - 100, 60, 200, 20, new TranslationTextComponent("selectWorld.enterName")) {
+		nameEdit = new TextFieldWidget(font, width / 2 - 100, 60, 200, 20, WordH.translate("selectWorld.enterName")) {
 			@Override
 			protected IFormattableTextComponent createNarrationMessage() {
-				return super.createNarrationMessage().append(". ").append(new TranslationTextComponent("selectWorld.resultFolder")).append(" ").append(resultFolder);
+				return super.createNarrationMessage().append(". ").append(WordH.translate("selectWorld.resultFolder")).append(" ").append(resultFolder);
 			}
 		};
 		
@@ -81,7 +81,7 @@ public class PRCreateWorldScreen extends Screen {
 		});
 		
 		addWidget(nameEdit);
-		seedEdit = new TextFieldWidget(font, width / 2 - 100, 120, 200, 20, new TranslationTextComponent("selectWorld.enterSeed"));
+		seedEdit = new TextFieldWidget(font, width / 2 - 100, 120, 200, 20, WordH.translate("selectWorld.enterSeed"));
 		addWidget(seedEdit);
 		
 		int left = width / 2 - 155;
@@ -104,7 +104,7 @@ public class PRCreateWorldScreen extends Screen {
 		}) {
 			@Override
 			public ITextComponent getMessage() {
-				return new TranslationTextComponent("options.generic_value", GAME_MODEL_LABEL, new TranslationTextComponent("selectWorld.gameMode." + gameMode.name));
+				return WordH.translate("options.generic_value", GAME_MODEL_LABEL, WordH.translate("selectWorld.gameMode." + gameMode.name));
 			}
 			
 			@Override
@@ -113,7 +113,7 @@ public class PRCreateWorldScreen extends Screen {
 			}
 		});
 		
-		commandsButton = addButton(new Button(left, 185, 150, 20, new TranslationTextComponent("selectWorld.allowCommands"), (button) -> {
+		commandsButton = addButton(new Button(left, 185, 150, 20, WordH.translate("selectWorld.allowCommands"), (button) -> {
 			commandsChanged = true;
 			commands = !commands;
 			button.queueNarration(250);
@@ -125,22 +125,22 @@ public class PRCreateWorldScreen extends Screen {
 			
 			@Override
 			protected IFormattableTextComponent createNarrationMessage() {
-				return super.createNarrationMessage().append(". ").append(new TranslationTextComponent("selectWorld.allowCommands.info"));
+				return super.createNarrationMessage().append(". ").append(WordH.translate("selectWorld.allowCommands.info"));
 			}
 		});
 		
-		difficultyButton = addButton(new Button(right, 160, 150, 20, new TranslationTextComponent("options.difficulty"), (button) -> {
+		difficultyButton = addButton(new Button(right, 160, 150, 20, WordH.translate("options.difficulty"), (button) -> {
 			selectedDifficulty = selectedDifficulty.nextById();
 			effectiveDifficulty = selectedDifficulty;
 			button.queueNarration(250);
 		}) {
 			@Override
 			public ITextComponent getMessage() {
-				return (new TranslationTextComponent("options.difficulty")).append(": ").append(effectiveDifficulty.getDisplayName());
+				return (WordH.translate("options.difficulty")).append(": ").append(effectiveDifficulty.getDisplayName());
 			}
 		});
 		
-		gameRulesButton = addButton(new Button(right, 185, 150, 20, new TranslationTextComponent("selectWorld.gameRules"), (button) -> {
+		gameRulesButton = addButton(new Button(right, 185, 150, 20, WordH.translate("selectWorld.gameRules"), (button) -> {
 			minecraft.setScreen(new EditGamerulesScreen(gameRules.copy(), (val) -> {
 				minecraft.setScreen(this);
 				val.ifPresent((gameRules) -> {
@@ -149,7 +149,7 @@ public class PRCreateWorldScreen extends Screen {
 			}));
 		}));
 		
-		createButton = addButton(new Button(left, height - 28, 150, 20, new TranslationTextComponent("selectWorld.create"), (button) -> {
+		createButton = addButton(new Button(left, height - 28, 150, 20, WordH.translate("selectWorld.create"), (button) -> {
 			onCreate();
 		}));
 		
@@ -176,7 +176,7 @@ public class PRCreateWorldScreen extends Screen {
 		drawString(stack, font, SEED_LABEL, width / 2 - 100, 107, -6250336);
 		drawString(stack, font, SEED_INFO, width / 2 - 100, 145, -6250336);
 		drawString(stack, font, NAME_LABEL, width / 2 - 100, 47, -6250336);
-		drawString(stack, font, (new StringTextComponent("")).append(OUTPUT_DIR_INFO).append(" ").append(resultFolder), width / 2 - 100, 85, -6250336);
+		drawString(stack, font, OUTPUT_DIR_INFO.copy().append(" ").append(resultFolder), width / 2 - 100, 85, -6250336);
 		nameEdit.render(stack, mouseX, mouseY, tick);
 		seedEdit.render(stack, mouseX, mouseY, tick);
 		super.render(stack, mouseX, mouseY, tick);
@@ -216,7 +216,7 @@ public class PRCreateWorldScreen extends Screen {
 	}
 	
 	private void onCreate() {
-		minecraft.forceSetScreen(new DirtMessageScreen(new TranslationTextComponent("createWorld.preparing")));
+		minecraft.forceSetScreen(new DirtMessageScreen(WordH.translate("createWorld.preparing")));
 		WorldSettings worldsettings = new WorldSettings(nameEdit.getValue().trim(), gameMode.gameType, hardCore, effectiveDifficulty, commands && !hardCore,
 				hardCore ? new GameRules() : gameRules, DatapackCodec.DEFAULT);
 		DimensionGeneratorSettings settings = PRWorld.PRIMAL_WORLD.get().createSettings(impl, 0, false, false, "");
@@ -244,8 +244,8 @@ public class PRCreateWorldScreen extends Screen {
 		}
 		
 		this.gameMode = gameMode;
-		gameModeHelp1 = new TranslationTextComponent("selectWorld.gameMode." + gameMode.name + ".line1");
-		gameModeHelp2 = new TranslationTextComponent("selectWorld.gameMode." + gameMode.name + ".line2");
+		gameModeHelp1 = WordH.translate("selectWorld.gameMode." + gameMode.name + ".line1");
+		gameModeHelp2 = WordH.translate("selectWorld.gameMode." + gameMode.name + ".line2");
 	}
 	
 	@Override

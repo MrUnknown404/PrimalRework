@@ -7,6 +7,7 @@ import mrunknown404.primalrework.helpers.BlockH;
 import mrunknown404.primalrework.helpers.ItemH;
 import mrunknown404.primalrework.helpers.MathH;
 import mrunknown404.primalrework.helpers.StageH;
+import mrunknown404.primalrework.helpers.WordH;
 import mrunknown404.primalrework.items.utils.SIDamageable;
 import mrunknown404.primalrework.items.utils.StagedItem;
 import mrunknown404.primalrework.utils.Cache;
@@ -25,7 +26,6 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
@@ -60,7 +60,7 @@ public class TooltipCEvents {
 		List<ITextComponent> list = new ArrayList<ITextComponent>();
 		
 		if (stack.getMaxStackSize() != 1) {
-			list.add(name.append(string(" [" + stack.getCount() + "/" + stack.getMaxStackSize() + "]").withStyle(Style.EMPTY.withItalic(false))));
+			list.add(name.append(WordH.string(" [" + stack.getCount() + "/" + stack.getMaxStackSize() + "]").withStyle(Style.EMPTY.withItalic(false))));
 		} else {
 			list.add(name);
 		}
@@ -83,8 +83,8 @@ public class TooltipCEvents {
 				int nutrition = ObfuscationReflectionHelper.getPrivateValue(Food.class, food, "nutrition");
 				float saturation = ObfuscationReflectionHelper.getPrivateValue(Food.class, food, "saturationModifier");
 				
-				list.add(string(nutrition + " ").append(translate("tooltips.food.nutrition")).withStyle(STYLE_GRAY));
-				list.add(string(MathH.roundTo(nutrition * saturation, 2) + " ").append(translate("tooltips.food.saturation")).withStyle(STYLE_GRAY));
+				list.add(WordH.string(nutrition + " ").append(WordH.translate("tooltips.food.nutrition")).withStyle(STYLE_GRAY));
+				list.add(WordH.string(MathH.roundTo(nutrition * saturation, 2) + " ").append(WordH.translate("tooltips.food.saturation")).withStyle(STYLE_GRAY));
 			} else if (ItemH.isBlock(item)) {
 				Block block = BlockH.getBlockFromItem(item);
 				List<HarvestInfo> infos = BlockH.getBlockHarvestInfos(block);
@@ -94,23 +94,23 @@ public class TooltipCEvents {
 				float blast = MathH.roundTo(ObfuscationReflectionHelper.getPrivateValue(AbstractBlock.Properties.class, prop, "explosionResistance"), 2);
 				
 				if (hardness != -1) {
-					list.add(string(((String.valueOf(hardness).split("\\.")[1].length() < 2) ? hardness + "0" : hardness) + " ").append(translate("tooltips.block.hardness"))
-							.withStyle(STYLE_GRAY));
+					list.add(WordH.string(((String.valueOf(hardness).split("\\.")[1].length() < 2) ? hardness + "0" : hardness) + " ")
+							.append(WordH.translate("tooltips.block.hardness")).withStyle(STYLE_GRAY));
 				} else {
-					list.add(translate("tooltips.block.unbreakable").withStyle(STYLE_GRAY));
+					list.add(WordH.translate("tooltips.block.unbreakable").withStyle(STYLE_GRAY));
 				}
 				
 				if (blast < 1000) {
-					list.add(string(((String.valueOf(blast).split("\\.")[1].length() < 2) ? blast + "0" : blast) + " ").append(translate("tooltips.block.blast"))
+					list.add(WordH.string(((String.valueOf(blast).split("\\.")[1].length() < 2) ? blast + "0" : blast) + " ").append(WordH.translate("tooltips.block.blast"))
 							.withStyle(STYLE_GRAY));
 				} else {
-					list.add(translate("tooltips.block.unexplodable").withStyle(STYLE_GRAY));
+					list.add(WordH.translate("tooltips.block.unexplodable").withStyle(STYLE_GRAY));
 				}
 				
 				list.add(StringTextComponent.EMPTY);
-				list.add(translate("tooltips.require.following").withStyle(STYLE_GRAY));
+				list.add(WordH.translate("tooltips.require.following").withStyle(STYLE_GRAY));
 				for (HarvestInfo info : infos) {
-					list.add(translate("tooltips.require.level").append(string(" " + info.toolMat.level + " " + info.toolType.getName())).withStyle(STYLE_GRAY));
+					list.add(WordH.translate("tooltips.require.level").append(WordH.string(" " + info.toolMat.level + " " + info.toolType.getName())).withStyle(STYLE_GRAY));
 				}
 			} else {
 				EnumToolType toolType = ItemH.getItemToolType(item);
@@ -121,8 +121,8 @@ public class TooltipCEvents {
 				
 				if (ItemH.isDamageable(item)) {
 					SIDamageable di = (SIDamageable) item;
-					list.add(string((ItemH.getMaxDamage(di) - stack.getDamageValue()) + "/" + ItemH.getMaxDamage(di) + " ").append(translate("tooltips.stat.durability"))
-							.withStyle(STYLE_GRAY));
+					list.add(WordH.string((ItemH.getMaxDamage(di) - stack.getDamageValue()) + "/" + ItemH.getMaxDamage(di) + " ")
+							.append(WordH.translate("tooltips.stat.durability")).withStyle(STYLE_GRAY));
 				}
 				
 				if (toolType != EnumToolType.none) {
@@ -131,31 +131,19 @@ public class TooltipCEvents {
 					boolean mineSpdCheck = String.valueOf(mineSpd).split("\\.")[1].length() < 2;
 					
 					list.add(StringTextComponent.EMPTY);
-					list.add(string((dmgCheck ? dmg + "0" : dmg) + " ").append(translate("tooltips.stat.damage")).withStyle(STYLE_GRAY));
-					list.add(string((atkSpdCheck ? atkSpd + "0" : atkSpd) + " ").append(translate("tooltips.stat.speed.attack")).withStyle(STYLE_GRAY));
-					list.add(string((mineSpdCheck ? mineSpd + "0" : mineSpd) + " ").append(translate("tooltips.stat.speed.mine")).withStyle(STYLE_GRAY));
-					list.add(translate("tooltips.stat.level").append(string(" " + toolMat.level + " " + toolType.getName())).withStyle(STYLE_GRAY));
+					list.add(WordH.string((dmgCheck ? dmg + "0" : dmg) + " ").append(WordH.translate("tooltips.stat.damage")).withStyle(STYLE_GRAY));
+					list.add(WordH.string((atkSpdCheck ? atkSpd + "0" : atkSpd) + " ").append(WordH.translate("tooltips.stat.speed.attack")).withStyle(STYLE_GRAY));
+					list.add(WordH.string((mineSpdCheck ? mineSpd + "0" : mineSpd) + " ").append(WordH.translate("tooltips.stat.speed.mine")).withStyle(STYLE_GRAY));
+					list.add(WordH.translate("tooltips.stat.level").append(WordH.string(" " + toolMat.level + " " + toolType.getName())).withStyle(STYLE_GRAY));
 				}
 			}
 			
 			list.add(StringTextComponent.EMPTY);
-			list.add(translate("tooltips.require.stage").withStyle(STYLE_LIGHT_PURPLE).append(string(" " + stage.getName())));
+			list.add(WordH.translate("tooltips.require.stage").withStyle(STYLE_LIGHT_PURPLE).append(WordH.string(" " + stage.getName())));
 		} else {
-			list.add(translate("tooltips.unknown").withStyle(STYLE_GRAY));
+			list.add(WordH.translate("tooltips.unknown").withStyle(STYLE_GRAY));
 		}
 		
 		return list;
-	}
-	
-	//TODO move this to a H class
-	
-	//These are just used to make things neater
-	private static StringTextComponent string(String str) {
-		return new StringTextComponent(str);
-	}
-	
-	//These are just used to make things neater
-	private static TranslationTextComponent translate(String str) {
-		return new TranslationTextComponent(str);
 	}
 }

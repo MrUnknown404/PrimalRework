@@ -1,5 +1,6 @@
 package mrunknown404.primalrework.quests.requirements;
 
+import mrunknown404.primalrework.helpers.WordH;
 import net.minecraft.item.Item;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -12,7 +13,7 @@ public abstract class QuestRequirement<T, I> {
 	
 	public QuestRequirement(T obj, int count) {
 		this.obj = obj;
-		this.requires = new TranslationTextComponent("quest.requirement.require");
+		this.requires = WordH.translate("quest.requirement.require");
 		this.count = count;
 	}
 	

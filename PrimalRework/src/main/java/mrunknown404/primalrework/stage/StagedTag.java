@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 import mrunknown404.primalrework.helpers.StageH;
+import mrunknown404.primalrework.helpers.WordH;
 import mrunknown404.primalrework.registries.PRStagedTags;
 import mrunknown404.primalrework.utils.enums.EnumStage;
 import net.minecraft.item.Item;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
 
 public class StagedTag {
 	private final Map<EnumStage, List<Item>> items = new HashMap<EnumStage, List<Item>>();
@@ -20,7 +20,7 @@ public class StagedTag {
 	
 	public StagedTag(String tag) {
 		this.tag = tag;
-		this.displayName = new TranslationTextComponent("staged_tag." + tag + ".name");
+		this.displayName = WordH.translate("staged_tag." + tag + ".name");
 		PRStagedTags.addToList(this);
 	}
 	

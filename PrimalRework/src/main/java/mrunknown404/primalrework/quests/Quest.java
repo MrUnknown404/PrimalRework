@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import mrunknown404.primalrework.helpers.StageH;
+import mrunknown404.primalrework.helpers.WordH;
 import mrunknown404.primalrework.network.NetworkHandler;
 import mrunknown404.primalrework.network.packets.PacketSyncQuestFinished;
 import mrunknown404.primalrework.quests.requirements.QuestRequirement;
@@ -21,7 +22,6 @@ import net.minecraft.util.Util;
 import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
 public class Quest implements IName, IDescription {
@@ -73,14 +73,16 @@ public class Quest implements IName, IDescription {
 		}
 		
 		for (PlayerEntity pl : world.players()) {
-			StringTextComponent space = new StringTextComponent(" ");
+			StringTextComponent space = WordH.space();
 			
 			if (player != null) {
-				pl.sendMessage(((IFormattableTextComponent) player.getDisplayName()).append(space).append(new TranslationTextComponent("quest.finish.player")).append(space)
-						.append(getFancyName()), Util.NIL_UUID);
+				pl.sendMessage(
+						((IFormattableTextComponent) player.getDisplayName()).append(space).append(WordH.translate("quest.finish.player")).append(space).append(getFancyName()),
+						Util.NIL_UUID);
 			} else {
-				pl.sendMessage(new TranslationTextComponent("quest.finish.missing.pre").append(space).append(getFancyName()).append(space)
-						.append(new TranslationTextComponent("quest.finish.missing.post")), Util.NIL_UUID);
+				pl.sendMessage(
+						WordH.translate("quest.finish.missing.pre").append(space).append(getFancyName()).append(space).append(WordH.translate("quest.finish.missing.post")),
+						Util.NIL_UUID);
 			}
 		}
 		
@@ -115,7 +117,7 @@ public class Quest implements IName, IDescription {
 	
 	@Override
 	public IFormattableTextComponent getFancyName() {
-		return new TranslationTextComponent("quest." + stage + "." + name_key + ".name");
+		return WordH.translate("quest." + stage + "." + name_key + ".name");
 	}
 	
 	/** @return stage + "_" + name */
@@ -131,8 +133,8 @@ public class Quest implements IName, IDescription {
 	@Override
 	public List<IFormattableTextComponent> getFancyDescription() {
 		List<IFormattableTextComponent> desc = new ArrayList<IFormattableTextComponent>();
-		for (String s : new TranslationTextComponent("quest." + stage + "." + name_key + ".desc").getString().split("\\n")) {
-			desc.add(new StringTextComponent(s.trim()));
+		for (String s : WordH.translate("quest." + stage + "." + name_key + ".desc").getString().split("\\n")) {
+			desc.add(WordH.string(s.trim()));
 		}
 		return desc;
 	}

@@ -7,9 +7,10 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 
-import mrunknown404.primalrework.client.ColorH;
 import mrunknown404.primalrework.client.CraftingDisplayH;
+import mrunknown404.primalrework.helpers.ColorH;
 import mrunknown404.primalrework.helpers.MathH;
+import mrunknown404.primalrework.helpers.WordH;
 import net.minecraft.client.MainWindow;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
@@ -24,9 +25,8 @@ import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.util.InputMappings;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.fml.client.gui.GuiUtils;
 
 public class ScreenCraftingDisplayItems extends Screen {
@@ -43,7 +43,7 @@ public class ScreenCraftingDisplayItems extends Screen {
 	private static int scroll, lastHeightItems, lastSize;
 	
 	public ScreenCraftingDisplayItems(ContainerScreen<?> container) {
-		super(new TranslationTextComponent("screen.crafting_display.title"));
+		super(WordH.translate("screen.crafting_display.title"));
 		this.container = container;
 	}
 	
@@ -97,10 +97,11 @@ public class ScreenCraftingDisplayItems extends Screen {
 			}
 		}
 		
-		scrollFaster = new TranslationTextComponent("gui.crafting_display.pre").append(new StringTextComponent(" '"))
-				.append(new TranslationTextComponent(minecraft.options.keyShift.getName())).append(new StringTextComponent("' "))
-				.append(new TranslationTextComponent("gui.crafting_display.post"));
+		scrollFaster = WordH.translate("gui.crafting_display.pre").append(right).append(WordH.translate(minecraft.options.keyShift.getName())).append(left)
+				.append(WordH.translate("gui.crafting_display.post"));
 	}
+	
+	private final IFormattableTextComponent left = WordH.string("' "), right = WordH.string(" '");
 	
 	@SuppressWarnings("deprecation")
 	@Override
@@ -142,7 +143,7 @@ public class ScreenCraftingDisplayItems extends Screen {
 		if (heightItems < listSize) {
 			drawString(stack, font, scrollFaster, 4, height - font.lineHeight - 2, ColorH.rgba2Int(255, 255, 255));
 			int sc = scroll < 0 ? listSize + scroll : scroll;
-			drawString(stack, font, new StringTextComponent(sc + "/" + listSize), 4, height - font.lineHeight * 2 - 4, ColorH.rgba2Int(255, 255, 255));
+			drawString(stack, font, WordH.string(sc + "/" + listSize), 4, height - font.lineHeight * 2 - 4, ColorH.rgba2Int(255, 255, 255));
 		}
 		
 		RenderSystem.enableDepthTest();

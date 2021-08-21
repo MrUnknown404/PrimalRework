@@ -8,9 +8,9 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 
-import mrunknown404.primalrework.client.ColorH;
 import mrunknown404.primalrework.client.gui.screen.ScreenQuestMenu;
 import mrunknown404.primalrework.client.gui.widget.QuestInfoList;
+import mrunknown404.primalrework.helpers.ColorH;
 import mrunknown404.primalrework.helpers.MathH;
 import mrunknown404.primalrework.quests.Quest;
 import mrunknown404.primalrework.quests.QuestTab;

@@ -9,9 +9,10 @@ import org.lwjgl.glfw.GLFW;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import mrunknown404.primalrework.PrimalRework;
-import mrunknown404.primalrework.client.ColorH;
 import mrunknown404.primalrework.client.gui.recipedisplays.RecipeDisplay;
+import mrunknown404.primalrework.helpers.ColorH;
 import mrunknown404.primalrework.helpers.MathH;
+import mrunknown404.primalrework.helpers.WordH;
 import mrunknown404.primalrework.recipes.IStagedRecipe;
 import mrunknown404.primalrework.registries.PRFuels;
 import mrunknown404.primalrework.utils.Pair;
@@ -27,8 +28,6 @@ import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
 
 public class ScreenRecipeList extends Screen {
 	private static final ResourceLocation BG = new ResourceLocation(PrimalRework.MOD_ID, "textures/gui/craftingdisplay/crafting_display_background.png");
@@ -43,7 +42,7 @@ public class ScreenRecipeList extends Screen {
 	private ITextComponent recipeName, pageCount;
 	
 	public ScreenRecipeList(ContainerScreen<?> lastScreen, Map<EnumRecipeType, List<IStagedRecipe<?, ?>>> recipes, Map<EnumFuelType, Pair<Item, Integer>> fuels, Item output) {
-		super(new TranslationTextComponent("screen.recipelist.title"));
+		super(WordH.translate("screen.recipelist.title"));
 		this.lastScreen = lastScreen;
 		this.recipes = new ArrayList<Data>();
 		
@@ -75,14 +74,14 @@ public class ScreenRecipeList extends Screen {
 		}
 		
 		curRecipeTab = 0;
-		addButton(leftButton = new Button(leftPos - 22, topPos + 4, 20, 20, new StringTextComponent("<"), new IPressable() {
+		addButton(leftButton = new Button(leftPos - 22, topPos + 4, 20, 20, WordH.string("<"), new IPressable() {
 			@Override
 			public void onPress(Button button) {
 				recipes.get(curRecipeTab).display.decreasePage();
 			}
 		}));
 		
-		addButton(rightButton = new Button(leftPos + 182, topPos + 4, 20, 20, new StringTextComponent(">"), new IPressable() {
+		addButton(rightButton = new Button(leftPos + 182, topPos + 4, 20, 20, WordH.string(">"), new IPressable() {
 			@Override
 			public void onPress(Button button) {
 				recipes.get(curRecipeTab).display.increasePage();
@@ -151,7 +150,7 @@ public class ScreenRecipeList extends Screen {
 	}
 	
 	public void refreshPageCount(RecipeDisplay<?> display) {
-		pageCount = new StringTextComponent((display.getPage() + 1) + "/" + display.getMaxPages());
+		pageCount = WordH.string((display.getPage() + 1) + "/" + display.getMaxPages());
 	}
 	
 	@Override

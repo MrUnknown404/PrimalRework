@@ -6,11 +6,12 @@ import java.util.List;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 
-import mrunknown404.primalrework.client.ColorH;
 import mrunknown404.primalrework.helpers.BlockH;
+import mrunknown404.primalrework.helpers.ColorH;
 import mrunknown404.primalrework.helpers.ItemH;
 import mrunknown404.primalrework.helpers.MathH;
 import mrunknown404.primalrework.helpers.RayTraceH;
+import mrunknown404.primalrework.helpers.WordH;
 import mrunknown404.primalrework.utils.DoubleCache;
 import mrunknown404.primalrework.utils.HarvestInfo;
 import mrunknown404.primalrework.utils.enums.EnumToolMaterial;
@@ -31,9 +32,7 @@ import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.ITextProperties;
 import net.minecraft.util.text.LanguageMap;
-import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.gui.GuiUtils;
@@ -42,8 +41,8 @@ import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 public class HarvestDisplayCEvents {
 	private DoubleCache<Block, Item, List<ITextComponent>> blockCache = new DoubleCache<Block, Item, List<ITextComponent>>();
 	
-	private static final IFormattableTextComponent YES_MINE = new StringTextComponent("\u2714 ").withStyle(TextFormatting.GREEN),
-			NO_MINE = new StringTextComponent("\u274C ").withStyle(TextFormatting.RED);
+	private static final IFormattableTextComponent YES_MINE = WordH.string("\u2714 ").withStyle(TextFormatting.GREEN),
+			NO_MINE = WordH.string("\u274C ").withStyle(TextFormatting.RED), ICON_SPACE = WordH.string("    ");
 	
 	@SubscribeEvent
 	public void onRender(RenderGameOverlayEvent.Post e) {
@@ -65,10 +64,10 @@ public class HarvestDisplayCEvents {
 			texts = blockCache.get();
 		} else if (b != null && b != Blocks.AIR) {
 			List<HarvestInfo> infos = BlockH.getBlockHarvestInfos(b);
-			texts.add(new StringTextComponent("    ").append(b.getName()));
+			texts.add(ICON_SPACE.copy().append(b.getName()));
 			
 			if (infos == null) {
-				texts.add(new TranslationTextComponent("tooltips.block.unbreakable"));
+				texts.add(WordH.translate("tooltips.block.unbreakable"));
 				GuiUtils.drawHoveringText(s, texts, -8, 0, w.getWidth(), w.getHeight(), -1, mc.font);
 				return;
 			}
@@ -77,10 +76,10 @@ public class HarvestDisplayCEvents {
 			float hardness = MathH.roundTo(ObfuscationReflectionHelper.getPrivateValue(AbstractBlock.Properties.class, prop, "destroyTime"), 2);
 			
 			if (hardness != -1) {
-				texts.add(new StringTextComponent(((String.valueOf(hardness).split("\\.")[1].length() < 2) ? hardness + "0" : hardness) + " ")
-						.append(new TranslationTextComponent("tooltips.block.hardness")));
+				texts.add(WordH.string(((String.valueOf(hardness).split("\\.")[1].length() < 2) ? hardness + "0" : hardness) + " ")
+						.append(WordH.translate("tooltips.block.hardness")));
 			} else {
-				texts.add(new TranslationTextComponent("tooltips.block.unbreakable"));
+				texts.add(WordH.translate("tooltips.block.unbreakable"));
 			}
 			
 			EnumToolType toolType = ItemH.getItemToolType(item);
@@ -89,8 +88,8 @@ public class HarvestDisplayCEvents {
 			for (HarvestInfo info : infos) {
 				if (info.toolMat != EnumToolMaterial.unbreakable) {
 					boolean canMine = info.toolType == EnumToolType.none ? true : info.toolType == toolType && info.toolMat.level <= toolMat.level;
-					texts.add((canMine ? YES_MINE : NO_MINE).copy().append(new TranslationTextComponent("tooltips.stat.level").withStyle(TextFormatting.WHITE)
-							.append(" " + info.toolMat.level + " " + info.toolType.getName())));
+					texts.add((canMine ? YES_MINE : NO_MINE).copy()
+							.append(WordH.translate("tooltips.stat.level").withStyle(TextFormatting.WHITE).append(" " + info.toolMat.level + " " + info.toolType.getName())));
 				}
 			}
 			

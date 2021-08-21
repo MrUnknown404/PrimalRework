@@ -1,9 +1,9 @@
 package mrunknown404.primalrework.quests.requirements;
 
+import mrunknown404.primalrework.helpers.WordH;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
 
 public class ItemRequirement extends QuestRequirement<Item, Item> {
 	
@@ -23,7 +23,7 @@ public class ItemRequirement extends QuestRequirement<Item, Item> {
 	
 	@Override
 	protected ITextComponent setupDescription() {
-		return requires.append(new StringTextComponent(" " + count + "x " + obj.getName(new ItemStack(obj)).getString()));
+		return requires.append(WordH.string(" " + count + "x " + obj.getName(new ItemStack(obj)).getString()));
 	}
 	
 	@Override

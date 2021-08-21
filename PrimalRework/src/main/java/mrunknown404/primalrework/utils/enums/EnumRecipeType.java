@@ -1,10 +1,10 @@
 package mrunknown404.primalrework.utils.enums;
 
+import mrunknown404.primalrework.helpers.WordH;
 import mrunknown404.primalrework.registries.PRBlocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.IFormattableTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
 
 public enum EnumRecipeType implements ICraftingInput {
 	//@formatter:off
@@ -17,7 +17,7 @@ public enum EnumRecipeType implements ICraftingInput {
 	
 	private EnumRecipeType(Item icon) {
 		this.icon = new ItemStack(icon);
-		this.name = new TranslationTextComponent("recipetype." + name() + ".name");
+		this.name = WordH.translate("recipetype." + name() + ".name");
 	}
 	
 	@Override

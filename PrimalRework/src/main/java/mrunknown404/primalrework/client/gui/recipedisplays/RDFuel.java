@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 
-import mrunknown404.primalrework.client.ColorH;
+import mrunknown404.primalrework.helpers.ColorH;
 import mrunknown404.primalrework.recipes.SRFuel;
 import net.minecraft.item.Item;
 

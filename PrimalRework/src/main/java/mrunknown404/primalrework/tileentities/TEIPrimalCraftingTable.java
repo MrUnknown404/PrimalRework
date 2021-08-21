@@ -3,6 +3,7 @@ package mrunknown404.primalrework.tileentities;
 import java.util.ArrayList;
 import java.util.List;
 
+import mrunknown404.primalrework.helpers.WordH;
 import mrunknown404.primalrework.inventory.container.ContainerPrimalCraftingTable;
 import mrunknown404.primalrework.recipes.Ingredient;
 import mrunknown404.primalrework.recipes.SRCrafting3;
@@ -21,7 +22,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.play.server.SSetSlotPacket;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
 
 public class TEIPrimalCraftingTable extends TEInventory {
 	
@@ -69,6 +69,6 @@ public class TEIPrimalCraftingTable extends TEInventory {
 	
 	@Override
 	protected ITextComponent getDefaultName() {
-		return new TranslationTextComponent("container.primal_crafting_table");
+		return WordH.translate("container.primal_crafting_table");
 	}
 }

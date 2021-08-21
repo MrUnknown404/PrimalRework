@@ -7,9 +7,10 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 
-import mrunknown404.primalrework.client.ColorH;
 import mrunknown404.primalrework.client.gui.screen.ScreenQuestMenu;
+import mrunknown404.primalrework.helpers.ColorH;
 import mrunknown404.primalrework.helpers.MathH;
+import mrunknown404.primalrework.helpers.WordH;
 import mrunknown404.primalrework.quests.Quest;
 import net.minecraft.client.MainWindow;
 import net.minecraft.client.Minecraft;
@@ -22,13 +23,14 @@ import net.minecraft.client.gui.widget.list.AbstractList;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
 
 public class QuestInfoList extends AbstractList<QuestInfoList.QuestInfoEntry> {
 	private final ScreenQuestMenu screen;
 	private final Quest quest;
+	
+	private final IFormattableTextComponent arrow = WordH.string(" -> ");
 	
 	public QuestInfoList(ScreenQuestMenu screen, Minecraft mc, Quest quest) {
 		super(mc, screen.width - 1, 0, screen.height - getInfoHeight(screen) + 1, screen.height - 1, 10);
@@ -101,14 +103,13 @@ public class QuestInfoList extends AbstractList<QuestInfoList.QuestInfoEntry> {
 		
 		if (quest.hasReward()) {
 			ITextComponent reward = quest.getReward().getDescription();
-			minecraft.font.draw(stack, new TranslationTextComponent("quest.info.reward").append(new StringTextComponent(" -> ")).append(reward), x, y + 26,
-					ColorH.rgba2Int(45, 45, 45));
+			minecraft.font.draw(stack, WordH.translate("quest.info.reward").append(arrow).append(reward), x, y + 26, ColorH.rgba2Int(45, 45, 45));
 		}
 		
 		if (!quest.isRoot()) {
 			ITextComponent requirement = quest.getRequirement().getDescription();
-			minecraft.font.draw(stack, new TranslationTextComponent("quest.info.requirement").append(new StringTextComponent(" -> ")).append(requirement), x,
-					y + (quest.hasReward() ? 36 : 26), ColorH.rgba2Int(45, 45, 45));
+			minecraft.font.draw(stack, WordH.translate("quest.info.requirement").append(arrow).append(requirement), x, y + (quest.hasReward() ? 36 : 26),
+					ColorH.rgba2Int(45, 45, 45));
 		}
 		
 		renderList(stack, getRowLeft(), y, mouseX, mouseY, tick);

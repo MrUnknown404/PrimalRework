@@ -1,8 +1,8 @@
 package mrunknown404.primalrework.utils.enums;
 
+import mrunknown404.primalrework.helpers.WordH;
 import mrunknown404.primalrework.utils.IName;
 import net.minecraft.util.text.IFormattableTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
 
 /**<pre> name, id <br>
  * stage0  ("before", 0),
@@ -30,7 +30,7 @@ public enum EnumStage implements IName {
 	public final int id;
 	
 	private EnumStage(String name, int id) {
-		this.name = new TranslationTextComponent("stage." + name + ".name");
+		this.name = WordH.translate("stage." + name + ".name");
 		this.id = id;
 	}
 	

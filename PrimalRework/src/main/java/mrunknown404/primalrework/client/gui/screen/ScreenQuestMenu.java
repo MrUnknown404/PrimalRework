@@ -10,13 +10,13 @@ import mrunknown404.primalrework.client.gui.GuiQuestTree;
 import mrunknown404.primalrework.client.gui.widget.QuestInfoList;
 import mrunknown404.primalrework.client.gui.widget.QuestTabList;
 import mrunknown404.primalrework.helpers.MathH;
+import mrunknown404.primalrework.helpers.WordH;
 import mrunknown404.primalrework.quests.Quest;
 import mrunknown404.primalrework.quests.QuestTab;
 import mrunknown404.primalrework.registries.PRQuests;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TranslationTextComponent;
 
 public class ScreenQuestMenu extends Screen {
 	private static final ResourceLocation BG = new ResourceLocation(PrimalRework.MOD_ID, "textures/gui/quest/quest_menu_background.png");
@@ -39,7 +39,7 @@ public class ScreenQuestMenu extends Screen {
 	public static Item selectedTab;
 	
 	public ScreenQuestMenu() {
-		super(new TranslationTextComponent("screen.quest.menu.title"));
+		super(WordH.translate("screen.quest.menu.title"));
 	}
 	
 	@Override

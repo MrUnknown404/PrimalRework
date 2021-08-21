@@ -1,8 +1,8 @@
 package mrunknown404.primalrework.utils.enums;
 
+import mrunknown404.primalrework.helpers.WordH;
 import mrunknown404.primalrework.utils.IName;
 import net.minecraft.util.text.IFormattableTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
 
 /**<pre> swingSpeed, baseDamage <br>
  * none   (2.00f, 0.00f)
@@ -32,7 +32,7 @@ public enum EnumToolType implements IName {
 	public final float swingSpeed, baseDamage;
 	
 	private EnumToolType(float swingSpeed, float baseDamage) {
-		this.name = new TranslationTextComponent("tool.type." + name() + ".name");
+		this.name = WordH.translate("tool.type." + name() + ".name");
 		this.swingSpeed = swingSpeed - 4;
 		this.baseDamage = baseDamage;
 	}

@@ -1,4 +1,4 @@
-package mrunknown404.primalrework.client;
+package mrunknown404.primalrework.helpers;
 
 public class ColorH {
 	public static int rgba2Int(int r, int g, int b, int a) {

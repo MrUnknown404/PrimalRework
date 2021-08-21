@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import mrunknown404.primalrework.events.client.TooltipCEvents;
+import mrunknown404.primalrework.helpers.WordH;
 import mrunknown404.primalrework.items.utils.StagedItem.ItemType;
 import mrunknown404.primalrework.registries.PRItemGroups;
 import mrunknown404.primalrework.utils.HarvestInfo;
@@ -16,7 +17,6 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
 
 public class StagedBlock extends Block {
 	private final Map<EnumToolType, HarvestInfo> harvestInfos = new HashMap<EnumToolType, HarvestInfo>();
@@ -51,7 +51,7 @@ public class StagedBlock extends Block {
 	
 	public StagedBlock addTooltip(int amount) {
 		for (int i = 0; i < amount; i++) {
-			tooltips.add(new TranslationTextComponent("tooltips.item." + name + "." + tooltips.size()).withStyle(TooltipCEvents.STYLE_GRAY));
+			tooltips.add(WordH.translate("tooltips.item." + name + "." + tooltips.size()).withStyle(TooltipCEvents.STYLE_GRAY));
 		}
 		return this;
 	}

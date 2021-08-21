@@ -1,5 +1,6 @@
 package mrunknown404.primalrework.tileentities;
 
+import mrunknown404.primalrework.helpers.WordH;
 import mrunknown404.primalrework.inventory.container.ContainerCampFire;
 import mrunknown404.primalrework.recipes.SRCampFire;
 import mrunknown404.primalrework.recipes.input.RISingle;
@@ -18,7 +19,6 @@ import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.util.IIntArray;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
 
 public class TEICampFire extends TEInventory implements ITickableTileEntity {
 	private int burnTimeLeft, maxBurnTime, cookTimeLeft, maxCookTime;
@@ -146,7 +146,7 @@ public class TEICampFire extends TEInventory implements ITickableTileEntity {
 	
 	@Override
 	protected ITextComponent getDefaultName() {
-		return new TranslationTextComponent("container.campfire");
+		return WordH.translate("container.campfire");
 	}
 	
 	@Override

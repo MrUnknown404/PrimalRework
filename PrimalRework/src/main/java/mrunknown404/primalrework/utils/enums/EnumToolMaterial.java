@@ -1,8 +1,8 @@
 package mrunknown404.primalrework.utils.enums;
 
+import mrunknown404.primalrework.helpers.WordH;
 import mrunknown404.primalrework.utils.IName;
 import net.minecraft.util.text.IFormattableTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
 
 /**<pre> level, durability, speed, extraDamage <br>
  * hand       (0,    0,  1.00f, 0.00f),
@@ -57,7 +57,7 @@ public enum EnumToolMaterial implements IName {
 		this.durability = durability * 8;
 		this.speed = speed;
 		this.extraDamage = extraDamage;
-		this.name = new TranslationTextComponent("tool.material." + name() + ".name");
+		this.name = WordH.translate("tool.material." + name() + ".name");
 	}
 	
 	@Override
