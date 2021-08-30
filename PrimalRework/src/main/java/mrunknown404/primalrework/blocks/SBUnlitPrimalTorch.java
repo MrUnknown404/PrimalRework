@@ -4,6 +4,7 @@ import mrunknown404.primalrework.blocks.utils.StagedBlock;
 import mrunknown404.primalrework.items.utils.StagedItem.ItemType;
 import mrunknown404.primalrework.registries.PRItemGroups;
 import mrunknown404.primalrework.utils.HarvestInfo;
+import mrunknown404.primalrework.utils.enums.EnumBlockInfo;
 import mrunknown404.primalrework.utils.enums.EnumStage;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -22,7 +23,7 @@ public class SBUnlitPrimalTorch extends StagedBlock {
 	private static final VoxelShape SHAPE = box(6, 0, 6, 10, 8, 10);
 	
 	protected SBUnlitPrimalTorch(String name, EnumStage stage, int light, BlockStateType blockStateType, HarvestInfo info) {
-		super(name, stage, 64, PRItemGroups.BLOCKS, Material.DECORATION, SoundType.WOOD, false, light, 0, 0, false, blockStateType, BlockModelType.none, info);
+		super(name, stage, 64, PRItemGroups.BLOCKS, Material.DECORATION, SoundType.WOOD, false, light, EnumBlockInfo.instant, false, blockStateType, BlockModelType.none, info);
 	}
 	
 	public SBUnlitPrimalTorch() {

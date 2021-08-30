@@ -1,9 +1,9 @@
 package mrunknown404.primalrework.blocks;
 
 import mrunknown404.primalrework.blocks.utils.SBContainer;
-import mrunknown404.primalrework.registries.PRItemGroups;
 import mrunknown404.primalrework.tileentities.TEIPrimalCraftingTable;
 import mrunknown404.primalrework.utils.HarvestInfo;
+import mrunknown404.primalrework.utils.enums.EnumBlockInfo;
 import mrunknown404.primalrework.utils.enums.EnumStage;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -27,8 +27,8 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 public class SBPrimalCraftingTable extends SBContainer {
 	public SBPrimalCraftingTable() {
-		super("primal_crafting_table", EnumStage.do_later, 64, PRItemGroups.MACHINES, Material.WOOD, SoundType.WOOD, true, 0, 3, 3, false, BlockStateType.normal,
-				BlockModelType.normal, HarvestInfo.SAW_MIN);
+		super("primal_crafting_table", EnumStage.do_later, 64, Material.WOOD, SoundType.WOOD, true, 0, EnumBlockInfo.wood, false, BlockStateType.normal, BlockModelType.normal,
+				HarvestInfo.SAW_MIN);
 	}
 	
 	@Override
@@ -45,7 +45,7 @@ public class SBPrimalCraftingTable extends SBContainer {
 	}
 	
 	@Override
-	public TileEntity newBlockEntity(IBlockReader reader) {
+	public TileEntity makeTileEntity(BlockState state, IBlockReader world) {
 		return new TEIPrimalCraftingTable();
 	}
 	

@@ -83,6 +83,8 @@ public class VanillaRegistry {
 		registerBlock(block, null, infos);
 	}
 	
+	//TODO make this take in an EnumBlockInfo!
+	
 	/** @param info Should not be null! Only used by the other register block method! */
 	public static void registerBlock(Block block, HarvestInfo info, HarvestInfo... infos) {
 		Map<EnumToolType, HarvestInfo> infoMap = new HashMap<EnumToolType, HarvestInfo>();

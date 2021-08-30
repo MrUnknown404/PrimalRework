@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mrunknown404.primalrework.items.SIClayVessel;
-import mrunknown404.primalrework.items.SINugget;
+import mrunknown404.primalrework.items.SIIngot;
+import mrunknown404.primalrework.items.SIMetalPart;
+import mrunknown404.primalrework.items.SIOreNugget;
 import mrunknown404.primalrework.items.utils.SIDamageable;
 import mrunknown404.primalrework.items.utils.SIFood;
 import mrunknown404.primalrework.items.utils.StagedItem;
-import mrunknown404.primalrework.utils.enums.EnumAlloy;
+import mrunknown404.primalrework.utils.enums.EnumMetal;
+import mrunknown404.primalrework.utils.enums.EnumMetalPart;
 import mrunknown404.primalrework.utils.enums.EnumOreValue;
 import mrunknown404.primalrework.utils.enums.EnumStage;
 import mrunknown404.primalrework.utils.enums.EnumToolMaterial;
@@ -19,6 +22,7 @@ import net.minecraftforge.fml.RegistryObject;
 public class PRItems {
 	private static final List<RegistryObject<Item>> CASTS = new ArrayList<RegistryObject<Item>>();
 	private static final List<RegistryObject<Item>> INGOTS = new ArrayList<RegistryObject<Item>>();
+	private static final List<RegistryObject<Item>> PARTS = new ArrayList<RegistryObject<Item>>();
 	
 	//MISC
 	public static final RegistryObject<Item> PLANT_FIBER = register(new StagedItem("plant_fiber", EnumStage.stage0));
@@ -72,23 +76,22 @@ public class PRItems {
 			}
 		}
 		
-		for (EnumAlloy alloy : EnumAlloy.values()) {
-			if (alloy.hasOre) {
+		for (EnumMetal alloy : EnumMetal.values()) {
+			if (!alloy.isAlloy) {
 				for (EnumOreValue value : EnumOreValue.values()) {
 					if (value == EnumOreValue.block) {
 						continue;
 					}
 					
-					INGOTS.add(register(new SINugget(alloy, value)));
+					INGOTS.add(register(new SIOreNugget(alloy, value)));
 				}
 			}
 			
-			if (alloy == EnumAlloy.unknown) {
-				INGOTS.add(register(new StagedItem(alloy.toString() + "_ingot", alloy.stage, 16).addTooltip()));
-				INGOTS.add(register(new StagedItem(alloy.toString() + "_nugget", alloy.stage, 32).addTooltip()));
-			} else {
-				INGOTS.add(register(new StagedItem(alloy.toString() + "_ingot", alloy.stage, 16)));
-				INGOTS.add(register(new StagedItem(alloy.toString() + "_nugget", alloy.stage, 32)));
+			INGOTS.add(register(new SIIngot(alloy, false, 16)));
+			INGOTS.add(register(new SIIngot(alloy, true, 32)));
+			
+			for (EnumMetalPart part : EnumMetalPart.values()) {
+				PARTS.add(register(new SIMetalPart(alloy, part)));
 			}
 		}
 	}
@@ -101,13 +104,24 @@ public class PRItems {
 	}
 	
 	//TODO make a block to clean ore and use this!
-	public static SINugget getOre(EnumAlloy alloy, EnumOreValue value) {
+	public static SIOreNugget getOre(EnumMetal alloy, EnumOreValue value) {
 		for (RegistryObject<Item> item : INGOTS) {
-			if (item.get() instanceof SINugget) {
-				SINugget ore = (SINugget) item.get();
-				if (ore.alloy == alloy && ore.value == value) {
+			if (item.get() instanceof SIOreNugget) {
+				SIOreNugget ore = (SIOreNugget) item.get();
+				if (ore.metal == alloy && ore.value == value) {
 					return ore;
 				}
+			}
+		}
+		
+		return null;
+	}
+	
+	public static SIMetalPart getMetalPart(EnumMetal metal, EnumMetalPart part) {
+		for (RegistryObject<Item> item : PARTS) {
+			SIMetalPart itemPart = (SIMetalPart) item.get();
+			if (itemPart.metal == metal && itemPart.part == part) {
+				return itemPart;
 			}
 		}
 		

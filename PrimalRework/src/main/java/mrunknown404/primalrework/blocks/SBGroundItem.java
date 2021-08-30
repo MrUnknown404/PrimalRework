@@ -5,6 +5,7 @@ import mrunknown404.primalrework.items.utils.StagedItem.ItemType;
 import mrunknown404.primalrework.registries.PRItemGroups;
 import mrunknown404.primalrework.utils.HarvestInfo;
 import mrunknown404.primalrework.utils.HarvestInfo.DropInfo;
+import mrunknown404.primalrework.utils.enums.EnumBlockInfo;
 import mrunknown404.primalrework.utils.enums.EnumStage;
 import mrunknown404.primalrework.utils.enums.EnumToolMaterial;
 import mrunknown404.primalrework.utils.enums.EnumToolType;
@@ -30,8 +31,8 @@ public class SBGroundItem extends StagedBlock {
 	}
 	
 	public SBGroundItem(String name, SoundType sound, Item dropInstead) {
-		super("ground_" + name, EnumStage.stage0, 64, PRItemGroups.BLOCKS, Material.DECORATION, sound, false, 0, 0, 0, false, BlockStateType.random_direction, BlockModelType.none,
-				dropInstead == null ? HarvestInfo.HAND : new HarvestInfo(EnumToolType.none, EnumToolMaterial.hand, new DropInfo(dropInstead)));
+		super("ground_" + name, EnumStage.stage0, 64, PRItemGroups.BLOCKS, Material.DECORATION, sound, false, 0, EnumBlockInfo.instant, false, BlockStateType.random_direction,
+				BlockModelType.none, dropInstead == null ? HarvestInfo.HAND : new HarvestInfo(EnumToolType.none, EnumToolMaterial.hand, new DropInfo(dropInstead)));
 	}
 	
 	@Override

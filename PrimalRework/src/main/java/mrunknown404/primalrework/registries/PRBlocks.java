@@ -20,7 +20,8 @@ import mrunknown404.primalrework.items.utils.SIBlock;
 import mrunknown404.primalrework.items.utils.SIWallFloor;
 import mrunknown404.primalrework.utils.HarvestInfo;
 import mrunknown404.primalrework.utils.HarvestInfo.DropInfo;
-import mrunknown404.primalrework.utils.enums.EnumAlloy;
+import mrunknown404.primalrework.utils.enums.EnumBlockInfo;
+import mrunknown404.primalrework.utils.enums.EnumMetal;
 import mrunknown404.primalrework.utils.enums.EnumOreValue;
 import mrunknown404.primalrework.utils.enums.EnumStage;
 import mrunknown404.primalrework.utils.enums.EnumToolMaterial;
@@ -36,7 +37,7 @@ public class PRBlocks {
 	
 	//MISC
 	public static final RegistryObject<Block> THATCH = register(
-			new SBFlammable("thatch", EnumStage.stage0, Material.LEAVES, SoundType.GRASS, 0.5f, 0.5f, 10, 10, HarvestInfo.HAND, HarvestInfo.KNIFE_MIN));
+			new SBFlammable("thatch", EnumStage.stage0, Material.LEAVES, SoundType.GRASS, EnumBlockInfo.thatch, 10, 10, HarvestInfo.HAND, HarvestInfo.KNIFE_MIN));
 	public static final RegistryObject<Block> GROUND_ROCK = register(new SBGroundItem("rock", SoundType.STONE));
 	public static final RegistryObject<Block> GROUND_STICK = register(new SBGroundItem("stick", SoundType.WOOD, Items.STICK));
 	public static final RegistryObject<Block> GROUND_FLINT = register(new SBGroundItem("flint", SoundType.STONE, Items.FLINT));
@@ -44,12 +45,12 @@ public class PRBlocks {
 	public static final RegistryObject<Block> UNLIT_PRIMAL_WALL_TORCH;
 	public static final RegistryObject<Block> LIT_PRIMAL_TORCH;
 	public static final RegistryObject<Block> LIT_PRIMAL_WALL_TORCH;
-	public static final RegistryObject<Block> SALT = register(new StagedBlock("salt_block", EnumStage.stage1, Material.CLAY, SoundType.SAND, 1.25f, 1.25f,
+	public static final RegistryObject<Block> SALT = register(new StagedBlock("salt_block", EnumStage.stage1, Material.CLAY, SoundType.SAND, EnumBlockInfo.dirt,
 			new HarvestInfo(EnumToolType.shovel, EnumToolMaterial.clay, new DropInfo(() -> PRItems.SALT.get(), 4, 4))));
 	public static final RegistryObject<Block> MUSHROOM_GRASS = register(new SBMushroomGrass());
 	public static final RegistryObject<Block> DENSE_LOG = register(new SBDenseLog());
 	public static final RegistryObject<Block> CHARCOAL_BLOCK = register(
-			new SBFlammable("charcoal_block", EnumStage.stage2, Material.STONE, SoundType.STONE, 4, 6, 8, 10, HarvestInfo.HAND, HarvestInfo.KNIFE_MIN));
+			new SBFlammable("charcoal_block", EnumStage.stage2, Material.STONE, SoundType.STONE, EnumBlockInfo.very_hard_wood, 8, 10, HarvestInfo.HAND, HarvestInfo.KNIFE_MIN));
 	public static final RegistryObject<Block> STRIPPED_OAK_LOG = register(new SBStrippedLog("oak"));
 	public static final RegistryObject<Block> STRIPPED_SPRUCE_LOG = register(new SBStrippedLog("spruce"));
 	public static final RegistryObject<Block> STRIPPED_BIRCH_LOG = register(new SBStrippedLog("birch"));
@@ -91,23 +92,19 @@ public class PRBlocks {
 	}
 	
 	static void register() {
-		for (EnumAlloy alloy : EnumAlloy.values()) {
+		for (EnumMetal alloy : EnumMetal.values()) {
 			for (EnumOreValue value : EnumOreValue.values()) {
-				if (alloy.hasOre || value == EnumOreValue.block) {
-					if (alloy == EnumAlloy.unknown) {
-						OREANDBLOCKS.add(register(SBOre.create(alloy.stage, alloy.hardness, alloy.blastResist, alloy, value, alloy.toolMat).addTooltip()));
-					} else {
-						OREANDBLOCKS.add(register(SBOre.create(alloy.stage, alloy.hardness, alloy.blastResist, alloy, value, alloy.toolMat)));
-					}
+				if (!alloy.isAlloy || value == EnumOreValue.block) {
+					OREANDBLOCKS.add(register(SBOre.create(alloy.stage, alloy.blockInfo, alloy, value, alloy.toolMat)));
 				}
 			}
 		}
 	}
 	
-	public static SBOre getOreOrBlock(EnumAlloy alloy, EnumOreValue value) {
+	public static SBOre getOreOrBlock(EnumMetal alloy, EnumOreValue value) {
 		for (RegistryObject<Block> b : OREANDBLOCKS) {
 			SBOre ore = (SBOre) b.get();
-			if (ore.alloy == alloy && ore.value == value) {
+			if (ore.metal == alloy && ore.value == value) {
 				return ore;
 			}
 		}

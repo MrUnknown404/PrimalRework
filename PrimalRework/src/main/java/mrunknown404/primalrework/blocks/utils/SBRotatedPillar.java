@@ -1,6 +1,7 @@
 package mrunknown404.primalrework.blocks.utils;
 
 import mrunknown404.primalrework.utils.HarvestInfo;
+import mrunknown404.primalrework.utils.enums.EnumBlockInfo;
 import mrunknown404.primalrework.utils.enums.EnumStage;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -16,9 +17,9 @@ import net.minecraft.util.Rotation;
 public class SBRotatedPillar extends StagedBlock {
 	
 	protected SBRotatedPillar(String name, EnumStage stage, int stackSize, ItemGroup tab, Material material, SoundType sound, boolean hasCollision, int lightLevel,
-			float hardness, float blastResist, boolean isRandomTick, HarvestInfo info, HarvestInfo... extraInfos) {
-		super(name, stage, stackSize, tab, material, sound, hasCollision, lightLevel, hardness, blastResist, isRandomTick, BlockStateType.facing_pillar,
-				BlockModelType.facing_pillar, info, extraInfos);
+			EnumBlockInfo blockInfo, boolean isRandomTick, HarvestInfo info, HarvestInfo... extraInfos) {
+		super(name, stage, stackSize, tab, material, sound, hasCollision, lightLevel, blockInfo, isRandomTick, BlockStateType.facing_pillar, BlockModelType.facing_pillar, info,
+				extraInfos);
 		registerDefaultState(defaultBlockState().setValue(BlockStateProperties.AXIS, Direction.Axis.Y));
 	}
 	

@@ -2,6 +2,7 @@ package mrunknown404.primalrework.blocks.utils;
 
 import mrunknown404.primalrework.registries.PRItemGroups;
 import mrunknown404.primalrework.utils.HarvestInfo;
+import mrunknown404.primalrework.utils.enums.EnumBlockInfo;
 import mrunknown404.primalrework.utils.enums.EnumStage;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
@@ -12,21 +13,20 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 
 public class SBFlammable extends StagedBlock {
-	
 	protected final int flammability, fireSpreadSpeed;
 	
-	protected SBFlammable(String name, EnumStage stage, int stackSize, ItemGroup tab, Material material, SoundType sound, boolean hasCollision, int lightLevel, float hardness,
-			float blastResist, boolean isRandomTick, int flammability, int fireSpreadSpeed, BlockStateType blockStateType, BlockModelType blockModelType, HarvestInfo info,
+	protected SBFlammable(String name, EnumStage stage, int stackSize, ItemGroup tab, Material material, SoundType sound, boolean hasCollision, int lightLevel,
+			EnumBlockInfo blockInfo, boolean isRandomTick, int flammability, int fireSpreadSpeed, BlockStateType blockStateType, BlockModelType blockModelType, HarvestInfo info,
 			HarvestInfo[] extraInfos) {
-		super(name, stage, stackSize, tab, material, sound, hasCollision, lightLevel, hardness, blastResist, isRandomTick, blockStateType, blockModelType, info, extraInfos);
+		super(name, stage, stackSize, tab, material, sound, hasCollision, lightLevel, blockInfo, isRandomTick, blockStateType, blockModelType, info, extraInfos);
 		this.flammability = flammability;
 		this.fireSpreadSpeed = fireSpreadSpeed;
 	}
 	
-	public SBFlammable(String name, EnumStage stage, Material material, SoundType sound, float hardness, float blastResist, int flammability, int fireSpreadSpeed,
-			HarvestInfo info, HarvestInfo... extraInfos) {
-		this(name, stage, 64, PRItemGroups.BLOCKS, material, sound, true, 0, hardness, blastResist, false, flammability, fireSpreadSpeed, BlockStateType.normal,
-				BlockModelType.normal, info, extraInfos);
+	public SBFlammable(String name, EnumStage stage, Material material, SoundType sound, EnumBlockInfo blockInfo, int flammability, int fireSpreadSpeed, HarvestInfo info,
+			HarvestInfo... extraInfos) {
+		this(name, stage, 64, PRItemGroups.BLOCKS, material, sound, true, 0, blockInfo, false, flammability, fireSpreadSpeed, BlockStateType.normal, BlockModelType.normal, info,
+				extraInfos);
 	}
 	
 	@Override

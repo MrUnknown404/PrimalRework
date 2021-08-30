@@ -7,6 +7,7 @@ import mrunknown404.primalrework.items.utils.StagedItem.ItemType;
 import mrunknown404.primalrework.registries.PRItemGroups;
 import mrunknown404.primalrework.utils.HarvestInfo;
 import mrunknown404.primalrework.utils.HarvestInfo.DropInfo;
+import mrunknown404.primalrework.utils.enums.EnumBlockInfo;
 import mrunknown404.primalrework.utils.enums.EnumStage;
 import mrunknown404.primalrework.utils.enums.EnumToolMaterial;
 import mrunknown404.primalrework.utils.enums.EnumToolType;
@@ -33,8 +34,8 @@ import net.minecraftforge.common.IPlantable;
 public class SBMushroomGrass extends StagedBlock {
 	
 	public SBMushroomGrass() {
-		super("mushroom_grass", EnumStage.stage0, 64, PRItemGroups.BLOCKS, Material.GRASS, SoundType.GRASS, true, 0, 0.8f, 0.8f, true, BlockStateType.none, BlockModelType.none,
-				new HarvestInfo(EnumToolType.shovel, EnumToolMaterial.clay, new DropInfo(Items.DIRT)),
+		super("mushroom_grass", EnumStage.stage0, 64, PRItemGroups.BLOCKS, Material.GRASS, SoundType.GRASS, true, 0, EnumBlockInfo.grass, true, BlockStateType.none,
+				BlockModelType.none, new HarvestInfo(EnumToolType.shovel, EnumToolMaterial.clay, new DropInfo(Items.DIRT)),
 				new HarvestInfo(EnumToolType.none, EnumToolMaterial.hand, new DropInfo(Items.DIRT)));
 		registerDefaultState(stateDefinition.any().setValue(BlockStateProperties.SNOWY, Boolean.valueOf(false)));
 	}

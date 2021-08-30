@@ -10,6 +10,7 @@ import mrunknown404.primalrework.helpers.WordH;
 import mrunknown404.primalrework.items.utils.StagedItem.ItemType;
 import mrunknown404.primalrework.registries.PRItemGroups;
 import mrunknown404.primalrework.utils.HarvestInfo;
+import mrunknown404.primalrework.utils.enums.EnumBlockInfo;
 import mrunknown404.primalrework.utils.enums.EnumStage;
 import mrunknown404.primalrework.utils.enums.EnumToolType;
 import net.minecraft.block.Block;
@@ -29,9 +30,9 @@ public class StagedBlock extends Block {
 	private final BlockModelType blockModelType;
 	private final List<ITextComponent> tooltips = new ArrayList<ITextComponent>();
 	
-	protected StagedBlock(String name, EnumStage stage, int stackSize, ItemGroup tab, Material material, SoundType sound, boolean hasCollision, int lightLevel, float hardness,
-			float blastResist, boolean isRandomTick, BlockStateType blockStateType, BlockModelType blockModelType, HarvestInfo info, HarvestInfo... extraInfos) {
-		super(toProperties(material, sound, hasCollision, lightLevel, hardness, blastResist, isRandomTick));
+	protected StagedBlock(String name, EnumStage stage, int stackSize, ItemGroup tab, Material material, SoundType sound, boolean hasCollision, int lightLevel,
+			EnumBlockInfo blockInfo, boolean isRandomTick, BlockStateType blockStateType, BlockModelType blockModelType, HarvestInfo info, HarvestInfo... extraInfos) {
+		super(toProperties(material, sound, hasCollision, lightLevel, blockInfo, isRandomTick));
 		this.name = name;
 		this.stage = stage;
 		this.stackSize = stackSize;
@@ -45,8 +46,8 @@ public class StagedBlock extends Block {
 		}
 	}
 	
-	public StagedBlock(String name, EnumStage stage, Material material, SoundType sound, float hardness, float blastResist, HarvestInfo info, HarvestInfo... extraInfos) {
-		this(name, stage, 64, PRItemGroups.BLOCKS, material, sound, true, 0, hardness, blastResist, false, BlockStateType.normal, BlockModelType.normal, info, extraInfos);
+	public StagedBlock(String name, EnumStage stage, Material material, SoundType sound, EnumBlockInfo blockInfo, HarvestInfo info, HarvestInfo... extraInfos) {
+		this(name, stage, 64, PRItemGroups.BLOCKS, material, sound, true, 0, blockInfo, false, BlockStateType.normal, BlockModelType.normal, info, extraInfos);
 	}
 	
 	public StagedBlock addTooltip(int amount) {
@@ -84,8 +85,8 @@ public class StagedBlock extends Block {
 		return ItemType.block;
 	}
 	
-	protected static Properties toProperties(Material material, SoundType sound, boolean hasCollision, int lightLevel, float hardness, float blastResist, boolean isRandomTick) {
-		Properties p = Properties.of(material).sound(sound).strength(hardness, blastResist).lightLevel((light) -> {
+	protected static Properties toProperties(Material material, SoundType sound, boolean hasCollision, int lightLevel, EnumBlockInfo blockInfo, boolean isRandomTick) {
+		Properties p = Properties.of(material).sound(sound).strength(blockInfo.hardness, blockInfo.blast).lightLevel((light) -> {
 			return lightLevel;
 		});
 		
@@ -111,6 +112,7 @@ public class StagedBlock extends Block {
 	public enum BlockModelType {
 		none,
 		normal,
-		facing_pillar;
+		facing_pillar,
+		normal_colored;
 	}
 }

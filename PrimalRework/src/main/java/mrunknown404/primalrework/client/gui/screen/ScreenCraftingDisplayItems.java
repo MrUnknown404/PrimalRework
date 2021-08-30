@@ -60,7 +60,7 @@ public class ScreenCraftingDisplayItems extends Screen {
 		heightItems = MathH.floor(height / itemSize);
 		widthItems = MathH.floor(container.getGuiLeft() * guiScale / itemSize);
 		xStart = width - (widthItems * 18) - (padding / 2);
-		listSize = CraftingDisplayH.getItemList().size() / widthItems;
+		listSize = MathH.floor((float) (CraftingDisplayH.getItemList().size() - 1) / (float) widthItems); //Unsure if this fixed it tbh
 		
 		if (lastHeightItems != heightItems || lastSize != CraftingDisplayH.getItemList().size()) {
 			scroll = 0;

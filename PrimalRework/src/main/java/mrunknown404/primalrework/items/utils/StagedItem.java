@@ -116,6 +116,7 @@ public class StagedItem extends Item {
 		handheld,
 		handheld_rod,
 		block,
-		itemblock
+		itemblock,
+		generated_colored;
 	}
 }
