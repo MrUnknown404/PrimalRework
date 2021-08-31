@@ -14,7 +14,7 @@ public class SIMetalPart extends StagedItem {
 	
 	public SIMetalPart(EnumMetal metal, EnumMetalPart part) {
 		super(metal.toString() + "_" + part.toString(), metal.stage, 32, EnumToolType.none, EnumToolMaterial.hand, PRItemGroups.METAL_PARTS, Rarity.COMMON, null, false, false,
-				ItemType.generated_colored);
+				metal == EnumMetal.unknown ? ItemType.generated : ItemType.generated_colored);
 		this.metal = metal;
 		this.part = part;
 	}
