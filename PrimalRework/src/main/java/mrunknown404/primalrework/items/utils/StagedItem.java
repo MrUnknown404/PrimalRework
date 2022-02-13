@@ -2,17 +2,17 @@ package mrunknown404.primalrework.items.utils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableMultimap.Builder;
 import com.google.common.collect.Multimap;
 
-import mrunknown404.primalrework.events.client.TooltipCEvents;
-import mrunknown404.primalrework.helpers.WordH;
 import mrunknown404.primalrework.registries.PRItemGroups;
-import mrunknown404.primalrework.utils.enums.EnumStage;
+import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.utils.enums.EnumToolMaterial;
 import mrunknown404.primalrework.utils.enums.EnumToolType;
+import mrunknown404.primalrework.utils.helpers.WordH;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -24,16 +24,17 @@ import net.minecraft.item.Rarity;
 import net.minecraft.util.text.ITextComponent;
 
 public class StagedItem extends Item {
-	public final EnumStage stage;
+	public final Supplier<Stage> stage;
 	public final EnumToolType toolType;
 	public final EnumToolMaterial toolMat;
 	private final String name;
 	private ItemType itemType;
-	private final List<ITextComponent> tooltips = new ArrayList<ITextComponent>();
+	private boolean overridesVanilla;
 	
+	private final List<ITextComponent> tooltips = new ArrayList<ITextComponent>();
 	private Multimap<Attribute, AttributeModifier> defaultModifiers;
 	
-	protected StagedItem(String name, EnumStage stage, int maxStackSize, EnumToolType toolType, EnumToolMaterial toolMat, ItemGroup tab, Rarity rarity, Food food,
+	protected StagedItem(String name, Supplier<Stage> stage, int maxStackSize, EnumToolType toolType, EnumToolMaterial toolMat, ItemGroup tab, Rarity rarity, Food food,
 			boolean isFireResistant, boolean canRepair, ItemType itemType) {
 		super(toProperties(maxStackSize, toolMat.durability, tab, rarity, food, isFireResistant, canRepair));
 		this.name = name;
@@ -45,17 +46,25 @@ public class StagedItem extends Item {
 		setupModifiers();
 	}
 	
-	public StagedItem(String name, EnumStage stage) {
+	public StagedItem(String name, Supplier<Stage> stage) {
 		this(name, stage, 64, EnumToolType.none, EnumToolMaterial.hand, PRItemGroups.ITEMS, Rarity.COMMON, null, false, false, ItemType.generated);
 	}
 	
-	public StagedItem(String name, EnumStage stage, int stackSize) {
+	public StagedItem(String name, Supplier<Stage> stage, int stackSize) {
 		this(name, stage, stackSize, EnumToolType.none, EnumToolMaterial.hand, PRItemGroups.ITEMS, Rarity.COMMON, null, false, false, ItemType.generated);
+	}
+	
+	public StagedItem(String name, Supplier<Stage> stage, ItemGroup tab) {
+		this(name, stage, 64, EnumToolType.none, EnumToolMaterial.hand, tab, Rarity.COMMON, null, false, false, ItemType.generated);
+	}
+	
+	public StagedItem(String name, Supplier<Stage> stage, int stackSize, ItemGroup tab) {
+		this(name, stage, stackSize, EnumToolType.none, EnumToolMaterial.hand, tab, Rarity.COMMON, null, false, false, ItemType.generated);
 	}
 	
 	public StagedItem addTooltip(int amount) {
 		for (int i = 0; i < amount; i++) {
-			tooltips.add(WordH.translate("tooltips.item." + name + "." + tooltips.size()).withStyle(TooltipCEvents.STYLE_GRAY));
+			tooltips.add(WordH.translate("tooltips.item." + name + "." + tooltips.size()).withStyle(WordH.STYLE_GRAY));
 		}
 		return this;
 	}
@@ -92,6 +101,15 @@ public class StagedItem extends Item {
 	
 	public String getRegName() {
 		return name;
+	}
+	
+	public StagedItem overrideVanilla() {
+		overridesVanilla = true;
+		return this;
+	}
+	
+	public boolean overridesVanilla() {
+		return overridesVanilla;
 	}
 	
 	public static Properties toProperties(int maxStackSize, int maxDamage, ItemGroup tab, Rarity rarity, Food food, boolean isFireResistant, boolean canRepair) {

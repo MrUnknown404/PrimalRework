@@ -1,16 +1,16 @@
 package mrunknown404.primalrework.recipes;
 
+import mrunknown404.primalrework.items.utils.StagedItem;
 import mrunknown404.primalrework.recipes.input.RICrafting3;
-import mrunknown404.primalrework.utils.enums.EnumStage;
-import net.minecraft.item.Item;
+import mrunknown404.primalrework.stage.Stage;
 import net.minecraft.item.ItemStack;
 
 public class SRCrafting3 implements IStagedRecipe<SRCrafting3, RICrafting3> {
-	private final EnumStage stage;
+	private final Stage stage;
 	private final ItemStack output;
 	public final RICrafting3 input;
 	
-	public SRCrafting3(EnumStage stage, Item output, int count, RICrafting3 input) {
+	public SRCrafting3(Stage stage, StagedItem output, int count, RICrafting3 input) {
 		this.stage = stage;
 		this.output = new ItemStack(output, count);
 		this.input = input;
@@ -27,7 +27,7 @@ public class SRCrafting3 implements IStagedRecipe<SRCrafting3, RICrafting3> {
 	}
 	
 	@Override
-	public EnumStage getStage() {
+	public Stage getStage() {
 		return stage;
 	}
 	

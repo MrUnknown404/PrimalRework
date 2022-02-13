@@ -1,10 +1,9 @@
 {
-	"stage.before.name": "Before",
-	"stage.early_stone.name": "Early Stone",
-	"stage.late_stone.name": "Late Stone",
-	"stage.copper.name": "Copper",
-	"stage.bronze.name": "Bronze",
-	"stage.do_later.name": "DO LATER!",
+	"stage.stage_0.name": "Before",
+	"stage.stage_1.name": "Early Stone",
+	"stage.stage_2.name": "Late Stone",
+	"stage.stage_3.name": "Copper",
+	"stage.stage_4.name": "Bronze",
 	"stage.no_show.name": "No Show",
 	"tool.type.none.name": "Hand",
 	"tool.type.shears.name": "Shears",
@@ -65,12 +64,15 @@
 	"recipetype.crafting_3.name": "3x3 Crafting",
 	"commands.stage.success": "Successfully set the stage to",
 	"commands.stage.current": "The current stage is",
+	"commands.quest.finish": "You have finished the quest",
+	"commands.quest.forget": "You have forgotten the quest",
+	"commands.quest.already_finished": "You have already finished the quest",
+	"commands.quest.already_forgotten": "You have already forgotten the quest",
 	"generator.primalrework.primal_world": "Primal World",
 	"quest.finish.player": "has finished the quest",
 	"quest.finish.missing.pre": "The quest",
 	"quest.finish.missing.post": "has been finished!",
 	"quest.info.reward": "Rewards",
 	"quest.info.requirement": "Requirements",
-	"quest.requirement.require": "Requires",
-	"quest.stage0.root.desc": "test! \n testing! \n \n asd asd asd as das dasd asd asd asdmasnd kjansdk jasnd kajsnd lkajs ndlaksj dnlkasjdnlaksjndlkasjndnalksjdn \n alksjdnlaksjdnas"
+	"quest.info.requirement.require": "Requires"
 }

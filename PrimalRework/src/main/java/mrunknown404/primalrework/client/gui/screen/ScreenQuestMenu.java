@@ -9,13 +9,12 @@ import mrunknown404.primalrework.PrimalRework;
 import mrunknown404.primalrework.client.gui.GuiQuestTree;
 import mrunknown404.primalrework.client.gui.widget.QuestInfoList;
 import mrunknown404.primalrework.client.gui.widget.QuestTabList;
-import mrunknown404.primalrework.helpers.MathH;
-import mrunknown404.primalrework.helpers.WordH;
 import mrunknown404.primalrework.quests.Quest;
 import mrunknown404.primalrework.quests.QuestTab;
 import mrunknown404.primalrework.registries.PRQuests;
+import mrunknown404.primalrework.utils.helpers.MathH;
+import mrunknown404.primalrework.utils.helpers.WordH;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 
 public class ScreenQuestMenu extends Screen {
@@ -31,12 +30,12 @@ public class ScreenQuestMenu extends Screen {
 	public static final ResourceLocation QUEST_END_ICON_SELECTED = new ResourceLocation(PrimalRework.MOD_ID, "textures/gui/quest/quest_end_icon_selected.png");
 	public static final ResourceLocation QUEST_END_ICON_SELECTED_HOVER = new ResourceLocation(PrimalRework.MOD_ID, "textures/gui/quest/quest_end_icon_selected_hover.png");
 	
-	private static final Map<Item, GuiQuestTree> TREE_MAP = new HashMap<Item, GuiQuestTree>();
+	private static final Map<QuestTab, GuiQuestTree> TREE_MAP = new HashMap<QuestTab, GuiQuestTree>();
 	private QuestTabList tabList;
 	private QuestInfoList questInfo;
 	private static float scale = 1f;
 	
-	public static Item selectedTab;
+	public static QuestTab selectedTab;
 	
 	public ScreenQuestMenu() {
 		super(WordH.translate("screen.quest.menu.title"));
@@ -50,11 +49,11 @@ public class ScreenQuestMenu extends Screen {
 		questInfo = null;
 		
 		for (QuestTab tab : PRQuests.getTabs()) {
-			TREE_MAP.put(tab.getIcon().getItem(), new GuiQuestTree(this, minecraft, tab));
+			TREE_MAP.put(tab, new GuiQuestTree(this, minecraft, tab));
 		}
 		scale = 1;
 		
-		selectedTab = PRQuests.TAB_STAGE_0.getIcon().getItem();
+		selectedTab = PRQuests.TAB_STAGE_0;
 	}
 	
 	@Override

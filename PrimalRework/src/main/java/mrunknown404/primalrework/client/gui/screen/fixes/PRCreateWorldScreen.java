@@ -7,8 +7,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 
-import mrunknown404.primalrework.helpers.WordH;
 import mrunknown404.primalrework.registries.PRWorld;
+import mrunknown404.primalrework.utils.helpers.WordH;
 import net.minecraft.client.gui.DialogTexts;
 import net.minecraft.client.gui.IGuiEventListener;
 import net.minecraft.client.gui.screen.DirtMessageScreen;

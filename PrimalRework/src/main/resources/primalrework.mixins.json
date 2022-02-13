@@ -6,7 +6,8 @@
 	"required": true,
 	"mixins": [
 		"MixinAbstractBlock",
-		"MixinForgeOnAdd"
+		"MixinForgeOnAdd",
+		"MixinContainer"
 	],
 	"client": [
 		"client.MixinServerWorldInfo",

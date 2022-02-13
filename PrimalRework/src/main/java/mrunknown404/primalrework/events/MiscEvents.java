@@ -2,15 +2,18 @@ package mrunknown404.primalrework.events;
 
 import java.util.Random;
 
-import mrunknown404.primalrework.PrimalRework;
-import mrunknown404.primalrework.helpers.RayTraceH;
-import mrunknown404.primalrework.helpers.StageH;
+import mrunknown404.primalrework.network.NetworkHandler;
+import mrunknown404.primalrework.network.packets.PacketSyncStage;
+import mrunknown404.primalrework.registries.PRBlocks;
 import mrunknown404.primalrework.registries.PRItems;
-import mrunknown404.primalrework.stage.storage.StageDataProvider;
 import mrunknown404.primalrework.utils.NoAdvancementManager;
+import mrunknown404.primalrework.utils.helpers.RayTraceH;
+import mrunknown404.primalrework.utils.helpers.StageH;
+import mrunknown404.primalrework.world.savedata.WSDQuests;
+import mrunknown404.primalrework.world.savedata.WSDStage;
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -19,10 +22,10 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.event.AddReloadListenerEvent;
-import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.player.BonemealEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent.FarmlandTrampleEvent;
 import net.minecraftforge.event.world.WorldEvent;
@@ -31,6 +34,19 @@ import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 public class MiscEvents {
 	private static final Random R = new Random();
+	
+	@SubscribeEvent
+	public void onWorldStart(WorldEvent.Load e) {
+		if (e.getWorld() instanceof ServerWorld) {
+			WSDStage.get((ServerWorld) e.getWorld());
+			WSDQuests.get((ServerWorld) e.getWorld());
+		}
+	}
+	
+	@SubscribeEvent
+	public void onPlayerJoin(PlayerLoggedInEvent e) {
+		NetworkHandler.sendPacketToTarget((ServerPlayerEntity) e.getPlayer(), new PacketSyncStage(StageH.getStage()));
+	}
 	
 	@SubscribeEvent
 	public void onTrample(FarmlandTrampleEvent e) {
@@ -43,19 +59,6 @@ public class MiscEvents {
 	}
 	
 	@SubscribeEvent
-	public void onCapability(AttachCapabilitiesEvent<World> e) {
-		e.addCapability(PrimalRework.STAGE_DATA, new StageDataProvider());
-	}
-	
-	@SubscribeEvent
-	public void onWorldLoad(WorldEvent.Load e) {
-		if (!e.getWorld().isClientSide()) {
-			StageH.setWorld((World) e.getWorld());
-			StageH.loadWorld();
-		}
-	}
-	
-	@SubscribeEvent
 	public void onBlockPunch(PlayerInteractEvent.LeftClickBlock e) {
 		if (e.getPlayer().isCreative() || e.getPlayer().swinging) {
 			return;
@@ -63,14 +66,14 @@ public class MiscEvents {
 		
 		Block b = e.getWorld().getBlockState(e.getPos()).getBlock();
 		
-		if (b == Blocks.STONE || b == Blocks.COBBLESTONE) {
-			BlockRayTraceResult result = RayTraceH.rayTrace(e.getPlayer(), 1);
+		if (b == PRBlocks.STONE.get() || b == PRBlocks.COBBLESTONE.get()) {
+			BlockRayTraceResult result = RayTraceH.rayTrace(1, false);
 			ItemStack item = e.getItemStack();
 			Vector3d hit = result.getLocation();
 			Item itemToAdd = null;
 			int count = 1 + R.nextInt(1);
 			
-			if (item.getItem() == Items.FLINT) {
+			if (item.getItem() == PRItems.FLINT.get()) {
 				e.getWorld().playSound(e.getPlayer(), e.getPos(), SoundEvents.STONE_BREAK, SoundCategory.PLAYERS, 1, 2);
 				itemToAdd = PRItems.KNAPPED_FLINT.get();
 			} else if (item.getItem() == PRItems.KNAPPED_FLINT.get()) {
@@ -97,7 +100,7 @@ public class MiscEvents {
 	
 	@SubscribeEvent
 	public void onReload(AddReloadListenerEvent e) {
-		ObfuscationReflectionHelper.setPrivateValue(DataPackRegistries.class, e.getDataPackRegistries(),
-				new NoAdvancementManager(e.getDataPackRegistries().getPredicateManager()), "advancements");
+		ObfuscationReflectionHelper.setPrivateValue(DataPackRegistries.class, e.getDataPackRegistries(), new NoAdvancementManager(e.getDataPackRegistries().getPredicateManager()),
+				"advancements");
 	}
 }

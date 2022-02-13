@@ -1,23 +1,22 @@
 package mrunknown404.primalrework.quests.requirements;
 
-import mrunknown404.primalrework.helpers.WordH;
-import net.minecraft.item.Item;
+import mrunknown404.primalrework.items.utils.StagedItem;
+import mrunknown404.primalrework.utils.helpers.WordH;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 
-public class ItemRequirement extends QuestRequirement<Item, Item> {
-	
-	public ItemRequirement(Item obj, int count) {
+public class ItemRequirement extends QuestRequirement<StagedItem, StagedItem> {
+	public ItemRequirement(StagedItem obj, int count) {
 		super(obj, count);
 	}
 	
 	@Override
-	protected boolean check(Item obj) {
+	protected boolean check(StagedItem obj) {
 		return this.obj == obj;
 	}
 	
 	@Override
-	public Item getIcon() {
+	public StagedItem getIcon() {
 		return obj;
 	}
 	
@@ -27,7 +26,7 @@ public class ItemRequirement extends QuestRequirement<Item, Item> {
 	}
 	
 	@Override
-	protected Class<Item> getClazz() {
-		return Item.class;
+	protected Class<StagedItem> getClazz() {
+		return StagedItem.class;
 	}
 }

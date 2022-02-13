@@ -2,8 +2,8 @@ package mrunknown404.primalrework.blocks;
 
 import java.util.Random;
 
+import mrunknown404.primalrework.registries.PRStages;
 import mrunknown404.primalrework.utils.HarvestInfo;
-import mrunknown404.primalrework.utils.enums.EnumStage;
 import net.minecraft.block.BlockState;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.math.BlockPos;
@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 
 public class SBLitPrimalTorch extends SBUnlitPrimalTorch {
 	public SBLitPrimalTorch() {
-		super("lit_primal_torch", EnumStage.stage1, 8, BlockStateType.normal, HarvestInfo.HAND);
+		super("lit_primal_torch", PRStages.STAGE_1, 8, BlockStateType.normal, HarvestInfo.HAND);
 	}
 	
 	@Override

@@ -1,6 +1,7 @@
 package mrunknown404.primalrework.client.gui.screen;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -10,24 +11,25 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 
 import mrunknown404.primalrework.PrimalRework;
 import mrunknown404.primalrework.client.gui.recipedisplays.RecipeDisplay;
-import mrunknown404.primalrework.helpers.ColorH;
-import mrunknown404.primalrework.helpers.MathH;
-import mrunknown404.primalrework.helpers.WordH;
+import mrunknown404.primalrework.items.utils.StagedItem;
 import mrunknown404.primalrework.recipes.IStagedRecipe;
 import mrunknown404.primalrework.registries.PRFuels;
 import mrunknown404.primalrework.utils.Pair;
 import mrunknown404.primalrework.utils.enums.EnumFuelType;
 import mrunknown404.primalrework.utils.enums.EnumRecipeType;
 import mrunknown404.primalrework.utils.enums.ICraftingInput;
+import mrunknown404.primalrework.utils.helpers.ColorH;
+import mrunknown404.primalrework.utils.helpers.MathH;
+import mrunknown404.primalrework.utils.helpers.WordH;
 import net.minecraft.client.audio.SimpleSound;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.client.gui.widget.button.Button.IPressable;
-import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraftforge.fml.client.gui.GuiUtils;
 
 public class ScreenRecipeList extends Screen {
 	private static final ResourceLocation BG = new ResourceLocation(PrimalRework.MOD_ID, "textures/gui/craftingdisplay/crafting_display_background.png");
@@ -41,7 +43,8 @@ public class ScreenRecipeList extends Screen {
 	private Button leftButton, rightButton;
 	private ITextComponent recipeName, pageCount;
 	
-	public ScreenRecipeList(ContainerScreen<?> lastScreen, Map<EnumRecipeType, List<IStagedRecipe<?, ?>>> recipes, Map<EnumFuelType, Pair<Item, Integer>> fuels, Item output) {
+	public ScreenRecipeList(ContainerScreen<?> lastScreen, Map<EnumRecipeType, List<IStagedRecipe<?, ?>>> recipes, Map<EnumFuelType, Pair<StagedItem, Integer>> fuels,
+			StagedItem output) {
 		super(WordH.translate("screen.recipelist.title"));
 		this.lastScreen = lastScreen;
 		this.recipes = new ArrayList<Data>();
@@ -100,7 +103,12 @@ public class ScreenRecipeList extends Screen {
 				(curData.display.thisHeight + 2) + 6;
 		
 		for (int i = 0; i < recipes.size(); i++) {
-			itemRenderer.renderGuiItem(recipes.get(i).type.getIcon(), leftPos + 9 + (i * 29), topPos - 20);
+			int left = leftPos + 9 + (i * 29), top = topPos - 20;
+			itemRenderer.renderGuiItem(recipes.get(i).type.getIcon(), left, top);
+			
+			if (MathH.within(mouseX, left, left + 15) && MathH.within(mouseY, top, top + 15)) {
+				GuiUtils.drawHoveringText(stack, Arrays.asList(recipes.get(i).type.getFancyName()), mouseX, mouseY, width, height, -1, font);
+			}
 		}
 		
 		minecraft.textureManager.bind(TAB);

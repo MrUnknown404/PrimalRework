@@ -8,12 +8,12 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import mrunknown404.primalrework.helpers.BlockH;
+import mrunknown404.primalrework.blocks.utils.StagedBlock;
 import mrunknown404.primalrework.utils.HarvestInfo;
 import mrunknown404.primalrework.utils.HarvestInfo.DropInfo;
 import mrunknown404.primalrework.utils.enums.EnumToolType;
+import mrunknown404.primalrework.utils.helpers.BlockH;
 import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.LootContext;
@@ -24,8 +24,12 @@ public class MixinAbstractBlock {
 	@Inject(at = @At("HEAD"), method = "getDrops(Lnet/minecraft/block/BlockState;Lnet/minecraft/loot/LootContext$Builder;)Ljava/util/List;", cancellable = true)
 	private void getDrops(BlockState state, LootContext.Builder builder, CallbackInfoReturnable<List<ItemStack>> callback) {
 		List<ItemStack> list = new ArrayList<ItemStack>();
+		if (!(state.getBlock() instanceof StagedBlock)) {
+			callback.setReturnValue(list);
+			return;
+		}
 		
-		Block block = state.getBlock();
+		StagedBlock block = (StagedBlock) state.getBlock();
 		HarvestInfo info = BlockH.getBlockHarvestInfo(block, EnumToolType.none);
 		
 		if (info == null) {

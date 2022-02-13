@@ -1,7 +1,7 @@
 package mrunknown404.primalrework.utils.enums;
 
-import mrunknown404.primalrework.helpers.WordH;
 import mrunknown404.primalrework.utils.IName;
+import mrunknown404.primalrework.utils.helpers.WordH;
 import net.minecraft.util.text.IFormattableTextComponent;
 
 /**<pre> swingSpeed, baseDamage <br>

@@ -1,12 +1,12 @@
 package mrunknown404.primalrework.events;
 
-import mrunknown404.primalrework.helpers.BlockH;
-import mrunknown404.primalrework.helpers.ItemH;
+import mrunknown404.primalrework.blocks.utils.StagedBlock;
+import mrunknown404.primalrework.items.utils.StagedItem;
 import mrunknown404.primalrework.utils.HarvestInfo;
 import mrunknown404.primalrework.utils.HarvestInfo.DropInfo;
 import mrunknown404.primalrework.utils.enums.EnumToolMaterial;
 import mrunknown404.primalrework.utils.enums.EnumToolType;
-import net.minecraft.block.Block;
+import mrunknown404.primalrework.utils.helpers.BlockH;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -16,39 +16,19 @@ import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class HarvestEvents {
-	private static Block bsBlock;
-	private static EnumToolType bsToolType;
-	private static EnumToolMaterial bsToolMat;
-	private static HarvestInfo bsInfo;
-	private static Block obBlock;
-	private static EnumToolType obToolType;
-	private static EnumToolMaterial obToolMat;
-	private static HarvestInfo obInfo;
-	
 	@SubscribeEvent
 	public void breakSpeed(PlayerEvent.BreakSpeed e) {
-		Block block = e.getState().getBlock();
-		
-		EnumToolType toolType;
-		EnumToolMaterial toolMat;
-		HarvestInfo info = null;
-		if (bsBlock != null && bsBlock == block) {
-			toolType = bsToolType;
-			toolMat = bsToolMat;
-			info = bsInfo;
-		} else {
-			ItemStack hand = e.getPlayer().getMainHandItem();
-			toolType = ItemH.getItemToolType(hand.getItem());
-			toolMat = ItemH.getItemToolMaterial(hand.getItem());
-			info = BlockH.getBlockHarvestInfo(block, toolType);
-			
-			bsBlock = block;
-			bsToolType = toolType;
-			bsToolMat = toolMat;
-			bsInfo = info;
+		if (!(e.getPlayer().getMainHandItem().getItem() instanceof StagedItem) || !(e.getState().getBlock() instanceof StagedBlock)) {
+			e.setNewSpeed(0);
+			return;
 		}
 		
-		if (toolMat == EnumToolMaterial.unbreakable) {
+		StagedBlock block = (StagedBlock) e.getState().getBlock();
+		ItemStack hand = e.getPlayer().getMainHandItem();
+		StagedItem item = (StagedItem) hand.getItem();
+		HarvestInfo info = BlockH.getBlockHarvestInfo(block, item.toolType);
+		
+		if (item.toolMat == EnumToolMaterial.unbreakable) {
 			e.setNewSpeed(0);
 			return;
 		}
@@ -56,13 +36,13 @@ public class HarvestEvents {
 		if (info != null) {
 			if (info.toolType == EnumToolType.none) {
 				e.setNewSpeed(EnumToolMaterial.hand.speed);
-			} else if (toolType == info.toolType && toolMat.level >= info.toolMat.level) {
-				e.setNewSpeed(toolMat.speed);
+			} else if (item.toolType == info.toolType && item.toolMat.level >= info.toolMat.level) {
+				e.setNewSpeed(item.toolMat.speed);
 			} else {
-				e.setNewSpeed(0.5f);
+				e.setNewSpeed(0);
 			}
 		} else {
-			e.setNewSpeed(0.5f);
+			e.setNewSpeed(0);
 		}
 	}
 	
@@ -75,25 +55,17 @@ public class HarvestEvents {
 	public void onBreak(BlockEvent.BreakEvent e) {
 		if (e.getPlayer().isCreative()) {
 			return;
+		} else if (!(e.getPlayer().getMainHandItem().getItem() instanceof StagedItem) || !(e.getState().getBlock() instanceof StagedBlock)) {
+			e.setCanceled(true);
+			return;
 		}
 		
-		Block block = e.getState().getBlock();
-		EnumToolType toolType;
-		EnumToolMaterial toolMat;
-		HarvestInfo info = null;
-		if (obBlock != null && obBlock == block) {
-			toolType = obToolType;
-			toolMat = obToolMat;
-			info = obInfo;
-		} else {
-			ItemStack hand = e.getPlayer().getMainHandItem();
-			toolType = ItemH.getItemToolType(hand.getItem());
-			toolMat = ItemH.getItemToolMaterial(hand.getItem());
-			info = BlockH.getBlockHarvestInfo(block, toolType);
-			obBlock = block;
-		}
+		StagedBlock block = (StagedBlock) e.getState().getBlock();
+		ItemStack hand = e.getPlayer().getMainHandItem();
+		StagedItem item = (StagedItem) hand.getItem();
+		HarvestInfo info = BlockH.getBlockHarvestInfo(block, item.toolType);
 		
-		if (info != null && ((toolType == info.toolType && toolMat.level >= info.toolMat.level) || info.toolType == EnumToolType.none)) {
+		if (info != null && ((item.toolType == info.toolType && item.toolMat.level >= info.toolMat.level) || info.toolType == EnumToolType.none)) {
 			BlockPos p = e.getPos();
 			
 			if (info.hasDrops()) {

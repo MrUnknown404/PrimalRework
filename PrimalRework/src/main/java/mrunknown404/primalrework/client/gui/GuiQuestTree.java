@@ -10,10 +10,10 @@ import com.mojang.blaze3d.systems.RenderSystem;
 
 import mrunknown404.primalrework.client.gui.screen.ScreenQuestMenu;
 import mrunknown404.primalrework.client.gui.widget.QuestInfoList;
-import mrunknown404.primalrework.helpers.ColorH;
-import mrunknown404.primalrework.helpers.MathH;
 import mrunknown404.primalrework.quests.Quest;
 import mrunknown404.primalrework.quests.QuestTab;
+import mrunknown404.primalrework.utils.helpers.ColorH;
+import mrunknown404.primalrework.utils.helpers.MathH;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FocusableGui;
 import net.minecraft.client.gui.IGuiEventListener;
@@ -34,6 +34,8 @@ public class GuiQuestTree extends FocusableGui implements IRenderable {
 	private final List<QuestButton> children = new ArrayList<QuestButton>();
 	private final ScreenQuestMenu screen;
 	private double x, y;
+	
+	private static final int WHITE = ColorH.rgba2Int(255, 255, 255), BLACK = ColorH.rgba2Int(0, 0, 0), GREEN = ColorH.rgba2Int(0, 255, 0);
 	
 	public GuiQuestTree(ScreenQuestMenu screen, Minecraft mc, QuestTab tab) {
 		this.screen = screen;
@@ -75,12 +77,18 @@ public class GuiQuestTree extends FocusableGui implements IRenderable {
 	public void render(MatrixStack stack, int mouseX, int mouseY, float partial) {
 		for (IGuiEventListener c : children()) {
 			QuestButton q = (QuestButton) c;
-			q.renderPre(stack);
-		}
-		for (IGuiEventListener c : children()) {
-			QuestButton q = (QuestButton) c;
-			q.renderPost(stack);
 			q.render(stack, mouseX, mouseY, partial);
+			q.renderBackgroundLines(stack);
+			
+			if (q.quest.isFinished()) {
+				stack.translate(0, 0, 2);
+				q.renderLines(stack, GREEN);
+				stack.translate(0, 0, -2);
+			} else {
+				stack.translate(0, 0, 1);
+				q.renderLines(stack, WHITE);
+				stack.translate(0, 0, -1);
+			}
 		}
 	}
 	
@@ -107,43 +115,44 @@ public class GuiQuestTree extends FocusableGui implements IRenderable {
 			this.tree = tree;
 		}
 		
-		public void renderPre(MatrixStack stack) {
+		private void renderBackgroundLines(MatrixStack stack) {
 			int x = this.x + MathH.floor(tree.x), y = this.y + MathH.floor(tree.y);
 			
-			if (!quest.isRoot()) {
+			if (quest.getParent() != null) {
 				Quest p = quest.getParent();
 				int px = MathH.floor(p.getXPos() * 33) + MathH.floor(tree.x) - 11 + tree.screen.width / 2;
 				int py = MathH.floor(p.getYPos() * 33) + MathH.floor(tree.y) - 11 + tree.screen.height / 2;
 				int d = x - (px + 22);
 				
 				if (py == y) {
-					fill(stack, x, y + 10, x - d, y + 13, ColorH.rgba2Int(0, 0, 0));
+					fill(stack, x, y + 10, x - d, y + 13, BLACK);
 				} else {
 					int i = py < y ? 1 : 0, hd = d / 2;
-					fill(stack, x - hd - 2, py + 11, x - hd + 1, y + 12 - i, ColorH.rgba2Int(0, 0, 0));
-					fill(stack, x - hd - 1, y + 11, x - hd, y + 12, ColorH.rgba2Int(0, 0, 0));
-					fill(stack, x, y + 10, x - hd, y + 13, ColorH.rgba2Int(0, 0, 0));
-					fill(stack, px + 22, py + 10, x - hd - 1, py + 13, ColorH.rgba2Int(0, 0, 0));
+					fill(stack, x - hd - 2, py + 11 + i, x - hd + 1, y + 12 - i, BLACK);
+					fill(stack, x, y + 10, x - hd, y + 13, BLACK);
+					fill(stack, px + 22, py + 10, x - hd - 1, py + 13, BLACK);
+					fill(stack, x - hd - 1, y + 11, x - hd, y + 12, BLACK);
+					fill(stack, x - hd - 1, py + 11, x - hd, py + 12, BLACK);
 				}
 			}
 		}
 		
-		public void renderPost(MatrixStack stack) {
+		private void renderLines(MatrixStack stack, int color) {
 			int x = this.x + MathH.floor(tree.x), y = this.y + MathH.floor(tree.y);
 			
-			if (!quest.isRoot()) {
+			if (quest.getParent() != null) {
 				Quest p = quest.getParent();
 				int px = MathH.floor(p.getXPos() * 33) + MathH.floor(tree.x) - 11 + tree.screen.width / 2;
 				int py = MathH.floor(p.getYPos() * 33) + MathH.floor(tree.y) - 11 + tree.screen.height / 2;
 				int d = x - (px + 22);
 				
 				if (py == y) {
-					fill(stack, x, y + 11, x - d, y + 12, ColorH.rgba2Int(255, 255, 255));
+					fill(stack, x, y + 11, x - d, y + 12, color);
 				} else {
 					int i = py < y ? 1 : 0, hd = d / 2;
-					fill(stack, x - hd - 1, py + 11, x - hd, y + 12 - i, ColorH.rgba2Int(255, 255, 255));
-					fill(stack, x, y + 11, x - hd, y + 12, ColorH.rgba2Int(255, 255, 255));
-					fill(stack, px + 22, py + 11, x - hd - 1, py + 12, ColorH.rgba2Int(255, 255, 255));
+					fill(stack, x - hd - 1, py + 11 + i, x - hd, y + 12 - i, color);
+					fill(stack, x, y + 11, x - hd, y + 12, color);
+					fill(stack, px + 22, py + 11, x - hd - 1, py + 12, color);
 				}
 			}
 		}

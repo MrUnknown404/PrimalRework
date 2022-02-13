@@ -3,74 +3,38 @@ package mrunknown404.primalrework.registries;
 import java.util.ArrayList;
 import java.util.List;
 
+import mrunknown404.primalrework.items.utils.StagedItem;
+import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.stage.StagedTag;
-import mrunknown404.primalrework.utils.Cache;
-import mrunknown404.primalrework.utils.enums.EnumStage;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
+import mrunknown404.primalrework.utils.DoubleCache;
+import mrunknown404.primalrework.utils.helpers.StageH;
+import net.minecraftforge.fml.RegistryObject;
 
 public class PRStagedTags {
-	private static final List<StagedTag> TAGS = new ArrayList<StagedTag>();
+	public static final RegistryObject<StagedTag> LOGS = PRRegistry.stagedTag(
+			new StagedTag("logs").add(PRStages.STAGE_1, PRBlocks.OAK_LOG.get().asStagedItem(), PRBlocks.SPRUCE_LOG.get().asStagedItem(), PRBlocks.BIRCH_LOG.get().asStagedItem(),
+					PRBlocks.JUNGLE_LOG.get().asStagedItem(), PRBlocks.ACACIA_LOG.get().asStagedItem(), PRBlocks.DARK_OAK_LOG.get().asStagedItem(),
+					PRBlocks.STRIPPED_OAK_LOG.get().asStagedItem(), PRBlocks.STRIPPED_SPRUCE_LOG.get().asStagedItem(), PRBlocks.STRIPPED_BIRCH_LOG.get().asStagedItem(),
+					PRBlocks.STRIPPED_JUNGLE_LOG.get().asStagedItem(), PRBlocks.STRIPPED_ACACIA_LOG.get().asStagedItem(), PRBlocks.STRIPPED_DARK_OAK_LOG.get().asStagedItem()));
 	
-	private static Cache<Item, List<StagedTag>> tagCache = new Cache<Item, List<StagedTag>>();
-	private static StagedTag tagSearchCache;
+	private static final DoubleCache<StagedItem, Stage, List<StagedTag>> tagCache = new DoubleCache<StagedItem, Stage, List<StagedTag>>();
 	
-	public static final StagedTag ALL_LOGS = new StagedTag("logs").add(EnumStage.stage0, Items.OAK_LOG, Items.BIRCH_LOG, Items.SPRUCE_LOG, Items.JUNGLE_LOG, Items.DARK_OAK_LOG,
-			Items.ACACIA_LOG, PRBlocks.STRIPPED_OAK_LOG.get().asItem(), PRBlocks.STRIPPED_BIRCH_LOG.get().asItem(), PRBlocks.STRIPPED_SPRUCE_LOG.get().asItem(),
-			PRBlocks.STRIPPED_JUNGLE_LOG.get().asItem(), PRBlocks.STRIPPED_DARK_OAK_LOG.get().asItem(), PRBlocks.STRIPPED_ACACIA_LOG.get().asItem());
-	public static final StagedTag ALL_PLANK_BLOCKS = new StagedTag("plank_blocks").add(EnumStage.stage0, Items.OAK_PLANKS, Items.BIRCH_PLANKS, Items.SPRUCE_PLANKS,
-			Items.JUNGLE_PLANKS, Items.DARK_OAK_PLANKS, Items.ACACIA_PLANKS);
-	public static final StagedTag ALL_PLANKS = new StagedTag("planks").add(EnumStage.stage2, PRItems.OAK_PLANK.get(), PRItems.BIRCH_PLANK.get(), PRItems.SPRUCE_PLANK.get(),
-			PRItems.JUNGLE_PLANK.get(), PRItems.DARK_OAK_PLANK.get(), PRItems.ACACIA_PLANK.get());
-	public static final StagedTag OAK_LOGS = new StagedTag("oak_logs").add(EnumStage.stage0, Items.OAK_LOG, PRBlocks.STRIPPED_OAK_LOG.get().asItem());
-	public static final StagedTag BIRCH_LOGS = new StagedTag("birch_logs").add(EnumStage.stage0, Items.BIRCH_LOG, PRBlocks.STRIPPED_BIRCH_LOG.get().asItem());
-	public static final StagedTag SPRUCE_LOGS = new StagedTag("spruce_logs").add(EnumStage.stage0, Items.SPRUCE_LOG, PRBlocks.STRIPPED_SPRUCE_LOG.get().asItem());
-	public static final StagedTag JUNGLE_LOGS = new StagedTag("jungle_logs").add(EnumStage.stage0, Items.JUNGLE_LOG, PRBlocks.STRIPPED_JUNGLE_LOG.get().asItem());
-	public static final StagedTag ACACIA_LOGS = new StagedTag("acacia_logs").add(EnumStage.stage0, Items.ACACIA_LOG, PRBlocks.STRIPPED_ACACIA_LOG.get().asItem());
-	public static final StagedTag DARK_OAK_LOGS = new StagedTag("dark_oak_logs").add(EnumStage.stage0, Items.DARK_OAK_LOG, PRBlocks.STRIPPED_DARK_OAK_LOG.get().asItem());
-	public static final StagedTag ALL_WOOL = new StagedTag("wools").add(EnumStage.stage2, Items.WHITE_WOOL, Items.ORANGE_WOOL, Items.MAGENTA_WOOL, Items.LIGHT_BLUE_WOOL,
-			Items.YELLOW_WOOL, Items.LIME_WOOL, Items.PINK_WOOL, Items.GRAY_WOOL, Items.LIGHT_GRAY_WOOL, Items.CYAN_WOOL, Items.PURPLE_WOOL, Items.BLUE_WOOL, Items.BROWN_WOOL,
-			Items.GREEN_WOOL, Items.RED_WOOL, Items.BLACK_WOOL);
-	
-	public static List<StagedTag> getItemsTags(Item item) {
-		if (tagCache.is(item)) {
+	public static List<StagedTag> getItemsTags(StagedItem item) {
+		if (tagCache.is(item, StageH.getStage())) {
 			return tagCache.get();
 		}
 		
 		List<StagedTag> tags = new ArrayList<StagedTag>();
-		for (StagedTag tag : TAGS) {
-			if (tag.getItemsWithCurrentStage().contains(item)) {
-				tags.add(tag);
+		for (RegistryObject<StagedTag> tag : PRRegistry.getTags()) {
+			if (tag.get().getItemsWithCurrentStage().contains(item)) {
+				tags.add(tag.get());
 			}
 		}
 		
 		if (!tags.isEmpty()) {
-			tagCache.set(item, tags);
+			tagCache.set(item, StageH.getStage(), tags);
 		}
 		
 		return tags;
-	}
-	
-	public static StagedTag getTag(String tag) {
-		if (tagSearchCache != null && tagSearchCache.tag.equals(tag)) {
-			return tagSearchCache;
-		}
-		
-		for (StagedTag stag : TAGS) {
-			if (stag.tag.equals(tag)) {
-				tagSearchCache = stag;
-				return stag;
-			}
-		}
-		
-		return null;
-	}
-	
-	public static void addToList(StagedTag tag) {
-		TAGS.add(tag);
-	}
-	
-	public static void load() {
-		System.out.println("Loaded " + TAGS.size() + " tags!");
 	}
 }

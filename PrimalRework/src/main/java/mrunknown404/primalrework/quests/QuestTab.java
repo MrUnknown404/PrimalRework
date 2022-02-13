@@ -3,20 +3,21 @@ package mrunknown404.primalrework.quests;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Supplier;
 
-import mrunknown404.primalrework.utils.enums.EnumStage;
+import mrunknown404.primalrework.items.utils.StagedItem;
+import mrunknown404.primalrework.stage.Stage;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class QuestTab {
 	private final List<Quest> quests = new ArrayList<Quest>();
 	private Quest root;
 	
-	private final EnumStage stage;
+	private final Supplier<Stage> stage;
 	private final ItemStack itemIcon;
 	
-	public QuestTab(EnumStage stage, Item itemIcon) {
+	public QuestTab(Supplier<Stage> stage, StagedItem itemIcon) {
 		this.stage = stage;
 		this.itemIcon = new ItemStack(itemIcon);
 	}
@@ -42,14 +43,14 @@ public class QuestTab {
 	}
 	
 	public String getName() {
-		return stage.getName();
+		return stage.get().getName();
 	}
 	
 	public String getDesc() {
 		return I18n.get("quest_tab." + stage.toString() + ".desc");
 	}
 	
-	public EnumStage getStage() {
+	public Supplier<Stage> getStage() {
 		return stage;
 	}
 	
@@ -58,8 +59,10 @@ public class QuestTab {
 	}
 	
 	public void sort() {
-		quests.sort(new CompareQuest());
+		quests.sort(COMPARE);
 	}
+	
+	private static final CompareQuest COMPARE = new CompareQuest();
 	
 	private static class CompareQuest implements Comparator<Quest> {
 		@Override

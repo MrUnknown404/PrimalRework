@@ -2,7 +2,7 @@ package mrunknown404.primalrework.client.gui.screen;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 
-import mrunknown404.primalrework.helpers.WordH;
+import mrunknown404.primalrework.utils.helpers.WordH;
 import net.minecraft.client.gui.DialogTexts;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.button.Button;

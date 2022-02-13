@@ -1,15 +1,17 @@
 package mrunknown404.primalrework.client.gui.recipedisplays;
 
+import java.util.Arrays;
 import java.util.List;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import mrunknown404.primalrework.PrimalRework;
-import mrunknown404.primalrework.events.client.TooltipCEvents;
-import mrunknown404.primalrework.helpers.MathH;
+import mrunknown404.primalrework.items.utils.StagedItem;
 import mrunknown404.primalrework.recipes.Ingredient;
 import mrunknown404.primalrework.recipes.SRCrafting3;
-import net.minecraft.item.Item;
+import mrunknown404.primalrework.utils.helpers.ItemH;
+import mrunknown404.primalrework.utils.helpers.MathH;
+import mrunknown404.primalrework.utils.helpers.WordH;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.gui.GuiUtils;
@@ -17,7 +19,7 @@ import net.minecraftforge.fml.client.gui.GuiUtils;
 public class RDCrafting3 extends RecipeDisplay<SRCrafting3> {
 	private static final ResourceLocation BG = new ResourceLocation(PrimalRework.MOD_ID, "textures/gui/craftingdisplay/primal_crafting_table.png");
 	
-	protected RDCrafting3(List<SRCrafting3> recipes, Item output) {
+	protected RDCrafting3(List<SRCrafting3> recipes, StagedItem output) {
 		super(recipes, output, 54);
 	}
 	
@@ -29,9 +31,9 @@ public class RDCrafting3 extends RecipeDisplay<SRCrafting3> {
 		
 		drawOutputItem(recipe.getOutput(), left + 95, top + 19);
 		
-		if (MathH.within(mouseX, left + 96, left + 111) && MathH.within(mouseY, top + 20, top + 35)) {
+		if (MathH.within(mouseX, left + 95, left + 110) && MathH.within(mouseY, top + 19, top + 34)) {
 			itemUnderMouse = recipe.getOutput();
-			GuiUtils.drawHoveringText(stack, TooltipCEvents.getTooltips(itemUnderMouse), mouseX, mouseY, listWidth, listHeight, -1, font);
+			GuiUtils.drawHoveringText(stack, ItemH.getTooltips(itemUnderMouse), mouseX, mouseY, listWidth, listHeight, -1, font);
 		}
 		
 		for (int y = 0; y < recipe.input.height; y++) {
@@ -48,7 +50,11 @@ public class RDCrafting3 extends RecipeDisplay<SRCrafting3> {
 				
 				if (itemUnderMouse == null && MathH.within(mouseX, xxx + 1, xxx + 16) && MathH.within(mouseY, yyy + 1, yyy + 16)) {
 					itemUnderMouse = itemStack;
-					GuiUtils.drawHoveringText(stack, TooltipCEvents.getTooltips(itemUnderMouse), mouseX, mouseY, listWidth, listHeight, -1, font);
+					if (ing.getStagedItems().size() > 1) {
+						GuiUtils.drawHoveringText(stack, Arrays.asList(WordH.string(ing.toString())), mouseX, mouseY, listWidth, listHeight, -1, font);
+					} else {
+						GuiUtils.drawHoveringText(stack, ItemH.getTooltips(itemUnderMouse), mouseX, mouseY, listWidth, listHeight, -1, font);
+					}
 				}
 			}
 		}

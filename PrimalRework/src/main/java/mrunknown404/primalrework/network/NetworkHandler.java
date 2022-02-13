@@ -13,19 +13,17 @@ import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import org.apache.commons.lang3.tuple.Pair;
-
 import mrunknown404.primalrework.PrimalRework;
 import mrunknown404.primalrework.network.packets.IPacket;
-import mrunknown404.primalrework.utils.enums.EnumStage;
+import mrunknown404.primalrework.registries.PRStages;
+import mrunknown404.primalrework.stage.Stage;
+import mrunknown404.primalrework.utils.Pair;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkEvent;
 import net.minecraftforge.fml.network.NetworkRegistry;
@@ -70,7 +68,6 @@ public class NetworkHandler {
 		INSTANCE.registerMessage(packetCount++, clazz, encoder, decoder, consumer);
 	}
 	
-	@OnlyIn(Dist.CLIENT)
 	public static void sendPacketToServer(IPacket packet) {
 		INSTANCE.sendToServer(packet);
 	}
@@ -120,7 +117,7 @@ public class NetworkHandler {
 			throw new RuntimeException("No handler for  " + clazz);
 		}
 		
-		return Pair.of((Reader<?>) pair.getLeft(), (Writer<T>) pair.getRight());
+		return new Pair<Reader<?>, Writer<T>>((Reader<?>) pair.getLeft(), (Writer<T>) pair.getRight());
 	}
 	
 	private static boolean allowField(Field f, Class<?> type) {
@@ -139,7 +136,7 @@ public class NetworkHandler {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static <T> void mapHandler(Class<T> type, Reader<T> reader, Writer<T> writer) {
+	private static <T> void mapHandler(Class<T> type, Reader<T> reader, Writer<T> writer) {
 		Class<T[]> arrayType = (Class<T[]>) Array.newInstance(type, 0).getClass();
 		
 		Reader<T[]> arrayReader = (buf, field) -> {
@@ -162,8 +159,8 @@ public class NetworkHandler {
 			}
 		};
 		
-		HANDLERS.put(type, Pair.of(reader, writer));
-		HANDLERS.put(arrayType, Pair.of(arrayReader, arrayWriter));
+		HANDLERS.put(type, new Pair<Reader<?>, Writer<?>>(reader, writer));
+		HANDLERS.put(arrayType, new Pair<Reader<?>, Writer<?>>(arrayReader, arrayWriter));
 	}
 	
 	private static Field[] getClassFields(Class<?> clazz) {
@@ -211,7 +208,7 @@ public class NetworkHandler {
 		mapHandler(CompoundNBT.class, PacketBuffer::readNbt, PacketBuffer::writeNbt);
 		mapHandler(ItemStack.class, PacketBuffer::readItem, PacketBuffer::writeItem);
 		mapHandler(String.class, NetworkHandler::readString, PacketBuffer::writeUtf);
-		mapHandler(EnumStage.class, NetworkHandler::readStage, NetworkHandler::writeStage);
+		mapHandler(Stage.class, NetworkHandler::readStage, NetworkHandler::writeStage);
 		mapHandler(List.class, NetworkHandler::readList, NetworkHandler::writeList);
 	}
 	
@@ -219,11 +216,11 @@ public class NetworkHandler {
 		return buf.readUtf(32767);
 	}
 	
-	private static EnumStage readStage(PacketBuffer buf) {
-		return EnumStage.fromID(buf.readByte());
+	private static Stage readStage(PacketBuffer buf) {
+		return PRStages.byID(buf.readByte());
 	}
 	
-	private static void writeStage(PacketBuffer buf, EnumStage stage) {
+	private static void writeStage(PacketBuffer buf, Stage stage) {
 		buf.writeByte(stage.id);
 	}
 	
@@ -235,7 +232,7 @@ public class NetworkHandler {
 		int strSize = buf.readInt();
 		String name = buf.readUtf(strSize);
 		
-		List<T> list = new ArrayList<>(size);
+		List<T> list = new ArrayList<T>(size);
 		try {
 			Class<?> clazz = Class.forName(name);
 			

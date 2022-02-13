@@ -1,7 +1,5 @@
 package mrunknown404.primalrework.inventory.container.slot;
 
-import mrunknown404.primalrework.registries.PRFuels;
-import mrunknown404.primalrework.utils.enums.EnumFuelType;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
@@ -12,8 +10,8 @@ public class SlotCampFireFuel extends Slot {
 	}
 	
 	@Override
-	public boolean mayPlace(ItemStack stack) {
-		return PRFuels.isFuelItem(EnumFuelType.campfire, stack.getItem());
+	public boolean mayPlace(ItemStack stack) { //TODO on redo fuel
+		return false;
 	}
 	
 	@Override

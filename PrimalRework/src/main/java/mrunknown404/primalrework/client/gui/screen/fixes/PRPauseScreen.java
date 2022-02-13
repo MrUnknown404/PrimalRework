@@ -3,7 +3,7 @@ package mrunknown404.primalrework.client.gui.screen.fixes;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import mrunknown404.primalrework.client.gui.screen.ScreenPrimalShareToLan;
-import mrunknown404.primalrework.helpers.WordH;
+import mrunknown404.primalrework.utils.helpers.WordH;
 import net.minecraft.client.gui.screen.DirtMessageScreen;
 import net.minecraft.client.gui.screen.MainMenuScreen;
 import net.minecraft.client.gui.screen.MultiplayerScreen;

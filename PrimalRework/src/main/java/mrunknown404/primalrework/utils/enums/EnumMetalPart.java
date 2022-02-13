@@ -5,5 +5,6 @@ public enum EnumMetalPart {
 	rod,
 	screw,
 	ring,
-	wire;
+	wire,
+	gear;
 }

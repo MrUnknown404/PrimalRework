@@ -1,13 +1,13 @@
 package mrunknown404.primalrework.recipes.input;
 
+import mrunknown404.primalrework.items.utils.StagedItem;
 import mrunknown404.primalrework.recipes.Ingredient;
-import net.minecraft.item.Item;
 
 public class RISingle extends RecipeInput<RISingle> {
 	public final Ingredient input;
 	
-	public RISingle(Item input) {
-		this.input = new Ingredient(input);
+	public RISingle(StagedItem input) {
+		this.input = Ingredient.createUsingItem(input);
 	}
 	
 	@Override

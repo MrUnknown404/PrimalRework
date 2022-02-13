@@ -8,9 +8,10 @@ import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import mrunknown404.primalrework.client.CraftingDisplayH;
-import mrunknown404.primalrework.helpers.ColorH;
-import mrunknown404.primalrework.helpers.MathH;
-import mrunknown404.primalrework.helpers.WordH;
+import mrunknown404.primalrework.items.utils.StagedItem;
+import mrunknown404.primalrework.utils.helpers.ColorH;
+import mrunknown404.primalrework.utils.helpers.MathH;
+import mrunknown404.primalrework.utils.helpers.WordH;
 import net.minecraft.client.MainWindow;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
@@ -23,7 +24,6 @@ import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.util.InputMappings;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.ITextComponent;
@@ -37,7 +37,7 @@ public class ScreenCraftingDisplayItems extends Screen {
 	private final List<Data> curItems = new ArrayList<Data>(), items3D = new ArrayList<Data>(), items2D = new ArrayList<Data>(), preItems3D = new ArrayList<Data>(),
 			preItems2D = new ArrayList<Data>();
 	private int heightItems, widthItems, padding, xStart, listSize;
-	private Item itemUnderMouse;
+	private StagedItem itemUnderMouse;
 	private ITextComponent scrollFaster;
 	
 	private static int scroll, lastHeightItems, lastSize;
@@ -170,7 +170,7 @@ public class ScreenCraftingDisplayItems extends Screen {
 			renderGuiItem(data.itemStack, data.model, stack, buf, xx, yy);
 			
 			if (MathH.within(mouseX, xx - 1, xx + 16) && MathH.within(mouseY, yy - 1, yy + 16)) {
-				itemUnderMouse = data.itemStack.getItem();
+				itemUnderMouse = (StagedItem) data.itemStack.getItem();
 				GuiUtils.drawHoveringText(stack, getTooltipFromItem(data.itemStack), mouseX, mouseY, width, height, -1, font);
 			}
 		}

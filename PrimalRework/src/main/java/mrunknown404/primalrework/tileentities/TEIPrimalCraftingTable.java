@@ -3,15 +3,15 @@ package mrunknown404.primalrework.tileentities;
 import java.util.ArrayList;
 import java.util.List;
 
-import mrunknown404.primalrework.helpers.WordH;
 import mrunknown404.primalrework.inventory.container.ContainerPrimalCraftingTable;
+import mrunknown404.primalrework.items.utils.StagedItem;
 import mrunknown404.primalrework.recipes.Ingredient;
 import mrunknown404.primalrework.recipes.SRCrafting3;
 import mrunknown404.primalrework.recipes.input.RICrafting3;
 import mrunknown404.primalrework.registries.PRRecipes;
-import mrunknown404.primalrework.registries.PRStagedTags;
 import mrunknown404.primalrework.registries.PRTileEntities;
 import mrunknown404.primalrework.utils.enums.EnumRecipeType;
+import mrunknown404.primalrework.utils.helpers.WordH;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -24,7 +24,6 @@ import net.minecraft.network.play.server.SSetSlotPacket;
 import net.minecraft.util.text.ITextComponent;
 
 public class TEIPrimalCraftingTable extends TEInventory {
-	
 	public TEIPrimalCraftingTable() {
 		super(PRTileEntities.PRIMAL_CRAFTING_TABLE.get(), 10);
 	}
@@ -39,7 +38,7 @@ public class TEIPrimalCraftingTable extends TEInventory {
 		List<Ingredient> ingredients = new ArrayList<Ingredient>();
 		for (int i = 0; i < 9; i++) {
 			Item item = getItem(i).getItem();
-			ingredients.add(new Ingredient(item, PRStagedTags.getItemsTags(item)));
+			ingredients.add(item instanceof StagedItem ? Ingredient.createUsingTags((StagedItem) item) : Ingredient.EMPTY);
 		}
 		
 		SRCrafting3 rec = (SRCrafting3) PRRecipes.getRecipeForInput(EnumRecipeType.crafting_3, RICrafting3.fromInventory(ingredients));

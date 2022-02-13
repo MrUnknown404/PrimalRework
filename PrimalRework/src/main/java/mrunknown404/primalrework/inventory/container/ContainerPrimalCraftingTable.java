@@ -39,6 +39,7 @@ public class ContainerPrimalCraftingTable extends Container implements IEasyQuic
 				});
 			}
 		}
+		
 		addSlot(new SlotOutput(container, 9, 124, 35) {
 			@Override
 			public ItemStack onTake(PlayerEntity player, ItemStack stack) {
@@ -82,13 +83,8 @@ public class ContainerPrimalCraftingTable extends Container implements IEasyQuic
 	}
 	
 	@Override
-	public int getAmountOfInputSlots() {
-		return 9;
-	}
-	
-	@Override
-	public int getAmountOfOutputSlots() {
-		return 1;
+	public int getAmountOfSlots() {
+		return 10;
 	}
 	
 	@Override

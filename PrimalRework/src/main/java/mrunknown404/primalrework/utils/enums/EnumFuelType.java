@@ -1,18 +1,18 @@
 package mrunknown404.primalrework.utils.enums;
 
-import mrunknown404.primalrework.helpers.WordH;
-import net.minecraft.item.Item;
+import mrunknown404.primalrework.items.utils.StagedItem;
+import mrunknown404.primalrework.registries.PRItems;
+import mrunknown404.primalrework.utils.helpers.WordH;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.util.text.IFormattableTextComponent;
 
 public enum EnumFuelType implements ICraftingInput {
-	campfire(Items.COAL);
+	campfire(PRItems.PLANT_FIBER.get()); //TODO switch to fuel
 	
 	private final ItemStack icon;
 	private final IFormattableTextComponent name;
 	
-	private EnumFuelType(Item icon) {
+	private EnumFuelType(StagedItem icon) {
 		this.icon = new ItemStack(icon);
 		this.name = WordH.translate("recipetype." + name() + ".name");
 	}

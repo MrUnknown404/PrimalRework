@@ -7,9 +7,9 @@ import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 
 import mrunknown404.primalrework.utils.LeafTickScheduler;
+import mrunknown404.primalrework.utils.helpers.BlockH;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.LeavesBlock;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.server.ServerWorld;
@@ -40,8 +40,8 @@ public class LeafEvents {
 	}
 	
 	@SubscribeEvent
-	public void onNotifyNeighbors(NeighborNotifyEvent e) {
-		if (!e.getWorld().isClientSide() && brokenBlockCache.getIfPresent(e.getPos()) != null) {
+	public void onNotifyNeighbors(NeighborNotifyEvent e) { //TODO move this into SBLeaves
+		if (brokenBlockCache.getIfPresent(e.getPos()) != null) {
 			ServerWorld world = (ServerWorld) e.getWorld();
 			
 			BlockState notifierState = e.getState();
@@ -54,7 +54,7 @@ public class LeafEvents {
 					if (world.isLoaded(offPos)) {
 						BlockState state = world.getBlockState(offPos);
 						
-						if (state.getBlock() instanceof LeavesBlock) {
+						if (BlockH.isLeaves(state.getBlock())) {
 							brokenBlockCache.put(offPos, 0);
 							LeafTickScheduler.schedule(world, offPos, 10 + R.nextInt(5));
 						}

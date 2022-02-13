@@ -4,69 +4,73 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.function.Supplier;
 
-import mrunknown404.primalrework.helpers.StageH;
-import mrunknown404.primalrework.helpers.WordH;
-import mrunknown404.primalrework.registries.PRStagedTags;
-import mrunknown404.primalrework.utils.enums.EnumStage;
-import net.minecraft.item.Item;
-import net.minecraft.util.text.ITextComponent;
+import mrunknown404.primalrework.items.utils.StagedItem;
+import mrunknown404.primalrework.registries.PRStages;
+import mrunknown404.primalrework.utils.helpers.StageH;
+import mrunknown404.primalrework.utils.helpers.WordH;
+import net.minecraft.util.text.TextComponent;
+import net.minecraftforge.registries.ForgeRegistryEntry;
 
-public class StagedTag {
-	private final Map<EnumStage, List<Item>> items = new HashMap<EnumStage, List<Item>>();
-	private final Map<Item, EnumStage> items_reverse = new HashMap<Item, EnumStage>();
-	public final String tag;
-	public final ITextComponent displayName;
+public class StagedTag extends ForgeRegistryEntry<StagedTag> {
+	public final String name;
+	public final TextComponent displayName;
 	
-	public StagedTag(String tag) {
-		this.tag = tag;
-		this.displayName = WordH.translate("staged_tag." + tag + ".name");
-		PRStagedTags.addToList(this);
+	private final Map<Supplier<Stage>, List<StagedItem>> itemMap_sup = new HashMap<Supplier<Stage>, List<StagedItem>>();
+	private final Map<Stage, List<StagedItem>> itemMap = new HashMap<Stage, List<StagedItem>>();
+	private final Map<StagedItem, Stage> stageMap = new HashMap<StagedItem, Stage>();
+	
+	public StagedTag(String name) {
+		this.name = name;
+		this.displayName = WordH.translate("stagedtag." + name);
 	}
 	
-	public boolean hasItemWithCurrentStage(Item item) {
-		return getItemsWithCurrentStage().contains(item);
-	}
-	
-	/** @param stage The minimum stage required for this item to be in the tag */
-	public StagedTag add(EnumStage stage, Item... items) {
-		List<Item> its = this.items.get(stage);
-		if (its == null) {
-			its = new ArrayList<Item>();
+	public StagedTag add(Supplier<Stage> stage, StagedItem item, StagedItem... items) {
+		itemMap_sup.put(stage, new ArrayList<StagedItem>());
+		itemMap_sup.get(stage).add(item);
+		for (StagedItem i : items) {
+			itemMap_sup.get(stage).add(i);
 		}
-		
-		for (Item item : items) {
-			its.add(item);
-			items_reverse.put(item, stage);
-		}
-		this.items.put(stage, its);
 		return this;
 	}
 	
-	public EnumStage getItemsMinStage(Item item) {
-		return items_reverse.get(item);
+	public void finish() {
+		for (Entry<Supplier<Stage>, List<StagedItem>> pair : itemMap_sup.entrySet()) {
+			Stage stage = pair.getKey().get();
+			if (!itemMap.containsKey(stage)) {
+				itemMap.put(stage, new ArrayList<StagedItem>());
+			}
+			
+			for (StagedItem i : pair.getValue()) {
+				itemMap.get(stage).add(i);
+				stageMap.put(i, stage);
+			}
+		}
 	}
 	
-	public List<Item> getItemsWithCurrentStage() {
-		List<Item> items = new ArrayList<Item>();
-		for (EnumStage st : StageH.getAllPrevStages()) {
-			List<Item> its = this.items.get(st);
-			if (its != null && !its.isEmpty()) {
-				items.addAll(its);
-			}
+	public boolean containsAtCurrentStage(StagedItem item) {
+		return containsAtAll(item) && StageH.hasAccessToStage(stageMap.get(item));
+	}
+	
+	public boolean containsAtAll(StagedItem item) {
+		return stageMap.containsKey(item);
+	}
+	
+	public List<StagedItem> getItemsWithCurrentStage() {
+		List<Stage> stages = PRStages.getStagesBeforeCurrent(true);
+		List<StagedItem> items = new ArrayList<StagedItem>();
+		
+		for (Stage s : stages) {
+			items.addAll(itemMap.getOrDefault(s, new ArrayList<StagedItem>()));
 		}
 		
 		return items;
 	}
 	
-	public List<Item> getItemsFromAllStages() {
-		List<Item> items = new ArrayList<Item>();
-		for (List<Item> list : this.items.values()) {
-			for (Item item : list) {
-				items.add(item);
-			}
-		}
-		
-		return items;
+	@Override
+	public String toString() {
+		return "Name: " + name + ", Map: " + itemMap.toString();
 	}
 }

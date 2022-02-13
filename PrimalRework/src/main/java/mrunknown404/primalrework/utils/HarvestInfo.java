@@ -5,9 +5,10 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.Supplier;
 
+import mrunknown404.primalrework.blocks.utils.StagedBlock;
+import mrunknown404.primalrework.items.utils.StagedItem;
 import mrunknown404.primalrework.utils.enums.EnumToolMaterial;
 import mrunknown404.primalrework.utils.enums.EnumToolType;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class HarvestInfo {
@@ -42,40 +43,40 @@ public class HarvestInfo {
 	
 	public static class DropInfo {
 		private static final Random R = new Random();
-		public static final DropInfo NONE = new DropInfo(() -> null);
+		public static final DropInfo NONE = item(() -> null);
 		
-		private final Supplier<Item> result;
+		private final Supplier<StagedItem> result;
 		private final int min, max, chance;
 		
-		public DropInfo(Supplier<Item> result, int min, int max, int chance) {
+		private DropInfo(Supplier<StagedItem> result, int min, int max, int chance) {
 			this.result = result;
 			this.min = min;
 			this.max = max;
 			this.chance = chance;
 		}
 		
-		public DropInfo(Supplier<Item> result, int min, int max) {
-			this(result, min, max, 100);
+		public static DropInfo item(Supplier<StagedItem> result, int min, int max) {
+			return new DropInfo(result, min, max, 100);
 		}
 		
-		public DropInfo(Supplier<Item> result, int chance) {
-			this(result, 1, 1, chance);
+		public static DropInfo item(Supplier<StagedItem> result, int chance) {
+			return new DropInfo(result, 1, 1, chance);
 		}
 		
-		public DropInfo(Supplier<Item> result) {
-			this(result, 1, 1, 100);
+		public static DropInfo item(Supplier<StagedItem> result) {
+			return new DropInfo(result, 1, 1, 100);
 		}
 		
-		public DropInfo(Item result, int min, int max) {
-			this(() -> result, min, max, 100);
+		public static DropInfo block(Supplier<StagedBlock> result, int min, int max) {
+			return new DropInfo(() -> result.get().asStagedItem(), min, max, 100);
 		}
 		
-		public DropInfo(Item result, int chance) {
-			this(() -> result, 1, 1, chance);
+		public static DropInfo block(Supplier<StagedBlock> result, int chance) {
+			return new DropInfo(() -> result.get().asStagedItem(), 1, 1, chance);
 		}
 		
-		public DropInfo(Item result) {
-			this(() -> result, 1, 1, 100);
+		public static DropInfo block(Supplier<StagedBlock> result) {
+			return new DropInfo(() -> result.get().asStagedItem(), 1, 1, 100);
 		}
 		
 		public ItemStack getItem() {

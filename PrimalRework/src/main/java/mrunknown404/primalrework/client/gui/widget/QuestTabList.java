@@ -2,17 +2,18 @@ package mrunknown404.primalrework.client.gui.widget;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Supplier;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import mrunknown404.primalrework.client.gui.screen.ScreenQuestMenu;
-import mrunknown404.primalrework.helpers.ColorH;
-import mrunknown404.primalrework.helpers.MathH;
 import mrunknown404.primalrework.quests.QuestTab;
 import mrunknown404.primalrework.registries.PRQuests;
-import mrunknown404.primalrework.utils.enums.EnumStage;
+import mrunknown404.primalrework.stage.Stage;
+import mrunknown404.primalrework.utils.helpers.ColorH;
+import mrunknown404.primalrework.utils.helpers.MathH;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.IGuiEventListener;
 import net.minecraft.client.gui.INestedGuiEventHandler;
@@ -21,11 +22,10 @@ import net.minecraft.client.gui.widget.list.AbstractList;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.client.gui.GuiUtils;
 
 public class QuestTabList extends AbstractList<QuestTabList.QuestTabEntry> {
-	private final ScreenQuestMenu screen;
+private final ScreenQuestMenu screen;
 	
 	public QuestTabList(ScreenQuestMenu screen, Minecraft mc) {
 		super(mc, 39, 0, 1, screen.height - 1, 28);
@@ -100,19 +100,19 @@ public class QuestTabList extends AbstractList<QuestTabList.QuestTabEntry> {
 	}
 	
 	private static class TabButton extends Button {
-		private final EnumStage stage;
-		private final ItemStack icon;
+		private final Supplier<Stage> stage;
+		private final QuestTab tab;
 		private final ScreenQuestMenu screen;
 		
-		private TabButton(ScreenQuestMenu screen, int x, int y, EnumStage stage, ItemStack icon) {
-			super(x, y, 22, 22, stage.getFancyName(), new IPressable() {
+		private TabButton(ScreenQuestMenu screen, int x, int y, Supplier<Stage> stage, QuestTab tab) {
+			super(x, y, 22, 22, stage.get().getFancyName(), new IPressable() {
 				@Override
 				public void onPress(Button onPress) {
-					ScreenQuestMenu.selectedTab = icon.getItem();
+					ScreenQuestMenu.selectedTab = tab;
 				}
 			});
 			this.stage = stage;
-			this.icon = icon;
+			this.tab = tab;
 			this.screen = screen;
 		}
 		
@@ -121,17 +121,17 @@ public class QuestTabList extends AbstractList<QuestTabList.QuestTabEntry> {
 			Minecraft mc = Minecraft.getInstance();
 			
 			boolean isSelected = MathH.within(mouseX, x, x + width) && MathH.within(mouseY, y, y + height);
-			if (ScreenQuestMenu.selectedTab == icon.getItem()) {
+			if (ScreenQuestMenu.selectedTab == tab) {
 				mc.getTextureManager().bind(isSelected ? ScreenQuestMenu.QUEST_ICON_SELECTED_HOVER : ScreenQuestMenu.QUEST_ICON_SELECTED);
 			} else {
 				mc.getTextureManager().bind(isSelected ? ScreenQuestMenu.QUEST_ICON_HOVER : ScreenQuestMenu.QUEST_ICON);
 			}
 			
 			blit(stack, x, y, 0, 0, 22, 22, 22, 22);
-			mc.getItemRenderer().renderGuiItem(icon, x + 3, y + 3);
+			mc.getItemRenderer().renderGuiItem(tab.getIcon(), x + 3, y + 3);
 			
 			if (isSelected) {
-				GuiUtils.drawHoveringText(stack, Arrays.asList(stage.getFancyName()), mouseX, mouseY, screen.width, screen.height, -1, mc.font);
+				GuiUtils.drawHoveringText(stack, Arrays.asList(stage.get().getFancyName()), mouseX, mouseY, screen.width, screen.height, -1, mc.font);
 			}
 		}
 	}
@@ -143,7 +143,7 @@ public class QuestTabList extends AbstractList<QuestTabList.QuestTabEntry> {
 		private final TabButton button;
 		
 		private QuestTabEntry(ScreenQuestMenu screen, QuestTab tab) {
-			this.button = new TabButton(screen, 5, 0, tab.getStage(), tab.getIcon());
+			this.button = new TabButton(screen, 5, 0, tab.getStage(), tab);
 		}
 		
 		@Override

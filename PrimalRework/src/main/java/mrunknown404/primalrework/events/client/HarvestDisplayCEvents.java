@@ -6,17 +6,17 @@ import java.util.List;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 
-import mrunknown404.primalrework.helpers.BlockH;
-import mrunknown404.primalrework.helpers.ColorH;
-import mrunknown404.primalrework.helpers.ItemH;
-import mrunknown404.primalrework.helpers.MathH;
-import mrunknown404.primalrework.helpers.RayTraceH;
-import mrunknown404.primalrework.helpers.WordH;
+import mrunknown404.primalrework.blocks.utils.StagedBlock;
+import mrunknown404.primalrework.items.utils.StagedItem;
 import mrunknown404.primalrework.utils.DoubleCache;
 import mrunknown404.primalrework.utils.HarvestInfo;
+import mrunknown404.primalrework.utils.enums.EnumBlockInfo;
 import mrunknown404.primalrework.utils.enums.EnumToolMaterial;
 import mrunknown404.primalrework.utils.enums.EnumToolType;
-import net.minecraft.block.AbstractBlock;
+import mrunknown404.primalrework.utils.helpers.BlockH;
+import mrunknown404.primalrework.utils.helpers.ColorH;
+import mrunknown404.primalrework.utils.helpers.RayTraceH;
+import mrunknown404.primalrework.utils.helpers.WordH;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.MainWindow;
@@ -27,6 +27,7 @@ import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.math.vector.Matrix4f;
 import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.ITextComponent;
@@ -36,7 +37,6 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.gui.GuiUtils;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 public class HarvestDisplayCEvents {
 	private DoubleCache<Block, Item, List<ITextComponent>> blockCache = new DoubleCache<Block, Item, List<ITextComponent>>();
@@ -51,14 +51,20 @@ public class HarvestDisplayCEvents {
 			return;
 		}
 		
-		MainWindow w = e.getWindow();
-		MatrixStack s = e.getMatrixStack();
-		Block b = mc.player.getCommandSenderWorld().getBlockState(RayTraceH.rayTrace(mc.player, e.getPartialTicks()).getBlockPos()).getBlock();
-		
-		List<ITextComponent> texts = new ArrayList<ITextComponent>();
-		
+		Block bOld = mc.player.getCommandSenderWorld().getBlockState(RayTraceH.rayTrace(e.getPartialTicks(), false).getBlockPos()).getBlock();
 		ItemStack stack = mc.player.getMainHandItem();
 		Item item = stack.getItem();
+		
+		if ((item != Items.AIR && !(item instanceof StagedItem)) || !(bOld instanceof StagedBlock)) {
+			return;
+		}
+		
+		StagedBlock b = (StagedBlock) bOld;
+		
+		MainWindow w = e.getWindow();
+		MatrixStack s = e.getMatrixStack();
+		
+		List<ITextComponent> texts = new ArrayList<ITextComponent>();
 		
 		if (blockCache.is(b, item)) {
 			texts = blockCache.get();
@@ -72,18 +78,17 @@ public class HarvestDisplayCEvents {
 				return;
 			}
 			
-			AbstractBlock.Properties prop = ObfuscationReflectionHelper.getPrivateValue(AbstractBlock.class, b, "properties");
-			float hardness = MathH.roundTo(ObfuscationReflectionHelper.getPrivateValue(AbstractBlock.Properties.class, prop, "destroyTime"), 2);
+			EnumBlockInfo blockInfo = b.blockInfo;
 			
-			if (hardness != -1) {
-				texts.add(WordH.string(((String.valueOf(hardness).split("\\.")[1].length() < 2) ? hardness + "0" : hardness) + " ")
+			if (blockInfo.hardness != -1) {
+				texts.add(WordH.string(((String.valueOf(blockInfo.hardness).split("\\.")[1].length() < 2) ? blockInfo.hardness + "0" : blockInfo.hardness) + " ")
 						.append(WordH.translate("tooltips.block.hardness")));
 			} else {
 				texts.add(WordH.translate("tooltips.block.unbreakable"));
 			}
 			
-			EnumToolType toolType = ItemH.getItemToolType(item);
-			EnumToolMaterial toolMat = ItemH.getItemToolMaterial(item);
+			EnumToolType toolType = item instanceof StagedItem ? ((StagedItem) item).toolType : EnumToolType.none;
+			EnumToolMaterial toolMat = item instanceof StagedItem ? ((StagedItem) item).toolMat : EnumToolMaterial.hand;
 			
 			for (HarvestInfo info : infos) {
 				if (info.toolMat != EnumToolMaterial.unbreakable) {
@@ -99,13 +104,14 @@ public class HarvestDisplayCEvents {
 		if (!texts.isEmpty()) {
 			drawHoveringText(s, texts, mc.font);
 			
-			Item bitem = b.asItem();
+			StagedItem bitem = b.asStagedItem();
 			if (bitem != null) {
 				mc.getItemRenderer().blitOffset += 410;
 				mc.getItemRenderer().renderGuiItem(new ItemStack(bitem), 4, 3);
 				mc.getItemRenderer().blitOffset -= 410;
 			}
 			
+			RenderSystem.enableBlend();
 			mc.textureManager.bind(AbstractGui.GUI_ICONS_LOCATION);
 		}
 	}
@@ -141,10 +147,11 @@ public class HarvestDisplayCEvents {
 			GuiUtils.drawGradientRect(mat, zLevel, tooltipX - 3, tooltipY - 4, tooltipX + tooltipTextWidth + 3, tooltipY - 3, backgroundColor, backgroundColor);
 			GuiUtils.drawGradientRect(mat, zLevel, tooltipX - 3, tooltipY + tooltipHeight + 3, tooltipX + tooltipTextWidth + 3, tooltipY + tooltipHeight + 4, backgroundColor,
 					backgroundColor);
-			GuiUtils.drawGradientRect(mat, zLevel, tooltipX - 3, tooltipY - 3, tooltipX + tooltipTextWidth + 3, tooltipY + tooltipHeight + 3, backgroundColor, backgroundColor);
-			GuiUtils.drawGradientRect(mat, zLevel, tooltipX - 4, tooltipY - 3, tooltipX - 3, tooltipY + tooltipHeight + 3, backgroundColor, backgroundColor);
-			GuiUtils.drawGradientRect(mat, zLevel, tooltipX + tooltipTextWidth + 3, tooltipY - 3, tooltipX + tooltipTextWidth + 4, tooltipY + tooltipHeight + 3, backgroundColor,
+			GuiUtils.drawGradientRect(mat, zLevel, tooltipX - 3, tooltipY - 3, tooltipX + tooltipTextWidth + 3, tooltipY + tooltipHeight + 3, backgroundColor,
 					backgroundColor);
+			GuiUtils.drawGradientRect(mat, zLevel, tooltipX - 4, tooltipY - 3, tooltipX - 3, tooltipY + tooltipHeight + 3, backgroundColor, backgroundColor);
+			GuiUtils.drawGradientRect(mat, zLevel, tooltipX + tooltipTextWidth + 3, tooltipY - 3, tooltipX + tooltipTextWidth + 4, tooltipY + tooltipHeight + 3,
+					backgroundColor, backgroundColor);
 			GuiUtils.drawGradientRect(mat, zLevel, tooltipX - 3, tooltipY - 3 + 1, tooltipX - 3 + 1, tooltipY + tooltipHeight + 3 - 1, borderColor, borderColor);
 			GuiUtils.drawGradientRect(mat, zLevel, tooltipX + tooltipTextWidth + 2, tooltipY - 3 + 1, tooltipX + tooltipTextWidth + 3, tooltipY + tooltipHeight + 3 - 1,
 					borderColor, borderColor);
@@ -158,8 +165,8 @@ public class HarvestDisplayCEvents {
 			for (int i = 0; i < textLines.size(); ++i) {
 				ITextProperties line = textLines.get(i);
 				if (line != null) {
-					font.drawInBatch(LanguageMap.getInstance().getVisualOrder(line), tooltipX + (i == 0 ? 2 : 1), tooltipY + (i == 0 ? 3 : 0), -1, true, mat, renderType, false,
-							0, 15728880);
+					font.drawInBatch(LanguageMap.getInstance().getVisualOrder(line), tooltipX + (i == 0 ? 2 : 1), tooltipY + (i == 0 ? 3 : 0), -1, true, mat, renderType,
+							false, 0, 15728880);
 				}
 				
 				if (i + 1 == titleLinesCount) {

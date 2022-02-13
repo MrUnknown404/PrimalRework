@@ -5,9 +5,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import mrunknown404.primalrework.items.utils.StagedItem;
 import mrunknown404.primalrework.recipes.Ingredient;
 import mrunknown404.primalrework.stage.StagedTag;
-import net.minecraft.item.Item;
+import net.minecraftforge.fml.RegistryObject;
 
 public class RICrafting3 extends RecipeInput<RICrafting3> {
 	private final List<Ingredient> ingredients;
@@ -162,6 +163,11 @@ public class RICrafting3 extends RecipeInput<RICrafting3> {
 		return new RICrafting3(i, false);
 	}
 	
+	@Override
+	public String toString() {
+		return ingredients.toString();
+	}
+	
 	public static final class Builder {
 		private final List<Ingredient> ingredients = new ArrayList<Ingredient>(9);
 		
@@ -261,21 +267,6 @@ public class RICrafting3 extends RecipeInput<RICrafting3> {
 			ingredients.set(4, create(i));
 			return this;
 		}
-		
-		private static Ingredient create(Object obj) {
-			if (obj == null) {
-				return Ingredient.EMPTY;
-			} else if (obj instanceof Ingredient) {
-				return (Ingredient) obj;
-			} else if (obj instanceof Item) {
-				return new Ingredient((Item) obj);
-			} else if (obj instanceof StagedTag) {
-				return new Ingredient((StagedTag) obj);
-			}
-			
-			System.err.println("Invalid ingredient " + obj);
-			return null;
-		}
 	}
 	
 	public static final class SBuilder {
@@ -298,19 +289,28 @@ public class RICrafting3 extends RecipeInput<RICrafting3> {
 			}
 			
 			for (int j = 0; j < i.length; j++) {
-				if (i[j] instanceof Ingredient) {
-					ingredients.set(j, (Ingredient) i[j]);
-				} else if (i[j] instanceof Item) {
-					ingredients.set(j, new Ingredient((Item) i[j]));
-				} else if (i[j] instanceof StagedTag) {
-					ingredients.set(j, new Ingredient((StagedTag) i[j]));
-				} else {
-					System.out.println("Invalid ingredient " + i[j]);
-				}
+				ingredients.set(j, create(i[j]));
 			}
 			
 			return this;
 		}
+	}
+	
+	private static Ingredient create(Object obj) {
+		if (obj == null) {
+			return Ingredient.EMPTY;
+		} else if (obj instanceof Ingredient) {
+			return (Ingredient) obj;
+		} else if (obj instanceof StagedItem) {
+			return Ingredient.createUsingItem((StagedItem) obj);
+		} else if (obj instanceof StagedTag) {
+			return Ingredient.createUsingTag((StagedTag) obj);
+		} else if (obj instanceof RegistryObject) {
+			return create(((RegistryObject<?>) obj).get());
+		}
+		
+		System.err.println("Invalid ingredient " + obj);
+		return null;
 	}
 	
 	private static class IngredientCompare implements Comparator<Ingredient> {

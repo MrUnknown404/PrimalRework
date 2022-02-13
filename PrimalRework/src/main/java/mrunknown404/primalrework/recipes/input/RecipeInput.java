@@ -7,6 +7,6 @@ public abstract class RecipeInput<T extends RecipeInput<T>> {
 	public boolean matches(RecipeInput<?> input) {
 		return getClass().equals(input.getClass()) && match((T) input);
 	}
-
+	
 	public abstract boolean isEmpty();
 }

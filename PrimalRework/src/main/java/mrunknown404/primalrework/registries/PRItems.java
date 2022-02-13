@@ -3,122 +3,111 @@ package mrunknown404.primalrework.registries;
 import java.util.ArrayList;
 import java.util.List;
 
-import mrunknown404.primalrework.items.SIClayVessel;
 import mrunknown404.primalrework.items.SIIngot;
 import mrunknown404.primalrework.items.SIMetalPart;
-import mrunknown404.primalrework.items.SIOreNugget;
+import mrunknown404.primalrework.items.SIOre;
+import mrunknown404.primalrework.items.SISimpleTool;
 import mrunknown404.primalrework.items.utils.SIDamageable;
 import mrunknown404.primalrework.items.utils.SIFood;
 import mrunknown404.primalrework.items.utils.StagedItem;
 import mrunknown404.primalrework.utils.enums.EnumMetal;
 import mrunknown404.primalrework.utils.enums.EnumMetalPart;
-import mrunknown404.primalrework.utils.enums.EnumOreValue;
-import mrunknown404.primalrework.utils.enums.EnumStage;
 import mrunknown404.primalrework.utils.enums.EnumToolMaterial;
 import mrunknown404.primalrework.utils.enums.EnumToolType;
-import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;
 
 public class PRItems {
-	private static final List<RegistryObject<Item>> CASTS = new ArrayList<RegistryObject<Item>>();
-	private static final List<RegistryObject<Item>> INGOTS = new ArrayList<RegistryObject<Item>>();
-	private static final List<RegistryObject<Item>> PARTS = new ArrayList<RegistryObject<Item>>();
+	private static final List<RegistryObject<StagedItem>> CASTS = new ArrayList<RegistryObject<StagedItem>>();
+	private static final List<RegistryObject<StagedItem>> INGOTS = new ArrayList<RegistryObject<StagedItem>>();
+	private static final List<RegistryObject<StagedItem>> PARTS = new ArrayList<RegistryObject<StagedItem>>();
+	private static final List<RegistryObject<StagedItem>> ORES = new ArrayList<RegistryObject<StagedItem>>();
 	
 	//MISC
-	public static final RegistryObject<Item> PLANT_FIBER = register(new StagedItem("plant_fiber", EnumStage.stage0));
-	public static final RegistryObject<Item> PLANT_ROPE = register(new StagedItem("plant_rope", EnumStage.stage0));
-	public static final RegistryObject<Item> GRAVEL = register(new StagedItem("gravel", EnumStage.stage0));
-	public static final RegistryObject<Item> KNAPPED_FLINT = register(new StagedItem("knapped_flint", EnumStage.stage0));
-	public static final RegistryObject<Item> FLINT_POINT = register(new StagedItem("flint_point", EnumStage.stage0));
-	public static final RegistryObject<Item> BONE_SHARD = register(new StagedItem("bone_shard", EnumStage.stage0));
-	public static final RegistryObject<Item> BARK = register(new StagedItem("bark", EnumStage.stage0));
-	public static final RegistryObject<Item> CLOTH = register(new StagedItem("cloth", EnumStage.stage2));
-	public static final RegistryObject<Item> OAK_PLANK = register(new StagedItem("oak_plank", EnumStage.stage2));
-	public static final RegistryObject<Item> SPRUCE_PLANK = register(new StagedItem("spruce_plank", EnumStage.stage2));
-	public static final RegistryObject<Item> BIRCH_PLANK = register(new StagedItem("birch_plank", EnumStage.stage2));
-	public static final RegistryObject<Item> JUNGLE_PLANK = register(new StagedItem("jungle_plank", EnumStage.stage2));
-	public static final RegistryObject<Item> DARK_OAK_PLANK = register(new StagedItem("dark_oak_plank", EnumStage.stage2));
-	public static final RegistryObject<Item> ACACIA_PLANK = register(new StagedItem("acacia_plank", EnumStage.stage2));
-	public static final RegistryObject<Item> SALT = register(new StagedItem("salt", EnumStage.stage0));
-	public static final RegistryObject<Item> ANIMAL_PELT = register(new StagedItem("animal_pelt", EnumStage.stage0));
-	public static final RegistryObject<Item> WET_HIDE = register(new StagedItem("wet_hide", EnumStage.stage1));
-	public static final RegistryObject<Item> RAW_HIDE = register(new StagedItem("raw_hide", EnumStage.stage1));
-	public static final RegistryObject<Item> CLEANED_HIDE = register(new StagedItem("cleaned_hide", EnumStage.stage1));
-	public static final RegistryObject<Item> SALTED_HIDE = register(new StagedItem("salted_hide", EnumStage.stage1));
-	public static final RegistryObject<Item> DRIED_HIDE = register(new StagedItem("dried_hide", EnumStage.stage1));
-	public static final RegistryObject<Item> WET_TANNED_HIDE = register(new StagedItem("wet_tanned_hide", EnumStage.stage1));
-	public static final RegistryObject<Item> DRY_TANNED_HIDE = register(new StagedItem("dry_tanned_hide", EnumStage.stage1));
-	public static final RegistryObject<Item> ROPE = register(new StagedItem("rope", EnumStage.stage1));
-	public static final RegistryObject<Item> LEATHER_STRIP = register(new StagedItem("leather_strip", EnumStage.stage1));
-	public static final RegistryObject<Item> CLAY_VESSEL = register(new SIClayVessel());
-	public static final RegistryObject<Item> BLANK_CAST = register(new StagedItem("blank_cast", EnumStage.stage3));
+	public static final RegistryObject<StagedItem> PLANT_FIBER = PRRegistry.item(new StagedItem("plant_fiber", PRStages.STAGE_0));
+	public static final RegistryObject<StagedItem> PLANT_ROPE = PRRegistry.item(new StagedItem("plant_rope", PRStages.STAGE_0));
+	public static final RegistryObject<StagedItem> KNAPPED_FLINT = PRRegistry.item(new StagedItem("knapped_flint", PRStages.STAGE_0));
+	public static final RegistryObject<StagedItem> FLINT_POINT = PRRegistry.item(new StagedItem("flint_point", PRStages.STAGE_0));
+	public static final RegistryObject<StagedItem> BONE_SHARD = PRRegistry.item(new StagedItem("bone_shard", PRStages.STAGE_0));
+	public static final RegistryObject<StagedItem> BARK = PRRegistry.item(new StagedItem("bark", PRStages.STAGE_0));
+	public static final RegistryObject<StagedItem> CLOTH = PRRegistry.item(new StagedItem("cloth", PRStages.STAGE_2));
+	public static final RegistryObject<StagedItem> OAK_PLANK = PRRegistry.item(new StagedItem("oak_plank", PRStages.STAGE_2));
+	public static final RegistryObject<StagedItem> SPRUCE_PLANK = PRRegistry.item(new StagedItem("spruce_plank", PRStages.STAGE_2));
+	public static final RegistryObject<StagedItem> BIRCH_PLANK = PRRegistry.item(new StagedItem("birch_plank", PRStages.STAGE_2));
+	public static final RegistryObject<StagedItem> JUNGLE_PLANK = PRRegistry.item(new StagedItem("jungle_plank", PRStages.STAGE_2));
+	public static final RegistryObject<StagedItem> DARK_OAK_PLANK = PRRegistry.item(new StagedItem("dark_oak_plank", PRStages.STAGE_2));
+	public static final RegistryObject<StagedItem> ACACIA_PLANK = PRRegistry.item(new StagedItem("acacia_plank", PRStages.STAGE_2));
+	public static final RegistryObject<StagedItem> SALT = PRRegistry.item(new StagedItem("salt", PRStages.STAGE_0));
+	public static final RegistryObject<StagedItem> ANIMAL_PELT = PRRegistry.item(new StagedItem("animal_pelt", PRStages.STAGE_0));
+	public static final RegistryObject<StagedItem> WET_HIDE = PRRegistry.item(new StagedItem("wet_hide", PRStages.STAGE_1));
+	public static final RegistryObject<StagedItem> RAW_HIDE = PRRegistry.item(new StagedItem("raw_hide", PRStages.STAGE_1));
+	public static final RegistryObject<StagedItem> CLEANED_HIDE = PRRegistry.item(new StagedItem("cleaned_hide", PRStages.STAGE_1));
+	public static final RegistryObject<StagedItem> SALTED_HIDE = PRRegistry.item(new StagedItem("salted_hide", PRStages.STAGE_1));
+	public static final RegistryObject<StagedItem> DRIED_HIDE = PRRegistry.item(new StagedItem("dried_hide", PRStages.STAGE_1));
+	public static final RegistryObject<StagedItem> WET_TANNED_HIDE = PRRegistry.item(new StagedItem("wet_tanned_hide", PRStages.STAGE_1));
+	public static final RegistryObject<StagedItem> DRY_TANNED_HIDE = PRRegistry.item(new StagedItem("dry_tanned_hide", PRStages.STAGE_1));
+	public static final RegistryObject<StagedItem> ROPE = PRRegistry.item(new StagedItem("rope", PRStages.STAGE_1));
+	public static final RegistryObject<StagedItem> LEATHER_STRIP = PRRegistry.item(new StagedItem("leather_strip", PRStages.STAGE_1));
+	public static final RegistryObject<StagedItem> BLANK_CAST = PRRegistry.item(new StagedItem("blank_cast", PRStages.STAGE_3));
+	public static final RegistryObject<StagedItem> ROCK = PRRegistry.item(new StagedItem("rock", PRStages.STAGE_1));
 	
 	//DAMAGEABLE
-	public static final RegistryObject<Item> MORTAR_PESTLE = register(new SIDamageable("mortar_pestle", EnumStage.stage0, EnumToolMaterial.wood));
-	public static final RegistryObject<Item> PLANT_MESH = register(new SIDamageable("plant_mesh", EnumStage.stage0, EnumToolMaterial.wood));
-	public static final RegistryObject<Item> STRING_MESH = register(new SIDamageable("string_mesh", EnumStage.stage0, EnumToolMaterial.flint));
+	public static final RegistryObject<StagedItem> MORTAR_PESTLE = PRRegistry.item(new SIDamageable("mortar_pestle", PRStages.STAGE_0, EnumToolMaterial.wood));
+	public static final RegistryObject<StagedItem> PLANT_MESH = PRRegistry.item(new SIDamageable("plant_mesh", PRStages.STAGE_0, EnumToolMaterial.wood));
+	public static final RegistryObject<StagedItem> STRING_MESH = PRRegistry.item(new SIDamageable("string_mesh", PRStages.STAGE_0, EnumToolMaterial.flint));
 	
 	//FOOD
-	public static final RegistryObject<Item> DOUGH = register(new SIFood("dough", EnumStage.stage1, 1, 0.5f));
-	public static final RegistryObject<Item> COOKED_CARROT = register(new SIFood("cooked_carrot", EnumStage.stage0, 5, 0.6f));
-	public static final RegistryObject<Item> COOKED_BEETROOT = register(new SIFood("cooked_beetroot", EnumStage.stage0, 5, 0.6f));
-	public static final RegistryObject<Item> COOKED_PUFFERFISH = register(new SIFood("cooked_pufferfish", EnumStage.stage0, 5, 0.6f));
-	public static final RegistryObject<Item> COOKED_TROPICALFISH = register(new SIFood("cooked_tropicalfish", EnumStage.stage0, 5, 0.6f));
+	public static final RegistryObject<StagedItem> DOUGH = PRRegistry.item(new SIFood("dough", PRStages.STAGE_1, 1, 0.5f));
 	
-	private static RegistryObject<Item> register(StagedItem item) {
-		return PRRegistry.ITEMS.register(item.getRegName(), () -> item);
-	}
+	//TOOLS
+	public static final RegistryObject<SISimpleTool> CLAY_SHOVEL = PRRegistry.item(new SISimpleTool(PRStages.STAGE_0, EnumToolType.shovel, EnumToolMaterial.clay));
+	public static final RegistryObject<SISimpleTool> CLAY_AXE = PRRegistry.item(new SISimpleTool(PRStages.STAGE_0, EnumToolType.axe, EnumToolMaterial.clay));
+	public static final RegistryObject<SISimpleTool> WOOD_SHOVEL = PRRegistry
+			.item((SISimpleTool) new SISimpleTool(PRStages.STAGE_0, EnumToolType.shovel, EnumToolMaterial.wood).overrideVanilla());
+	public static final RegistryObject<SISimpleTool> WOOD_AXE = PRRegistry
+			.item((SISimpleTool) new SISimpleTool(PRStages.STAGE_0, EnumToolType.axe, EnumToolMaterial.wood).overrideVanilla());
+	public static final RegistryObject<SISimpleTool> FLINT_PICKAXE = PRRegistry.item(new SISimpleTool(PRStages.STAGE_1, EnumToolType.pickaxe, EnumToolMaterial.flint));
+	public static final RegistryObject<SISimpleTool> FLINT_SHOVEL = PRRegistry.item(new SISimpleTool(PRStages.STAGE_1, EnumToolType.shovel, EnumToolMaterial.flint));
+	public static final RegistryObject<SISimpleTool> FLINT_AXE = PRRegistry.item(new SISimpleTool(PRStages.STAGE_1, EnumToolType.axe, EnumToolMaterial.flint));
+	public static final RegistryObject<SISimpleTool> FLINT_HOE = PRRegistry.item(new SISimpleTool(PRStages.STAGE_1, EnumToolType.hoe, EnumToolMaterial.flint));
+	public static final RegistryObject<SISimpleTool> FLINT_KNIFE = PRRegistry.item(new SISimpleTool(PRStages.STAGE_1, EnumToolType.knife, EnumToolMaterial.flint));
+	public static final RegistryObject<SISimpleTool> FLINT_SAW = PRRegistry.item(new SISimpleTool(PRStages.STAGE_1, EnumToolType.saw, EnumToolMaterial.flint));
+	public static final RegistryObject<SISimpleTool> FLINT_SHEARS = PRRegistry.item(new SISimpleTool(PRStages.STAGE_1, EnumToolType.shears, EnumToolMaterial.flint));
+	public static final RegistryObject<SISimpleTool> BONE_SWORD = PRRegistry.item(new SISimpleTool(PRStages.STAGE_1, EnumToolType.sword, EnumToolMaterial.bone));
 	
-	static void register() {
+	//VANILLA OVERRIDES
+	public static final RegistryObject<StagedItem> FLINT = PRRegistry.item(new StagedItem("flint", PRStages.STAGE_0).overrideVanilla());
+	public static final RegistryObject<StagedItem> STICK = PRRegistry.item(new StagedItem("stick", PRStages.STAGE_0).overrideVanilla());
+	public static final RegistryObject<StagedItem> CLAY_BALL = PRRegistry.item(new StagedItem("clay_ball", PRStages.STAGE_0).overrideVanilla());
+	
+	static {
 		for (EnumToolType type : EnumToolType.values()) {
 			if (type != EnumToolType.none) {
 				registerCast(type);
 			}
 		}
 		
-		for (EnumMetal alloy : EnumMetal.values()) {
-			if (!alloy.isAlloy) {
-				for (EnumOreValue value : EnumOreValue.values()) {
-					if (value == EnumOreValue.block) {
-						continue;
-					}
-					
-					INGOTS.add(register(new SIOreNugget(alloy, value)));
-				}
+		for (EnumMetal metal : EnumMetal.values()) {
+			INGOTS.add(PRRegistry.item(new SIIngot(metal, false, 16)));
+			INGOTS.add(PRRegistry.item(new SIIngot(metal, true, 32)));
+			if (!metal.isAlloy) {
+				ORES.add(PRRegistry.item(new SIOre(metal)));
 			}
 			
-			INGOTS.add(register(new SIIngot(alloy, false, 16)));
-			INGOTS.add(register(new SIIngot(alloy, true, 32)));
-			
 			for (EnumMetalPart part : EnumMetalPart.values()) {
-				PARTS.add(register(new SIMetalPart(alloy, part)));
+				PARTS.add(PRRegistry.item(new SIMetalPart(metal, part)));
 			}
 		}
 	}
 	
-	private static RegistryObject<Item> registerCast(EnumToolType type) {
-		StagedItem item = new StagedItem(type.name() + "_cast", EnumStage.stage3, 8);
-		RegistryObject<Item> reg = PRRegistry.ITEMS.register(item.getRegName(), () -> item);
+	private static RegistryObject<StagedItem> registerCast(EnumToolType type) {
+		StagedItem item = new StagedItem(type.name() + "_cast", PRStages.STAGE_3, 8);
+		RegistryObject<StagedItem> reg = PRRegistry.item(item);
 		CASTS.add(reg);
 		return reg;
 	}
 	
-	//TODO make a block to clean ore and use this!
-	public static SIOreNugget getOre(EnumMetal alloy, EnumOreValue value) {
-		for (RegistryObject<Item> item : INGOTS) {
-			if (item.get() instanceof SIOreNugget) {
-				SIOreNugget ore = (SIOreNugget) item.get();
-				if (ore.metal == alloy && ore.value == value) {
-					return ore;
-				}
-			}
-		}
-		
-		return null;
-	}
-	
 	public static SIMetalPart getMetalPart(EnumMetal metal, EnumMetalPart part) {
-		for (RegistryObject<Item> item : PARTS) {
+		for (RegistryObject<StagedItem> item : PARTS) {
 			SIMetalPart itemPart = (SIMetalPart) item.get();
 			if (itemPart.metal == metal && itemPart.part == part) {
 				return itemPart;

@@ -6,36 +6,36 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 
 import mrunknown404.primalrework.client.CraftingDisplayH;
 import mrunknown404.primalrework.client.gui.screen.ScreenRecipeList;
-import mrunknown404.primalrework.helpers.MathH;
+import mrunknown404.primalrework.items.utils.StagedItem;
 import mrunknown404.primalrework.recipes.IStagedRecipe;
 import mrunknown404.primalrework.recipes.Ingredient;
 import mrunknown404.primalrework.recipes.SRCampFire;
 import mrunknown404.primalrework.recipes.SRCrafting3;
 import mrunknown404.primalrework.recipes.SRFuel;
-import mrunknown404.primalrework.utils.Cache;
+import mrunknown404.primalrework.utils.DoubleCache;
 import mrunknown404.primalrework.utils.enums.EnumFuelType;
 import mrunknown404.primalrework.utils.enums.EnumRecipeType;
 import mrunknown404.primalrework.utils.enums.ICraftingInput;
+import mrunknown404.primalrework.utils.helpers.MathH;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.ItemRenderer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public abstract class RecipeDisplay<T extends IStagedRecipe<T, ?>> {
 	public final int thisHeight;
 	protected final List<T> recipes;
-	protected final Item output;
+	protected final StagedItem output;
 	protected Minecraft mc;
 	protected FontRenderer font;
 	protected ItemStack itemUnderMouse;
 	protected int listWidth, listHeight, maxRecipesSupported, maxPages, page;
 	
-	private final Cache<Ingredient, ItemStack> lastIngCache = new Cache<Ingredient, ItemStack>() {
+	private final DoubleCache<Ingredient, Integer, ItemStack> lastIngCache = new DoubleCache<Ingredient, Integer, ItemStack>() {
 		@Override
-		public boolean is(Ingredient key) {
-			return this.key != null && key != null ? this.key.matches(key) : false;
+		public boolean is(Ingredient key0, Integer key1) {
+			return this.key0 != null && key0 != null ? (this.key0.matches(key0) && this.key1 == key1) : false;
 		}
 	};
 	
@@ -44,7 +44,7 @@ public abstract class RecipeDisplay<T extends IStagedRecipe<T, ?>> {
 	private Ingredient lastIng;
 	private int ti, ingSize, curIng;
 	
-	protected RecipeDisplay(List<T> recipes, Item output, int thisHeight) {
+	protected RecipeDisplay(List<T> recipes, StagedItem output, int thisHeight) {
 		this.recipes = recipes;
 		this.output = output;
 		this.thisHeight = thisHeight;
@@ -86,7 +86,7 @@ public abstract class RecipeDisplay<T extends IStagedRecipe<T, ?>> {
 	
 	public final void tick() {
 		if (ti == 0) {
-			ti = 30;
+			ti = 20;
 			if (curIng == 0) {
 				curIng = ingSize - 1;
 			} else {
@@ -100,12 +100,18 @@ public abstract class RecipeDisplay<T extends IStagedRecipe<T, ?>> {
 	}
 	
 	protected ItemStack getIngToRender(Ingredient ing) {
-		if (lastIngCache.is(ing)) {
+		if (lastIngCache.is(ing, ti)) {
 			return lastIngCache.get();
 		}
 		
-		Item item = null;
-		List<Item> items = ing.getItems();
+		StagedItem item = null;
+		List<StagedItem> items = ing.getStagedItems();
+		
+		if (items.isEmpty()) {
+			System.err.println("Recipe stage < Ingredient stage?");
+			return ItemStack.EMPTY;
+		}
+		
 		if (items.size() == 1) {
 			item = items.get(0);
 		} else {
@@ -120,7 +126,7 @@ public abstract class RecipeDisplay<T extends IStagedRecipe<T, ?>> {
 		}
 		
 		ItemStack stack = new ItemStack(item);
-		lastIngCache.set(ing, stack);
+		lastIngCache.set(ing, ti, stack);
 		return stack;
 	}
 	
@@ -136,10 +142,10 @@ public abstract class RecipeDisplay<T extends IStagedRecipe<T, ?>> {
 	public boolean mouseClicked(int button) {
 		if (itemUnderMouse != null) {
 			if (button == 0) {
-				CraftingDisplayH.showHowToCraft(mc, itemUnderMouse.getItem(), list.getLastScreen());
+				CraftingDisplayH.showHowToCraft(mc, (StagedItem) itemUnderMouse.getItem(), list.getLastScreen());
 				return true;
 			} else if (button == 1) {
-				CraftingDisplayH.showWhatCanBeMade(mc, itemUnderMouse.getItem(), list.getLastScreen());
+				CraftingDisplayH.showWhatCanBeMade(mc, (StagedItem) itemUnderMouse.getItem(), list.getLastScreen());
 				return true;
 			}
 		}
@@ -180,7 +186,7 @@ public abstract class RecipeDisplay<T extends IStagedRecipe<T, ?>> {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static <T extends IStagedRecipe<?, ?>> RecipeDisplay<?> createFrom(ICraftingInput type, List<T> recipes, Item output) {
+	public static <T extends IStagedRecipe<?, ?>> RecipeDisplay<?> createFrom(ICraftingInput type, List<T> recipes, StagedItem output) {
 		if (type instanceof EnumRecipeType) {
 			switch ((EnumRecipeType) type) {
 				case campfire:

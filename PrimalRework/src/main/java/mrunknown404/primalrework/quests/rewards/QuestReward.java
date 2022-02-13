@@ -1,6 +1,6 @@
 package mrunknown404.primalrework.quests.rewards;
 
-import mrunknown404.primalrework.helpers.WordH;
+import mrunknown404.primalrework.utils.helpers.WordH;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.text.ITextComponent;
 

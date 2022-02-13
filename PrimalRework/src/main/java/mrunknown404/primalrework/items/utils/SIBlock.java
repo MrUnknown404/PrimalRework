@@ -38,6 +38,10 @@ public class SIBlock extends StagedItem {
 	public SIBlock(StagedBlock block) {
 		super(block.getRegName(), block.stage, block.stackSize, EnumToolType.none, EnumToolMaterial.hand, block.tab, Rarity.COMMON, null, false, false, ItemType.block);
 		this.block = block;
+		
+		if (block.overridesVanillaItem()) {
+			overrideVanilla();
+		}
 	}
 	
 	@Override
@@ -144,9 +148,10 @@ public class SIBlock extends StagedItem {
 		}).orElse(state);
 	}
 	
-	private static boolean canPlace(BlockItemUseContext context, BlockState state) {
-		PlayerEntity player = context.getPlayer();
-		return context.getLevel().isUnobstructed(state, context.getClickedPos(), player == null ? ISelectionContext.empty() : ISelectionContext.of(player));
+	private static boolean canPlace(BlockItemUseContext ctx, BlockState state) {
+		PlayerEntity player = ctx.getPlayer();
+		return state.canSurvive(ctx.getLevel(), ctx.getClickedPos()) &&
+				ctx.getLevel().isUnobstructed(state, ctx.getClickedPos(), player == null ? ISelectionContext.empty() : ISelectionContext.of(player));
 	}
 	
 	private static boolean placeBlock(BlockItemUseContext context, BlockState state) {

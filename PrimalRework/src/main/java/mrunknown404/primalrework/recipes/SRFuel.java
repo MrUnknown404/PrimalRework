@@ -1,8 +1,9 @@
 package mrunknown404.primalrework.recipes;
 
+import mrunknown404.primalrework.items.utils.StagedItem;
 import mrunknown404.primalrework.recipes.input.RISingle;
-import mrunknown404.primalrework.utils.enums.EnumStage;
-import net.minecraft.item.Item;
+import mrunknown404.primalrework.registries.PRStages;
+import mrunknown404.primalrework.stage.Stage;
 import net.minecraft.item.ItemStack;
 
 public class SRFuel implements IStagedRecipe<SRFuel, RISingle> {
@@ -10,7 +11,7 @@ public class SRFuel implements IStagedRecipe<SRFuel, RISingle> {
 	private final RISingle itemRI;
 	private final int time;
 	
-	public SRFuel(Item item, int time) {
+	public SRFuel(StagedItem item, int time) {
 		this.itemRI = new RISingle(item);
 		this.item = new ItemStack(item);
 		this.time = time;
@@ -27,8 +28,8 @@ public class SRFuel implements IStagedRecipe<SRFuel, RISingle> {
 	}
 	
 	@Override
-	public EnumStage getStage() {
-		return EnumStage.stage0;
+	public Stage getStage() {
+		return PRStages.STAGE_0.get();
 	}
 	
 	public int getCookTime() {
@@ -42,6 +43,6 @@ public class SRFuel implements IStagedRecipe<SRFuel, RISingle> {
 	
 	@Override
 	public boolean has(Ingredient input) {
-		return input.matches(this.itemRI.input);
+		return input.matches(itemRI.input);
 	}
 }

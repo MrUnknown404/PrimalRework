@@ -8,18 +8,17 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import mrunknown404.primalrework.client.gui.screen.ScreenRecipeList;
-import mrunknown404.primalrework.helpers.ItemH;
-import mrunknown404.primalrework.helpers.StageH;
+import mrunknown404.primalrework.items.utils.StagedItem;
 import mrunknown404.primalrework.recipes.IStagedRecipe;
 import mrunknown404.primalrework.recipes.Ingredient;
 import mrunknown404.primalrework.registries.PRFuels;
 import mrunknown404.primalrework.registries.PRRecipes;
-import mrunknown404.primalrework.registries.PRStagedTags;
+import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.utils.Cache;
 import mrunknown404.primalrework.utils.Pair;
 import mrunknown404.primalrework.utils.enums.EnumFuelType;
 import mrunknown404.primalrework.utils.enums.EnumRecipeType;
-import mrunknown404.primalrework.utils.enums.EnumStage;
+import mrunknown404.primalrework.utils.helpers.StageH;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.renderer.ItemRenderer;
@@ -28,11 +27,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class CraftingDisplayH {
-	private static final Map<Item, Data> ITEM_DATA = new HashMap<Item, Data>();
+	private static final Map<StagedItem, Data> ITEM_DATA = new HashMap<StagedItem, Data>();
 	private static final List<ItemStack> ALL_ITEMS = new ArrayList<ItemStack>();
-	private static final Cache<EnumStage, List<ItemStack>> ITEM_CACHE = new Cache<EnumStage, List<ItemStack>>();
+	private static final Cache<Stage, List<ItemStack>> ITEM_CACHE = new Cache<Stage, List<ItemStack>>();
 	
-	public static void addItem(Item item) {
+	public static void addItem(StagedItem item) {
 		if (item.getItemCategory() == null) {
 			return;
 		}
@@ -58,7 +57,7 @@ public class CraftingDisplayH {
 		if (!ITEM_CACHE.is(StageH.getStage())) {
 			List<ItemStack> list = new ArrayList<ItemStack>();
 			for (ItemStack stack : ALL_ITEMS) {
-				if (StageH.hasAccessToStage(ItemH.getStage(stack.getItem()))) {
+				if (StageH.hasAccessToStage(((StagedItem) stack.getItem()).stage.get())) {
 					list.add(stack);
 				}
 			}
@@ -77,7 +76,7 @@ public class CraftingDisplayH {
 		if (!lateRun) {
 			lateRun = true;
 			ItemRenderer ir = Minecraft.getInstance().getItemRenderer();
-			for (Entry<Item, Data> data : ITEM_DATA.entrySet()) {
+			for (Entry<StagedItem, Data> data : ITEM_DATA.entrySet()) {
 				IBakedModel model = ir.getModel(data.getValue().stack, null, null);
 				if (model.usesBlockLight()) {
 					data.getValue().is3D();
@@ -88,16 +87,16 @@ public class CraftingDisplayH {
 		return ITEM_DATA.get(item.getItem()).is3D;
 	}
 	
-	public static void showHowToCraft(Minecraft minecraft, Item item, ContainerScreen<?> lastScreen) {
+	public static void showHowToCraft(Minecraft minecraft, StagedItem item, ContainerScreen<?> lastScreen) {
 		Map<EnumRecipeType, List<IStagedRecipe<?, ?>>> recipes = PRRecipes.getRecipesForOutput(item);
 		if (!recipes.isEmpty()) {
 			minecraft.setScreen(new ScreenRecipeList(lastScreen, recipes, null, item));
 		}
 	}
 	
-	public static void showWhatCanBeMade(Minecraft minecraft, Item item, ContainerScreen<?> lastScreen) {
-		Map<EnumRecipeType, List<IStagedRecipe<?, ?>>> recipes = PRRecipes.getRecipesContainingInput(new Ingredient(item, PRStagedTags.getItemsTags(item)));
-		Map<EnumFuelType, Pair<Item, Integer>> fuels = PRFuels.getFuels(item);
+	public static void showWhatCanBeMade(Minecraft minecraft, StagedItem item, ContainerScreen<?> lastScreen) {
+		Map<EnumRecipeType, List<IStagedRecipe<?, ?>>> recipes = PRRecipes.getRecipesContainingInput(Ingredient.createUsingTags(item));
+		Map<EnumFuelType, Pair<StagedItem, Integer>> fuels = PRFuels.getFuels(item);
 		if (!recipes.isEmpty() || !fuels.isEmpty()) {
 			minecraft.setScreen(new ScreenRecipeList(lastScreen, recipes, fuels, item));
 		}

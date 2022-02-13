@@ -4,10 +4,10 @@ import java.util.Random;
 
 import mrunknown404.primalrework.blocks.utils.SBContainer;
 import mrunknown404.primalrework.items.utils.StagedItem.ItemType;
+import mrunknown404.primalrework.registries.PRStages;
 import mrunknown404.primalrework.tileentities.TEICampFire;
 import mrunknown404.primalrework.utils.HarvestInfo;
 import mrunknown404.primalrework.utils.enums.EnumBlockInfo;
-import mrunknown404.primalrework.utils.enums.EnumStage;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -42,7 +42,7 @@ public class SBCampFire extends SBContainer {
 	private static final VoxelShape COL_SHAPE = box(2, 0, 2, 14, 2, 14);
 	
 	public SBCampFire() {
-		super("campfire", EnumStage.stage1, 64, Material.DECORATION, SoundType.WOOD, true, 0, EnumBlockInfo.soft_wood, false, BlockStateType.lit, BlockModelType.none,
+		super("campfire", PRStages.STAGE_1, 64, Material.DECORATION, SoundType.WOOD, true, false, 0, EnumBlockInfo.soft_wood, false, BlockStateType.lit, BlockModelType.none,
 				HarvestInfo.HAND, HarvestInfo.SAW_MIN);
 		registerDefaultState(defaultBlockState().setValue(BlockStateProperties.LIT, false));
 	}

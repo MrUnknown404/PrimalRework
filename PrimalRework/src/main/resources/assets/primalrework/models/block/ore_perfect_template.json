@@ -1,6 +1,0 @@
-{
-	"parent": "primalrework:block/ore_template",
-	"textures": {
-		"overlay": "primalrework:block/ore_perfect_template"
-	}
-}

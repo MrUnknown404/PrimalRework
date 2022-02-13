@@ -4,13 +4,13 @@ import java.util.List;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 
-import mrunknown404.primalrework.helpers.ColorH;
+import mrunknown404.primalrework.items.utils.StagedItem;
 import mrunknown404.primalrework.recipes.SRFuel;
-import net.minecraft.item.Item;
+import mrunknown404.primalrework.utils.helpers.ColorH;
 
 public class RDFuel extends RecipeDisplay<SRFuel> {
 	
-	public RDFuel(List<SRFuel> recipes, Item output) {
+	public RDFuel(List<SRFuel> recipes, StagedItem output) {
 		super(recipes, output, 32); // figure out height
 	}
 	

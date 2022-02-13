@@ -11,7 +11,6 @@ import net.minecraft.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
 
 public class NoAdvancementManager extends AdvancementManager {
-	
 	public NoAdvancementManager(LootPredicateManager manager) {
 		super(manager);
 	}

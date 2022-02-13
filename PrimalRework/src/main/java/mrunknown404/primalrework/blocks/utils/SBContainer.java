@@ -1,11 +1,13 @@
 package mrunknown404.primalrework.blocks.utils;
 
+import java.util.function.Supplier;
+
 import javax.annotation.Nullable;
 
 import mrunknown404.primalrework.registries.PRItemGroups;
+import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.utils.HarvestInfo;
 import mrunknown404.primalrework.utils.enums.EnumBlockInfo;
-import mrunknown404.primalrework.utils.enums.EnumStage;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -17,9 +19,9 @@ import net.minecraft.world.World;
 
 @SuppressWarnings("deprecation")
 public abstract class SBContainer extends StagedBlock {
-	protected SBContainer(String name, EnumStage stage, int stackSize, Material material, SoundType sound, boolean hasCollision, int lightLevel, EnumBlockInfo blockInfo,
-			boolean isRandomTick, BlockStateType blockStateType, BlockModelType blockModelType, HarvestInfo info, HarvestInfo... extraInfos) {
-		super(name, stage, stackSize, PRItemGroups.MACHINES, material, sound, hasCollision, lightLevel, blockInfo, isRandomTick, blockStateType, blockModelType, info,
+	protected SBContainer(String name, Supplier<Stage> stage, int stackSize, Material material, SoundType sound, boolean hasCollision, boolean canOcclude, int lightLevel,
+			EnumBlockInfo blockInfo, boolean isRandomTick, BlockStateType blockStateType, BlockModelType blockModelType, HarvestInfo info, HarvestInfo... extraInfos) {
+		super(name, stage, stackSize, PRItemGroups.MACHINES, material, sound, hasCollision, canOcclude, lightLevel, blockInfo, isRandomTick, blockStateType, blockModelType, info,
 				extraInfos);
 	}
 	
@@ -43,4 +45,9 @@ public abstract class SBContainer extends StagedBlock {
 	}
 	
 	public abstract TileEntity makeTileEntity(BlockState state, IBlockReader world);
+	
+	@Override
+	public boolean hasTileEntity(BlockState state) {
+		return true;
+	}
 }

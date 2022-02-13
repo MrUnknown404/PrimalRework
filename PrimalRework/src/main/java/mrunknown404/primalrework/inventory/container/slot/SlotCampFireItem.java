@@ -1,8 +1,5 @@
 package mrunknown404.primalrework.inventory.container.slot;
 
-import mrunknown404.primalrework.recipes.input.RISingle;
-import mrunknown404.primalrework.registries.PRRecipes;
-import mrunknown404.primalrework.utils.enums.EnumRecipeType;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
@@ -13,8 +10,8 @@ public class SlotCampFireItem extends Slot {
 	}
 	
 	@Override
-	public boolean mayPlace(ItemStack stack) {
-		return PRRecipes.getRecipeForInput(EnumRecipeType.campfire, new RISingle(stack.getItem())) != null;
+	public boolean mayPlace(ItemStack stack) { //TODO on redo recipes
+		return false;
 	}
 	
 	@Override

@@ -56,13 +56,8 @@ public class ContainerCampFire extends Container implements IEasyQuickMoveStack 
 	}
 	
 	@Override
-	public int getAmountOfInputSlots() {
-		return 1;
-	}
-	
-	@Override
-	public int getAmountOfOutputSlots() {
-		return 1;
+	public int getAmountOfSlots() {
+		return 2;
 	}
 	
 	@Override

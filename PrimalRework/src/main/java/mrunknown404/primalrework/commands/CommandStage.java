@@ -4,24 +4,27 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 
-import mrunknown404.primalrework.helpers.StageH;
-import mrunknown404.primalrework.helpers.WordH;
-import mrunknown404.primalrework.utils.enums.EnumStage;
+import mrunknown404.primalrework.registries.PRRegistry;
+import mrunknown404.primalrework.registries.PRStages;
+import mrunknown404.primalrework.stage.Stage;
+import mrunknown404.primalrework.utils.helpers.StageH;
+import mrunknown404.primalrework.utils.helpers.WordH;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
+import net.minecraftforge.fml.RegistryObject;
 
 public class CommandStage {
 	public static void register(CommandDispatcher<CommandSource> dispatcher) {
-		LiteralArgumentBuilder<CommandSource> cmd = Commands.literal("stage").requires((commandSource) -> commandSource.hasPermission(4));
+		LiteralArgumentBuilder<CommandSource> cmd = Commands.literal("stage").requires((src) -> src.hasPermission(4));
 		cmd.then(Commands.literal("get").executes(c -> {
 			return getStage(c);
 		}));
 		
 		LiteralArgumentBuilder<CommandSource> set = Commands.literal("set");
-		for (EnumStage stage : EnumStage.values()) {
-			if (stage != EnumStage.no_show) {
-				set.then(Commands.literal(stage.name()).executes(c -> {
-					return setStage(c, stage);
+		for (RegistryObject<Stage> stage : PRRegistry.getStages()) {
+			if (stage != PRStages.NO_SHOW) {
+				set.then(Commands.literal(stage.get().nameID).executes(c -> {
+					return setStage(c, stage.get());
 				}));
 			}
 		}
@@ -30,8 +33,8 @@ public class CommandStage {
 		dispatcher.register(cmd);
 	}
 	
-	private static int setStage(CommandContext<CommandSource> source, EnumStage stage) {
-		StageH.setStage(stage);
+	private static int setStage(CommandContext<CommandSource> source, Stage stage) {
+		StageH.setStage(source.getSource().getServer().overworld(), stage);
 		source.getSource().sendSuccess(WordH.translate("commands.stage.success").append(WordH.string(" " + stage.getName())), false);
 		return 1;
 	}

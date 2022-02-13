@@ -2,27 +2,27 @@ package mrunknown404.primalrework.quests;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 import javax.annotation.Nullable;
 
-import mrunknown404.primalrework.helpers.StageH;
-import mrunknown404.primalrework.helpers.WordH;
-import mrunknown404.primalrework.network.NetworkHandler;
-import mrunknown404.primalrework.network.packets.PacketSyncQuestFinished;
+import mrunknown404.primalrework.items.utils.StagedItem;
 import mrunknown404.primalrework.quests.requirements.QuestRequirement;
 import mrunknown404.primalrework.quests.rewards.QuestReward;
-import mrunknown404.primalrework.registries.PRQuests;
+import mrunknown404.primalrework.registries.PRStages;
+import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.utils.IDescription;
 import mrunknown404.primalrework.utils.IName;
-import mrunknown404.primalrework.utils.enums.EnumStage;
+import mrunknown404.primalrework.utils.helpers.StageH;
+import mrunknown404.primalrework.utils.helpers.WordH;
+import mrunknown404.primalrework.world.savedata.WSDQuests;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Util;
 import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 
 public class Quest implements IName, IDescription {
 	protected final String name_key;
@@ -31,7 +31,7 @@ public class Quest implements IName, IDescription {
 	protected final QuestTab tab;
 	protected final QuestRequirement<?, ?> req;
 	protected final QuestReward reward;
-	protected final EnumStage stage;
+	protected final Supplier<Stage> stage;
 	protected final boolean isEnd, isRoot;
 	
 	/** Grid pos! */
@@ -39,7 +39,7 @@ public class Quest implements IName, IDescription {
 	protected boolean isFinished;
 	protected List<Quest> children = new ArrayList<Quest>();
 	
-	protected Quest(EnumStage stage, String name_key, Quest parent, float xPos, float yPos, ItemStack itemIcon, QuestRequirement<?, ?> req, @Nullable QuestReward reward,
+	protected Quest(Supplier<Stage> stage, String name_key, Quest parent, float xPos, float yPos, ItemStack itemIcon, QuestRequirement<?, ?> req, @Nullable QuestReward reward,
 			boolean isEnd, boolean isRoot, QuestTab tab) {
 		this.stage = stage;
 		this.name_key = name_key;
@@ -58,7 +58,7 @@ public class Quest implements IName, IDescription {
 		children.add(q);
 	}
 	
-	public void finishQuest(World world, @Nullable PlayerEntity player) {
+	public void finishQuest(ServerWorld world, @Nullable PlayerEntity player) {
 		if (world.isClientSide) {
 			System.out.println("Tried to finish quest on client side!");
 			return;
@@ -80,50 +80,51 @@ public class Quest implements IName, IDescription {
 						((IFormattableTextComponent) player.getDisplayName()).append(space).append(WordH.translate("quest.finish.player")).append(space).append(getFancyName()),
 						Util.NIL_UUID);
 			} else {
-				pl.sendMessage(
-						WordH.translate("quest.finish.missing.pre").append(space).append(getFancyName()).append(space).append(WordH.translate("quest.finish.missing.post")),
+				pl.sendMessage(WordH.translate("quest.finish.missing.pre").append(space).append(getFancyName()).append(space).append(WordH.translate("quest.finish.missing.post")),
 						Util.NIL_UUID);
 			}
 		}
 		
 		isFinished = true;
-		PRQuests.resetQuestCache();
-		if (reward != null && player != null) {
+		if (reward != null && player != null) { //TODO make this not auto claimed. add a button or something
 			reward.giveRewardsToPlayer(player);
 		}
 		
 		if (isEnd) {
-			StageH.setStage(StageH.getNextStage());
-			System.out.println("The world has advanced to the next stage!");
+			if (stage.get().id <= StageH.getStage().id) {
+				StageH.setStage(world, PRStages.getNextStage());
+				System.out.println("The world has advanced to the next stage!");
+			} else {
+				System.err.println("Finished an end quest that should progress to the next stage but we're already there");
+			}
 		}
 		
-		NetworkHandler.sendPacketToAll(new PacketSyncQuestFinished(this));
+		WSDQuests.get(world).setDirty();
 	}
 	
-	public void forgetQuest(@SuppressWarnings("unused") World world) {
+	public void forgetQuest(ServerWorld world) {
 		System.out.println("Quest '" + getName() + "' was forgotten!");
-		
 		isFinished = false;
-		PRQuests.resetQuestCache();
+		WSDQuests.get(world).setDirty();
 	}
 	
 	public void loadFinished(boolean isFinished) {
 		this.isFinished = isFinished;
 	}
 	
-	public EnumStage getStage() {
+	public Supplier<Stage> getStage() {
 		return stage;
 	}
 	
 	@Override
 	public IFormattableTextComponent getFancyName() {
-		return WordH.translate("quest." + stage + "." + name_key + ".name");
+		return WordH.translate("quest." + stage.get().nameID + "." + name_key + ".name");
 	}
 	
-	/** @return stage + "_" + name */
+	/** @return stage + "." + name */
 	@Override
 	public String getName() {
-		return stage.toString() + "_" + name_key;
+		return stage.get().nameID + "." + name_key;
 	}
 	
 	public String getNameKey() {
@@ -133,7 +134,7 @@ public class Quest implements IName, IDescription {
 	@Override
 	public List<IFormattableTextComponent> getFancyDescription() {
 		List<IFormattableTextComponent> desc = new ArrayList<IFormattableTextComponent>();
-		for (String s : WordH.translate("quest." + stage + "." + name_key + ".desc").getString().split("\\n")) {
+		for (String s : WordH.translate("quest." + getName() + ".desc").getString().split("\\n")) {
 			desc.add(WordH.string(s.trim()));
 		}
 		return desc;
@@ -229,16 +230,16 @@ public class Quest implements IName, IDescription {
 	public static class QuestBuilder {
 		//@Nullable QuestReward reward
 		
-		private final EnumStage stage;
+		private final Supplier<Stage> stage;
 		private final String name_key;
 		private final Quest parent;
 		private final float xPos, yPos;
 		private final QuestRequirement<?, ?> req;
 		private ItemStack itemIcon;
 		private QuestReward reward;
-		private boolean isEnd, isRoot;
+		private boolean isRoot;
 		
-		private QuestBuilder(EnumStage stage, String name_key, Quest parent, float xPos, float yPos, QuestRequirement<?, ?> req) {
+		private QuestBuilder(Supplier<Stage> stage, String name_key, Quest parent, float xPos, float yPos, QuestRequirement<?, ?> req) {
 			this.stage = stage;
 			this.name_key = name_key;
 			this.parent = parent;
@@ -247,21 +248,16 @@ public class Quest implements IName, IDescription {
 			this.req = req;
 		}
 		
-		public static QuestBuilder create(EnumStage stage) {
-			return new QuestBuilder(stage, "root", null, 0, 0, null).setRoot();
+		public static Quest root(Supplier<Stage> stage, QuestTab tab) {
+			return new Quest(stage, "root", null, 0, 0, tab.getIcon(), null, null, false, true, tab);
 		}
 		
 		public static QuestBuilder create(String name_key, Quest parent, float xPos, float yPos, QuestRequirement<?, ?> req) {
 			return new QuestBuilder(parent.stage, name_key, parent, xPos, yPos, req).setIcon(req.getIcon());
 		}
 		
-		public QuestBuilder setIcon(Item itemIcon) {
+		public QuestBuilder setIcon(StagedItem itemIcon) {
 			this.itemIcon = new ItemStack(itemIcon);
-			return this;
-		}
-		
-		public QuestBuilder setEnd() {
-			this.isEnd = true;
 			return this;
 		}
 		
@@ -275,12 +271,12 @@ public class Quest implements IName, IDescription {
 			return this;
 		}
 		
-		public Quest finish(QuestTab tab) {
-			if (itemIcon == null) {
-				itemIcon = tab.getIcon();
-			}
-			
-			return new Quest(stage, name_key, parent, xPos, yPos, itemIcon, req, reward, isEnd, isRoot, tab);
+		public Quest finish() {
+			return new Quest(stage, name_key, parent, xPos, yPos, itemIcon, req, reward, false, isRoot, parent.tab);
+		}
+		
+		public Quest finishAsEnd() {
+			return new Quest(stage, name_key, parent, xPos, yPos, itemIcon, req, reward, true, isRoot, parent.tab);
 		}
 	}
 }

@@ -1,12 +1,12 @@
 package mrunknown404.primalrework.blocks;
 
 import mrunknown404.primalrework.blocks.utils.SBRotatedPillar;
-import mrunknown404.primalrework.helpers.MathH;
 import mrunknown404.primalrework.registries.PRBlocks;
 import mrunknown404.primalrework.registries.PRItemGroups;
+import mrunknown404.primalrework.registries.PRStages;
 import mrunknown404.primalrework.utils.HarvestInfo;
 import mrunknown404.primalrework.utils.enums.EnumBlockInfo;
-import mrunknown404.primalrework.utils.enums.EnumStage;
+import mrunknown404.primalrework.utils.helpers.MathH;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -19,7 +19,7 @@ import net.minecraft.world.World;
 
 public class SBDenseLog extends SBRotatedPillar {
 	public SBDenseLog() {
-		super("dense_log", EnumStage.stage2, 16, PRItemGroups.BLOCKS, Material.WOOD, SoundType.WOOD, true, 0, EnumBlockInfo.hard_wood, false, HarvestInfo.AXE_MIN);
+		super("dense_log", PRStages.STAGE_2, 16, PRItemGroups.BLOCKS, Material.WOOD, SoundType.WOOD, true, true, 0, EnumBlockInfo.hard_wood, false, HarvestInfo.AXE_MIN);
 	}
 	
 	@SuppressWarnings("deprecation")

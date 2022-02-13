@@ -9,7 +9,6 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import mrunknown404.primalrework.registries.PRRegistry;
-import mrunknown404.primalrework.world.gen.layer.PRLayer;
 import mrunknown404.primalrework.world.gen.layer.transformer.PRAreaTransformer;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryLookupCodec;
@@ -20,6 +19,7 @@ import net.minecraft.world.gen.LazyAreaLayerContext;
 import net.minecraft.world.gen.area.IArea;
 import net.minecraft.world.gen.area.IAreaFactory;
 import net.minecraft.world.gen.area.LazyArea;
+import net.minecraft.world.gen.layer.Layer;
 import net.minecraft.world.gen.layer.LayerUtil;
 import net.minecraft.world.gen.layer.ZoomLayer;
 import net.minecraftforge.fml.RegistryObject;
@@ -35,7 +35,7 @@ public class BiomeProviderPrimal extends BiomeProvider {
 	});
 	
 	private final long seed;
-	private final PRLayer noiseBiomeLayer;
+	private final Layer noiseBiomeLayer;
 	private final Registry<Biome> biomes;
 	
 	public BiomeProviderPrimal(long seed, Registry<Biome> biomeRegistry) {
@@ -51,15 +51,16 @@ public class BiomeProviderPrimal extends BiomeProvider {
 		this.biomes = biomeRegistry;
 	}
 	
-	private static PRLayer buildLayerGen(long seed, List<Biome> biomes, ForgeRegistry<Biome> biomeRegistry) {
+	private static Layer buildLayerGen(long seed, List<Biome> biomes, ForgeRegistry<Biome> biomeRegistry) {
 		IAreaFactory<LazyArea> iareafactory = buildLayers(biomes, biomeRegistry, (l) -> {
 			return new LazyAreaLayerContext(25, seed, l);
 		});
-		return new PRLayer(iareafactory);
+		return new Layer(iareafactory);
 	}
 	
 	private static <T extends IArea, C extends IExtendedNoiseRandom<T>> IAreaFactory<T> buildLayers(List<Biome> biomes, ForgeRegistry<Biome> biomeRegistry,
 			LongFunction<C> seedHandler) {
+		
 		IAreaFactory<T> iareafactory = new PRAreaTransformer(biomes, biomeRegistry).run(seedHandler.apply(1L));
 		iareafactory = LayerUtil.zoom(2001L, ZoomLayer.NORMAL, iareafactory, 4, seedHandler);
 		return iareafactory;

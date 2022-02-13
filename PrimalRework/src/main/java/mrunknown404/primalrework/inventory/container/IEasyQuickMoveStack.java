@@ -15,8 +15,8 @@ public interface IEasyQuickMoveStack {
 			ItemStack itemstack1 = slot.getItem();
 			itemstack = itemstack1.copy();
 			
-			if (slotID <= getAmountOfInputSlots()) {
-				if (!IMoveItemStackTo(itemstack1, getAmountOfInputSlots(), 36 + getAmountOfSlots(), true)) {
+			if (slotID <= getAmountOfSlots()) {
+				if (!IMoveItemStackTo(itemstack1, getAmountOfSlots(), 36 + getAmountOfSlots(), true)) {
 					return ItemStack.EMPTY;
 				}
 			} else if (!IMoveItemStackTo(itemstack1, 0, getAmountOfSlots(), false)) {
@@ -39,16 +39,7 @@ public interface IEasyQuickMoveStack {
 		return itemstack;
 	}
 	
-	/** @return Amount of input slots in the container */
-	int getAmountOfInputSlots();
-	
-	/** @return Amount of output slots in the container */
-	int getAmountOfOutputSlots();
-	
-	/** Used internally */
-	default int getAmountOfSlots() {
-		return getAmountOfInputSlots() + getAmountOfOutputSlots();
-	}
+	public abstract int getAmountOfSlots();
 	
 	List<Slot> getSlots();
 	

@@ -8,10 +8,10 @@ import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import mrunknown404.primalrework.client.gui.screen.ScreenQuestMenu;
-import mrunknown404.primalrework.helpers.ColorH;
-import mrunknown404.primalrework.helpers.MathH;
-import mrunknown404.primalrework.helpers.WordH;
 import mrunknown404.primalrework.quests.Quest;
+import mrunknown404.primalrework.utils.helpers.ColorH;
+import mrunknown404.primalrework.utils.helpers.MathH;
+import mrunknown404.primalrework.utils.helpers.WordH;
 import net.minecraft.client.MainWindow;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;

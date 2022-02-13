@@ -5,14 +5,15 @@ import com.google.common.base.Preconditions;
 import mrunknown404.primalrework.PrimalRework;
 import mrunknown404.primalrework.blocks.SBStrippedLog;
 import mrunknown404.primalrework.blocks.SBUnlitPrimalWallTorch;
+import mrunknown404.primalrework.blocks.utils.SBSlab;
 import mrunknown404.primalrework.blocks.utils.StagedBlock;
-import mrunknown404.primalrework.blocks.utils.StagedBlock.BlockStateType;
 import mrunknown404.primalrework.registries.PRRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.RotatedPillarBlock;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DirectoryCache;
 import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.state.properties.SlabType;
 import net.minecraft.util.Direction.Axis;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.generators.BlockModelBuilder;
@@ -38,15 +39,14 @@ class GeneratorBlockState extends BlockStateProvider {
 	protected void registerStatesAndModels() {
 		for (RegistryObject<Block> regBlock : PRRegistry.getBlocks()) {
 			StagedBlock b = (StagedBlock) regBlock.get();
-			if (b.getBlockStateType() == BlockStateType.none) {
-				continue;
-			}
+			
+			final String id = b.overridesVanillaBlock() ? "minecraft" : PrimalRework.MOD_ID;
 			
 			switch (b.getBlockStateType()) {
 				case none:
 					break;
 				case normal:
-					simpleBlock(b);
+					simpleBlock(b, new UncheckedModelFile(new ResourceLocation(id, "block/" + b.getRegName())));
 					break;
 				case facing:
 					int a = 180;
@@ -54,7 +54,7 @@ class GeneratorBlockState extends BlockStateProvider {
 						a = 90;
 					}
 					
-					horizontalBlock(b, new UncheckedModelFile(modLoc("block/" + b.getRegName())), a);
+					horizontalBlock(b, new UncheckedModelFile(new ResourceLocation(id, "block/" + b.getRegName())), a);
 					break;
 				case facing_pillar:
 					facingPillar(b);
@@ -65,28 +65,30 @@ class GeneratorBlockState extends BlockStateProvider {
 				case random_direction:
 					randomDirection(b);
 					break;
+				case slab:
+					slabBlock(b);
+					break;
 			}
 		}
 	}
 	
-	private void randomDirection(StagedBlock b) {
+	private void randomDirection(StagedBlock block) {
+		final String id = block.overridesVanillaBlock() ? "minecraft" : PrimalRework.MOD_ID;
 		ConfiguredModel[] models = new ConfiguredModel[4];
 		for (int i = 0; i < 4; i++) {
-			models[i] = new ConfiguredModel(new UncheckedModelFile(modLoc("block/" + b.getRegName())), 0, 90 * i, false);
+			models[i] = new ConfiguredModel(new UncheckedModelFile(new ResourceLocation(id, "block/" + block.getRegName())), 0, 90 * i, false);
 		}
-		getVariantBuilder(b).partialState().setModels(models);
+		getVariantBuilder(block).partialState().setModels(models);
 	}
 	
 	public void facingPillar(StagedBlock block) {
-		ResourceLocation baseName = modLoc(block.getRegName());
-		facingPillar(block, extend(baseName, "_side"), extend(baseName, "_end"));
-	}
-	
-	public void facingPillar(StagedBlock block, ResourceLocation side, ResourceLocation end) {
+		final String id = block.overridesVanillaBlock() ? "minecraft" : PrimalRework.MOD_ID;
+		ResourceLocation baseName = new ResourceLocation(id, "block/" + block.getRegName());
+		
 		if (block instanceof SBStrippedLog) {
-			facingPillar(block, models().cubeColumn(block.getRegName(), side, end), models().cubeColumnHorizontal(block.getRegName(), side, end));
+			facingPillar(block, models().cubeColumn(block.getRegName(), baseName, baseName), models().cubeColumnHorizontal(block.getRegName(), baseName, baseName));
 		} else {
-			facingPillar(block, models().cubeColumn(block.getRegName(), side, end), models().cubeColumnHorizontal(block.getRegName() + "_horizontal", side, end));
+			facingPillar(block, new UncheckedModelFile(baseName), new UncheckedModelFile(extend(baseName, "_horizontal")));
 		}
 	}
 	
@@ -100,6 +102,15 @@ class GeneratorBlockState extends BlockStateProvider {
 		ResourceLocation baseName = modLoc("block/" + block.getRegName());
 		getVariantBuilder(block).partialState().with(BlockStateProperties.LIT, false).modelForState().modelFile(new UncheckedModelFile(extend(baseName, "_unlit"))).addModel()
 				.partialState().with(BlockStateProperties.LIT, true).modelForState().modelFile(new UncheckedModelFile(extend(baseName, "_lit"))).addModel();
+	}
+	
+	public void slabBlock(StagedBlock block) {
+		ResourceLocation baseName = modLoc("block/" + block.getRegName().replace("_slab", ""));
+		
+		getVariantBuilder(block).partialState().with(SBSlab.TYPE, SlabType.BOTTOM).modelForState().modelFile(new UncheckedModelFile(extend(baseName, "_slab"))).addModel()
+				.partialState().with(SBSlab.TYPE, SlabType.TOP).modelForState().modelFile(new UncheckedModelFile(extend(baseName, "_slab_top"))).addModel().partialState()
+				.with(SBSlab.TYPE, SlabType.DOUBLE).modelForState()
+				.modelFile(new UncheckedModelFile(block.overridesVanillaBlock() ? mcLoc("block/" + block.getRegName().replace("_slab", "")) : baseName)).addModel();
 	}
 	
 	private static ResourceLocation extend(ResourceLocation rl, String suffix) {

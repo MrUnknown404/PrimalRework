@@ -1,29 +1,18 @@
 package mrunknown404.primalrework.registries;
 
-import mrunknown404.primalrework.PrimalRework;
+import mrunknown404.primalrework.utils.helpers.ColorH;
 import mrunknown404.primalrework.world.biome.PRBiome;
-import net.minecraft.util.RegistryKey;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
-import net.minecraftforge.common.BiomeManager;
-import net.minecraftforge.common.BiomeManager.BiomeEntry;
 import net.minecraftforge.common.BiomeManager.BiomeType;
 import net.minecraftforge.fml.RegistryObject;
 
 public class PRBiomes {
-	public static final RegistryObject<Biome> TEST0 = register(new PRBiome("test0", 100, BiomeType.WARM, Category.PLAINS, 1, 0.1f, 1, 1));
-	public static final RegistryObject<Biome> TEST1 = register(new PRBiome("test1", 100, BiomeType.COOL, Category.OCEAN, 1, 0.1f, 1, 1));
-	public static final RegistryObject<Biome> TEST2 = register(new PRBiome("test2", 100, BiomeType.DESERT, Category.FOREST, 1, 0.1f, 1, 1));
-	
-	private static RegistryObject<Biome> register(PRBiome biome) {
-		ResourceLocation loc = new ResourceLocation(PrimalRework.MOD_ID, biome.name);
-		BiomeManager.addBiome(biome.biomeType, new BiomeEntry(RegistryKey.create(Registry.BIOME_REGISTRY, loc), biome.weight));
-		return PRRegistry.BIOMES.register(biome.name, () -> biome.biome);
-	}
-	
-	//@formatter:off
-	static void register() { }
-	//@formatter:on
+	public static final RegistryObject<Biome> FOREST = PRRegistry.register(
+			new PRBiome("forest", () -> PRConfiguredSurfaceBuilders.GRASS, 100, BiomeType.WARM, Category.PLAINS, 0, 0.1f, 1, 1), () -> PRConfiguredFeatures.OAK_COMMON,
+			() -> PRConfiguredFeatures.BIG_OAK_RARE, () -> PRConfiguredFeatures.BIRCH_RARE);
+	public static final RegistryObject<Biome> TEST1 = PRRegistry.register(
+			new PRBiome("sunken_forest", () -> PRConfiguredSurfaceBuilders.GRASS, 20, BiomeType.WARM, Category.SWAMP, -0.125f, 0.1f, 1, 1, ColorH.rgba2Int(60, 80, 100),
+					ColorH.rgba2Int(20, 30, 40)),
+			() -> PRConfiguredFeatures.SUNKEN_OAK_COMMON, () -> PRConfiguredFeatures.SUNKEN_BIG_OAK_RARE, () -> PRConfiguredFeatures.SUNKEN_BIRCH_RARE);
 }

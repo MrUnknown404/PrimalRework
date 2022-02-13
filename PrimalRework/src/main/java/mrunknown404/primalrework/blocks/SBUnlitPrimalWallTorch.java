@@ -1,14 +1,16 @@
 package mrunknown404.primalrework.blocks;
 
 import java.util.Map;
+import java.util.function.Supplier;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 
 import mrunknown404.primalrework.registries.PRBlocks;
+import mrunknown404.primalrework.registries.PRStages;
+import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.utils.HarvestInfo;
 import mrunknown404.primalrework.utils.HarvestInfo.DropInfo;
-import mrunknown404.primalrework.utils.enums.EnumStage;
 import mrunknown404.primalrework.utils.enums.EnumToolMaterial;
 import mrunknown404.primalrework.utils.enums.EnumToolType;
 import net.minecraft.block.Block;
@@ -34,14 +36,13 @@ public class SBUnlitPrimalWallTorch extends SBUnlitPrimalTorch {
 	private static final Map<Direction, VoxelShape> SHAPES = Maps.newEnumMap(ImmutableMap.of(Direction.NORTH, Block.box(5.5, 3, 11, 10.5, 11.25, 16), Direction.SOUTH,
 			Block.box(5.5, 3, 0, 10.5, 11.25, 5), Direction.WEST, Block.box(11, 3, 5.5, 16, 11.25, 10.5), Direction.EAST, Block.box(0, 3, 5.5, 5, 11.25, 10.5)));
 	
-	protected SBUnlitPrimalWallTorch(String name, EnumStage stage, int light, HarvestInfo info) {
+	protected SBUnlitPrimalWallTorch(String name, Supplier<Stage> stage, int light, HarvestInfo info) {
 		super(name, stage, light, BlockStateType.facing, info);
 		registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH));
 	}
 	
 	public SBUnlitPrimalWallTorch() {
-		this("unlit_primal_wall_torch", EnumStage.stage0, 0,
-				new HarvestInfo(EnumToolType.none, EnumToolMaterial.hand, new DropInfo(() -> PRBlocks.UNLIT_PRIMAL_TORCH.get().asItem())));
+		this("unlit_primal_wall_torch", PRStages.STAGE_0, 0, new HarvestInfo(EnumToolType.none, EnumToolMaterial.hand, DropInfo.block(PRBlocks.UNLIT_PRIMAL_TORCH)));
 	}
 	
 	@Override

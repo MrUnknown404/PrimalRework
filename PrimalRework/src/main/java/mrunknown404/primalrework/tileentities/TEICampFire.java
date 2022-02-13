@@ -1,14 +1,8 @@
 package mrunknown404.primalrework.tileentities;
 
-import mrunknown404.primalrework.helpers.WordH;
 import mrunknown404.primalrework.inventory.container.ContainerCampFire;
-import mrunknown404.primalrework.recipes.SRCampFire;
-import mrunknown404.primalrework.recipes.input.RISingle;
-import mrunknown404.primalrework.registries.PRFuels;
-import mrunknown404.primalrework.registries.PRRecipes;
 import mrunknown404.primalrework.registries.PRTileEntities;
-import mrunknown404.primalrework.utils.enums.EnumFuelType;
-import mrunknown404.primalrework.utils.enums.EnumRecipeType;
+import mrunknown404.primalrework.utils.helpers.WordH;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -78,7 +72,7 @@ public class TEICampFire extends TEInventory implements ITickableTileEntity {
 		
 		if (!level.isClientSide) {
 			if (!isBurning()) {
-				int burnValue = PRFuels.getBurnTime(EnumFuelType.campfire, getItem(0).getItem());
+				int burnValue = 0; //TODO on fuel redo
 				if (burnValue > 0) {
 					maxBurnTime = burnValue;
 					burnTimeLeft = burnValue;
@@ -86,7 +80,8 @@ public class TEICampFire extends TEInventory implements ITickableTileEntity {
 				}
 			}
 			
-			if (isBurning()) {
+			if (isBurning()) { //TODO on recipe redo
+				/*
 				SRCampFire rec = (SRCampFire) PRRecipes.getRecipeForInput(EnumRecipeType.campfire, new RISingle(getItem(1).getItem()));
 				
 				if (rec == null) {
@@ -104,6 +99,7 @@ public class TEICampFire extends TEInventory implements ITickableTileEntity {
 						}
 					}
 				}
+				*/
 			}
 			
 			if (flag != isBurning()) {
