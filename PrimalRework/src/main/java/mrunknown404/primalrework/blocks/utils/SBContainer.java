@@ -7,7 +7,7 @@ import javax.annotation.Nullable;
 import mrunknown404.primalrework.registries.PRItemGroups;
 import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.utils.HarvestInfo;
-import mrunknown404.primalrework.utils.enums.EnumBlockInfo;
+import mrunknown404.primalrework.utils.enums.BlockInfo;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -20,7 +20,7 @@ import net.minecraft.world.World;
 @SuppressWarnings("deprecation")
 public abstract class SBContainer extends StagedBlock {
 	protected SBContainer(String name, Supplier<Stage> stage, int stackSize, Material material, SoundType sound, boolean hasCollision, boolean canOcclude, int lightLevel,
-			EnumBlockInfo blockInfo, boolean isRandomTick, BlockStateType blockStateType, BlockModelType blockModelType, HarvestInfo info, HarvestInfo... extraInfos) {
+			BlockInfo blockInfo, boolean isRandomTick, BlockStateType blockStateType, BlockModelType blockModelType, HarvestInfo info, HarvestInfo... extraInfos) {
 		super(name, stage, stackSize, PRItemGroups.MACHINES, material, sound, hasCollision, canOcclude, lightLevel, blockInfo, isRandomTick, blockStateType, blockModelType, info,
 				extraInfos);
 	}

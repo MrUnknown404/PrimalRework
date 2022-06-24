@@ -10,9 +10,9 @@ import mrunknown404.primalrework.blocks.utils.StagedBlock;
 import mrunknown404.primalrework.items.utils.StagedItem;
 import mrunknown404.primalrework.utils.DoubleCache;
 import mrunknown404.primalrework.utils.HarvestInfo;
-import mrunknown404.primalrework.utils.enums.EnumBlockInfo;
-import mrunknown404.primalrework.utils.enums.EnumToolMaterial;
-import mrunknown404.primalrework.utils.enums.EnumToolType;
+import mrunknown404.primalrework.utils.enums.BlockInfo;
+import mrunknown404.primalrework.utils.enums.ToolMaterial;
+import mrunknown404.primalrework.utils.enums.ToolType;
 import mrunknown404.primalrework.utils.helpers.BlockH;
 import mrunknown404.primalrework.utils.helpers.ColorH;
 import mrunknown404.primalrework.utils.helpers.RayTraceH;
@@ -78,7 +78,7 @@ public class HarvestDisplayCEvents {
 				return;
 			}
 			
-			EnumBlockInfo blockInfo = b.blockInfo;
+			BlockInfo blockInfo = b.blockInfo;
 			
 			if (blockInfo.hardness != -1) {
 				texts.add(WordH.string(((String.valueOf(blockInfo.hardness).split("\\.")[1].length() < 2) ? blockInfo.hardness + "0" : blockInfo.hardness) + " ")
@@ -87,12 +87,12 @@ public class HarvestDisplayCEvents {
 				texts.add(WordH.translate("tooltips.block.unbreakable"));
 			}
 			
-			EnumToolType toolType = item instanceof StagedItem ? ((StagedItem) item).toolType : EnumToolType.none;
-			EnumToolMaterial toolMat = item instanceof StagedItem ? ((StagedItem) item).toolMat : EnumToolMaterial.hand;
+			ToolType toolType = item instanceof StagedItem ? ((StagedItem) item).toolType : ToolType.NONE;
+			ToolMaterial toolMat = item instanceof StagedItem ? ((StagedItem) item).toolMat : ToolMaterial.HAND;
 			
 			for (HarvestInfo info : infos) {
-				if (info.toolMat != EnumToolMaterial.unbreakable) {
-					boolean canMine = info.toolType == EnumToolType.none ? true : info.toolType == toolType && info.toolMat.level <= toolMat.level;
+				if (info.toolMat != ToolMaterial.UNBREAKABLE) {
+					boolean canMine = info.toolType == ToolType.NONE ? true : info.toolType == toolType && info.toolMat.level <= toolMat.level;
 					texts.add((canMine ? YES_MINE : NO_MINE).copy()
 							.append(WordH.translate("tooltips.stat.level").withStyle(TextFormatting.WHITE).append(" " + info.toolMat.level + " " + info.toolType.getName())));
 				}

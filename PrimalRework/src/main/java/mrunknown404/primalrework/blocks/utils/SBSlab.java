@@ -5,7 +5,7 @@ import java.util.function.Supplier;
 import mrunknown404.primalrework.registries.PRItemGroups;
 import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.utils.HarvestInfo;
-import mrunknown404.primalrework.utils.enums.EnumBlockInfo;
+import mrunknown404.primalrework.utils.enums.BlockInfo;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.IWaterLoggable;
@@ -36,7 +36,7 @@ public class SBSlab extends StagedBlock implements IWaterLoggable {
 	private static final VoxelShape BOTTOM_AABB = Block.box(0, 0, 0, 16, 8, 16);
 	private static final VoxelShape TOP_AABB = Block.box(0, 8, 0, 16, 16, 16);
 	
-	public SBSlab(String name, Supplier<Stage> stage, Material material, SoundType sound, EnumBlockInfo blockInfo, boolean isRandomTick, HarvestInfo info) {
+	public SBSlab(String name, Supplier<Stage> stage, Material material, SoundType sound, BlockInfo blockInfo, boolean isRandomTick, HarvestInfo info) {
 		super(name, stage, 64, PRItemGroups.BLOCKS, material, sound, true, true, 0, blockInfo, isRandomTick, BlockStateType.slab, BlockModelType.slab, info);
 		registerDefaultState(defaultBlockState().setValue(TYPE, SlabType.BOTTOM).setValue(WATERLOGGED, Boolean.valueOf(false)));
 	}

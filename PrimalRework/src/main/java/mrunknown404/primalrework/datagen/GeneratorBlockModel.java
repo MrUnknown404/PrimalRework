@@ -22,11 +22,11 @@ class GeneratorBlockModel extends ModelProvider<TexturelessModelBuilder> {
 		for (RegistryObject<Block> regBlock : PRRegistry.getBlocks()) {
 			StagedBlock b = (StagedBlock) regBlock.get();
 			
-			if (b.overridesVanillaItem()) {
+			if (b.usesVanillaNamespaceItem()) {
 				continue;
 			}
 			
-			final String id = b.overridesVanillaBlock() ? "minecraft" : PrimalRework.MOD_ID;
+			final String id = b.usesVanillaNamespaceBlock() ? "minecraft" : PrimalRework.MOD_ID;
 			
 			switch (b.getBlockModelType()) {
 				case none:

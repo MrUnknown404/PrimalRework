@@ -10,8 +10,8 @@ import com.google.common.collect.Multimap;
 
 import mrunknown404.primalrework.registries.PRItemGroups;
 import mrunknown404.primalrework.stage.Stage;
-import mrunknown404.primalrework.utils.enums.EnumToolMaterial;
-import mrunknown404.primalrework.utils.enums.EnumToolType;
+import mrunknown404.primalrework.utils.enums.ToolMaterial;
+import mrunknown404.primalrework.utils.enums.ToolType;
 import mrunknown404.primalrework.utils.helpers.WordH;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -25,16 +25,16 @@ import net.minecraft.util.text.ITextComponent;
 
 public class StagedItem extends Item {
 	public final Supplier<Stage> stage;
-	public final EnumToolType toolType;
-	public final EnumToolMaterial toolMat;
+	public final ToolType toolType;
+	public final ToolMaterial toolMat;
 	private final String name;
 	private ItemType itemType;
-	private boolean overridesVanilla;
+	private boolean usesVanillaNamespace;
 	
 	private final List<ITextComponent> tooltips = new ArrayList<ITextComponent>();
 	private Multimap<Attribute, AttributeModifier> defaultModifiers;
 	
-	protected StagedItem(String name, Supplier<Stage> stage, int maxStackSize, EnumToolType toolType, EnumToolMaterial toolMat, ItemGroup tab, Rarity rarity, Food food,
+	protected StagedItem(String name, Supplier<Stage> stage, int maxStackSize, ToolType toolType, ToolMaterial toolMat, ItemGroup tab, Rarity rarity, Food food,
 			boolean isFireResistant, boolean canRepair, ItemType itemType) {
 		super(toProperties(maxStackSize, toolMat.durability, tab, rarity, food, isFireResistant, canRepair));
 		this.name = name;
@@ -47,19 +47,19 @@ public class StagedItem extends Item {
 	}
 	
 	public StagedItem(String name, Supplier<Stage> stage) {
-		this(name, stage, 64, EnumToolType.none, EnumToolMaterial.hand, PRItemGroups.ITEMS, Rarity.COMMON, null, false, false, ItemType.generated);
+		this(name, stage, 64, ToolType.NONE, ToolMaterial.HAND, PRItemGroups.ITEMS, Rarity.COMMON, null, false, false, ItemType.generated);
 	}
 	
 	public StagedItem(String name, Supplier<Stage> stage, int stackSize) {
-		this(name, stage, stackSize, EnumToolType.none, EnumToolMaterial.hand, PRItemGroups.ITEMS, Rarity.COMMON, null, false, false, ItemType.generated);
+		this(name, stage, stackSize, ToolType.NONE, ToolMaterial.HAND, PRItemGroups.ITEMS, Rarity.COMMON, null, false, false, ItemType.generated);
 	}
 	
 	public StagedItem(String name, Supplier<Stage> stage, ItemGroup tab) {
-		this(name, stage, 64, EnumToolType.none, EnumToolMaterial.hand, tab, Rarity.COMMON, null, false, false, ItemType.generated);
+		this(name, stage, 64, ToolType.NONE, ToolMaterial.HAND, tab, Rarity.COMMON, null, false, false, ItemType.generated);
 	}
 	
 	public StagedItem(String name, Supplier<Stage> stage, int stackSize, ItemGroup tab) {
-		this(name, stage, stackSize, EnumToolType.none, EnumToolMaterial.hand, tab, Rarity.COMMON, null, false, false, ItemType.generated);
+		this(name, stage, stackSize, ToolType.NONE, ToolMaterial.HAND, tab, Rarity.COMMON, null, false, false, ItemType.generated);
 	}
 	
 	public StagedItem addTooltip(int amount) {
@@ -103,13 +103,13 @@ public class StagedItem extends Item {
 		return name;
 	}
 	
-	public StagedItem overrideVanilla() {
-		overridesVanilla = true;
+	public StagedItem useVanillaNamespace() {
+		usesVanillaNamespace = true;
 		return this;
 	}
 	
-	public boolean overridesVanilla() {
-		return overridesVanilla;
+	public boolean usesVanillaNamespace() {
+		return usesVanillaNamespace;
 	}
 	
 	public static Properties toProperties(int maxStackSize, int maxDamage, ItemGroup tab, Rarity rarity, Food food, boolean isFireResistant, boolean canRepair) {

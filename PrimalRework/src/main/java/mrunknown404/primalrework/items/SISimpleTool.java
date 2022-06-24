@@ -8,8 +8,8 @@ import mrunknown404.primalrework.registries.PRBlocks;
 import mrunknown404.primalrework.registries.PRItemGroups;
 import mrunknown404.primalrework.registries.PRItems;
 import mrunknown404.primalrework.stage.Stage;
-import mrunknown404.primalrework.utils.enums.EnumToolMaterial;
-import mrunknown404.primalrework.utils.enums.EnumToolType;
+import mrunknown404.primalrework.utils.enums.ToolMaterial;
+import mrunknown404.primalrework.utils.enums.ToolType;
 import mrunknown404.primalrework.utils.helpers.BlockH;
 import mrunknown404.primalrework.utils.helpers.RayTraceH;
 import net.minecraft.block.Block;
@@ -34,7 +34,7 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
 
 public class SISimpleTool extends SIDamageable {
-	public SISimpleTool(Supplier<Stage> stage, EnumToolType toolType, EnumToolMaterial toolMat) {
+	public SISimpleTool(Supplier<Stage> stage, ToolType toolType, ToolMaterial toolMat) {
 		super(toolMat.toString() + "_" + toolType.toString(), stage, toolType, toolMat, PRItemGroups.TOOLS, ItemType.handheld);
 	}
 	
@@ -54,7 +54,7 @@ public class SISimpleTool extends SIDamageable {
 	
 	@Override
 	public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
-		if (toolType == EnumToolType.axe) {
+		if (toolType == ToolType.AXE) {
 			player.startUsingItem(hand);
 			return ActionResult.consume(player.getItemInHand(hand));
 		}
@@ -64,7 +64,7 @@ public class SISimpleTool extends SIDamageable {
 	
 	@Override
 	public void releaseUsing(ItemStack stack, World world, LivingEntity entity, int partialTicks) {
-		if (toolType == EnumToolType.axe && entity instanceof PlayerEntity) {
+		if (toolType == ToolType.AXE && entity instanceof PlayerEntity) {
 			if (getUseDuration(stack) - partialTicks > 22) {
 				PlayerEntity player = (PlayerEntity) entity;
 				
@@ -111,7 +111,7 @@ public class SISimpleTool extends SIDamageable {
 	
 	@Override
 	public ActionResultType useOn(ItemUseContext context) {
-		if (toolType == EnumToolType.shovel) {
+		if (toolType == ToolType.SHOVEL) {
 			World w = context.getLevel();
 			BlockPos pos = context.getClickedPos();
 			Block b = w.getBlockState(pos).getBlock();
@@ -126,7 +126,7 @@ public class SISimpleTool extends SIDamageable {
 				
 				return ActionResultType.sidedSuccess(w.isClientSide);
 			}
-		} else if (toolType == EnumToolType.hoe) {
+		} else if (toolType == ToolType.HOE) {
 			World w = context.getLevel();
 			BlockPos pos = context.getClickedPos();
 			Block b = w.getBlockState(pos).getBlock();
@@ -148,16 +148,16 @@ public class SISimpleTool extends SIDamageable {
 	
 	@Override
 	public int getUseDuration(ItemStack stack) {
-		return toolType == EnumToolType.axe ? 72000 : 0;
+		return toolType == ToolType.AXE ? 72000 : 0;
 	}
 	
 	@Override
 	public UseAction getUseAnimation(ItemStack stack) {
-		return toolType == EnumToolType.axe ? UseAction.BOW : UseAction.NONE;
+		return toolType == ToolType.AXE ? UseAction.BOW : UseAction.NONE;
 	}
 	
 	@Override
 	public boolean canDisableShield(ItemStack stack, ItemStack shield, LivingEntity entity, LivingEntity attacker) {
-		return toolType == EnumToolType.axe;
+		return toolType == ToolType.AXE;
 	}
 }

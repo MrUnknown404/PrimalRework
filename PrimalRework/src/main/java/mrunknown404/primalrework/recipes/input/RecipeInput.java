@@ -1,6 +1,6 @@
 package mrunknown404.primalrework.recipes.input;
 
-import mrunknown404.primalrework.utils.enums.EnumRecipeType;
+import mrunknown404.primalrework.utils.enums.RecipeType;
 
 public abstract class RecipeInput<T extends RecipeInput<T>> {
 	protected abstract boolean match(T input);
@@ -12,5 +12,5 @@ public abstract class RecipeInput<T extends RecipeInput<T>> {
 	
 	public abstract boolean isEmpty();
 	
-	public abstract EnumRecipeType getRecipeType();
+	public abstract RecipeType getRecipeType();
 }

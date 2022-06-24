@@ -4,7 +4,7 @@ import mrunknown404.primalrework.blocks.utils.SBRotatedPillar;
 import mrunknown404.primalrework.registries.PRItemGroups;
 import mrunknown404.primalrework.registries.PRStages;
 import mrunknown404.primalrework.utils.HarvestInfo;
-import mrunknown404.primalrework.utils.enums.EnumBlockInfo;
+import mrunknown404.primalrework.utils.enums.BlockInfo;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -14,7 +14,7 @@ import net.minecraft.world.IBlockReader;
 
 public class SBLog extends SBRotatedPillar {
 	public SBLog(String name) {
-		super(name + "_log", PRStages.STAGE_0, 32, PRItemGroups.BLOCKS, Material.WOOD, SoundType.WOOD, true, true, 0, EnumBlockInfo.wood, false, HarvestInfo.AXE_MIN);
+		super(name + "_log", PRStages.STAGE_0, 32, PRItemGroups.BLOCKS, Material.WOOD, SoundType.WOOD, true, true, 0, BlockInfo.WOOD, false, HarvestInfo.AXE_MIN);
 	}
 	
 	@Override

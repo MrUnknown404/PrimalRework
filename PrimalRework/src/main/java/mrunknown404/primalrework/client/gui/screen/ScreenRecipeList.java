@@ -15,8 +15,8 @@ import mrunknown404.primalrework.items.utils.StagedItem;
 import mrunknown404.primalrework.recipes.IStagedRecipe;
 import mrunknown404.primalrework.registries.PRFuels;
 import mrunknown404.primalrework.utils.Pair;
-import mrunknown404.primalrework.utils.enums.EnumFuelType;
-import mrunknown404.primalrework.utils.enums.EnumRecipeType;
+import mrunknown404.primalrework.utils.enums.FuelType;
+import mrunknown404.primalrework.utils.enums.RecipeType;
 import mrunknown404.primalrework.utils.enums.ICraftingInput;
 import mrunknown404.primalrework.utils.helpers.ColorH;
 import mrunknown404.primalrework.utils.helpers.MathH;
@@ -43,14 +43,14 @@ public class ScreenRecipeList extends Screen {
 	private Button leftButton, rightButton;
 	private ITextComponent recipeName, pageCount;
 	
-	public ScreenRecipeList(ContainerScreen<?> lastScreen, Map<EnumRecipeType, List<IStagedRecipe<?, ?>>> recipes, Map<EnumFuelType, Pair<StagedItem, Integer>> fuels,
+	public ScreenRecipeList(ContainerScreen<?> lastScreen, Map<RecipeType, List<IStagedRecipe<?, ?>>> recipes, Map<FuelType, Pair<StagedItem, Integer>> fuels,
 			StagedItem output) {
 		super(WordH.translate("screen.recipelist.title"));
 		this.lastScreen = lastScreen;
 		this.recipes = new ArrayList<Data>();
 		
 		if (recipes != null) {
-			for (EnumRecipeType type : EnumRecipeType.values()) {
+			for (RecipeType type : RecipeType.values()) {
 				if (recipes.containsKey(type)) {
 					List<IStagedRecipe<?, ?>> list = recipes.get(type);
 					this.recipes.add(new Data(type, RecipeDisplay.createFrom(type, list, output), list.size()));
@@ -59,7 +59,7 @@ public class ScreenRecipeList extends Screen {
 		}
 		
 		if (fuels != null) {
-			for (EnumFuelType type : EnumFuelType.values()) {
+			for (FuelType type : FuelType.values()) {
 				if (fuels.containsKey(type)) {
 					this.recipes.add(new Data(type, RecipeDisplay.createFrom(type, PRFuels.convertToRecipes(type, fuels.get(type)), output), fuels.size()));
 				}

@@ -2,7 +2,7 @@ package mrunknown404.primalrework.recipes.input;
 
 import mrunknown404.primalrework.items.utils.StagedItem;
 import mrunknown404.primalrework.recipes.Ingredient;
-import mrunknown404.primalrework.utils.enums.EnumRecipeType;
+import mrunknown404.primalrework.utils.enums.RecipeType;
 
 public class RIBurnableFuel extends RecipeInput<RIBurnableFuel> {
 	public final Ingredient input;
@@ -22,7 +22,7 @@ public class RIBurnableFuel extends RecipeInput<RIBurnableFuel> {
 	}
 	
 	@Override
-	public EnumRecipeType getRecipeType() {
+	public RecipeType getRecipeType() {
 		return null;
 	}
 }

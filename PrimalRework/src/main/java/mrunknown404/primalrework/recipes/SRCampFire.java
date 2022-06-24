@@ -3,7 +3,7 @@ package mrunknown404.primalrework.recipes;
 import mrunknown404.primalrework.items.utils.StagedItem;
 import mrunknown404.primalrework.recipes.input.RICampfire;
 import mrunknown404.primalrework.stage.Stage;
-import mrunknown404.primalrework.utils.enums.EnumRecipeType;
+import mrunknown404.primalrework.utils.enums.RecipeType;
 import net.minecraft.item.ItemStack;
 
 public class SRCampFire implements IStagedRecipe<SRCampFire, RICampfire> {
@@ -49,7 +49,7 @@ public class SRCampFire implements IStagedRecipe<SRCampFire, RICampfire> {
 	}
 	
 	@Override
-	public EnumRecipeType getRecipeType() {
-		return EnumRecipeType.campfire;
+	public RecipeType getRecipeType() {
+		return RecipeType.CAMPFIRE;
 	}
 }

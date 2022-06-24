@@ -4,9 +4,9 @@ import mrunknown404.primalrework.PrimalRework;
 import mrunknown404.primalrework.items.utils.IColoredItem;
 import mrunknown404.primalrework.items.utils.StagedItem;
 import mrunknown404.primalrework.registries.PRRegistry;
-import mrunknown404.primalrework.utils.enums.EnumMetal;
-import mrunknown404.primalrework.utils.enums.EnumToolMaterial;
-import mrunknown404.primalrework.utils.enums.EnumToolType;
+import mrunknown404.primalrework.utils.enums.Metal;
+import mrunknown404.primalrework.utils.enums.ToolMaterial;
+import mrunknown404.primalrework.utils.enums.ToolType;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
@@ -26,15 +26,17 @@ class GeneratorItemModel extends ModelProvider<TexturelessModelBuilder> {
 		for (RegistryObject<Item> regItem : PRRegistry.getItems()) {
 			StagedItem i = (StagedItem) regItem.get();
 			
-			final String id = i.overridesVanilla() ? "minecraft" : PrimalRework.MOD_ID;
+			final String id = i.usesVanillaNamespace() ? "minecraft" : PrimalRework.MOD_ID;
 			String name = i.getRegName();
-			if (i.toolType != EnumToolType.none && i.toolMat == EnumToolMaterial.wood && (i.toolType == EnumToolType.shovel || i.toolType == EnumToolType.axe)) {
+			if (i.toolType != ToolType.NONE && i.toolMat == ToolMaterial.WOOD && (i.toolType == ToolType.SHOVEL || i.toolType == ToolType.AXE)) {
 				String[] split = name.split("_");
 				name = split[0] + "en_" + split[1];
+			} else if (name.equals("tall_grass")) {
+				name = "grass";
 			}
 			
 			if (i instanceof IColoredItem) {
-				if (((IColoredItem) i).getMetal() != EnumMetal.unknown) {
+				if (((IColoredItem) i).getMetal() != Metal.UNKNOWN) {
 					name = "template_" + name.substring(name.indexOf('_') + 1);
 				}
 			}

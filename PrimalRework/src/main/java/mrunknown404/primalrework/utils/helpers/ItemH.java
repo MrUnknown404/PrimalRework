@@ -12,8 +12,8 @@ import mrunknown404.primalrework.items.utils.StagedItem;
 import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.utils.Cache;
 import mrunknown404.primalrework.utils.HarvestInfo;
-import mrunknown404.primalrework.utils.enums.EnumBlockInfo;
-import mrunknown404.primalrework.utils.enums.EnumToolType;
+import mrunknown404.primalrework.utils.enums.BlockInfo;
+import mrunknown404.primalrework.utils.enums.ToolType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -85,7 +85,7 @@ public class ItemH {
 						.withStyle(WordH.STYLE_GRAY));
 			} else if (ItemH.isBlock(item)) {
 				StagedBlock block = ((SIBlock) item).getBlock();
-				EnumBlockInfo blockInfo = block.blockInfo;
+				BlockInfo blockInfo = block.blockInfo;
 				List<HarvestInfo> infos = BlockH.getBlockHarvestInfos(block);
 				
 				if (blockInfo.hardness != -1) {
@@ -119,7 +119,7 @@ public class ItemH {
 							.append(WordH.translate("tooltips.stat.durability")).withStyle(WordH.STYLE_GRAY));
 				}
 				
-				if (item.toolType != EnumToolType.none) {
+				if (item.toolType != ToolType.NONE) {
 					boolean dmgCheck = String.valueOf(dmg).split("\\.")[1].length() < 2;
 					boolean atkSpdCheck = String.valueOf(atkSpd).split("\\.")[1].length() < 2;
 					boolean mineSpdCheck = String.valueOf(mineSpd).split("\\.")[1].length() < 2;

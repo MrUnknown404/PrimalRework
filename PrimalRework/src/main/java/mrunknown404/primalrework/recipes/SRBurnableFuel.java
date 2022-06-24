@@ -3,7 +3,7 @@ package mrunknown404.primalrework.recipes;
 import mrunknown404.primalrework.items.utils.StagedItem;
 import mrunknown404.primalrework.recipes.input.RIBurnableFuel;
 import mrunknown404.primalrework.stage.Stage;
-import mrunknown404.primalrework.utils.enums.EnumRecipeType;
+import mrunknown404.primalrework.utils.enums.RecipeType;
 import net.minecraft.item.ItemStack;
 
 public class SRBurnableFuel implements IStagedRecipe<SRBurnableFuel, RIBurnableFuel> {
@@ -47,7 +47,7 @@ public class SRBurnableFuel implements IStagedRecipe<SRBurnableFuel, RIBurnableF
 	}
 	
 	@Override
-	public EnumRecipeType getRecipeType() {
+	public RecipeType getRecipeType() {
 		return null;
 	}
 }

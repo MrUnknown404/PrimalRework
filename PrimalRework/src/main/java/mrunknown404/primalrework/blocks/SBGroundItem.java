@@ -9,9 +9,9 @@ import mrunknown404.primalrework.registries.PRItemGroups;
 import mrunknown404.primalrework.registries.PRStages;
 import mrunknown404.primalrework.utils.HarvestInfo;
 import mrunknown404.primalrework.utils.HarvestInfo.DropInfo;
-import mrunknown404.primalrework.utils.enums.EnumBlockInfo;
-import mrunknown404.primalrework.utils.enums.EnumToolMaterial;
-import mrunknown404.primalrework.utils.enums.EnumToolType;
+import mrunknown404.primalrework.utils.enums.BlockInfo;
+import mrunknown404.primalrework.utils.enums.ToolMaterial;
+import mrunknown404.primalrework.utils.enums.ToolType;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -40,9 +40,8 @@ public class SBGroundItem extends StagedBlock implements IWaterLoggable {
 	private static final VoxelShape SHAPE = box(3, 0, 3, 13, 1, 13);
 	
 	public SBGroundItem(String name, SoundType sound, Supplier<StagedItem> dropInstead) {
-		super("ground_" + name, PRStages.STAGE_0, 64, PRItemGroups.BLOCKS, Material.DECORATION, sound, false, false, 0, EnumBlockInfo.instant, false,
-				BlockStateType.random_direction, BlockModelType.none,
-				dropInstead == null ? HarvestInfo.HAND : new HarvestInfo(EnumToolType.none, EnumToolMaterial.hand, DropInfo.item(dropInstead)));
+		super("ground_" + name, PRStages.STAGE_0, 64, PRItemGroups.BLOCKS, Material.DECORATION, sound, false, false, 0, BlockInfo.INSTANT, false, BlockStateType.random_direction,
+				BlockModelType.none, dropInstead == null ? HarvestInfo.HAND : new HarvestInfo(ToolType.NONE, ToolMaterial.HAND, DropInfo.item(dropInstead)));
 		registerDefaultState(defaultBlockState().setValue(WATERLOGGED, Boolean.valueOf(false)));
 	}
 	

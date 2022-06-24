@@ -5,7 +5,7 @@ import java.util.function.Supplier;
 import mrunknown404.primalrework.registries.PRItemGroups;
 import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.utils.HarvestInfo;
-import mrunknown404.primalrework.utils.enums.EnumBlockInfo;
+import mrunknown404.primalrework.utils.enums.BlockInfo;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -22,7 +22,7 @@ import net.minecraft.world.IWorld;
 public class SBSnowyDirt extends StagedBlock {//TODO switch to my snow
 	public static final BooleanProperty SNOWY = BlockStateProperties.SNOWY;
 	
-	public SBSnowyDirt(String name, Supplier<Stage> stage, Material material, SoundType soundType, EnumBlockInfo blockInfo, boolean isRandomTick, BlockStateType blockStateType,
+	public SBSnowyDirt(String name, Supplier<Stage> stage, Material material, SoundType soundType, BlockInfo blockInfo, boolean isRandomTick, BlockStateType blockStateType,
 			BlockModelType blockModelType, HarvestInfo info, HarvestInfo... extraInfos) {
 		super(name, stage, 64, PRItemGroups.BLOCKS, material, soundType, true, true, 0, blockInfo, isRandomTick, blockStateType, blockModelType, info, extraInfos);
 		registerDefaultState(stateDefinition.any().setValue(SNOWY, Boolean.valueOf(false)));

@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import mrunknown404.primalrework.blocks.utils.StagedBlock;
 import mrunknown404.primalrework.utils.HarvestInfo;
 import mrunknown404.primalrework.utils.HarvestInfo.DropInfo;
-import mrunknown404.primalrework.utils.enums.EnumToolType;
+import mrunknown404.primalrework.utils.enums.ToolType;
 import mrunknown404.primalrework.utils.helpers.BlockH;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
@@ -30,7 +30,7 @@ public class MixinAbstractBlock {
 		}
 		
 		StagedBlock block = (StagedBlock) state.getBlock();
-		HarvestInfo info = BlockH.getBlockHarvestInfo(block, EnumToolType.none);
+		HarvestInfo info = BlockH.getBlockHarvestInfo(block, ToolType.NONE);
 		
 		if (info == null) {
 			callback.setReturnValue(list);

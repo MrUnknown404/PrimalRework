@@ -13,22 +13,22 @@ import mrunknown404.primalrework.recipes.input.RICrafting3;
 import mrunknown404.primalrework.recipes.input.RecipeInput;
 import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.utils.DoubleCache;
-import mrunknown404.primalrework.utils.enums.EnumRecipeType;
+import mrunknown404.primalrework.utils.enums.RecipeType;
 import mrunknown404.primalrework.utils.helpers.StageH;
 
 public class PRRecipes {
-	private static final Map<EnumRecipeType, List<IStagedRecipe<?, ?>>> RECIPES = new HashMap<EnumRecipeType, List<IStagedRecipe<?, ?>>>();
+	private static final Map<RecipeType, List<IStagedRecipe<?, ?>>> RECIPES = new HashMap<RecipeType, List<IStagedRecipe<?, ?>>>();
 	
 	//haha these names suck and won't be confusing later!
-	private static final Map<EnumRecipeType, DoubleCache<Stage, StagedItem, List<IStagedRecipe<?, ?>>>> cacheRecipesForOutput0 = new HashMap<EnumRecipeType, DoubleCache<Stage, StagedItem, List<IStagedRecipe<?, ?>>>>();
-	private static final Map<EnumRecipeType, DoubleCache<Stage, RecipeInput<?>, IStagedRecipe<?, ?>>> cacheRecipesForInput = new HashMap<EnumRecipeType, DoubleCache<Stage, RecipeInput<?>, IStagedRecipe<?, ?>>>();
-	private static final Map<EnumRecipeType, DoubleCache<Stage, Ingredient, List<IStagedRecipe<?, ?>>>> cacheRecipesContainingInput0 = new HashMap<EnumRecipeType, DoubleCache<Stage, Ingredient, List<IStagedRecipe<?, ?>>>>();
-	private static final DoubleCache<Stage, StagedItem, Map<EnumRecipeType, List<IStagedRecipe<?, ?>>>> cacheRecipesForOutput1 = DoubleCache.and();
-	private static final DoubleCache<Stage, Ingredient, Map<EnumRecipeType, List<IStagedRecipe<?, ?>>>> cacheRecipesContainingInput1 = DoubleCache
+	private static final Map<RecipeType, DoubleCache<Stage, StagedItem, List<IStagedRecipe<?, ?>>>> cacheRecipesForOutput0 = new HashMap<RecipeType, DoubleCache<Stage, StagedItem, List<IStagedRecipe<?, ?>>>>();
+	private static final Map<RecipeType, DoubleCache<Stage, RecipeInput<?>, IStagedRecipe<?, ?>>> cacheRecipesForInput = new HashMap<RecipeType, DoubleCache<Stage, RecipeInput<?>, IStagedRecipe<?, ?>>>();
+	private static final Map<RecipeType, DoubleCache<Stage, Ingredient, List<IStagedRecipe<?, ?>>>> cacheRecipesContainingInput0 = new HashMap<RecipeType, DoubleCache<Stage, Ingredient, List<IStagedRecipe<?, ?>>>>();
+	private static final DoubleCache<Stage, StagedItem, Map<RecipeType, List<IStagedRecipe<?, ?>>>> cacheRecipesForOutput1 = DoubleCache.and();
+	private static final DoubleCache<Stage, Ingredient, Map<RecipeType, List<IStagedRecipe<?, ?>>>> cacheRecipesContainingInput1 = DoubleCache
 			.create((okey0, okey1, key0, key1) -> okey0 == key0 || (okey0 != null && okey0.equals(key0)) && (okey1 == null ? false : okey1.matches(key1)));
 	
 	public static void load() {
-		for (EnumRecipeType type : EnumRecipeType.values()) {
+		for (RecipeType type : RecipeType.values()) {
 			RECIPES.put(type, new ArrayList<IStagedRecipe<?, ?>>());
 			cacheRecipesForOutput0.put(type, DoubleCache.and());
 			cacheRecipesForInput.put(type,
@@ -67,7 +67,7 @@ public class PRRecipes {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static <T extends IStagedRecipe<T, ?>> List<T> getRecipesForOutput(EnumRecipeType type, StagedItem output) {
+	public static <T extends IStagedRecipe<T, ?>> List<T> getRecipesForOutput(RecipeType type, StagedItem output) {
 		Stage stage = StageH.getStage();
 		if (cacheRecipesForOutput0.get(type).is(stage, output)) {
 			return (List<T>) cacheRecipesForOutput0.get(type).get();
@@ -85,7 +85,7 @@ public class PRRecipes {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static <T extends IStagedRecipe<T, ?>> List<T> getRecipesContainingInput(EnumRecipeType type, Ingredient input) {
+	public static <T extends IStagedRecipe<T, ?>> List<T> getRecipesContainingInput(RecipeType type, Ingredient input) {
 		Stage stage = StageH.getStage();
 		if (cacheRecipesContainingInput0.get(type).is(stage, input)) {
 			return (List<T>) cacheRecipesContainingInput0.get(type).get();
@@ -102,14 +102,14 @@ public class PRRecipes {
 		return list;
 	}
 	
-	public static Map<EnumRecipeType, List<IStagedRecipe<?, ?>>> getRecipesContainingInput(Ingredient ingredient) {
+	public static Map<RecipeType, List<IStagedRecipe<?, ?>>> getRecipesContainingInput(Ingredient ingredient) {
 		Stage stage = StageH.getStage();
 		if (cacheRecipesContainingInput1.is(stage, ingredient)) {
 			return cacheRecipesContainingInput1.get();
 		}
 		
-		Map<EnumRecipeType, List<IStagedRecipe<?, ?>>> map = new HashMap<EnumRecipeType, List<IStagedRecipe<?, ?>>>();
-		for (EnumRecipeType type : EnumRecipeType.values()) {
+		Map<RecipeType, List<IStagedRecipe<?, ?>>> map = new HashMap<RecipeType, List<IStagedRecipe<?, ?>>>();
+		for (RecipeType type : RecipeType.values()) {
 			List<IStagedRecipe<?, ?>> list = new ArrayList<IStagedRecipe<?, ?>>();
 			for (IStagedRecipe<?, ?> recipe : RECIPES.get(type)) {
 				if (StageH.hasAccessToStage(recipe.getStage()) && recipe.has(ingredient)) {
@@ -126,14 +126,14 @@ public class PRRecipes {
 		return map;
 	}
 	
-	public static Map<EnumRecipeType, List<IStagedRecipe<?, ?>>> getRecipesForOutput(StagedItem item) {
+	public static Map<RecipeType, List<IStagedRecipe<?, ?>>> getRecipesForOutput(StagedItem item) {
 		Stage stage = StageH.getStage();
 		if (cacheRecipesForOutput1.is(stage, item)) {
 			return cacheRecipesForOutput1.get();
 		}
 		
-		Map<EnumRecipeType, List<IStagedRecipe<?, ?>>> map = new HashMap<EnumRecipeType, List<IStagedRecipe<?, ?>>>();
-		for (EnumRecipeType type : EnumRecipeType.values()) {
+		Map<RecipeType, List<IStagedRecipe<?, ?>>> map = new HashMap<RecipeType, List<IStagedRecipe<?, ?>>>();
+		for (RecipeType type : RecipeType.values()) {
 			List<IStagedRecipe<?, ?>> list = new ArrayList<IStagedRecipe<?, ?>>();
 			for (IStagedRecipe<?, ?> recipe : RECIPES.get(type)) {
 				if (StageH.hasAccessToStage(recipe.getStage()) && recipe.getOutput().getItem() == item) {

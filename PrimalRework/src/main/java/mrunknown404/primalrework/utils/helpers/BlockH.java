@@ -12,7 +12,7 @@ import mrunknown404.primalrework.blocks.utils.SBSlab;
 import mrunknown404.primalrework.blocks.utils.StagedBlock;
 import mrunknown404.primalrework.registries.PRBlocks;
 import mrunknown404.primalrework.utils.HarvestInfo;
-import mrunknown404.primalrework.utils.enums.EnumToolType;
+import mrunknown404.primalrework.utils.enums.ToolType;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.state.properties.SlabType;
@@ -23,9 +23,9 @@ import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 
 public class BlockH {
-	public static HarvestInfo getBlockHarvestInfo(StagedBlock block, EnumToolType toolType) {
+	public static HarvestInfo getBlockHarvestInfo(StagedBlock block, ToolType toolType) {
 		HarvestInfo info = block.getHarvest().get(toolType);
-		return info == null ? block.getHarvest().get(EnumToolType.none) : info;
+		return info == null ? block.getHarvest().get(ToolType.NONE) : info;
 	}
 	
 	public static List<HarvestInfo> getBlockHarvestInfos(StagedBlock block) {

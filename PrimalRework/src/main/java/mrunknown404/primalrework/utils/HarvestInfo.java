@@ -7,27 +7,27 @@ import java.util.function.Supplier;
 
 import mrunknown404.primalrework.blocks.utils.StagedBlock;
 import mrunknown404.primalrework.items.utils.StagedItem;
-import mrunknown404.primalrework.utils.enums.EnumToolMaterial;
-import mrunknown404.primalrework.utils.enums.EnumToolType;
+import mrunknown404.primalrework.utils.enums.ToolMaterial;
+import mrunknown404.primalrework.utils.enums.ToolType;
 import net.minecraft.item.ItemStack;
 
 public class HarvestInfo {
-	public static final HarvestInfo AXE_MIN = new HarvestInfo(EnumToolType.axe, EnumToolMaterial.clay);
-	public static final HarvestInfo HOE_MIN = new HarvestInfo(EnumToolType.hoe, EnumToolMaterial.clay);
-	public static final HarvestInfo KNIFE_MIN = new HarvestInfo(EnumToolType.knife, EnumToolMaterial.clay);
-	public static final HarvestInfo PICKAXE_MIN = new HarvestInfo(EnumToolType.pickaxe, EnumToolMaterial.clay);
-	public static final HarvestInfo SHEARS_MIN = new HarvestInfo(EnumToolType.shears, EnumToolMaterial.clay);
-	public static final HarvestInfo SHOVEL_MIN = new HarvestInfo(EnumToolType.shovel, EnumToolMaterial.clay);
-	public static final HarvestInfo SWORD_MIN = new HarvestInfo(EnumToolType.sword, EnumToolMaterial.clay);
+	public static final HarvestInfo AXE_MIN = new HarvestInfo(ToolType.AXE, ToolMaterial.CLAY);
+	public static final HarvestInfo HOE_MIN = new HarvestInfo(ToolType.HOE, ToolMaterial.CLAY);
+	public static final HarvestInfo KNIFE_MIN = new HarvestInfo(ToolType.KNIFE, ToolMaterial.CLAY);
+	public static final HarvestInfo PICKAXE_MIN = new HarvestInfo(ToolType.PICKAXE, ToolMaterial.CLAY);
+	public static final HarvestInfo SHEARS_MIN = new HarvestInfo(ToolType.SHEARS, ToolMaterial.CLAY);
+	public static final HarvestInfo SHOVEL_MIN = new HarvestInfo(ToolType.SHOVEL, ToolMaterial.CLAY);
+	public static final HarvestInfo SWORD_MIN = new HarvestInfo(ToolType.SWORD, ToolMaterial.CLAY);
 	
-	public static final HarvestInfo HAND = new HarvestInfo(EnumToolType.none, EnumToolMaterial.hand);
-	public static final HarvestInfo UNBREAKABLE = new HarvestInfo(EnumToolType.none, EnumToolMaterial.unbreakable);
+	public static final HarvestInfo HAND = new HarvestInfo(ToolType.NONE, ToolMaterial.HAND);
+	public static final HarvestInfo UNBREAKABLE = new HarvestInfo(ToolType.NONE, ToolMaterial.UNBREAKABLE);
 	
-	public final EnumToolType toolType;
-	public final EnumToolMaterial toolMat;
+	public final ToolType toolType;
+	public final ToolMaterial toolMat;
 	public final List<DropInfo> drops = new ArrayList<DropInfo>();
 	
-	public HarvestInfo(EnumToolType toolType, EnumToolMaterial toolMat, DropInfo... drops) {
+	public HarvestInfo(ToolType toolType, ToolMaterial toolMat, DropInfo... drops) {
 		this.toolType = toolType;
 		this.toolMat = toolMat;
 		

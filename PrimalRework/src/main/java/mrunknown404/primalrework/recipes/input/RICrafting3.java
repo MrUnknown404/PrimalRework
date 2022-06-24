@@ -8,7 +8,7 @@ import java.util.List;
 import mrunknown404.primalrework.items.utils.StagedItem;
 import mrunknown404.primalrework.recipes.Ingredient;
 import mrunknown404.primalrework.stage.StagedTag;
-import mrunknown404.primalrework.utils.enums.EnumRecipeType;
+import mrunknown404.primalrework.utils.enums.RecipeType;
 import net.minecraftforge.fml.RegistryObject;
 
 public class RICrafting3 extends RecipeInput<RICrafting3> {
@@ -167,8 +167,8 @@ public class RICrafting3 extends RecipeInput<RICrafting3> {
 	}
 	
 	@Override
-	public EnumRecipeType getRecipeType() {
-		return EnumRecipeType.crafting_3;
+	public RecipeType getRecipeType() {
+		return RecipeType.CRAFTING_3;
 	}
 	
 	@Override

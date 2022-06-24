@@ -6,8 +6,8 @@ import mrunknown404.primalrework.registries.PRBlocks;
 import mrunknown404.primalrework.registries.PRStages;
 import mrunknown404.primalrework.utils.HarvestInfo;
 import mrunknown404.primalrework.utils.HarvestInfo.DropInfo;
-import mrunknown404.primalrework.utils.enums.EnumToolMaterial;
-import mrunknown404.primalrework.utils.enums.EnumToolType;
+import mrunknown404.primalrework.utils.enums.ToolMaterial;
+import mrunknown404.primalrework.utils.enums.ToolType;
 import net.minecraft.block.BlockState;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.Direction;
@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 
 public class SBLitPrimalWallTorch extends SBUnlitPrimalWallTorch {
 	public SBLitPrimalWallTorch() {
-		super("lit_primal_wall_torch", PRStages.STAGE_1, 8, new HarvestInfo(EnumToolType.none, EnumToolMaterial.hand, DropInfo.block(PRBlocks.LIT_PRIMAL_TORCH)));
+		super("lit_primal_wall_torch", PRStages.STAGE_1, 8, new HarvestInfo(ToolType.NONE, ToolMaterial.HAND, DropInfo.block(PRBlocks.LIT_PRIMAL_TORCH)));
 	}
 	
 	@Override

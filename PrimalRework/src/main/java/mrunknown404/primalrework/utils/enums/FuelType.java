@@ -1,21 +1,18 @@
 package mrunknown404.primalrework.utils.enums;
 
 import mrunknown404.primalrework.items.utils.StagedItem;
-import mrunknown404.primalrework.registries.PRBlocks;
+import mrunknown404.primalrework.registries.PRItems;
 import mrunknown404.primalrework.utils.helpers.WordH;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.IFormattableTextComponent;
 
-public enum EnumRecipeType implements ICraftingInput {
-	//@formatter:off
-	crafting_3(PRBlocks.PRIMAL_CRAFTING_TABLE.get().asStagedItem()),
-	campfire  (PRBlocks.CAMPFIRE.get().asStagedItem());
-	//@formatter:on
+public enum FuelType implements ICraftingInput {
+	BURNABLE_FUEL(PRItems.PLANT_FIBER.get()); //TODO switch to fuel
 	
 	private final ItemStack icon;
 	private final IFormattableTextComponent name;
 	
-	private EnumRecipeType(StagedItem icon) {
+	private FuelType(StagedItem icon) {
 		this.icon = new ItemStack(icon);
 		this.name = WordH.translate("recipetype." + name() + ".name");
 	}

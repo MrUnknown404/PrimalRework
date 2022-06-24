@@ -11,8 +11,8 @@ import mrunknown404.primalrework.items.utils.StagedItem.ItemType;
 import mrunknown404.primalrework.registries.PRItemGroups;
 import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.utils.HarvestInfo;
-import mrunknown404.primalrework.utils.enums.EnumBlockInfo;
-import mrunknown404.primalrework.utils.enums.EnumToolType;
+import mrunknown404.primalrework.utils.enums.BlockInfo;
+import mrunknown404.primalrework.utils.enums.ToolType;
 import mrunknown404.primalrework.utils.helpers.WordH;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -23,20 +23,20 @@ import net.minecraft.item.Items;
 import net.minecraft.util.text.ITextComponent;
 
 public class StagedBlock extends Block {
-	private final Map<EnumToolType, HarvestInfo> harvestInfos = new HashMap<EnumToolType, HarvestInfo>();
+	private final Map<ToolType, HarvestInfo> harvestInfos = new HashMap<ToolType, HarvestInfo>();
 	
 	public final Supplier<Stage> stage;
 	public final int stackSize;
 	public final ItemGroup tab;
-	public final EnumBlockInfo blockInfo;
+	public final BlockInfo blockInfo;
 	private final String name;
 	private final BlockStateType blockStateType;
 	private final BlockModelType blockModelType;
 	private final List<ITextComponent> tooltips = new ArrayList<ITextComponent>();
-	private boolean overridesVanillaBlock, overridesVanillaItem;
+	private boolean useVanillaNamespaceBlock, useVanillaNamespaceItem;
 	
 	protected StagedBlock(String name, Supplier<Stage> stage, int stackSize, ItemGroup tab, Material material, SoundType sound, boolean hasCollision, boolean canOcclude,
-			int lightLevel, EnumBlockInfo blockInfo, boolean isRandomTick, BlockStateType blockStateType, BlockModelType blockModelType, HarvestInfo info,
+			int lightLevel, BlockInfo blockInfo, boolean isRandomTick, BlockStateType blockStateType, BlockModelType blockModelType, HarvestInfo info,
 			HarvestInfo... extraInfos) {
 		super(toProperties(material, sound, hasCollision, canOcclude, lightLevel, blockInfo, isRandomTick));
 		this.name = name;
@@ -68,7 +68,7 @@ public class StagedBlock extends Block {
 		return tooltips;
 	}
 	
-	public Map<EnumToolType, HarvestInfo> getHarvest() {
+	public Map<ToolType, HarvestInfo> getHarvest() {
 		return harvestInfos;
 	}
 	
@@ -99,25 +99,31 @@ public class StagedBlock extends Block {
 		return super.asItem();
 	}
 	
-	public StagedBlock overrideVanilla() {
-		overridesVanillaBlock = true;
+	public StagedBlock useVanillaNamespaceBlock() {
+		useVanillaNamespaceBlock = true;
 		return this;
 	}
 	
-	public StagedBlock overrideVanilla(boolean overridesVanillaItem) {
-		this.overridesVanillaItem = overridesVanillaItem;
-		return overrideVanilla();
+	public StagedBlock useVanillaNamespaceItem() {
+		useVanillaNamespaceItem = true;
+		return this;
 	}
 	
-	public boolean overridesVanillaBlock() {
-		return overridesVanillaBlock;
+	public StagedBlock usesVanillaNamespaceFull() {
+		useVanillaNamespaceBlock = true;
+		useVanillaNamespaceItem = true;
+		return this;
 	}
 	
-	public boolean overridesVanillaItem() {
-		return overridesVanillaItem;
+	public boolean usesVanillaNamespaceBlock() {
+		return useVanillaNamespaceBlock;
 	}
 	
-	protected static Properties toProperties(Material material, SoundType sound, boolean hasCollision, boolean canOcclude, int lightLevel, EnumBlockInfo blockInfo,
+	public boolean usesVanillaNamespaceItem() {
+		return useVanillaNamespaceItem;
+	}
+	
+	protected static Properties toProperties(Material material, SoundType sound, boolean hasCollision, boolean canOcclude, int lightLevel, BlockInfo blockInfo,
 			boolean isRandomTick) {
 		Properties p = Properties.of(material).sound(sound).strength(blockInfo.hardness, blockInfo.blast).lightLevel((light) -> {
 			return lightLevel;
@@ -159,7 +165,7 @@ public class StagedBlock extends Block {
 		private final Supplier<Stage> stage;
 		private final Material material;
 		private final SoundType sound;
-		private final EnumBlockInfo blockInfo;
+		private final BlockInfo blockInfo;
 		private final HarvestInfo info;
 		private final HarvestInfo[] extraInfos;
 		
@@ -170,7 +176,7 @@ public class StagedBlock extends Block {
 		private BlockStateType blockStateType = BlockStateType.normal;
 		private BlockModelType blockModelType = BlockModelType.normal;
 		
-		public Builder(String name, Supplier<Stage> stage, Material material, SoundType sound, EnumBlockInfo blockInfo, HarvestInfo info, HarvestInfo... extraInfos) {
+		public Builder(String name, Supplier<Stage> stage, Material material, SoundType sound, BlockInfo blockInfo, HarvestInfo info, HarvestInfo... extraInfos) {
 			this.name = name;
 			this.stage = stage;
 			this.material = material;

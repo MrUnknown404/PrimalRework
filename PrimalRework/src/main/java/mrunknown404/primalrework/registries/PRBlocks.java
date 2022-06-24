@@ -17,6 +17,7 @@ import mrunknown404.primalrework.blocks.SBMushroomGrass;
 import mrunknown404.primalrework.blocks.SBPrimalCraftingTable;
 import mrunknown404.primalrework.blocks.SBRawOre;
 import mrunknown404.primalrework.blocks.SBStrippedLog;
+import mrunknown404.primalrework.blocks.SBTallGrass;
 import mrunknown404.primalrework.blocks.SBUnlitPrimalTorch;
 import mrunknown404.primalrework.blocks.SBUnlitPrimalWallTorch;
 import mrunknown404.primalrework.blocks.utils.SBFlammable;
@@ -27,16 +28,16 @@ import mrunknown404.primalrework.blocks.utils.StagedBlock.Builder;
 import mrunknown404.primalrework.items.utils.SIWallFloor;
 import mrunknown404.primalrework.utils.HarvestInfo;
 import mrunknown404.primalrework.utils.HarvestInfo.DropInfo;
-import mrunknown404.primalrework.utils.enums.EnumBlockInfo;
-import mrunknown404.primalrework.utils.enums.EnumMetal;
-import mrunknown404.primalrework.utils.enums.EnumToolMaterial;
-import mrunknown404.primalrework.utils.enums.EnumToolType;
+import mrunknown404.primalrework.utils.enums.BlockInfo;
+import mrunknown404.primalrework.utils.enums.Metal;
+import mrunknown404.primalrework.utils.enums.ToolMaterial;
+import mrunknown404.primalrework.utils.enums.ToolType;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraftforge.fml.RegistryObject;
 
 public class PRBlocks {
-	public static final List<RegistryObject<StagedBlock>> OREANDBLOCKS = new ArrayList<RegistryObject<StagedBlock>>();
+	public static final List<RegistryObject<StagedBlock>> ORE_AND_BLOCKS = new ArrayList<RegistryObject<StagedBlock>>();
 	@Deprecated
 	private static WallFloorWrap lastWrap = null;
 	
@@ -44,7 +45,7 @@ public class PRBlocks {
 	
 	//MISC
 	public static final RegistryObject<StagedBlock> THATCH = PRRegistry
-			.block(new SBFlammable("thatch", PRStages.STAGE_0, Material.LEAVES, SoundType.GRASS, EnumBlockInfo.thatch, 10, 10, HarvestInfo.HAND, HarvestInfo.KNIFE_MIN));
+			.block(new SBFlammable("thatch", PRStages.STAGE_0, Material.LEAVES, SoundType.GRASS, BlockInfo.PLANT, 10, 10, HarvestInfo.HAND, HarvestInfo.KNIFE_MIN));
 	public static final RegistryObject<StagedBlock> GROUND_ROCK = PRRegistry.block(new SBGroundItem("rock", SoundType.STONE, PRItems.ROCK));
 	public static final RegistryObject<StagedBlock> GROUND_STICK = PRRegistry.block(new SBGroundItem("stick", SoundType.WOOD, PRItems.STICK));
 	public static final RegistryObject<StagedBlock> GROUND_FLINT = PRRegistry.block(new SBGroundItem("flint", SoundType.STONE, PRItems.FLINT));
@@ -52,22 +53,23 @@ public class PRBlocks {
 	public static final RegistryObject<StagedBlock> UNLIT_PRIMAL_WALL_TORCH = getLastWall();
 	public static final RegistryObject<StagedBlock> LIT_PRIMAL_TORCH = registerWallFloor(new SBLitPrimalTorch(), new SBLitPrimalWallTorch()).floor;
 	public static final RegistryObject<StagedBlock> LIT_PRIMAL_WALL_TORCH = getLastWall();
-	public static final RegistryObject<StagedBlock> SALT = PRRegistry.block(new Builder("salt_block", PRStages.STAGE_1, Material.CLAY, SoundType.SAND, EnumBlockInfo.dirt,
-			new HarvestInfo(EnumToolType.shovel, EnumToolMaterial.clay, DropInfo.item(PRItems.SALT, 4, 4))).create());
+	public static final RegistryObject<StagedBlock> SALT = PRRegistry.block(new Builder("salt_block", PRStages.STAGE_1, Material.CLAY, SoundType.SAND, BlockInfo.DIRT,
+			new HarvestInfo(ToolType.SHOVEL, ToolMaterial.CLAY, DropInfo.item(PRItems.SALT, 4, 4))).create());
 	public static final RegistryObject<StagedBlock> MUSHROOM_GRASS = PRRegistry.block(new SBMushroomGrass());
 	public static final RegistryObject<StagedBlock> DENSE_LOG = PRRegistry.block(new SBDenseLog());
-	public static final RegistryObject<StagedBlock> CHARCOAL_BLOCK = PRRegistry.block(
-			new SBFlammable("charcoal_block", PRStages.STAGE_2, Material.STONE, SoundType.STONE, EnumBlockInfo.very_hard_wood, 8, 10, HarvestInfo.HAND, HarvestInfo.KNIFE_MIN));
+	public static final RegistryObject<StagedBlock> CHARCOAL_BLOCK = PRRegistry
+			.block(new SBFlammable("charcoal_block", PRStages.STAGE_2, Material.STONE, SoundType.STONE, BlockInfo.VERY_HARD_WOOD, 8, 10, HarvestInfo.HAND, HarvestInfo.KNIFE_MIN));
 	public static final RegistryObject<StagedBlock> STRIPPED_OAK_LOG = PRRegistry.block(new SBStrippedLog("oak"));
 	public static final RegistryObject<StagedBlock> STRIPPED_SPRUCE_LOG = PRRegistry.block(new SBStrippedLog("spruce"));
 	public static final RegistryObject<StagedBlock> STRIPPED_BIRCH_LOG = PRRegistry.block(new SBStrippedLog("birch"));
 	public static final RegistryObject<StagedBlock> STRIPPED_JUNGLE_LOG = PRRegistry.block(new SBStrippedLog("jungle"));
 	public static final RegistryObject<StagedBlock> STRIPPED_DARK_OAK_LOG = PRRegistry.block(new SBStrippedLog("dark_oak"));
 	public static final RegistryObject<StagedBlock> STRIPPED_ACACIA_LOG = PRRegistry.block(new SBStrippedLog("acacia"));
+	public static final RegistryObject<StagedBlock> TALL_GRASS = PRRegistry.block(new SBTallGrass());
 	
 	//SLABS
 	public static final RegistryObject<StagedBlock> DIRT_SLAB = PRRegistry
-			.block(new SBSlab("dirt_slab", PRStages.STAGE_0, Material.DIRT, SoundType.GRAVEL, EnumBlockInfo.dirt, false, HarvestInfo.SHOVEL_MIN).overrideVanilla());
+			.block(new SBSlab("dirt_slab", PRStages.STAGE_0, Material.DIRT, SoundType.GRAVEL, BlockInfo.DIRT, false, HarvestInfo.SHOVEL_MIN).useVanillaNamespaceBlock());
 	public static final RegistryObject<StagedBlock> GRASS_SLAB = PRRegistry.block(new SBGrassSlab());
 	
 	//MACHINES
@@ -76,24 +78,24 @@ public class PRBlocks {
 	
 	//VANILLA OVERRIDES
 	public static final RegistryObject<StagedBlock> DIRT = PRRegistry
-			.block(new Builder("dirt", PRStages.STAGE_0, Material.DIRT, SoundType.GRASS, EnumBlockInfo.dirt, HarvestInfo.SHOVEL_MIN).create().overrideVanilla(true));
+			.block(new Builder("dirt", PRStages.STAGE_0, Material.DIRT, SoundType.GRASS, BlockInfo.DIRT, HarvestInfo.SHOVEL_MIN).create().usesVanillaNamespaceFull());
 	public static final RegistryObject<StagedBlock> GRASS_BLOCK = PRRegistry.block(new SBGrassBlock());
-	public static final RegistryObject<StagedBlock> STONE = PRRegistry.block(new Builder("stone", PRStages.STAGE_0, Material.STONE, SoundType.STONE, EnumBlockInfo.stone,
-			new HarvestInfo(EnumToolType.pickaxe, EnumToolMaterial.clay, DropInfo.item(PRItems.ROCK, 2, 4))).setBlockStateType(BlockStateType.none).create().overrideVanilla(true));
+	public static final RegistryObject<StagedBlock> STONE = PRRegistry.block(new Builder("stone", PRStages.STAGE_0, Material.STONE, SoundType.STONE, BlockInfo.STONE,
+			new HarvestInfo(ToolType.PICKAXE, ToolMaterial.CLAY, DropInfo.item(PRItems.ROCK, 2, 4))).setBlockStateType(BlockStateType.none).create().usesVanillaNamespaceFull());
 	public static final RegistryObject<StagedBlock> COBBLESTONE = PRRegistry
-			.block(new Builder("cobblestone", PRStages.STAGE_0, Material.STONE, SoundType.STONE, EnumBlockInfo.stone, HarvestInfo.PICKAXE_MIN).create().overrideVanilla(true));
-	public static final RegistryObject<StagedBlock> OAK_LOG = PRRegistry.block(new SBLog("oak").overrideVanilla(true));
-	public static final RegistryObject<StagedBlock> SPRUCE_LOG = PRRegistry.block(new SBLog("spruce").overrideVanilla(true));
-	public static final RegistryObject<StagedBlock> BIRCH_LOG = PRRegistry.block(new SBLog("birch").overrideVanilla(true));
-	public static final RegistryObject<StagedBlock> JUNGLE_LOG = PRRegistry.block(new SBLog("jungle").overrideVanilla(true));
-	public static final RegistryObject<StagedBlock> ACACIA_LOG = PRRegistry.block(new SBLog("acacia").overrideVanilla(true));
-	public static final RegistryObject<StagedBlock> DARK_OAK_LOG = PRRegistry.block(new SBLog("dark_oak").overrideVanilla(true));
-	public static final RegistryObject<StagedBlock> OAK_LEAVES = PRRegistry.block(new SBLeaves("oak").overrideVanilla(true));
-	public static final RegistryObject<StagedBlock> SPRUCE_LEAVES = PRRegistry.block(new SBLeaves("spruce").overrideVanilla(true));
-	public static final RegistryObject<StagedBlock> BIRCH_LEAVES = PRRegistry.block(new SBLeaves("birch").overrideVanilla(true));
-	public static final RegistryObject<StagedBlock> JUNGLE_LEAVES = PRRegistry.block(new SBLeaves("jungle").overrideVanilla(true));
-	public static final RegistryObject<StagedBlock> ACACIA_LEAVES = PRRegistry.block(new SBLeaves("acacia").overrideVanilla(true));
-	public static final RegistryObject<StagedBlock> DARK_OAK_LEAVES = PRRegistry.block(new SBLeaves("dark_oak").overrideVanilla(true));
+			.block(new Builder("cobblestone", PRStages.STAGE_0, Material.STONE, SoundType.STONE, BlockInfo.STONE, HarvestInfo.PICKAXE_MIN).create().usesVanillaNamespaceFull());
+	public static final RegistryObject<StagedBlock> OAK_LOG = PRRegistry.block(new SBLog("oak").usesVanillaNamespaceFull());
+	public static final RegistryObject<StagedBlock> SPRUCE_LOG = PRRegistry.block(new SBLog("spruce").usesVanillaNamespaceFull());
+	public static final RegistryObject<StagedBlock> BIRCH_LOG = PRRegistry.block(new SBLog("birch").usesVanillaNamespaceFull());
+	public static final RegistryObject<StagedBlock> JUNGLE_LOG = PRRegistry.block(new SBLog("jungle").usesVanillaNamespaceFull());
+	public static final RegistryObject<StagedBlock> ACACIA_LOG = PRRegistry.block(new SBLog("acacia").usesVanillaNamespaceFull());
+	public static final RegistryObject<StagedBlock> DARK_OAK_LOG = PRRegistry.block(new SBLog("dark_oak").usesVanillaNamespaceFull());
+	public static final RegistryObject<StagedBlock> OAK_LEAVES = PRRegistry.block(new SBLeaves("oak").usesVanillaNamespaceFull());
+	public static final RegistryObject<StagedBlock> SPRUCE_LEAVES = PRRegistry.block(new SBLeaves("spruce").usesVanillaNamespaceFull());
+	public static final RegistryObject<StagedBlock> BIRCH_LEAVES = PRRegistry.block(new SBLeaves("birch").usesVanillaNamespaceFull());
+	public static final RegistryObject<StagedBlock> JUNGLE_LEAVES = PRRegistry.block(new SBLeaves("jungle").usesVanillaNamespaceFull());
+	public static final RegistryObject<StagedBlock> ACACIA_LEAVES = PRRegistry.block(new SBLeaves("acacia").usesVanillaNamespaceFull());
+	public static final RegistryObject<StagedBlock> DARK_OAK_LEAVES = PRRegistry.block(new SBLeaves("dark_oak").usesVanillaNamespaceFull());
 	
 	private static WallFloorWrap registerWallFloor(StagedBlock floorBlock, StagedBlock wallBlock) {
 		RegistryObject<StagedBlock> floor = PRRegistry.block(floorBlock, false);
@@ -109,16 +111,16 @@ public class PRBlocks {
 	}
 	
 	static {
-		for (EnumMetal metal : EnumMetal.values()) {
-			OREANDBLOCKS.add(PRRegistry.block(new SBMetal(metal)));
+		for (Metal metal : Metal.values()) {
+			ORE_AND_BLOCKS.add(PRRegistry.block(new SBMetal(metal)));
 			if (!metal.isAlloy) {
-				OREANDBLOCKS.add(PRRegistry.block(new SBRawOre(metal)));
+				ORE_AND_BLOCKS.add(PRRegistry.block(new SBRawOre(metal)));
 			}
 		}
 	}
 	
-	public static SBMetal getMetalBlock(EnumMetal alloy) {
-		for (RegistryObject<StagedBlock> b : OREANDBLOCKS) {
+	public static SBMetal getMetalBlock(Metal alloy) {
+		for (RegistryObject<StagedBlock> b : ORE_AND_BLOCKS) {
 			if (b.get() instanceof SBMetal) {
 				SBMetal ore = (SBMetal) b.get();
 				if (ore.metal == alloy) {
@@ -130,8 +132,8 @@ public class PRBlocks {
 		return null;
 	}
 	
-	public static SBRawOre getOreBlock(EnumMetal alloy) {
-		for (RegistryObject<StagedBlock> b : OREANDBLOCKS) {
+	public static SBRawOre getOreBlock(Metal alloy) {
+		for (RegistryObject<StagedBlock> b : ORE_AND_BLOCKS) {
 			if (b.get() instanceof SBRawOre) {
 				SBRawOre ore = (SBRawOre) b.get();
 				if (ore.metal == alloy) {

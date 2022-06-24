@@ -40,7 +40,7 @@ class GeneratorBlockState extends BlockStateProvider {
 		for (RegistryObject<Block> regBlock : PRRegistry.getBlocks()) {
 			StagedBlock b = (StagedBlock) regBlock.get();
 			
-			final String id = b.overridesVanillaBlock() ? "minecraft" : PrimalRework.MOD_ID;
+			final String id = b.usesVanillaNamespaceBlock() ? "minecraft" : PrimalRework.MOD_ID;
 			
 			switch (b.getBlockStateType()) {
 				case none:
@@ -73,7 +73,7 @@ class GeneratorBlockState extends BlockStateProvider {
 	}
 	
 	private void randomDirection(StagedBlock block) {
-		final String id = block.overridesVanillaBlock() ? "minecraft" : PrimalRework.MOD_ID;
+		final String id = block.usesVanillaNamespaceBlock() ? "minecraft" : PrimalRework.MOD_ID;
 		ConfiguredModel[] models = new ConfiguredModel[4];
 		for (int i = 0; i < 4; i++) {
 			models[i] = new ConfiguredModel(new UncheckedModelFile(new ResourceLocation(id, "block/" + block.getRegName())), 0, 90 * i, false);
@@ -82,7 +82,7 @@ class GeneratorBlockState extends BlockStateProvider {
 	}
 	
 	public void facingPillar(StagedBlock block) {
-		final String id = block.overridesVanillaBlock() ? "minecraft" : PrimalRework.MOD_ID;
+		final String id = block.usesVanillaNamespaceBlock() ? "minecraft" : PrimalRework.MOD_ID;
 		ResourceLocation baseName = new ResourceLocation(id, "block/" + block.getRegName());
 		
 		if (block instanceof SBStrippedLog) {
@@ -110,7 +110,7 @@ class GeneratorBlockState extends BlockStateProvider {
 		getVariantBuilder(block).partialState().with(SBSlab.TYPE, SlabType.BOTTOM).modelForState().modelFile(new UncheckedModelFile(extend(baseName, "_slab"))).addModel()
 				.partialState().with(SBSlab.TYPE, SlabType.TOP).modelForState().modelFile(new UncheckedModelFile(extend(baseName, "_slab_top"))).addModel().partialState()
 				.with(SBSlab.TYPE, SlabType.DOUBLE).modelForState()
-				.modelFile(new UncheckedModelFile(block.overridesVanillaBlock() ? mcLoc("block/" + block.getRegName().replace("_slab", "")) : baseName)).addModel();
+				.modelFile(new UncheckedModelFile(block.usesVanillaNamespaceBlock() ? mcLoc("block/" + block.getRegName().replace("_slab", "")) : baseName)).addModel();
 	}
 	
 	private static ResourceLocation extend(ResourceLocation rl, String suffix) {

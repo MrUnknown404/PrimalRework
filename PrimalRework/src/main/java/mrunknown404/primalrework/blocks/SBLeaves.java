@@ -7,9 +7,9 @@ import mrunknown404.primalrework.registries.PRItemGroups;
 import mrunknown404.primalrework.registries.PRStages;
 import mrunknown404.primalrework.utils.HarvestInfo;
 import mrunknown404.primalrework.utils.HarvestInfo.DropInfo;
-import mrunknown404.primalrework.utils.enums.EnumBlockInfo;
-import mrunknown404.primalrework.utils.enums.EnumToolMaterial;
-import mrunknown404.primalrework.utils.enums.EnumToolType;
+import mrunknown404.primalrework.utils.enums.BlockInfo;
+import mrunknown404.primalrework.utils.enums.ToolMaterial;
+import mrunknown404.primalrework.utils.enums.ToolType;
 import mrunknown404.primalrework.utils.helpers.BlockH;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -35,10 +35,10 @@ public class SBLeaves extends StagedBlock {
 	public static final BooleanProperty PERSISTENT = BlockStateProperties.PERSISTENT;
 	
 	public SBLeaves(String name) {
-		super(name + "_leaves", PRStages.STAGE_0, 32, PRItemGroups.BLOCKS, Material.LEAVES, SoundType.GRASS, true, false, 0, EnumBlockInfo.thatch, true, BlockStateType.normal,
-				BlockModelType.normal_colored, new HarvestInfo(EnumToolType.none, EnumToolMaterial.hand, DropInfo.NONE),
-				new HarvestInfo(EnumToolType.knife, EnumToolMaterial.clay, DropInfo.NONE), new HarvestInfo(EnumToolType.axe, EnumToolMaterial.clay, DropInfo.NONE),
-				new HarvestInfo(EnumToolType.shears, EnumToolMaterial.clay));
+		super(name + "_leaves", PRStages.STAGE_0, 32, PRItemGroups.BLOCKS, Material.LEAVES, SoundType.GRASS, true, false, 0, BlockInfo.PLANT, true, BlockStateType.normal,
+				BlockModelType.normal_colored, //TODO add saplings/sticks
+				new HarvestInfo(ToolType.NONE, ToolMaterial.HAND, DropInfo.NONE), new HarvestInfo(ToolType.KNIFE, ToolMaterial.CLAY, DropInfo.NONE),
+				new HarvestInfo(ToolType.AXE, ToolMaterial.CLAY, DropInfo.NONE), new HarvestInfo(ToolType.SHEARS, ToolMaterial.CLAY));
 		registerDefaultState(stateDefinition.any().setValue(DISTANCE, Integer.valueOf(7)).setValue(PERSISTENT, Boolean.valueOf(false)));
 	}
 	

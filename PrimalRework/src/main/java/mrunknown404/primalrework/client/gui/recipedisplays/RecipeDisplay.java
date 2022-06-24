@@ -13,8 +13,8 @@ import mrunknown404.primalrework.recipes.SRCampFire;
 import mrunknown404.primalrework.recipes.SRCrafting3;
 import mrunknown404.primalrework.recipes.SRBurnableFuel;
 import mrunknown404.primalrework.utils.DoubleCache;
-import mrunknown404.primalrework.utils.enums.EnumFuelType;
-import mrunknown404.primalrework.utils.enums.EnumRecipeType;
+import mrunknown404.primalrework.utils.enums.FuelType;
+import mrunknown404.primalrework.utils.enums.RecipeType;
 import mrunknown404.primalrework.utils.enums.ICraftingInput;
 import mrunknown404.primalrework.utils.helpers.MathH;
 import net.minecraft.client.Minecraft;
@@ -183,21 +183,21 @@ public abstract class RecipeDisplay<T extends IStagedRecipe<T, ?>> {
 	
 	@SuppressWarnings("unchecked")
 	public static <T extends IStagedRecipe<?, ?>> RecipeDisplay<?> createFrom(ICraftingInput type, List<T> recipes, StagedItem output) {
-		if (type instanceof EnumRecipeType) {
-			switch ((EnumRecipeType) type) {
-				case campfire:
+		if (type instanceof RecipeType) {
+			switch ((RecipeType) type) {
+				case CAMPFIRE:
 					return new RecipeDisplay<SRCampFire>((List<SRCampFire>) recipes, output, 1) {
 						@Override
 						protected void drawSlot(MatrixStack stack, int left, int top, int mouseX, int mouseY, int drawSlot) {
 							
 						}
 					};
-				case crafting_3:
+				case CRAFTING_3:
 					return new RDCrafting3((List<SRCrafting3>) recipes, output);
 			}
-		} else if (type instanceof EnumFuelType) {
-			switch ((EnumFuelType) type) {
-				case burnable_fuel:
+		} else if (type instanceof FuelType) {
+			switch ((FuelType) type) {
+				case BURNABLE_FUEL:
 					return new RDBurnableFuel((List<SRBurnableFuel>) recipes, output);
 			}
 		} else {

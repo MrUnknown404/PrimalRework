@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import mrunknown404.primalrework.blocks.utils.StagedBlock;
-import mrunknown404.primalrework.utils.enums.EnumToolMaterial;
-import mrunknown404.primalrework.utils.enums.EnumToolType;
+import mrunknown404.primalrework.utils.enums.ToolMaterial;
+import mrunknown404.primalrework.utils.enums.ToolType;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -36,11 +36,11 @@ public class SIBlock extends StagedItem {
 	private final StagedBlock block;
 	
 	public SIBlock(StagedBlock block) {
-		super(block.getRegName(), block.stage, block.stackSize, EnumToolType.none, EnumToolMaterial.hand, block.tab, Rarity.COMMON, null, false, false, ItemType.block);
+		super(block.getRegName(), block.stage, block.stackSize, ToolType.NONE, ToolMaterial.HAND, block.tab, Rarity.COMMON, null, false, false, ItemType.block);
 		this.block = block;
 		
-		if (block.overridesVanillaItem()) {
-			overrideVanilla();
+		if (block.usesVanillaNamespaceItem()) {
+			useVanillaNamespace();
 		}
 	}
 	
