@@ -1,19 +1,20 @@
 package mrunknown404.primalrework.recipes;
 
 import mrunknown404.primalrework.items.utils.StagedItem;
-import mrunknown404.primalrework.recipes.input.RISingle;
+import mrunknown404.primalrework.recipes.input.RICampfire;
 import mrunknown404.primalrework.stage.Stage;
+import mrunknown404.primalrework.utils.enums.EnumRecipeType;
 import net.minecraft.item.ItemStack;
 
-public class SRCampFire implements IStagedRecipe<SRCampFire, RISingle> {
+public class SRCampFire implements IStagedRecipe<SRCampFire, RICampfire> {
 	private final Stage stage;
 	private final ItemStack output;
-	private final RISingle input;
+	private final RICampfire input;
 	public final int time;
 	
 	public SRCampFire(Stage stage, StagedItem input, StagedItem output, int time) {
 		this.stage = stage;
-		this.input = new RISingle(input);
+		this.input = new RICampfire(input);
 		this.output = new ItemStack(output);
 		this.time = time;
 	}
@@ -23,7 +24,7 @@ public class SRCampFire implements IStagedRecipe<SRCampFire, RISingle> {
 	}
 	
 	@Override
-	public RISingle getInput() {
+	public RICampfire getInput() {
 		return input;
 	}
 	
@@ -45,5 +46,10 @@ public class SRCampFire implements IStagedRecipe<SRCampFire, RISingle> {
 	@Override
 	public boolean has(Ingredient input) {
 		return input.matches(this.input.input);
+	}
+	
+	@Override
+	public EnumRecipeType getRecipeType() {
+		return EnumRecipeType.campfire;
 	}
 }

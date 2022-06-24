@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.IFormattableTextComponent;
 
 public enum EnumFuelType implements ICraftingInput {
-	campfire(PRItems.PLANT_FIBER.get()); //TODO switch to fuel
+	burnable_fuel(PRItems.PLANT_FIBER.get()); //TODO switch to fuel
 	
 	private final ItemStack icon;
 	private final IFormattableTextComponent name;

@@ -5,18 +5,17 @@ import java.util.List;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import mrunknown404.primalrework.items.utils.StagedItem;
-import mrunknown404.primalrework.recipes.SRFuel;
+import mrunknown404.primalrework.recipes.SRBurnableFuel;
 import mrunknown404.primalrework.utils.helpers.ColorH;
 
-public class RDFuel extends RecipeDisplay<SRFuel> {
-	
-	public RDFuel(List<SRFuel> recipes, StagedItem output) {
+public class RDBurnableFuel extends RecipeDisplay<SRBurnableFuel> {
+	public RDBurnableFuel(List<SRBurnableFuel> recipes, StagedItem output) {
 		super(recipes, output, 32); // figure out height
 	}
 	
 	@Override
 	protected void drawSlot(MatrixStack stack, int left, int top, int mouseX, int mouseY, int drawSlot) { // actually render this
-		SRFuel recipe = recipes.get(drawSlot);
+		SRBurnableFuel recipe = recipes.get(drawSlot);
 		drawOutputItem(recipe.getOutput(), left, top);
 		font.draw(stack, "" + recipe.getCookTime(), left + 20, top, ColorH.rgba2Int(17, 150, 74));
 	}

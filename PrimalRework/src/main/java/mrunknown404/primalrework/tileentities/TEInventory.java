@@ -21,7 +21,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 
-public abstract class TEInventory extends TileEntity implements IInventory, INamedContainerProvider, INameable {
+abstract class TEInventory extends TileEntity implements IInventory, INamedContainerProvider, INameable {
 	private NonNullList<ItemStack> items;
 	private ITextComponent name;
 	

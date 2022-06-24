@@ -28,7 +28,7 @@ import net.minecraftforge.fml.network.NetworkHooks;
 public class SBPrimalCraftingTable extends SBContainer {
 	public SBPrimalCraftingTable() {
 		super("primal_crafting_table", PRStages.DO_LATER, 64, Material.WOOD, SoundType.WOOD, true, true, 0, EnumBlockInfo.wood, false, BlockStateType.normal, BlockModelType.normal,
-				HarvestInfo.SAW_MIN);
+				HarvestInfo.AXE_MIN);
 	}
 	
 	@Override

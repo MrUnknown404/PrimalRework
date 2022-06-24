@@ -1,11 +1,21 @@
 package mrunknown404.primalrework.world.gen.feature;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 
+import javax.annotation.Nullable;
+
+import mrunknown404.primalrework.blocks.utils.StagedBlock;
 import mrunknown404.primalrework.registries.PRBlocks;
-import mrunknown404.primalrework.utils.helpers.BlockH;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.SlabBlock;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
 import net.minecraft.world.IWorldWriter;
@@ -15,6 +25,14 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 
 public class FeatureGroundSlabs extends Feature<NoFeatureConfig> {
+	private static final Map<StagedBlock, SlabSpawnInfo> SPAWN_MAP = new HashMap<StagedBlock, SlabSpawnInfo>();
+	private static final Set<StagedBlock> SIDE_BLOCKS = new HashSet<StagedBlock>(Arrays.asList(PRBlocks.DIRT.get(), PRBlocks.GRASS_BLOCK.get(), PRBlocks.STONE.get()));
+	
+	static {
+		add(PRBlocks.GRASS_BLOCK.get(), PRBlocks.DIRT.get(), PRBlocks.GRASS_SLAB.get());
+		add(PRBlocks.DIRT.get(), null, PRBlocks.DIRT_SLAB.get());
+	}
+	
 	public FeatureGroundSlabs() {
 		super(NoFeatureConfig.CODEC);
 	}
@@ -28,65 +46,37 @@ public class FeatureGroundSlabs extends Feature<NoFeatureConfig> {
 	public boolean place(ISeedReader seed, ChunkGenerator gen, Random r, BlockPos pos, NoFeatureConfig config) {
 		for (int x = 0; x < 16; x++) {
 			for (int z = 0; z < 16; z++) {
-				int yy = seed.getHeightmapPos(Heightmap.Type.WORLD_SURFACE, new BlockPos(pos.getX() + x, 0, pos.getZ() + z)).getY();
-				
-				yLoop:
-				for (int y = gen.getSeaLevel() - 1; y < 255; y++) {
-					BlockPos newPos = new BlockPos(pos.getX() + x, y, pos.getZ() + z), abovePos = newPos.above();
+				for (int y = gen.getSeaLevel() - 1; y < seed.getHeight(Heightmap.Type.WORLD_SURFACE, pos.getX() + x, pos.getZ() + z); y++) {
+					BlockPos originPos = new BlockPos(pos.getX() + x, y, pos.getZ() + z), abovePos = originPos.above();
+					SlabSpawnInfo info = SPAWN_MAP.getOrDefault(seed.getBlockState(originPos).getBlock(), null);
+					BlockState aboveState = seed.getBlockState(abovePos);
 					
-					if (y > yy) {
-						break yLoop;
-					}
-					
-					if (BlockH.canSupportPlant(seed.getBlockState(newPos).getBlock()) && seed.getBlockState(abovePos).getMaterial().isReplaceable()) {
+					if (info != null && aboveState.getBlock() != Blocks.CAVE_AIR && !aboveState.getMaterial().isLiquid() && aboveState.getMaterial().isReplaceable()) {
 						float count = 0;
 						
-						Block an = seed.getBlockState(abovePos.north()).getBlock();
-						Block ae = seed.getBlockState(abovePos.east()).getBlock();
-						Block as = seed.getBlockState(abovePos.south()).getBlock();
-						Block aw = seed.getBlockState(abovePos.west()).getBlock();
-						BlockState dn = seed.getBlockState(newPos.north());
-						BlockState de = seed.getBlockState(newPos.east());
-						BlockState ds = seed.getBlockState(newPos.south());
-						BlockState dw = seed.getBlockState(newPos.west());
-						
-						if (BlockH.canSupportPlant(an) || an == PRBlocks.STONE.get()) {
-							count++;
-						} else if (an == PRBlocks.GRASS_SLAB.get()) {
-							count += 0.5f;
-						}
-						if (BlockH.canSupportPlant(ae) || ae == PRBlocks.STONE.get()) {
-							count++;
-						} else if (ae == PRBlocks.GRASS_SLAB.get()) {
-							count += 0.5f;
-						}
-						if (BlockH.canSupportPlant(as) || as == PRBlocks.STONE.get()) {
-							count++;
-						} else if (as == PRBlocks.GRASS_SLAB.get()) {
-							count += 0.5f;
-						}
-						if (BlockH.canSupportPlant(aw) || aw == PRBlocks.STONE.get()) {
-							count++;
-						} else if (aw == PRBlocks.GRASS_SLAB.get()) {
-							count += 0.5f;
-						}
-						
-						if (dn.getMaterial().isReplaceable() || dn.getBlock() == PRBlocks.GRASS_SLAB.get()) {
-							count -= 0.5f;
-						}
-						if (de.getMaterial().isReplaceable() || de.getBlock() == PRBlocks.GRASS_SLAB.get()) {
-							count -= 0.5f;
-						}
-						if (ds.getMaterial().isReplaceable() || ds.getBlock() == PRBlocks.GRASS_SLAB.get()) {
-							count -= 0.5f;
-						}
-						if (dw.getMaterial().isReplaceable() || dw.getBlock() == PRBlocks.GRASS_SLAB.get()) {
-							count -= 0.5f;
+						for (Direction dir : Direction.values()) {
+							if (dir == Direction.UP || dir == Direction.DOWN) {
+								continue;
+							}
+							
+							Block relAboveBlock = seed.getBlockState(abovePos.relative(dir)).getBlock();
+							if (isSide(relAboveBlock)) {
+								count++;
+							} else if (relAboveBlock instanceof SlabBlock) {
+								count += 0.5f;
+							}
+							
+							BlockState relOriginBlock = seed.getBlockState(originPos.relative(dir));
+							if (relOriginBlock.getMaterial().isReplaceable() || relOriginBlock.getBlock() instanceof SlabBlock) {
+								count -= 0.5f;
+							}
 						}
 						
 						if (count > 1) {
-							setBlock(seed, newPos, PRBlocks.DIRT.get().defaultBlockState());
-							setBlock(seed, abovePos, PRBlocks.GRASS_SLAB.get().defaultBlockState());
+							if (info.shouldReplace()) {
+								setBlock(seed, originPos, info.replaceBlock.defaultBlockState());
+							}
+							setBlock(seed, abovePos, info.slabBlock.defaultBlockState());
 						}
 					}
 				}
@@ -94,5 +84,26 @@ public class FeatureGroundSlabs extends Feature<NoFeatureConfig> {
 		}
 		
 		return true;
+	}
+	
+	private static void add(StagedBlock originBlock, StagedBlock replaceBlock, StagedBlock slabBlock) {
+		SPAWN_MAP.put(originBlock, new SlabSpawnInfo(replaceBlock, slabBlock));
+	}
+	
+	private static boolean isSide(Block b) {
+		return SIDE_BLOCKS.contains(b);
+	}
+	
+	private static class SlabSpawnInfo {
+		private final StagedBlock slabBlock, replaceBlock;
+		
+		private SlabSpawnInfo(@Nullable StagedBlock replaceBlock, StagedBlock slabBlock) {
+			this.slabBlock = slabBlock;
+			this.replaceBlock = replaceBlock;
+		}
+		
+		private boolean shouldReplace() {
+			return replaceBlock != null;
+		}
 	}
 }

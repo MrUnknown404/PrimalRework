@@ -13,7 +13,6 @@ import net.minecraft.util.text.IFormattableTextComponent;
  * axe    (0.90f, 4.50f)
  * hoe    (1.25f, 0.50f)
  * sword  (1.60f, 3.00f)
- * saw    (1.00f, 1.50f)
  * </pre> */
 public enum EnumToolType implements IName {
 	//@formatter:off
@@ -24,8 +23,7 @@ public enum EnumToolType implements IName {
 	shovel (1.50f, 1.50f),
 	axe    (0.90f, 4.50f),
 	hoe    (1.25f, 0.50f),
-	sword  (1.60f, 3.00f),
-	saw    (1.00f, 1.50f);
+	sword  (1.60f, 3.00f);
 	//@formatter:on
 	
 	private final IFormattableTextComponent name;

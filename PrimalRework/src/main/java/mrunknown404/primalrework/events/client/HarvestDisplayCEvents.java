@@ -39,7 +39,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.gui.GuiUtils;
 
 public class HarvestDisplayCEvents {
-	private DoubleCache<Block, Item, List<ITextComponent>> blockCache = new DoubleCache<Block, Item, List<ITextComponent>>();
+	private DoubleCache<Block, Item, List<ITextComponent>> blockCache = DoubleCache.and();
 	
 	private static final IFormattableTextComponent YES_MINE = WordH.string("\u2714 ").withStyle(TextFormatting.GREEN),
 			NO_MINE = WordH.string("\u274C ").withStyle(TextFormatting.RED), ICON_SPACE = WordH.string("    ");
@@ -147,11 +147,10 @@ public class HarvestDisplayCEvents {
 			GuiUtils.drawGradientRect(mat, zLevel, tooltipX - 3, tooltipY - 4, tooltipX + tooltipTextWidth + 3, tooltipY - 3, backgroundColor, backgroundColor);
 			GuiUtils.drawGradientRect(mat, zLevel, tooltipX - 3, tooltipY + tooltipHeight + 3, tooltipX + tooltipTextWidth + 3, tooltipY + tooltipHeight + 4, backgroundColor,
 					backgroundColor);
-			GuiUtils.drawGradientRect(mat, zLevel, tooltipX - 3, tooltipY - 3, tooltipX + tooltipTextWidth + 3, tooltipY + tooltipHeight + 3, backgroundColor,
-					backgroundColor);
+			GuiUtils.drawGradientRect(mat, zLevel, tooltipX - 3, tooltipY - 3, tooltipX + tooltipTextWidth + 3, tooltipY + tooltipHeight + 3, backgroundColor, backgroundColor);
 			GuiUtils.drawGradientRect(mat, zLevel, tooltipX - 4, tooltipY - 3, tooltipX - 3, tooltipY + tooltipHeight + 3, backgroundColor, backgroundColor);
-			GuiUtils.drawGradientRect(mat, zLevel, tooltipX + tooltipTextWidth + 3, tooltipY - 3, tooltipX + tooltipTextWidth + 4, tooltipY + tooltipHeight + 3,
-					backgroundColor, backgroundColor);
+			GuiUtils.drawGradientRect(mat, zLevel, tooltipX + tooltipTextWidth + 3, tooltipY - 3, tooltipX + tooltipTextWidth + 4, tooltipY + tooltipHeight + 3, backgroundColor,
+					backgroundColor);
 			GuiUtils.drawGradientRect(mat, zLevel, tooltipX - 3, tooltipY - 3 + 1, tooltipX - 3 + 1, tooltipY + tooltipHeight + 3 - 1, borderColor, borderColor);
 			GuiUtils.drawGradientRect(mat, zLevel, tooltipX + tooltipTextWidth + 2, tooltipY - 3 + 1, tooltipX + tooltipTextWidth + 3, tooltipY + tooltipHeight + 3 - 1,
 					borderColor, borderColor);
@@ -165,8 +164,8 @@ public class HarvestDisplayCEvents {
 			for (int i = 0; i < textLines.size(); ++i) {
 				ITextProperties line = textLines.get(i);
 				if (line != null) {
-					font.drawInBatch(LanguageMap.getInstance().getVisualOrder(line), tooltipX + (i == 0 ? 2 : 1), tooltipY + (i == 0 ? 3 : 0), -1, true, mat, renderType,
-							false, 0, 15728880);
+					font.drawInBatch(LanguageMap.getInstance().getVisualOrder(line), tooltipX + (i == 0 ? 2 : 1), tooltipY + (i == 0 ? 3 : 0), -1, true, mat, renderType, false, 0,
+							15728880);
 				}
 				
 				if (i + 1 == titleLinesCount) {

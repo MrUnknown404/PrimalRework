@@ -104,12 +104,7 @@ public class GuiQuestTree extends FocusableGui implements IRenderable {
 		
 		private QuestButton(Quest quest, Minecraft mc, GuiQuestTree tree) {
 			super(MathH.floor(quest.getXPos() * 33) - 11 + tree.screen.width / 2, MathH.floor(quest.getYPos() * 33) - 11 + tree.screen.height / 2, 22, 22, quest.getFancyName(),
-					new IPressable() {
-						@Override
-						public void onPress(Button onPress) {
-							tree.screen.setQuestInfo(quest);
-						}
-					});
+					(onPress) -> tree.screen.setQuestInfo(quest));
 			this.quest = quest;
 			this.mc = mc;
 			this.tree = tree;
@@ -163,8 +158,7 @@ public class GuiQuestTree extends FocusableGui implements IRenderable {
 			float s = ScreenQuestMenu.getScale();
 			
 			boolean isHover = mouseX > 39 && (tree.screen.getQuestInfo() != null ? mouseY < tree.screen.height - QuestInfoList.getInfoHeight(tree.screen) : true) &&
-					MathH.within(mouseX, x * s, (x + width) * s) && MathH.within(mouseY, y * s, (y + height) * s);
-			
+					MathH.within(mouseX, x * s, (x + width - 1) * s) && MathH.within(mouseY, y * s, (y + height - 1) * s);
 			boolean isSelected = tree.screen.getQuestInfo() != null && tree.screen.getQuestInfo().isQuest(quest);
 			
 			if (quest.isEnd()) {
@@ -194,15 +188,15 @@ public class GuiQuestTree extends FocusableGui implements IRenderable {
 			}
 			
 			if (isHover) {
-				MatrixStack st = new MatrixStack();
-				GuiUtils.drawHoveringText(st, Arrays.asList(quest.getFancyName()), mouseX, mouseY, tree.screen.width, tree.screen.height, -1, mc.font);
+				GuiUtils.drawHoveringText(new MatrixStack(), Arrays.asList(quest.getFancyName()), mouseX, mouseY, tree.screen.width, tree.screen.height, -1, mc.font);
 			}
 		}
 		
 		@Override
 		protected boolean clicked(double mouseX, double mouseY) {
 			float s = ScreenQuestMenu.getScale();
-			return active && visible && mouseX >= (x + tree.x) * s && mouseY >= (y + tree.y) * s && mouseX < (x + tree.x + width) * s && mouseY < (y + tree.y + height) * s;
+			return active && visible && MathH.within(mouseX, (x + tree.x) * s, (x + tree.x + width - 1) * s) &&
+					MathH.within(mouseY, (y + tree.y) * s, (y + tree.y + height - 1) * s);
 		}
 	}
 	

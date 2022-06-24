@@ -4,7 +4,7 @@ import java.util.List;
 
 import mrunknown404.primalrework.inventory.container.slot.SlotOutput;
 import mrunknown404.primalrework.registries.PRContainers;
-import mrunknown404.primalrework.tileentities.TEInventory;
+import mrunknown404.primalrework.tileentities.TEIPrimalCraftingTable;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.IInventory;
@@ -32,8 +32,8 @@ public class ContainerPrimalCraftingTable extends Container implements IEasyQuic
 					@Override
 					public void set(ItemStack stack) {
 						super.set(stack);
-						if (container instanceof TEInventory) {
-							((TEInventory) container).onItemChange(getSlotIndex(), player, windowID);
+						if (container instanceof TEIPrimalCraftingTable) {
+							((TEIPrimalCraftingTable) container).onItemChange(getSlotIndex(), player, windowID);
 						}
 					}
 				});
@@ -58,8 +58,8 @@ public class ContainerPrimalCraftingTable extends Container implements IEasyQuic
 					}
 				}
 				
-				if (container instanceof TEInventory) {
-					((TEInventory) container).onItemChange(9, player, windowID);
+				if (container instanceof TEIPrimalCraftingTable) {
+					((TEIPrimalCraftingTable) container).onItemChange(9, player, windowID);
 				}
 				
 				return super.onTake(player, stack);

@@ -14,7 +14,6 @@ import mrunknown404.primalrework.utils.HarvestInfo.DropInfo;
 import mrunknown404.primalrework.utils.enums.EnumToolMaterial;
 import mrunknown404.primalrework.utils.enums.EnumToolType;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.BlockItemUseContext;
@@ -86,11 +85,6 @@ public class SBUnlitPrimalWallTorch extends SBUnlitPrimalTorch {
 		return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
 	}
 	
-	@Override
-	public BlockRenderType getRenderShape(BlockState state) {
-		return BlockRenderType.MODEL;
-	}
-	
 	@SuppressWarnings("deprecation")
 	@Override
 	public BlockState mirror(BlockState state, Mirror mirror) {
@@ -98,7 +92,7 @@ public class SBUnlitPrimalWallTorch extends SBUnlitPrimalTorch {
 	}
 	
 	@Override
-	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> p_206840_1_) {
-		p_206840_1_.add(FACING);
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+		builder.add(FACING);
 	}
 }

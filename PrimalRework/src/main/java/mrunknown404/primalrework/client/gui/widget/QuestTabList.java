@@ -25,7 +25,7 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraftforge.fml.client.gui.GuiUtils;
 
 public class QuestTabList extends AbstractList<QuestTabList.QuestTabEntry> {
-private final ScreenQuestMenu screen;
+	private final ScreenQuestMenu screen;
 	
 	public QuestTabList(ScreenQuestMenu screen, Minecraft mc) {
 		super(mc, 39, 0, 1, screen.height - 1, 28);
@@ -105,12 +105,7 @@ private final ScreenQuestMenu screen;
 		private final ScreenQuestMenu screen;
 		
 		private TabButton(ScreenQuestMenu screen, int x, int y, Supplier<Stage> stage, QuestTab tab) {
-			super(x, y, 22, 22, stage.get().getFancyName(), new IPressable() {
-				@Override
-				public void onPress(Button onPress) {
-					ScreenQuestMenu.selectedTab = tab;
-				}
-			});
+			super(x, y, 22, 22, stage.get().getFancyName(), (onPress) -> ScreenQuestMenu.selectedTab = tab);
 			this.stage = stage;
 			this.tab = tab;
 			this.screen = screen;
@@ -120,7 +115,7 @@ private final ScreenQuestMenu screen;
 		public void render(MatrixStack stack, int mouseX, int mouseY, float tick) {
 			Minecraft mc = Minecraft.getInstance();
 			
-			boolean isSelected = MathH.within(mouseX, x, x + width) && MathH.within(mouseY, y, y + height);
+			boolean isSelected = MathH.within(mouseX, x, x + width - 1) && MathH.within(mouseY, y, y + height - 1);
 			if (ScreenQuestMenu.selectedTab == tab) {
 				mc.getTextureManager().bind(isSelected ? ScreenQuestMenu.QUEST_ICON_SELECTED_HOVER : ScreenQuestMenu.QUEST_ICON_SELECTED);
 			} else {

@@ -8,6 +8,7 @@ import java.util.List;
 import mrunknown404.primalrework.items.utils.StagedItem;
 import mrunknown404.primalrework.recipes.Ingredient;
 import mrunknown404.primalrework.stage.StagedTag;
+import mrunknown404.primalrework.utils.enums.EnumRecipeType;
 import net.minecraftforge.fml.RegistryObject;
 
 public class RICrafting3 extends RecipeInput<RICrafting3> {
@@ -75,6 +76,8 @@ public class RICrafting3 extends RecipeInput<RICrafting3> {
 		isEmpty = !found;
 	}
 	
+	private static final IngredientCompare COMPARE = new IngredientCompare();
+	
 	@Override
 	protected boolean match(RICrafting3 input) {
 		if (isShapeless) {
@@ -83,8 +86,8 @@ public class RICrafting3 extends RecipeInput<RICrafting3> {
 			List<Ingredient> inputIngs = new ArrayList<Ingredient>(input.ingredients);
 			List<Ingredient> recipeIngs = new ArrayList<Ingredient>(ingredients);
 			
-			Collections.sort(inputIngs, new IngredientCompare());
-			Collections.sort(recipeIngs, new IngredientCompare());
+			Collections.sort(inputIngs, COMPARE);
+			Collections.sort(recipeIngs, COMPARE);
 			
 			for (int i = 0; i < 9; i++) {
 				if (inputIngs.get(i).matches(recipeIngs.get(i))) {
@@ -161,6 +164,11 @@ public class RICrafting3 extends RecipeInput<RICrafting3> {
 		}
 		
 		return new RICrafting3(i, false);
+	}
+	
+	@Override
+	public EnumRecipeType getRecipeType() {
+		return EnumRecipeType.crafting_3;
 	}
 	
 	@Override

@@ -3,13 +3,15 @@ package mrunknown404.primalrework.registries;
 import java.util.ArrayList;
 import java.util.List;
 
+import mrunknown404.primalrework.items.SICraftingTool;
 import mrunknown404.primalrework.items.SIIngot;
-import mrunknown404.primalrework.items.SIMetalPart;
 import mrunknown404.primalrework.items.SIOre;
+import mrunknown404.primalrework.items.SIRawPart;
 import mrunknown404.primalrework.items.SISimpleTool;
 import mrunknown404.primalrework.items.utils.SIDamageable;
 import mrunknown404.primalrework.items.utils.SIFood;
 import mrunknown404.primalrework.items.utils.StagedItem;
+import mrunknown404.primalrework.utils.enums.EnumCraftingToolType;
 import mrunknown404.primalrework.utils.enums.EnumMetal;
 import mrunknown404.primalrework.utils.enums.EnumMetalPart;
 import mrunknown404.primalrework.utils.enums.EnumToolMaterial;
@@ -19,8 +21,10 @@ import net.minecraftforge.fml.RegistryObject;
 public class PRItems {
 	private static final List<RegistryObject<StagedItem>> CASTS = new ArrayList<RegistryObject<StagedItem>>();
 	private static final List<RegistryObject<StagedItem>> INGOTS = new ArrayList<RegistryObject<StagedItem>>();
-	private static final List<RegistryObject<StagedItem>> PARTS = new ArrayList<RegistryObject<StagedItem>>();
+	private static final List<RegistryObject<StagedItem>> RAW_PARTS = new ArrayList<RegistryObject<StagedItem>>();
+	private static final List<RegistryObject<StagedItem>> TOOL_PARTS = new ArrayList<RegistryObject<StagedItem>>();
 	private static final List<RegistryObject<StagedItem>> ORES = new ArrayList<RegistryObject<StagedItem>>();
+	private static final List<RegistryObject<StagedItem>> CRAFTING_TOOLS = new ArrayList<RegistryObject<StagedItem>>();
 	
 	//MISC
 	public static final RegistryObject<StagedItem> PLANT_FIBER = PRRegistry.item(new StagedItem("plant_fiber", PRStages.STAGE_0));
@@ -48,7 +52,7 @@ public class PRItems {
 	public static final RegistryObject<StagedItem> ROPE = PRRegistry.item(new StagedItem("rope", PRStages.STAGE_1));
 	public static final RegistryObject<StagedItem> LEATHER_STRIP = PRRegistry.item(new StagedItem("leather_strip", PRStages.STAGE_1));
 	public static final RegistryObject<StagedItem> BLANK_CAST = PRRegistry.item(new StagedItem("blank_cast", PRStages.STAGE_3));
-	public static final RegistryObject<StagedItem> ROCK = PRRegistry.item(new StagedItem("rock", PRStages.STAGE_1));
+	public static final RegistryObject<StagedItem> ROCK = PRRegistry.item(new StagedItem("rock", PRStages.STAGE_0));
 	
 	//DAMAGEABLE
 	public static final RegistryObject<StagedItem> MORTAR_PESTLE = PRRegistry.item(new SIDamageable("mortar_pestle", PRStages.STAGE_0, EnumToolMaterial.wood));
@@ -70,7 +74,6 @@ public class PRItems {
 	public static final RegistryObject<SISimpleTool> FLINT_AXE = PRRegistry.item(new SISimpleTool(PRStages.STAGE_1, EnumToolType.axe, EnumToolMaterial.flint));
 	public static final RegistryObject<SISimpleTool> FLINT_HOE = PRRegistry.item(new SISimpleTool(PRStages.STAGE_1, EnumToolType.hoe, EnumToolMaterial.flint));
 	public static final RegistryObject<SISimpleTool> FLINT_KNIFE = PRRegistry.item(new SISimpleTool(PRStages.STAGE_1, EnumToolType.knife, EnumToolMaterial.flint));
-	public static final RegistryObject<SISimpleTool> FLINT_SAW = PRRegistry.item(new SISimpleTool(PRStages.STAGE_1, EnumToolType.saw, EnumToolMaterial.flint));
 	public static final RegistryObject<SISimpleTool> FLINT_SHEARS = PRRegistry.item(new SISimpleTool(PRStages.STAGE_1, EnumToolType.shears, EnumToolMaterial.flint));
 	public static final RegistryObject<SISimpleTool> BONE_SWORD = PRRegistry.item(new SISimpleTool(PRStages.STAGE_1, EnumToolType.sword, EnumToolMaterial.bone));
 	
@@ -85,31 +88,79 @@ public class PRItems {
 				registerCast(type);
 			}
 		}
+		for (EnumCraftingToolType type : EnumCraftingToolType.values()) {
+			registerCast(type);
+		}
 		
 		for (EnumMetal metal : EnumMetal.values()) {
-			INGOTS.add(PRRegistry.item(new SIIngot(metal, false, 16)));
-			INGOTS.add(PRRegistry.item(new SIIngot(metal, true, 32)));
+			INGOTS.add(PRRegistry.item(new SIIngot(metal, false)));
+			INGOTS.add(PRRegistry.item(new SIIngot(metal, true)));
 			if (!metal.isAlloy) {
 				ORES.add(PRRegistry.item(new SIOre(metal)));
 			}
 			
-			for (EnumMetalPart part : EnumMetalPart.values()) {
-				PARTS.add(PRRegistry.item(new SIMetalPart(metal, part)));
+			for (EnumMetalPart type : EnumMetalPart.values()) {
+				RAW_PARTS.add(PRRegistry.item(SIRawPart.rawPart(metal, type)));
+			}
+			for (EnumCraftingToolType type : EnumCraftingToolType.values()) {
+				CRAFTING_TOOLS.add(PRRegistry.item(new SICraftingTool(metal, type)));
+				TOOL_PARTS.add(PRRegistry.item(SIRawPart.toolHead(metal, type)));
+			}
+			for (EnumToolType type : EnumToolType.values()) {
+				if (type != EnumToolType.none) {
+					TOOL_PARTS.add(PRRegistry.item(SIRawPart.toolHead(metal, type)));
+				}
 			}
 		}
 	}
 	
-	private static RegistryObject<StagedItem> registerCast(EnumToolType type) {
+	private static RegistryObject<StagedItem> registerCast(Enum<?> type) {
 		StagedItem item = new StagedItem(type.name() + "_cast", PRStages.STAGE_3, 8);
 		RegistryObject<StagedItem> reg = PRRegistry.item(item);
 		CASTS.add(reg);
 		return reg;
 	}
 	
-	public static SIMetalPart getMetalPart(EnumMetal metal, EnumMetalPart part) {
-		for (RegistryObject<StagedItem> item : PARTS) {
-			SIMetalPart itemPart = (SIMetalPart) item.get();
+	@SuppressWarnings("unchecked")
+	public static SIRawPart<EnumMetalPart> getRawPart(EnumMetal metal, EnumMetalPart part) {
+		for (RegistryObject<StagedItem> item : RAW_PARTS) {
+			SIRawPart<?> itemPart = (SIRawPart<?>) item.get();
 			if (itemPart.metal == metal && itemPart.part == part) {
+				return (SIRawPart<EnumMetalPart>) itemPart;
+			}
+		}
+		
+		return null;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static SIRawPart<EnumToolType> getToolPart(EnumMetal metal, EnumToolType part) {
+		for (RegistryObject<StagedItem> item : TOOL_PARTS) {
+			SIRawPart<?> itemPart = (SIRawPart<?>) item.get();
+			if (itemPart.metal == metal && itemPart.part == part) {
+				return (SIRawPart<EnumToolType>) itemPart;
+			}
+		}
+		
+		return null;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static SIRawPart<EnumCraftingToolType> getToolPart(EnumMetal metal, EnumCraftingToolType part) {
+		for (RegistryObject<StagedItem> item : TOOL_PARTS) {
+			SIRawPart<?> itemPart = (SIRawPart<?>) item.get();
+			if (itemPart.metal == metal && itemPart.part == part) {
+				return (SIRawPart<EnumCraftingToolType>) itemPart;
+			}
+		}
+		
+		return null;
+	}
+	
+	public static SICraftingTool getCraftingTool(EnumMetal metal, EnumCraftingToolType type) {
+		for (RegistryObject<StagedItem> item : TOOL_PARTS) {
+			SICraftingTool itemPart = (SICraftingTool) item.get();
+			if (itemPart.metal == metal && itemPart.type == type) {
 				return itemPart;
 			}
 		}

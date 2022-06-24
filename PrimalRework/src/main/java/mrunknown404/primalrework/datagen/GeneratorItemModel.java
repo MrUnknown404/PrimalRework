@@ -1,10 +1,10 @@
 package mrunknown404.primalrework.datagen;
 
 import mrunknown404.primalrework.PrimalRework;
-import mrunknown404.primalrework.items.SIIngot;
-import mrunknown404.primalrework.items.SIMetalPart;
+import mrunknown404.primalrework.items.utils.IColoredItem;
 import mrunknown404.primalrework.items.utils.StagedItem;
 import mrunknown404.primalrework.registries.PRRegistry;
+import mrunknown404.primalrework.utils.enums.EnumMetal;
 import mrunknown404.primalrework.utils.enums.EnumToolMaterial;
 import mrunknown404.primalrework.utils.enums.EnumToolType;
 import net.minecraft.data.DataGenerator;
@@ -33,23 +33,18 @@ class GeneratorItemModel extends ModelProvider<TexturelessModelBuilder> {
 				name = split[0] + "en_" + split[1];
 			}
 			
+			if (i instanceof IColoredItem) {
+				if (((IColoredItem) i).getMetal() != EnumMetal.unknown) {
+					name = "template_" + name.substring(name.indexOf('_') + 1);
+				}
+			}
+			
 			switch (i.getItemType()) {
 				case block:
 					getBuilder(i.getRegName()).parent(new UncheckedModelFile(extendWithFolder(new ResourceLocation(id, "block/" + i.getRegName()))));
 					break;
 				case generated:
 					getBuilder(i.getRegName()).parent(getExistingFile(mcLoc("item/generated"))).texture("layer0", new ResourceLocation(id, "item/" + name));
-					break;
-				case generated_colored:
-					if (i instanceof SIIngot) {
-						getBuilder(i.getRegName()).parent(getExistingFile(mcLoc("item/generated"))).texture("layer0",
-								new ResourceLocation(id, "item/template_" + (((SIIngot) i).isNugget ? "nugget" : "ingot")));
-					} else if (i instanceof SIMetalPart) {
-						getBuilder(i.getRegName()).parent(getExistingFile(mcLoc("item/generated"))).texture("layer0",
-								new ResourceLocation(id, "item/template_" + ((SIMetalPart) i).part));
-					} else {
-						System.err.println("Error! Class not supported!");
-					}
 					break;
 				case handheld:
 					getBuilder(i.getRegName()).parent(getExistingFile(mcLoc("item/handheld"))).texture("layer0", new ResourceLocation(id, "item/" + name));

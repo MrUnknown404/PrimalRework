@@ -14,6 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
+import mrunknown404.primalrework.inventory.container.slot.SlotInventoryResult;
 import mrunknown404.primalrework.inventory.container.slot.SlotOutput;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -181,6 +182,10 @@ public abstract class MixinContainer {
 			Slot slot3 = slots.get(slot0);
 			if (slot3 != null && slot3.hasItem() && slot3.mayPickup(player)) {
 				ItemStack itemstack6 = slot3.remove(mouse == 0 && !(slot3 instanceof SlotOutput) ? 1 : slot3.getItem().getCount());
+				if (slot3 instanceof SlotInventoryResult) { //ugly fix. idc
+					((SlotInventoryResult) slot3).drop();
+				}
+				
 				slot3.onTake(player, itemstack6);
 				player.drop(itemstack6, true);
 			}

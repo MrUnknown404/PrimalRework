@@ -5,6 +5,7 @@ import java.util.function.Supplier;
 import mrunknown404.primalrework.PrimalRework;
 import mrunknown404.primalrework.utils.enums.EnumMetal;
 import mrunknown404.primalrework.utils.enums.EnumMetalPart;
+import mrunknown404.primalrework.utils.enums.EnumToolType;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 
@@ -12,7 +13,8 @@ public class PRItemGroups {
 	public static final ModItemGroup BLOCKS = new ModItemGroup("blocks", () -> new ItemStack(PRBlocks.THATCH.get()));
 	public static final ModItemGroup MACHINES = new ModItemGroup("machines", () -> new ItemStack(PRBlocks.CAMPFIRE.get()));
 	public static final ModItemGroup ITEMS = new ModItemGroup("items", () -> new ItemStack(PRItems.PLANT_FIBER.get()));
-	public static final ModItemGroup METAL_PARTS = new ModItemGroup("metal_parts", () -> new ItemStack(PRItems.getMetalPart(EnumMetal.copper, EnumMetalPart.plate)));
+	public static final ModItemGroup RAW_PARTS = new ModItemGroup("raw_parts", () -> new ItemStack(PRItems.getRawPart(EnumMetal.copper, EnumMetalPart.plate)));
+	public static final ModItemGroup TOOL_PARTS = new ModItemGroup("tool_parts", () -> new ItemStack(PRItems.getToolPart(EnumMetal.copper, EnumToolType.pickaxe)));
 	public static final ModItemGroup TOOLS = new ModItemGroup("tools", () -> new ItemStack(PRItems.CLAY_SHOVEL.get()));
 	public static final ModItemGroup FOOD = new ModItemGroup("food", () -> new ItemStack(PRItems.DOUGH.get()));
 	public static final ModItemGroup ORES = new ModItemGroup("ores", () -> new ItemStack(PRBlocks.getOreBlock(EnumMetal.copper)));

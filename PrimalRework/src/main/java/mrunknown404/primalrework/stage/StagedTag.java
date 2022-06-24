@@ -28,7 +28,9 @@ public class StagedTag extends ForgeRegistryEntry<StagedTag> {
 	}
 	
 	public StagedTag add(Supplier<Stage> stage, StagedItem item, StagedItem... items) {
-		itemMap_sup.put(stage, new ArrayList<StagedItem>());
+		if (!itemMap_sup.containsKey(stage)) {
+			itemMap_sup.put(stage, new ArrayList<StagedItem>());
+		}
 		itemMap_sup.get(stage).add(item);
 		for (StagedItem i : items) {
 			itemMap_sup.get(stage).add(i);

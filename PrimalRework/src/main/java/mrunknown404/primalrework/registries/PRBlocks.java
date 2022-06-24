@@ -37,7 +37,10 @@ import net.minecraftforge.fml.RegistryObject;
 
 public class PRBlocks {
 	public static final List<RegistryObject<StagedBlock>> OREANDBLOCKS = new ArrayList<RegistryObject<StagedBlock>>();
+	@Deprecated
 	private static WallFloorWrap lastWrap = null;
+	
+	//TODO when i add flowers, make them work like pickles
 	
 	//MISC
 	public static final RegistryObject<StagedBlock> THATCH = PRRegistry
@@ -46,9 +49,9 @@ public class PRBlocks {
 	public static final RegistryObject<StagedBlock> GROUND_STICK = PRRegistry.block(new SBGroundItem("stick", SoundType.WOOD, PRItems.STICK));
 	public static final RegistryObject<StagedBlock> GROUND_FLINT = PRRegistry.block(new SBGroundItem("flint", SoundType.STONE, PRItems.FLINT));
 	public static final RegistryObject<StagedBlock> UNLIT_PRIMAL_TORCH = registerWallFloor(new SBUnlitPrimalTorch(), new SBUnlitPrimalWallTorch()).floor;
-	public static final RegistryObject<StagedBlock> UNLIT_PRIMAL_WALL_TORCH = lastWrap.wall;
+	public static final RegistryObject<StagedBlock> UNLIT_PRIMAL_WALL_TORCH = getLastWall();
 	public static final RegistryObject<StagedBlock> LIT_PRIMAL_TORCH = registerWallFloor(new SBLitPrimalTorch(), new SBLitPrimalWallTorch()).floor;
-	public static final RegistryObject<StagedBlock> LIT_PRIMAL_WALL_TORCH = lastWrap.wall;
+	public static final RegistryObject<StagedBlock> LIT_PRIMAL_WALL_TORCH = getLastWall();
 	public static final RegistryObject<StagedBlock> SALT = PRRegistry.block(new Builder("salt_block", PRStages.STAGE_1, Material.CLAY, SoundType.SAND, EnumBlockInfo.dirt,
 			new HarvestInfo(EnumToolType.shovel, EnumToolMaterial.clay, DropInfo.item(PRItems.SALT, 4, 4))).create());
 	public static final RegistryObject<StagedBlock> MUSHROOM_GRASS = PRRegistry.block(new SBMushroomGrass());
@@ -97,6 +100,12 @@ public class PRBlocks {
 		RegistryObject<StagedBlock> wall = PRRegistry.block(wallBlock, false);
 		PRRegistry.item(new SIWallFloor(floorBlock, wallBlock));
 		return lastWrap = new WallFloorWrap(floor, wall);
+	}
+	
+	private static RegistryObject<StagedBlock> getLastWall() {
+		RegistryObject<StagedBlock> o = lastWrap.wall;
+		lastWrap = null;
+		return o;
 	}
 	
 	static {

@@ -59,9 +59,7 @@ public class NetworkHandler {
 				return;
 			}
 			
-			context.enqueueWork(() -> {
-				msg.handle(context);
-			});
+			context.enqueueWork(() -> msg.handle(context));
 			context.setPacketHandled(true);
 		};
 		
@@ -295,37 +293,21 @@ public class NetworkHandler {
 		buf.writeUtf(name, name.length());
 		
 		if (clazz == Boolean.class) {
-			list.forEach(o -> {
-				buf.writeBoolean(((Boolean) o).booleanValue());
-			});
+			list.forEach(o -> buf.writeBoolean(((Boolean) o).booleanValue()));
 		} else if (clazz == Character.class) {
-			list.forEach(o -> {
-				buf.writeChar(((Character) o).charValue());
-			});
+			list.forEach(o -> buf.writeChar(((Character) o).charValue()));
 		} else if (clazz == Byte.class) {
-			list.forEach(o -> {
-				buf.writeByte(((Byte) o).byteValue());
-			});
+			list.forEach(o -> buf.writeByte(((Byte) o).byteValue()));
 		} else if (clazz == Short.class) {
-			list.forEach(o -> {
-				buf.writeShort(((Short) o).shortValue());
-			});
+			list.forEach(o -> buf.writeShort(((Short) o).shortValue()));
 		} else if (clazz == Integer.class) {
-			list.forEach(o -> {
-				buf.writeInt(((Integer) o).intValue());
-			});
+			list.forEach(o -> buf.writeInt(((Integer) o).intValue()));
 		} else if (clazz == Long.class) {
-			list.forEach(o -> {
-				buf.writeLong(((Long) o).longValue());
-			});
+			list.forEach(o -> buf.writeLong(((Long) o).longValue()));
 		} else if (clazz == Float.class) {
-			list.forEach(o -> {
-				buf.writeFloat(((Float) o).floatValue());
-			});
+			list.forEach(o -> buf.writeFloat(((Float) o).floatValue()));
 		} else if (clazz == Double.class) {
-			list.forEach(o -> {
-				buf.writeDouble(((Double) o).doubleValue());
-			});
+			list.forEach(o -> buf.writeDouble(((Double) o).doubleValue()));
 		} else if (clazz == String.class) {
 			list.forEach(o -> {
 				int s = ((String) o).length();
@@ -333,9 +315,7 @@ public class NetworkHandler {
 				buf.writeUtf((String) o, s);
 			});
 		} else {
-			list.forEach(o -> {
-				writeObject(o, buf);
-			});
+			list.forEach(o -> writeObject(o, buf));
 		}
 	}
 }

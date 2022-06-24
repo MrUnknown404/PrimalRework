@@ -33,7 +33,7 @@ public class ScreenCraftingDisplayItems extends Screen {
 	private ItemRenderer ir;
 	private TextureManager textureManager;
 	private MainWindow window;
-	private final ContainerScreen<?> container;
+	private ContainerScreen<?> container;
 	private final List<Data> curItems = new ArrayList<Data>(), items3D = new ArrayList<Data>(), items2D = new ArrayList<Data>(), preItems3D = new ArrayList<Data>(),
 			preItems2D = new ArrayList<Data>();
 	private int heightItems, widthItems, padding, xStart, listSize;
@@ -42,9 +42,8 @@ public class ScreenCraftingDisplayItems extends Screen {
 	
 	private static int scroll, lastHeightItems, lastSize;
 	
-	public ScreenCraftingDisplayItems(ContainerScreen<?> container) {
+	public ScreenCraftingDisplayItems() {
 		super(WordH.translate("screen.crafting_display.title"));
-		this.container = container;
 	}
 	
 	@Override
@@ -52,6 +51,7 @@ public class ScreenCraftingDisplayItems extends Screen {
 		ir = minecraft.getItemRenderer();
 		window = minecraft.getWindow();
 		textureManager = minecraft.textureManager;
+		container = (ContainerScreen<?>) minecraft.screen;
 		
 		int guiScale = minecraft.options.guiScale;
 		int height = window.getHeight();

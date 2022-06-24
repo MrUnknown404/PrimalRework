@@ -13,6 +13,7 @@ import mrunknown404.primalrework.world.savedata.WSDQuests;
 import mrunknown404.primalrework.world.savedata.WSDStage;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -45,7 +46,9 @@ public class MiscEvents {
 	
 	@SubscribeEvent
 	public void onPlayerJoin(PlayerLoggedInEvent e) {
-		NetworkHandler.sendPacketToTarget((ServerPlayerEntity) e.getPlayer(), new PacketSyncStage(StageH.getStage()));
+		PlayerEntity player = e.getPlayer();
+		
+		NetworkHandler.sendPacketToTarget((ServerPlayerEntity) player, new PacketSyncStage(StageH.getStage()));
 	}
 	
 	@SubscribeEvent

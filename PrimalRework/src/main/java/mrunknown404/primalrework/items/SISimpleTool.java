@@ -35,24 +35,19 @@ import net.minecraft.world.World;
 
 public class SISimpleTool extends SIDamageable {
 	public SISimpleTool(Supplier<Stage> stage, EnumToolType toolType, EnumToolMaterial toolMat) {
-		super(toolMat.toString() + "_" + toolType.toString(), stage, toolType, toolMat, PRItemGroups.TOOLS,
-				toolType == EnumToolType.saw ? ItemType.handheld_rod : ItemType.handheld);
+		super(toolMat.toString() + "_" + toolType.toString(), stage, toolType, toolMat, PRItemGroups.TOOLS, ItemType.handheld);
 	}
 	
 	@Override
 	public boolean hurtEnemy(ItemStack stack, LivingEntity entity0, LivingEntity entity1) {
-		stack.hurtAndBreak(1, entity1, (e) -> {
-			e.broadcastBreakEvent(EquipmentSlotType.MAINHAND);
-		});
+		stack.hurtAndBreak(1, entity1, (e) -> e.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
 		return true;
 	}
 	
 	@Override
 	public boolean mineBlock(ItemStack stack, World world, BlockState block, BlockPos pos, LivingEntity entity) {
 		if (!world.isClientSide && block.getDestroySpeed(world, pos) != 0) {
-			stack.hurtAndBreak(1, entity, (e) -> {
-				e.broadcastBreakEvent(EquipmentSlotType.MAINHAND);
-			});
+			stack.hurtAndBreak(1, entity, (e) -> e.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
 		}
 		return true;
 	}
@@ -85,9 +80,7 @@ public class SISimpleTool extends SIDamageable {
 					}
 					
 					if (!player.isCreative()) {
-						stack.hurtAndBreak(1, player, (e) -> {
-							e.broadcastBreakEvent(EquipmentSlotType.MAINHAND);
-						});
+						stack.hurtAndBreak(1, player, (e) -> e.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
 					}
 					
 					if (b == PRBlocks.OAK_LOG.get()) {
@@ -128,9 +121,7 @@ public class SISimpleTool extends SIDamageable {
 				
 				if (!w.isClientSide) {
 					w.setBlock(pos, Blocks.GRASS_PATH.defaultBlockState(), 11); //TODO switch to my grass path
-					context.getItemInHand().hurtAndBreak(1, context.getPlayer(), (e) -> {
-						e.broadcastBreakEvent(context.getHand());
-					});
+					context.getItemInHand().hurtAndBreak(1, context.getPlayer(), (e) -> e.broadcastBreakEvent(context.getHand()));
 				}
 				
 				return ActionResultType.sidedSuccess(w.isClientSide);
@@ -145,9 +136,7 @@ public class SISimpleTool extends SIDamageable {
 				
 				if (!w.isClientSide) {
 					w.setBlock(pos, Blocks.FARMLAND.defaultBlockState(), 11); //TODO switch to my farmland
-					context.getItemInHand().hurtAndBreak(1, context.getPlayer(), (e) -> {
-						e.broadcastBreakEvent(context.getHand());
-					});
+					context.getItemInHand().hurtAndBreak(1, context.getPlayer(), (e) -> e.broadcastBreakEvent(context.getHand()));
 				}
 				
 				return ActionResultType.sidedSuccess(w.isClientSide);

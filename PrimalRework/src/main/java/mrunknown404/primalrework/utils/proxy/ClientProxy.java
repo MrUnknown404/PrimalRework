@@ -14,6 +14,7 @@ import mrunknown404.primalrework.blocks.utils.StagedBlock.BlockModelType;
 import mrunknown404.primalrework.client.CraftingDisplayH;
 import mrunknown404.primalrework.client.gui.GuiNoToast;
 import mrunknown404.primalrework.client.gui.screen.container.ScreenCampFire;
+import mrunknown404.primalrework.client.gui.screen.container.ScreenInventory;
 import mrunknown404.primalrework.client.gui.screen.container.ScreenPrimalCraftingTable;
 import mrunknown404.primalrework.client.tileentities.TERCampFire;
 import mrunknown404.primalrework.events.client.CraftingDisplayCEvents;
@@ -21,11 +22,9 @@ import mrunknown404.primalrework.events.client.HarvestDisplayCEvents;
 import mrunknown404.primalrework.events.client.MiscCEvents;
 import mrunknown404.primalrework.events.client.QuestCEvents;
 import mrunknown404.primalrework.events.client.TooltipCEvents;
-import mrunknown404.primalrework.items.SIIngot;
-import mrunknown404.primalrework.items.SIMetalPart;
+import mrunknown404.primalrework.items.utils.IColoredItem;
 import mrunknown404.primalrework.items.utils.SIBlock;
 import mrunknown404.primalrework.items.utils.StagedItem;
-import mrunknown404.primalrework.items.utils.StagedItem.ItemType;
 import mrunknown404.primalrework.registries.PRBlocks;
 import mrunknown404.primalrework.registries.PRContainers;
 import mrunknown404.primalrework.registries.PRRegistry;
@@ -98,23 +97,17 @@ public class ClientProxy extends CommonProxy {
 		
 		ScreenManager.register(PRContainers.CAMPFIRE.get(), ScreenCampFire::new);
 		ScreenManager.register(PRContainers.PRIMAL_CRAFTING_TABLE.get(), ScreenPrimalCraftingTable::new);
+		ScreenManager.register(PRContainers.INVENTORY.get(), ScreenInventory::new);
 		
 		//Color setup
 		List<Item> items = new ArrayList<Item>();
 		for (RegistryObject<Item> ro : PRRegistry.getItems()) {
 			StagedItem item = (StagedItem) ro.get();
-			if (item.getItemType() == ItemType.generated_colored) {
-				if (item instanceof SIIngot) {
-					if (((SIIngot) item).metal == EnumMetal.unknown) {
-						continue;
-					}
-				} else if (item instanceof SIMetalPart) {
-					if (((SIMetalPart) item).metal == EnumMetal.unknown) {
-						continue;
-					}
+			
+			if (item instanceof IColoredItem) {
+				if (((IColoredItem) item).getMetal() != EnumMetal.unknown) {
+					items.add(item);
 				}
-				
-				items.add(item);
 			}
 		}
 		
@@ -123,10 +116,9 @@ public class ClientProxy extends CommonProxy {
 			StagedBlock block = (StagedBlock) ro.get();
 			if (block.getBlockModelType() == BlockModelType.normal_colored) {
 				if (block instanceof SBMetal) {
-					if (((SBMetal) block).metal == EnumMetal.unknown) {
-						continue;
+					if (((SBMetal) block).metal != EnumMetal.unknown) {
+						RenderTypeLookup.setRenderLayer(block, RenderType.translucent());
 					}
-					RenderTypeLookup.setRenderLayer(block, RenderType.translucent());
 				}
 				
 				blocks.add(block);
@@ -163,12 +155,11 @@ public class ClientProxy extends CommonProxy {
 		
 		mc.getItemColors().register((itemstack, tintIndex) -> {
 			StagedItem item = (StagedItem) itemstack.getItem();
-			if (item instanceof SIIngot) {
-				return ColorH.rgba2Int(((SIIngot) item).metal.ingotColor);
-			} else if (item instanceof SIMetalPart) {
-				return ColorH.rgba2Int(((SIMetalPart) item).metal.ingotColor);
+			if (item instanceof IColoredItem) {
+				return ColorH.rgba2Int(((IColoredItem) item).getMetal().ingotColor);
 			}
 			
+			System.out.println("Unsetup colored item '" + item.getRegName() + "'!");
 			return 0;
 		}, items.toArray(new Item[0]));
 		

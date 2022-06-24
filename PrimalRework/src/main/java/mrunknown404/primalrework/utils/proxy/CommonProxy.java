@@ -6,6 +6,7 @@ import mrunknown404.primalrework.events.LeafEvents;
 import mrunknown404.primalrework.events.MiscEvents;
 import mrunknown404.primalrework.events.QuestEvents;
 import mrunknown404.primalrework.network.NetworkHandler;
+import mrunknown404.primalrework.network.packets.PacketOpenInventory;
 import mrunknown404.primalrework.network.packets.PacketSyncStage;
 import mrunknown404.primalrework.registries.PRFuels;
 import mrunknown404.primalrework.registries.PRQuests;
@@ -30,10 +31,12 @@ public class CommonProxy {
 	
 	public void setup() {
 		NetworkHandler.registerPacket(PacketSyncStage.class, NetworkDirection.PLAY_TO_CLIENT);
+		NetworkHandler.registerPacket(PacketOpenInventory.class, NetworkDirection.PLAY_TO_SERVER);
 		
 		for (RegistryObject<StagedTag> tag : PRRegistry.getTags()) {
 			tag.get().finish();
 		}
+		
 		PRQuests.load();
 		PRRecipes.load();
 		PRFuels.load();

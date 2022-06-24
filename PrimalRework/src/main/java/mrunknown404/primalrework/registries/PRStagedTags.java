@@ -17,7 +17,7 @@ public class PRStagedTags {
 					PRBlocks.STRIPPED_OAK_LOG.get().asStagedItem(), PRBlocks.STRIPPED_SPRUCE_LOG.get().asStagedItem(), PRBlocks.STRIPPED_BIRCH_LOG.get().asStagedItem(),
 					PRBlocks.STRIPPED_JUNGLE_LOG.get().asStagedItem(), PRBlocks.STRIPPED_ACACIA_LOG.get().asStagedItem(), PRBlocks.STRIPPED_DARK_OAK_LOG.get().asStagedItem()));
 	
-	private static final DoubleCache<StagedItem, Stage, List<StagedTag>> tagCache = new DoubleCache<StagedItem, Stage, List<StagedTag>>();
+	private static final DoubleCache<StagedItem, Stage, List<StagedTag>> tagCache = DoubleCache.and();
 	
 	public static List<StagedTag> getItemsTags(StagedItem item) {
 		if (tagCache.is(item, StageH.getStage())) {

@@ -6,44 +6,31 @@ import java.util.List;
 import java.util.Map;
 
 import mrunknown404.primalrework.items.utils.StagedItem;
-import mrunknown404.primalrework.recipes.SRFuel;
+import mrunknown404.primalrework.recipes.SRBurnableFuel;
 import mrunknown404.primalrework.utils.Cache;
 import mrunknown404.primalrework.utils.Pair;
 import mrunknown404.primalrework.utils.enums.EnumFuelType;
 
 public class PRFuels {
 	private static final Map<EnumFuelType, Map<StagedItem, Integer>> FUELS = new HashMap<EnumFuelType, Map<StagedItem, Integer>>();
-	private static final Map<EnumFuelType, List<SRFuel>> FUELS_AS_RECIPES = new HashMap<EnumFuelType, List<SRFuel>>();
+	private static final Map<EnumFuelType, List<SRBurnableFuel>> FUELS_AS_RECIPES = new HashMap<EnumFuelType, List<SRBurnableFuel>>();
 	
 	private static final Cache<StagedItem, Map<EnumFuelType, Pair<StagedItem, Integer>>> fuelsCache = new Cache<StagedItem, Map<EnumFuelType, Pair<StagedItem, Integer>>>();
-	private static final Cache<EnumFuelType, List<SRFuel>> fuelsAsRecipesCache = new Cache<EnumFuelType, List<SRFuel>>();
+	private static final Cache<EnumFuelType, List<SRBurnableFuel>> fuelsAsRecipesCache = new Cache<EnumFuelType, List<SRBurnableFuel>>();
 	
 	public static void load() {
 		for (EnumFuelType type : EnumFuelType.values()) {
 			FUELS.put(type, new HashMap<StagedItem, Integer>());
-			FUELS_AS_RECIPES.put(type, new ArrayList<SRFuel>());
+			FUELS_AS_RECIPES.put(type, new ArrayList<SRBurnableFuel>());
 		}
 		
-		/*
-		int oneCampfireItem = 200;
-		addFuel(EnumFuelType.campfire, Items.STICK, oneCampfireItem / 4);
-		addFuel(EnumFuelType.campfire, Items.COAL, oneCampfireItem * 8);
-		addFuel(EnumFuelType.campfire, Items.CHARCOAL, oneCampfireItem * 8);
-		for (Item item : PRStagedTags.ALL_LOGS.getItemsFromAllStages()) {
-			addFuel(EnumFuelType.campfire, item, oneCampfireItem * 4);
-		}
-		for (Item item : PRStagedTags.ALL_PLANK_BLOCKS.getItemsFromAllStages()) {
-			addFuel(EnumFuelType.campfire, item, oneCampfireItem);
-		}
-		for (Item item : PRStagedTags.ALL_PLANKS.getItemsFromAllStages()) {
-			addFuel(EnumFuelType.campfire, item, oneCampfireItem / 8);
-		}
-		*/
+		int oneBurnableItem = 200;
+		addFuel(EnumFuelType.burnable_fuel, PRItems.STICK.get(), oneBurnableItem / 4);
 	}
 	
 	public static void addFuel(EnumFuelType type, StagedItem item, int cookTime) {
 		FUELS.get(type).put(item, cookTime);
-		FUELS_AS_RECIPES.get(type).add(new SRFuel(item, cookTime));
+		FUELS_AS_RECIPES.get(type).add(new SRBurnableFuel(item, cookTime));
 	}
 	
 	public static boolean isFuelItem(EnumFuelType type, StagedItem item) {
@@ -71,13 +58,13 @@ public class PRFuels {
 		return map;
 	}
 	
-	public static List<SRFuel> convertToRecipes(EnumFuelType type, Pair<StagedItem, Integer> pair) {
+	public static List<SRBurnableFuel> convertToRecipes(EnumFuelType type, Pair<StagedItem, Integer> pair) {
 		if (fuelsAsRecipesCache.is(type)) {
 			fuelsAsRecipesCache.get();
 		}
 		
-		List<SRFuel> srFuels = new ArrayList<SRFuel>();
-		for (SRFuel sr : FUELS_AS_RECIPES.get(type)) {
+		List<SRBurnableFuel> srFuels = new ArrayList<SRBurnableFuel>();
+		for (SRBurnableFuel sr : FUELS_AS_RECIPES.get(type)) {
 			if (sr.getOutput().getItem() == pair.getL()) {
 				srFuels.add(sr);
 			}

@@ -5,12 +5,11 @@ import java.util.List;
 
 import mrunknown404.primalrework.inventory.container.ContainerPrimalCraftingTable;
 import mrunknown404.primalrework.items.utils.StagedItem;
+import mrunknown404.primalrework.recipes.IStagedRecipe;
 import mrunknown404.primalrework.recipes.Ingredient;
-import mrunknown404.primalrework.recipes.SRCrafting3;
 import mrunknown404.primalrework.recipes.input.RICrafting3;
 import mrunknown404.primalrework.registries.PRRecipes;
 import mrunknown404.primalrework.registries.PRTileEntities;
-import mrunknown404.primalrework.utils.enums.EnumRecipeType;
 import mrunknown404.primalrework.utils.helpers.WordH;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -41,7 +40,7 @@ public class TEIPrimalCraftingTable extends TEInventory {
 			ingredients.add(item instanceof StagedItem ? Ingredient.createUsingTags((StagedItem) item) : Ingredient.EMPTY);
 		}
 		
-		SRCrafting3 rec = (SRCrafting3) PRRecipes.getRecipeForInput(EnumRecipeType.crafting_3, RICrafting3.fromInventory(ingredients));
+		IStagedRecipe<?, ?> rec = PRRecipes.getRecipeForInput(RICrafting3.fromInventory(ingredients));
 		ItemStack stack = rec == null ? ItemStack.EMPTY : rec.getOutput().copy();
 		
 		if (!lastStack.equals(stack, false)) {

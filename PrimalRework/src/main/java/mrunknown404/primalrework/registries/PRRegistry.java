@@ -144,9 +144,9 @@ public class PRRegistry {
 	public static void biomeLoad(BiomeLoadingEvent e) {
 		List<Supplier<ConfiguredFeature<?, ?>>> list = BIOME_FEATURE_MAP.getOrDefault(e.getName().toString(), new ArrayList<Supplier<ConfiguredFeature<?, ?>>>());
 		for (Supplier<ConfiguredFeature<?, ?>> conf : list) {
-			e.getGeneration().addFeature(Decoration.RAW_GENERATION.ordinal(), () -> PRConfiguredFeatures.GROUND_SLABS);
-			e.getGeneration().addFeature(Decoration.RAW_GENERATION.ordinal(), () -> PRConfiguredFeatures.GROUND_ITEMS);
-			e.getGeneration().addFeature(Decoration.RAW_GENERATION.ordinal(), conf);
+			e.getGeneration().addFeature(Decoration.TOP_LAYER_MODIFICATION.ordinal(), () -> PRConfiguredFeatures.GROUND_SLABS);
+			e.getGeneration().addFeature(Decoration.TOP_LAYER_MODIFICATION.ordinal(), () -> PRConfiguredFeatures.GROUND_ITEMS);
+			e.getGeneration().addFeature(Decoration.RAW_GENERATION.ordinal(), conf); //TODO make Decoration configurable
 		}
 	}
 	
@@ -171,11 +171,10 @@ public class PRRegistry {
 	}
 	
 	public static <T extends StagedBlock> RegistryObject<T> block(T o, boolean registerItem) {
-		RegistryObject<T> reg = BLOCKS.register(o.getRegName(), () -> o);
 		if (registerItem) {
 			item((StagedItem) new SIBlock(o));
 		}
-		return reg;
+		return BLOCKS.register(o.getRegName(), () -> o);
 	}
 	
 	public static <T extends StagedItem> RegistryObject<T> item(T o) {

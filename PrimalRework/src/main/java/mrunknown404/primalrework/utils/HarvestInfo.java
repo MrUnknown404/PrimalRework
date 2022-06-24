@@ -16,7 +16,6 @@ public class HarvestInfo {
 	public static final HarvestInfo HOE_MIN = new HarvestInfo(EnumToolType.hoe, EnumToolMaterial.clay);
 	public static final HarvestInfo KNIFE_MIN = new HarvestInfo(EnumToolType.knife, EnumToolMaterial.clay);
 	public static final HarvestInfo PICKAXE_MIN = new HarvestInfo(EnumToolType.pickaxe, EnumToolMaterial.clay);
-	public static final HarvestInfo SAW_MIN = new HarvestInfo(EnumToolType.saw, EnumToolMaterial.clay);
 	public static final HarvestInfo SHEARS_MIN = new HarvestInfo(EnumToolType.shears, EnumToolMaterial.clay);
 	public static final HarvestInfo SHOVEL_MIN = new HarvestInfo(EnumToolType.shovel, EnumToolMaterial.clay);
 	public static final HarvestInfo SWORD_MIN = new HarvestInfo(EnumToolType.sword, EnumToolMaterial.clay);

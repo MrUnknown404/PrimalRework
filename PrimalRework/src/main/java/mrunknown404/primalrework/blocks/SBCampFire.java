@@ -43,7 +43,7 @@ public class SBCampFire extends SBContainer {
 	
 	public SBCampFire() {
 		super("campfire", PRStages.STAGE_1, 64, Material.DECORATION, SoundType.WOOD, true, false, 0, EnumBlockInfo.soft_wood, false, BlockStateType.lit, BlockModelType.none,
-				HarvestInfo.HAND, HarvestInfo.SAW_MIN);
+				HarvestInfo.HAND, HarvestInfo.AXE_MIN);
 		registerDefaultState(defaultBlockState().setValue(BlockStateProperties.LIT, false));
 	}
 	

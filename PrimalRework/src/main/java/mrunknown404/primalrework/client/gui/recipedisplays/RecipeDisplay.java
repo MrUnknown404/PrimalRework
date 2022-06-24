@@ -11,7 +11,7 @@ import mrunknown404.primalrework.recipes.IStagedRecipe;
 import mrunknown404.primalrework.recipes.Ingredient;
 import mrunknown404.primalrework.recipes.SRCampFire;
 import mrunknown404.primalrework.recipes.SRCrafting3;
-import mrunknown404.primalrework.recipes.SRFuel;
+import mrunknown404.primalrework.recipes.SRBurnableFuel;
 import mrunknown404.primalrework.utils.DoubleCache;
 import mrunknown404.primalrework.utils.enums.EnumFuelType;
 import mrunknown404.primalrework.utils.enums.EnumRecipeType;
@@ -32,12 +32,8 @@ public abstract class RecipeDisplay<T extends IStagedRecipe<T, ?>> {
 	protected ItemStack itemUnderMouse;
 	protected int listWidth, listHeight, maxRecipesSupported, maxPages, page;
 	
-	private final DoubleCache<Ingredient, Integer, ItemStack> lastIngCache = new DoubleCache<Ingredient, Integer, ItemStack>() {
-		@Override
-		public boolean is(Ingredient key0, Integer key1) {
-			return this.key0 != null && key0 != null ? (this.key0.matches(key0) && this.key1 == key1) : false;
-		}
-	};
+	private final DoubleCache<Ingredient, Integer, ItemStack> lastIngCache = DoubleCache
+			.create((okey0, okey1, key0, key1) -> (okey0 != null && key0 != null) ? (okey0.matches(key0) && okey1 == key1) : false);
 	
 	private ItemRenderer ir;
 	private ScreenRecipeList list;
@@ -201,8 +197,8 @@ public abstract class RecipeDisplay<T extends IStagedRecipe<T, ?>> {
 			}
 		} else if (type instanceof EnumFuelType) {
 			switch ((EnumFuelType) type) {
-				case campfire:
-					return new RDFuel((List<SRFuel>) recipes, output);
+				case burnable_fuel:
+					return new RDBurnableFuel((List<SRBurnableFuel>) recipes, output);
 			}
 		} else {
 			System.err.println("Invalid input type??");

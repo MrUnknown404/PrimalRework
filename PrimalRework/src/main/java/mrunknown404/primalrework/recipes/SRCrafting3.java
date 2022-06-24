@@ -3,6 +3,7 @@ package mrunknown404.primalrework.recipes;
 import mrunknown404.primalrework.items.utils.StagedItem;
 import mrunknown404.primalrework.recipes.input.RICrafting3;
 import mrunknown404.primalrework.stage.Stage;
+import mrunknown404.primalrework.utils.enums.EnumRecipeType;
 import net.minecraft.item.ItemStack;
 
 public class SRCrafting3 implements IStagedRecipe<SRCrafting3, RICrafting3> {
@@ -39,5 +40,10 @@ public class SRCrafting3 implements IStagedRecipe<SRCrafting3, RICrafting3> {
 	@Override
 	public boolean has(Ingredient input) {
 		return this.input.has(input);
+	}
+	
+	@Override
+	public EnumRecipeType getRecipeType() {
+		return EnumRecipeType.crafting_3;
 	}
 }

@@ -9,7 +9,6 @@ import mrunknown404.primalrework.registries.PRStages;
 import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.utils.HarvestInfo;
 import mrunknown404.primalrework.utils.enums.EnumBlockInfo;
-import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
@@ -47,11 +46,6 @@ public class SBUnlitPrimalTorch extends StagedBlock {
 	@Override
 	public ItemType getItemType() {
 		return ItemType.itemblock;
-	}
-	
-	@Override
-	public BlockRenderType getRenderShape(BlockState state) {
-		return BlockRenderType.MODEL;
 	}
 	
 	@Override

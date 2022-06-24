@@ -1,5 +1,7 @@
 package mrunknown404.primalrework.stage;
 
+import java.util.Objects;
+
 import mrunknown404.primalrework.utils.IName;
 import mrunknown404.primalrework.utils.helpers.WordH;
 import net.minecraft.util.text.IFormattableTextComponent;
@@ -33,5 +35,20 @@ public class Stage extends ForgeRegistryEntry<Stage> implements IName {
 	@Override
 	public String toString() {
 		return getName();
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this != obj || obj == null || getClass() != obj.getClass()) {
+			return false;
+		}
+		
+		Stage other = (Stage) obj;
+		return id == other.id;
 	}
 }

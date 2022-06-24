@@ -1,22 +1,62 @@
 package mrunknown404.primalrework.events.client;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import mrunknown404.primalrework.client.gui.screen.ScreenNonSupportedMods;
 import mrunknown404.primalrework.client.gui.screen.fixes.PRCreateWorldScreen;
 import mrunknown404.primalrework.client.gui.screen.fixes.PRPauseScreen;
+import mrunknown404.primalrework.network.NetworkHandler;
+import mrunknown404.primalrework.network.packets.PacketOpenInventory;
+import mrunknown404.primalrework.utils.PrimalMod;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.CreateWorldScreen;
 import net.minecraft.client.gui.screen.IngameMenuScreen;
+import net.minecraft.client.gui.screen.MainMenuScreen;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.screen.inventory.CreativeScreen;
+import net.minecraft.client.gui.screen.inventory.InventoryScreen;
 import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 
 public class MiscCEvents {
+	private static boolean firstMainMenu;
+	
 	@SubscribeEvent
 	public void onGuiOpen(GuiOpenEvent e) {
 		Minecraft mc = Minecraft.getInstance();
+		Screen gui = e.getGui();
 		
-		if (e.getGui() instanceof CreateWorldScreen) {
+		if (gui instanceof CreateWorldScreen) {
 			e.setGui(new PRCreateWorldScreen(mc.screen));
-		} else if (e.getGui() instanceof IngameMenuScreen) {
+		} else if (gui instanceof IngameMenuScreen) {
 			e.setGui(new PRPauseScreen(!(mc.hasSingleplayerServer() && !mc.getSingleplayerServer().isPublished())));
+		} else if (!firstMainMenu && gui instanceof MainMenuScreen) {
+			firstMainMenu = true;
+			List<String> modids = new ArrayList<String>();
+			
+			ModList.get().forEachModContainer((modid, instance) -> {
+				if (modid.equalsIgnoreCase("minecraft") || modid.equalsIgnoreCase("forge")) {
+					return;
+				}
+				
+				if (!instance.getMod().getClass().isAnnotationPresent(PrimalMod.class)) {
+					modids.add(modid);
+					System.out.println("Mod '" + modid + "' is not supported!");
+				}
+			});
+			
+			if (!modids.isEmpty()) {
+				e.setGui(new ScreenNonSupportedMods(modids));
+			}
+		} else if (gui instanceof InventoryScreen) {
+			if (!mc.player.isCreative()) {
+				e.setCanceled(true);
+				NetworkHandler.sendPacketToServer(new PacketOpenInventory());
+			} else {
+				e.setGui(new CreativeScreen(mc.player));
+			}
 		}
 	}
 }

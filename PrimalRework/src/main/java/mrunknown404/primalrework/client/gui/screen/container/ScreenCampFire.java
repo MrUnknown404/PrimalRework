@@ -19,7 +19,6 @@ public class ScreenCampFire extends ContainerScreen<ContainerCampFire> {
 	@Override
 	public void render(MatrixStack stack, int mouseX, int mouseY, float tick) {
 		renderBackground(stack);
-		renderBg(stack, tick, mouseX, mouseY);
 		super.render(stack, mouseX, mouseY, tick);
 		renderTooltip(stack, mouseX, mouseY);
 	}
