@@ -6,17 +6,15 @@ import mrunknown404.primalrework.blocks.utils.SBSlab;
 import mrunknown404.primalrework.blocks.utils.SBSnowyDirt;
 import mrunknown404.primalrework.registries.PRBlocks;
 import mrunknown404.primalrework.registries.PRStages;
+import mrunknown404.primalrework.utils.BlockInfo;
 import mrunknown404.primalrework.utils.HarvestInfo;
 import mrunknown404.primalrework.utils.HarvestInfo.DropInfo;
-import mrunknown404.primalrework.utils.enums.BlockInfo;
 import mrunknown404.primalrework.utils.enums.ToolMaterial;
 import mrunknown404.primalrework.utils.enums.ToolType;
 import mrunknown404.primalrework.utils.helpers.BlockH;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SnowBlock;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -25,8 +23,7 @@ import net.minecraft.world.server.ServerWorld;
 
 public class SBGrassSlab extends SBSlab { //TODO replace with my snow
 	public SBGrassSlab() {
-		super("grass_slab", PRStages.STAGE_0, Material.GRASS, SoundType.GRASS, BlockInfo.GRASS, true,
-				new HarvestInfo(ToolType.SHOVEL, ToolMaterial.CLAY, DropInfo.block(PRBlocks.DIRT_SLAB)));
+		super("grass_slab", PRStages.STAGE_0, BlockInfo.of(BlockInfo.DRY_GRASS), new HarvestInfo(ToolType.SHOVEL, ToolMaterial.CLAY, DropInfo.block(PRBlocks.DIRT_SLAB)));
 	}
 	
 	@Override

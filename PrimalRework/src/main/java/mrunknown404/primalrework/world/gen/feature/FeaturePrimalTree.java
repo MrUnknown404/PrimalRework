@@ -38,40 +38,28 @@ public class FeaturePrimalTree extends Feature<BaseTreeFeatureConfig> {
 	}
 	
 	private static boolean isFree(IWorldGenerationBaseReader world, BlockPos pos) {
-		return validTreePos(world, pos) || world.isStateAtPosition(pos, (state) -> {
-			return BlockH.isLog(state.getBlock());
-		});
+		return validTreePos(world, pos) || world.isStateAtPosition(pos, (state) -> BlockH.isLog(state.getBlock()));
 	}
 	
 	private static boolean isVine(IWorldGenerationBaseReader world, BlockPos pos) {
-		return world.isStateAtPosition(pos, (state) -> {
-			return state.is(Blocks.VINE);
-		});
+		return world.isStateAtPosition(pos, (state) -> state.is(Blocks.VINE));
 	}
 	
 	private static boolean isBlockWater(IWorldGenerationBaseReader world, BlockPos pos) {
-		return world.isStateAtPosition(pos, (state) -> {
-			return state.is(Blocks.WATER);
-		});
+		return world.isStateAtPosition(pos, (state) -> state.is(Blocks.WATER));
 	}
 	
 	@SuppressWarnings("deprecation")
 	public static boolean isAirOrLeaves(IWorldGenerationBaseReader world, BlockPos pos) {
-		return world.isStateAtPosition(pos, (state) -> {
-			return state.isAir() || BlockH.isLeaves(state.getBlock());
-		});
+		return world.isStateAtPosition(pos, (state) -> state.isAir() || BlockH.isLeaves(state.getBlock()));
 	}
 	
 	private static boolean isGrassOrDirtOrFarmland(IWorldGenerationBaseReader world, BlockPos pos) {
-		return world.isStateAtPosition(pos, (state) -> {
-			return BlockH.canSupportPlant(state.getBlock());
-		});
+		return world.isStateAtPosition(pos, (state) -> BlockH.canSupportPlant(state.getBlock()));
 	}
 	
 	private static boolean isReplaceablePlant(IWorldGenerationBaseReader world, BlockPos pos) {
-		return world.isStateAtPosition(pos, (state) -> {
-			return state.getMaterial() == Material.REPLACEABLE_PLANT;
-		});
+		return world.isStateAtPosition(pos, (state) -> state.getMaterial() == Material.REPLACEABLE_PLANT);
 	}
 	
 	private static boolean validTreePos(IWorldGenerationBaseReader world, BlockPos pos) {
@@ -117,9 +105,7 @@ public class FeaturePrimalTree extends Feature<BaseTreeFeatureConfig> {
 			
 			if (l1 >= i || optionalint.isPresent() && l1 >= optionalint.getAsInt()) {
 				List<FoliagePlacer.Foliage> list = config.trunkPlacer.placeTrunk(world, r, l1, blockpos, set0, bb, config);
-				list.forEach((foliage) -> {
-					config.foliagePlacer.createFoliage(world, r, config, l1, foliage, j, l, set1, bb);
-				});
+				list.forEach((foliage) -> config.foliagePlacer.createFoliage(world, r, config, l1, foliage, j, l, set1, bb));
 				
 				return true;
 			}

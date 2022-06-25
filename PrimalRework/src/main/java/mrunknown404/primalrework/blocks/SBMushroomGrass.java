@@ -6,17 +6,15 @@ import mrunknown404.primalrework.blocks.utils.SBSnowyDirt;
 import mrunknown404.primalrework.items.utils.StagedItem.ItemType;
 import mrunknown404.primalrework.registries.PRBlocks;
 import mrunknown404.primalrework.registries.PRStages;
+import mrunknown404.primalrework.utils.BlockInfo;
 import mrunknown404.primalrework.utils.HarvestInfo;
 import mrunknown404.primalrework.utils.HarvestInfo.DropInfo;
-import mrunknown404.primalrework.utils.enums.BlockInfo;
 import mrunknown404.primalrework.utils.enums.ToolMaterial;
 import mrunknown404.primalrework.utils.enums.ToolType;
 import mrunknown404.primalrework.utils.helpers.BlockH;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SnowBlock;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -27,9 +25,8 @@ import net.minecraftforge.common.IPlantable;
 
 public class SBMushroomGrass extends SBSnowyDirt { //TODO switch to my snow
 	public SBMushroomGrass() {
-		super("mushroom_grass", PRStages.STAGE_0, Material.GRASS, SoundType.GRASS, BlockInfo.GRASS, true, BlockStateType.none, BlockModelType.none,
+		super("mushroom_grass", PRStages.STAGE_0, BlockInfo.of(BlockInfo.DRY_GRASS), BlockStateType.none, BlockModelType.none,
 				new HarvestInfo(ToolType.SHOVEL, ToolMaterial.CLAY, DropInfo.block(PRBlocks.DIRT)));
-		registerDefaultState(stateDefinition.any().setValue(SNOWY, Boolean.valueOf(false)));
 	}
 	
 	@Override

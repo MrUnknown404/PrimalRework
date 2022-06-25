@@ -115,7 +115,7 @@ public class PRItems {
 	}
 	
 	private static RegistryObject<StagedItem> registerCast(Enum<?> type) {
-		StagedItem item = new StagedItem(type.name() + "_cast", PRStages.STAGE_3, 8);
+		StagedItem item = new StagedItem(type + "_cast", PRStages.STAGE_3, 8);
 		RegistryObject<StagedItem> reg = PRRegistry.item(item);
 		CASTS.add(reg);
 		return reg;

@@ -31,4 +31,9 @@ public enum FuelType implements ICraftingInput {
 	public ItemStack getIcon() {
 		return icon;
 	}
+	
+	@Override
+	public String toString() {
+		return super.toString().toLowerCase();
+	}
 }

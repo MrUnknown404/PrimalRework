@@ -3,6 +3,7 @@ package mrunknown404.primalrework.blocks;
 import java.util.Random;
 
 import mrunknown404.primalrework.registries.PRStages;
+import mrunknown404.primalrework.utils.BlockInfo;
 import mrunknown404.primalrework.utils.HarvestInfo;
 import net.minecraft.block.BlockState;
 import net.minecraft.particles.ParticleTypes;
@@ -11,7 +12,7 @@ import net.minecraft.world.World;
 
 public class SBLitPrimalTorch extends SBUnlitPrimalTorch {
 	public SBLitPrimalTorch() {
-		super("lit_primal_torch", PRStages.STAGE_1, 8, BlockStateType.normal, HarvestInfo.HAND);
+		super("lit_primal_torch", PRStages.STAGE_1, BlockInfo.LIT_PRIMAL_TORCH, HarvestInfo.HAND);
 	}
 	
 	@Override

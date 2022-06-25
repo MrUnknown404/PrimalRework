@@ -8,9 +8,9 @@ import com.mojang.blaze3d.systems.RenderSystem;
 
 import mrunknown404.primalrework.blocks.utils.StagedBlock;
 import mrunknown404.primalrework.items.utils.StagedItem;
+import mrunknown404.primalrework.utils.BlockInfo;
 import mrunknown404.primalrework.utils.DoubleCache;
 import mrunknown404.primalrework.utils.HarvestInfo;
-import mrunknown404.primalrework.utils.enums.BlockInfo;
 import mrunknown404.primalrework.utils.enums.ToolMaterial;
 import mrunknown404.primalrework.utils.enums.ToolType;
 import mrunknown404.primalrework.utils.helpers.BlockH;
@@ -79,13 +79,13 @@ public class HarvestDisplayCEvents {
 			}
 			
 			BlockInfo blockInfo = b.blockInfo;
+			float hardness = blockInfo.getHardness();
+			float blast = blockInfo.getBlast();
 			
-			if (blockInfo.hardness != -1) {
-				texts.add(WordH.string(((String.valueOf(blockInfo.hardness).split("\\.")[1].length() < 2) ? blockInfo.hardness + "0" : blockInfo.hardness) + " ")
-						.append(WordH.translate("tooltips.block.hardness")));
-			} else {
-				texts.add(WordH.translate("tooltips.block.unbreakable"));
-			}
+			texts.add(hardness != -1 ? WordH.string(WordH.toPrintableNumber(hardness) + " ").append(WordH.translate("tooltips.block.hardness")) :
+					WordH.translate("tooltips.block.unbreakable"));
+			texts.add(blast != -1 ? WordH.string(WordH.toPrintableNumber(blast) + " ").append(WordH.translate("tooltips.block.blast")) :
+					WordH.translate("tooltips.block.unexplodable"));
 			
 			ToolType toolType = item instanceof StagedItem ? ((StagedItem) item).toolType : ToolType.NONE;
 			ToolMaterial toolMat = item instanceof StagedItem ? ((StagedItem) item).toolMat : ToolMaterial.HAND;
@@ -168,11 +168,7 @@ public class HarvestDisplayCEvents {
 							15728880);
 				}
 				
-				if (i + 1 == titleLinesCount) {
-					tooltipY += 7;
-				}
-				
-				tooltipY += 10;
+				tooltipY += i + 1 == titleLinesCount ? 17 : 10;
 			}
 			
 			renderType.endBatch();

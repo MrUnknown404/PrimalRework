@@ -7,12 +7,11 @@ import mrunknown404.primalrework.items.utils.StagedItem.ItemType;
 import mrunknown404.primalrework.registries.PRItemGroups;
 import mrunknown404.primalrework.registries.PRStages;
 import mrunknown404.primalrework.stage.Stage;
+import mrunknown404.primalrework.utils.BlockInfo;
+import mrunknown404.primalrework.utils.BlockInfo.UniqueRawBlockInfo;
 import mrunknown404.primalrework.utils.HarvestInfo;
-import mrunknown404.primalrework.utils.enums.BlockInfo;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
@@ -24,13 +23,13 @@ import net.minecraft.world.IWorldReader;
 public class SBUnlitPrimalTorch extends StagedBlock {
 	private static final VoxelShape SHAPE = box(6, 0, 6, 10, 8, 10);
 	
-	protected SBUnlitPrimalTorch(String name, Supplier<Stage> stage, int light, BlockStateType blockStateType, HarvestInfo info) {
-		super(name, stage, 64, PRItemGroups.BLOCKS, Material.DECORATION, SoundType.WOOD, false, false, light, BlockInfo.INSTANT, false, blockStateType, BlockModelType.none,
-				info);
+	SBUnlitPrimalTorch(String name, Supplier<Stage> stage, UniqueRawBlockInfo blockInfo, HarvestInfo info) {
+		super(name, stage, 64, PRItemGroups.BLOCKS, BlockInfo.of(blockInfo), BlockStateType.normal, BlockModelType.none, info);
 	}
 	
 	public SBUnlitPrimalTorch() {
-		this("unlit_primal_torch", PRStages.STAGE_0, 0, BlockStateType.normal, HarvestInfo.HAND);
+		super("unlit_primal_torch", PRStages.STAGE_0, 64, PRItemGroups.BLOCKS, BlockInfo.of(BlockInfo.UNLIT_PRIMAL_TORCH), BlockStateType.normal, BlockModelType.none,
+				HarvestInfo.HAND);
 	}
 	
 	@Override

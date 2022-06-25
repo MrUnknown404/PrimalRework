@@ -6,11 +6,9 @@ import javax.annotation.Nullable;
 
 import mrunknown404.primalrework.registries.PRItemGroups;
 import mrunknown404.primalrework.stage.Stage;
+import mrunknown404.primalrework.utils.BlockInfo;
 import mrunknown404.primalrework.utils.HarvestInfo;
-import mrunknown404.primalrework.utils.enums.BlockInfo;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -19,10 +17,9 @@ import net.minecraft.world.World;
 
 @SuppressWarnings("deprecation")
 public abstract class SBContainer extends StagedBlock {
-	protected SBContainer(String name, Supplier<Stage> stage, int stackSize, Material material, SoundType sound, boolean hasCollision, boolean canOcclude, int lightLevel,
-			BlockInfo blockInfo, boolean isRandomTick, BlockStateType blockStateType, BlockModelType blockModelType, HarvestInfo info, HarvestInfo... extraInfos) {
-		super(name, stage, stackSize, PRItemGroups.MACHINES, material, sound, hasCollision, canOcclude, lightLevel, blockInfo, isRandomTick, blockStateType, blockModelType, info,
-				extraInfos);
+	protected SBContainer(String name, Supplier<Stage> stage, BlockInfo material, BlockStateType blockStateType, BlockModelType blockModelType, HarvestInfo info,
+			HarvestInfo... extraInfos) {
+		super(name, stage, 1, PRItemGroups.MACHINES, material, blockStateType, blockModelType, info, extraInfos);
 	}
 	
 	@Override

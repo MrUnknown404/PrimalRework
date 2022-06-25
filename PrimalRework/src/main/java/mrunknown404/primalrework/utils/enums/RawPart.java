@@ -7,4 +7,9 @@ public enum RawPart {
 	RING,
 	WIRE,
 	GEAR;
+	
+	@Override
+	public String toString() {
+		return super.toString().toLowerCase();
+	}
 }

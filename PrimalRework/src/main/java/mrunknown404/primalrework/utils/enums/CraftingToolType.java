@@ -7,4 +7,9 @@ public enum CraftingToolType {
 	HAMMER,
 	CUTTER,
 	WRENCH;
+	
+	@Override
+	public String toString() {
+		return super.toString().toLowerCase();
+	}
 }

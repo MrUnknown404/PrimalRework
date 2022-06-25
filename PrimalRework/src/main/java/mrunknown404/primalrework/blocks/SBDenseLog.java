@@ -4,22 +4,19 @@ import mrunknown404.primalrework.blocks.utils.SBRotatedPillar;
 import mrunknown404.primalrework.registries.PRBlocks;
 import mrunknown404.primalrework.registries.PRItemGroups;
 import mrunknown404.primalrework.registries.PRStages;
+import mrunknown404.primalrework.utils.BlockInfo;
+import mrunknown404.primalrework.utils.BlockInfo.Hardness;
 import mrunknown404.primalrework.utils.HarvestInfo;
-import mrunknown404.primalrework.utils.enums.BlockInfo;
 import mrunknown404.primalrework.utils.helpers.MathH;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
 public class SBDenseLog extends SBRotatedPillar {
 	public SBDenseLog() {
-		super("dense_log", PRStages.STAGE_2, 16, PRItemGroups.BLOCKS, Material.WOOD, SoundType.WOOD, true, true, 0, BlockInfo.HARD_WOOD, false, HarvestInfo.AXE_MIN);
+		super("dense_log", PRStages.STAGE_2, 16, PRItemGroups.BLOCKS, BlockInfo.with(BlockInfo.WOOD, Hardness.HARD_0), HarvestInfo.AXE_MIN);
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -90,15 +87,5 @@ public class SBDenseLog extends SBRotatedPillar {
 		}
 		
 		return true;
-	}
-	
-	@Override
-	public int getFlammability(BlockState state, IBlockReader world, BlockPos pos, Direction face) {
-		return 5;
-	}
-	
-	@Override
-	public int getFireSpreadSpeed(BlockState state, IBlockReader world, BlockPos pos, Direction face) {
-		return 5;
 	}
 }

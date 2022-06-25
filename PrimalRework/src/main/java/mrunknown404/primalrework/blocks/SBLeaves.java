@@ -5,16 +5,14 @@ import java.util.Random;
 import mrunknown404.primalrework.blocks.utils.StagedBlock;
 import mrunknown404.primalrework.registries.PRItemGroups;
 import mrunknown404.primalrework.registries.PRStages;
+import mrunknown404.primalrework.utils.BlockInfo;
 import mrunknown404.primalrework.utils.HarvestInfo;
 import mrunknown404.primalrework.utils.HarvestInfo.DropInfo;
-import mrunknown404.primalrework.utils.enums.BlockInfo;
 import mrunknown404.primalrework.utils.enums.ToolMaterial;
 import mrunknown404.primalrework.utils.enums.ToolType;
 import mrunknown404.primalrework.utils.helpers.BlockH;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.BooleanProperty;
@@ -34,9 +32,8 @@ public class SBLeaves extends StagedBlock {
 	public static final IntegerProperty DISTANCE = BlockStateProperties.DISTANCE;
 	public static final BooleanProperty PERSISTENT = BlockStateProperties.PERSISTENT;
 	
-	public SBLeaves(String name) {
-		super(name + "_leaves", PRStages.STAGE_0, 32, PRItemGroups.BLOCKS, Material.LEAVES, SoundType.GRASS, true, false, 0, BlockInfo.PLANT, true, BlockStateType.normal,
-				BlockModelType.normal_colored, //TODO add saplings/sticks
+	public SBLeaves(String name) { // TODO add saplings/sticks
+		super(name + "_leaves", PRStages.STAGE_0, 32, PRItemGroups.BLOCKS, BlockInfo.of(BlockInfo.LEAVES), BlockStateType.normal, BlockModelType.normal_colored,
 				new HarvestInfo(ToolType.NONE, ToolMaterial.HAND, DropInfo.NONE), new HarvestInfo(ToolType.KNIFE, ToolMaterial.CLAY, DropInfo.NONE),
 				new HarvestInfo(ToolType.AXE, ToolMaterial.CLAY, DropInfo.NONE), new HarvestInfo(ToolType.SHEARS, ToolMaterial.CLAY));
 		registerDefaultState(stateDefinition.any().setValue(DISTANCE, Integer.valueOf(7)).setValue(PERSISTENT, Boolean.valueOf(false)));
@@ -126,15 +123,5 @@ public class SBLeaves extends StagedBlock {
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext ctx) {
 		return updateDistance(defaultBlockState().setValue(PERSISTENT, Boolean.valueOf(true)), ctx.getLevel(), ctx.getClickedPos());
-	}
-	
-	@Override
-	public int getFlammability(BlockState state, IBlockReader world, BlockPos pos, Direction face) {
-		return 60;
-	}
-	
-	@Override
-	public int getFireSpreadSpeed(BlockState state, IBlockReader world, BlockPos pos, Direction face) {
-		return 30;
 	}
 }

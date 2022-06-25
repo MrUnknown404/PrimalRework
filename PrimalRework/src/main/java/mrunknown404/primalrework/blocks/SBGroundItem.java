@@ -7,9 +7,10 @@ import mrunknown404.primalrework.items.utils.StagedItem;
 import mrunknown404.primalrework.items.utils.StagedItem.ItemType;
 import mrunknown404.primalrework.registries.PRItemGroups;
 import mrunknown404.primalrework.registries.PRStages;
+import mrunknown404.primalrework.utils.BlockInfo;
+import mrunknown404.primalrework.utils.BlockInfo.UniqueRawBlockInfo;
 import mrunknown404.primalrework.utils.HarvestInfo;
 import mrunknown404.primalrework.utils.HarvestInfo.DropInfo;
-import mrunknown404.primalrework.utils.enums.BlockInfo;
 import mrunknown404.primalrework.utils.enums.ToolMaterial;
 import mrunknown404.primalrework.utils.enums.ToolType;
 import net.minecraft.block.Block;
@@ -17,8 +18,6 @@ import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.IWaterLoggable;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.BlockItemUseContext;
@@ -39,9 +38,9 @@ public class SBGroundItem extends StagedBlock implements IWaterLoggable {
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	private static final VoxelShape SHAPE = box(3, 0, 3, 13, 1, 13);
 	
-	public SBGroundItem(String name, SoundType sound, Supplier<StagedItem> dropInstead) {
-		super("ground_" + name, PRStages.STAGE_0, 64, PRItemGroups.BLOCKS, Material.DECORATION, sound, false, false, 0, BlockInfo.INSTANT, false, BlockStateType.random_direction,
-				BlockModelType.none, dropInstead == null ? HarvestInfo.HAND : new HarvestInfo(ToolType.NONE, ToolMaterial.HAND, DropInfo.item(dropInstead)));
+	public SBGroundItem(String name, UniqueRawBlockInfo info, Supplier<StagedItem> dropInstead) {
+		super("ground_" + name, PRStages.STAGE_0, 64, PRItemGroups.BLOCKS, BlockInfo.of(info), BlockStateType.random_direction, BlockModelType.none,
+				dropInstead == null ? HarvestInfo.HAND : new HarvestInfo(ToolType.NONE, ToolMaterial.HAND, DropInfo.item(dropInstead)));
 		registerDefaultState(defaultBlockState().setValue(WATERLOGGED, Boolean.valueOf(false)));
 	}
 	

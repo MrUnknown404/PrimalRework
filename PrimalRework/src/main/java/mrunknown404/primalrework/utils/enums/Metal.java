@@ -5,13 +5,15 @@ import java.util.function.Supplier;
 
 import mrunknown404.primalrework.registries.PRStages;
 import mrunknown404.primalrework.stage.Stage;
+import mrunknown404.primalrework.utils.BlockInfo;
+import mrunknown404.primalrework.utils.BlockInfo.Hardness;
 
 public enum Metal {
 	//@formatter:off
-	UNKNOWN(BlockInfo.SOFT_METAL, PRStages.STAGE_3, ToolMaterial.STONE,  true,  null),
-	COPPER (BlockInfo.METAL,      PRStages.STAGE_3, ToolMaterial.STONE,  false, new Color(255, 145, 0)),
-	TIN    (BlockInfo.SOFT_METAL, PRStages.STAGE_3, ToolMaterial.STONE,  false, new Color(255, 237, 251)),
-	BRONZE (BlockInfo.HARD_METAL, PRStages.STAGE_4, ToolMaterial.COPPER, true,  new Color(208, 101, 0));
+	UNKNOWN(BlockInfo.with(BlockInfo.METAL, Hardness.MEDIUM_0), PRStages.STAGE_3, ToolMaterial.STONE,  true,  null),
+	COPPER (BlockInfo.with(BlockInfo.METAL, Hardness.MEDIUM_0), PRStages.STAGE_3, ToolMaterial.STONE,  false, new Color(255, 145, 0)),
+	TIN    (BlockInfo.with(BlockInfo.METAL, Hardness.SOFT_2),   PRStages.STAGE_3, ToolMaterial.STONE,  false, new Color(255, 237, 251)),
+	BRONZE (BlockInfo.with(BlockInfo.METAL, Hardness.MEDIUM_1), PRStages.STAGE_4, ToolMaterial.COPPER, true,  new Color(208, 101, 0));
 	//@formatter:on
 	
 	//TODO add melting/boiling temp
@@ -29,5 +31,10 @@ public enum Metal {
 		this.toolMat = toolMat;
 		this.isAlloy = isAlloy;
 		this.ingotColor = ingotColor;
+	}
+	
+	@Override
+	public String toString() {
+		return super.toString().toLowerCase();
 	}
 }

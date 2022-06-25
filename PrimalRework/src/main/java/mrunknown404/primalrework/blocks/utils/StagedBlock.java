@@ -10,17 +10,19 @@ import mrunknown404.primalrework.items.utils.StagedItem;
 import mrunknown404.primalrework.items.utils.StagedItem.ItemType;
 import mrunknown404.primalrework.registries.PRItemGroups;
 import mrunknown404.primalrework.stage.Stage;
+import mrunknown404.primalrework.utils.BlockInfo;
 import mrunknown404.primalrework.utils.HarvestInfo;
-import mrunknown404.primalrework.utils.enums.BlockInfo;
 import mrunknown404.primalrework.utils.enums.ToolType;
 import mrunknown404.primalrework.utils.helpers.WordH;
 import net.minecraft.block.Block;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
+import net.minecraft.block.BlockState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Items;
+import net.minecraft.util.Direction;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.world.IBlockReader;
 
 public class StagedBlock extends Block {
 	private final Map<ToolType, HarvestInfo> harvestInfos = new HashMap<ToolType, HarvestInfo>();
@@ -35,10 +37,9 @@ public class StagedBlock extends Block {
 	private final List<ITextComponent> tooltips = new ArrayList<ITextComponent>();
 	private boolean useVanillaNamespaceBlock, useVanillaNamespaceItem;
 	
-	protected StagedBlock(String name, Supplier<Stage> stage, int stackSize, ItemGroup tab, Material material, SoundType sound, boolean hasCollision, boolean canOcclude,
-			int lightLevel, BlockInfo blockInfo, boolean isRandomTick, BlockStateType blockStateType, BlockModelType blockModelType, HarvestInfo info,
-			HarvestInfo... extraInfos) {
-		super(toProperties(material, sound, hasCollision, canOcclude, lightLevel, blockInfo, isRandomTick));
+	public StagedBlock(String name, Supplier<Stage> stage, int stackSize, ItemGroup tab, BlockInfo blockInfo, BlockStateType blockStateType, BlockModelType blockModelType,
+			HarvestInfo info, HarvestInfo... extraInfos) {
+		super(toProperties(blockInfo));
 		this.name = name;
 		this.stage = stage;
 		this.stackSize = stackSize;
@@ -51,6 +52,15 @@ public class StagedBlock extends Block {
 		for (HarvestInfo is : extraInfos) {
 			harvestInfos.put(is.toolType, is);
 		}
+	}
+	
+	public StagedBlock(String name, Supplier<Stage> stage, BlockInfo blockInfo, BlockStateType blockStateType, BlockModelType blockModelType, HarvestInfo info,
+			HarvestInfo... extraInfos) {
+		this(name, stage, 64, PRItemGroups.BLOCKS, blockInfo, blockStateType, blockModelType, info, extraInfos);
+	}
+	
+	public StagedBlock(String name, Supplier<Stage> stage, BlockInfo blockInfo, HarvestInfo info, HarvestInfo... extraInfos) {
+		this(name, stage, 64, PRItemGroups.BLOCKS, blockInfo, BlockStateType.normal, BlockModelType.normal, info, extraInfos);
 	}
 	
 	public StagedBlock addTooltip(int amount) {
@@ -99,6 +109,16 @@ public class StagedBlock extends Block {
 		return super.asItem();
 	}
 	
+	@Override
+	public final int getFlammability(BlockState state, IBlockReader world, BlockPos pos, Direction face) {
+		return blockInfo.getFlammability();
+	}
+	
+	@Override
+	public final int getFireSpreadSpeed(BlockState state, IBlockReader world, BlockPos pos, Direction face) {
+		return blockInfo.getFireSpreadSpeed();
+	}
+	
 	public StagedBlock useVanillaNamespaceBlock() {
 		useVanillaNamespaceBlock = true;
 		return this;
@@ -123,19 +143,17 @@ public class StagedBlock extends Block {
 		return useVanillaNamespaceItem;
 	}
 	
-	protected static Properties toProperties(Material material, SoundType sound, boolean hasCollision, boolean canOcclude, int lightLevel, BlockInfo blockInfo,
-			boolean isRandomTick) {
-		Properties p = Properties.of(material).sound(sound).strength(blockInfo.hardness, blockInfo.blast).lightLevel((light) -> {
-			return lightLevel;
-		});
+	protected static Properties toProperties(BlockInfo blockInfo) {
+		Properties p = Properties.of(blockInfo.getMaterial()).sound(blockInfo.getSound()).strength(blockInfo.getHardness(), blockInfo.getBlast())
+				.lightLevel((state) -> blockInfo.getLight());
 		
-		if (!hasCollision) {
+		if (!blockInfo.getMaterial().blocksMotion()) {
 			p.noCollission();
 		}
-		if (isRandomTick) {
+		if (blockInfo.isRandomTick()) {
 			p.randomTicks();
 		}
-		if (!canOcclude) {
+		if (!blockInfo.getMaterial().isSolidBlocking()) {
 			p.noOcclusion();
 		}
 		
@@ -158,77 +176,5 @@ public class StagedBlock extends Block {
 		normal_colored,
 		facing_pillar,
 		slab;
-	}
-	
-	public static class Builder {
-		private final String name;
-		private final Supplier<Stage> stage;
-		private final Material material;
-		private final SoundType sound;
-		private final BlockInfo blockInfo;
-		private final HarvestInfo info;
-		private final HarvestInfo[] extraInfos;
-		
-		private int stackSize = 64;
-		private ItemGroup tab = PRItemGroups.BLOCKS;
-		private boolean hasCollision = true, isRandomTick = false, canOcclude = true;
-		private int lightLevel = 0;
-		private BlockStateType blockStateType = BlockStateType.normal;
-		private BlockModelType blockModelType = BlockModelType.normal;
-		
-		public Builder(String name, Supplier<Stage> stage, Material material, SoundType sound, BlockInfo blockInfo, HarvestInfo info, HarvestInfo... extraInfos) {
-			this.name = name;
-			this.stage = stage;
-			this.material = material;
-			this.sound = sound;
-			this.blockInfo = blockInfo;
-			this.info = info;
-			this.extraInfos = extraInfos;
-		}
-		
-		public Builder setStackSize(int stackSize) {
-			this.stackSize = stackSize;
-			return this;
-		}
-		
-		public Builder setGroup(ItemGroup tab) {
-			this.tab = tab;
-			return this;
-		}
-		
-		public Builder disableCollision() {
-			this.hasCollision = false;
-			return this;
-		}
-		
-		public Builder enableRandomTick() {
-			this.isRandomTick = true;
-			return this;
-		}
-		
-		public Builder noOcclusion() {
-			canOcclude = false;
-			return this;
-		}
-		
-		public Builder setLightLevel(int lightLevel) {
-			this.lightLevel = lightLevel;
-			return this;
-		}
-		
-		public Builder setBlockStateType(BlockStateType blockStateType) {
-			this.blockStateType = blockStateType;
-			return this;
-		}
-		
-		public Builder setBlockModelType(BlockModelType blockModelType) {
-			this.blockModelType = blockModelType;
-			return this;
-		}
-		
-		public StagedBlock create() {
-			return new StagedBlock(name, stage, stackSize, tab, material, sound, hasCollision, canOcclude, lightLevel, blockInfo, isRandomTick, blockStateType, blockModelType,
-					info, extraInfos);
-		}
 	}
 }

@@ -69,4 +69,9 @@ public enum ToolMaterial implements IName {
 	public String getName() {
 		return name.getString();
 	}
+	
+	@Override
+	public String toString() {
+		return super.toString().toLowerCase();
+	}
 }

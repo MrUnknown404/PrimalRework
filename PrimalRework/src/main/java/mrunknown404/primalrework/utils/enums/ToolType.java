@@ -30,7 +30,7 @@ public enum ToolType implements IName {
 	public final float swingSpeed, baseDamage;
 	
 	private ToolType(float swingSpeed, float baseDamage) {
-		this.name = WordH.translate("tool.type." + name() + ".name");
+		this.name = WordH.translate("tool.type." + toString() + ".name");
 		this.swingSpeed = swingSpeed - 4;
 		this.baseDamage = baseDamage;
 	}
@@ -43,5 +43,10 @@ public enum ToolType implements IName {
 	@Override
 	public String getName() {
 		return name.getString();
+	}
+	
+	@Override
+	public String toString() {
+		return super.toString().toLowerCase();
 	}
 }

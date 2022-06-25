@@ -6,13 +6,11 @@ import mrunknown404.primalrework.blocks.utils.SBContainer;
 import mrunknown404.primalrework.items.utils.StagedItem.ItemType;
 import mrunknown404.primalrework.registries.PRStages;
 import mrunknown404.primalrework.tileentities.TEICampFire;
+import mrunknown404.primalrework.utils.BlockInfo;
 import mrunknown404.primalrework.utils.HarvestInfo;
-import mrunknown404.primalrework.utils.enums.BlockInfo;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -42,8 +40,7 @@ public class SBCampFire extends SBContainer {
 	private static final VoxelShape COL_SHAPE = box(2, 0, 2, 14, 2, 14);
 	
 	public SBCampFire() {
-		super("campfire", PRStages.STAGE_1, 64, Material.DECORATION, SoundType.WOOD, true, false, 0, BlockInfo.SOFT_WOOD, false, BlockStateType.lit, BlockModelType.none,
-				HarvestInfo.HAND, HarvestInfo.AXE_MIN);
+		super("campfire", PRStages.STAGE_1, BlockInfo.of(BlockInfo.CAMPFIRE), BlockStateType.lit, BlockModelType.none, HarvestInfo.HAND, HarvestInfo.AXE_MIN);
 		registerDefaultState(defaultBlockState().setValue(BlockStateProperties.LIT, false));
 	}
 	
