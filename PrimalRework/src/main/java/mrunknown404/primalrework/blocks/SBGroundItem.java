@@ -41,7 +41,7 @@ public class SBGroundItem extends StagedBlock implements IWaterLoggable {
 	public SBGroundItem(String name, UniqueRawBlockInfo info, Supplier<StagedItem> dropInstead) {
 		super("ground_" + name, PRStages.STAGE_0, 64, PRItemGroups.BLOCKS, BlockInfo.of(info), BlockStateType.random_direction, BlockModelType.none,
 				dropInstead == null ? HarvestInfo.HAND : new HarvestInfo(ToolType.NONE, ToolMaterial.HAND, DropInfo.item(dropInstead)));
-		registerDefaultState(defaultBlockState().setValue(WATERLOGGED, Boolean.valueOf(false)));
+		registerDefaultState(defaultBlockState().setValue(WATERLOGGED, false));
 	}
 	
 	@Override
@@ -54,10 +54,10 @@ public class SBGroundItem extends StagedBlock implements IWaterLoggable {
 		BlockPos blockpos = ctx.getClickedPos();
 		BlockState blockstate = ctx.getLevel().getBlockState(blockpos);
 		if (blockstate.is(this)) {
-			return blockstate.setValue(WATERLOGGED, Boolean.valueOf(false));
+			return blockstate.setValue(WATERLOGGED, false);
 		}
 		
-		return defaultBlockState().setValue(WATERLOGGED, Boolean.valueOf(ctx.getLevel().getFluidState(blockpos).getType() == Fluids.WATER));
+		return defaultBlockState().setValue(WATERLOGGED, ctx.getLevel().getFluidState(blockpos).getType() == Fluids.WATER);
 	}
 	
 	@Override
@@ -77,16 +77,7 @@ public class SBGroundItem extends StagedBlock implements IWaterLoggable {
 	
 	@Override
 	public boolean isPathfindable(BlockState state, IBlockReader block, BlockPos pos, PathType path) {
-		switch (path) {
-			case LAND:
-				return false;
-			case WATER:
-				return block.getFluidState(pos).is(FluidTags.WATER);
-			case AIR:
-				return false;
-			default:
-				return false;
-		}
+		return path == PathType.WATER && block.getFluidState(pos).is(FluidTags.WATER);
 	}
 	
 	@Override

@@ -25,7 +25,7 @@ import net.minecraftforge.common.IPlantable;
 
 public class SBGrassBlock extends SBSnowyDirt { //TODO switch to my snow
 	public SBGrassBlock() {
-		super("grass_block", PRStages.STAGE_0, BlockInfo.of(BlockInfo.DRY_GRASS), BlockStateType.none, BlockModelType.none,
+		super("grass_block", PRStages.STAGE_0, BlockInfo.of(BlockInfo.R_DRY_GRASS), BlockStateType.none, BlockModelType.none,
 				new HarvestInfo(ToolType.SHOVEL, ToolMaterial.CLAY, DropInfo.block(PRBlocks.DIRT)));
 		usesVanillaNamespaceFull();
 	}
@@ -49,6 +49,10 @@ public class SBGrassBlock extends SBSnowyDirt { //TODO switch to my snow
 					} else if (world.getBlockState(blockpos).is(PRBlocks.DIRT_SLAB.get()) && canPropagate(state1, world, blockpos)) {
 						world.setBlockAndUpdate(blockpos, PRBlocks.GRASS_SLAB.get().defaultBlockState().setValue(SBSlab.TYPE, world.getBlockState(blockpos).getValue(SBSlab.TYPE)));
 					}
+				}
+				
+				if (world.getBlockState(pos.above()).is(Blocks.AIR) && random.nextInt(512) == 0) {
+					world.setBlockAndUpdate(pos.above(), PRBlocks.TALL_GRASS.get().defaultBlockState());
 				}
 			}
 		}

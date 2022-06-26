@@ -27,7 +27,7 @@ public class FeatureGroundItems extends Feature<NoFeatureConfig> {
 		if (BlockH.canSupportPlant(seed.getBlockState(pos.below()).getBlock())) {
 			int ri = r.nextInt(6);
 			if (ri == 5) {
-				setBlock(seed, pos,  PRBlocks.GROUND_FLINT.get().defaultBlockState());
+				setBlock(seed, pos, PRBlocks.GROUND_FLINT.get().defaultBlockState());
 			} else if (ri >= 3) {
 				setBlock(seed, pos, PRBlocks.GROUND_ROCK.get().defaultBlockState());
 			} else {

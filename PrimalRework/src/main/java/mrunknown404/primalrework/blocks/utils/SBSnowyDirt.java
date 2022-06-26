@@ -23,20 +23,19 @@ public class SBSnowyDirt extends StagedBlock {//TODO switch to my snow
 	public SBSnowyDirt(String name, Supplier<Stage> stage, BlockInfo blockInfo, BlockStateType blockStateType, BlockModelType blockModelType, HarvestInfo info,
 			HarvestInfo... extraInfos) {
 		super(name, stage, 64, PRItemGroups.BLOCKS, blockInfo, blockStateType, blockModelType, info, extraInfos);
-		registerDefaultState(stateDefinition.any().setValue(SNOWY, Boolean.valueOf(false)));
+		registerDefaultState(stateDefinition.any().setValue(SNOWY, false));
 	}
 	
 	@SuppressWarnings("deprecation")
 	@Override
 	public BlockState updateShape(BlockState state0, Direction dir, BlockState state1, IWorld world, BlockPos pos0, BlockPos pos1) {
-		return dir != Direction.UP ? super.updateShape(state0, dir, state1, world, pos0, pos1) :
-				state0.setValue(SNOWY, Boolean.valueOf(state1.is(Blocks.SNOW_BLOCK) || state1.is(Blocks.SNOW)));
+		return dir != Direction.UP ? super.updateShape(state0, dir, state1, world, pos0, pos1) : state0.setValue(SNOWY, state1.is(Blocks.SNOW_BLOCK) || state1.is(Blocks.SNOW));
 	}
 	
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext ctx) {
 		BlockState blockstate = ctx.getLevel().getBlockState(ctx.getClickedPos().above());
-		return defaultBlockState().setValue(SNOWY, Boolean.valueOf(blockstate.is(Blocks.SNOW_BLOCK) || blockstate.is(Blocks.SNOW)));
+		return defaultBlockState().setValue(SNOWY, blockstate.is(Blocks.SNOW_BLOCK) || blockstate.is(Blocks.SNOW));
 	}
 	
 	@Override

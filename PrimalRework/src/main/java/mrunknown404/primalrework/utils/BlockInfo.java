@@ -6,29 +6,29 @@ import net.minecraft.block.material.MaterialColor;
 import net.minecraft.block.material.PushReaction;
 
 public class BlockInfo {
-	public static final RawBlockInfo PLANT = new RawBlockInfo(MaterialColor.PLANT, SoundType.GRASS, 0.2f, 0.1f, false, false, false, 100, 60, false, false, 0,
-			PushReaction.DESTROY);
-	public static final RawBlockInfo LEAVES = new RawBlockInfo(MaterialColor.PLANT, SoundType.GRASS, 0.8f, 0.2f, true, true, false, 60, 30, false, true, 0, PushReaction.DESTROY);
-	public static final RawBlockInfo DIRT = new RawBlockInfo(MaterialColor.DIRT, SoundType.GRAVEL, 0.5f, 0.5f);
-	public static final RawBlockInfo DRY_GRASS = new RawBlockInfo(MaterialColor.GRASS, SoundType.GRASS, 0.7f, 0.5f);
-	public static final RawBlockInfo WET_GRASS = new RawBlockInfo(MaterialColor.GRASS, SoundType.WET_GRASS, 0.7f, 0.5f);
-	public static final RawBlockInfo STONE = new RawBlockInfo(MaterialColor.STONE, SoundType.STONE, 2f, 6f);
-	public static final RawBlockInfo METAL = new RawBlockInfo(MaterialColor.METAL, SoundType.METAL, 3f, 10f);
-	public static final RawBlockInfo COAL = new RawBlockInfo(MaterialColor.STONE, SoundType.STONE, 3f, 10f, 8, 10);
-	public static final RawBlockInfo WOOD = new RawBlockInfo(MaterialColor.WOOD, SoundType.WOOD, 1f, 2f, 20, 5);
+	public static final RawBlockInfo PLANT = RawBlockInfo.of(MaterialColor.PLANT, SoundType.GRASS, 0.2f, 0.1f, false, false, false, 100, 60, false, false, 0, PushReaction.DESTROY);
+	public static final RawBlockInfo LEAVES = RawBlockInfo.of(MaterialColor.PLANT, SoundType.GRASS, 0.8f, 0.2f, true, true, false, 60, 30, false, true, 0, PushReaction.DESTROY);
+	public static final RawBlockInfo DIRT = RawBlockInfo.simpleFull(MaterialColor.DIRT, SoundType.GRAVEL, 0.5f, 0.5f);
+	public static final RawBlockInfo DRY_GRASS = RawBlockInfo.simpleFull(MaterialColor.GRASS, SoundType.GRASS, 0.7f, 0.5f);
+	public static final RawBlockInfo WET_GRASS = RawBlockInfo.simpleFull(MaterialColor.GRASS, SoundType.WET_GRASS, 0.7f, 0.5f);
+	public static final RawBlockInfo R_DRY_GRASS = RawBlockInfo.simpleFullTicking(MaterialColor.GRASS, SoundType.GRASS, 0.7f, 0.5f);
+	public static final RawBlockInfo R_WET_GRASS = RawBlockInfo.simpleFullTicking(MaterialColor.GRASS, SoundType.WET_GRASS, 0.7f, 0.5f);
+	public static final RawBlockInfo STONE = RawBlockInfo.simpleFull(MaterialColor.STONE, SoundType.STONE, 2f, 6f);
+	public static final RawBlockInfo METAL = RawBlockInfo.simpleFull(MaterialColor.METAL, SoundType.METAL, 3f, 10f);
+	public static final RawBlockInfo COAL = RawBlockInfo.simpleFullFlammable(MaterialColor.STONE, SoundType.STONE, 3f, 10f, 8, 10);
+	public static final RawBlockInfo WOOD = RawBlockInfo.simpleFullFlammable(MaterialColor.WOOD, SoundType.WOOD, 1f, 2f, 20, 5);
 	
-	public static final UniqueRawBlockInfo WOOD_GROUND_ITEM = new UniqueRawBlockInfo(MaterialColor.NONE, SoundType.WOOD, 0, 0, false, false, false, 0, 0, false, false, 0,
+	public static final UniqueRawBlockInfo WOOD_GROUND_ITEM = UniqueRawBlockInfo.of(MaterialColor.NONE, SoundType.WOOD, 0, 0, false, false, false, 0, 0, false, false, 0,
 			PushReaction.DESTROY);
-	public static final UniqueRawBlockInfo STONE_GROUND_ITEM = new UniqueRawBlockInfo(MaterialColor.NONE, SoundType.STONE, 0, 0, false, false, false, 0, 0, false, false, 0,
+	public static final UniqueRawBlockInfo STONE_GROUND_ITEM = UniqueRawBlockInfo.of(MaterialColor.NONE, SoundType.STONE, 0, 0, false, false, false, 0, 0, false, false, 0,
 			PushReaction.DESTROY);
-	public static final UniqueRawBlockInfo CAMPFIRE = new UniqueRawBlockInfo(MaterialColor.WOOD, SoundType.WOOD, 1f, 0.5f, true, true, true, 0, 0, false, false, 0,
+	public static final UniqueRawBlockInfo CAMPFIRE = UniqueRawBlockInfo.simpleFullDestroy(MaterialColor.WOOD, SoundType.WOOD, 1f, 0.5f);
+	public static final UniqueRawBlockInfo PRIMAL_CRAFTING_TABLE = UniqueRawBlockInfo.simpleFull(MaterialColor.WOOD, SoundType.WOOD, 2f, 4f);
+	public static final UniqueRawBlockInfo UNLIT_PRIMAL_TORCH = UniqueRawBlockInfo.of(MaterialColor.WOOD, SoundType.WOOD, 0, 0, false, false, false, 0, 0, false, false, 0,
 			PushReaction.DESTROY);
-	public static final UniqueRawBlockInfo PRIMAL_CRAFTING_TABLE = new UniqueRawBlockInfo(MaterialColor.WOOD, SoundType.WOOD, 2f, 4f);
-	public static final UniqueRawBlockInfo UNLIT_PRIMAL_TORCH = new UniqueRawBlockInfo(MaterialColor.WOOD, SoundType.WOOD, 0, 0, false, false, false, 0, 0, false, false, 0,
+	public static final UniqueRawBlockInfo LIT_PRIMAL_TORCH = UniqueRawBlockInfo.of(MaterialColor.WOOD, SoundType.WOOD, 0, 0, false, false, false, 0, 0, false, false, 8,
 			PushReaction.DESTROY);
-	public static final UniqueRawBlockInfo LIT_PRIMAL_TORCH = new UniqueRawBlockInfo(MaterialColor.WOOD, SoundType.WOOD, 0, 0, false, false, false, 0, 0, false, false, 8,
-			PushReaction.DESTROY);
-	public static final UniqueRawBlockInfo THATCH = new UniqueRawBlockInfo(MaterialColor.PLANT, SoundType.GRASS, 0.8f, 0.2f, 60, 30);
+	public static final UniqueRawBlockInfo THATCH = UniqueRawBlockInfo.simpleFullFlammable(MaterialColor.PLANT, SoundType.GRASS, 0.8f, 0.2f, 60, 30);
 	
 	private final I_RawBlockInfo info;
 	private final Hardness hardness;
@@ -132,32 +132,60 @@ public class BlockInfo {
 	}
 	
 	public static class UniqueRawBlockInfo extends I_RawBlockInfo {
-		public UniqueRawBlockInfo(MaterialColor color, SoundType sound, float rawHardness, float rawBlast, boolean isSolid, boolean blocksMotion, boolean solidBlocking,
+		private UniqueRawBlockInfo(MaterialColor color, SoundType sound, float rawHardness, float rawBlast, boolean isSolid, boolean blocksMotion, boolean solidBlocking,
 				int flammability, int fireSpreadSpeed, boolean replaceable, boolean isRandomTick, int light, PushReaction pushReaction) {
 			super(color, sound, rawHardness, rawBlast, isSolid, blocksMotion, solidBlocking, flammability, fireSpreadSpeed, replaceable, isRandomTick, light, pushReaction);
 		}
 		
-		public UniqueRawBlockInfo(MaterialColor color, SoundType sound, float rawHardness, float rawBlast, int flammability, int fireSpreadSpeed) {
-			super(color, sound, rawHardness, rawBlast, true, true, true, flammability, fireSpreadSpeed, false, false, 0, PushReaction.NORMAL);
+		public static UniqueRawBlockInfo of(MaterialColor color, SoundType sound, float rawHardness, float rawBlast, boolean isSolid, boolean blocksMotion, boolean solidBlocking,
+				int flammability, int fireSpreadSpeed, boolean replaceable, boolean isRandomTick, int light, PushReaction pushReaction) {
+			return new UniqueRawBlockInfo(color, sound, rawHardness, rawBlast, isSolid, blocksMotion, solidBlocking, flammability, fireSpreadSpeed, replaceable, isRandomTick,
+					light, pushReaction);
 		}
 		
-		public UniqueRawBlockInfo(MaterialColor color, SoundType sound, float rawHardness, float rawBlast) {
-			super(color, sound, rawHardness, rawBlast, true, true, true, 0, 0, false, false, 0, PushReaction.NORMAL);
+		public static UniqueRawBlockInfo simpleFull(MaterialColor color, SoundType sound, float rawHardness, float rawBlast) {
+			return new UniqueRawBlockInfo(color, sound, rawHardness, rawBlast, true, true, true, 0, 0, false, false, 0, PushReaction.NORMAL);
+		}
+		
+		public static UniqueRawBlockInfo simpleFullDestroy(MaterialColor color, SoundType sound, float rawHardness, float rawBlast) {
+			return new UniqueRawBlockInfo(color, sound, rawHardness, rawBlast, true, true, true, 0, 0, false, false, 0, PushReaction.DESTROY);
+		}
+		
+		public static UniqueRawBlockInfo simpleFullFlammable(MaterialColor color, SoundType sound, float rawHardness, float rawBlast, int flammability, int fireSpreadSpeed) {
+			return new UniqueRawBlockInfo(color, sound, rawHardness, rawBlast, true, true, true, flammability, fireSpreadSpeed, false, false, 0, PushReaction.NORMAL);
+		}
+		
+		public static UniqueRawBlockInfo simpleFullTicking(MaterialColor color, SoundType sound, float rawHardness, float rawBlast) {
+			return new UniqueRawBlockInfo(color, sound, rawHardness, rawBlast, true, true, true, 0, 0, false, true, 0, PushReaction.NORMAL);
 		}
 	}
 	
 	public static class RawBlockInfo extends I_RawBlockInfo {
-		public RawBlockInfo(MaterialColor color, SoundType sound, float rawHardness, float rawBlast, boolean isSolid, boolean blocksMotion, boolean solidBlocking, int flammability,
-				int fireSpreadSpeed, boolean replaceable, boolean isRandomTick, int light, PushReaction pushReaction) {
+		private RawBlockInfo(MaterialColor color, SoundType sound, float rawHardness, float rawBlast, boolean isSolid, boolean blocksMotion, boolean solidBlocking,
+				int flammability, int fireSpreadSpeed, boolean replaceable, boolean isRandomTick, int light, PushReaction pushReaction) {
 			super(color, sound, rawHardness, rawBlast, isSolid, blocksMotion, solidBlocking, flammability, fireSpreadSpeed, replaceable, isRandomTick, light, pushReaction);
 		}
 		
-		public RawBlockInfo(MaterialColor color, SoundType sound, float rawHardness, float rawBlast, int flammability, int fireSpreadSpeed) {
-			super(color, sound, rawHardness, rawBlast, true, true, true, flammability, fireSpreadSpeed, false, false, 0, PushReaction.NORMAL);
+		public static RawBlockInfo of(MaterialColor color, SoundType sound, float rawHardness, float rawBlast, boolean isSolid, boolean blocksMotion, boolean solidBlocking,
+				int flammability, int fireSpreadSpeed, boolean replaceable, boolean isRandomTick, int light, PushReaction pushReaction) {
+			return new RawBlockInfo(color, sound, rawHardness, rawBlast, isSolid, blocksMotion, solidBlocking, flammability, fireSpreadSpeed, replaceable, isRandomTick, light,
+					pushReaction);
 		}
 		
-		public RawBlockInfo(MaterialColor color, SoundType sound, float rawHardness, float rawBlast) {
-			super(color, sound, rawHardness, rawBlast, true, true, true, 0, 0, false, false, 0, PushReaction.NORMAL);
+		public static RawBlockInfo simpleFull(MaterialColor color, SoundType sound, float rawHardness, float rawBlast) {
+			return new RawBlockInfo(color, sound, rawHardness, rawBlast, true, true, true, 0, 0, false, false, 0, PushReaction.NORMAL);
+		}
+		
+		public static RawBlockInfo simpleFullDestroy(MaterialColor color, SoundType sound, float rawHardness, float rawBlast) {
+			return new RawBlockInfo(color, sound, rawHardness, rawBlast, true, true, true, 0, 0, false, false, 0, PushReaction.DESTROY);
+		}
+		
+		public static RawBlockInfo simpleFullFlammable(MaterialColor color, SoundType sound, float rawHardness, float rawBlast, int flammability, int fireSpreadSpeed) {
+			return new RawBlockInfo(color, sound, rawHardness, rawBlast, true, true, true, flammability, fireSpreadSpeed, false, false, 0, PushReaction.NORMAL);
+		}
+		
+		public static RawBlockInfo simpleFullTicking(MaterialColor color, SoundType sound, float rawHardness, float rawBlast) {
+			return new RawBlockInfo(color, sound, rawHardness, rawBlast, true, true, true, 0, 0, false, true, 0, PushReaction.NORMAL);
 		}
 	}
 	

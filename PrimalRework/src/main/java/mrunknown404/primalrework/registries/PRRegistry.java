@@ -1,7 +1,6 @@
 package mrunknown404.primalrework.registries;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -193,11 +192,10 @@ public class PRRegistry {
 		return WORLD_TYPES.register(name, worldType);
 	}
 	
-	@SafeVarargs
-	public static RegistryObject<Biome> register(PRBiome o, Supplier<ConfiguredFeature<?, ?>>... features) {
+	public static RegistryObject<Biome> register(PRBiome o, List<Supplier<ConfiguredFeature<?, ?>>> features) {
 		ResourceLocation loc = new ResourceLocation(PrimalRework.MOD_ID, o.name);
 		BiomeManager.addBiome(o.biomeType, new BiomeEntry(RegistryKey.create(Registry.BIOME_REGISTRY, loc), o.weight));
-		BIOME_FEATURE_MAP.put(PrimalRework.MOD_ID + ":" + o.name, Arrays.asList(features));
+		BIOME_FEATURE_MAP.put(PrimalRework.MOD_ID + ":" + o.name, features);
 		return BIOMES.register(o.name, () -> o.biome);
 	}
 	

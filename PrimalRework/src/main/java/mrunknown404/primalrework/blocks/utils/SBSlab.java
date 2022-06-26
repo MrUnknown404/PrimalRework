@@ -36,7 +36,7 @@ public class SBSlab extends StagedBlock implements IWaterLoggable {
 	
 	public SBSlab(String name, Supplier<Stage> stage, BlockInfo blockInfo, HarvestInfo info) {
 		super(name, stage, 64, PRItemGroups.BLOCKS, blockInfo, BlockStateType.slab, BlockModelType.slab, info);
-		registerDefaultState(defaultBlockState().setValue(TYPE, SlabType.BOTTOM).setValue(WATERLOGGED, Boolean.valueOf(false)));
+		registerDefaultState(defaultBlockState().setValue(TYPE, SlabType.BOTTOM).setValue(WATERLOGGED, false));
 	}
 	
 	@Override
@@ -66,11 +66,10 @@ public class SBSlab extends StagedBlock implements IWaterLoggable {
 		BlockPos blockpos = ctx.getClickedPos();
 		BlockState blockstate = ctx.getLevel().getBlockState(blockpos);
 		if (blockstate.is(this)) {
-			return blockstate.setValue(TYPE, SlabType.DOUBLE).setValue(WATERLOGGED, Boolean.valueOf(false));
+			return blockstate.setValue(TYPE, SlabType.DOUBLE).setValue(WATERLOGGED, false);
 		}
 		
-		BlockState blockstate1 = defaultBlockState().setValue(TYPE, SlabType.BOTTOM).setValue(WATERLOGGED,
-				Boolean.valueOf(ctx.getLevel().getFluidState(blockpos).getType() == Fluids.WATER));
+		BlockState blockstate1 = defaultBlockState().setValue(TYPE, SlabType.BOTTOM).setValue(WATERLOGGED, ctx.getLevel().getFluidState(blockpos).getType() == Fluids.WATER);
 		Direction direction = ctx.getClickedFace();
 		return direction != Direction.DOWN && (direction == Direction.UP || !(ctx.getClickLocation().y - blockpos.getY() > 0.5)) ? blockstate1 :
 				blockstate1.setValue(TYPE, SlabType.TOP);
@@ -125,15 +124,6 @@ public class SBSlab extends StagedBlock implements IWaterLoggable {
 	
 	@Override
 	public boolean isPathfindable(BlockState state, IBlockReader block, BlockPos pos, PathType path) {
-		switch (path) {
-			case LAND:
-				return false;
-			case WATER:
-				return block.getFluidState(pos).is(FluidTags.WATER);
-			case AIR:
-				return false;
-			default:
-				return false;
-		}
+		return path == PathType.WATER && block.getFluidState(pos).is(FluidTags.WATER);
 	}
 }
