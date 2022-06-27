@@ -13,6 +13,7 @@ import mrunknown404.primalrework.recipes.input.RICrafting3;
 import mrunknown404.primalrework.recipes.input.RecipeInput;
 import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.utils.DoubleCache;
+import mrunknown404.primalrework.utils.DoubleCache.DoubleCachePredicate;
 import mrunknown404.primalrework.utils.enums.RecipeType;
 import mrunknown404.primalrework.utils.helpers.StageH;
 
@@ -25,21 +26,27 @@ public class PRRecipes {
 	private static final Map<RecipeType, DoubleCache<Stage, Ingredient, List<IStagedRecipe<?, ?>>>> cacheRecipesContainingInput0 = new HashMap<RecipeType, DoubleCache<Stage, Ingredient, List<IStagedRecipe<?, ?>>>>();
 	private static final DoubleCache<Stage, StagedItem, Map<RecipeType, List<IStagedRecipe<?, ?>>>> cacheRecipesForOutput1 = DoubleCache.and();
 	private static final DoubleCache<Stage, Ingredient, Map<RecipeType, List<IStagedRecipe<?, ?>>>> cacheRecipesContainingInput1 = DoubleCache
-			.create((okey0, okey1, key0, key1) -> okey0 == key0 || (okey0 != null && okey0.equals(key0)) && (okey1 == null ? false : okey1.matches(key1)));
+			.create((o0, o1, k0, k1) -> (o0 == k0 || (o0 != null && o0.equals(k0))) && (o1 == null ? false : o1.matches(k1)));
 	
 	public static void load() {
+		final DoubleCachePredicate<Stage, RecipeInput<?>> predicate0 = (o0, o1, k0, k1) -> (o0 == k0 || (o0 != null && o0.equals(k0))) && (o1 == null ? false : o1.matches(k1));
+		final DoubleCachePredicate<Stage, Ingredient> predicate1 = (o0, o1, k0, k1) -> (o0 == k0 || (o0 != null && o0.equals(k0))) && (o1 == null ? false : o1.matches(k1));
+		
 		for (RecipeType type : RecipeType.values()) {
 			RECIPES.put(type, new ArrayList<IStagedRecipe<?, ?>>());
 			cacheRecipesForOutput0.put(type, DoubleCache.and());
-			cacheRecipesForInput.put(type,
-					DoubleCache.create((okey0, okey1, key0, key1) -> (okey0 == key0 || (okey0 != null && okey0.equals(key0))) && (okey1 == null ? false : okey1.matches(key1))));
-			cacheRecipesContainingInput0.put(type,
-					DoubleCache.create((okey0, okey1, key0, key1) -> (okey0 == key0 || (okey0 != null && okey0.equals(key0))) && (okey1 == null ? false : okey1.matches(key1))));
+			cacheRecipesForInput.put(type, DoubleCache.create(predicate0));
+			cacheRecipesContainingInput0.put(type, DoubleCache.create(predicate1));
 		}
 		
+		//@formatter:off
 		Stage stage = PRStages.STAGE_0.get();
 		addRecipe(new SRCrafting3(stage, PRItems.CLAY_SHOVEL.get(), 1, RICrafting3.shaped().set1x2(PRItems.CLAY_BALL, PRItems.STICK).finish()));
 		addRecipe(new SRCrafting3(stage, PRItems.CLAY_AXE.get(), 1, RICrafting3.shaped().set2x2(PRItems.CLAY_BALL, PRItems.CLAY_BALL, null, PRItems.STICK).finish()));
+		addRecipe(new SRCrafting3(stage, PRItems.PLANT_ROPE.get(), 1, RICrafting3.shapeless().set(PRItems.PLANT_FIBER, 3).finish()));
+		addRecipe(new SRCrafting3(stage, PRItems.PLANT_MESH.get(), 1, RICrafting3.shaped().set2x2(PRItems.STICK, PRItems.PLANT_FIBER, PRItems.PLANT_FIBER, PRItems.STICK).finish()));
+		addRecipe(new SRCrafting3(stage, PRBlocks.THATCH.get().asStagedItem(), 1, RICrafting3.shaped().set2x2(PRItems.PLANT_FIBER).finish()));
+		//@formatter:on
 	}
 	
 	public static void addRecipe(IStagedRecipe<?, ?> recipe) {

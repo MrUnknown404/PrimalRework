@@ -38,13 +38,13 @@ public class SBUnlitPrimalWallTorch extends SBUnlitPrimalTorch {
 			Block.box(5.5, 3, 0, 10.5, 11.25, 5), Direction.WEST, Block.box(11, 3, 5.5, 16, 11.25, 10.5), Direction.EAST, Block.box(0, 3, 5.5, 5, 11.25, 10.5)));
 	
 	SBUnlitPrimalWallTorch(String name, Supplier<Stage> stage, UniqueRawBlockInfo blockInfo, HarvestInfo info) {
-		super(name, stage, blockInfo, info);
+		super(name, stage, blockInfo, BlockStateType.facing, info);
 		registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH));
 	}
 	
 	public SBUnlitPrimalWallTorch() {
 		this("unlit_primal_wall_torch", PRStages.STAGE_0, BlockInfo.UNLIT_PRIMAL_TORCH,
-				new HarvestInfo(ToolType.NONE, ToolMaterial.HAND, DropInfo.block(PRBlocks.UNLIT_PRIMAL_TORCH)));
+				new HarvestInfo(ToolType.NONE, ToolMaterial.HAND, DropInfo.block(() -> PRBlocks.UNLIT_PRIMAL_TORCH)));
 	}
 	
 	@Override

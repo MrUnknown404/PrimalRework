@@ -25,18 +25,18 @@ public class FeatureGroundItems extends Feature<NoFeatureConfig> {
 	@Override
 	public boolean place(ISeedReader seed, ChunkGenerator gen, Random r, BlockPos pos, NoFeatureConfig config) {
 		if (BlockH.canSupportPlant(seed.getBlockState(pos.below()).getBlock())) {
-			int ri = r.nextInt(6);
-			if (ri == 5) {
+			int ri = r.nextInt(8);
+			if (ri == 7) {
 				setBlock(seed, pos, PRBlocks.GROUND_FLINT.get().defaultBlockState());
+			} else if (ri >= 5) {
+				setBlock(seed, pos, PRBlocks.GROUND_CLAY.get().defaultBlockState());
 			} else if (ri >= 3) {
 				setBlock(seed, pos, PRBlocks.GROUND_ROCK.get().defaultBlockState());
 			} else {
 				setBlock(seed, pos, PRBlocks.GROUND_STICK.get().defaultBlockState());
 			}
-			
-			return true;
 		}
 		
-		return false;
+		return true;
 	}
 }

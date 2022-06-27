@@ -18,7 +18,6 @@ import net.minecraft.world.gen.IExtendedNoiseRandom;
 import net.minecraft.world.gen.LazyAreaLayerContext;
 import net.minecraft.world.gen.area.IArea;
 import net.minecraft.world.gen.area.IAreaFactory;
-import net.minecraft.world.gen.area.LazyArea;
 import net.minecraft.world.gen.layer.Layer;
 import net.minecraft.world.gen.layer.LayerUtil;
 import net.minecraft.world.gen.layer.ZoomLayer;
@@ -52,10 +51,7 @@ public class BiomeProviderPrimal extends BiomeProvider {
 	}
 	
 	private static Layer buildLayerGen(long seed, List<Biome> biomes, ForgeRegistry<Biome> biomeRegistry) {
-		IAreaFactory<LazyArea> iareafactory = buildLayers(biomes, biomeRegistry, (l) -> {
-			return new LazyAreaLayerContext(25, seed, l);
-		});
-		return new Layer(iareafactory);
+		return new Layer(buildLayers(biomes, biomeRegistry, (l) -> new LazyAreaLayerContext(25, seed, l)));
 	}
 	
 	private static <T extends IArea, C extends IExtendedNoiseRandom<T>> IAreaFactory<T> buildLayers(List<Biome> biomes, ForgeRegistry<Biome> biomeRegistry,

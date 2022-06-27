@@ -22,6 +22,8 @@ public class MixinItemParser {
 	@Shadow
 	public final boolean forTesting = false;
 	
+	//TODO redo this. i don't like it.
+	
 	@Inject(at = @At("HEAD"), method = "suggestItemIdOrTag(Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;Lnet/minecraft/tags/ITagCollection;)Ljava/util/concurrent/CompletableFuture;", cancellable = true)
 	private void suggestItemIdOrTag(SuggestionsBuilder builder, ITagCollection<Item> tags, CallbackInfoReturnable<CompletableFuture<Suggestions>> callable) {
 		if (forTesting) {

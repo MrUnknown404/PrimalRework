@@ -28,6 +28,7 @@ public class PRQuests {
 	public static final Quest STAGE_4_ROOT = addRoot(QuestBuilder.root(PRStages.STAGE_4, TAB_STAGE_4));
 	
 	//@formatter:off
+	//STAGE 0
 	public static final Quest GET_PLANT_FIBER   = addQuest(QuestBuilder.create("get_plant_fiber",   STAGE_0_ROOT,      0,  0, new ItemRequirement(PRItems.PLANT_FIBER.get(),             12)).finish());
 	public static final Quest GET_PLANT_MESH    = addQuest(QuestBuilder.create("get_plant_mesh",    GET_PLANT_FIBER,   0,  0, new ItemRequirement(PRItems.PLANT_MESH.get(),               1)).finish());
 	public static final Quest GET_PLANT_ROPE    = addQuest(QuestBuilder.create("get_plant_rope",    GET_PLANT_FIBER,   0, -1, new ItemRequirement(PRItems.PLANT_ROPE.get(),               4)).finish());

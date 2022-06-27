@@ -22,6 +22,8 @@ public class BlockInfo {
 			PushReaction.DESTROY);
 	public static final UniqueRawBlockInfo STONE_GROUND_ITEM = UniqueRawBlockInfo.of(MaterialColor.NONE, SoundType.STONE, 0, 0, false, false, false, 0, 0, false, false, 0,
 			PushReaction.DESTROY);
+	public static final UniqueRawBlockInfo CLAY_GROUND_ITEM = UniqueRawBlockInfo.of(MaterialColor.NONE, SoundType.GRAVEL, 0, 0, false, false, false, 0, 0, false, false, 0,
+			PushReaction.DESTROY);
 	public static final UniqueRawBlockInfo CAMPFIRE = UniqueRawBlockInfo.simpleFullDestroy(MaterialColor.WOOD, SoundType.WOOD, 1f, 0.5f);
 	public static final UniqueRawBlockInfo PRIMAL_CRAFTING_TABLE = UniqueRawBlockInfo.simpleFull(MaterialColor.WOOD, SoundType.WOOD, 2f, 4f);
 	public static final UniqueRawBlockInfo UNLIT_PRIMAL_TORCH = UniqueRawBlockInfo.of(MaterialColor.WOOD, SoundType.WOOD, 0, 0, false, false, false, 0, 0, false, false, 0,
@@ -83,7 +85,7 @@ public class BlockInfo {
 		private final int light, flammability, fireSpreadSpeed;
 		private final boolean isRandomTick;
 		private final SoundType sound;
-		private final Material material;
+		private final Material material; //TODO mob spawning
 		
 		protected I_RawBlockInfo(MaterialColor color, SoundType sound, float rawHardness, float rawBlast, boolean isSolid, boolean blocksMotion, boolean solidBlocking,
 				int flammability, int fireSpreadSpeed, boolean replaceable, boolean isRandomTick, int light, PushReaction pushReaction) {

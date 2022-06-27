@@ -26,7 +26,7 @@ import net.minecraftforge.common.IPlantable;
 public class SBMushroomGrass extends SBSnowyDirt { //TODO switch to my snow
 	public SBMushroomGrass() {
 		super("mushroom_grass", PRStages.STAGE_0, BlockInfo.of(BlockInfo.R_DRY_GRASS), BlockStateType.none, BlockModelType.none,
-				new HarvestInfo(ToolType.SHOVEL, ToolMaterial.CLAY, DropInfo.block(PRBlocks.DIRT)));
+				new HarvestInfo(ToolType.SHOVEL, ToolMaterial.CLAY, DropInfo.block(() -> PRBlocks.DIRT)));
 	}
 	
 	@Override
@@ -49,7 +49,17 @@ public class SBMushroomGrass extends SBSnowyDirt { //TODO switch to my snow
 				}
 				
 				if (world.getBlockState(pos.above()).is(Blocks.AIR) && random.nextInt(512) == 0) {
-					world.setBlockAndUpdate(pos.above(), PRBlocks.TALL_GRASS.get().defaultBlockState());
+					BlockState b;
+					int r = random.nextInt(3);
+					if (r == 0) {
+						b = PRBlocks.TALL_GRASS.get().defaultBlockState();
+					} else if (r == 1) {
+						b = PRBlocks.MEDIUM_GRASS.get().defaultBlockState();
+					} else {
+						b = PRBlocks.SHORT_GRASS.get().defaultBlockState();
+					}
+					
+					world.setBlockAndUpdate(pos.above(), b);
 				}
 			}
 		}

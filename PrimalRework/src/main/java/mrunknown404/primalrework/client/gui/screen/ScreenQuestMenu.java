@@ -35,7 +35,7 @@ public class ScreenQuestMenu extends Screen {
 	private QuestInfoList questInfo;
 	private static float scale = 1f;
 	
-	public static QuestTab selectedTab;
+	public QuestTab selectedTab;
 	
 	public ScreenQuestMenu() {
 		super(WordH.translate("screen.quest.menu.title"));
@@ -120,12 +120,10 @@ public class ScreenQuestMenu extends Screen {
 	}
 	
 	public void setQuestInfo(Quest quest) {
-		if (questInfo == null) {
+		if (quest != null && (questInfo == null || !questInfo.isQuest(quest))) {
 			questInfo = new QuestInfoList(this, minecraft, quest);
-		} else if (questInfo.isQuest(quest)) {
-			questInfo = null;
 		} else {
-			questInfo = new QuestInfoList(this, minecraft, quest);
+			questInfo = null;
 		}
 	}
 	

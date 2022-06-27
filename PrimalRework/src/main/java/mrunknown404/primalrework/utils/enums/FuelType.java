@@ -14,7 +14,7 @@ public enum FuelType implements ICraftingInput {
 	
 	private FuelType(StagedItem icon) {
 		this.icon = new ItemStack(icon);
-		this.name = WordH.translate("recipetype." + name() + ".name");
+		this.name = WordH.translate("recipetype." + toString() + ".name");
 	}
 	
 	@Override

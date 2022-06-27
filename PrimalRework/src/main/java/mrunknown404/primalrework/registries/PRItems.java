@@ -26,6 +26,8 @@ public class PRItems {
 	private static final List<RegistryObject<StagedItem>> ORES = new ArrayList<RegistryObject<StagedItem>>();
 	private static final List<RegistryObject<StagedItem>> CRAFTING_TOOLS = new ArrayList<RegistryObject<StagedItem>>();
 	
+	//@formatter:off
+	
 	//MISC
 	public static final RegistryObject<StagedItem> PLANT_FIBER = PRRegistry.item(new StagedItem("plant_fiber", PRStages.STAGE_0));
 	public static final RegistryObject<StagedItem> PLANT_ROPE = PRRegistry.item(new StagedItem("plant_rope", PRStages.STAGE_0));
@@ -65,10 +67,8 @@ public class PRItems {
 	//TOOLS
 	public static final RegistryObject<SISimpleTool> CLAY_SHOVEL = PRRegistry.item(new SISimpleTool(PRStages.STAGE_0, ToolType.SHOVEL, ToolMaterial.CLAY));
 	public static final RegistryObject<SISimpleTool> CLAY_AXE = PRRegistry.item(new SISimpleTool(PRStages.STAGE_0, ToolType.AXE, ToolMaterial.CLAY));
-	public static final RegistryObject<SISimpleTool> WOOD_SHOVEL = PRRegistry
-			.item((SISimpleTool) new SISimpleTool(PRStages.STAGE_0, ToolType.SHOVEL, ToolMaterial.WOOD).useVanillaNamespace());
-	public static final RegistryObject<SISimpleTool> WOOD_AXE = PRRegistry
-			.item((SISimpleTool) new SISimpleTool(PRStages.STAGE_0, ToolType.AXE, ToolMaterial.WOOD).useVanillaNamespace());
+	public static final RegistryObject<SISimpleTool> WOOD_SHOVEL = PRRegistry.item((SISimpleTool) new SISimpleTool(PRStages.STAGE_0, ToolType.SHOVEL, ToolMaterial.WOOD).useVanillaNamespace());
+	public static final RegistryObject<SISimpleTool> WOOD_AXE = PRRegistry.item((SISimpleTool) new SISimpleTool(PRStages.STAGE_0, ToolType.AXE, ToolMaterial.WOOD).useVanillaNamespace());
 	public static final RegistryObject<SISimpleTool> FLINT_PICKAXE = PRRegistry.item(new SISimpleTool(PRStages.STAGE_1, ToolType.PICKAXE, ToolMaterial.FLINT));
 	public static final RegistryObject<SISimpleTool> FLINT_SHOVEL = PRRegistry.item(new SISimpleTool(PRStages.STAGE_1, ToolType.SHOVEL, ToolMaterial.FLINT));
 	public static final RegistryObject<SISimpleTool> FLINT_AXE = PRRegistry.item(new SISimpleTool(PRStages.STAGE_1, ToolType.AXE, ToolMaterial.FLINT));
@@ -81,6 +81,8 @@ public class PRItems {
 	public static final RegistryObject<StagedItem> FLINT = PRRegistry.item(new StagedItem("flint", PRStages.STAGE_0).useVanillaNamespace());
 	public static final RegistryObject<StagedItem> STICK = PRRegistry.item(new StagedItem("stick", PRStages.STAGE_0).useVanillaNamespace());
 	public static final RegistryObject<StagedItem> CLAY_BALL = PRRegistry.item(new StagedItem("clay_ball", PRStages.STAGE_0).useVanillaNamespace());
+	
+	//@formatter:on
 	
 	static {
 		for (ToolType type : ToolType.values()) {

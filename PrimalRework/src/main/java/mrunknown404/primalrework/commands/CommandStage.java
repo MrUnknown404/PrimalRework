@@ -16,16 +16,12 @@ import net.minecraftforge.fml.RegistryObject;
 public class CommandStage {
 	public static void register(CommandDispatcher<CommandSource> dispatcher) {
 		LiteralArgumentBuilder<CommandSource> cmd = Commands.literal("stage").requires((src) -> src.hasPermission(4));
-		cmd.then(Commands.literal("get").executes(c -> {
-			return getStage(c);
-		}));
+		cmd.then(Commands.literal("get").executes(c -> getStage(c)));
 		
 		LiteralArgumentBuilder<CommandSource> set = Commands.literal("set");
 		for (RegistryObject<Stage> stage : PRRegistry.getStages()) {
 			if (stage != PRStages.NO_SHOW) {
-				set.then(Commands.literal(stage.get().nameID).executes(c -> {
-					return setStage(c, stage.get());
-				}));
+				set.then(Commands.literal(stage.get().nameID).executes(c -> setStage(c, stage.get())));
 			}
 		}
 		

@@ -1,18 +1,19 @@
 package mrunknown404.primalrework.blocks;
 
+import java.util.function.Supplier;
+
 import mrunknown404.primalrework.blocks.utils.StagedBlock;
 import mrunknown404.primalrework.items.utils.StagedItem.ItemType;
-import mrunknown404.primalrework.registries.PRBlocks;
 import mrunknown404.primalrework.registries.PRItemGroups;
 import mrunknown404.primalrework.registries.PRItems;
 import mrunknown404.primalrework.registries.PRStages;
 import mrunknown404.primalrework.utils.BlockInfo;
+import mrunknown404.primalrework.utils.BlockInfo.Hardness;
 import mrunknown404.primalrework.utils.HarvestInfo;
 import mrunknown404.primalrework.utils.HarvestInfo.DropInfo;
 import mrunknown404.primalrework.utils.enums.ToolMaterial;
 import mrunknown404.primalrework.utils.enums.ToolType;
 import mrunknown404.primalrework.utils.helpers.BlockH;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.pathfinding.PathType;
@@ -23,17 +24,18 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
+import net.minecraftforge.fml.RegistryObject;
 
 public class SBTallGrass extends StagedBlock {
-	private static final VoxelShape SHAPE = Block.box(2, 0, 2, 14, 13, 14);
+	private final VoxelShape shape;
 	
-	public SBTallGrass() {
-		super("tall_grass", PRStages.STAGE_0, 64, PRItemGroups.BLOCKS, BlockInfo.of(BlockInfo.PLANT), BlockStateType.normal, BlockModelType.none,
+	public SBTallGrass(String size, Supplier<RegistryObject<StagedBlock>> self, Hardness hardness, VoxelShape shape) {
+		super(size + "_grass", PRStages.STAGE_0, 64, PRItemGroups.BLOCKS, BlockInfo.with(BlockInfo.PLANT, hardness), BlockStateType.normal, BlockModelType.none,
 				new HarvestInfo(ToolType.NONE, ToolMaterial.HAND, DropInfo.item(PRItems.PLANT_FIBER, 30)),
 				new HarvestInfo(ToolType.KNIFE, ToolMaterial.CLAY, DropInfo.item(PRItems.PLANT_FIBER, 80)),
 				new HarvestInfo(ToolType.HOE, ToolMaterial.CLAY, DropInfo.item(PRItems.PLANT_FIBER, 80) /* TODO add seeds here */),
-				new HarvestInfo(ToolType.SHEARS, ToolMaterial.CLAY, DropInfo.block(PRBlocks.TALL_GRASS, 80)));
-		useVanillaNamespaceItem();
+				new HarvestInfo(ToolType.SHEARS, ToolMaterial.CLAY, DropInfo.block(self, 80)));
+		this.shape = shape;
 	}
 	
 	@Override
@@ -43,7 +45,7 @@ public class SBTallGrass extends StagedBlock {
 	
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader reader, BlockPos pos, ISelectionContext ctx) {
-		return SHAPE;
+		return shape;
 	}
 	
 	@SuppressWarnings("deprecation")

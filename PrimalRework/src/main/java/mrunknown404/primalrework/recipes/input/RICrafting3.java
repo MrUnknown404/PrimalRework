@@ -299,7 +299,21 @@ public class RICrafting3 extends RecipeInput<RICrafting3> {
 			for (int j = 0; j < i.length; j++) {
 				ingredients.set(j, create(i[j]));
 			}
+			return this;
+		}
+		
+		public SBuilder set(Object i, int amount) {
+			if (amount > 10) {
+				System.out.println("Tried to feed in too much ingredients");
+				return this;
+			} else if (amount <= 0) {
+				System.out.println("Tried to feed in too little ingredients");
+				return this;
+			}
 			
+			for (int j = 0; j < amount; j++) {
+				ingredients.set(j, create(i));
+			}
 			return this;
 		}
 	}

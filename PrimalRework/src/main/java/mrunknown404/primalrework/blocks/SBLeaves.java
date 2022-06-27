@@ -36,7 +36,7 @@ public class SBLeaves extends StagedBlock {
 		super(name + "_leaves", PRStages.STAGE_0, 32, PRItemGroups.BLOCKS, BlockInfo.of(BlockInfo.LEAVES), BlockStateType.normal, BlockModelType.normal_colored,
 				new HarvestInfo(ToolType.NONE, ToolMaterial.HAND, DropInfo.NONE), new HarvestInfo(ToolType.KNIFE, ToolMaterial.CLAY, DropInfo.NONE),
 				new HarvestInfo(ToolType.AXE, ToolMaterial.CLAY, DropInfo.NONE), new HarvestInfo(ToolType.SHEARS, ToolMaterial.CLAY));
-		registerDefaultState(stateDefinition.any().setValue(DISTANCE, Integer.valueOf(7)).setValue(PERSISTENT, Boolean.valueOf(false)));
+		registerDefaultState(stateDefinition.any().setValue(DISTANCE, Integer.valueOf(7)).setValue(PERSISTENT, false));
 	}
 	
 	@Override
@@ -122,6 +122,6 @@ public class SBLeaves extends StagedBlock {
 	
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext ctx) {
-		return updateDistance(defaultBlockState().setValue(PERSISTENT, Boolean.valueOf(true)), ctx.getLevel(), ctx.getClickedPos());
+		return updateDistance(defaultBlockState().setValue(PERSISTENT, true), ctx.getLevel(), ctx.getClickedPos());
 	}
 }

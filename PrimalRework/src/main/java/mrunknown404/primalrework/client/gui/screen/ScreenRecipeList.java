@@ -16,8 +16,8 @@ import mrunknown404.primalrework.recipes.IStagedRecipe;
 import mrunknown404.primalrework.registries.PRFuels;
 import mrunknown404.primalrework.utils.Pair;
 import mrunknown404.primalrework.utils.enums.FuelType;
-import mrunknown404.primalrework.utils.enums.RecipeType;
 import mrunknown404.primalrework.utils.enums.ICraftingInput;
+import mrunknown404.primalrework.utils.enums.RecipeType;
 import mrunknown404.primalrework.utils.helpers.ColorH;
 import mrunknown404.primalrework.utils.helpers.MathH;
 import mrunknown404.primalrework.utils.helpers.WordH;
@@ -25,7 +25,6 @@ import net.minecraft.client.audio.SimpleSound;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.gui.widget.button.Button;
-import net.minecraft.client.gui.widget.button.Button.IPressable;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.text.ITextComponent;
@@ -43,8 +42,7 @@ public class ScreenRecipeList extends Screen {
 	private Button leftButton, rightButton;
 	private ITextComponent recipeName, pageCount;
 	
-	public ScreenRecipeList(ContainerScreen<?> lastScreen, Map<RecipeType, List<IStagedRecipe<?, ?>>> recipes, Map<FuelType, Pair<StagedItem, Integer>> fuels,
-			StagedItem output) {
+	public ScreenRecipeList(ContainerScreen<?> lastScreen, Map<RecipeType, List<IStagedRecipe<?, ?>>> recipes, Map<FuelType, Pair<StagedItem, Integer>> fuels, StagedItem output) {
 		super(WordH.translate("screen.recipelist.title"));
 		this.lastScreen = lastScreen;
 		this.recipes = new ArrayList<Data>();
@@ -77,19 +75,8 @@ public class ScreenRecipeList extends Screen {
 		}
 		
 		curRecipeTab = 0;
-		addButton(leftButton = new Button(leftPos - 22, topPos + 4, 20, 20, WordH.string("<"), new IPressable() {
-			@Override
-			public void onPress(Button button) {
-				recipes.get(curRecipeTab).display.decreasePage();
-			}
-		}));
-		
-		addButton(rightButton = new Button(leftPos + 182, topPos + 4, 20, 20, WordH.string(">"), new IPressable() {
-			@Override
-			public void onPress(Button button) {
-				recipes.get(curRecipeTab).display.increasePage();
-			}
-		}));
+		addButton(leftButton = new Button(leftPos - 22, topPos + 4, 20, 20, WordH.string("<"), (button) -> recipes.get(curRecipeTab).display.decreasePage()));
+		addButton(rightButton = new Button(leftPos + 182, topPos + 4, 20, 20, WordH.string(">"), (button) -> recipes.get(curRecipeTab).display.increasePage()));
 		
 		onTabChange(true);
 	}

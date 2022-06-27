@@ -17,7 +17,7 @@ public enum RecipeType implements ICraftingInput {
 	
 	private RecipeType(StagedItem icon) {
 		this.icon = new ItemStack(icon);
-		this.name = WordH.translate("recipetype." + name() + ".name");
+		this.name = WordH.translate("recipetype." + toString() + ".name");
 	}
 	
 	@Override

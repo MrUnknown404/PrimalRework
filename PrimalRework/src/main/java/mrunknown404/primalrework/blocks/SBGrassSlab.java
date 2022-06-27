@@ -23,7 +23,7 @@ import net.minecraft.world.server.ServerWorld;
 
 public class SBGrassSlab extends SBSlab { //TODO replace with my snow
 	public SBGrassSlab() {
-		super("grass_slab", PRStages.STAGE_0, BlockInfo.of(BlockInfo.DRY_GRASS), new HarvestInfo(ToolType.SHOVEL, ToolMaterial.CLAY, DropInfo.block(PRBlocks.DIRT_SLAB)));
+		super("grass_slab", PRStages.STAGE_0, BlockInfo.of(BlockInfo.DRY_GRASS), new HarvestInfo(ToolType.SHOVEL, ToolMaterial.CLAY, DropInfo.block(() -> PRBlocks.DIRT_SLAB)));
 	}
 	
 	@Override

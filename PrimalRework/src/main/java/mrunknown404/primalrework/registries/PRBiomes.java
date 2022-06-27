@@ -17,13 +17,15 @@ public class PRBiomes {
 			new PRBiome("forest", () -> PRConfiguredSurfaceBuilders.GRASS, 100, BiomeType.WARM, Category.PLAINS, 0, 0.1f, 1, 1),
 			withDefaultGrassyFeatures(() -> PRConfiguredFeatures.OAK_COMMON, () -> PRConfiguredFeatures.BIG_OAK_RARE, () -> PRConfiguredFeatures.BIRCH_RARE));
 	public static final RegistryObject<Biome> SUNKEN_FOREST = PRRegistry.register(
-			new PRBiome("sunken_forest", () -> PRConfiguredSurfaceBuilders.GRASS, 20, BiomeType.WARM, Category.SWAMP, -0.125f, 0.1f, 1, 1, ColorH.rgba2Int(60, 80, 100),
+			new PRBiome("sunken_forest", () -> PRConfiguredSurfaceBuilders.GRASS, 20, BiomeType.WARM, Category.SWAMP, -0.2f, 0f, 1, 1, ColorH.rgba2Int(60, 80, 100),
 					ColorH.rgba2Int(20, 30, 40)),
 			withDefaultGrassyFeatures(() -> PRConfiguredFeatures.SUNKEN_OAK_COMMON, () -> PRConfiguredFeatures.SUNKEN_BIG_OAK_RARE, () -> PRConfiguredFeatures.SUNKEN_BIRCH_RARE));
 	
 	@SafeVarargs
 	public static List<Supplier<ConfiguredFeature<?, ?>>> withDefaultGrassyFeatures(Supplier<ConfiguredFeature<?, ?>>... features) {
 		List<Supplier<ConfiguredFeature<?, ?>>> list = new ArrayList<Supplier<ConfiguredFeature<?, ?>>>();
+		list.add(() -> PRConfiguredFeatures.SHORT_GRASS);
+		list.add(() -> PRConfiguredFeatures.MEDIUM_GRASS);
 		list.add(() -> PRConfiguredFeatures.TALL_GRASS);
 		for (Supplier<ConfiguredFeature<?, ?>> f : features) {
 			list.add(f);

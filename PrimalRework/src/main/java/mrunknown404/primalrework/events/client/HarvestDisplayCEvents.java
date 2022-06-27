@@ -89,10 +89,11 @@ public class HarvestDisplayCEvents {
 			
 			ToolType toolType = item instanceof StagedItem ? ((StagedItem) item).toolType : ToolType.NONE;
 			ToolMaterial toolMat = item instanceof StagedItem ? ((StagedItem) item).toolMat : ToolMaterial.HAND;
+			boolean has = infos.stream().anyMatch((i) -> i.toolType == toolType);
 			
 			for (HarvestInfo info : infos) {
 				if (info.toolMat != ToolMaterial.UNBREAKABLE) {
-					boolean canMine = info.toolType == ToolType.NONE ? true : info.toolType == toolType && info.toolMat.level <= toolMat.level;
+					boolean canMine = (!has && info.toolType == ToolType.NONE) || (info.toolType == toolType && info.toolMat.level <= toolMat.level);
 					texts.add((canMine ? YES_MINE : NO_MINE).copy()
 							.append(WordH.translate("tooltips.stat.level").withStyle(TextFormatting.WHITE).append(" " + info.toolMat.level + " " + info.toolType.getName())));
 				}

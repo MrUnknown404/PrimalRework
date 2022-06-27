@@ -1,8 +1,5 @@
 package mrunknown404.primalrework.utils.proxy;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.commons.lang3.ArrayUtils;
 import org.lwjgl.glfw.GLFW;
 
@@ -32,7 +29,6 @@ import mrunknown404.primalrework.registries.PRTileEntities;
 import mrunknown404.primalrework.utils.enums.Metal;
 import mrunknown404.primalrework.utils.helpers.ColorH;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
 import net.minecraft.client.GameSettings;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
@@ -94,6 +90,8 @@ public class ClientProxy extends CommonProxy {
 		RenderTypeLookup.setRenderLayer(PRBlocks.JUNGLE_LEAVES.get(), RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(PRBlocks.ACACIA_LEAVES.get(), RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(PRBlocks.DARK_OAK_LEAVES.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(PRBlocks.SHORT_GRASS.get(), RenderType.cutoutMipped());
+		RenderTypeLookup.setRenderLayer(PRBlocks.MEDIUM_GRASS.get(), RenderType.cutoutMipped());
 		RenderTypeLookup.setRenderLayer(PRBlocks.TALL_GRASS.get(), RenderType.cutoutMipped());
 		
 		ScreenManager.register(PRContainers.CAMPFIRE.get(), ScreenCampFire::new);
@@ -106,35 +104,21 @@ public class ClientProxy extends CommonProxy {
 		CraftingDisplayH.finish();
 		
 		//Color setup
-		List<Item> items = new ArrayList<Item>();
-		for (RegistryObject<Item> ro : PRRegistry.getItems()) {
-			StagedItem item = (StagedItem) ro.get();
-			
-			if (item instanceof IColoredItem) {
-				if (((IColoredItem) item).getMetal() != Metal.UNKNOWN) {
-					items.add(item);
-				}
-			}
-		}
-		
-		List<Block> blocks = new ArrayList<Block>();
-		for (RegistryObject<Block> ro : PRRegistry.getBlocks()) {
+		Block[] blocks = PRRegistry.getBlocks().stream().filter((ro) -> {
 			StagedBlock block = (StagedBlock) ro.get();
 			if (block.getBlockModelType() == BlockModelType.normal_colored) {
-				if (block instanceof SBMetal) {
-					if (((SBMetal) block).metal != Metal.UNKNOWN) {
-						RenderTypeLookup.setRenderLayer(block, RenderType.translucent());
-					}
+				if (block instanceof SBMetal && ((SBMetal) block).metal != Metal.UNKNOWN) {
+					RenderTypeLookup.setRenderLayer(block, RenderType.translucent());
 				}
-				
-				blocks.add(block);
+				return true;
 			}
-		}
+			return false;
+		}).map((ro) -> ro.get()).toArray(Block[]::new);
 		
 		//Block colors
-		mc.getBlockColors().register((state, reader, pos, tintIndex) -> {
-			return reader != null && pos != null ? BiomeColors.getAverageGrassColor(reader, pos) : GrassColors.get(0.5, 1);
-		}, PRBlocks.MUSHROOM_GRASS.get(), PRBlocks.GRASS_BLOCK.get(), PRBlocks.GRASS_SLAB.get(), PRBlocks.TALL_GRASS.get());
+		mc.getBlockColors().register((state, reader, pos, tintIndex) -> reader != null && pos != null ? BiomeColors.getAverageGrassColor(reader, pos) : GrassColors.get(0.5, 1),
+				PRBlocks.MUSHROOM_GRASS.get(), PRBlocks.GRASS_BLOCK.get(), PRBlocks.GRASS_SLAB.get(), PRBlocks.SHORT_GRASS.get(), PRBlocks.MEDIUM_GRASS.get(),
+				PRBlocks.TALL_GRASS.get());
 		
 		mc.getBlockColors().register((state, reader, pos, tintIndex) -> {
 			StagedBlock block = (StagedBlock) state.getBlock();
@@ -146,18 +130,15 @@ public class ClientProxy extends CommonProxy {
 			}
 			
 			return 0;
-		}, blocks.toArray(new Block[0]));
+		}, blocks);
 		
 		//Item colors
-		mc.getItemColors().register((itemstack, tintIndex) -> {
-			BlockState blockstate = ((SIBlock) itemstack.getItem()).getBlock().defaultBlockState();
-			return mc.getBlockColors().getColor(blockstate, null, null, tintIndex);
-		}, PRBlocks.MUSHROOM_GRASS.get(), PRBlocks.GRASS_BLOCK.get(), PRBlocks.GRASS_SLAB.get(), PRBlocks.TALL_GRASS.get());
+		mc.getItemColors().register((itemstack, tintIndex) -> mc.getBlockColors().getColor(((SIBlock) itemstack.getItem()).getBlock().defaultBlockState(), null, null, tintIndex),
+				PRBlocks.MUSHROOM_GRASS.get(), PRBlocks.GRASS_BLOCK.get(), PRBlocks.GRASS_SLAB.get(), PRBlocks.SHORT_GRASS.get(), PRBlocks.MEDIUM_GRASS.get(),
+				PRBlocks.TALL_GRASS.get());
 		
-		mc.getItemColors().register((itemstack, tintIndex) -> {
-			BlockState blockstate = ((SIBlock) itemstack.getItem()).getBlock().defaultBlockState();
-			return mc.getBlockColors().getColor(blockstate, null, null, tintIndex);
-		}, blocks.toArray(new Block[0]));
+		mc.getItemColors().register((itemstack, tintIndex) -> mc.getBlockColors().getColor(((SIBlock) itemstack.getItem()).getBlock().defaultBlockState(), null, null, tintIndex),
+				blocks);
 		
 		mc.getItemColors().register((itemstack, tintIndex) -> {
 			StagedItem item = (StagedItem) itemstack.getItem();
@@ -167,6 +148,9 @@ public class ClientProxy extends CommonProxy {
 			
 			System.out.println("Unsetup colored item '" + item.getRegName() + "'!");
 			return 0;
-		}, items.toArray(new Item[0]));
+		}, PRRegistry.getItems().stream().filter((ro) -> {
+			StagedItem item = (StagedItem) ro.get();
+			return item instanceof IColoredItem && ((IColoredItem) item).getMetal() != Metal.UNKNOWN;
+		}).map((ro) -> ro.get()).toArray(Item[]::new));
 	}
 }

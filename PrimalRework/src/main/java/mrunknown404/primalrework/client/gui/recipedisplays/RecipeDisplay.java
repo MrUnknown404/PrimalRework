@@ -9,13 +9,13 @@ import mrunknown404.primalrework.client.gui.screen.ScreenRecipeList;
 import mrunknown404.primalrework.items.utils.StagedItem;
 import mrunknown404.primalrework.recipes.IStagedRecipe;
 import mrunknown404.primalrework.recipes.Ingredient;
+import mrunknown404.primalrework.recipes.SRBurnableFuel;
 import mrunknown404.primalrework.recipes.SRCampFire;
 import mrunknown404.primalrework.recipes.SRCrafting3;
-import mrunknown404.primalrework.recipes.SRBurnableFuel;
 import mrunknown404.primalrework.utils.DoubleCache;
 import mrunknown404.primalrework.utils.enums.FuelType;
-import mrunknown404.primalrework.utils.enums.RecipeType;
 import mrunknown404.primalrework.utils.enums.ICraftingInput;
+import mrunknown404.primalrework.utils.enums.RecipeType;
 import mrunknown404.primalrework.utils.helpers.MathH;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
@@ -33,7 +33,7 @@ public abstract class RecipeDisplay<T extends IStagedRecipe<T, ?>> {
 	protected int listWidth, listHeight, maxRecipesSupported, maxPages, page;
 	
 	private final DoubleCache<Ingredient, Integer, ItemStack> lastIngCache = DoubleCache
-			.create((okey0, okey1, key0, key1) -> (okey0 != null && key0 != null) ? (okey0.matches(key0) && okey1 == key1) : false);
+			.create((o0, o1, k0, k1) -> (o0 != null && k0 != null) ? (o0.matches(k0) && o1 == k1) : false);
 	
 	private ItemRenderer ir;
 	private ScreenRecipeList list;

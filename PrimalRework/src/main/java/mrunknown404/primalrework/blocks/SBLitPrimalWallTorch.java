@@ -17,7 +17,8 @@ import net.minecraft.world.World;
 
 public class SBLitPrimalWallTorch extends SBUnlitPrimalWallTorch {
 	public SBLitPrimalWallTorch() {
-		super("lit_primal_wall_torch", PRStages.STAGE_1, BlockInfo.LIT_PRIMAL_TORCH, new HarvestInfo(ToolType.NONE, ToolMaterial.HAND, DropInfo.block(PRBlocks.LIT_PRIMAL_TORCH)));
+		super("lit_primal_wall_torch", PRStages.STAGE_1, BlockInfo.LIT_PRIMAL_TORCH,
+				new HarvestInfo(ToolType.NONE, ToolMaterial.HAND, DropInfo.block(() -> PRBlocks.LIT_PRIMAL_TORCH)));
 	}
 	
 	@Override

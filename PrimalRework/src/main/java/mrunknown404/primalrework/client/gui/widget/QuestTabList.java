@@ -105,7 +105,10 @@ public class QuestTabList extends AbstractList<QuestTabList.QuestTabEntry> {
 		private final ScreenQuestMenu screen;
 		
 		private TabButton(ScreenQuestMenu screen, int x, int y, Supplier<Stage> stage, QuestTab tab) {
-			super(x, y, 22, 22, stage.get().getFancyName(), (onPress) -> ScreenQuestMenu.selectedTab = tab);
+			super(x, y, 22, 22, stage.get().getFancyName(), (onPress) -> {
+				screen.selectedTab = tab;
+				screen.setQuestInfo(null);
+			});
 			this.stage = stage;
 			this.tab = tab;
 			this.screen = screen;
@@ -116,7 +119,7 @@ public class QuestTabList extends AbstractList<QuestTabList.QuestTabEntry> {
 			Minecraft mc = Minecraft.getInstance();
 			
 			boolean isSelected = MathH.within(mouseX, x, x + width - 1) && MathH.within(mouseY, y, y + height - 1);
-			if (ScreenQuestMenu.selectedTab == tab) {
+			if (screen.selectedTab == tab) {
 				mc.getTextureManager().bind(isSelected ? ScreenQuestMenu.QUEST_ICON_SELECTED_HOVER : ScreenQuestMenu.QUEST_ICON_SELECTED);
 			} else {
 				mc.getTextureManager().bind(isSelected ? ScreenQuestMenu.QUEST_ICON_HOVER : ScreenQuestMenu.QUEST_ICON);

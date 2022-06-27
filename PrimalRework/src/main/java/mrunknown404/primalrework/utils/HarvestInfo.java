@@ -10,6 +10,7 @@ import mrunknown404.primalrework.items.utils.StagedItem;
 import mrunknown404.primalrework.utils.enums.ToolMaterial;
 import mrunknown404.primalrework.utils.enums.ToolType;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.RegistryObject;
 
 public class HarvestInfo {
 	public static final HarvestInfo AXE_MIN = new HarvestInfo(ToolType.AXE, ToolMaterial.CLAY);
@@ -66,16 +67,16 @@ public class HarvestInfo {
 			return new DropInfo(result, 1, 1, 100);
 		}
 		
-		public static DropInfo block(Supplier<StagedBlock> result, int min, int max) {
-			return new DropInfo(() -> result.get().asStagedItem(), min, max, 100);
+		public static DropInfo block(Supplier<RegistryObject<StagedBlock>> result, int min, int max) {
+			return new DropInfo(() -> result.get().get().asStagedItem(), min, max, 100);
 		}
 		
-		public static DropInfo block(Supplier<StagedBlock> result, int chance) {
-			return new DropInfo(() -> result.get().asStagedItem(), 1, 1, chance);
+		public static DropInfo block(Supplier<RegistryObject<StagedBlock>> self, int chance) {
+			return new DropInfo(() -> self.get().get().asStagedItem(), 1, 1, chance);
 		}
 		
-		public static DropInfo block(Supplier<StagedBlock> result) {
-			return new DropInfo(() -> result.get().asStagedItem(), 1, 1, 100);
+		public static DropInfo block(Supplier<RegistryObject<StagedBlock>> result) {
+			return new DropInfo(() -> result.get().get().asStagedItem(), 1, 1, 100);
 		}
 		
 		public ItemStack getItem() {
