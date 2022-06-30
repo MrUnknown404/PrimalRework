@@ -41,12 +41,13 @@ class GeneratorBlockState extends BlockStateProvider {
 			StagedBlock b = (StagedBlock) regBlock.get();
 			
 			final String id = b.usesVanillaNamespaceBlock() ? "minecraft" : PrimalRework.MOD_ID;
+			final String rawName = b.getRegistryName().getPath();
 			
 			switch (b.getBlockStateType()) {
 				case none:
 					break;
 				case normal:
-					simpleBlock(b, new UncheckedModelFile(new ResourceLocation(id, "block/" + b.getRegName())));
+					simpleBlock(b, new UncheckedModelFile(new ResourceLocation(id, "block/" + rawName)));
 					break;
 				case facing:
 					int a = 180;
@@ -54,7 +55,7 @@ class GeneratorBlockState extends BlockStateProvider {
 						a = 90;
 					}
 					
-					horizontalBlock(b, new UncheckedModelFile(new ResourceLocation(id, "block/" + b.getRegName())), a);
+					horizontalBlock(b, new UncheckedModelFile(new ResourceLocation(id, "block/" + rawName)), a);
 					break;
 				case facing_pillar:
 					facingPillar(b);
@@ -74,19 +75,23 @@ class GeneratorBlockState extends BlockStateProvider {
 	
 	private void randomDirection(StagedBlock block) {
 		final String id = block.usesVanillaNamespaceBlock() ? "minecraft" : PrimalRework.MOD_ID;
+		final String rawName = block.getRegistryName().getPath();
+		
 		ConfiguredModel[] models = new ConfiguredModel[4];
 		for (int i = 0; i < 4; i++) {
-			models[i] = new ConfiguredModel(new UncheckedModelFile(new ResourceLocation(id, "block/" + block.getRegName())), 0, 90 * i, false);
+			models[i] = new ConfiguredModel(new UncheckedModelFile(new ResourceLocation(id, "block/" + rawName)), 0, 90 * i, false);
 		}
 		getVariantBuilder(block).partialState().setModels(models);
 	}
 	
 	public void facingPillar(StagedBlock block) {
 		final String id = block.usesVanillaNamespaceBlock() ? "minecraft" : PrimalRework.MOD_ID;
-		ResourceLocation baseName = new ResourceLocation(id, "block/" + block.getRegName());
+		final String rawName = block.getRegistryName().getPath();
+		
+		ResourceLocation baseName = new ResourceLocation(id, "block/" + rawName);
 		
 		if (block instanceof SBStrippedLog) {
-			facingPillar(block, models().cubeColumn(block.getRegName(), baseName, baseName), models().cubeColumnHorizontal(block.getRegName(), baseName, baseName));
+			facingPillar(block, models().cubeColumn(rawName, baseName, baseName), models().cubeColumnHorizontal(rawName, baseName, baseName));
 		} else {
 			facingPillar(block, new UncheckedModelFile(baseName), new UncheckedModelFile(extend(baseName, "_horizontal")));
 		}
@@ -99,18 +104,19 @@ class GeneratorBlockState extends BlockStateProvider {
 	}
 	
 	public void lit(StagedBlock block) {
-		ResourceLocation baseName = modLoc("block/" + block.getRegName());
+		ResourceLocation baseName = modLoc("block/" + block.getRegistryName().getPath());
 		getVariantBuilder(block).partialState().with(BlockStateProperties.LIT, false).modelForState().modelFile(new UncheckedModelFile(extend(baseName, "_unlit"))).addModel()
 				.partialState().with(BlockStateProperties.LIT, true).modelForState().modelFile(new UncheckedModelFile(extend(baseName, "_lit"))).addModel();
 	}
 	
 	public void slabBlock(StagedBlock block) {
-		ResourceLocation baseName = modLoc("block/" + block.getRegName().replace("_slab", ""));
+		final String rawName = block.getRegistryName().getPath().replace("_slab", "");
+		ResourceLocation baseName = modLoc("block/" + rawName);
 		
 		getVariantBuilder(block).partialState().with(SBSlab.TYPE, SlabType.BOTTOM).modelForState().modelFile(new UncheckedModelFile(extend(baseName, "_slab"))).addModel()
 				.partialState().with(SBSlab.TYPE, SlabType.TOP).modelForState().modelFile(new UncheckedModelFile(extend(baseName, "_slab_top"))).addModel().partialState()
-				.with(SBSlab.TYPE, SlabType.DOUBLE).modelForState()
-				.modelFile(new UncheckedModelFile(block.usesVanillaNamespaceBlock() ? mcLoc("block/" + block.getRegName().replace("_slab", "")) : baseName)).addModel();
+				.with(SBSlab.TYPE, SlabType.DOUBLE).modelForState().modelFile(new UncheckedModelFile(block.usesVanillaNamespaceBlock() ? mcLoc("block/" + rawName) : baseName))
+				.addModel();
 	}
 	
 	private static ResourceLocation extend(ResourceLocation rl, String suffix) {

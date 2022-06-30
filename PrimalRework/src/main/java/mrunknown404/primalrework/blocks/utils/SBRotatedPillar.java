@@ -15,8 +15,8 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.Rotation;
 
 public class SBRotatedPillar extends StagedBlock {
-	public SBRotatedPillar(String name, Supplier<Stage> stage, int stackSize, ItemGroup tab, BlockInfo blockInfo, HarvestInfo info, HarvestInfo... extraInfos) {
-		super(name, stage, stackSize, tab, blockInfo, BlockStateType.facing_pillar, BlockModelType.facing_pillar, info, extraInfos);
+	public SBRotatedPillar(Supplier<Stage> stage, int stackSize, ItemGroup tab, BlockInfo blockInfo, HarvestInfo info, HarvestInfo... extraInfos) {
+		super(stage, stackSize, tab, blockInfo, BlockStateType.facing_pillar, BlockModelType.facing_pillar, info, extraInfos);
 		registerDefaultState(defaultBlockState().setValue(BlockStateProperties.AXIS, Direction.Axis.Y));
 	}
 	

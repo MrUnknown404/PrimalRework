@@ -38,8 +38,8 @@ public class SBGroundItem extends StagedBlock implements IWaterLoggable {
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	private static final VoxelShape SHAPE = box(3, 0, 3, 13, 1, 13);
 	
-	public SBGroundItem(String name, UniqueRawBlockInfo info, Supplier<StagedItem> dropInstead) {
-		super("ground_" + name, PRStages.STAGE_0, 64, PRItemGroups.BLOCKS, BlockInfo.of(info), BlockStateType.random_direction, BlockModelType.none,
+	public SBGroundItem(UniqueRawBlockInfo info, Supplier<StagedItem> dropInstead) {
+		super(PRStages.STAGE_0, 64, PRItemGroups.BLOCKS, BlockInfo.of(info), BlockStateType.random_direction, BlockModelType.none,
 				dropInstead == null ? HarvestInfo.HAND : new HarvestInfo(ToolType.NONE, ToolMaterial.HAND, DropInfo.item(dropInstead)));
 		registerDefaultState(defaultBlockState().setValue(WATERLOGGED, false));
 	}

@@ -1,9 +1,9 @@
 package mrunknown404.primalrework.datagen;
 
 import mrunknown404.primalrework.PrimalRework;
-import mrunknown404.primalrework.items.utils.IColoredItem;
 import mrunknown404.primalrework.items.utils.StagedItem;
 import mrunknown404.primalrework.registries.PRRegistry;
+import mrunknown404.primalrework.utils.IMetalColored;
 import mrunknown404.primalrework.utils.enums.Metal;
 import mrunknown404.primalrework.utils.enums.ToolMaterial;
 import mrunknown404.primalrework.utils.enums.ToolType;
@@ -27,7 +27,9 @@ class GeneratorItemModel extends ModelProvider<TexturelessModelBuilder> {
 			StagedItem i = (StagedItem) regItem.get();
 			
 			final String id = i.usesVanillaNamespace() ? "minecraft" : PrimalRework.MOD_ID;
-			String name = i.getRegName();
+			final String rawName = i.getRegistryName().getPath();
+			String name = rawName;
+			
 			if (i.toolType != ToolType.NONE && i.toolMat == ToolMaterial.WOOD && (i.toolType == ToolType.SHOVEL || i.toolType == ToolType.AXE)) {
 				String[] split = name.split("_");
 				name = split[0] + "en_" + split[1];
@@ -35,27 +37,27 @@ class GeneratorItemModel extends ModelProvider<TexturelessModelBuilder> {
 				name = "grass";
 			}
 			
-			if (i instanceof IColoredItem) {
-				if (((IColoredItem) i).getMetal() != Metal.UNKNOWN) {
+			if (i instanceof IMetalColored) {
+				if (((IMetalColored) i).getMetal() != Metal.UNKNOWN) {
 					name = "template_" + name.substring(name.indexOf('_') + 1);
 				}
 			}
 			
 			switch (i.getItemType()) {
 				case block:
-					getBuilder(i.getRegName()).parent(new UncheckedModelFile(extendWithFolder(new ResourceLocation(id, "block/" + i.getRegName()))));
+					getBuilder(rawName).parent(new UncheckedModelFile(extendWithFolder(new ResourceLocation(id, "block/" + name))));
 					break;
 				case generated:
-					getBuilder(i.getRegName()).parent(getExistingFile(mcLoc("item/generated"))).texture("layer0", new ResourceLocation(id, "item/" + name));
+					getBuilder(rawName).parent(getExistingFile(mcLoc("item/generated"))).texture("layer0", new ResourceLocation(id, "item/" + name));
 					break;
 				case handheld:
-					getBuilder(i.getRegName()).parent(getExistingFile(mcLoc("item/handheld"))).texture("layer0", new ResourceLocation(id, "item/" + name));
+					getBuilder(rawName).parent(getExistingFile(mcLoc("item/handheld"))).texture("layer0", new ResourceLocation(id, "item/" + name));
 					break;
 				case handheld_rod:
-					getBuilder(i.getRegName()).parent(getExistingFile(mcLoc("item/handheld_rod"))).texture("layer0", new ResourceLocation(id, "item/" + name));
+					getBuilder(rawName).parent(getExistingFile(mcLoc("item/handheld_rod"))).texture("layer0", new ResourceLocation(id, "item/" + name));
 					break;
 				case itemblock:
-					getBuilder(i.getRegName()).parent(getExistingFile(mcLoc("item/generated"))).texture("layer0", new ResourceLocation(id, "block/" + name));
+					getBuilder(rawName).parent(getExistingFile(mcLoc("item/generated"))).texture("layer0", new ResourceLocation(id, "block/" + name));
 					break;
 				case none: {
 					break;

@@ -3,6 +3,7 @@ package mrunknown404.primalrework.utils.helpers;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map.Entry;
 
 import mrunknown404.primalrework.blocks.utils.StagedBlock;
 import mrunknown404.primalrework.items.utils.SIBlock;
@@ -13,9 +14,8 @@ import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.utils.BlockInfo;
 import mrunknown404.primalrework.utils.Cache;
 import mrunknown404.primalrework.utils.HarvestInfo;
+import mrunknown404.primalrework.utils.enums.Element;
 import mrunknown404.primalrework.utils.enums.ToolType;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.ITextComponent;
@@ -23,22 +23,6 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.Style;
 
 public class ItemH {
-	public static boolean isFood(Item item) {
-		return item.getFoodProperties() != null;
-	}
-	
-	public static boolean isBlock(Item item) {
-		return item instanceof SIBlock || item instanceof BlockItem;
-	}
-	
-	public static boolean isDamageable(Item item) {
-		return item instanceof SIDamageable;
-	}
-	
-	public static int getMaxDamage(SIDamageable item) {
-		return item.toolMat.durability;
-	}
-	
 	private static final Cache<ItemStack, List<ITextComponent>> TOOLTIP_CACHE = new Cache<ItemStack, List<ITextComponent>>() {
 		@Override
 		public boolean is(ItemStack key) {
@@ -51,9 +35,7 @@ public class ItemH {
 	public static List<ITextComponent> getTooltips(ItemStack stack) {
 		if (!(stack.getItem() instanceof StagedItem)) {
 			return UNKNOWN_ITEM;
-		}
-		
-		if (TOOLTIP_CACHE.is(stack)) {
+		} else if (TOOLTIP_CACHE.is(stack)) {
 			return TOOLTIP_CACHE.get();
 		}
 		
@@ -72,18 +54,18 @@ public class ItemH {
 			List<ITextComponent> temp = item.getTooltips();
 			if (!temp.isEmpty()) {
 				list.addAll(temp);
-				if (ItemH.isBlock(item) || ItemH.isDamageable(item) || ItemH.isFood(item)) {
+				if (item instanceof SIBlock || item instanceof SIDamageable || item instanceof SIFood) {
 					list.add(StringTextComponent.EMPTY);
 				}
 			}
 			
-			if (ItemH.isFood(item)) {
+			if (item instanceof SIFood) {
 				SIFood food = (SIFood) item;
 				
 				list.add(WordH.string(WordH.toPrintableNumber(food.nutrition) + " ").append(WordH.translate("tooltips.food.nutrition")).withStyle(WordH.STYLE_GRAY));
 				list.add(WordH.string(WordH.toPrintableNumber(food.nutrition * food.saturation) + " ").append(WordH.translate("tooltips.food.saturation"))
 						.withStyle(WordH.STYLE_GRAY));
-			} else if (ItemH.isBlock(item)) {
+			} else if (item instanceof SIBlock) {
 				StagedBlock block = ((SIBlock) item).getBlock();
 				List<HarvestInfo> infos = BlockH.getBlockHarvestInfos(block);
 				
@@ -96,6 +78,15 @@ public class ItemH {
 				list.add(blast != -1 ? WordH.string(WordH.toPrintableNumber(blast) + " ").append(WordH.translate("tooltips.block.blast")) :
 						WordH.translate("tooltips.block.unexplodable"));
 				
+				if (!item.getElements().isEmpty()) {
+					String s = "";
+					for (Entry<Element, Integer> entry : item.getElements().entrySet()) {
+						s += entry.getKey() == Element.UNKNOWN || entry.getValue() == 1 ? entry.getKey().atomicSymbol() :
+								entry.getKey().atomicSymbol() + Element.subscript(entry.getValue());
+					}
+					list.add(WordH.string(s).withStyle(WordH.STYLE_GREEN));
+				}
+				
 				list.add(StringTextComponent.EMPTY);
 				list.add(WordH.translate("tooltips.require.following").withStyle(WordH.STYLE_GRAY));
 				for (HarvestInfo info : infos) {
@@ -106,10 +97,10 @@ public class ItemH {
 				String atkSpd = WordH.toPrintableNumber(item.toolType.swingSpeed + 4);
 				String mineSpd = WordH.toPrintableNumber(item.toolMat.speed);
 				
-				if (ItemH.isDamageable(item)) {
+				if (item instanceof SIDamageable) {
 					SIDamageable di = (SIDamageable) item;
-					list.add(WordH.string((ItemH.getMaxDamage(di) - stack.getDamageValue()) + "/" + ItemH.getMaxDamage(di) + " ")
-							.append(WordH.translate("tooltips.stat.durability")).withStyle(WordH.STYLE_GRAY));
+					list.add(WordH.string((di.toolMat.durability - stack.getDamageValue()) + "/" + di.toolMat.durability + " ").append(WordH.translate("tooltips.stat.durability"))
+							.withStyle(WordH.STYLE_GRAY));
 				}
 				
 				if (item.toolType != ToolType.NONE) {
@@ -118,6 +109,17 @@ public class ItemH {
 					list.add(WordH.string(atkSpd + " ").append(WordH.translate("tooltips.stat.speed.attack")).withStyle(WordH.STYLE_GRAY));
 					list.add(WordH.string(mineSpd + " ").append(WordH.translate("tooltips.stat.speed.mine")).withStyle(WordH.STYLE_GRAY));
 					list.add(WordH.translate("tooltips.stat.level").append(WordH.string(" " + item.toolMat.level + " " + item.toolType.getName())).withStyle(WordH.STYLE_GRAY));
+				}
+			}
+			
+			if (!(item instanceof SIBlock)) {
+				if (!item.getElements().isEmpty()) {
+					String s = "";
+					for (Entry<Element, Integer> entry : item.getElements().entrySet()) {
+						s += entry.getKey() == Element.UNKNOWN || entry.getValue() == 1 ? entry.getKey().atomicSymbol() :
+								entry.getKey().atomicSymbol() + Element.subscript(entry.getValue());
+					}
+					list.add(WordH.string(s).withStyle(WordH.STYLE_GREEN));
 				}
 			}
 			

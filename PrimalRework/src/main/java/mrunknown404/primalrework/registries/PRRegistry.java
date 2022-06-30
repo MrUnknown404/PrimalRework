@@ -157,27 +157,26 @@ public class PRRegistry {
 		}
 	}
 	
-	public static RegistryObject<Stage> stage(Stage o) {
-		return STAGES.register(o.nameID, () -> o);
+	public static RegistryObject<Stage> stage(String nameID, Supplier<Stage> o) {
+		return STAGES.register(nameID, o);
 	}
 	
-	public static RegistryObject<StagedTag> stagedTag(StagedTag o) {
-		return STAGED_TAGS.register(o.name, () -> o);
+	public static RegistryObject<StagedTag> stagedTag(String name, Supplier<StagedTag> o) {
+		return STAGED_TAGS.register(name, o);
 	}
 	
-	public static <T extends StagedBlock> RegistryObject<T> block(T o) {
-		return block(o, true);
+	public static <T extends StagedBlock> RegistryObject<T> blockNoItem(String name, Supplier<T> o) {
+		return BLOCKS.register(name, o);
 	}
 	
-	public static <T extends StagedBlock> RegistryObject<T> block(T o, boolean registerItem) {
-		if (registerItem) {
-			item((StagedItem) new SIBlock(o));
-		}
-		return BLOCKS.register(o.getRegName(), () -> o);
+	public static <T extends StagedBlock> RegistryObject<T> block(String name, Supplier<T> o) {
+		RegistryObject<T> ro = BLOCKS.register(name, o);
+		item(name, () -> new SIBlock(ro.get()));
+		return ro;
 	}
 	
-	public static <T extends StagedItem> RegistryObject<T> item(T o) {
-		return ITEMS.register(o.getRegName(), () -> o);
+	public static <T extends StagedItem> RegistryObject<T> item(String name, Supplier<T> o) {
+		return ITEMS.register(name, o);
 	}
 	
 	public static <T extends TileEntity> RegistryObject<TileEntityType<T>> tileEntity(String name, Supplier<T> entity, RegistryObject<StagedBlock> block) {

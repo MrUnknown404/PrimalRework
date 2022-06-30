@@ -15,19 +15,19 @@ public class SIFood extends StagedItem {
 	public final int nutrition;
 	public final float saturation;
 	
-	public SIFood(String name, Supplier<Stage> stage, int maxStackSize, int nutrition, float saturation, boolean isMeat, boolean canAlwaysEat, boolean fastFood) {
-		super(name, stage, maxStackSize, ToolType.NONE, ToolMaterial.HAND, PRItemGroups.FOOD, Rarity.COMMON, toFood(nutrition, saturation, isMeat, canAlwaysEat, fastFood), false,
-				false, ItemType.generated);
+	public SIFood(Supplier<Stage> stage, int maxStackSize, int nutrition, float saturation, boolean isMeat, boolean canAlwaysEat, boolean fastFood) {
+		super(stage, maxStackSize, ToolType.NONE, ToolMaterial.HAND, PRItemGroups.FOOD, Rarity.COMMON, toFood(nutrition, saturation, isMeat, canAlwaysEat, fastFood), false, false,
+				ItemType.generated);
 		this.nutrition = nutrition;
 		this.saturation = saturation;
 	}
 	
-	public SIFood(String name, Supplier<Stage> stage, int maxStackSize, int nutrition, float saturation) {
-		this(name, stage, maxStackSize, nutrition, saturation, false, false, false);
+	public SIFood(Supplier<Stage> stage, int maxStackSize, int nutrition, float saturation) {
+		this(stage, maxStackSize, nutrition, saturation, false, false, false);
 	}
 	
-	public SIFood(String name, Supplier<Stage> stage, int nutrition, float saturation) {
-		this(name, stage, 64, nutrition, saturation, false, false, false);
+	public SIFood(Supplier<Stage> stage, int nutrition, float saturation) {
+		this(stage, 64, nutrition, saturation, false, false, false);
 	}
 	
 	@Override

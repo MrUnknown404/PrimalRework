@@ -1,7 +1,7 @@
-package mrunknown404.primalrework.items.utils;
+package mrunknown404.primalrework.utils;
 
 import mrunknown404.primalrework.utils.enums.Metal;
 
-public interface IColoredItem {
+public interface IMetalColored {
 	public abstract Metal getMetal();
 }

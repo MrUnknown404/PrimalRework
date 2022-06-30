@@ -23,13 +23,12 @@ import net.minecraft.world.IWorldReader;
 public class SBUnlitPrimalTorch extends StagedBlock {
 	private static final VoxelShape SHAPE = box(6, 0, 6, 10, 8, 10);
 	
-	SBUnlitPrimalTorch(String name, Supplier<Stage> stage, UniqueRawBlockInfo blockInfo, BlockStateType blockstateType, HarvestInfo info) {
-		super(name, stage, 64, PRItemGroups.BLOCKS, BlockInfo.of(blockInfo), blockstateType, BlockModelType.none, info);
+	SBUnlitPrimalTorch(Supplier<Stage> stage, UniqueRawBlockInfo blockInfo, BlockStateType blockstateType, HarvestInfo info) {
+		super(stage, 64, PRItemGroups.BLOCKS, BlockInfo.of(blockInfo), blockstateType, BlockModelType.none, info);
 	}
 	
 	public SBUnlitPrimalTorch() {
-		super("unlit_primal_torch", PRStages.STAGE_0, 64, PRItemGroups.BLOCKS, BlockInfo.of(BlockInfo.UNLIT_PRIMAL_TORCH), BlockStateType.normal, BlockModelType.none,
-				HarvestInfo.HAND);
+		super(PRStages.STAGE_0, 64, PRItemGroups.BLOCKS, BlockInfo.of(BlockInfo.UNLIT_PRIMAL_TORCH), BlockStateType.normal, BlockModelType.none, HarvestInfo.HAND);
 	}
 	
 	@Override

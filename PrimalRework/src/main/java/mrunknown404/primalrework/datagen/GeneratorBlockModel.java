@@ -4,10 +4,11 @@ import mrunknown404.primalrework.PrimalRework;
 import mrunknown404.primalrework.blocks.SBMetal;
 import mrunknown404.primalrework.blocks.utils.StagedBlock;
 import mrunknown404.primalrework.registries.PRRegistry;
+import mrunknown404.primalrework.utils.IMetalColored;
+import mrunknown404.primalrework.utils.enums.Metal;
 import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.generators.ModelFile.UncheckedModelFile;
 import net.minecraftforge.client.model.generators.ModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.fml.RegistryObject;
@@ -27,29 +28,33 @@ class GeneratorBlockModel extends ModelProvider<TexturelessModelBuilder> {
 			}
 			
 			final String id = b.usesVanillaNamespaceBlock() ? "minecraft" : PrimalRework.MOD_ID;
+			final String rawName = b.getRegistryName().getPath();
+			String name = rawName;
+			
+			if (b instanceof IMetalColored) {
+				if (((IMetalColored) b).getMetal() != Metal.UNKNOWN) {
+					name = "template_" + name.substring(name.indexOf('_') + 1);
+				}
+			}
 			
 			switch (b.getBlockModelType()) {
 				case none:
 					break;
 				case normal:
-					cubeAll(b.getRegName(), new ResourceLocation(id, "block/" + b.getRegName()));
-					break;
-				case facing_pillar:
-					cubeColumnHorizontal(b.getRegName() + "_horizontal", new ResourceLocation(id, "block/" + b.getRegName() + "_side"),
-							new ResourceLocation(id, "block/" + b.getRegName() + "_end"));
-					cubeColumn(b.getRegName(), new ResourceLocation(id, "block/" + b.getRegName() + "_side"), new ResourceLocation(id, "block/" + b.getRegName() + "_end"));
-					break;
-				case normal_colored:
 					if (b instanceof SBMetal) {
-						getBuilder(b.getRegName()).parent(new UncheckedModelFile(new ResourceLocation(id, ("block/template_metal_block"))));
+						getBuilder(rawName).parent(getExistingFile(new ResourceLocation(id, "block/template_metal_block")));
 					} else {
-						cubeAll(b.getRegName(), new ResourceLocation(id, "block/" + b.getRegName()));
+						cubeAll(rawName, new ResourceLocation(id, "block/" + name));
 					}
 					break;
+				case facing_pillar:
+					cubeColumnHorizontal(rawName + "_horizontal", new ResourceLocation(id, "block/" + name + "_side"), new ResourceLocation(id, "block/" + name + "_end"));
+					cubeColumn(rawName, new ResourceLocation(id, "block/" + name + "_side"), new ResourceLocation(id, "block/" + name + "_end"));
+					break;
 				case slab:
-					ResourceLocation loc = new ResourceLocation(id, "block/" + b.getRegName().replace("_slab", ""));
-					slab(b.getRegName(), loc, loc, loc);
-					slabTop(b.getRegName() + "_top", loc, loc, loc);
+					ResourceLocation loc = new ResourceLocation(id, "block/" + name.replace("_slab", ""));
+					slab(rawName, loc, loc, loc);
+					slabTop(rawName + "_top", loc, loc, loc);
 					break;
 			}
 		}

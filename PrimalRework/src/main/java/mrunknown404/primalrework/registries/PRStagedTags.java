@@ -11,8 +11,8 @@ import mrunknown404.primalrework.utils.helpers.StageH;
 import net.minecraftforge.fml.RegistryObject;
 
 public class PRStagedTags {
-	public static final RegistryObject<StagedTag> LOGS = PRRegistry.stagedTag(
-			new StagedTag("logs").add(PRStages.STAGE_1, PRBlocks.OAK_LOG.get().asStagedItem(), PRBlocks.SPRUCE_LOG.get().asStagedItem(), PRBlocks.BIRCH_LOG.get().asStagedItem(),
+	public static final RegistryObject<StagedTag> LOGS = PRRegistry.stagedTag("logs",
+			() -> new StagedTag().add(PRStages.STAGE_1, PRBlocks.OAK_LOG.get().asStagedItem(), PRBlocks.SPRUCE_LOG.get().asStagedItem(), PRBlocks.BIRCH_LOG.get().asStagedItem(),
 					PRBlocks.JUNGLE_LOG.get().asStagedItem(), PRBlocks.ACACIA_LOG.get().asStagedItem(), PRBlocks.DARK_OAK_LOG.get().asStagedItem(),
 					PRBlocks.STRIPPED_OAK_LOG.get().asStagedItem(), PRBlocks.STRIPPED_SPRUCE_LOG.get().asStagedItem(), PRBlocks.STRIPPED_BIRCH_LOG.get().asStagedItem(),
 					PRBlocks.STRIPPED_JUNGLE_LOG.get().asStagedItem(), PRBlocks.STRIPPED_ACACIA_LOG.get().asStagedItem(), PRBlocks.STRIPPED_DARK_OAK_LOG.get().asStagedItem()));

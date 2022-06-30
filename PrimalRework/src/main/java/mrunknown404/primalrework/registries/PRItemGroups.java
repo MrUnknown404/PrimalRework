@@ -17,7 +17,7 @@ public class PRItemGroups {
 	public static final ModItemGroup TOOL_PARTS = new ModItemGroup("tool_parts", () -> new ItemStack(PRItems.getToolPart(Metal.COPPER, ToolType.PICKAXE)));
 	public static final ModItemGroup TOOLS = new ModItemGroup("tools", () -> new ItemStack(PRItems.CLAY_SHOVEL.get()));
 	public static final ModItemGroup FOOD = new ModItemGroup("food", () -> new ItemStack(PRItems.DOUGH.get()));
-	public static final ModItemGroup ORES = new ModItemGroup("ores", () -> new ItemStack(PRBlocks.getOreBlock(Metal.COPPER)));
+	public static final ModItemGroup ORES = new ModItemGroup("ores", () -> new ItemStack(PRItems.PLANT_FIBER.get()));
 	
 	public static class ModItemGroup extends ItemGroup {
 		private Supplier<ItemStack> displayStack;

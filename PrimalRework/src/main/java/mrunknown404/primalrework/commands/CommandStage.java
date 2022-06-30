@@ -21,7 +21,7 @@ public class CommandStage {
 		LiteralArgumentBuilder<CommandSource> set = Commands.literal("set");
 		for (RegistryObject<Stage> stage : PRRegistry.getStages()) {
 			if (stage != PRStages.NO_SHOW) {
-				set.then(Commands.literal(stage.get().nameID).executes(c -> setStage(c, stage.get())));
+				set.then(Commands.literal(stage.get().getNameID()).executes(c -> setStage(c, stage.get())));
 			}
 		}
 		

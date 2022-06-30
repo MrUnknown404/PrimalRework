@@ -5,31 +5,29 @@ import java.util.Objects;
 import mrunknown404.primalrework.utils.IName;
 import mrunknown404.primalrework.utils.helpers.WordH;
 import net.minecraft.util.text.IFormattableTextComponent;
+import net.minecraftforge.common.util.Lazy;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
 public class Stage extends ForgeRegistryEntry<Stage> implements IName {
-	public final String nameID;
-	private final IFormattableTextComponent name;
+	private final Lazy<IFormattableTextComponent> name = Lazy.of(() -> WordH.translate("stage." + getNameID() + ".name"));
 	public final byte id;
 	
 	public Stage(byte id) {
-		this("stage_" + id, id);
-	}
-	
-	public Stage(String name, byte id) {
-		this.nameID = name;
-		this.name = WordH.translate("stage." + nameID + ".name");
 		this.id = id;
 	}
 	
 	@Override
 	public IFormattableTextComponent getFancyName() {
-		return name;
+		return name.get();
 	}
 	
 	@Override
 	public String getName() {
-		return name.getString();
+		return name.get().getString();
+	}
+	
+	public String getNameID() {
+		return getRegistryName().getPath();
 	}
 	
 	@Override

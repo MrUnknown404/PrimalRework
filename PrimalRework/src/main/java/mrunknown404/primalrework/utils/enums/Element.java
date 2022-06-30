@@ -1,6 +1,7 @@
 package mrunknown404.primalrework.utils.enums;
 
 public enum Element {
+	UNKNOWN("??", 0, 0),
 	HYDROGEN("H", 14, 20),
 	HELIUM("He", 1, 4),
 	LITHIUM("Li", 454, 1615),
@@ -137,7 +138,17 @@ public enum Element {
 	}
 	
 	public int atomicNumber() {
-		return ordinal() + 1;
+		return ordinal();
+	}
+	
+	public static String subscript(int value) {
+		String s = "";
+		for (char c : String.valueOf(value).toCharArray()) {
+			int i = Integer.parseInt(Character.toString(c));
+			s += (char) (i + 0x2080);
+		}
+		
+		return s;
 	}
 	
 	public ElementState getStateAt(int kelvin) {

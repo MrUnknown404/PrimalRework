@@ -1,22 +1,19 @@
 package mrunknown404.primalrework.blocks;
 
 import mrunknown404.primalrework.blocks.utils.SBRotatedPillar;
-import mrunknown404.primalrework.registries.PRBlocks;
 import mrunknown404.primalrework.registries.PRItemGroups;
 import mrunknown404.primalrework.registries.PRStages;
 import mrunknown404.primalrework.utils.BlockInfo;
 import mrunknown404.primalrework.utils.BlockInfo.Hardness;
 import mrunknown404.primalrework.utils.HarvestInfo;
-import mrunknown404.primalrework.utils.helpers.MathH;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class SBDenseLog extends SBRotatedPillar {
 	public SBDenseLog() {
-		super("dense_log", PRStages.STAGE_2, 16, PRItemGroups.BLOCKS, BlockInfo.with(BlockInfo.WOOD, Hardness.HARD_0), HarvestInfo.AXE_MIN);
+		super(PRStages.STAGE_2, 16, PRItemGroups.BLOCKS, BlockInfo.with(BlockInfo.WOOD, Hardness.HARD_0), HarvestInfo.AXE_MIN);
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -41,6 +38,7 @@ public class SBDenseLog extends SBRotatedPillar {
 		super.neighborChanged(state, w, pos, block, fromPos, flag);
 	}
 	
+	/*
 	public static boolean isValidCharcoalPit(World w, BlockPos center) {
 		Block b = w.getBlockState(center).getBlock();
 		if (b != PRBlocks.DENSE_LOG.get()) {// && b != InitBlocks.CHARCOAL_PIT_MASTER) {
@@ -70,13 +68,13 @@ public class SBDenseLog extends SBRotatedPillar {
 				if (shouldBe == null) {
 					return false;
 				} else if (shouldBe == Blocks.DIRT) {
-					if (toCheck == Blocks.GRASS || toCheck == Blocks.DIRT || toCheck == PRBlocks.MUSHROOM_GRASS.get()) {
+					if (toCheck == Blocks.GRASS || toCheck == Blocks.DIRT) {
 						continue;
 					}
 					return false;
 				} else if (shouldBe == PRBlocks.DENSE_LOG.get() && (toCheck == PRBlocks.DENSE_LOG.get())) {// || toCheck == InitBlocks.CHARCOAL_PIT_MASTER)) {
 					Block nb = w.getBlockState(center.offset(x, 1, z)).getBlock();
-					if (nb == Blocks.GRASS || nb == Blocks.DIRT || nb == PRBlocks.MUSHROOM_GRASS.get()) {
+					if (nb == Blocks.GRASS || nb == Blocks.DIRT) {
 						continue;
 					}
 					return false;
@@ -88,4 +86,5 @@ public class SBDenseLog extends SBRotatedPillar {
 		
 		return true;
 	}
+	*/
 }

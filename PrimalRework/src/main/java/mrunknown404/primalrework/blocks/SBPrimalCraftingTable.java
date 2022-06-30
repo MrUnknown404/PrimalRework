@@ -25,7 +25,7 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 public class SBPrimalCraftingTable extends SBContainer {
 	public SBPrimalCraftingTable() {
-		super("primal_crafting_table", PRStages.DO_LATER, BlockInfo.of(BlockInfo.PRIMAL_CRAFTING_TABLE), BlockStateType.normal, BlockModelType.normal, HarvestInfo.AXE_MIN);
+		super(PRStages.DO_LATER, BlockInfo.of(BlockInfo.PRIMAL_CRAFTING_TABLE), BlockStateType.normal, BlockModelType.normal, HarvestInfo.AXE_MIN);
 	}
 	
 	@Override

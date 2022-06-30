@@ -9,6 +9,8 @@ import java.util.Set;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
+import mrunknown404.primalrework.blocks.SBLeaves;
+import mrunknown404.primalrework.blocks.SBLog;
 import mrunknown404.primalrework.utils.helpers.BlockH;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -38,7 +40,7 @@ public class FeaturePrimalTree extends Feature<BaseTreeFeatureConfig> {
 	}
 	
 	private static boolean isFree(IWorldGenerationBaseReader world, BlockPos pos) {
-		return validTreePos(world, pos) || world.isStateAtPosition(pos, (state) -> BlockH.isLog(state.getBlock()));
+		return validTreePos(world, pos) || world.isStateAtPosition(pos, (state) -> state.getBlock() instanceof SBLog);
 	}
 	
 	private static boolean isVine(IWorldGenerationBaseReader world, BlockPos pos) {
@@ -51,7 +53,7 @@ public class FeaturePrimalTree extends Feature<BaseTreeFeatureConfig> {
 	
 	@SuppressWarnings("deprecation")
 	public static boolean isAirOrLeaves(IWorldGenerationBaseReader world, BlockPos pos) {
-		return world.isStateAtPosition(pos, (state) -> state.isAir() || BlockH.isLeaves(state.getBlock()));
+		return world.isStateAtPosition(pos, (state) -> state.isAir() || state.getBlock() instanceof SBLeaves);
 	}
 	
 	private static boolean isGrassOrDirtOrFarmland(IWorldGenerationBaseReader world, BlockPos pos) {

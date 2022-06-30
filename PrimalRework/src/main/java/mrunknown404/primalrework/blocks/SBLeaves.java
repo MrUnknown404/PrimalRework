@@ -2,6 +2,7 @@ package mrunknown404.primalrework.blocks;
 
 import java.util.Random;
 
+import mrunknown404.primalrework.blocks.utils.IBiomeColored;
 import mrunknown404.primalrework.blocks.utils.StagedBlock;
 import mrunknown404.primalrework.registries.PRItemGroups;
 import mrunknown404.primalrework.registries.PRStages;
@@ -10,7 +11,6 @@ import mrunknown404.primalrework.utils.HarvestInfo;
 import mrunknown404.primalrework.utils.HarvestInfo.DropInfo;
 import mrunknown404.primalrework.utils.enums.ToolMaterial;
 import mrunknown404.primalrework.utils.enums.ToolType;
-import mrunknown404.primalrework.utils.helpers.BlockH;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.BlockItemUseContext;
@@ -28,12 +28,12 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
-public class SBLeaves extends StagedBlock {
+public class SBLeaves extends StagedBlock implements IBiomeColored {
 	public static final IntegerProperty DISTANCE = BlockStateProperties.DISTANCE;
 	public static final BooleanProperty PERSISTENT = BlockStateProperties.PERSISTENT;
 	
-	public SBLeaves(String name) { // TODO add saplings/sticks
-		super(name + "_leaves", PRStages.STAGE_0, 32, PRItemGroups.BLOCKS, BlockInfo.of(BlockInfo.LEAVES), BlockStateType.normal, BlockModelType.normal_colored,
+	public SBLeaves() { // TODO add saplings/sticks
+		super(PRStages.STAGE_0, 32, PRItemGroups.BLOCKS, BlockInfo.of(BlockInfo.LEAVES), BlockStateType.normal, BlockModelType.normal,
 				new HarvestInfo(ToolType.NONE, ToolMaterial.HAND, DropInfo.NONE), new HarvestInfo(ToolType.KNIFE, ToolMaterial.CLAY, DropInfo.NONE),
 				new HarvestInfo(ToolType.AXE, ToolMaterial.CLAY, DropInfo.NONE), new HarvestInfo(ToolType.SHEARS, ToolMaterial.CLAY));
 		registerDefaultState(stateDefinition.any().setValue(DISTANCE, Integer.valueOf(7)).setValue(PERSISTENT, false));
@@ -93,10 +93,8 @@ public class SBLeaves extends StagedBlock {
 	}
 	
 	private static int getDistanceAt(BlockState state) {
-		if (BlockH.isLog(state.getBlock())) {
-			return 0;
-		}
-		return state.getBlock() instanceof SBLeaves ? state.getValue(DISTANCE) : 7;
+		Block block = state.getBlock();
+		return block instanceof SBLog ? 0 : block instanceof SBLeaves ? state.getValue(DISTANCE) : 7;
 	}
 	
 	@Override

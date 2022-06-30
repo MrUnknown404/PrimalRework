@@ -20,9 +20,8 @@ import net.minecraft.world.IWorld;
 public class SBSnowyDirt extends StagedBlock {//TODO switch to my snow
 	public static final BooleanProperty SNOWY = BlockStateProperties.SNOWY;
 	
-	public SBSnowyDirt(String name, Supplier<Stage> stage, BlockInfo blockInfo, BlockStateType blockStateType, BlockModelType blockModelType, HarvestInfo info,
-			HarvestInfo... extraInfos) {
-		super(name, stage, 64, PRItemGroups.BLOCKS, blockInfo, blockStateType, blockModelType, info, extraInfos);
+	public SBSnowyDirt(Supplier<Stage> stage, BlockInfo blockInfo, BlockStateType blockStateType, BlockModelType blockModelType, HarvestInfo info, HarvestInfo... extraInfos) {
+		super(stage, 64, PRItemGroups.BLOCKS, blockInfo, blockStateType, blockModelType, info, extraInfos);
 		registerDefaultState(stateDefinition.any().setValue(SNOWY, false));
 	}
 	

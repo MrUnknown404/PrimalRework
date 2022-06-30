@@ -2,6 +2,7 @@ package mrunknown404.primalrework.blocks;
 
 import java.util.Random;
 
+import mrunknown404.primalrework.blocks.utils.IBiomeColored;
 import mrunknown404.primalrework.blocks.utils.SBSlab;
 import mrunknown404.primalrework.blocks.utils.SBSnowyDirt;
 import mrunknown404.primalrework.registries.PRBlocks;
@@ -23,9 +24,9 @@ import net.minecraft.world.IWorldReader;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.IPlantable;
 
-public class SBGrassBlock extends SBSnowyDirt { //TODO switch to my snow
+public class SBGrassBlock extends SBSnowyDirt implements IBiomeColored { //TODO switch to my snow
 	public SBGrassBlock() {
-		super("grass_block", PRStages.STAGE_0, BlockInfo.of(BlockInfo.R_DRY_GRASS), BlockStateType.none, BlockModelType.none,
+		super(PRStages.STAGE_0, BlockInfo.of(BlockInfo.R_DRY_GRASS), BlockStateType.none, BlockModelType.none,
 				new HarvestInfo(ToolType.SHOVEL, ToolMaterial.CLAY, DropInfo.block(() -> PRBlocks.DIRT)));
 		usesVanillaNamespaceFull();
 	}

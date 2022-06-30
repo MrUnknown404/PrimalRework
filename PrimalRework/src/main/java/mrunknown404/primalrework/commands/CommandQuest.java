@@ -23,17 +23,10 @@ public class CommandQuest {
 	public static void register(CommandDispatcher<CommandSource> dispatcher) {
 		LiteralArgumentBuilder<CommandSource> cmd = Commands.literal("quest").requires((src) -> src.hasPermission(4));
 		
-		cmd.then(Commands.literal("finish").then(Commands.argument("quest", StringArgumentType.word()).suggests((src, builder) -> {
-			return getSuggestions(builder, false);
-		}).executes((src) -> {
-			return finishQuest(src, PRQuests.getFromName(StringArgumentType.getString(src, "quest")));
-		})));
-		
-		cmd.then(Commands.literal("forget").then(Commands.argument("quest", StringArgumentType.word()).suggests((src, builder) -> {
-			return getSuggestions(builder, true);
-		}).executes((src) -> {
-			return forgetQuest(src, PRQuests.getFromName(StringArgumentType.getString(src, "quest")));
-		})));
+		cmd.then(Commands.literal("finish").then(Commands.argument("quest", StringArgumentType.word()).suggests((src, builder) -> getSuggestions(builder, false))
+				.executes((src) -> finishQuest(src, PRQuests.getFromName(StringArgumentType.getString(src, "quest"))))));
+		cmd.then(Commands.literal("forget").then(Commands.argument("quest", StringArgumentType.word()).suggests((src, builder) -> getSuggestions(builder, true))
+				.executes((src) -> forgetQuest(src, PRQuests.getFromName(StringArgumentType.getString(src, "quest"))))));
 		
 		dispatcher.register(cmd);
 	}
@@ -54,11 +47,8 @@ public class CommandQuest {
 			return 1;
 		}
 		
-		if (src.getSource().getEntity() != null && src.getSource().getEntity() instanceof PlayerEntity) {
-			quest.finishQuest(src.getSource().getServer().overworld(), (PlayerEntity) src.getSource().getEntity());
-		} else {
-			quest.finishQuest(src.getSource().getServer().overworld(), null);
-		}
+		quest.finishQuest(src.getSource().getServer().overworld(),
+				src.getSource().getEntity() != null && src.getSource().getEntity() instanceof PlayerEntity ? (PlayerEntity) src.getSource().getEntity() : null);
 		
 		src.getSource().sendSuccess(WordH.translate("commands.quest.finish").append(WordH.string(" '" + quest.getName() + "' ")), false);
 		return 1;

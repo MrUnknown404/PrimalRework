@@ -50,7 +50,7 @@ public class PRFuels {
 		for (FuelType fuel : FuelType.values()) {
 			int i = FUELS.get(fuel).getOrDefault(item, -1);
 			if (i != -1) {
-				map.put(fuel, new Pair<StagedItem, Integer>(item, -1));
+				map.put(fuel, Pair.of(item, -1));
 			}
 		}
 		

@@ -34,8 +34,8 @@ public class SBSlab extends StagedBlock implements IWaterLoggable {
 	private static final VoxelShape BOTTOM_AABB = Block.box(0, 0, 0, 16, 8, 16);
 	private static final VoxelShape TOP_AABB = Block.box(0, 8, 0, 16, 16, 16);
 	
-	public SBSlab(String name, Supplier<Stage> stage, BlockInfo blockInfo, HarvestInfo info) {
-		super(name, stage, 64, PRItemGroups.BLOCKS, blockInfo, BlockStateType.slab, BlockModelType.slab, info);
+	public SBSlab(Supplier<Stage> stage, BlockInfo blockInfo, HarvestInfo info) {
+		super(stage, 64, PRItemGroups.BLOCKS, blockInfo, BlockStateType.slab, BlockModelType.slab, info);
 		registerDefaultState(defaultBlockState().setValue(TYPE, SlabType.BOTTOM).setValue(WATERLOGGED, false));
 	}
 	

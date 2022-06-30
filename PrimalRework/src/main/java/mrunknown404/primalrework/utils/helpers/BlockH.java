@@ -6,8 +6,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import mrunknown404.primalrework.blocks.SBLeaves;
-import mrunknown404.primalrework.blocks.SBLog;
 import mrunknown404.primalrework.blocks.utils.SBSlab;
 import mrunknown404.primalrework.blocks.utils.StagedBlock;
 import mrunknown404.primalrework.registries.PRBlocks;
@@ -32,19 +30,10 @@ public class BlockH {
 		return new ArrayList<HarvestInfo>(block.getHarvest().values());
 	}
 	
-	private static final Set<StagedBlock> CAN_SUPPORT_PLANTS = new HashSet<StagedBlock>(
-			Arrays.asList(PRBlocks.DIRT.get(), PRBlocks.GRASS_BLOCK.get(), PRBlocks.MUSHROOM_GRASS.get()));
+	private static final Set<StagedBlock> CAN_SUPPORT_PLANTS = new HashSet<StagedBlock>(Arrays.asList(PRBlocks.DIRT.get(), PRBlocks.GRASS_BLOCK.get()));
 	
 	public static boolean canSupportPlant(Block block) {
 		return CAN_SUPPORT_PLANTS.contains(block);
-	}
-	
-	public static boolean isLog(Block block) {
-		return block instanceof SBLog;
-	}
-	
-	public static boolean isLeaves(Block block) {
-		return block instanceof SBLeaves;
 	}
 	
 	public static int getLightBlockInto(IBlockReader world, BlockState state0, BlockPos pos0, BlockState state1, BlockPos pos1, Direction dir, int value) {

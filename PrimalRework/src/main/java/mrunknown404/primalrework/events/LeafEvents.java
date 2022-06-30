@@ -6,8 +6,8 @@ import java.util.concurrent.TimeUnit;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 
+import mrunknown404.primalrework.blocks.SBLeaves;
 import mrunknown404.primalrework.utils.LeafTickScheduler;
-import mrunknown404.primalrework.utils.helpers.BlockH;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.Direction;
@@ -54,7 +54,7 @@ public class LeafEvents {
 					if (world.isLoaded(offPos)) {
 						BlockState state = world.getBlockState(offPos);
 						
-						if (BlockH.isLeaves(state.getBlock())) {
+						if (state.getBlock() instanceof SBLeaves) {
 							brokenBlockCache.put(offPos, 0);
 							LeafTickScheduler.schedule(world, offPos, 10 + R.nextInt(5));
 						}

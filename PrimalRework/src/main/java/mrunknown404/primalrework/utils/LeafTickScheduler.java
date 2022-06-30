@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import mrunknown404.primalrework.utils.helpers.BlockH;
+import mrunknown404.primalrework.blocks.SBLeaves;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.server.ServerWorld;
@@ -35,7 +35,7 @@ public class LeafTickScheduler {
 				if (world != null && world.isLoaded(st.pos)) {
 					BlockState state = world.getBlockState(st.pos);
 					
-					if (BlockH.isLeaves(state.getBlock())) {
+					if (state.getBlock() instanceof SBLeaves) {
 						state.tick(world, st.pos, world.getRandom());
 						state.randomTick(world, st.pos, world.getRandom());
 					}
@@ -49,7 +49,7 @@ public class LeafTickScheduler {
 		private final BlockPos pos;
 		private int tick;
 		
-		public ScheduledTick(ServerWorld worldObj, BlockPos pos, int tick) {
+		private ScheduledTick(ServerWorld worldObj, BlockPos pos, int tick) {
 			this.worldReference = new WeakReference<ServerWorld>(worldObj);
 			this.pos = pos;
 			this.tick = tick;

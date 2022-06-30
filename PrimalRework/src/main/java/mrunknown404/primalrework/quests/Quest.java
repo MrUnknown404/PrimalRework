@@ -118,13 +118,13 @@ public class Quest implements IName, IDescription {
 	
 	@Override
 	public IFormattableTextComponent getFancyName() {
-		return WordH.translate("quest." + stage.get().nameID + "." + name_key + ".name");
+		return WordH.translate("quest." + stage.get().getNameID() + "." + name_key + ".name");
 	}
 	
 	/** @return stage + "." + name */
 	@Override
 	public String getName() {
-		return stage.get().nameID + "." + name_key;
+		return stage.get().getNameID() + "." + name_key;
 	}
 	
 	public String getNameKey() {

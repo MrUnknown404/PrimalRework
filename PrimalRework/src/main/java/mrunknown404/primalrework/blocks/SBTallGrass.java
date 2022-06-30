@@ -2,6 +2,7 @@ package mrunknown404.primalrework.blocks;
 
 import java.util.function.Supplier;
 
+import mrunknown404.primalrework.blocks.utils.IBiomeColored;
 import mrunknown404.primalrework.blocks.utils.StagedBlock;
 import mrunknown404.primalrework.items.utils.StagedItem.ItemType;
 import mrunknown404.primalrework.registries.PRItemGroups;
@@ -26,11 +27,11 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraftforge.fml.RegistryObject;
 
-public class SBTallGrass extends StagedBlock {
+public class SBTallGrass extends StagedBlock implements IBiomeColored {
 	private final VoxelShape shape;
 	
-	public SBTallGrass(String size, Supplier<RegistryObject<StagedBlock>> self, Hardness hardness, VoxelShape shape) {
-		super(size + "_grass", PRStages.STAGE_0, 64, PRItemGroups.BLOCKS, BlockInfo.with(BlockInfo.PLANT, hardness), BlockStateType.normal, BlockModelType.none,
+	public SBTallGrass(Supplier<RegistryObject<StagedBlock>> self, Hardness hardness, VoxelShape shape) {
+		super(PRStages.STAGE_0, 64, PRItemGroups.BLOCKS, BlockInfo.with(BlockInfo.PLANT, hardness), BlockStateType.normal, BlockModelType.none,
 				new HarvestInfo(ToolType.NONE, ToolMaterial.HAND, DropInfo.item(PRItems.PLANT_FIBER, 30)),
 				new HarvestInfo(ToolType.KNIFE, ToolMaterial.CLAY, DropInfo.item(PRItems.PLANT_FIBER, 80)),
 				new HarvestInfo(ToolType.HOE, ToolMaterial.CLAY, DropInfo.item(PRItems.PLANT_FIBER, 80) /* TODO add seeds here */),

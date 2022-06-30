@@ -35,7 +35,7 @@ import net.minecraft.world.World;
 
 public class SISimpleTool extends SIDamageable {
 	public SISimpleTool(Supplier<Stage> stage, ToolType toolType, ToolMaterial toolMat) {
-		super(toolMat.toString() + "_" + toolType.toString(), stage, toolType, toolMat, PRItemGroups.TOOLS, ItemType.handheld);
+		super(stage, toolType, toolMat, PRItemGroups.TOOLS, ItemType.handheld);
 	}
 	
 	@Override

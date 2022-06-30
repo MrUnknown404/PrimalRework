@@ -1,7 +1,9 @@
 package mrunknown404.primalrework.items.utils;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Supplier;
 
 import com.google.common.collect.ImmutableMultimap;
@@ -10,6 +12,7 @@ import com.google.common.collect.Multimap;
 
 import mrunknown404.primalrework.registries.PRItemGroups;
 import mrunknown404.primalrework.stage.Stage;
+import mrunknown404.primalrework.utils.enums.Element;
 import mrunknown404.primalrework.utils.enums.ToolMaterial;
 import mrunknown404.primalrework.utils.enums.ToolType;
 import mrunknown404.primalrework.utils.helpers.WordH;
@@ -27,17 +30,16 @@ public class StagedItem extends Item {
 	public final Supplier<Stage> stage;
 	public final ToolType toolType;
 	public final ToolMaterial toolMat;
-	private final String name;
 	private ItemType itemType;
 	private boolean usesVanillaNamespace;
 	
+	protected final Map<Element, Integer> elements = new LinkedHashMap<Element, Integer>();
 	private final List<ITextComponent> tooltips = new ArrayList<ITextComponent>();
 	private Multimap<Attribute, AttributeModifier> defaultModifiers;
 	
-	protected StagedItem(String name, Supplier<Stage> stage, int maxStackSize, ToolType toolType, ToolMaterial toolMat, ItemGroup tab, Rarity rarity, Food food,
-			boolean isFireResistant, boolean canRepair, ItemType itemType) {
+	protected StagedItem(Supplier<Stage> stage, int maxStackSize, ToolType toolType, ToolMaterial toolMat, ItemGroup tab, Rarity rarity, Food food, boolean isFireResistant,
+			boolean canRepair, ItemType itemType) {
 		super(toProperties(maxStackSize, toolMat.durability, tab, rarity, food, isFireResistant, canRepair));
-		this.name = name;
 		this.stage = stage;
 		this.toolType = toolType;
 		this.toolMat = toolMat;
@@ -46,23 +48,24 @@ public class StagedItem extends Item {
 		setupModifiers();
 	}
 	
-	public StagedItem(String name, Supplier<Stage> stage) {
-		this(name, stage, 64, ToolType.NONE, ToolMaterial.HAND, PRItemGroups.ITEMS, Rarity.COMMON, null, false, false, ItemType.generated);
+	public StagedItem(Supplier<Stage> stage) {
+		this(stage, 64, ToolType.NONE, ToolMaterial.HAND, PRItemGroups.ITEMS, Rarity.COMMON, null, false, false, ItemType.generated);
 	}
 	
-	public StagedItem(String name, Supplier<Stage> stage, int stackSize) {
-		this(name, stage, stackSize, ToolType.NONE, ToolMaterial.HAND, PRItemGroups.ITEMS, Rarity.COMMON, null, false, false, ItemType.generated);
+	public StagedItem(Supplier<Stage> stage, int stackSize) {
+		this(stage, stackSize, ToolType.NONE, ToolMaterial.HAND, PRItemGroups.ITEMS, Rarity.COMMON, null, false, false, ItemType.generated);
 	}
 	
-	public StagedItem(String name, Supplier<Stage> stage, ItemGroup tab) {
-		this(name, stage, 64, ToolType.NONE, ToolMaterial.HAND, tab, Rarity.COMMON, null, false, false, ItemType.generated);
+	public StagedItem(Supplier<Stage> stage, ItemGroup tab) {
+		this(stage, 64, ToolType.NONE, ToolMaterial.HAND, tab, Rarity.COMMON, null, false, false, ItemType.generated);
 	}
 	
-	public StagedItem(String name, Supplier<Stage> stage, int stackSize, ItemGroup tab) {
-		this(name, stage, stackSize, ToolType.NONE, ToolMaterial.HAND, tab, Rarity.COMMON, null, false, false, ItemType.generated);
+	public StagedItem(Supplier<Stage> stage, int stackSize, ItemGroup tab) {
+		this(stage, stackSize, ToolType.NONE, ToolMaterial.HAND, tab, Rarity.COMMON, null, false, false, ItemType.generated);
 	}
 	
 	public StagedItem addTooltip(int amount) {
+		String name = getRegistryName().getPath();
 		for (int i = 0; i < amount; i++) {
 			tooltips.add(WordH.translate("tooltips.item." + name + "." + tooltips.size()).withStyle(WordH.STYLE_GRAY));
 		}
@@ -71,6 +74,10 @@ public class StagedItem extends Item {
 	
 	public StagedItem addTooltip() {
 		return addTooltip(1);
+	}
+	
+	public Map<Element, Integer> getElements() {
+		return elements;
 	}
 	
 	public List<ITextComponent> getTooltips() {
@@ -97,10 +104,6 @@ public class StagedItem extends Item {
 	
 	public ItemType getItemType() {
 		return itemType;
-	}
-	
-	public String getRegName() {
-		return name;
 	}
 	
 	public StagedItem useVanillaNamespace() {

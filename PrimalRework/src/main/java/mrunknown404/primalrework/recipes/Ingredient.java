@@ -87,7 +87,7 @@ public class Ingredient {
 			StringBuilder sb = new StringBuilder();
 			for (int i = 0; i < tags.size(); i++) {
 				StagedTag tag = tags.get(i);
-				sb.append("Any '" + tag.displayName.getString() + "'");
+				sb.append("Any '" + tag.getDisplayName().getString() + "'");
 				
 				if (i != tags.size() - 1) {
 					sb.append(" or ");

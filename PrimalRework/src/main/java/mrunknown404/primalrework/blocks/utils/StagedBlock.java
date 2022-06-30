@@ -2,6 +2,7 @@ package mrunknown404.primalrework.blocks.utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
@@ -12,6 +13,7 @@ import mrunknown404.primalrework.registries.PRItemGroups;
 import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.utils.BlockInfo;
 import mrunknown404.primalrework.utils.HarvestInfo;
+import mrunknown404.primalrework.utils.enums.Element;
 import mrunknown404.primalrework.utils.enums.ToolType;
 import mrunknown404.primalrework.utils.helpers.WordH;
 import net.minecraft.block.Block;
@@ -26,21 +28,20 @@ import net.minecraft.world.IBlockReader;
 
 public class StagedBlock extends Block {
 	private final Map<ToolType, HarvestInfo> harvestInfos = new HashMap<ToolType, HarvestInfo>();
+	protected final Map<Element, Integer> elements = new LinkedHashMap<Element, Integer>();
 	
 	public final Supplier<Stage> stage;
 	public final int stackSize;
 	public final ItemGroup tab;
 	public final BlockInfo blockInfo;
-	private final String name;
 	private final BlockStateType blockStateType;
 	private final BlockModelType blockModelType;
 	private final List<ITextComponent> tooltips = new ArrayList<ITextComponent>();
 	private boolean useVanillaNamespaceBlock, useVanillaNamespaceItem;
 	
-	public StagedBlock(String name, Supplier<Stage> stage, int stackSize, ItemGroup tab, BlockInfo blockInfo, BlockStateType blockStateType, BlockModelType blockModelType,
-			HarvestInfo info, HarvestInfo... extraInfos) {
+	public StagedBlock(Supplier<Stage> stage, int stackSize, ItemGroup tab, BlockInfo blockInfo, BlockStateType blockStateType, BlockModelType blockModelType, HarvestInfo info,
+			HarvestInfo... extraInfos) {
 		super(toProperties(blockInfo));
-		this.name = name;
 		this.stage = stage;
 		this.stackSize = stackSize;
 		this.tab = tab;
@@ -54,16 +55,16 @@ public class StagedBlock extends Block {
 		}
 	}
 	
-	public StagedBlock(String name, Supplier<Stage> stage, BlockInfo blockInfo, BlockStateType blockStateType, BlockModelType blockModelType, HarvestInfo info,
-			HarvestInfo... extraInfos) {
-		this(name, stage, 64, PRItemGroups.BLOCKS, blockInfo, blockStateType, blockModelType, info, extraInfos);
+	public StagedBlock(Supplier<Stage> stage, BlockInfo blockInfo, BlockStateType blockStateType, BlockModelType blockModelType, HarvestInfo info, HarvestInfo... extraInfos) {
+		this(stage, 64, PRItemGroups.BLOCKS, blockInfo, blockStateType, blockModelType, info, extraInfos);
 	}
 	
-	public StagedBlock(String name, Supplier<Stage> stage, BlockInfo blockInfo, HarvestInfo info, HarvestInfo... extraInfos) {
-		this(name, stage, 64, PRItemGroups.BLOCKS, blockInfo, BlockStateType.normal, BlockModelType.normal, info, extraInfos);
+	public StagedBlock(Supplier<Stage> stage, BlockInfo blockInfo, HarvestInfo info, HarvestInfo... extraInfos) {
+		this(stage, 64, PRItemGroups.BLOCKS, blockInfo, BlockStateType.normal, BlockModelType.normal, info, extraInfos);
 	}
 	
 	public StagedBlock addTooltip(int amount) {
+		String name = getRegistryName().getPath();
 		for (int i = 0; i < amount; i++) {
 			tooltips.add(WordH.translate("tooltips.item." + name + "." + tooltips.size()).withStyle(WordH.STYLE_GRAY));
 		}
@@ -72,6 +73,10 @@ public class StagedBlock extends Block {
 	
 	public StagedBlock addTooltip() {
 		return addTooltip(1);
+	}
+	
+	public Map<Element, Integer> getElements() {
+		return elements;
 	}
 	
 	public List<ITextComponent> getTooltips() {
@@ -88,10 +93,6 @@ public class StagedBlock extends Block {
 	
 	public BlockModelType getBlockModelType() {
 		return blockModelType;
-	}
-	
-	public String getRegName() {
-		return name;
 	}
 	
 	public ItemType getItemType() {
@@ -173,7 +174,6 @@ public class StagedBlock extends Block {
 	public enum BlockModelType {
 		none,
 		normal,
-		normal_colored,
 		facing_pillar,
 		slab;
 	}

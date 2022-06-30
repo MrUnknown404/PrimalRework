@@ -17,9 +17,8 @@ import net.minecraft.world.World;
 
 @SuppressWarnings("deprecation")
 public abstract class SBContainer extends StagedBlock {
-	protected SBContainer(String name, Supplier<Stage> stage, BlockInfo material, BlockStateType blockStateType, BlockModelType blockModelType, HarvestInfo info,
-			HarvestInfo... extraInfos) {
-		super(name, stage, 1, PRItemGroups.MACHINES, material, blockStateType, blockModelType, info, extraInfos);
+	protected SBContainer(Supplier<Stage> stage, BlockInfo material, BlockStateType blockStateType, BlockModelType blockModelType, HarvestInfo info, HarvestInfo... extraInfos) {
+		super(stage, 1, PRItemGroups.MACHINES, material, blockStateType, blockModelType, info, extraInfos);
 	}
 	
 	@Override

@@ -36,8 +36,12 @@ public class SIBlock extends StagedItem {
 	private final StagedBlock block;
 	
 	public SIBlock(StagedBlock block) {
-		super(block.getRegName(), block.stage, block.stackSize, ToolType.NONE, ToolMaterial.HAND, block.tab, Rarity.COMMON, null, false, false, ItemType.block);
+		super(block.stage, block.stackSize, ToolType.NONE, ToolMaterial.HAND, block.tab, Rarity.COMMON, null, false, false, ItemType.block);
 		this.block = block;
+		
+		if (!block.getElements().isEmpty()) {
+			this.elements.putAll(block.getElements());
+		}
 		
 		if (block.usesVanillaNamespaceItem()) {
 			useVanillaNamespace();
@@ -65,54 +69,39 @@ public class SIBlock extends StagedItem {
 			return ActionResultType.FAIL;
 		}
 		
-		BlockItemUseContext blockitemusecontext = updatePlacementContext(context);
-		if (blockitemusecontext == null) {
+		BlockState blockstate = getPlacementState(context);
+		if (blockstate == null || !context.getLevel().setBlock(context.getClickedPos(), blockstate, 11)) {
 			return ActionResultType.FAIL;
 		}
 		
-		BlockState blockstate = getPlacementState(blockitemusecontext);
-		if (blockstate == null) {
-			return ActionResultType.FAIL;
-		} else if (!placeBlock(blockitemusecontext, blockstate)) {
-			return ActionResultType.FAIL;
-		} else {
-			BlockPos blockpos = blockitemusecontext.getClickedPos();
-			World world = blockitemusecontext.getLevel();
-			PlayerEntity playerentity = blockitemusecontext.getPlayer();
-			ItemStack itemstack = blockitemusecontext.getItemInHand();
-			BlockState blockstate1 = world.getBlockState(blockpos);
-			Block block = blockstate1.getBlock();
-			if (block == blockstate.getBlock()) {
-				blockstate1 = updateBlockStateFromTag(blockpos, world, itemstack, blockstate1);
-				updateCustomBlockEntityTag(blockpos, world, playerentity, itemstack);
-				block.setPlacedBy(world, blockpos, blockstate1, playerentity, itemstack);
-				
-				if (playerentity instanceof ServerPlayerEntity) {
-					CriteriaTriggers.PLACED_BLOCK.trigger((ServerPlayerEntity) playerentity, blockpos, itemstack);
-				}
-			}
+		BlockPos blockpos = context.getClickedPos();
+		World world = context.getLevel();
+		PlayerEntity playerentity = context.getPlayer();
+		ItemStack itemstack = context.getItemInHand();
+		BlockState blockstate1 = world.getBlockState(blockpos);
+		Block block = blockstate1.getBlock();
+		if (block == blockstate.getBlock()) {
+			blockstate1 = updateBlockStateFromTag(blockpos, world, itemstack, blockstate1);
+			updateCustomBlockEntityTag(world, playerentity, blockpos, itemstack);
+			block.setPlacedBy(world, blockpos, blockstate1, playerentity, itemstack);
 			
-			SoundType soundtype = blockstate1.getSoundType(world, blockpos, context.getPlayer());
-			world.playSound(playerentity, blockpos, getPlaceSound(blockstate1, world, blockpos, context.getPlayer()), SoundCategory.BLOCKS, (soundtype.getVolume() + 1f) / 2f,
-					soundtype.getPitch() * 0.8f);
-			if (playerentity == null || !playerentity.abilities.instabuild) {
-				itemstack.shrink(1);
+			if (playerentity instanceof ServerPlayerEntity) {
+				CriteriaTriggers.PLACED_BLOCK.trigger((ServerPlayerEntity) playerentity, blockpos, itemstack);
 			}
-			
-			return ActionResultType.sidedSuccess(world.isClientSide);
 		}
+		
+		SoundType soundtype = blockstate1.getSoundType(world, blockpos, context.getPlayer());
+		world.playSound(playerentity, blockpos, getPlaceSound(blockstate1, world, blockpos, context.getPlayer()), SoundCategory.BLOCKS, (soundtype.getVolume() + 1f) / 2f,
+				soundtype.getPitch() * 0.8f);
+		if (playerentity == null || !playerentity.abilities.instabuild) {
+			itemstack.shrink(1);
+		}
+		
+		return ActionResultType.sidedSuccess(world.isClientSide);
 	}
 	
 	private static SoundEvent getPlaceSound(BlockState state, World world, BlockPos pos, PlayerEntity entity) {
 		return state.getSoundType(world, pos, entity).getPlaceSound();
-	}
-	
-	private static BlockItemUseContext updatePlacementContext(BlockItemUseContext context) {
-		return context;
-	}
-	
-	private static boolean updateCustomBlockEntityTag(BlockPos pos, World world, PlayerEntity player, ItemStack item) {
-		return updateCustomBlockEntityTag(world, player, pos, item);
 	}
 	
 	protected BlockState getPlacementState(BlockItemUseContext context) {
@@ -143,9 +132,7 @@ public class SIBlock extends StagedItem {
 	}
 	
 	private static <T extends Comparable<T>> BlockState updateState(BlockState state, Property<T> prop, String str) {
-		return prop.getValue(str).map((val) -> {
-			return state.setValue(prop, val);
-		}).orElse(state);
+		return prop.getValue(str).map((val) -> state.setValue(prop, val)).orElse(state);
 	}
 	
 	private static boolean canPlace(BlockItemUseContext ctx, BlockState state) {
@@ -154,18 +141,14 @@ public class SIBlock extends StagedItem {
 				ctx.getLevel().isUnobstructed(state, ctx.getClickedPos(), player == null ? ISelectionContext.empty() : ISelectionContext.of(player));
 	}
 	
-	private static boolean placeBlock(BlockItemUseContext context, BlockState state) {
-		return context.getLevel().setBlock(context.getClickedPos(), state, 11);
-	}
-	
 	private static boolean updateCustomBlockEntityTag(World world, PlayerEntity player, BlockPos pos, ItemStack item) {
-		MinecraftServer minecraftserver = world.getServer();
-		if (minecraftserver == null) {
+		MinecraftServer server = world.getServer();
+		if (server == null) {
 			return false;
 		}
 		
-		CompoundNBT compoundnbt = item.getTagElement("BlockEntityTag");
-		if (compoundnbt != null) {
+		CompoundNBT nbt = item.getTagElement("BlockEntityTag");
+		if (nbt != null) {
 			TileEntity tileentity = world.getBlockEntity(pos);
 			if (tileentity != null) {
 				if (!world.isClientSide && tileentity.onlyOpCanSetNbt() && (player == null || !player.canUseGameMasterBlocks())) {
@@ -174,7 +157,7 @@ public class SIBlock extends StagedItem {
 				
 				CompoundNBT compoundnbt1 = tileentity.save(new CompoundNBT());
 				CompoundNBT compoundnbt2 = compoundnbt1.copy();
-				compoundnbt1.merge(compoundnbt);
+				compoundnbt1.merge(nbt);
 				compoundnbt1.putInt("x", pos.getX());
 				compoundnbt1.putInt("y", pos.getY());
 				compoundnbt1.putInt("z", pos.getZ());

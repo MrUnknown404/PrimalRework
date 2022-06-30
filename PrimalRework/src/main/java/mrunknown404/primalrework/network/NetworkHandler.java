@@ -115,7 +115,7 @@ public class NetworkHandler {
 			throw new RuntimeException("No handler for  " + clazz);
 		}
 		
-		return new Pair<Reader<?>, Writer<T>>((Reader<?>) pair.getLeft(), (Writer<T>) pair.getRight());
+		return Pair.of(pair.getLeft(), (Writer<T>) pair.getRight());
 	}
 	
 	private static boolean allowField(Field f, Class<?> type) {
@@ -157,8 +157,8 @@ public class NetworkHandler {
 			}
 		};
 		
-		HANDLERS.put(type, new Pair<Reader<?>, Writer<?>>(reader, writer));
-		HANDLERS.put(arrayType, new Pair<Reader<?>, Writer<?>>(arrayReader, arrayWriter));
+		HANDLERS.put(type, Pair.of(reader, writer));
+		HANDLERS.put(arrayType, Pair.of(arrayReader, arrayWriter));
 	}
 	
 	private static Field[] getClassFields(Class<?> clazz) {
