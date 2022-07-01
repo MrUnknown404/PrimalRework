@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import mrunknown404.primalrework.items.utils.StagedItem;
-import mrunknown404.primalrework.registries.PRStagedTags;
+import mrunknown404.primalrework.init.InitStagedTags;
+import mrunknown404.primalrework.items.raw.StagedItem;
 import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.stage.StagedTag;
 import mrunknown404.primalrework.utils.Cache;
@@ -31,7 +31,7 @@ public class Ingredient {
 	}
 	
 	public static Ingredient createUsingTags(StagedItem item) {
-		return new Ingredient(item, PRStagedTags.getItemsTags(item));
+		return new Ingredient(item, InitStagedTags.getItemsTags(item));
 	}
 	
 	public static Ingredient createUsingTag(StagedTag tag) {

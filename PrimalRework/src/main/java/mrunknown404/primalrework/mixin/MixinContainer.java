@@ -14,8 +14,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
-import mrunknown404.primalrework.inventory.container.slot.SlotInventoryResult;
-import mrunknown404.primalrework.inventory.container.slot.SlotOutput;
+import mrunknown404.primalrework.inventory.slot.SlotInventoryResult;
+import mrunknown404.primalrework.inventory.slot.SlotOutput;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.ClickType;
@@ -35,6 +35,7 @@ public abstract class MixinContainer {
 	private final Set<Slot> quickcraftSlots = Sets.newHashSet();
 	
 	//I didn't know how to fix this without resulting to this hell
+	//edit: months later, i have no idea what this fixed/what i changed
 	
 	@Inject(at = @At("HEAD"), method = "doClick(IILnet/minecraft/inventory/container/ClickType;Lnet/minecraft/entity/player/PlayerEntity;)Lnet/minecraft/item/ItemStack;", cancellable = true)
 	private void doClick(int slot0, int mouse, ClickType type, PlayerEntity player, CallbackInfoReturnable<ItemStack> callback) {

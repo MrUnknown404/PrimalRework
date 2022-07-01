@@ -2,14 +2,14 @@ package mrunknown404.primalrework.blocks;
 
 import java.util.function.Supplier;
 
-import mrunknown404.primalrework.blocks.utils.StagedBlock;
-import mrunknown404.primalrework.items.utils.StagedItem;
-import mrunknown404.primalrework.items.utils.StagedItem.ItemType;
-import mrunknown404.primalrework.registries.PRItemGroups;
-import mrunknown404.primalrework.registries.PRStages;
+import mrunknown404.primalrework.blocks.raw.StagedBlock;
+import mrunknown404.primalrework.init.InitPRItemGroups;
+import mrunknown404.primalrework.init.InitStages;
+import mrunknown404.primalrework.items.raw.StagedItem;
+import mrunknown404.primalrework.items.raw.StagedItem.ItemType;
 import mrunknown404.primalrework.utils.BlockInfo;
-import mrunknown404.primalrework.utils.BlockInfo.UniqueRawBlockInfo;
 import mrunknown404.primalrework.utils.HarvestInfo;
+import mrunknown404.primalrework.utils.BlockInfo.UniqueRawBlockInfo;
 import mrunknown404.primalrework.utils.HarvestInfo.DropInfo;
 import mrunknown404.primalrework.utils.enums.ToolMaterial;
 import mrunknown404.primalrework.utils.enums.ToolType;
@@ -39,7 +39,7 @@ public class SBGroundItem extends StagedBlock implements IWaterLoggable {
 	private static final VoxelShape SHAPE = box(3, 0, 3, 13, 1, 13);
 	
 	public SBGroundItem(UniqueRawBlockInfo info, Supplier<StagedItem> dropInstead) {
-		super(PRStages.STAGE_0, 64, PRItemGroups.BLOCKS, BlockInfo.of(info), BlockStateType.random_direction, BlockModelType.none,
+		super(InitStages.STAGE_0, 64, InitPRItemGroups.BLOCKS, BlockInfo.of(info), BlockStateType.random_direction, BlockModelType.none,
 				dropInstead == null ? HarvestInfo.HAND : new HarvestInfo(ToolType.NONE, ToolMaterial.HAND, DropInfo.item(dropInstead)));
 		registerDefaultState(defaultBlockState().setValue(WATERLOGGED, false));
 	}

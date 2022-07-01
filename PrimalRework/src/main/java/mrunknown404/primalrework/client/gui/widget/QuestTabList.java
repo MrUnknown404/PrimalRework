@@ -9,8 +9,8 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import mrunknown404.primalrework.client.gui.screen.ScreenQuestMenu;
+import mrunknown404.primalrework.init.InitQuests;
 import mrunknown404.primalrework.quests.QuestTab;
-import mrunknown404.primalrework.registries.PRQuests;
 import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.utils.helpers.ColorH;
 import mrunknown404.primalrework.utils.helpers.MathH;
@@ -32,7 +32,7 @@ public class QuestTabList extends AbstractList<QuestTabList.QuestTabEntry> {
 		this.screen = screen;
 		this.x0 = 0;
 		
-		for (QuestTab tab : PRQuests.getTabs()) {
+		for (QuestTab tab : InitQuests.getTabs()) {
 			addEntry(new QuestTabList.QuestTabEntry(screen, tab));
 		}
 		
@@ -118,7 +118,7 @@ public class QuestTabList extends AbstractList<QuestTabList.QuestTabEntry> {
 		public void render(MatrixStack stack, int mouseX, int mouseY, float tick) {
 			Minecraft mc = Minecraft.getInstance();
 			
-			boolean isSelected = MathH.within(mouseX, x, x + width - 1) && MathH.within(mouseY, y, y + height - 1);
+			boolean isSelected = mouseX >= x && mouseX < x + width && mouseY >= y && mouseY < y + height;
 			if (screen.selectedTab == tab) {
 				mc.getTextureManager().bind(isSelected ? ScreenQuestMenu.QUEST_ICON_SELECTED_HOVER : ScreenQuestMenu.QUEST_ICON_SELECTED);
 			} else {

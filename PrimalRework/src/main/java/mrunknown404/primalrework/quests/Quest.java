@@ -2,17 +2,14 @@ package mrunknown404.primalrework.quests;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Supplier;
 
 import javax.annotation.Nullable;
 
-import mrunknown404.primalrework.items.utils.StagedItem;
+import mrunknown404.primalrework.init.InitStages;
 import mrunknown404.primalrework.quests.requirements.QuestRequirement;
-import mrunknown404.primalrework.quests.rewards.QuestReward;
-import mrunknown404.primalrework.registries.PRStages;
 import mrunknown404.primalrework.stage.Stage;
-import mrunknown404.primalrework.utils.IDescription;
-import mrunknown404.primalrework.utils.IName;
 import mrunknown404.primalrework.utils.helpers.StageH;
 import mrunknown404.primalrework.utils.helpers.WordH;
 import mrunknown404.primalrework.world.savedata.WSDQuests;
@@ -20,11 +17,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Util;
 import net.minecraft.util.text.IFormattableTextComponent;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.server.ServerWorld;
 
-public class Quest implements IName, IDescription {
+public class Quest {
 	protected final String name_key;
 	protected final ItemStack itemIcon;
 	protected final Quest parent;
@@ -35,11 +31,11 @@ public class Quest implements IName, IDescription {
 	protected final boolean isEnd, isRoot;
 	
 	/** Grid pos! */
-	protected float xPos, yPos;
+	protected final float xPos, yPos;
 	protected boolean isFinished;
 	protected List<Quest> children = new ArrayList<Quest>();
 	
-	protected Quest(Supplier<Stage> stage, String name_key, Quest parent, float xPos, float yPos, ItemStack itemIcon, QuestRequirement<?, ?> req, @Nullable QuestReward reward,
+	private Quest(Supplier<Stage> stage, String name_key, Quest parent, float xPos, float yPos, ItemStack itemIcon, QuestRequirement<?, ?> req, @Nullable QuestReward reward,
 			boolean isEnd, boolean isRoot, QuestTab tab) {
 		this.stage = stage;
 		this.name_key = name_key;
@@ -52,6 +48,26 @@ public class Quest implements IName, IDescription {
 		this.reward = reward;
 		this.isEnd = isEnd;
 		this.isRoot = isRoot;
+	}
+	
+	public static Quest simple(String name_key, Quest parent, float xPos, float yPos, QuestRequirement<?, ?> req) {
+		return new Quest(parent.stage, name_key, parent, xPos, yPos, new ItemStack(req.getIcon()), req, null, false, false, parent.tab);
+	}
+	
+	public static Quest simple(String name_key, Quest parent, float xPos, float yPos, QuestRequirement<?, ?> req, QuestReward reward) {
+		return new Quest(parent.stage, name_key, parent, xPos, yPos, new ItemStack(req.getIcon()), req, reward, false, false, parent.tab);
+	}
+	
+	public static Quest end(String name_key, Quest parent, float xPos, float yPos, QuestRequirement<?, ?> req) {
+		return new Quest(parent.stage, name_key, parent, xPos, yPos, new ItemStack(req.getIcon()), req, null, true, false, parent.tab);
+	}
+	
+	public static Quest end(String name_key, Quest parent, float xPos, float yPos, QuestRequirement<?, ?> req, QuestReward reward) {
+		return new Quest(parent.stage, name_key, parent, xPos, yPos, new ItemStack(req.getIcon()), req, reward, true, false, parent.tab);
+	}
+	
+	public static Quest root(Supplier<Stage> stage, QuestTab tab) {
+		return new Quest(stage, "root", null, 0, 0, tab.getIcon(), null, null, false, true, tab);
 	}
 	
 	public void addChild(Quest q) {
@@ -87,12 +103,12 @@ public class Quest implements IName, IDescription {
 		
 		isFinished = true;
 		if (reward != null && player != null) { //TODO make this not auto claimed. add a button or something
-			reward.giveRewardsToPlayer(player);
+			reward.giveRewards(player);
 		}
 		
 		if (isEnd) {
 			if (stage.get().id <= StageH.getStage().id) {
-				StageH.setStage(world, PRStages.getNextStage());
+				StageH.setStage(world, InitStages.getNextStage());
 				System.out.println("The world has advanced to the next stage!");
 			} else {
 				System.err.println("Finished an end quest that should progress to the next stage but we're already there");
@@ -116,13 +132,11 @@ public class Quest implements IName, IDescription {
 		return stage;
 	}
 	
-	@Override
 	public IFormattableTextComponent getFancyName() {
 		return WordH.translate("quest." + stage.get().getNameID() + "." + name_key + ".name");
 	}
 	
 	/** @return stage + "." + name */
-	@Override
 	public String getName() {
 		return stage.get().getNameID() + "." + name_key;
 	}
@@ -131,20 +145,10 @@ public class Quest implements IName, IDescription {
 		return name_key;
 	}
 	
-	@Override
-	public List<IFormattableTextComponent> getFancyDescription() {
+	public List<IFormattableTextComponent> getDescription() {
 		List<IFormattableTextComponent> desc = new ArrayList<IFormattableTextComponent>();
 		for (String s : WordH.translate("quest." + getName() + ".desc").getString().split("\\n")) {
 			desc.add(WordH.string(s.trim()));
-		}
-		return desc;
-	}
-	
-	@Override
-	public List<String> getDescription() {
-		List<String> desc = new ArrayList<String>();
-		for (ITextComponent text : getFancyDescription()) {
-			desc.add(text.getString());
 		}
 		return desc;
 	}
@@ -202,18 +206,12 @@ public class Quest implements IName, IDescription {
 	
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((name_key == null) ? 0 : name_key.hashCode());
-		return result;
+		return Objects.hash(name_key);
 	}
 	
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null || getClass() != obj.getClass()) {
+		if (this != obj || obj == null || getClass() != obj.getClass()) {
 			return false;
 		}
 		
@@ -225,58 +223,5 @@ public class Quest implements IName, IDescription {
 		}
 		
 		return true;
-	}
-	
-	public static class QuestBuilder {
-		//@Nullable QuestReward reward
-		
-		private final Supplier<Stage> stage;
-		private final String name_key;
-		private final Quest parent;
-		private final float xPos, yPos;
-		private final QuestRequirement<?, ?> req;
-		private ItemStack itemIcon;
-		private QuestReward reward;
-		private boolean isRoot;
-		
-		private QuestBuilder(Supplier<Stage> stage, String name_key, Quest parent, float xPos, float yPos, QuestRequirement<?, ?> req) {
-			this.stage = stage;
-			this.name_key = name_key;
-			this.parent = parent;
-			this.xPos = xPos;
-			this.yPos = yPos;
-			this.req = req;
-		}
-		
-		public static Quest root(Supplier<Stage> stage, QuestTab tab) {
-			return new Quest(stage, "root", null, 0, 0, tab.getIcon(), null, null, false, true, tab);
-		}
-		
-		public static QuestBuilder create(String name_key, Quest parent, float xPos, float yPos, QuestRequirement<?, ?> req) {
-			return new QuestBuilder(parent.stage, name_key, parent, xPos, yPos, req).setIcon(req.getIcon());
-		}
-		
-		public QuestBuilder setIcon(StagedItem itemIcon) {
-			this.itemIcon = new ItemStack(itemIcon);
-			return this;
-		}
-		
-		public QuestBuilder setRoot() {
-			this.isRoot = true;
-			return this;
-		}
-		
-		public QuestBuilder setReward(QuestReward reward) {
-			this.reward = reward;
-			return this;
-		}
-		
-		public Quest finish() {
-			return new Quest(stage, name_key, parent, xPos, yPos, itemIcon, req, reward, false, isRoot, parent.tab);
-		}
-		
-		public Quest finishAsEnd() {
-			return new Quest(stage, name_key, parent, xPos, yPos, itemIcon, req, reward, true, isRoot, parent.tab);
-		}
 	}
 }

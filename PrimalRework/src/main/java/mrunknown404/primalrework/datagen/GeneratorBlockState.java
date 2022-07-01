@@ -5,9 +5,9 @@ import com.google.common.base.Preconditions;
 import mrunknown404.primalrework.PrimalRework;
 import mrunknown404.primalrework.blocks.SBStrippedLog;
 import mrunknown404.primalrework.blocks.SBUnlitPrimalWallTorch;
-import mrunknown404.primalrework.blocks.utils.SBSlab;
-import mrunknown404.primalrework.blocks.utils.StagedBlock;
-import mrunknown404.primalrework.registries.PRRegistry;
+import mrunknown404.primalrework.blocks.raw.SBSlab;
+import mrunknown404.primalrework.blocks.raw.StagedBlock;
+import mrunknown404.primalrework.init.InitRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.RotatedPillarBlock;
 import net.minecraft.data.DataGenerator;
@@ -37,7 +37,7 @@ class GeneratorBlockState extends BlockStateProvider {
 	
 	@Override
 	protected void registerStatesAndModels() {
-		for (RegistryObject<Block> regBlock : PRRegistry.getBlocks()) {
+		for (RegistryObject<Block> regBlock : InitRegistry.getBlocks()) {
 			StagedBlock b = (StagedBlock) regBlock.get();
 			
 			final String id = b.usesVanillaNamespaceBlock() ? "minecraft" : PrimalRework.MOD_ID;

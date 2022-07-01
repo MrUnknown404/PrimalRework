@@ -2,10 +2,10 @@ package mrunknown404.primalrework.events;
 
 import java.util.Random;
 
+import mrunknown404.primalrework.init.InitBlocks;
+import mrunknown404.primalrework.init.InitItems;
 import mrunknown404.primalrework.network.NetworkHandler;
-import mrunknown404.primalrework.network.packets.PacketSyncStage;
-import mrunknown404.primalrework.registries.PRBlocks;
-import mrunknown404.primalrework.registries.PRItems;
+import mrunknown404.primalrework.network.packets.PSyncStage;
 import mrunknown404.primalrework.utils.NoAdvancementManager;
 import mrunknown404.primalrework.utils.helpers.RayTraceH;
 import mrunknown404.primalrework.utils.helpers.StageH;
@@ -21,7 +21,6 @@ import net.minecraft.item.Items;
 import net.minecraft.resources.DataPackRegistries;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.event.AddReloadListenerEvent;
@@ -48,7 +47,7 @@ public class MiscEvents {
 	public void onPlayerJoin(PlayerLoggedInEvent e) {
 		PlayerEntity player = e.getPlayer();
 		
-		NetworkHandler.sendPacketToTarget((ServerPlayerEntity) player, new PacketSyncStage(StageH.getStage()));
+		NetworkHandler.sendPacketToTarget((ServerPlayerEntity) player, new PSyncStage(StageH.getStage()));
 	}
 	
 	@SubscribeEvent
@@ -69,33 +68,32 @@ public class MiscEvents {
 		
 		Block b = e.getWorld().getBlockState(e.getPos()).getBlock();
 		
-		if (b == PRBlocks.STONE.get() || b == PRBlocks.COBBLESTONE.get()) {
-			BlockRayTraceResult result = RayTraceH.rayTrace(1, false);
+		if (b == InitBlocks.STONE.get() || b == InitBlocks.COBBLESTONE.get()) {
 			ItemStack item = e.getItemStack();
-			Vector3d hit = result.getLocation();
+			Vector3d hit = RayTraceH.rayTrace(1, false).getLocation();
 			Item itemToAdd = null;
 			int count = 1 + R.nextInt(1);
 			
-			if (item.getItem() == PRItems.FLINT.get()) {
-				e.getWorld().playSound(e.getPlayer(), e.getPos(), SoundEvents.STONE_BREAK, SoundCategory.PLAYERS, 1, 2);
-				itemToAdd = PRItems.KNAPPED_FLINT.get();
-			} else if (item.getItem() == PRItems.KNAPPED_FLINT.get()) {
-				e.getWorld().playSound(e.getPlayer(), e.getPos(), SoundEvents.STONE_BREAK, SoundCategory.PLAYERS, 1, 2);
-				itemToAdd = PRItems.FLINT_POINT.get();
+			if (item.getItem() == InitItems.FLINT.get()) {
+				itemToAdd = InitItems.KNAPPED_FLINT.get();
+			} else if (item.getItem() == InitItems.KNAPPED_FLINT.get()) {
+				itemToAdd = InitItems.FLINT_POINT.get();
 			} else if (item.getItem() == Items.BONE) {
-				e.getWorld().playSound(e.getPlayer(), e.getPos(), SoundEvents.STONE_BREAK, SoundCategory.PLAYERS, 1, 2);
-				itemToAdd = PRItems.BONE_SHARD.get();
-			} else if (item.getItem() == PRItems.BONE_SHARD.get()) {
-				e.getWorld().playSound(e.getPlayer(), e.getPos(), SoundEvents.STONE_BREAK, SoundCategory.PLAYERS, 1, 2);
-				itemToAdd = Items.BONE_MEAL;
+				itemToAdd = InitItems.BONE_SHARD.get();
+			} else if (item.getItem() == InitItems.BONE_SHARD.get()) {
+				itemToAdd = Items.BONE_MEAL; //TODO switch to mine
 			}
 			
-			if (itemToAdd != null && !e.getWorld().isClientSide && R.nextInt(3) == 0) {
-				item.shrink(1);
-				e.getWorld().addFreshEntity(new ItemEntity(e.getWorld(), hit.x, hit.y, hit.z, new ItemStack(itemToAdd, count)));
+			if (itemToAdd != null) {
+				e.getWorld().playSound(e.getPlayer(), e.getPos(), SoundEvents.STONE_BREAK, SoundCategory.PLAYERS, 1, 2);
 				
-				if (item.getItem() == Items.BONE && R.nextInt(3) == 0) {
-					e.getWorld().addFreshEntity(new ItemEntity(e.getWorld(), hit.x, hit.y, hit.z, new ItemStack(Items.BONE_MEAL)));
+				if (!e.getWorld().isClientSide && R.nextInt(3) == 0) {
+					item.shrink(1);
+					e.getWorld().addFreshEntity(new ItemEntity(e.getWorld(), hit.x, hit.y, hit.z, new ItemStack(itemToAdd, count)));
+					
+					if (item.getItem() == Items.BONE && R.nextInt(3) == 0) { //TODO switch to mine
+						e.getWorld().addFreshEntity(new ItemEntity(e.getWorld(), hit.x, hit.y, hit.z, new ItemStack(Items.BONE_MEAL))); //TODO switch to mine
+					}
 				}
 			}
 		}

@@ -5,7 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
-import mrunknown404.primalrework.registries.PRStages;
+import mrunknown404.primalrework.init.InitStages;
 import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.utils.BlockInfo;
 import mrunknown404.primalrework.utils.BlockInfo.Hardness;
@@ -13,10 +13,10 @@ import net.minecraftforge.common.util.Lazy;
 
 public enum Metal {
 	//@formatter:off
-	UNKNOWN(BlockInfo.with(BlockInfo.METAL, Hardness.MEDIUM_0), PRStages.STAGE_3, ToolMaterial.STONE,  null),
-	COPPER (BlockInfo.with(BlockInfo.METAL, Hardness.MEDIUM_0), PRStages.STAGE_3, ToolMaterial.STONE,  new Color(255, 145, 0)),
-	TIN    (BlockInfo.with(BlockInfo.METAL, Hardness.SOFT_2),   PRStages.STAGE_3, ToolMaterial.STONE,  new Color(255, 237, 251)),
-	BRONZE (BlockInfo.with(BlockInfo.METAL, Hardness.MEDIUM_1), PRStages.STAGE_4, ToolMaterial.COPPER, new Color(208, 101, 0));
+	UNKNOWN(BlockInfo.with(BlockInfo.METAL, Hardness.MEDIUM_0), InitStages.STAGE_3, ToolMaterial.STONE,  null),
+	COPPER (BlockInfo.with(BlockInfo.METAL, Hardness.MEDIUM_0), InitStages.STAGE_3, ToolMaterial.STONE,  new Color(255, 145, 0)),
+	TIN    (BlockInfo.with(BlockInfo.METAL, Hardness.SOFT_2),   InitStages.STAGE_3, ToolMaterial.STONE,  new Color(255, 237, 251)),
+	BRONZE (BlockInfo.with(BlockInfo.METAL, Hardness.MEDIUM_1), InitStages.STAGE_4, ToolMaterial.COPPER, new Color(208, 101, 0));
 	//@formatter:on
 	
 	//TODO add melting/boiling temp

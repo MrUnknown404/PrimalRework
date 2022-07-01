@@ -11,15 +11,14 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 
 import mrunknown404.primalrework.PrimalRework;
 import mrunknown404.primalrework.client.gui.recipedisplays.RecipeDisplay;
-import mrunknown404.primalrework.items.utils.StagedItem;
-import mrunknown404.primalrework.recipes.IStagedRecipe;
-import mrunknown404.primalrework.registries.PRFuels;
+import mrunknown404.primalrework.init.InitPRFuels;
+import mrunknown404.primalrework.items.raw.StagedItem;
+import mrunknown404.primalrework.recipes.StagedRecipe;
 import mrunknown404.primalrework.utils.Pair;
 import mrunknown404.primalrework.utils.enums.FuelType;
 import mrunknown404.primalrework.utils.enums.ICraftingInput;
 import mrunknown404.primalrework.utils.enums.RecipeType;
 import mrunknown404.primalrework.utils.helpers.ColorH;
-import mrunknown404.primalrework.utils.helpers.MathH;
 import mrunknown404.primalrework.utils.helpers.WordH;
 import net.minecraft.client.audio.SimpleSound;
 import net.minecraft.client.gui.screen.Screen;
@@ -42,7 +41,7 @@ public class ScreenRecipeList extends Screen {
 	private Button leftButton, rightButton;
 	private ITextComponent recipeName, pageCount;
 	
-	public ScreenRecipeList(ContainerScreen<?> lastScreen, Map<RecipeType, List<IStagedRecipe<?, ?>>> recipes, Map<FuelType, Pair<StagedItem, Integer>> fuels, StagedItem output) {
+	public ScreenRecipeList(ContainerScreen<?> lastScreen, Map<RecipeType, List<StagedRecipe<?, ?>>> recipes, Map<FuelType, Pair<StagedItem, Integer>> fuels, StagedItem output) {
 		super(WordH.translate("screen.recipelist.title"));
 		this.lastScreen = lastScreen;
 		this.recipes = new ArrayList<Data>();
@@ -50,7 +49,7 @@ public class ScreenRecipeList extends Screen {
 		if (recipes != null) {
 			for (RecipeType type : RecipeType.values()) {
 				if (recipes.containsKey(type)) {
-					List<IStagedRecipe<?, ?>> list = recipes.get(type);
+					List<StagedRecipe<?, ?>> list = recipes.get(type);
 					this.recipes.add(new Data(type, RecipeDisplay.createFrom(type, list, output), list.size()));
 				}
 			}
@@ -59,7 +58,7 @@ public class ScreenRecipeList extends Screen {
 		if (fuels != null) {
 			for (FuelType type : FuelType.values()) {
 				if (fuels.containsKey(type)) {
-					this.recipes.add(new Data(type, RecipeDisplay.createFrom(type, PRFuels.convertToRecipes(type, fuels.get(type)), output), fuels.size()));
+					this.recipes.add(new Data(type, RecipeDisplay.createFrom(type, InitPRFuels.convertToRecipes(type, fuels.get(type)), output), fuels.size()));
 				}
 			}
 		}
@@ -93,7 +92,7 @@ public class ScreenRecipeList extends Screen {
 			int left = leftPos + 9 + (i * 29), top = topPos - 20;
 			itemRenderer.renderGuiItem(recipes.get(i).type.getIcon(), left, top);
 			
-			if (MathH.within(mouseX, left, left + 15) && MathH.within(mouseY, top, top + 15)) {
+			if (mouseX >= left && mouseX <= left + 15 && mouseY >= top && mouseY <= top + 15) {
 				GuiUtils.drawHoveringText(stack, Arrays.asList(recipes.get(i).type.getFancyName()), mouseX, mouseY, width, height, -1, font);
 			}
 		}
@@ -152,7 +151,7 @@ public class ScreenRecipeList extends Screen {
 	public boolean mouseClicked(double mouseX, double mouseY, int button) {
 		for (int i = 0; i < recipes.size(); i++) {
 			int x = leftPos + 3 + (i * 29), y = topPos - 26;
-			if (MathH.within(mouseX, x, x + 28) && MathH.within(mouseY, y, y + 26)) {
+			if (mouseX >= x && mouseX <= x + 28 && mouseY >= y && mouseY <= y + 26) {
 				curRecipeTab = i;
 				onTabChange(false);
 				break;

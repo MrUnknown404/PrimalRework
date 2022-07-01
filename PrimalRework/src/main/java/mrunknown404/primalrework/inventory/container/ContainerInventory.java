@@ -2,10 +2,10 @@ package mrunknown404.primalrework.inventory.container;
 
 import com.mojang.datafixers.util.Pair;
 
-import mrunknown404.primalrework.inventory.InventoryCraftingGrid;
-import mrunknown404.primalrework.inventory.InventoryCraftingResult;
-import mrunknown404.primalrework.inventory.container.slot.SlotInventoryResult;
-import mrunknown404.primalrework.registries.PRContainers;
+import mrunknown404.primalrework.init.InitContainers;
+import mrunknown404.primalrework.inventory.InvCraftingGrid;
+import mrunknown404.primalrework.inventory.InvCraftingResult;
+import mrunknown404.primalrework.inventory.slot.SlotInventoryResult;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -22,12 +22,12 @@ public class ContainerInventory extends Container {
 			PlayerContainer.EMPTY_ARMOR_SLOT_CHESTPLATE, PlayerContainer.EMPTY_ARMOR_SLOT_HELMET };
 	private static final EquipmentSlotType[] SLOT_IDS = new EquipmentSlotType[] { EquipmentSlotType.HEAD, EquipmentSlotType.CHEST, EquipmentSlotType.LEGS, EquipmentSlotType.FEET };
 	
-	private final InventoryCraftingResult craftResult = new InventoryCraftingResult();
-	private final InventoryCraftingGrid craftSlots = new InventoryCraftingGrid(this, craftResult);
+	private final InvCraftingResult craftResult = new InvCraftingResult();
+	private final InvCraftingGrid craftSlots = new InvCraftingGrid(this, craftResult);
 	private final PlayerEntity player;
 	
 	public ContainerInventory(int windowID, PlayerInventory inv) {
-		super(PRContainers.INVENTORY.get(), windowID);
+		super(InitContainers.INVENTORY.get(), windowID);
 		this.player = inv.player;
 		
 		addSlot(new SlotInventoryResult(craftResult, 0, 154, 28, inv, craftSlots));

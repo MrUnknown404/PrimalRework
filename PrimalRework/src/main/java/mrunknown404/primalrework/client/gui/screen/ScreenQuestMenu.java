@@ -9,9 +9,9 @@ import mrunknown404.primalrework.PrimalRework;
 import mrunknown404.primalrework.client.gui.GuiQuestTree;
 import mrunknown404.primalrework.client.gui.widget.QuestInfoList;
 import mrunknown404.primalrework.client.gui.widget.QuestTabList;
+import mrunknown404.primalrework.init.InitQuests;
 import mrunknown404.primalrework.quests.Quest;
 import mrunknown404.primalrework.quests.QuestTab;
-import mrunknown404.primalrework.registries.PRQuests;
 import mrunknown404.primalrework.utils.helpers.MathH;
 import mrunknown404.primalrework.utils.helpers.WordH;
 import net.minecraft.client.gui.screen.Screen;
@@ -48,12 +48,12 @@ public class ScreenQuestMenu extends Screen {
 		TREE_MAP.clear();
 		questInfo = null;
 		
-		for (QuestTab tab : PRQuests.getTabs()) {
+		for (QuestTab tab : InitQuests.getTabs()) {
 			TREE_MAP.put(tab, new GuiQuestTree(this, minecraft, tab));
 		}
 		scale = 1;
 		
-		selectedTab = PRQuests.TAB_STAGE_0;
+		selectedTab = InitQuests.TAB_STAGE_0;
 	}
 	
 	@Override
@@ -78,9 +78,7 @@ public class ScreenQuestMenu extends Screen {
 		if (flag) {
 			return true;
 		} else if (mouseX > 39) {
-			if (questInfo == null) {
-				return TREE_MAP.get(selectedTab).mouseClicked(mouseX, mouseY, partial);
-			} else if (mouseY < height - QuestInfoList.getInfoHeight(this)) {
+			if (questInfo == null || mouseY < height - QuestInfoList.getInfoHeight(this)) {
 				return TREE_MAP.get(selectedTab).mouseClicked(mouseX, mouseY, partial);
 			}
 			

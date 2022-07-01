@@ -42,7 +42,7 @@ public class QuestInfoList extends AbstractList<QuestInfoList.QuestInfoEntry> {
 		this.headerHeight += quest.hasReward() ? (this.headerHeight == 26 ? 20 : 10) : 0;
 		this.headerHeight += quest.isRoot() ? 0 : (this.headerHeight == 26 ? 20 : 10);
 		
-		for (ITextComponent text : quest.getFancyDescription()) {
+		for (ITextComponent text : quest.getDescription()) {
 			addEntry(new QuestInfoEntry(this, mc, text));
 		}
 		

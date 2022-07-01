@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.Supplier;
 
-import mrunknown404.primalrework.blocks.utils.StagedBlock;
-import mrunknown404.primalrework.items.utils.StagedItem;
+import mrunknown404.primalrework.blocks.raw.StagedBlock;
+import mrunknown404.primalrework.items.raw.StagedItem;
 import mrunknown404.primalrework.utils.enums.ToolMaterial;
 import mrunknown404.primalrework.utils.enums.ToolType;
 import net.minecraft.item.ItemStack;

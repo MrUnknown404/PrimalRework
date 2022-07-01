@@ -1,7 +1,7 @@
 package mrunknown404.primalrework.events;
 
-import mrunknown404.primalrework.blocks.utils.StagedBlock;
-import mrunknown404.primalrework.items.utils.StagedItem;
+import mrunknown404.primalrework.blocks.raw.StagedBlock;
+import mrunknown404.primalrework.items.raw.StagedItem;
 import mrunknown404.primalrework.utils.HarvestInfo;
 import mrunknown404.primalrework.utils.HarvestInfo.DropInfo;
 import mrunknown404.primalrework.utils.enums.ToolMaterial;
@@ -51,11 +51,6 @@ public class HarvestEvents {
 	}
 	
 	@SubscribeEvent
-	public void harvestCheck(PlayerEvent.HarvestCheck e) {
-		e.setCanHarvest(false);
-	}
-	
-	@SubscribeEvent
 	public void onBreak(BlockEvent.BreakEvent e) {
 		Item item = e.getPlayer().getMainHandItem().getItem();
 		
@@ -85,5 +80,10 @@ public class HarvestEvents {
 				e.getWorld().addFreshEntity(new ItemEntity((World) e.getWorld(), p.getX() + 0.5d, p.getY(), p.getZ() + 0.5d, new ItemStack(block)));
 			}
 		}
+	}
+	
+	@SubscribeEvent
+	public void harvestCheck(PlayerEvent.HarvestCheck e) {
+		e.setCanHarvest(false);
 	}
 }

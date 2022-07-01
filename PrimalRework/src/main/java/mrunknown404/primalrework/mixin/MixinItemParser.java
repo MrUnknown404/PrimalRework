@@ -26,10 +26,8 @@ public class MixinItemParser {
 	
 	@Inject(at = @At("HEAD"), method = "suggestItemIdOrTag(Lcom/mojang/brigadier/suggestion/SuggestionsBuilder;Lnet/minecraft/tags/ITagCollection;)Ljava/util/concurrent/CompletableFuture;", cancellable = true)
 	private void suggestItemIdOrTag(SuggestionsBuilder builder, ITagCollection<Item> tags, CallbackInfoReturnable<CompletableFuture<Suggestions>> callable) {
-		if (forTesting) {
-			callable.setReturnValue(ISuggestionProvider.suggestResource(tags.getAvailableTags(), builder, String.valueOf('#')));
-		} else {
-			callable.setReturnValue(ISuggestionProvider.suggestResource(ForgeRegistries.ITEMS.getKeys().stream().filter((r) -> !r.getNamespace().equals("minecraft")), builder));
-		}
+		callable.setReturnValue(forTesting ? ISuggestionProvider.suggestResource(tags.getAvailableTags(), builder, String.valueOf('#')) :
+				ISuggestionProvider.suggestResource(ForgeRegistries.ITEMS.getKeys().stream().filter((r) -> !r.getNamespace().equals("minecraft")), builder));
+		
 	}
 }

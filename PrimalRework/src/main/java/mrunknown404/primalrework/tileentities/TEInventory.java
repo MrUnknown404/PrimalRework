@@ -11,17 +11,11 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.Direction;
 import net.minecraft.util.INameable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.wrapper.InvWrapper;
 
-abstract class TEInventory extends TileEntity implements IInventory, INamedContainerProvider, INameable {
+public abstract class TEInventory extends TileEntity implements IInventory, INamedContainerProvider, INameable {
 	private NonNullList<ItemStack> items;
 	private ITextComponent name;
 	
@@ -55,16 +49,12 @@ abstract class TEInventory extends TileEntity implements IInventory, INamedConta
 	
 	@Override
 	public SUpdateTileEntityPacket getUpdatePacket() {
-		CompoundNBT nbt = getUpdateTag();
-		ItemStackHelper.saveAllItems(nbt, items);
-		return new SUpdateTileEntityPacket(worldPosition, 1, nbt);
+		return new SUpdateTileEntityPacket(worldPosition, 1, ItemStackHelper.saveAllItems(getUpdateTag(), items));
 	}
 	
 	@Override
 	public CompoundNBT getUpdateTag() {
-		CompoundNBT nbt = super.getUpdateTag();
-		saveNBT(nbt);
-		return nbt;
+		return saveNBT(super.getUpdateTag());
 	}
 	
 	@Override
@@ -135,8 +125,7 @@ abstract class TEInventory extends TileEntity implements IInventory, INamedConta
 	
 	@Override
 	public boolean stillValid(PlayerEntity player) {
-		return level.getBlockEntity(worldPosition) != this ? false :
-				player.distanceToSqr(worldPosition.getX() + 0.5, worldPosition.getY() + 0.5, worldPosition.getZ() + 0.5) <= 64;
+		return level.getBlockEntity(worldPosition) != this ? false : player.distanceToSqr(worldPosition.getX() + 0.5, worldPosition.getY() + 0.5, worldPosition.getZ() + 0.5) <= 64;
 	}
 	
 	@Override
@@ -161,22 +150,5 @@ abstract class TEInventory extends TileEntity implements IInventory, INamedConta
 	@Override
 	public ITextComponent getCustomName() {
 		return name;
-	}
-	
-	private final LazyOptional<?> itemHandler = LazyOptional.of(() -> createUnSidedHandler());
-	
-	private IItemHandler createUnSidedHandler() {
-		return new InvWrapper(this);
-	}
-	
-	@Override
-	public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
-		return !remove && cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ? itemHandler.cast() : super.getCapability(cap, side);
-	}
-	
-	@Override
-	protected void invalidateCaps() {
-		super.invalidateCaps();
-		itemHandler.invalidate();
 	}
 }

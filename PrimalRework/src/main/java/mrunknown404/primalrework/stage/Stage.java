@@ -2,13 +2,12 @@ package mrunknown404.primalrework.stage;
 
 import java.util.Objects;
 
-import mrunknown404.primalrework.utils.IName;
 import mrunknown404.primalrework.utils.helpers.WordH;
 import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraftforge.common.util.Lazy;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
-public class Stage extends ForgeRegistryEntry<Stage> implements IName {
+public class Stage extends ForgeRegistryEntry<Stage> {
 	private final Lazy<IFormattableTextComponent> name = Lazy.of(() -> WordH.translate("stage." + getNameID() + ".name"));
 	public final byte id;
 	
@@ -16,12 +15,10 @@ public class Stage extends ForgeRegistryEntry<Stage> implements IName {
 		this.id = id;
 	}
 	
-	@Override
 	public IFormattableTextComponent getFancyName() {
 		return name.get();
 	}
 	
-	@Override
 	public String getName() {
 		return name.get().getString();
 	}

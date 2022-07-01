@@ -2,11 +2,11 @@ package mrunknown404.primalrework.blocks;
 
 import java.util.Random;
 
-import mrunknown404.primalrework.blocks.utils.IBiomeColored;
-import mrunknown404.primalrework.blocks.utils.SBSlab;
-import mrunknown404.primalrework.blocks.utils.SBSnowyDirt;
-import mrunknown404.primalrework.registries.PRBlocks;
-import mrunknown404.primalrework.registries.PRStages;
+import mrunknown404.primalrework.blocks.raw.IBiomeColored;
+import mrunknown404.primalrework.blocks.raw.SBSlab;
+import mrunknown404.primalrework.blocks.raw.SBSnowyDirt;
+import mrunknown404.primalrework.init.InitBlocks;
+import mrunknown404.primalrework.init.InitStages;
 import mrunknown404.primalrework.utils.BlockInfo;
 import mrunknown404.primalrework.utils.HarvestInfo;
 import mrunknown404.primalrework.utils.HarvestInfo.DropInfo;
@@ -22,9 +22,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.server.ServerWorld;
 
+@SuppressWarnings("deprecation")
 public class SBGrassSlab extends SBSlab implements IBiomeColored { //TODO replace with my snow
 	public SBGrassSlab() {
-		super(PRStages.STAGE_0, BlockInfo.of(BlockInfo.DRY_GRASS), new HarvestInfo(ToolType.SHOVEL, ToolMaterial.CLAY, DropInfo.block(() -> PRBlocks.DIRT_SLAB)));
+		super(InitStages.STAGE_0, BlockInfo.of(BlockInfo.DRY_GRASS), new HarvestInfo(ToolType.SHOVEL, ToolMaterial.CLAY, DropInfo.block(() -> InitBlocks.DIRT_SLAB)));
 	}
 	
 	@Override
@@ -44,17 +45,17 @@ public class SBGrassSlab extends SBSlab implements IBiomeColored { //TODO replac
 				return;
 			}
 			
-			world.setBlockAndUpdate(pos, PRBlocks.DIRT_SLAB.get().defaultBlockState().setValue(SBSlab.TYPE, world.getBlockState(pos).getValue(SBSlab.TYPE)));
+			world.setBlockAndUpdate(pos, InitBlocks.DIRT_SLAB.get().defaultBlockState().setValue(SBSlab.TYPE, world.getBlockState(pos).getValue(SBSlab.TYPE)));
 		} else {
 			if (world.getMaxLocalRawBrightness(pos.above()) >= 9) {
 				for (int i = 0; i < 4; i++) {
 					BlockPos blockpos = pos.offset(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
 					BlockState state1 = world.getBlockState(blockpos);
 					
-					if (state1.is(PRBlocks.DIRT.get()) && canPropagate(state1, world, blockpos)) {
+					if (state1.is(InitBlocks.DIRT.get()) && canPropagate(state1, world, blockpos)) {
 						world.setBlockAndUpdate(blockpos,
-								PRBlocks.GRASS_BLOCK.get().defaultBlockState().setValue(SBSnowyDirt.SNOWY, Boolean.valueOf(world.getBlockState(blockpos.above()).is(Blocks.SNOW))));
-					} else if (state1.is(PRBlocks.DIRT_SLAB.get()) && canPropagate(state1, world, blockpos)) {
+								InitBlocks.GRASS_BLOCK.get().defaultBlockState().setValue(SBSnowyDirt.SNOWY, Boolean.valueOf(world.getBlockState(blockpos.above()).is(Blocks.SNOW))));
+					} else if (state1.is(InitBlocks.DIRT_SLAB.get()) && canPropagate(state1, world, blockpos)) {
 						world.setBlockAndUpdate(blockpos, defaultBlockState().setValue(SBSlab.TYPE, world.getBlockState(blockpos).getValue(SBSlab.TYPE)));
 					}
 				}

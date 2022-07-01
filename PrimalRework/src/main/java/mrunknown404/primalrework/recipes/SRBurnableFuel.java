@@ -1,35 +1,14 @@
 package mrunknown404.primalrework.recipes;
 
-import mrunknown404.primalrework.items.utils.StagedItem;
-import mrunknown404.primalrework.recipes.input.RIBurnableFuel;
-import mrunknown404.primalrework.stage.Stage;
-import mrunknown404.primalrework.utils.enums.RecipeType;
-import net.minecraft.item.ItemStack;
+import mrunknown404.primalrework.items.raw.StagedItem;
+import mrunknown404.primalrework.recipes.inputs.RIBurnableFuel;
 
-public class SRBurnableFuel implements IStagedRecipe<SRBurnableFuel, RIBurnableFuel> {
-	private final ItemStack item;
-	private final RIBurnableFuel itemRI;
+public class SRBurnableFuel extends StagedRecipe<SRBurnableFuel, RIBurnableFuel> {
 	private final int time;
 	
 	public SRBurnableFuel(StagedItem item, int time) {
-		this.itemRI = new RIBurnableFuel(item);
-		this.item = new ItemStack(item);
+		super(null, item.stage.get(), item, 1, new RIBurnableFuel(item));
 		this.time = time;
-	}
-	
-	@Override
-	public RIBurnableFuel getInput() {
-		return itemRI;
-	}
-	
-	@Override
-	public ItemStack getOutput() {
-		return item;
-	}
-	
-	@Override
-	public Stage getStage() {
-		return ((StagedItem) item.getItem()).stage.get();
 	}
 	
 	public int getCookTime() {
@@ -38,16 +17,11 @@ public class SRBurnableFuel implements IStagedRecipe<SRBurnableFuel, RIBurnableF
 	
 	@Override
 	public boolean is(SRBurnableFuel recipe) {
-		return recipe.item == item;
+		return recipe.getOutput() == getOutput();
 	}
 	
 	@Override
-	public boolean has(Ingredient input) {
-		return input.matches(itemRI.input);
-	}
-	
-	@Override
-	public RecipeType getRecipeType() {
-		return null;
+	public boolean has(Ingredient ingredient) {
+		return inputRecipe.input.matches(ingredient);
 	}
 }

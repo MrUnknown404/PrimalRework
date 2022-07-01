@@ -2,12 +2,12 @@ package mrunknown404.primalrework;
 
 import com.mojang.brigadier.CommandDispatcher;
 
+import mrunknown404.primalrework.utils.ProxyClient;
+import mrunknown404.primalrework.utils.Proxy;
 import mrunknown404.primalrework.commands.CommandQuest;
 import mrunknown404.primalrework.commands.CommandStage;
 import mrunknown404.primalrework.utils.PRConfig;
 import mrunknown404.primalrework.utils.PrimalMod;
-import mrunknown404.primalrework.utils.proxy.ClientProxy;
-import mrunknown404.primalrework.utils.proxy.CommonProxy;
 import net.minecraft.command.CommandSource;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -24,14 +24,14 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 public class PrimalRework {
 	public static final String MOD_ID = "primalrework";
 	
-	public static CommonProxy proxy;
+	public static Proxy proxy;
 	
 	public PrimalRework() {
 		System.out.println("#-# Thank you for playing PrimalRework! #-#");
 		
 		ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, PRConfig.CLIENT_SPEC);
 		
-		proxy = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> CommonProxy::new);
+		proxy = DistExecutor.safeRunForDist(() -> ProxyClient::new, () -> Proxy::new);
 		proxy.preSetup(this);
 		
 		FMLJavaModLoadingContext.get().getModEventBus().addListener((FMLCommonSetupEvent e) -> proxy.setup());

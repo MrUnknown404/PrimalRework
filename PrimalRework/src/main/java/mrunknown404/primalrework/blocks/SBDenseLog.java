@@ -1,11 +1,11 @@
 package mrunknown404.primalrework.blocks;
 
-import mrunknown404.primalrework.blocks.utils.SBRotatedPillar;
-import mrunknown404.primalrework.registries.PRItemGroups;
-import mrunknown404.primalrework.registries.PRStages;
+import mrunknown404.primalrework.blocks.raw.SBRotatedPillar;
+import mrunknown404.primalrework.init.InitPRItemGroups;
+import mrunknown404.primalrework.init.InitStages;
 import mrunknown404.primalrework.utils.BlockInfo;
-import mrunknown404.primalrework.utils.BlockInfo.Hardness;
 import mrunknown404.primalrework.utils.HarvestInfo;
+import mrunknown404.primalrework.utils.BlockInfo.Hardness;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 
 public class SBDenseLog extends SBRotatedPillar {
 	public SBDenseLog() {
-		super(PRStages.STAGE_2, 16, PRItemGroups.BLOCKS, BlockInfo.with(BlockInfo.WOOD, Hardness.HARD_0), HarvestInfo.AXE_MIN);
+		super(InitStages.STAGE_2, 16, InitPRItemGroups.BLOCKS, BlockInfo.with(BlockInfo.WOOD, Hardness.HARD_0), HarvestInfo.AXE_MIN);
 	}
 	
 	@SuppressWarnings("deprecation")

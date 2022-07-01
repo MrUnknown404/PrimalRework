@@ -6,12 +6,12 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 
 import mrunknown404.primalrework.client.CraftingDisplayH;
 import mrunknown404.primalrework.client.gui.screen.ScreenRecipeList;
-import mrunknown404.primalrework.items.utils.StagedItem;
-import mrunknown404.primalrework.recipes.IStagedRecipe;
+import mrunknown404.primalrework.items.raw.StagedItem;
 import mrunknown404.primalrework.recipes.Ingredient;
 import mrunknown404.primalrework.recipes.SRBurnableFuel;
 import mrunknown404.primalrework.recipes.SRCampFire;
 import mrunknown404.primalrework.recipes.SRCrafting3;
+import mrunknown404.primalrework.recipes.StagedRecipe;
 import mrunknown404.primalrework.utils.DoubleCache;
 import mrunknown404.primalrework.utils.enums.FuelType;
 import mrunknown404.primalrework.utils.enums.ICraftingInput;
@@ -23,7 +23,7 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.item.ItemStack;
 
-public abstract class RecipeDisplay<T extends IStagedRecipe<T, ?>> {
+public abstract class RecipeDisplay<T extends StagedRecipe<T, ?>> {
 	public final int thisHeight;
 	protected final List<T> recipes;
 	protected final StagedItem output;
@@ -182,7 +182,7 @@ public abstract class RecipeDisplay<T extends IStagedRecipe<T, ?>> {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static <T extends IStagedRecipe<?, ?>> RecipeDisplay<?> createFrom(ICraftingInput type, List<T> recipes, StagedItem output) {
+	public static <T extends StagedRecipe<?, ?>> RecipeDisplay<?> createFrom(ICraftingInput type, List<T> recipes, StagedItem output) {
 		if (type instanceof RecipeType) {
 			switch ((RecipeType) type) {
 				case CAMPFIRE:

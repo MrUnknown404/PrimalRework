@@ -8,7 +8,7 @@ import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import mrunknown404.primalrework.client.CraftingDisplayH;
-import mrunknown404.primalrework.items.utils.StagedItem;
+import mrunknown404.primalrework.items.raw.StagedItem;
 import mrunknown404.primalrework.utils.helpers.ColorH;
 import mrunknown404.primalrework.utils.helpers.MathH;
 import mrunknown404.primalrework.utils.helpers.WordH;
@@ -155,12 +155,12 @@ public class ScreenCraftingDisplayItems extends Screen {
 		for (Data data : datas) {
 			int ymod = 0;
 			if (data.isPre) {
-				if (!MathH.within(data.y, heightItems - -scroll, heightItems)) {
+				if (!(data.y >= heightItems - -scroll && data.y <= heightItems)) {
 					continue;
 				}
 				ymod = (scroll + heightItems) * 18;
 			} else {
-				if (!MathH.within(data.y, scroll, scroll + heightItems - 1)) {
+				if (!(data.y >= scroll && data.y < scroll + heightItems)) {
 					continue;
 				}
 				ymod = scroll * 18;
@@ -169,7 +169,7 @@ public class ScreenCraftingDisplayItems extends Screen {
 			int xx = xStart + data.x * 18, yy = padding + data.y * 18 - ymod;
 			renderGuiItem(data.itemStack, data.model, stack, buf, xx, yy);
 			
-			if (MathH.within(mouseX, xx - 1, xx + 16) && MathH.within(mouseY, yy - 1, yy + 16)) {
+			if (mouseX > xx && mouseX <= xx + 16 && mouseY > yy && mouseY <= yy + 16) {
 				itemUnderMouse = (StagedItem) data.itemStack.getItem();
 				GuiUtils.drawHoveringText(stack, getTooltipFromItem(data.itemStack), mouseX, mouseY, width, height, -1, font);
 			}

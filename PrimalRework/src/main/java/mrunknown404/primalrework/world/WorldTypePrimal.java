@@ -4,7 +4,7 @@ import java.util.function.BiFunction;
 
 import com.mojang.serialization.Lifecycle;
 
-import mrunknown404.primalrework.registries.PRBlocks;
+import mrunknown404.primalrework.init.InitBlocks;
 import mrunknown404.primalrework.world.biome.provider.BiomeProviderPrimal;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.RegistryKey;
@@ -73,7 +73,7 @@ public class WorldTypePrimal extends ForgeWorldType {
 	
 	private static DimensionSettings primal(DimensionStructuresSettings settings, boolean flag) {
 		return new DimensionSettings(settings, new NoiseSettings(256, new ScalingSettings(0.9999999814507745D, 0.9999999814507745D, 80, 160), new SlideSettings(-10, 3, 0),
-				new SlideSettings(-30, 0, 0), 1, 2, 1, -0.46875D, true, true, false, flag), PRBlocks.STONE.get().defaultBlockState(), Blocks.WATER.defaultBlockState(), -10, 0, 80,
+				new SlideSettings(-30, 0, 0), 1, 2, 1, -0.46875D, true, true, false, flag), InitBlocks.STONE.get().defaultBlockState(), Blocks.WATER.defaultBlockState(), -10, 0, 80,
 				false);
 	}
 	

@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import mrunknown404.primalrework.PrimalRework;
+import mrunknown404.primalrework.init.InitQuests;
 import mrunknown404.primalrework.quests.Quest;
-import mrunknown404.primalrework.registries.PRQuests;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.nbt.ListNBT;
@@ -30,7 +30,7 @@ public class WSDQuests extends WorldSavedData {
 			questMap.put(inner.getString("name"), inner.getBoolean("finished"));
 		}
 		
-		for (Quest q : PRQuests.getQuests()) {
+		for (Quest q : InitQuests.getQuests()) {
 			if (questMap.containsKey(q.getNameKey())) {
 				q.loadFinished(questMap.get(q.getNameKey()));
 			}
@@ -40,7 +40,7 @@ public class WSDQuests extends WorldSavedData {
 	@Override
 	public CompoundNBT save(CompoundNBT nbt) {
 		ListNBT list = new ListNBT();
-		for (Quest q : PRQuests.getQuests()) {
+		for (Quest q : InitQuests.getQuests()) {
 			CompoundNBT inner = new CompoundNBT();
 			inner.putString("name", q.getNameKey());
 			inner.putBoolean("finished", q.isFinished());

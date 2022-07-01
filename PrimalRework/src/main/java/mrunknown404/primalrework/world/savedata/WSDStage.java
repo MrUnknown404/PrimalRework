@@ -1,7 +1,7 @@
 package mrunknown404.primalrework.world.savedata;
 
 import mrunknown404.primalrework.PrimalRework;
-import mrunknown404.primalrework.registries.PRStages;
+import mrunknown404.primalrework.init.InitStages;
 import mrunknown404.primalrework.utils.helpers.StageH;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.world.server.ServerWorld;
@@ -17,7 +17,7 @@ public class WSDStage extends WorldSavedData {
 	
 	@Override
 	public void load(CompoundNBT nbt) {
-		StageH.loadStage(PRStages.byID(nbt.getByte("stage")));
+		StageH.loadStage(InitStages.byID(nbt.getByte("stage")));
 	}
 	
 	@Override

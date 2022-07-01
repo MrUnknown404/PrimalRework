@@ -158,7 +158,7 @@ public class GuiQuestTree extends FocusableGui implements IRenderable {
 			float s = ScreenQuestMenu.getScale();
 			
 			boolean isHover = mouseX > 39 && (tree.screen.getQuestInfo() != null ? mouseY < tree.screen.height - QuestInfoList.getInfoHeight(tree.screen) : true) &&
-					MathH.within(mouseX, x * s, (x + width - 1) * s) && MathH.within(mouseY, y * s, (y + height - 1) * s);
+					mouseX >= x * s && mouseX < (x + width) * s && mouseY >= y * s && mouseY < (y + height) * s;
 			boolean isSelected = tree.screen.getQuestInfo() != null && tree.screen.getQuestInfo().isQuest(quest);
 			
 			if (quest.isEnd()) {
@@ -195,8 +195,7 @@ public class GuiQuestTree extends FocusableGui implements IRenderable {
 		@Override
 		protected boolean clicked(double mouseX, double mouseY) {
 			float s = ScreenQuestMenu.getScale();
-			return active && visible && MathH.within(mouseX, (x + tree.x) * s, (x + tree.x + width - 1) * s) &&
-					MathH.within(mouseY, (y + tree.y) * s, (y + tree.y + height - 1) * s);
+			return active && visible && mouseX >= (x + tree.x) * s && mouseX < (x + tree.x + width) * s && mouseY >= (y + tree.y) * s && mouseY < (y + tree.y + height) * s;
 		}
 	}
 	

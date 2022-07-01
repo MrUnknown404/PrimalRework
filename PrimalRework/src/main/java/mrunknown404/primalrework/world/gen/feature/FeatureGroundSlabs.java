@@ -9,8 +9,8 @@ import java.util.Set;
 
 import javax.annotation.Nullable;
 
-import mrunknown404.primalrework.blocks.utils.StagedBlock;
-import mrunknown404.primalrework.registries.PRBlocks;
+import mrunknown404.primalrework.blocks.raw.StagedBlock;
+import mrunknown404.primalrework.init.InitBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -26,11 +26,11 @@ import net.minecraft.world.gen.feature.NoFeatureConfig;
 
 public class FeatureGroundSlabs extends Feature<NoFeatureConfig> {
 	private static final Map<StagedBlock, SlabSpawnInfo> SPAWN_MAP = new HashMap<StagedBlock, SlabSpawnInfo>();
-	private static final Set<StagedBlock> SIDE_BLOCKS = new HashSet<StagedBlock>(Arrays.asList(PRBlocks.DIRT.get(), PRBlocks.GRASS_BLOCK.get(), PRBlocks.STONE.get()));
+	private static final Set<StagedBlock> SIDE_BLOCKS = new HashSet<StagedBlock>(Arrays.asList(InitBlocks.DIRT.get(), InitBlocks.GRASS_BLOCK.get(), InitBlocks.STONE.get()));
 	
 	static {
-		add(PRBlocks.GRASS_BLOCK.get(), PRBlocks.DIRT.get(), PRBlocks.GRASS_SLAB.get());
-		add(PRBlocks.DIRT.get(), null, PRBlocks.DIRT_SLAB.get());
+		add(InitBlocks.GRASS_BLOCK.get(), InitBlocks.DIRT.get(), InitBlocks.GRASS_SLAB.get());
+		add(InitBlocks.DIRT.get(), null, InitBlocks.DIRT_SLAB.get());
 	}
 	
 	public FeatureGroundSlabs() {

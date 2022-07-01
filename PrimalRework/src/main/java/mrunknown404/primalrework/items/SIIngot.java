@@ -1,7 +1,7 @@
 package mrunknown404.primalrework.items;
 
-import mrunknown404.primalrework.items.utils.StagedItem;
-import mrunknown404.primalrework.registries.PRItemGroups;
+import mrunknown404.primalrework.init.InitPRItemGroups;
+import mrunknown404.primalrework.items.raw.StagedItem;
 import mrunknown404.primalrework.utils.IMetalColored;
 import mrunknown404.primalrework.utils.enums.Metal;
 import mrunknown404.primalrework.utils.enums.ToolMaterial;
@@ -12,7 +12,7 @@ public class SIIngot extends StagedItem implements IMetalColored {
 	public final Metal metal;
 	
 	public SIIngot(Metal metal, boolean isNugget) {
-		super(metal.stage, isNugget ? 32 : 16, ToolType.NONE, ToolMaterial.HAND, PRItemGroups.ITEMS, Rarity.COMMON, null, false, false, ItemType.generated);
+		super(metal.stage, isNugget ? 32 : 16, ToolType.NONE, ToolMaterial.HAND, InitPRItemGroups.ITEMS, Rarity.COMMON, null, false, false, ItemType.generated);
 		this.metal = metal;
 		this.elements.putAll(metal.getElements());
 	}

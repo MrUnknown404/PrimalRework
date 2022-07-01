@@ -1,18 +1,17 @@
 package mrunknown404.primalrework.client;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import mrunknown404.primalrework.client.gui.screen.ScreenRecipeList;
-import mrunknown404.primalrework.items.utils.StagedItem;
-import mrunknown404.primalrework.recipes.IStagedRecipe;
+import mrunknown404.primalrework.init.InitPRFuels;
+import mrunknown404.primalrework.init.InitRecipes;
+import mrunknown404.primalrework.items.raw.StagedItem;
 import mrunknown404.primalrework.recipes.Ingredient;
-import mrunknown404.primalrework.registries.PRFuels;
-import mrunknown404.primalrework.registries.PRRecipes;
+import mrunknown404.primalrework.recipes.StagedRecipe;
 import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.utils.Cache;
 import mrunknown404.primalrework.utils.Pair;
@@ -44,12 +43,9 @@ public class CraftingDisplayH {
 			ALL_ITEMS.add(map.stack);
 		}
 		
-		ALL_ITEMS.sort(new Comparator<ItemStack>() {
-			@Override
-			public int compare(ItemStack o1, ItemStack o2) {
-				Item i1 = o1.getItem(), i2 = o2.getItem();
-				return (i1.getItemCategory().getId() * 100000) - (i2.getItemCategory().getId() * 100000) + ITEM_DATA.get(i1).order - ITEM_DATA.get(i2).order;
-			}
+		ALL_ITEMS.sort((o1, o2) -> {
+			Item i1 = o1.getItem(), i2 = o2.getItem();
+			return (i1.getItemCategory().getId() * 100000) - (i2.getItemCategory().getId() * 100000) + ITEM_DATA.get(i1).order - ITEM_DATA.get(i2).order;
 		});
 	}
 	
@@ -88,15 +84,15 @@ public class CraftingDisplayH {
 	}
 	
 	public static void showHowToCraft(Minecraft minecraft, StagedItem item, ContainerScreen<?> lastScreen) {
-		Map<RecipeType, List<IStagedRecipe<?, ?>>> recipes = PRRecipes.getRecipesForOutput(item);
+		Map<RecipeType, List<StagedRecipe<?, ?>>> recipes = InitRecipes.getRecipesForOutput(item);
 		if (!recipes.isEmpty()) {
 			minecraft.setScreen(new ScreenRecipeList(lastScreen, recipes, null, item));
 		}
 	}
 	
 	public static void showWhatCanBeMade(Minecraft minecraft, StagedItem item, ContainerScreen<?> lastScreen) {
-		Map<RecipeType, List<IStagedRecipe<?, ?>>> recipes = PRRecipes.getRecipesContainingInput(Ingredient.createUsingTags(item));
-		Map<FuelType, Pair<StagedItem, Integer>> fuels = PRFuels.getFuels(item);
+		Map<RecipeType, List<StagedRecipe<?, ?>>> recipes = InitRecipes.getRecipesContainingInput(Ingredient.createUsingTags(item));
+		Map<FuelType, Pair<StagedItem, Integer>> fuels = InitPRFuels.getFuels(item);
 		if (!recipes.isEmpty() || !fuels.isEmpty()) {
 			minecraft.setScreen(new ScreenRecipeList(lastScreen, recipes, fuels, item));
 		}

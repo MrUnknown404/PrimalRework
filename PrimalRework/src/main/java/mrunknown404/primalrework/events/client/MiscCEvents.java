@@ -3,11 +3,11 @@ package mrunknown404.primalrework.events.client;
 import java.util.ArrayList;
 import java.util.List;
 
+import mrunknown404.primalrework.client.gui.screen.ScreenCreateWorld;
 import mrunknown404.primalrework.client.gui.screen.ScreenNonSupportedMods;
-import mrunknown404.primalrework.client.gui.screen.fixes.PRCreateWorldScreen;
-import mrunknown404.primalrework.client.gui.screen.fixes.PRPauseScreen;
+import mrunknown404.primalrework.client.gui.screen.ScreenPause;
 import mrunknown404.primalrework.network.NetworkHandler;
-import mrunknown404.primalrework.network.packets.PacketOpenInventory;
+import mrunknown404.primalrework.network.packets.POpenInventory;
 import mrunknown404.primalrework.utils.PrimalMod;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.CreateWorldScreen;
@@ -29,9 +29,9 @@ public class MiscCEvents {
 		Screen gui = e.getGui();
 		
 		if (gui instanceof CreateWorldScreen) {
-			e.setGui(new PRCreateWorldScreen(mc.screen));
+			e.setGui(new ScreenCreateWorld(mc.screen));
 		} else if (gui instanceof IngameMenuScreen) {
-			e.setGui(new PRPauseScreen(!(mc.hasSingleplayerServer() && !mc.getSingleplayerServer().isPublished())));
+			e.setGui(new ScreenPause(!(mc.hasSingleplayerServer() && !mc.getSingleplayerServer().isPublished())));
 		} else if (!firstMainMenu && gui instanceof MainMenuScreen) {
 			firstMainMenu = true;
 			List<String> modids = new ArrayList<String>();
@@ -53,7 +53,7 @@ public class MiscCEvents {
 		} else if (gui instanceof InventoryScreen) {
 			if (!mc.player.isCreative()) {
 				e.setCanceled(true);
-				NetworkHandler.sendPacketToServer(new PacketOpenInventory());
+				NetworkHandler.sendPacketToServer(new POpenInventory());
 			} else {
 				e.setGui(new CreativeScreen(mc.player));
 			}

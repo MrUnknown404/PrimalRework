@@ -6,12 +6,12 @@ import java.util.function.Supplier;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 
-import mrunknown404.primalrework.registries.PRBlocks;
-import mrunknown404.primalrework.registries.PRStages;
+import mrunknown404.primalrework.init.InitBlocks;
+import mrunknown404.primalrework.init.InitStages;
 import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.utils.BlockInfo;
-import mrunknown404.primalrework.utils.BlockInfo.UniqueRawBlockInfo;
 import mrunknown404.primalrework.utils.HarvestInfo;
+import mrunknown404.primalrework.utils.BlockInfo.UniqueRawBlockInfo;
 import mrunknown404.primalrework.utils.HarvestInfo.DropInfo;
 import mrunknown404.primalrework.utils.enums.ToolMaterial;
 import mrunknown404.primalrework.utils.enums.ToolType;
@@ -43,7 +43,7 @@ public class SBUnlitPrimalWallTorch extends SBUnlitPrimalTorch {
 	}
 	
 	public SBUnlitPrimalWallTorch() {
-		this(PRStages.STAGE_0, BlockInfo.UNLIT_PRIMAL_TORCH, new HarvestInfo(ToolType.NONE, ToolMaterial.HAND, DropInfo.block(() -> PRBlocks.UNLIT_PRIMAL_TORCH)));
+		this(InitStages.STAGE_0, BlockInfo.UNLIT_PRIMAL_TORCH, new HarvestInfo(ToolType.NONE, ToolMaterial.HAND, DropInfo.block(() -> InitBlocks.UNLIT_PRIMAL_TORCH)));
 	}
 	
 	@Override

@@ -10,6 +10,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.server.ServerWorld;
 
+@Deprecated
 public class LeafTickScheduler {
 	private static final List<ScheduledTick> PLANNED = new ArrayList<ScheduledTick>();
 	private static final List<ScheduledTick> SCHEDULED = new ArrayList<ScheduledTick>();

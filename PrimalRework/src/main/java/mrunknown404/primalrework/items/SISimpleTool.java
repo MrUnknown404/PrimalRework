@@ -3,10 +3,10 @@ package mrunknown404.primalrework.items;
 import java.util.Random;
 import java.util.function.Supplier;
 
-import mrunknown404.primalrework.items.utils.SIDamageable;
-import mrunknown404.primalrework.registries.PRBlocks;
-import mrunknown404.primalrework.registries.PRItemGroups;
-import mrunknown404.primalrework.registries.PRItems;
+import mrunknown404.primalrework.init.InitBlocks;
+import mrunknown404.primalrework.init.InitItems;
+import mrunknown404.primalrework.init.InitPRItemGroups;
+import mrunknown404.primalrework.items.raw.SIDamageable;
 import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.utils.enums.ToolMaterial;
 import mrunknown404.primalrework.utils.enums.ToolType;
@@ -35,7 +35,7 @@ import net.minecraft.world.World;
 
 public class SISimpleTool extends SIDamageable {
 	public SISimpleTool(Supplier<Stage> stage, ToolType toolType, ToolMaterial toolMat) {
-		super(stage, toolType, toolMat, PRItemGroups.TOOLS, ItemType.handheld);
+		super(stage, toolType, toolMat, InitPRItemGroups.TOOLS, ItemType.handheld);
 	}
 	
 	@Override
@@ -75,7 +75,7 @@ public class SISimpleTool extends SIDamageable {
 					
 					if (!world.isClientSide) {
 						world.addFreshEntity(new ItemEntity(world, ray.getLocation().x, ray.getLocation().y, ray.getLocation().z,
-								new ItemStack(PRItems.BARK.get(), 2 + new Random().nextInt(3))));
+								new ItemStack(InitItems.BARK.get(), 2 + new Random().nextInt(3))));
 						world.playSound(null, pos, SoundEvents.WOOD_BREAK, SoundCategory.BLOCKS, 1, 0);
 					}
 					
@@ -83,23 +83,23 @@ public class SISimpleTool extends SIDamageable {
 						stack.hurtAndBreak(1, player, (e) -> e.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
 					}
 					
-					if (b == PRBlocks.OAK_LOG.get()) {
-						world.setBlock(pos, PRBlocks.STRIPPED_OAK_LOG.get().defaultBlockState().setValue(BlockStateProperties.AXIS,
+					if (b == InitBlocks.OAK_LOG.get()) {
+						world.setBlock(pos, InitBlocks.STRIPPED_OAK_LOG.get().defaultBlockState().setValue(BlockStateProperties.AXIS,
 								world.getBlockState(pos).getValue(BlockStateProperties.AXIS)), 11);
-					} else if (b == PRBlocks.SPRUCE_LOG.get()) {
-						world.setBlock(pos, PRBlocks.STRIPPED_SPRUCE_LOG.get().defaultBlockState().setValue(BlockStateProperties.AXIS,
+					} else if (b == InitBlocks.SPRUCE_LOG.get()) {
+						world.setBlock(pos, InitBlocks.STRIPPED_SPRUCE_LOG.get().defaultBlockState().setValue(BlockStateProperties.AXIS,
 								world.getBlockState(pos).getValue(BlockStateProperties.AXIS)), 11);
-					} else if (b == PRBlocks.BIRCH_LOG.get()) {
-						world.setBlock(pos, PRBlocks.STRIPPED_BIRCH_LOG.get().defaultBlockState().setValue(BlockStateProperties.AXIS,
+					} else if (b == InitBlocks.BIRCH_LOG.get()) {
+						world.setBlock(pos, InitBlocks.STRIPPED_BIRCH_LOG.get().defaultBlockState().setValue(BlockStateProperties.AXIS,
 								world.getBlockState(pos).getValue(BlockStateProperties.AXIS)), 11);
-					} else if (b == PRBlocks.JUNGLE_LOG.get()) {
-						world.setBlock(pos, PRBlocks.STRIPPED_JUNGLE_LOG.get().defaultBlockState().setValue(BlockStateProperties.AXIS,
+					} else if (b == InitBlocks.JUNGLE_LOG.get()) {
+						world.setBlock(pos, InitBlocks.STRIPPED_JUNGLE_LOG.get().defaultBlockState().setValue(BlockStateProperties.AXIS,
 								world.getBlockState(pos).getValue(BlockStateProperties.AXIS)), 11);
-					} else if (b == PRBlocks.ACACIA_LOG.get()) {
-						world.setBlock(pos, PRBlocks.STRIPPED_ACACIA_LOG.get().defaultBlockState().setValue(BlockStateProperties.AXIS,
+					} else if (b == InitBlocks.ACACIA_LOG.get()) {
+						world.setBlock(pos, InitBlocks.STRIPPED_ACACIA_LOG.get().defaultBlockState().setValue(BlockStateProperties.AXIS,
 								world.getBlockState(pos).getValue(BlockStateProperties.AXIS)), 11);
-					} else if (b == PRBlocks.DARK_OAK_LOG.get()) {
-						world.setBlock(pos, PRBlocks.STRIPPED_DARK_OAK_LOG.get().defaultBlockState().setValue(BlockStateProperties.AXIS,
+					} else if (b == InitBlocks.DARK_OAK_LOG.get()) {
+						world.setBlock(pos, InitBlocks.STRIPPED_DARK_OAK_LOG.get().defaultBlockState().setValue(BlockStateProperties.AXIS,
 								world.getBlockState(pos).getValue(BlockStateProperties.AXIS)), 11);
 					}
 				}

@@ -10,7 +10,6 @@ import net.minecraft.client.gui.toasts.ToastGui;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 public class GuiNoToast extends ToastGui {
-	
 	public GuiNoToast(Minecraft mc) {
 		super(mc);
 		ObfuscationReflectionHelper.setPrivateValue(ToastGui.class, this, new BlockedDeque(), "queued");

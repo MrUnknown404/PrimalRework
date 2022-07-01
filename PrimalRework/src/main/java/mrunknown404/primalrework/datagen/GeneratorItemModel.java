@@ -1,8 +1,8 @@
 package mrunknown404.primalrework.datagen;
 
 import mrunknown404.primalrework.PrimalRework;
-import mrunknown404.primalrework.items.utils.StagedItem;
-import mrunknown404.primalrework.registries.PRRegistry;
+import mrunknown404.primalrework.init.InitRegistry;
+import mrunknown404.primalrework.items.raw.StagedItem;
 import mrunknown404.primalrework.utils.IMetalColored;
 import mrunknown404.primalrework.utils.enums.Metal;
 import mrunknown404.primalrework.utils.enums.ToolMaterial;
@@ -23,7 +23,7 @@ class GeneratorItemModel extends ModelProvider<TexturelessModelBuilder> {
 	
 	@Override
 	protected void registerModels() {
-		for (RegistryObject<Item> regItem : PRRegistry.getItems()) {
+		for (RegistryObject<Item> regItem : InitRegistry.getItems()) {
 			StagedItem i = (StagedItem) regItem.get();
 			
 			final String id = i.usesVanillaNamespace() ? "minecraft" : PrimalRework.MOD_ID;

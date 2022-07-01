@@ -5,7 +5,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.function.Supplier;
 
-import mrunknown404.primalrework.items.utils.StagedItem;
+import mrunknown404.primalrework.items.raw.StagedItem;
 import mrunknown404.primalrework.stage.Stage;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;

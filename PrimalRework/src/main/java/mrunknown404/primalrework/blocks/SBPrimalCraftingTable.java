@@ -1,7 +1,7 @@
 package mrunknown404.primalrework.blocks;
 
-import mrunknown404.primalrework.blocks.utils.SBContainer;
-import mrunknown404.primalrework.registries.PRStages;
+import mrunknown404.primalrework.blocks.raw.SBContainer;
+import mrunknown404.primalrework.init.InitStages;
 import mrunknown404.primalrework.tileentities.TEIPrimalCraftingTable;
 import mrunknown404.primalrework.utils.BlockInfo;
 import mrunknown404.primalrework.utils.HarvestInfo;
@@ -25,7 +25,7 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 public class SBPrimalCraftingTable extends SBContainer {
 	public SBPrimalCraftingTable() {
-		super(PRStages.DO_LATER, BlockInfo.of(BlockInfo.PRIMAL_CRAFTING_TABLE), BlockStateType.normal, BlockModelType.normal, HarvestInfo.AXE_MIN);
+		super(InitStages.DO_LATER, BlockInfo.of(BlockInfo.PRIMAL_CRAFTING_TABLE), BlockStateType.normal, BlockModelType.normal, HarvestInfo.AXE_MIN);
 	}
 	
 	@Override

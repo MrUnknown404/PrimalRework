@@ -1,15 +1,15 @@
 package mrunknown404.primalrework.utils.enums;
 
-import mrunknown404.primalrework.items.utils.StagedItem;
-import mrunknown404.primalrework.registries.PRBlocks;
+import mrunknown404.primalrework.init.InitBlocks;
+import mrunknown404.primalrework.items.raw.StagedItem;
 import mrunknown404.primalrework.utils.helpers.WordH;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.IFormattableTextComponent;
 
 public enum RecipeType implements ICraftingInput {
 	//@formatter:off
-	CRAFTING_3(PRBlocks.PRIMAL_CRAFTING_TABLE.get().asStagedItem()),
-	CAMPFIRE  (PRBlocks.CAMPFIRE.get().asStagedItem());
+	CRAFTING_3(InitBlocks.PRIMAL_CRAFTING_TABLE.get().asStagedItem()),
+	CAMPFIRE  (InitBlocks.CAMPFIRE.get().asStagedItem());
 	//@formatter:on
 	
 	private final ItemStack icon;

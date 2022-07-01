@@ -1,7 +1,7 @@
 package mrunknown404.primalrework.tileentities;
 
+import mrunknown404.primalrework.init.InitTileEntities;
 import mrunknown404.primalrework.inventory.container.ContainerCampFire;
-import mrunknown404.primalrework.registries.PRTileEntities;
 import mrunknown404.primalrework.utils.helpers.WordH;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -57,7 +57,7 @@ public class TEICampFire extends TEInventory implements ITickableTileEntity {
 	};
 	
 	public TEICampFire() {
-		super(PRTileEntities.CAMPFIRE.get(), 2);
+		super(InitTileEntities.CAMPFIRE.get(), 2);
 	}
 	
 	@Override

@@ -2,8 +2,8 @@ package mrunknown404.primalrework.datagen;
 
 import mrunknown404.primalrework.PrimalRework;
 import mrunknown404.primalrework.blocks.SBMetal;
-import mrunknown404.primalrework.blocks.utils.StagedBlock;
-import mrunknown404.primalrework.registries.PRRegistry;
+import mrunknown404.primalrework.blocks.raw.StagedBlock;
+import mrunknown404.primalrework.init.InitRegistry;
 import mrunknown404.primalrework.utils.IMetalColored;
 import mrunknown404.primalrework.utils.enums.Metal;
 import net.minecraft.block.Block;
@@ -20,7 +20,7 @@ class GeneratorBlockModel extends ModelProvider<TexturelessModelBuilder> {
 	
 	@Override
 	protected void registerModels() {
-		for (RegistryObject<Block> regBlock : PRRegistry.getBlocks()) {
+		for (RegistryObject<Block> regBlock : InitRegistry.getBlocks()) {
 			StagedBlock b = (StagedBlock) regBlock.get();
 			
 			if (b.usesVanillaNamespaceItem()) {

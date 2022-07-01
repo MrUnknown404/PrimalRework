@@ -2,9 +2,9 @@ package mrunknown404.primalrework.inventory.container;
 
 import java.util.List;
 
-import mrunknown404.primalrework.inventory.container.slot.SlotCampFireFuel;
-import mrunknown404.primalrework.inventory.container.slot.SlotCampFireItem;
-import mrunknown404.primalrework.registries.PRContainers;
+import mrunknown404.primalrework.init.InitContainers;
+import mrunknown404.primalrework.inventory.slot.SlotCampFireFuel;
+import mrunknown404.primalrework.inventory.slot.SlotCampFireItem;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.IInventory;
@@ -25,7 +25,7 @@ public class ContainerCampFire extends Container implements IEasyQuickMoveStack 
 	}
 	
 	public ContainerCampFire(int windowID, PlayerInventory inv, IInventory container, IIntArray dataAccess) {
-		super(PRContainers.CAMPFIRE.get(), windowID);
+		super(InitContainers.CAMPFIRE.get(), windowID);
 		this.container = container;
 		this.dataAccess = dataAccess;
 		

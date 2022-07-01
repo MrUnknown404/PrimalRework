@@ -5,11 +5,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map.Entry;
 
-import mrunknown404.primalrework.blocks.utils.StagedBlock;
-import mrunknown404.primalrework.items.utils.SIBlock;
-import mrunknown404.primalrework.items.utils.SIDamageable;
-import mrunknown404.primalrework.items.utils.SIFood;
-import mrunknown404.primalrework.items.utils.StagedItem;
+import mrunknown404.primalrework.blocks.raw.StagedBlock;
+import mrunknown404.primalrework.items.raw.SIBlock;
+import mrunknown404.primalrework.items.raw.SIDamageable;
+import mrunknown404.primalrework.items.raw.SIFood;
+import mrunknown404.primalrework.items.raw.StagedItem;
 import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.utils.BlockInfo;
 import mrunknown404.primalrework.utils.Cache;

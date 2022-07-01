@@ -1,9 +1,5 @@
 package mrunknown404.primalrework.utils.enums;
 
-import mrunknown404.primalrework.utils.IName;
-import mrunknown404.primalrework.utils.helpers.WordH;
-import net.minecraft.util.text.IFormattableTextComponent;
-
 /**<pre> level, durability, speed, extraDamage <br>
  * HAND       (0,    0,  1.00f, 0.00f),
  * CLAY       (1,    1,  1.25f, 0.00f),
@@ -25,7 +21,7 @@ import net.minecraft.util.text.IFormattableTextComponent;
  * 
  * UNBREAKABLE(99,   0,  0.00f, 0.00f);
  * </pre> */
-public enum ToolMaterial implements IName {
+public enum ToolMaterial {
 	//@formatter:off
 	HAND       (0,    0,  1.00f, 0.00f),
 	CLAY       (1,    1,  1.25f, 0.00f),
@@ -48,7 +44,6 @@ public enum ToolMaterial implements IName {
 	UNBREAKABLE(99,   0,  0.00f, 0.00f);
 	//@formatter:on
 	
-	private final IFormattableTextComponent name;
 	public final int level, durability;
 	public final float speed, extraDamage;
 	
@@ -57,17 +52,6 @@ public enum ToolMaterial implements IName {
 		this.durability = durability * 8;
 		this.speed = speed;
 		this.extraDamage = extraDamage;
-		this.name = WordH.translate("tool.material." + name() + ".name");
-	}
-	
-	@Override
-	public IFormattableTextComponent getFancyName() {
-		return name;
-	}
-	
-	@Override
-	public String getName() {
-		return name.getString();
 	}
 	
 	@Override

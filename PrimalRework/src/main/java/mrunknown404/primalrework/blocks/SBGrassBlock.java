@@ -2,11 +2,11 @@ package mrunknown404.primalrework.blocks;
 
 import java.util.Random;
 
-import mrunknown404.primalrework.blocks.utils.IBiomeColored;
-import mrunknown404.primalrework.blocks.utils.SBSlab;
-import mrunknown404.primalrework.blocks.utils.SBSnowyDirt;
-import mrunknown404.primalrework.registries.PRBlocks;
-import mrunknown404.primalrework.registries.PRStages;
+import mrunknown404.primalrework.blocks.raw.IBiomeColored;
+import mrunknown404.primalrework.blocks.raw.SBSlab;
+import mrunknown404.primalrework.blocks.raw.SBSnowyDirt;
+import mrunknown404.primalrework.init.InitBlocks;
+import mrunknown404.primalrework.init.InitStages;
 import mrunknown404.primalrework.utils.BlockInfo;
 import mrunknown404.primalrework.utils.HarvestInfo;
 import mrunknown404.primalrework.utils.HarvestInfo.DropInfo;
@@ -24,10 +24,11 @@ import net.minecraft.world.IWorldReader;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.IPlantable;
 
+@SuppressWarnings("deprecation")
 public class SBGrassBlock extends SBSnowyDirt implements IBiomeColored { //TODO switch to my snow
 	public SBGrassBlock() {
-		super(PRStages.STAGE_0, BlockInfo.of(BlockInfo.R_DRY_GRASS), BlockStateType.none, BlockModelType.none,
-				new HarvestInfo(ToolType.SHOVEL, ToolMaterial.CLAY, DropInfo.block(() -> PRBlocks.DIRT)));
+		super(InitStages.STAGE_0, BlockInfo.of(BlockInfo.R_DRY_GRASS), BlockStateType.none, BlockModelType.none,
+				new HarvestInfo(ToolType.SHOVEL, ToolMaterial.CLAY, DropInfo.block(() -> InitBlocks.DIRT)));
 		usesVanillaNamespaceFull();
 	}
 	
@@ -38,17 +39,17 @@ public class SBGrassBlock extends SBSnowyDirt implements IBiomeColored { //TODO 
 				return;
 			}
 			
-			world.setBlockAndUpdate(pos, PRBlocks.DIRT.get().defaultBlockState());
+			world.setBlockAndUpdate(pos, InitBlocks.DIRT.get().defaultBlockState());
 		} else {
 			if (world.getMaxLocalRawBrightness(pos.above()) >= 9) {
 				for (int i = 0; i < 4; i++) {
 					BlockPos blockpos = pos.offset(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
 					BlockState state1 = world.getBlockState(blockpos);
 					
-					if (world.getBlockState(blockpos).is(PRBlocks.DIRT.get()) && canPropagate(state1, world, blockpos)) {
+					if (world.getBlockState(blockpos).is(InitBlocks.DIRT.get()) && canPropagate(state1, world, blockpos)) {
 						world.setBlockAndUpdate(blockpos, defaultBlockState().setValue(SNOWY, Boolean.valueOf(world.getBlockState(blockpos.above()).is(Blocks.SNOW))));
-					} else if (world.getBlockState(blockpos).is(PRBlocks.DIRT_SLAB.get()) && canPropagate(state1, world, blockpos)) {
-						world.setBlockAndUpdate(blockpos, PRBlocks.GRASS_SLAB.get().defaultBlockState().setValue(SBSlab.TYPE, world.getBlockState(blockpos).getValue(SBSlab.TYPE)));
+					} else if (world.getBlockState(blockpos).is(InitBlocks.DIRT_SLAB.get()) && canPropagate(state1, world, blockpos)) {
+						world.setBlockAndUpdate(blockpos, InitBlocks.GRASS_SLAB.get().defaultBlockState().setValue(SBSlab.TYPE, world.getBlockState(blockpos).getValue(SBSlab.TYPE)));
 					}
 				}
 				
@@ -56,11 +57,11 @@ public class SBGrassBlock extends SBSnowyDirt implements IBiomeColored { //TODO 
 					BlockState b;
 					int r = random.nextInt(3);
 					if (r == 0) {
-						b = PRBlocks.TALL_GRASS.get().defaultBlockState();
+						b = InitBlocks.TALL_GRASS.get().defaultBlockState();
 					} else if (r == 1) {
-						b = PRBlocks.MEDIUM_GRASS.get().defaultBlockState();
+						b = InitBlocks.MEDIUM_GRASS.get().defaultBlockState();
 					} else {
-						b = PRBlocks.SHORT_GRASS.get().defaultBlockState();
+						b = InitBlocks.SHORT_GRASS.get().defaultBlockState();
 					}
 					
 					world.setBlockAndUpdate(pos.above(), b);

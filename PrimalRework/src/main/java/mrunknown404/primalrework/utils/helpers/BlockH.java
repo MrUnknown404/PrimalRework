@@ -6,9 +6,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import mrunknown404.primalrework.blocks.utils.SBSlab;
-import mrunknown404.primalrework.blocks.utils.StagedBlock;
-import mrunknown404.primalrework.registries.PRBlocks;
+import mrunknown404.primalrework.blocks.raw.SBSlab;
+import mrunknown404.primalrework.blocks.raw.StagedBlock;
+import mrunknown404.primalrework.init.InitBlocks;
 import mrunknown404.primalrework.utils.HarvestInfo;
 import mrunknown404.primalrework.utils.enums.ToolType;
 import net.minecraft.block.Block;
@@ -30,7 +30,7 @@ public class BlockH {
 		return new ArrayList<HarvestInfo>(block.getHarvest().values());
 	}
 	
-	private static final Set<StagedBlock> CAN_SUPPORT_PLANTS = new HashSet<StagedBlock>(Arrays.asList(PRBlocks.DIRT.get(), PRBlocks.GRASS_BLOCK.get()));
+	private static final Set<StagedBlock> CAN_SUPPORT_PLANTS = new HashSet<StagedBlock>(Arrays.asList(InitBlocks.DIRT.get(), InitBlocks.GRASS_BLOCK.get()));
 	
 	public static boolean canSupportPlant(Block block) {
 		return CAN_SUPPORT_PLANTS.contains(block);

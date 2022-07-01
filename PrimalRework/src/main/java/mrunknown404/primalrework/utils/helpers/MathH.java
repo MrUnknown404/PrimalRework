@@ -80,16 +80,4 @@ public class MathH {
 	public static float percentage(float number, float max) {
 		return (number / max) * 100f;
 	}
-	
-	public static boolean within(int value, int min, int max) {
-		return value >= min && value <= max;
-	}
-	
-	public static boolean within(float value, float min, float max) {
-		return value >= min && value <= max;
-	}
-	
-	public static boolean within(double value, double min, double max) {
-		return value >= min && value <= max;
-	}
 }

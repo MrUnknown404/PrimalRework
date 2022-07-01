@@ -11,8 +11,8 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 
+import mrunknown404.primalrework.init.InitQuests;
 import mrunknown404.primalrework.quests.Quest;
-import mrunknown404.primalrework.registries.PRQuests;
 import mrunknown404.primalrework.utils.helpers.WordH;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
@@ -24,16 +24,16 @@ public class CommandQuest {
 		LiteralArgumentBuilder<CommandSource> cmd = Commands.literal("quest").requires((src) -> src.hasPermission(4));
 		
 		cmd.then(Commands.literal("finish").then(Commands.argument("quest", StringArgumentType.word()).suggests((src, builder) -> getSuggestions(builder, false))
-				.executes((src) -> finishQuest(src, PRQuests.getFromName(StringArgumentType.getString(src, "quest"))))));
+				.executes((src) -> finishQuest(src, InitQuests.getFromName(StringArgumentType.getString(src, "quest"))))));
 		cmd.then(Commands.literal("forget").then(Commands.argument("quest", StringArgumentType.word()).suggests((src, builder) -> getSuggestions(builder, true))
-				.executes((src) -> forgetQuest(src, PRQuests.getFromName(StringArgumentType.getString(src, "quest"))))));
+				.executes((src) -> forgetQuest(src, InitQuests.getFromName(StringArgumentType.getString(src, "quest"))))));
 		
 		dispatcher.register(cmd);
 	}
 	
 	private static CompletableFuture<Suggestions> getSuggestions(SuggestionsBuilder builder, boolean wantFinished) {
 		List<String> list = new ArrayList<String>();
-		for (Quest quest : PRQuests.getQuests()) {
+		for (Quest quest : InitQuests.getQuests()) {
 			if (quest.isFinished() == wantFinished) {
 				list.add(quest.getName());
 			}

@@ -2,7 +2,7 @@ package mrunknown404.primalrework.world.gen.feature;
 
 import java.util.Random;
 
-import mrunknown404.primalrework.registries.PRBlocks;
+import mrunknown404.primalrework.init.InitBlocks;
 import mrunknown404.primalrework.utils.helpers.BlockH;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
@@ -27,13 +27,13 @@ public class FeatureGroundItems extends Feature<NoFeatureConfig> {
 		if (BlockH.canSupportPlant(seed.getBlockState(pos.below()).getBlock())) {
 			int ri = r.nextInt(8);
 			if (ri == 7) {
-				setBlock(seed, pos, PRBlocks.GROUND_FLINT.get().defaultBlockState());
+				setBlock(seed, pos, InitBlocks.GROUND_FLINT.get().defaultBlockState());
 			} else if (ri >= 5) {
-				setBlock(seed, pos, PRBlocks.GROUND_CLAY.get().defaultBlockState());
+				setBlock(seed, pos, InitBlocks.GROUND_CLAY.get().defaultBlockState());
 			} else if (ri >= 3) {
-				setBlock(seed, pos, PRBlocks.GROUND_ROCK.get().defaultBlockState());
+				setBlock(seed, pos, InitBlocks.GROUND_ROCK.get().defaultBlockState());
 			} else {
-				setBlock(seed, pos, PRBlocks.GROUND_STICK.get().defaultBlockState());
+				setBlock(seed, pos, InitBlocks.GROUND_STICK.get().defaultBlockState());
 			}
 		}
 		

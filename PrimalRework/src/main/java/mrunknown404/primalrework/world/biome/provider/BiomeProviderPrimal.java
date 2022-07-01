@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
-import mrunknown404.primalrework.registries.PRRegistry;
+import mrunknown404.primalrework.init.InitRegistry;
 import mrunknown404.primalrework.world.gen.layer.transformer.PRAreaTransformer;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryLookupCodec;
@@ -26,12 +26,10 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistry;
 
 public class BiomeProviderPrimal extends BiomeProvider {
-	public static final Codec<BiomeProviderPrimal> PRIMAL_CODEC = RecordCodecBuilder.create((builder) -> {
-		return builder
-				.group(Codec.LONG.fieldOf("seed").stable().forGetter((biomeProvider) -> biomeProvider.seed),
-						RegistryLookupCodec.create(Registry.BIOME_REGISTRY).forGetter((biomeProvider) -> biomeProvider.biomes))
-				.apply(builder, builder.stable(BiomeProviderPrimal::new));
-	});
+	public static final Codec<BiomeProviderPrimal> PRIMAL_CODEC = RecordCodecBuilder.create((builder) -> builder
+			.group(Codec.LONG.fieldOf("seed").stable().forGetter((biomeProvider) -> biomeProvider.seed),
+					RegistryLookupCodec.create(Registry.BIOME_REGISTRY).forGetter((biomeProvider) -> biomeProvider.biomes))
+			.apply(builder, builder.stable(BiomeProviderPrimal::new)));
 	
 	private final long seed;
 	private final Layer noiseBiomeLayer;
@@ -42,7 +40,7 @@ public class BiomeProviderPrimal extends BiomeProvider {
 		this.seed = seed;
 		
 		List<Biome> biomes = new ArrayList<Biome>();
-		for (RegistryObject<Biome> b : PRRegistry.getBiomes()) {
+		for (RegistryObject<Biome> b : InitRegistry.getBiomes()) {
 			biomes.add(b.get());
 		}
 		

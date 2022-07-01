@@ -14,8 +14,8 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 import mrunknown404.primalrework.PrimalRework;
+import mrunknown404.primalrework.init.InitStages;
 import mrunknown404.primalrework.network.packets.IPacket;
-import mrunknown404.primalrework.registries.PRStages;
 import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.utils.Pair;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -215,7 +215,7 @@ public class NetworkHandler {
 	}
 	
 	private static Stage readStage(PacketBuffer buf) {
-		return PRStages.byID(buf.readByte());
+		return InitStages.byID(buf.readByte());
 	}
 	
 	private static void writeStage(PacketBuffer buf, Stage stage) {

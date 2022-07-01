@@ -7,8 +7,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.function.Supplier;
 
-import mrunknown404.primalrework.items.utils.StagedItem;
-import mrunknown404.primalrework.registries.PRStages;
+import mrunknown404.primalrework.init.InitStages;
+import mrunknown404.primalrework.items.raw.StagedItem;
 import mrunknown404.primalrework.utils.helpers.StageH;
 import mrunknown404.primalrework.utils.helpers.WordH;
 import net.minecraft.util.text.TextComponent;
@@ -56,7 +56,7 @@ public class StagedTag extends ForgeRegistryEntry<StagedTag> {
 	}
 	
 	public List<StagedItem> getItemsWithCurrentStage() {
-		List<Stage> stages = PRStages.getStagesBeforeCurrent(true);
+		List<Stage> stages = InitStages.getStagesBeforeCurrent(true);
 		List<StagedItem> items = new ArrayList<StagedItem>();
 		
 		for (Stage s : stages) {

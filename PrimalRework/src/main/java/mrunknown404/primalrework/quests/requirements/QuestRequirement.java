@@ -1,6 +1,6 @@
 package mrunknown404.primalrework.quests.requirements;
 
-import mrunknown404.primalrework.items.utils.StagedItem;
+import mrunknown404.primalrework.items.raw.StagedItem;
 import mrunknown404.primalrework.utils.helpers.WordH;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -18,19 +18,14 @@ public abstract class QuestRequirement<T, I> {
 	}
 	
 	public boolean check(I obj, int count) {
-		return isType(obj) && check(obj) && count >= this.count;
+		return check(obj) && count >= this.count;
 	}
 	
 	//@formatter:off
 	public abstract StagedItem getIcon();
 	protected abstract boolean check(I obj);
 	protected abstract ITextComponent setupDescription();
-	protected abstract Class<I> getClazz();
 	//@formatter:on
-	
-	protected boolean isType(I obj) {
-		return getClazz().isAssignableFrom(obj.getClass());
-	}
 	
 	public T getObj() {
 		return obj;

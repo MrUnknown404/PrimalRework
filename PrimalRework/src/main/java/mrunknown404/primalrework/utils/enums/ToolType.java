@@ -1,6 +1,5 @@
 package mrunknown404.primalrework.utils.enums;
 
-import mrunknown404.primalrework.utils.IName;
 import mrunknown404.primalrework.utils.helpers.WordH;
 import net.minecraft.util.text.IFormattableTextComponent;
 
@@ -14,7 +13,7 @@ import net.minecraft.util.text.IFormattableTextComponent;
  * HOE    (1.25f, 0.50f),
  * SWORD  (1.60f, 3.00f);
  * </pre> */
-public enum ToolType implements IName {
+public enum ToolType {
 	//@formatter:off
 	NONE   (2.00f, 0.00f),
 	SHEARS (1.75f, 1.50f),
@@ -35,12 +34,6 @@ public enum ToolType implements IName {
 		this.baseDamage = baseDamage;
 	}
 	
-	@Override
-	public IFormattableTextComponent getFancyName() {
-		return name;
-	}
-	
-	@Override
 	public String getName() {
 		return name.getString();
 	}

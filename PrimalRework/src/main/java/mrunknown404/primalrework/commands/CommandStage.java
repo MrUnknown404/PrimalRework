@@ -4,8 +4,8 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 
-import mrunknown404.primalrework.registries.PRRegistry;
-import mrunknown404.primalrework.registries.PRStages;
+import mrunknown404.primalrework.init.InitRegistry;
+import mrunknown404.primalrework.init.InitStages;
 import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.utils.helpers.StageH;
 import mrunknown404.primalrework.utils.helpers.WordH;
@@ -19,8 +19,8 @@ public class CommandStage {
 		cmd.then(Commands.literal("get").executes(c -> getStage(c)));
 		
 		LiteralArgumentBuilder<CommandSource> set = Commands.literal("set");
-		for (RegistryObject<Stage> stage : PRRegistry.getStages()) {
-			if (stage != PRStages.NO_SHOW) {
+		for (RegistryObject<Stage> stage : InitRegistry.getStages()) {
+			if (stage != InitStages.NO_SHOW) {
 				set.then(Commands.literal(stage.get().getNameID()).executes(c -> setStage(c, stage.get())));
 			}
 		}
