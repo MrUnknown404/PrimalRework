@@ -32,7 +32,7 @@ public class ItemH {
 		}
 	};
 	
-	private static final List<ITextComponent> UNKNOWN_ITEM = Arrays.asList(WordH.string("???"));
+	private static final List<ITextComponent> UNKNOWN_ITEM = Arrays.asList(WordH.string("???").withStyle(TextFormatting.GRAY));
 	
 	public static List<ITextComponent> getTooltips(ItemStack stack) {
 		if (!(stack.getItem() instanceof StagedItem)) {
@@ -47,12 +47,12 @@ public class ItemH {
 		
 		final PRConfig.Client config = PRConfig.CLIENT;
 		
-		list.add(config.tooltips_showStackSize.get() && stack.getMaxStackSize() != 1 ?
-				name.append(WordH.string(" [" + stack.getCount() + "/" + stack.getMaxStackSize() + "]").withStyle(Style.EMPTY.withItalic(false))) :
-				name);
-		
 		Stage stage = item.stage.get();
 		if (StageH.hasAccessToStage(stage)) {
+			list.add(config.tooltips_showStackSize.get() && stack.getMaxStackSize() != 1 ?
+					name.copy().append(WordH.string(" [" + stack.getCount() + "/" + stack.getMaxStackSize() + "]").withStyle(Style.EMPTY.withItalic(false))) :
+					name);
+			
 			List<ITextComponent> temp = item.getTooltips();
 			if (!temp.isEmpty()) {
 				list.addAll(temp);

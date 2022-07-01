@@ -9,7 +9,8 @@
 		"MixinForgeOnAdd",
 		"MixinContainer",
 		"MixinDimensionType",
-		"MixinItemParser"
+		"MixinItemParser",
+		"MixinItemStack"
 	],
 	"client": [
 		"client.MixinServerWorldInfo",

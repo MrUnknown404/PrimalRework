@@ -17,6 +17,7 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.inventory.CreativeScreen;
 import net.minecraft.client.gui.screen.inventory.InventoryScreen;
 import net.minecraftforge.client.event.GuiOpenEvent;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 
@@ -57,6 +58,41 @@ public class MiscCEvents {
 			} else {
 				e.setGui(new CreativeScreen(mc.player));
 			}
+		}
+	}
+	
+	@SubscribeEvent
+	public void onOverlayRenderPre(RenderGameOverlayEvent.Pre e) {
+		switch (e.getType()) {
+			case AIR:
+			case ARMOR:
+			case FOOD:
+			case HEALTH:
+			case HEALTHMOUNT:
+			case JUMPBAR:
+				e.getMatrixStack().translate(0, 6, 0);
+				break;
+			case EXPERIENCE:
+				e.setCanceled(true);
+				break;
+			default:
+				break;
+		}
+	}
+	
+	@SubscribeEvent
+	public void onOverlayRenderPost(RenderGameOverlayEvent.Post e) {
+		switch (e.getType()) {
+			case AIR:
+			case ARMOR:
+			case FOOD:
+			case HEALTH:
+			case HEALTHMOUNT:
+			case JUMPBAR:
+				e.getMatrixStack().translate(0, -6, 0);
+				break;
+			default:
+				break;
 		}
 	}
 }
