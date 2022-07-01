@@ -24,6 +24,7 @@ import net.minecraft.item.Items;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockReader;
 
 public class StagedBlock extends Block {
@@ -66,7 +67,7 @@ public class StagedBlock extends Block {
 	public StagedBlock addTooltip(int amount) {
 		String name = getRegistryName().getPath();
 		for (int i = 0; i < amount; i++) {
-			tooltips.add(WordH.translate("tooltips.item." + name + "." + tooltips.size()).withStyle(WordH.STYLE_GRAY));
+			tooltips.add(WordH.translate("tooltips.item." + name + "." + tooltips.size()).withStyle(TextFormatting.GRAY));
 		}
 		return this;
 	}

@@ -1,6 +1,7 @@
 package mrunknown404.primalrework.events.client;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
@@ -11,6 +12,7 @@ import mrunknown404.primalrework.items.utils.StagedItem;
 import mrunknown404.primalrework.utils.BlockInfo;
 import mrunknown404.primalrework.utils.DoubleCache;
 import mrunknown404.primalrework.utils.HarvestInfo;
+import mrunknown404.primalrework.utils.PRConfig;
 import mrunknown404.primalrework.utils.enums.ToolMaterial;
 import mrunknown404.primalrework.utils.enums.ToolType;
 import mrunknown404.primalrework.utils.helpers.BlockH;
@@ -43,11 +45,17 @@ public class HarvestDisplayCEvents {
 	
 	private static final IFormattableTextComponent YES_MINE = WordH.string("\u2714 ").withStyle(TextFormatting.GREEN),
 			NO_MINE = WordH.string("\u274C ").withStyle(TextFormatting.RED), ICON_SPACE = WordH.string("    ");
+	private static final List<ITextComponent> UNKNOWN_BLOCK = Arrays.asList(WordH.string("???"));
 	
 	@SubscribeEvent
 	public void onRender(RenderGameOverlayEvent.Post e) {
 		Minecraft mc = Minecraft.getInstance();
 		if (mc.screen != null || mc.options.renderDebug) {
+			return;
+		}
+		
+		PRConfig.Client config = PRConfig.CLIENT;
+		if (!config.harvestDisplay_isEnabled.get()) {
 			return;
 		}
 		
@@ -60,7 +68,6 @@ public class HarvestDisplayCEvents {
 		}
 		
 		StagedBlock b = (StagedBlock) bOld;
-		
 		MainWindow w = e.getWindow();
 		MatrixStack s = e.getMatrixStack();
 		
@@ -70,32 +77,35 @@ public class HarvestDisplayCEvents {
 			texts = blockCache.get();
 		} else if (b != null && b != Blocks.AIR) {
 			List<HarvestInfo> infos = BlockH.getBlockHarvestInfos(b);
-			texts.add(ICON_SPACE.copy().append(b.getName()));
 			
 			if (infos == null) {
-				texts.add(WordH.translate("tooltips.block.unbreakable"));
-				GuiUtils.drawHoveringText(s, texts, -8, 0, w.getWidth(), w.getHeight(), -1, mc.font);
+				GuiUtils.drawHoveringText(s, UNKNOWN_BLOCK, -8, 0, w.getWidth(), w.getHeight(), -1, mc.font);
 				return;
 			}
+			texts.add(config.harvestDisplay_showIcon.get() ? ICON_SPACE.copy().append(b.getName()) : b.getName());
 			
-			BlockInfo blockInfo = b.blockInfo;
-			float hardness = blockInfo.getHardness();
-			float blast = blockInfo.getBlast();
+			if (config.harvestDisplay_showHardnessAndBlast.get()) {
+				BlockInfo blockInfo = b.blockInfo;
+				float hardness = blockInfo.getHardness();
+				float blast = blockInfo.getBlast();
+				
+				texts.add(hardness != -1 ? WordH.string(WordH.toPrintableNumber(hardness) + " ").append(WordH.translate("tooltips.block.hardness")) :
+						WordH.translate("tooltips.block.unbreakable"));
+				texts.add(blast != -1 ? WordH.string(WordH.toPrintableNumber(blast) + " ").append(WordH.translate("tooltips.block.blast")) :
+						WordH.translate("tooltips.block.unexplodable"));
+			}
 			
-			texts.add(hardness != -1 ? WordH.string(WordH.toPrintableNumber(hardness) + " ").append(WordH.translate("tooltips.block.hardness")) :
-					WordH.translate("tooltips.block.unbreakable"));
-			texts.add(blast != -1 ? WordH.string(WordH.toPrintableNumber(blast) + " ").append(WordH.translate("tooltips.block.blast")) :
-					WordH.translate("tooltips.block.unexplodable"));
-			
-			ToolType toolType = item instanceof StagedItem ? ((StagedItem) item).toolType : ToolType.NONE;
-			ToolMaterial toolMat = item instanceof StagedItem ? ((StagedItem) item).toolMat : ToolMaterial.HAND;
-			boolean has = infos.stream().anyMatch((i) -> i.toolType == toolType);
-			
-			for (HarvestInfo info : infos) {
-				if (info.toolMat != ToolMaterial.UNBREAKABLE) {
-					boolean canMine = (!has && info.toolType == ToolType.NONE) || (info.toolType == toolType && info.toolMat.level <= toolMat.level);
-					texts.add((canMine ? YES_MINE : NO_MINE).copy()
-							.append(WordH.translate("tooltips.stat.level").withStyle(TextFormatting.WHITE).append(" " + info.toolMat.level + " " + info.toolType.getName())));
+			if (config.harvestDisplay_showRequiredTool.get()) {
+				ToolType toolType = item instanceof StagedItem ? ((StagedItem) item).toolType : ToolType.NONE;
+				ToolMaterial toolMat = item instanceof StagedItem ? ((StagedItem) item).toolMat : ToolMaterial.HAND;
+				boolean has = infos.stream().anyMatch((i) -> i.toolType == toolType);
+				
+				for (HarvestInfo info : infos) {
+					if (info.toolMat != ToolMaterial.UNBREAKABLE) {
+						boolean canMine = (!has && info.toolType == ToolType.NONE) || (info.toolType == toolType && info.toolMat.level <= toolMat.level);
+						texts.add((canMine ? YES_MINE : NO_MINE).copy()
+								.append(WordH.translate("tooltips.stat.level").withStyle(TextFormatting.WHITE).append(" " + info.toolMat.level + " " + info.toolType.getName())));
+					}
 				}
 			}
 			
@@ -105,11 +115,13 @@ public class HarvestDisplayCEvents {
 		if (!texts.isEmpty()) {
 			drawHoveringText(s, texts, mc.font);
 			
-			StagedItem bitem = b.asStagedItem();
-			if (bitem != null) {
-				mc.getItemRenderer().blitOffset += 410;
-				mc.getItemRenderer().renderGuiItem(new ItemStack(bitem), 4, 3);
-				mc.getItemRenderer().blitOffset -= 410;
+			if (config.harvestDisplay_showIcon.get()) {
+				StagedItem bitem = b.asStagedItem();
+				if (bitem != null) {
+					mc.getItemRenderer().blitOffset += 410;
+					mc.getItemRenderer().renderGuiItem(new ItemStack(bitem), 4, 3);
+					mc.getItemRenderer().blitOffset -= 410;
+				}
 			}
 			
 			RenderSystem.enableBlend();

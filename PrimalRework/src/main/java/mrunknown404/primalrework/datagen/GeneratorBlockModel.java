@@ -41,7 +41,7 @@ class GeneratorBlockModel extends ModelProvider<TexturelessModelBuilder> {
 				case none:
 					break;
 				case normal:
-					if (b instanceof SBMetal) {
+					if (b instanceof SBMetal && ((SBMetal) b).getMetal() != Metal.UNKNOWN) {
 						getBuilder(rawName).parent(getExistingFile(new ResourceLocation(id, "block/template_metal_block")));
 					} else {
 						cubeAll(rawName, new ResourceLocation(id, "block/" + name));

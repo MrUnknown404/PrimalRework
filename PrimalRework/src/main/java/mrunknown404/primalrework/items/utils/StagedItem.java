@@ -25,6 +25,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Rarity;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextFormatting;
 
 public class StagedItem extends Item {
 	public final Supplier<Stage> stage;
@@ -67,7 +68,7 @@ public class StagedItem extends Item {
 	public StagedItem addTooltip(int amount) {
 		String name = getRegistryName().getPath();
 		for (int i = 0; i < amount; i++) {
-			tooltips.add(WordH.translate("tooltips.item." + name + "." + tooltips.size()).withStyle(WordH.STYLE_GRAY));
+			tooltips.add(WordH.translate("tooltips.item." + name + "." + tooltips.size()).withStyle(TextFormatting.GRAY));
 		}
 		return this;
 	}
