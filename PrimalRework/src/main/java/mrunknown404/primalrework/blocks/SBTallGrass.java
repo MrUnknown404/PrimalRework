@@ -9,8 +9,8 @@ import mrunknown404.primalrework.init.InitPRItemGroups;
 import mrunknown404.primalrework.init.InitStages;
 import mrunknown404.primalrework.items.raw.StagedItem.ItemType;
 import mrunknown404.primalrework.utils.BlockInfo;
-import mrunknown404.primalrework.utils.HarvestInfo;
 import mrunknown404.primalrework.utils.BlockInfo.Hardness;
+import mrunknown404.primalrework.utils.HarvestInfo;
 import mrunknown404.primalrework.utils.HarvestInfo.DropInfo;
 import mrunknown404.primalrework.utils.enums.ToolMaterial;
 import mrunknown404.primalrework.utils.enums.ToolType;
@@ -32,7 +32,7 @@ public class SBTallGrass extends StagedBlock implements IBiomeColored {
 	private final VoxelShape shape;
 	
 	public SBTallGrass(Supplier<RegistryObject<StagedBlock>> self, Hardness hardness, VoxelShape shape) {
-		super(InitStages.STAGE_0, 64, InitPRItemGroups.BLOCKS, BlockInfo.with(BlockInfo.PLANT, hardness), BlockStateType.normal, BlockModelType.none,
+		super(InitStages.STAGE_0, 64, InitPRItemGroups.BLOCKS, BlockInfo.with(BlockInfo.REPLACEABLE_PLANT, hardness), BlockStateType.normal, BlockModelType.none,
 				new HarvestInfo(ToolType.NONE, ToolMaterial.HAND, DropInfo.item(InitItems.PLANT_FIBER, 30)),
 				new HarvestInfo(ToolType.KNIFE, ToolMaterial.CLAY, DropInfo.item(InitItems.PLANT_FIBER, 80)),
 				new HarvestInfo(ToolType.HOE, ToolMaterial.CLAY, DropInfo.item(InitItems.PLANT_FIBER, 80) /* TODO add seeds here */),

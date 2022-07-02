@@ -13,13 +13,17 @@ import net.minecraftforge.common.BiomeManager.BiomeType;
 import net.minecraftforge.fml.RegistryObject;
 
 public class InitBiomes {
-	public static final RegistryObject<Biome> FOREST = InitRegistry.register(
+	public static final RegistryObject<Biome> FOREST = InitRegistry.biome(
 			new PRBiome("forest", () -> InitConfiguredSurfaceBuilders.GRASS, 100, BiomeType.WARM, Category.PLAINS, 0, 0.1f, 1, 1),
 			withDefaultGrassyFeatures(() -> InitConfiguredFeatures.OAK_COMMON, () -> InitConfiguredFeatures.BIG_OAK_RARE, () -> InitConfiguredFeatures.BIRCH_RARE));
-	public static final RegistryObject<Biome> SUNKEN_FOREST = InitRegistry.register(
+	public static final RegistryObject<Biome> SUNKEN_FOREST = InitRegistry.biome(
 			new PRBiome("sunken_forest", () -> InitConfiguredSurfaceBuilders.GRASS, 20, BiomeType.WARM, Category.SWAMP, -0.2f, 0f, 1, 1, ColorH.rgba2Int(60, 80, 100),
 					ColorH.rgba2Int(20, 30, 40)),
-			withDefaultGrassyFeatures(() -> InitConfiguredFeatures.SUNKEN_OAK_COMMON, () -> InitConfiguredFeatures.SUNKEN_BIG_OAK_RARE, () -> InitConfiguredFeatures.SUNKEN_BIRCH_RARE));
+			withDefaultGrassyFeatures(() -> InitConfiguredFeatures.SUNKEN_OAK_COMMON, () -> InitConfiguredFeatures.SUNKEN_BIG_OAK_RARE,
+					() -> InitConfiguredFeatures.SUNKEN_BIRCH_RARE));
+	public static final RegistryObject<Biome> BEACH = InitRegistry.biome(
+			new PRBiome("beach", () -> InitConfiguredSurfaceBuilders.SAND, 60, BiomeType.WARM, Category.BEACH, -0.3f, 0f, 1, 1),
+			withDefaultGrassyFeatures(() -> InitConfiguredFeatures.OAK_COMMON, () -> InitConfiguredFeatures.BIG_OAK_RARE, () -> InitConfiguredFeatures.BIRCH_RARE));
 	
 	@SafeVarargs
 	public static List<Supplier<ConfiguredFeature<?, ?>>> withDefaultGrassyFeatures(Supplier<ConfiguredFeature<?, ?>>... features) {

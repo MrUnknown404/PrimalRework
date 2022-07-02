@@ -60,6 +60,9 @@ public class InitRegistry {
 	private static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, PrimalRework.MOD_ID);
 	private static final DeferredRegister<SurfaceBuilder<?>> SURFACE_BUILDERS = DeferredRegister.create(ForgeRegistries.SURFACE_BUILDERS, PrimalRework.MOD_ID);
 	
+	private static final Map<String, List<Supplier<ConfiguredFeature<?, ?>>>> BIOME_FEATURE_MAP = new HashMap<String, List<Supplier<ConfiguredFeature<?, ?>>>>();
+	private static final Map<String, PRBiome> PR_BIOMES = new HashMap<String, PRBiome>();
+	
 	public static void register() {
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 		bus.addGenericListener(Stage.class, InitRegistry::registerStages);
@@ -137,8 +140,6 @@ public class InitRegistry {
 		loadClass(InitSurfaceBuilders.class);
 	}
 	
-	private static final Map<String, List<Supplier<ConfiguredFeature<?, ?>>>> BIOME_FEATURE_MAP = new HashMap<String, List<Supplier<ConfiguredFeature<?, ?>>>>();
-	
 	@SubscribeEvent
 	public static void biomeLoad(BiomeLoadingEvent e) {
 		List<Supplier<ConfiguredFeature<?, ?>>> list = BIOME_FEATURE_MAP.getOrDefault(e.getName().toString(), new ArrayList<Supplier<ConfiguredFeature<?, ?>>>());
@@ -191,9 +192,9 @@ public class InitRegistry {
 		return WORLD_TYPES.register(name, worldType);
 	}
 	
-	public static RegistryObject<Biome> register(PRBiome o, List<Supplier<ConfiguredFeature<?, ?>>> features) {
-		ResourceLocation loc = new ResourceLocation(PrimalRework.MOD_ID, o.name);
-		BiomeManager.addBiome(o.biomeType, new BiomeEntry(RegistryKey.create(Registry.BIOME_REGISTRY, loc), o.weight));
+	public static RegistryObject<Biome> biome(PRBiome o, List<Supplier<ConfiguredFeature<?, ?>>> features) {
+		BiomeManager.addBiome(o.biomeType, new BiomeEntry(RegistryKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(PrimalRework.MOD_ID, o.name)), o.weight));
+		PR_BIOMES.put(o.name, o);
 		BIOME_FEATURE_MAP.put(PrimalRework.MOD_ID + ":" + o.name, features);
 		return BIOMES.register(o.name, () -> o.biome);
 	}
@@ -224,5 +225,9 @@ public class InitRegistry {
 	
 	public static Collection<RegistryObject<Biome>> getBiomes() {
 		return BIOMES.getEntries();
+	}
+	
+	public static PRBiome getBiome(String name) {
+		return PR_BIOMES.get(name);
 	}
 }

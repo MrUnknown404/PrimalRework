@@ -7,5 +7,5 @@ import net.minecraftforge.fml.RegistryObject;
 
 public class InitSurfaceBuilders {
 	public static final RegistryObject<SurfaceBuilder<SurfaceBuilderConfig>> DEFAULT = InitRegistry.surfaceBuilder("pr_default",
-			() -> new DefaultSurfaceBuilder(SurfaceBuilderConfig.CODEC));
+			() -> new DefaultSurfaceBuilder(SurfaceBuilderConfig.CODEC)); //TODO switch to custom surface builder
 }

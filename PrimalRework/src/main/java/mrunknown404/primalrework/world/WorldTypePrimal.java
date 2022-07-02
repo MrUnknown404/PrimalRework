@@ -72,9 +72,9 @@ public class WorldTypePrimal extends ForgeWorldType {
 	public static final DimensionSettings BUILTIN_PRIMAL = register(PRIMAL, primal(new DimensionStructuresSettings(true), false));
 	
 	private static DimensionSettings primal(DimensionStructuresSettings settings, boolean flag) {
-		return new DimensionSettings(settings, new NoiseSettings(256, new ScalingSettings(0.9999999814507745D, 0.9999999814507745D, 80, 160), new SlideSettings(-10, 3, 0),
-				new SlideSettings(-30, 0, 0), 1, 2, 1, -0.46875D, true, true, false, flag), InitBlocks.STONE.get().defaultBlockState(), Blocks.WATER.defaultBlockState(), -10, 0, 80,
-				false);
+		return new DimensionSettings(settings, new NoiseSettings(256, new ScalingSettings(0.9999999814507745d, 0.9999999814507745d, 80, 160), new SlideSettings(-10, 3, 0),
+				new SlideSettings(-30, 0, 0), 1, 2, 1, -0.46875d, true, true, false, flag), InitBlocks.STONE.get().defaultBlockState(), Blocks.WATER.defaultBlockState(), -10, 0,
+				80, false);
 	}
 	
 	private static DimensionSettings register(RegistryKey<DimensionSettings> key, DimensionSettings settings) {

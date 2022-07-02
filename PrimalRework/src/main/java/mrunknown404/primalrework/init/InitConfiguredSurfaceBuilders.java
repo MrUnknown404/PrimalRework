@@ -7,12 +7,15 @@ import net.minecraft.world.gen.surfacebuilders.ISurfaceBuilderConfig;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
 
 public class InitConfiguredSurfaceBuilders {
-	private static final BlockState GRASS_BLOCK = InitBlocks.GRASS_BLOCK.get().defaultBlockState();
-	private static final BlockState DIRT = InitBlocks.DIRT.get().defaultBlockState();
+	private static final BlockState S_GRASS = InitBlocks.GRASS_BLOCK.get().defaultBlockState();
+	private static final BlockState S_SAND = InitBlocks.THATCH.get().defaultBlockState(); //TODO switch to sand
+	private static final BlockState S_DIRT = InitBlocks.DIRT.get().defaultBlockState();
 	
-	private static final SurfaceBuilderConfig CONFIG_GRASS = new SurfaceBuilderConfig(GRASS_BLOCK, DIRT, DIRT);
+	private static final SurfaceBuilderConfig C_GRASS = new SurfaceBuilderConfig(S_GRASS, S_DIRT, S_DIRT);
+	private static final SurfaceBuilderConfig C_SAND = new SurfaceBuilderConfig(S_SAND, S_SAND, S_SAND);
 	
-	public static final ConfiguredSurfaceBuilder<SurfaceBuilderConfig> GRASS = register("grass", InitSurfaceBuilders.DEFAULT.get().configured(CONFIG_GRASS));
+	public static final ConfiguredSurfaceBuilder<SurfaceBuilderConfig> GRASS = register("grass", InitSurfaceBuilders.DEFAULT.get().configured(C_GRASS));
+	public static final ConfiguredSurfaceBuilder<SurfaceBuilderConfig> SAND = register("sand", InitSurfaceBuilders.DEFAULT.get().configured(C_SAND));
 	
 	private static <SC extends ISurfaceBuilderConfig> ConfiguredSurfaceBuilder<SC> register(String name, ConfiguredSurfaceBuilder<SC> conf) {
 		return WorldGenRegistries.register(WorldGenRegistries.CONFIGURED_SURFACE_BUILDER, "pr_" + name, conf);

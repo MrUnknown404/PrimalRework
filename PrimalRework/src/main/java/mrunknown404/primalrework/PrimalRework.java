@@ -2,12 +2,12 @@ package mrunknown404.primalrework;
 
 import com.mojang.brigadier.CommandDispatcher;
 
-import mrunknown404.primalrework.utils.ProxyClient;
-import mrunknown404.primalrework.utils.Proxy;
 import mrunknown404.primalrework.commands.CommandQuest;
 import mrunknown404.primalrework.commands.CommandStage;
 import mrunknown404.primalrework.utils.PRConfig;
 import mrunknown404.primalrework.utils.PrimalMod;
+import mrunknown404.primalrework.utils.Proxy;
+import mrunknown404.primalrework.utils.ProxyClient;
 import net.minecraft.command.CommandSource;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;

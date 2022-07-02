@@ -6,6 +6,8 @@ import net.minecraft.block.material.MaterialColor;
 import net.minecraft.block.material.PushReaction;
 
 public class BlockInfo {
+	public static final RawBlockInfo REPLACEABLE_PLANT = RawBlockInfo.of(MaterialColor.PLANT, SoundType.GRASS, 0.2f, 0.1f, false, false, false, 100, 60, true, false, 0,
+			PushReaction.DESTROY);
 	public static final RawBlockInfo PLANT = RawBlockInfo.of(MaterialColor.PLANT, SoundType.GRASS, 0.2f, 0.1f, false, false, false, 100, 60, false, false, 0, PushReaction.DESTROY);
 	public static final RawBlockInfo LEAVES = RawBlockInfo.of(MaterialColor.PLANT, SoundType.GRASS, 0.8f, 0.2f, true, true, false, 60, 30, false, true, 0, PushReaction.DESTROY);
 	public static final RawBlockInfo DIRT = RawBlockInfo.simpleFull(MaterialColor.DIRT, SoundType.GRAVEL, 0.5f, 0.5f);

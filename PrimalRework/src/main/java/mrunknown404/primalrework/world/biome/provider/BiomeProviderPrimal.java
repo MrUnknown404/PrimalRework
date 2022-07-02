@@ -54,9 +54,9 @@ public class BiomeProviderPrimal extends BiomeProvider {
 	
 	private static <T extends IArea, C extends IExtendedNoiseRandom<T>> IAreaFactory<T> buildLayers(List<Biome> biomes, ForgeRegistry<Biome> biomeRegistry,
 			LongFunction<C> seedHandler) {
-		
 		IAreaFactory<T> iareafactory = new PRAreaTransformer(biomes, biomeRegistry).run(seedHandler.apply(1L));
 		iareafactory = LayerUtil.zoom(2001L, ZoomLayer.NORMAL, iareafactory, 4, seedHandler);
+		
 		return iareafactory;
 	}
 	
