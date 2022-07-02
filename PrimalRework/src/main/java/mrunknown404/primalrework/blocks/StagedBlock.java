@@ -138,7 +138,7 @@ public class StagedBlock extends Block implements ISIProvider, IIngredientProvid
 		return this;
 	}
 	
-	public StagedBlock usesVanillaNamespaceFull() {
+	public StagedBlock useVanillaNamespaceFull() {
 		useVanillaNamespaceBlock = true;
 		useVanillaNamespaceItem = true;
 		return this;

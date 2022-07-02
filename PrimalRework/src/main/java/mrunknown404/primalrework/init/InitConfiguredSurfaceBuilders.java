@@ -8,7 +8,7 @@ import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
 
 public class InitConfiguredSurfaceBuilders {
 	private static final BlockState S_GRASS = InitBlocks.GRASS_BLOCK.get().defaultBlockState();
-	private static final BlockState S_SAND = InitBlocks.THATCH.get().defaultBlockState(); //TODO switch to sand
+	private static final BlockState S_SAND = InitBlocks.SAND.get().defaultBlockState();
 	private static final BlockState S_DIRT = InitBlocks.DIRT.get().defaultBlockState();
 	
 	private static final SurfaceBuilderConfig C_GRASS = new SurfaceBuilderConfig(S_GRASS, S_DIRT, S_DIRT);

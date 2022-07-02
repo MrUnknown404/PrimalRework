@@ -24,7 +24,7 @@ public class SBGrassBlock extends SBSnowyDirt implements IBiomeColored { //TODO 
 	public SBGrassBlock() {
 		super(InitStages.STAGE_0, BlockInfo.of(BlockInfo.R_DRY_GRASS), BlockStateType.none, BlockModelType.none,
 				new HarvestInfo(ToolType.SHOVEL, ToolMaterial.CLAY, DropInfo.of(InitBlocks.DIRT)));
-		usesVanillaNamespaceFull();
+		useVanillaNamespaceFull();
 	}
 	
 	@Override

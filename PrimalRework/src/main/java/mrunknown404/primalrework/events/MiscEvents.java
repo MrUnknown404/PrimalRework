@@ -81,7 +81,7 @@ public class MiscEvents {
 			} else if (item.getItem() == Items.BONE) {
 				itemToAdd = InitItems.BONE_SHARD.get();
 			} else if (item.getItem() == InitItems.BONE_SHARD.get()) {
-				itemToAdd = Items.BONE_MEAL; //TODO switch to mine
+				itemToAdd = Items.BONE_MEAL; //TODO switch to my bone dust
 			}
 			
 			if (itemToAdd != null) {
@@ -91,8 +91,8 @@ public class MiscEvents {
 					item.shrink(1);
 					e.getWorld().addFreshEntity(new ItemEntity(e.getWorld(), hit.x, hit.y, hit.z, new ItemStack(itemToAdd, count)));
 					
-					if (item.getItem() == Items.BONE && R.nextInt(3) == 0) { //TODO switch to mine
-						e.getWorld().addFreshEntity(new ItemEntity(e.getWorld(), hit.x, hit.y, hit.z, new ItemStack(Items.BONE_MEAL))); //TODO switch to mine
+					if (item.getItem() == Items.BONE && R.nextInt(3) == 0) { //TODO switch to my bone
+						e.getWorld().addFreshEntity(new ItemEntity(e.getWorld(), hit.x, hit.y, hit.z, new ItemStack(Items.BONE_MEAL))); //TODO switch to my bone dust
 					}
 				}
 			}

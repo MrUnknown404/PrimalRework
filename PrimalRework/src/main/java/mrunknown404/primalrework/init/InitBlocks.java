@@ -5,9 +5,12 @@ import java.util.List;
 import java.util.function.Supplier;
 
 import mrunknown404.primalrework.blocks.BlockInfo;
+import mrunknown404.primalrework.blocks.BlockInfo.Hardness;
 import mrunknown404.primalrework.blocks.HarvestInfo;
+import mrunknown404.primalrework.blocks.HarvestInfo.DropInfo;
 import mrunknown404.primalrework.blocks.SBCampFire;
 import mrunknown404.primalrework.blocks.SBDenseLog;
+import mrunknown404.primalrework.blocks.SBFalling;
 import mrunknown404.primalrework.blocks.SBGrassBlock;
 import mrunknown404.primalrework.blocks.SBGrassSlab;
 import mrunknown404.primalrework.blocks.SBGroundItem;
@@ -23,8 +26,6 @@ import mrunknown404.primalrework.blocks.SBTallGrass;
 import mrunknown404.primalrework.blocks.SBUnlitPrimalTorch;
 import mrunknown404.primalrework.blocks.SBUnlitPrimalWallTorch;
 import mrunknown404.primalrework.blocks.StagedBlock;
-import mrunknown404.primalrework.blocks.BlockInfo.Hardness;
-import mrunknown404.primalrework.blocks.HarvestInfo.DropInfo;
 import mrunknown404.primalrework.blocks.StagedBlock.BlockModelType;
 import mrunknown404.primalrework.blocks.StagedBlock.BlockStateType;
 import mrunknown404.primalrework.items.SIWallFloor;
@@ -65,9 +66,11 @@ public class InitBlocks {
 	public static final ROISIProvider<StagedBlock> SHORT_GRASS = InitRegistry.block("short_grass", () -> new SBTallGrass(InitBlocks.SHORT_GRASS, Hardness.SOFT_1, Block.box(2, 0, 2, 14, 6, 14)));
 	public static final ROISIProvider<StagedBlock> MEDIUM_GRASS = InitRegistry.block("medium_grass", () -> new SBTallGrass(InitBlocks.MEDIUM_GRASS, Hardness.SOFT_1, Block.box(2, 0, 2, 14, 9, 14)));
 	public static final ROISIProvider<StagedBlock> TALL_GRASS = InitRegistry.block("tall_grass", () -> new SBTallGrass(InitBlocks.TALL_GRASS, Hardness.MEDIUM_0, Block.box(2, 0, 2, 14, 13, 14)).useVanillaNamespaceItem());
+	public static final ROISIProvider<StagedBlock> SAND = InitRegistry.block("sand", () -> new SBFalling(InitStages.STAGE_0, BlockInfo.of(BlockInfo.SAND), HarvestInfo.SHOVEL_MIN).useVanillaNamespaceFull());
+	public static final ROISIProvider<StagedBlock> SANDSTONE = InitRegistry.block("sandstone", () -> new StagedBlock(InitStages.STAGE_0, BlockInfo.of(BlockInfo.STONE), HarvestInfo.PICKAXE_MIN).useVanillaNamespaceFull());
 	
 	//SLABS
-	public static final ROISIProvider<StagedBlock> DIRT_SLAB = InitRegistry.block("dirt_slab", () -> new SBSlab(InitStages.STAGE_0, BlockInfo.of(BlockInfo.DIRT), HarvestInfo.SHOVEL_MIN).useVanillaNamespaceBlock());
+	public static final ROISIProvider<StagedBlock> DIRT_SLAB = InitRegistry.block("dirt_slab", () -> new SBSlab(InitStages.STAGE_0, BlockInfo.of(BlockInfo.DIRT), HarvestInfo.SHOVEL_MIN).useVanillaNamespaceFull());
 	public static final ROISIProvider<StagedBlock> GRASS_SLAB = InitRegistry.block("grass_slab", () -> new SBGrassSlab());
 	
 	//MACHINES
@@ -75,22 +78,22 @@ public class InitBlocks {
 	public static final ROISIProvider<StagedBlock> PRIMAL_CRAFTING_TABLE = InitRegistry.block("primal_crafting_table", () -> new SBPrimalCraftingTable());
 	
 	//VANILLA OVERRIDES
-	public static final ROISIProvider<StagedBlock> DIRT = InitRegistry.block("dirt", () -> new StagedBlock(InitStages.STAGE_0, BlockInfo.of(BlockInfo.DIRT), HarvestInfo.SHOVEL_MIN).usesVanillaNamespaceFull());
+	public static final ROISIProvider<StagedBlock> DIRT = InitRegistry.block("dirt", () -> new StagedBlock(InitStages.STAGE_0, BlockInfo.of(BlockInfo.DIRT), HarvestInfo.SHOVEL_MIN).useVanillaNamespaceFull());
 	public static final ROISIProvider<StagedBlock> GRASS_BLOCK = InitRegistry.block("grass_block", () -> new SBGrassBlock());
-	public static final ROISIProvider<StagedBlock> STONE = InitRegistry.block("stone", () -> new StagedBlock(InitStages.STAGE_0, BlockInfo.of(BlockInfo.STONE), BlockStateType.none, BlockModelType.normal, new HarvestInfo(ToolType.PICKAXE, ToolMaterial.CLAY, DropInfo.of(InitItems.ROCK, 2, 4))).usesVanillaNamespaceFull());
-	public static final ROISIProvider<StagedBlock> COBBLESTONE = InitRegistry.block("cobblestone", () -> new StagedBlock(InitStages.STAGE_0, BlockInfo.of(BlockInfo.STONE), HarvestInfo.PICKAXE_MIN).usesVanillaNamespaceFull());
-	public static final ROISIProvider<StagedBlock> OAK_LOG = InitRegistry.block("oak_log", () -> new SBLog().usesVanillaNamespaceFull());
-	public static final ROISIProvider<StagedBlock> SPRUCE_LOG = InitRegistry.block("spruce_log", () -> new SBLog().usesVanillaNamespaceFull());
-	public static final ROISIProvider<StagedBlock> BIRCH_LOG = InitRegistry.block("birch_log", () -> new SBLog().usesVanillaNamespaceFull());
-	public static final ROISIProvider<StagedBlock> JUNGLE_LOG = InitRegistry.block("jungle_log", () -> new SBLog().usesVanillaNamespaceFull());
-	public static final ROISIProvider<StagedBlock> ACACIA_LOG = InitRegistry.block("acacia_log", () -> new SBLog().usesVanillaNamespaceFull());
-	public static final ROISIProvider<StagedBlock> DARK_OAK_LOG = InitRegistry.block("dark_oak_log", () -> new SBLog().usesVanillaNamespaceFull());
-	public static final ROISIProvider<StagedBlock> OAK_LEAVES = InitRegistry.block("oak_leaves", () -> new SBLeaves().usesVanillaNamespaceFull());
-	public static final ROISIProvider<StagedBlock> SPRUCE_LEAVES = InitRegistry.block("spruce_leaves", () -> new SBLeaves().usesVanillaNamespaceFull());
-	public static final ROISIProvider<StagedBlock> BIRCH_LEAVES = InitRegistry.block("birch_leaves", () -> new SBLeaves().usesVanillaNamespaceFull());
-	public static final ROISIProvider<StagedBlock> JUNGLE_LEAVES = InitRegistry.block("jungle_leaves", () -> new SBLeaves().usesVanillaNamespaceFull());
-	public static final ROISIProvider<StagedBlock> ACACIA_LEAVES = InitRegistry.block("acacia_leaves", () -> new SBLeaves().usesVanillaNamespaceFull());
-	public static final ROISIProvider<StagedBlock> DARK_OAK_LEAVES = InitRegistry.block("dark_oak_leaves", () -> new SBLeaves().usesVanillaNamespaceFull());
+	public static final ROISIProvider<StagedBlock> STONE = InitRegistry.block("stone", () -> new StagedBlock(InitStages.STAGE_0, BlockInfo.of(BlockInfo.STONE), BlockStateType.none, BlockModelType.normal, new HarvestInfo(ToolType.PICKAXE, ToolMaterial.CLAY, DropInfo.of(InitItems.ROCK, 2, 4))).useVanillaNamespaceFull());
+	public static final ROISIProvider<StagedBlock> COBBLESTONE = InitRegistry.block("cobblestone", () -> new StagedBlock(InitStages.STAGE_0, BlockInfo.of(BlockInfo.STONE), HarvestInfo.PICKAXE_MIN).useVanillaNamespaceFull());
+	public static final ROISIProvider<StagedBlock> OAK_LOG = InitRegistry.block("oak_log", () -> new SBLog().useVanillaNamespaceFull());
+	public static final ROISIProvider<StagedBlock> SPRUCE_LOG = InitRegistry.block("spruce_log", () -> new SBLog().useVanillaNamespaceFull());
+	public static final ROISIProvider<StagedBlock> BIRCH_LOG = InitRegistry.block("birch_log", () -> new SBLog().useVanillaNamespaceFull());
+	public static final ROISIProvider<StagedBlock> JUNGLE_LOG = InitRegistry.block("jungle_log", () -> new SBLog().useVanillaNamespaceFull());
+	public static final ROISIProvider<StagedBlock> ACACIA_LOG = InitRegistry.block("acacia_log", () -> new SBLog().useVanillaNamespaceFull());
+	public static final ROISIProvider<StagedBlock> DARK_OAK_LOG = InitRegistry.block("dark_oak_log", () -> new SBLog().useVanillaNamespaceFull());
+	public static final ROISIProvider<StagedBlock> OAK_LEAVES = InitRegistry.block("oak_leaves", () -> new SBLeaves().useVanillaNamespaceFull());
+	public static final ROISIProvider<StagedBlock> SPRUCE_LEAVES = InitRegistry.block("spruce_leaves", () -> new SBLeaves().useVanillaNamespaceFull());
+	public static final ROISIProvider<StagedBlock> BIRCH_LEAVES = InitRegistry.block("birch_leaves", () -> new SBLeaves().useVanillaNamespaceFull());
+	public static final ROISIProvider<StagedBlock> JUNGLE_LEAVES = InitRegistry.block("jungle_leaves", () -> new SBLeaves().useVanillaNamespaceFull());
+	public static final ROISIProvider<StagedBlock> ACACIA_LEAVES = InitRegistry.block("acacia_leaves", () -> new SBLeaves().useVanillaNamespaceFull());
+	public static final ROISIProvider<StagedBlock> DARK_OAK_LEAVES = InitRegistry.block("dark_oak_leaves", () -> new SBLeaves().useVanillaNamespaceFull());
 	
 	//@formatter:off
 	

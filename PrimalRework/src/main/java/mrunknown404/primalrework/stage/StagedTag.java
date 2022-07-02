@@ -22,11 +22,8 @@ public class StagedTag extends ForgeRegistryEntry<StagedTag> implements IIngredi
 	
 	private final List<StagedItem> items = new ArrayList<StagedItem>();
 	private final Map<Supplier<Stage>, List<StagedItem>> stageMap = new HashMap<Supplier<Stage>, List<StagedItem>>();
-	private final StagedItem icon;
 	
 	public StagedTag(ISIProvider icon, ISIProvider... items) {
-		this.icon = icon.getStagedItem();
-		
 		add(icon.getStagedItem());
 		for (ISIProvider i : items) {
 			add(i.getStagedItem());
@@ -38,10 +35,14 @@ public class StagedTag extends ForgeRegistryEntry<StagedTag> implements IIngredi
 	}
 	
 	public StagedItem getIcon() {
-		return icon;
+		return items.get(0);
 	}
 	
 	private void add(StagedItem item) {
+		if (item == null) { //Data-gen fix.
+			return;
+		}
+		
 		stageMap.computeIfAbsent(item.stage, (s) -> new ArrayList<StagedItem>()).add(item);
 		items.add(item);
 	}

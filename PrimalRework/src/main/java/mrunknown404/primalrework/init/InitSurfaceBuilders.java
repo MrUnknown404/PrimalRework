@@ -1,11 +1,11 @@
 package mrunknown404.primalrework.init;
 
-import net.minecraft.world.gen.surfacebuilders.DefaultSurfaceBuilder;
+import mrunknown404.primalrework.world.gen.PrimalSurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
 import net.minecraftforge.fml.RegistryObject;
 
 public class InitSurfaceBuilders {
 	public static final RegistryObject<SurfaceBuilder<SurfaceBuilderConfig>> DEFAULT = InitRegistry.surfaceBuilder("pr_default",
-			() -> new DefaultSurfaceBuilder(SurfaceBuilderConfig.CODEC)); //TODO switch to custom surface builder
+			() -> new PrimalSurfaceBuilder(SurfaceBuilderConfig.CODEC));
 }
