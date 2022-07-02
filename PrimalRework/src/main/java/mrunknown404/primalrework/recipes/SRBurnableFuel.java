@@ -1,13 +1,13 @@
 package mrunknown404.primalrework.recipes;
 
-import mrunknown404.primalrework.items.raw.StagedItem;
+import mrunknown404.primalrework.items.ISIProvider;
 import mrunknown404.primalrework.recipes.inputs.RIBurnableFuel;
 
 public class SRBurnableFuel extends StagedRecipe<SRBurnableFuel, RIBurnableFuel> {
 	private final int time;
 	
-	public SRBurnableFuel(StagedItem item, int time) {
-		super(null, item.stage.get(), item, 1, new RIBurnableFuel(item));
+	public <T extends IIngredientProvider & ISIProvider> SRBurnableFuel(T item, int time) {
+		super(null, item.getStagedItem().stage.get(), item, 1, new RIBurnableFuel(item));
 		this.time = time;
 	}
 	

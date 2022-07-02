@@ -6,10 +6,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import mrunknown404.primalrework.blocks.raw.SBSlab;
-import mrunknown404.primalrework.blocks.raw.StagedBlock;
+import mrunknown404.primalrework.blocks.HarvestInfo;
+import mrunknown404.primalrework.blocks.SBSlab;
+import mrunknown404.primalrework.blocks.StagedBlock;
 import mrunknown404.primalrework.init.InitBlocks;
-import mrunknown404.primalrework.utils.HarvestInfo;
 import mrunknown404.primalrework.utils.enums.ToolType;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

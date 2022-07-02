@@ -9,7 +9,7 @@ import java.util.Set;
 
 import javax.annotation.Nullable;
 
-import mrunknown404.primalrework.blocks.raw.StagedBlock;
+import mrunknown404.primalrework.blocks.StagedBlock;
 import mrunknown404.primalrework.init.InitBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

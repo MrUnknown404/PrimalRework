@@ -3,7 +3,8 @@ package mrunknown404.primalrework.init;
 import java.util.ArrayList;
 import java.util.List;
 
-import mrunknown404.primalrework.items.raw.StagedItem;
+import mrunknown404.primalrework.items.ISIProvider;
+import mrunknown404.primalrework.items.StagedItem;
 import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.stage.StagedTag;
 import mrunknown404.primalrework.utils.DoubleCache;
@@ -12,15 +13,14 @@ import net.minecraftforge.fml.RegistryObject;
 
 public class InitStagedTags {
 	public static final RegistryObject<StagedTag> LOGS = InitRegistry.stagedTag("logs",
-			() -> new StagedTag().add(InitStages.STAGE_1, InitBlocks.OAK_LOG.get().asStagedItem(), InitBlocks.SPRUCE_LOG.get().asStagedItem(), InitBlocks.BIRCH_LOG.get().asStagedItem(),
-					InitBlocks.JUNGLE_LOG.get().asStagedItem(), InitBlocks.ACACIA_LOG.get().asStagedItem(), InitBlocks.DARK_OAK_LOG.get().asStagedItem(),
-					InitBlocks.STRIPPED_OAK_LOG.get().asStagedItem(), InitBlocks.STRIPPED_SPRUCE_LOG.get().asStagedItem(), InitBlocks.STRIPPED_BIRCH_LOG.get().asStagedItem(),
-					InitBlocks.STRIPPED_JUNGLE_LOG.get().asStagedItem(), InitBlocks.STRIPPED_ACACIA_LOG.get().asStagedItem(), InitBlocks.STRIPPED_DARK_OAK_LOG.get().asStagedItem()));
+			() -> new StagedTag(InitBlocks.OAK_LOG, InitBlocks.SPRUCE_LOG, InitBlocks.BIRCH_LOG, InitBlocks.JUNGLE_LOG, InitBlocks.ACACIA_LOG, InitBlocks.DARK_OAK_LOG,
+					InitBlocks.STRIPPED_OAK_LOG, InitBlocks.STRIPPED_SPRUCE_LOG, InitBlocks.STRIPPED_BIRCH_LOG, InitBlocks.STRIPPED_JUNGLE_LOG, InitBlocks.STRIPPED_ACACIA_LOG,
+					InitBlocks.STRIPPED_DARK_OAK_LOG));
 	
 	private static final DoubleCache<StagedItem, Stage, List<StagedTag>> tagCache = DoubleCache.and();
 	
-	public static List<StagedTag> getItemsTags(StagedItem item) {
-		if (tagCache.is(item, StageH.getStage())) {
+	public static List<StagedTag> getItemsTags(ISIProvider item) {
+		if (tagCache.is(item.getStagedItem(), StageH.getStage())) {
 			return tagCache.get();
 		}
 		
@@ -32,7 +32,7 @@ public class InitStagedTags {
 		}
 		
 		if (!tags.isEmpty()) {
-			tagCache.set(item, StageH.getStage(), tags);
+			tagCache.set(item.getStagedItem(), StageH.getStage(), tags);
 		}
 		
 		return tags;

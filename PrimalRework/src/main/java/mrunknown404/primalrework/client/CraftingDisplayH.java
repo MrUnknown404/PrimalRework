@@ -9,7 +9,7 @@ import java.util.Map.Entry;
 import mrunknown404.primalrework.client.gui.screen.ScreenRecipeList;
 import mrunknown404.primalrework.init.InitPRFuels;
 import mrunknown404.primalrework.init.InitRecipes;
-import mrunknown404.primalrework.items.raw.StagedItem;
+import mrunknown404.primalrework.items.StagedItem;
 import mrunknown404.primalrework.recipes.Ingredient;
 import mrunknown404.primalrework.recipes.StagedRecipe;
 import mrunknown404.primalrework.stage.Stage;

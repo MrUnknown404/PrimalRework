@@ -1,9 +1,9 @@
 package mrunknown404.primalrework.events;
 
-import mrunknown404.primalrework.blocks.raw.StagedBlock;
-import mrunknown404.primalrework.items.raw.StagedItem;
-import mrunknown404.primalrework.utils.HarvestInfo;
-import mrunknown404.primalrework.utils.HarvestInfo.DropInfo;
+import mrunknown404.primalrework.blocks.HarvestInfo;
+import mrunknown404.primalrework.blocks.StagedBlock;
+import mrunknown404.primalrework.blocks.HarvestInfo.DropInfo;
+import mrunknown404.primalrework.items.StagedItem;
 import mrunknown404.primalrework.utils.enums.ToolMaterial;
 import mrunknown404.primalrework.utils.enums.ToolType;
 import mrunknown404.primalrework.utils.helpers.BlockH;

@@ -8,9 +8,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import mrunknown404.primalrework.blocks.raw.StagedBlock;
-import mrunknown404.primalrework.utils.HarvestInfo;
-import mrunknown404.primalrework.utils.HarvestInfo.DropInfo;
+import mrunknown404.primalrework.blocks.HarvestInfo;
+import mrunknown404.primalrework.blocks.StagedBlock;
+import mrunknown404.primalrework.blocks.HarvestInfo.DropInfo;
 import mrunknown404.primalrework.utils.enums.ToolType;
 import mrunknown404.primalrework.utils.helpers.BlockH;
 import net.minecraft.block.AbstractBlock;

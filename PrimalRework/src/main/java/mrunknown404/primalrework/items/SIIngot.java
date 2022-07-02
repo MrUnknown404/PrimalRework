@@ -1,7 +1,6 @@
 package mrunknown404.primalrework.items;
 
 import mrunknown404.primalrework.init.InitPRItemGroups;
-import mrunknown404.primalrework.items.raw.StagedItem;
 import mrunknown404.primalrework.utils.IMetalColored;
 import mrunknown404.primalrework.utils.enums.Metal;
 import mrunknown404.primalrework.utils.enums.ToolMaterial;

@@ -1,16 +1,13 @@
-package mrunknown404.primalrework.utils;
+package mrunknown404.primalrework.blocks;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.function.Supplier;
 
-import mrunknown404.primalrework.blocks.raw.StagedBlock;
-import mrunknown404.primalrework.items.raw.StagedItem;
+import mrunknown404.primalrework.items.ISIProvider;
 import mrunknown404.primalrework.utils.enums.ToolMaterial;
 import mrunknown404.primalrework.utils.enums.ToolType;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.RegistryObject;
 
 public class HarvestInfo {
 	public static final HarvestInfo AXE_MIN = new HarvestInfo(ToolType.AXE, ToolMaterial.CLAY);
@@ -43,40 +40,28 @@ public class HarvestInfo {
 	
 	public static class DropInfo {
 		private static final Random R = new Random();
-		public static final DropInfo NONE = item(() -> null);
+		public static final DropInfo NONE = of(() -> null);
 		
-		private final Supplier<StagedItem> result;
+		private final ISIProvider result;
 		private final int min, max, chance;
 		
-		private DropInfo(Supplier<StagedItem> result, int min, int max, int chance) {
+		private DropInfo(ISIProvider result, int min, int max, int chance) {
 			this.result = result;
 			this.min = min;
 			this.max = max;
 			this.chance = chance;
 		}
 		
-		public static DropInfo item(Supplier<StagedItem> result, int min, int max) {
+		public static DropInfo of(ISIProvider result, int min, int max) {
 			return new DropInfo(result, min, max, 100);
 		}
 		
-		public static DropInfo item(Supplier<StagedItem> result, int chance) {
+		public static DropInfo of(ISIProvider result, int chance) {
 			return new DropInfo(result, 1, 1, chance);
 		}
 		
-		public static DropInfo item(Supplier<StagedItem> result) {
+		public static DropInfo of(ISIProvider result) {
 			return new DropInfo(result, 1, 1, 100);
-		}
-		
-		public static DropInfo block(Supplier<RegistryObject<StagedBlock>> result, int min, int max) {
-			return new DropInfo(() -> result.get().get().asStagedItem(), min, max, 100);
-		}
-		
-		public static DropInfo block(Supplier<RegistryObject<StagedBlock>> self, int chance) {
-			return new DropInfo(() -> self.get().get().asStagedItem(), 1, 1, chance);
-		}
-		
-		public static DropInfo block(Supplier<RegistryObject<StagedBlock>> result) {
-			return new DropInfo(() -> result.get().get().asStagedItem(), 1, 1, 100);
 		}
 		
 		public ItemStack getItem() {
@@ -86,7 +71,7 @@ public class HarvestInfo {
 			
 			if (R.nextInt(100) + 1 <= chance) {
 				int count = max == min ? max : R.nextInt(max - min) + min;
-				return new ItemStack(result.get(), count);
+				return new ItemStack(result.getStagedItem(), count);
 			}
 			
 			return ItemStack.EMPTY;

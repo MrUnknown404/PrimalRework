@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import mrunknown404.primalrework.init.InitRecipes;
-import mrunknown404.primalrework.items.raw.StagedItem;
+import mrunknown404.primalrework.items.StagedItem;
 import mrunknown404.primalrework.recipes.Ingredient;
 import mrunknown404.primalrework.recipes.StagedRecipe;
 import mrunknown404.primalrework.recipes.inputs.RICrafting3;

@@ -2,13 +2,9 @@ package mrunknown404.primalrework.blocks;
 
 import java.util.Random;
 
-import mrunknown404.primalrework.blocks.raw.IBiomeColored;
-import mrunknown404.primalrework.blocks.raw.StagedBlock;
+import mrunknown404.primalrework.blocks.HarvestInfo.DropInfo;
 import mrunknown404.primalrework.init.InitPRItemGroups;
 import mrunknown404.primalrework.init.InitStages;
-import mrunknown404.primalrework.utils.BlockInfo;
-import mrunknown404.primalrework.utils.HarvestInfo;
-import mrunknown404.primalrework.utils.HarvestInfo.DropInfo;
 import mrunknown404.primalrework.utils.enums.ToolMaterial;
 import mrunknown404.primalrework.utils.enums.ToolType;
 import net.minecraft.block.Block;

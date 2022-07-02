@@ -2,12 +2,9 @@ package mrunknown404.primalrework.blocks;
 
 import java.util.Random;
 
-import mrunknown404.primalrework.blocks.raw.SBContainer;
 import mrunknown404.primalrework.init.InitStages;
-import mrunknown404.primalrework.items.raw.StagedItem.ItemType;
+import mrunknown404.primalrework.items.StagedItem.ItemType;
 import mrunknown404.primalrework.tileentities.TEICampFire;
-import mrunknown404.primalrework.utils.BlockInfo;
-import mrunknown404.primalrework.utils.HarvestInfo;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;

@@ -1,4 +1,4 @@
-package mrunknown404.primalrework.blocks.raw;
+package mrunknown404.primalrework.blocks;
 
 /** This still works but will be replaced */
 @Deprecated

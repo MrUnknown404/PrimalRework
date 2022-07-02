@@ -7,11 +7,11 @@ import java.util.List;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 
-import mrunknown404.primalrework.blocks.raw.StagedBlock;
-import mrunknown404.primalrework.items.raw.StagedItem;
-import mrunknown404.primalrework.utils.BlockInfo;
+import mrunknown404.primalrework.blocks.BlockInfo;
+import mrunknown404.primalrework.blocks.HarvestInfo;
+import mrunknown404.primalrework.blocks.StagedBlock;
+import mrunknown404.primalrework.items.StagedItem;
 import mrunknown404.primalrework.utils.DoubleCache;
-import mrunknown404.primalrework.utils.HarvestInfo;
 import mrunknown404.primalrework.utils.PRConfig;
 import mrunknown404.primalrework.utils.enums.ToolMaterial;
 import mrunknown404.primalrework.utils.enums.ToolType;
@@ -121,7 +121,7 @@ public class HarvestDisplayCEvents {
 			drawHoveringText(s, texts, mc.font);
 			
 			if (config.harvestDisplay_showIcon.get()) {
-				StagedItem bitem = b.asStagedItem();
+				StagedItem bitem = b.getStagedItem();
 				if (bitem != null) {
 					mc.getItemRenderer().blitOffset += 410;
 					mc.getItemRenderer().renderGuiItem(new ItemStack(bitem), 4, 3);

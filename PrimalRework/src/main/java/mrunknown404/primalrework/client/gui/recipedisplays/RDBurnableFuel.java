@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 
-import mrunknown404.primalrework.items.raw.StagedItem;
+import mrunknown404.primalrework.items.StagedItem;
 import mrunknown404.primalrework.recipes.SRBurnableFuel;
 import mrunknown404.primalrework.utils.helpers.ColorH;
 

@@ -25,7 +25,7 @@ public class Quest {
 	protected final ItemStack itemIcon;
 	protected final Quest parent;
 	protected final QuestTab tab;
-	protected final QuestRequirement<?, ?> req;
+	protected final QuestRequirement<?> req;
 	protected final QuestReward reward;
 	protected final Supplier<Stage> stage;
 	protected final boolean isEnd, isRoot;
@@ -35,7 +35,7 @@ public class Quest {
 	protected boolean isFinished;
 	protected List<Quest> children = new ArrayList<Quest>();
 	
-	private Quest(Supplier<Stage> stage, String name_key, Quest parent, float xPos, float yPos, ItemStack itemIcon, QuestRequirement<?, ?> req, @Nullable QuestReward reward,
+	private Quest(Supplier<Stage> stage, String name_key, Quest parent, float xPos, float yPos, ItemStack itemIcon, QuestRequirement<?> req, @Nullable QuestReward reward,
 			boolean isEnd, boolean isRoot, QuestTab tab) {
 		this.stage = stage;
 		this.name_key = name_key;
@@ -50,19 +50,19 @@ public class Quest {
 		this.isRoot = isRoot;
 	}
 	
-	public static Quest simple(String name_key, Quest parent, float xPos, float yPos, QuestRequirement<?, ?> req) {
+	public static Quest simple(String name_key, Quest parent, float xPos, float yPos, QuestRequirement<?> req) {
 		return new Quest(parent.stage, name_key, parent, xPos, yPos, new ItemStack(req.getIcon()), req, null, false, false, parent.tab);
 	}
 	
-	public static Quest simple(String name_key, Quest parent, float xPos, float yPos, QuestRequirement<?, ?> req, QuestReward reward) {
+	public static Quest simple(String name_key, Quest parent, float xPos, float yPos, QuestRequirement<?> req, QuestReward reward) {
 		return new Quest(parent.stage, name_key, parent, xPos, yPos, new ItemStack(req.getIcon()), req, reward, false, false, parent.tab);
 	}
 	
-	public static Quest end(String name_key, Quest parent, float xPos, float yPos, QuestRequirement<?, ?> req) {
+	public static Quest end(String name_key, Quest parent, float xPos, float yPos, QuestRequirement<?> req) {
 		return new Quest(parent.stage, name_key, parent, xPos, yPos, new ItemStack(req.getIcon()), req, null, true, false, parent.tab);
 	}
 	
-	public static Quest end(String name_key, Quest parent, float xPos, float yPos, QuestRequirement<?, ?> req, QuestReward reward) {
+	public static Quest end(String name_key, Quest parent, float xPos, float yPos, QuestRequirement<?> req, QuestReward reward) {
 		return new Quest(parent.stage, name_key, parent, xPos, yPos, new ItemStack(req.getIcon()), req, reward, true, false, parent.tab);
 	}
 	
@@ -182,7 +182,7 @@ public class Quest {
 		return isRoot;
 	}
 	
-	public QuestRequirement<?, ?> getRequirement() {
+	public QuestRequirement<?> getRequirement() {
 		return req;
 	}
 	

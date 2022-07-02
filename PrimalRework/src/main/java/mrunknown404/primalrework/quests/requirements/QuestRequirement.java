@@ -1,11 +1,14 @@
 package mrunknown404.primalrework.quests.requirements;
 
-import mrunknown404.primalrework.items.raw.StagedItem;
+import java.util.List;
+
+import mrunknown404.primalrework.items.StagedItem;
 import mrunknown404.primalrework.utils.helpers.WordH;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 
-public abstract class QuestRequirement<T, I> {
+public abstract class QuestRequirement<T> {
 	private ITextComponent realDesc;
 	protected final TranslationTextComponent requires;
 	protected final T obj;
@@ -17,13 +20,14 @@ public abstract class QuestRequirement<T, I> {
 		this.count = count;
 	}
 	
-	public boolean check(I obj, int count) {
-		return check(obj) && count >= this.count;
+	public boolean checkCount(int count) {
+		return count >= this.count;
 	}
 	
 	//@formatter:off
+	public abstract CheckResult checkConditions(List<? extends PlayerEntity> list);
 	public abstract StagedItem getIcon();
-	protected abstract boolean check(I obj);
+	public abstract boolean isObject(T obj);
 	protected abstract ITextComponent setupDescription();
 	//@formatter:on
 	
@@ -37,5 +41,20 @@ public abstract class QuestRequirement<T, I> {
 		}
 		
 		return realDesc;
+	}
+	
+	public static class CheckResult {
+		public final boolean finished;
+		public final PlayerEntity player;
+		
+		protected CheckResult() {
+			this.finished = false;
+			this.player = null;
+		}
+		
+		protected CheckResult(PlayerEntity player) {
+			this.finished = true;
+			this.player = player;
+		}
 	}
 }

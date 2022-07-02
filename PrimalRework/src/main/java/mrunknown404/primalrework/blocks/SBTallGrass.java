@@ -1,17 +1,12 @@
 package mrunknown404.primalrework.blocks;
 
-import java.util.function.Supplier;
-
-import mrunknown404.primalrework.blocks.raw.IBiomeColored;
-import mrunknown404.primalrework.blocks.raw.StagedBlock;
+import mrunknown404.primalrework.blocks.BlockInfo.Hardness;
+import mrunknown404.primalrework.blocks.HarvestInfo.DropInfo;
 import mrunknown404.primalrework.init.InitItems;
 import mrunknown404.primalrework.init.InitPRItemGroups;
 import mrunknown404.primalrework.init.InitStages;
-import mrunknown404.primalrework.items.raw.StagedItem.ItemType;
-import mrunknown404.primalrework.utils.BlockInfo;
-import mrunknown404.primalrework.utils.BlockInfo.Hardness;
-import mrunknown404.primalrework.utils.HarvestInfo;
-import mrunknown404.primalrework.utils.HarvestInfo.DropInfo;
+import mrunknown404.primalrework.items.StagedItem.ItemType;
+import mrunknown404.primalrework.utils.ROISIProvider;
 import mrunknown404.primalrework.utils.enums.ToolMaterial;
 import mrunknown404.primalrework.utils.enums.ToolType;
 import mrunknown404.primalrework.utils.helpers.BlockH;
@@ -25,18 +20,17 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
-import net.minecraftforge.fml.RegistryObject;
 
 @SuppressWarnings("deprecation")
 public class SBTallGrass extends StagedBlock implements IBiomeColored {
 	private final VoxelShape shape;
 	
-	public SBTallGrass(Supplier<RegistryObject<StagedBlock>> self, Hardness hardness, VoxelShape shape) {
+	public SBTallGrass(ROISIProvider<StagedBlock> self, Hardness hardness, VoxelShape shape) {
 		super(InitStages.STAGE_0, 64, InitPRItemGroups.BLOCKS, BlockInfo.with(BlockInfo.REPLACEABLE_PLANT, hardness), BlockStateType.normal, BlockModelType.none,
-				new HarvestInfo(ToolType.NONE, ToolMaterial.HAND, DropInfo.item(InitItems.PLANT_FIBER, 30)),
-				new HarvestInfo(ToolType.KNIFE, ToolMaterial.CLAY, DropInfo.item(InitItems.PLANT_FIBER, 80)),
-				new HarvestInfo(ToolType.HOE, ToolMaterial.CLAY, DropInfo.item(InitItems.PLANT_FIBER, 80) /* TODO add seeds here */),
-				new HarvestInfo(ToolType.SHEARS, ToolMaterial.CLAY, DropInfo.block(self, 80)));
+				new HarvestInfo(ToolType.NONE, ToolMaterial.HAND, DropInfo.of(InitItems.PLANT_FIBER, 30)),
+				new HarvestInfo(ToolType.KNIFE, ToolMaterial.CLAY, DropInfo.of(InitItems.PLANT_FIBER, 80)),
+				new HarvestInfo(ToolType.HOE, ToolMaterial.CLAY, DropInfo.of(InitItems.PLANT_FIBER, 80) /* TODO add seeds here */),
+				new HarvestInfo(ToolType.SHEARS, ToolMaterial.CLAY, DropInfo.of(self, 80)));
 		this.shape = shape;
 	}
 	

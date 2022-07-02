@@ -12,9 +12,7 @@ import mrunknown404.primalrework.init.InitRegistry;
 import mrunknown404.primalrework.network.NetworkHandler;
 import mrunknown404.primalrework.network.packets.POpenInventory;
 import mrunknown404.primalrework.network.packets.PSyncStage;
-import mrunknown404.primalrework.stage.StagedTag;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.network.NetworkDirection;
 
 public class Proxy {
@@ -32,10 +30,6 @@ public class Proxy {
 	public void setup() {
 		NetworkHandler.registerPacket(PSyncStage.class, NetworkDirection.PLAY_TO_CLIENT);
 		NetworkHandler.registerPacket(POpenInventory.class, NetworkDirection.PLAY_TO_SERVER);
-		
-		for (RegistryObject<StagedTag> tag : InitRegistry.getTags()) {
-			tag.get().finish();
-		}
 		
 		InitQuests.load();
 		InitRecipes.load();

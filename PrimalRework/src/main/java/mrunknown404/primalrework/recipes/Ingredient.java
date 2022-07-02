@@ -5,13 +5,13 @@ import java.util.Arrays;
 import java.util.List;
 
 import mrunknown404.primalrework.init.InitStagedTags;
-import mrunknown404.primalrework.items.raw.StagedItem;
+import mrunknown404.primalrework.items.StagedItem;
 import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.stage.StagedTag;
 import mrunknown404.primalrework.utils.Cache;
 import mrunknown404.primalrework.utils.helpers.StageH;
 
-public class Ingredient {
+public class Ingredient implements IIngredientProvider {
 	public static final Ingredient EMPTY = createUsingItem(null);
 	
 	private final StagedItem item;
@@ -77,6 +77,11 @@ public class Ingredient {
 		
 		itemsCache.set(StageH.getStage(), items);
 		return itemsCache.get();
+	}
+	
+	@Override
+	public Ingredient getIngredient() {
+		return this;
 	}
 	
 	@Override

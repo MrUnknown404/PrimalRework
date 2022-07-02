@@ -12,7 +12,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import mrunknown404.primalrework.PrimalRework;
 import mrunknown404.primalrework.client.gui.recipedisplays.RecipeDisplay;
 import mrunknown404.primalrework.init.InitPRFuels;
-import mrunknown404.primalrework.items.raw.StagedItem;
+import mrunknown404.primalrework.items.StagedItem;
 import mrunknown404.primalrework.recipes.StagedRecipe;
 import mrunknown404.primalrework.utils.Pair;
 import mrunknown404.primalrework.utils.enums.FuelType;

@@ -8,11 +8,12 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 import mrunknown404.primalrework.PrimalRework;
-import mrunknown404.primalrework.blocks.raw.StagedBlock;
-import mrunknown404.primalrework.items.raw.SIBlock;
-import mrunknown404.primalrework.items.raw.StagedItem;
+import mrunknown404.primalrework.blocks.StagedBlock;
+import mrunknown404.primalrework.items.SIBlock;
+import mrunknown404.primalrework.items.StagedItem;
 import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.stage.StagedTag;
+import mrunknown404.primalrework.utils.ROISIProvider;
 import mrunknown404.primalrework.world.biome.PRBiome;
 import mrunknown404.primalrework.world.biome.provider.BiomeProviderPrimal;
 import net.minecraft.block.Block;
@@ -166,21 +167,21 @@ public class InitRegistry {
 		return STAGED_TAGS.register(name, o);
 	}
 	
-	public static <T extends StagedBlock> RegistryObject<T> blockNoItem(String name, Supplier<T> o) {
-		return BLOCKS.register(name, o);
+	public static <T extends StagedBlock> ROISIProvider<T> blockNoItem(String name, Supplier<T> o) {
+		return new ROISIProvider<T>(BLOCKS.register(name, o));
 	}
 	
-	public static <T extends StagedBlock> RegistryObject<T> block(String name, Supplier<T> o) {
+	public static <T extends StagedBlock> ROISIProvider<T> block(String name, Supplier<T> o) {
 		RegistryObject<T> ro = BLOCKS.register(name, o);
 		item(name, () -> new SIBlock(ro.get()));
-		return ro;
+		return new ROISIProvider<T>(ro);
 	}
 	
-	public static <T extends StagedItem> RegistryObject<T> item(String name, Supplier<T> o) {
-		return ITEMS.register(name, o);
+	public static <T extends StagedItem> ROISIProvider<T> item(String name, Supplier<T> o) {
+		return new ROISIProvider<T>(ITEMS.register(name, o));
 	}
 	
-	public static <T extends TileEntity> RegistryObject<TileEntityType<T>> tileEntity(String name, Supplier<T> entity, RegistryObject<StagedBlock> block) {
+	public static <T extends TileEntity> RegistryObject<TileEntityType<T>> tileEntity(String name, Supplier<T> entity, ROISIProvider<StagedBlock> block) {
 		return TILE_ENTITIES.register(name, () -> TileEntityType.Builder.of(entity, block.get()).build(null));
 	}
 	

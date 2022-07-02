@@ -1,11 +1,8 @@
 package mrunknown404.primalrework.blocks;
 
-import mrunknown404.primalrework.blocks.raw.SBRotatedPillar;
+import mrunknown404.primalrework.blocks.BlockInfo.Hardness;
 import mrunknown404.primalrework.init.InitPRItemGroups;
 import mrunknown404.primalrework.init.InitStages;
-import mrunknown404.primalrework.utils.BlockInfo;
-import mrunknown404.primalrework.utils.HarvestInfo;
-import mrunknown404.primalrework.utils.BlockInfo.Hardness;
 import net.minecraft.block.BlockState;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.math.BlockPos;

@@ -3,10 +3,10 @@ package mrunknown404.primalrework.datagen;
 import com.google.common.base.Preconditions;
 
 import mrunknown404.primalrework.PrimalRework;
+import mrunknown404.primalrework.blocks.SBSlab;
 import mrunknown404.primalrework.blocks.SBStrippedLog;
 import mrunknown404.primalrework.blocks.SBUnlitPrimalWallTorch;
-import mrunknown404.primalrework.blocks.raw.SBSlab;
-import mrunknown404.primalrework.blocks.raw.StagedBlock;
+import mrunknown404.primalrework.blocks.StagedBlock;
 import mrunknown404.primalrework.init.InitRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.RotatedPillarBlock;

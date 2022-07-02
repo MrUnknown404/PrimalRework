@@ -1,4 +1,4 @@
-package mrunknown404.primalrework.utils;
+package mrunknown404.primalrework.blocks;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

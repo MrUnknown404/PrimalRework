@@ -5,7 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import mrunknown404.primalrework.items.raw.StagedItem;
+import mrunknown404.primalrework.items.ISIProvider;
+import mrunknown404.primalrework.items.StagedItem;
+import mrunknown404.primalrework.recipes.IIngredientProvider;
 import mrunknown404.primalrework.recipes.SRBurnableFuel;
 import mrunknown404.primalrework.utils.Cache;
 import mrunknown404.primalrework.utils.Pair;
@@ -25,36 +27,36 @@ public class InitPRFuels {
 		}
 		
 		int oneBurnableItem = 200;
-		addFuel(FuelType.BURNABLE_FUEL, InitItems.STICK.get(), oneBurnableItem / 4);
+		addFuel(FuelType.BURNABLE_FUEL, InitItems.STICK, oneBurnableItem / 4);
 	}
 	
-	public static void addFuel(FuelType type, StagedItem item, int cookTime) {
-		FUELS.get(type).put(item, cookTime);
+	public static <T extends IIngredientProvider & ISIProvider> void addFuel(FuelType type, T item, int cookTime) {
+		FUELS.get(type).put(item.getStagedItem(), cookTime);
 		FUELS_AS_RECIPES.get(type).add(new SRBurnableFuel(item, cookTime));
 	}
 	
-	public static boolean isFuelItem(FuelType type, StagedItem item) {
+	public static boolean isFuelItem(FuelType type, ISIProvider item) {
 		return getBurnTime(type, item) > 0;
 	}
 	
-	public static int getBurnTime(FuelType type, StagedItem item) {
-		return FUELS.get(type).getOrDefault(item, 0);
+	public static int getBurnTime(FuelType type, ISIProvider item) {
+		return FUELS.get(type).getOrDefault(item.getStagedItem(), 0);
 	}
 	
-	public static Map<FuelType, Pair<StagedItem, Integer>> getFuels(StagedItem item) {
-		if (fuelsCache.is(item)) {
+	public static Map<FuelType, Pair<StagedItem, Integer>> getFuels(ISIProvider item) {
+		if (fuelsCache.is(item.getStagedItem())) {
 			return fuelsCache.get();
 		}
 		
 		Map<FuelType, Pair<StagedItem, Integer>> map = new HashMap<FuelType, Pair<StagedItem, Integer>>();
 		for (FuelType fuel : FuelType.values()) {
-			int i = FUELS.get(fuel).getOrDefault(item, -1);
+			int i = FUELS.get(fuel).getOrDefault(item.getStagedItem(), -1);
 			if (i != -1) {
-				map.put(fuel, Pair.of(item, -1));
+				map.put(fuel, Pair.of(item.getStagedItem(), -1));
 			}
 		}
 		
-		fuelsCache.set(item, map);
+		fuelsCache.set(item.getStagedItem(), map);
 		return map;
 	}
 	

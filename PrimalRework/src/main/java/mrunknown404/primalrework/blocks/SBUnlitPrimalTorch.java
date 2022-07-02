@@ -2,14 +2,11 @@ package mrunknown404.primalrework.blocks;
 
 import java.util.function.Supplier;
 
-import mrunknown404.primalrework.blocks.raw.StagedBlock;
+import mrunknown404.primalrework.blocks.BlockInfo.UniqueRawBlockInfo;
 import mrunknown404.primalrework.init.InitPRItemGroups;
 import mrunknown404.primalrework.init.InitStages;
-import mrunknown404.primalrework.items.raw.StagedItem.ItemType;
+import mrunknown404.primalrework.items.StagedItem.ItemType;
 import mrunknown404.primalrework.stage.Stage;
-import mrunknown404.primalrework.utils.BlockInfo;
-import mrunknown404.primalrework.utils.HarvestInfo;
-import mrunknown404.primalrework.utils.BlockInfo.UniqueRawBlockInfo;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Direction;

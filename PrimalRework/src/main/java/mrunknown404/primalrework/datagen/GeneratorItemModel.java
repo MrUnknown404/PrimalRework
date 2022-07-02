@@ -2,7 +2,7 @@ package mrunknown404.primalrework.datagen;
 
 import mrunknown404.primalrework.PrimalRework;
 import mrunknown404.primalrework.init.InitRegistry;
-import mrunknown404.primalrework.items.raw.StagedItem;
+import mrunknown404.primalrework.items.StagedItem;
 import mrunknown404.primalrework.utils.IMetalColored;
 import mrunknown404.primalrework.utils.enums.Metal;
 import mrunknown404.primalrework.utils.enums.ToolMaterial;

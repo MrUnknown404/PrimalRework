@@ -2,14 +2,9 @@ package mrunknown404.primalrework.blocks;
 
 import java.util.Random;
 
-import mrunknown404.primalrework.blocks.raw.IBiomeColored;
-import mrunknown404.primalrework.blocks.raw.SBSlab;
-import mrunknown404.primalrework.blocks.raw.SBSnowyDirt;
+import mrunknown404.primalrework.blocks.HarvestInfo.DropInfo;
 import mrunknown404.primalrework.init.InitBlocks;
 import mrunknown404.primalrework.init.InitStages;
-import mrunknown404.primalrework.utils.BlockInfo;
-import mrunknown404.primalrework.utils.HarvestInfo;
-import mrunknown404.primalrework.utils.HarvestInfo.DropInfo;
 import mrunknown404.primalrework.utils.enums.ToolMaterial;
 import mrunknown404.primalrework.utils.enums.ToolType;
 import mrunknown404.primalrework.utils.helpers.BlockH;
@@ -25,7 +20,7 @@ import net.minecraft.world.server.ServerWorld;
 @SuppressWarnings("deprecation")
 public class SBGrassSlab extends SBSlab implements IBiomeColored { //TODO replace with my snow
 	public SBGrassSlab() {
-		super(InitStages.STAGE_0, BlockInfo.of(BlockInfo.DRY_GRASS), new HarvestInfo(ToolType.SHOVEL, ToolMaterial.CLAY, DropInfo.block(() -> InitBlocks.DIRT_SLAB)));
+		super(InitStages.STAGE_0, BlockInfo.of(BlockInfo.DRY_GRASS), new HarvestInfo(ToolType.SHOVEL, ToolMaterial.CLAY, DropInfo.of(InitBlocks.DIRT_SLAB)));
 	}
 	
 	@Override
@@ -53,8 +48,8 @@ public class SBGrassSlab extends SBSlab implements IBiomeColored { //TODO replac
 					BlockState state1 = world.getBlockState(blockpos);
 					
 					if (state1.is(InitBlocks.DIRT.get()) && canPropagate(state1, world, blockpos)) {
-						world.setBlockAndUpdate(blockpos,
-								InitBlocks.GRASS_BLOCK.get().defaultBlockState().setValue(SBSnowyDirt.SNOWY, Boolean.valueOf(world.getBlockState(blockpos.above()).is(Blocks.SNOW))));
+						world.setBlockAndUpdate(blockpos, InitBlocks.GRASS_BLOCK.get().defaultBlockState().setValue(SBSnowyDirt.SNOWY,
+								Boolean.valueOf(world.getBlockState(blockpos.above()).is(Blocks.SNOW))));
 					} else if (state1.is(InitBlocks.DIRT_SLAB.get()) && canPropagate(state1, world, blockpos)) {
 						world.setBlockAndUpdate(blockpos, defaultBlockState().setValue(SBSlab.TYPE, world.getBlockState(blockpos).getValue(SBSlab.TYPE)));
 					}

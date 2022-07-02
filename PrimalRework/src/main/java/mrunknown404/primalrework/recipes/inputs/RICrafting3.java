@@ -5,11 +5,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import mrunknown404.primalrework.items.raw.StagedItem;
+import mrunknown404.primalrework.recipes.IIngredientProvider;
 import mrunknown404.primalrework.recipes.Ingredient;
-import mrunknown404.primalrework.stage.StagedTag;
 import mrunknown404.primalrework.utils.enums.RecipeType;
-import net.minecraftforge.fml.RegistryObject;
 
 public class RICrafting3 extends RecipeInput<RICrafting3> {
 	private final List<Ingredient> ingredients;
@@ -133,13 +131,7 @@ public class RICrafting3 extends RecipeInput<RICrafting3> {
 	}
 	
 	public boolean has(Ingredient input) {
-		for (Ingredient ing : ingredients) {
-			if (ing.matches(input)) {
-				return true;
-			}
-		}
-		
-		return false;
+		return ingredients.stream().anyMatch((i) -> i.matches(input));
 	}
 	
 	@Override
@@ -185,7 +177,7 @@ public class RICrafting3 extends RecipeInput<RICrafting3> {
 			return new RICrafting3(ingredients, false);
 		}
 		
-		public Builder setRing(Object i) {
+		public Builder setRing(IIngredientProvider i) {
 			Ingredient ig = create(i);
 			ingredients.set(0, ig);
 			ingredients.set(1, ig);
@@ -198,7 +190,7 @@ public class RICrafting3 extends RecipeInput<RICrafting3> {
 			return this;
 		}
 		
-		public Builder set2x2(Object i0, Object i1, Object i2, Object i3) {
+		public Builder set2x2(IIngredientProvider i0, IIngredientProvider i1, IIngredientProvider i2, IIngredientProvider i3) {
 			ingredients.set(0, create(i0));
 			ingredients.set(1, create(i1));
 			ingredients.set(3, create(i2));
@@ -206,23 +198,24 @@ public class RICrafting3 extends RecipeInput<RICrafting3> {
 			return this;
 		}
 		
-		public Builder set2x2(Object i) {
+		public Builder set2x2(IIngredientProvider i) {
 			Ingredient ig = create(i);
 			return set2x2(ig, ig, ig, ig);
 		}
 		
-		public Builder set1x2(Object i0, Object i1) {
+		public Builder set1x2(IIngredientProvider i0, IIngredientProvider i1) {
 			ingredients.set(0, create(i0));
 			ingredients.set(3, create(i1));
 			return this;
 		}
 		
-		public Builder set1x2(Object i) {
+		public Builder set1x2(IIngredientProvider i) {
 			Ingredient ig = create(i);
 			return set1x2(ig, ig);
 		}
 		
-		public Builder set3x3(Object i0, Object i1, Object i2, Object i3, Object i4, Object i5, Object i6, Object i7, Object i8) {
+		public Builder set3x3(IIngredientProvider i0, IIngredientProvider i1, IIngredientProvider i2, IIngredientProvider i3, IIngredientProvider i4, IIngredientProvider i5,
+				IIngredientProvider i6, IIngredientProvider i7, IIngredientProvider i8) {
 			ingredients.set(0, create(i0));
 			ingredients.set(1, create(i1));
 			ingredients.set(2, create(i2));
@@ -235,12 +228,12 @@ public class RICrafting3 extends RecipeInput<RICrafting3> {
 			return this;
 		}
 		
-		public Builder set3x3(Object i) {
+		public Builder set3x3(IIngredientProvider i) {
 			Ingredient ig = create(i);
 			return set3x3(ig, ig, ig, ig, ig, ig, ig, ig, ig);
 		}
 		
-		public Builder set2x3(Object i0, Object i1, Object i2, Object i3, Object i4, Object i5) {
+		public Builder set2x3(IIngredientProvider i0, IIngredientProvider i1, IIngredientProvider i2, IIngredientProvider i3, IIngredientProvider i4, IIngredientProvider i5) {
 			ingredients.set(0, create(i0));
 			ingredients.set(1, create(i1));
 			ingredients.set(3, create(i2));
@@ -250,24 +243,24 @@ public class RICrafting3 extends RecipeInput<RICrafting3> {
 			return this;
 		}
 		
-		public Builder set2x3(Object i) {
+		public Builder set2x3(IIngredientProvider i) {
 			Ingredient ig = create(i);
 			return set2x3(ig, ig, ig, ig, ig, ig);
 		}
 		
-		public Builder set1x3(Object i0, Object i1, Object i2) {
+		public Builder set1x3(IIngredientProvider i0, IIngredientProvider i1, IIngredientProvider i2) {
 			ingredients.set(0, create(i0));
 			ingredients.set(3, create(i1));
 			ingredients.set(6, create(i2));
 			return this;
 		}
 		
-		public Builder set1x3(Object i) {
+		public Builder set1x3(IIngredientProvider i) {
 			Ingredient ig = create(i);
 			return set1x3(ig, ig, ig);
 		}
 		
-		public Builder setMiddle(Object i) {
+		public Builder setMiddle(IIngredientProvider i) {
 			ingredients.set(4, create(i));
 			return this;
 		}
@@ -286,9 +279,12 @@ public class RICrafting3 extends RecipeInput<RICrafting3> {
 			return new RICrafting3(ingredients, true);
 		}
 		
-		public SBuilder set(Object... i) {
+		public SBuilder set(IIngredientProvider... i) {
 			if (i.length > 9) {
 				System.out.println("Tried to feed in too much ingredients");
+				return this;
+			} else if (i.length == 0) {
+				System.out.println("Tried to feed in too little ingredients");
 				return this;
 			}
 			
@@ -298,7 +294,7 @@ public class RICrafting3 extends RecipeInput<RICrafting3> {
 			return this;
 		}
 		
-		public SBuilder set(Object i, int amount) {
+		public SBuilder set(IIngredientProvider i, int amount) {
 			if (amount > 10) {
 				System.out.println("Tried to feed in too much ingredients");
 				return this;
@@ -314,21 +310,8 @@ public class RICrafting3 extends RecipeInput<RICrafting3> {
 		}
 	}
 	
-	private static Ingredient create(Object obj) {
-		if (obj == null) {
-			return Ingredient.EMPTY;
-		} else if (obj instanceof Ingredient) {
-			return (Ingredient) obj;
-		} else if (obj instanceof StagedItem) {
-			return Ingredient.createUsingItem((StagedItem) obj);
-		} else if (obj instanceof StagedTag) {
-			return Ingredient.createUsingTag((StagedTag) obj);
-		} else if (obj instanceof RegistryObject) {
-			return create(((RegistryObject<?>) obj).get());
-		}
-		
-		System.err.println("Invalid ingredient " + obj);
-		return null;
+	private static Ingredient create(IIngredientProvider obj) {
+		return obj == null ? Ingredient.EMPTY : obj.getIngredient();
 	}
 	
 	private static class IngredientCompare implements Comparator<Ingredient> {

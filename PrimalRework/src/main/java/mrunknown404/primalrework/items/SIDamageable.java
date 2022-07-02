@@ -1,4 +1,4 @@
-package mrunknown404.primalrework.items.raw;
+package mrunknown404.primalrework.items;
 
 import java.util.function.Supplier;
 

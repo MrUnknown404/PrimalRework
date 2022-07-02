@@ -6,7 +6,6 @@ import java.util.function.Supplier;
 import mrunknown404.primalrework.init.InitBlocks;
 import mrunknown404.primalrework.init.InitItems;
 import mrunknown404.primalrework.init.InitPRItemGroups;
-import mrunknown404.primalrework.items.raw.SIDamageable;
 import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.utils.enums.ToolMaterial;
 import mrunknown404.primalrework.utils.enums.ToolType;

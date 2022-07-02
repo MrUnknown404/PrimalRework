@@ -1,11 +1,9 @@
-package mrunknown404.primalrework.blocks.raw;
+package mrunknown404.primalrework.blocks;
 
 import java.util.function.Supplier;
 
 import mrunknown404.primalrework.init.InitPRItemGroups;
 import mrunknown404.primalrework.stage.Stage;
-import mrunknown404.primalrework.utils.BlockInfo;
-import mrunknown404.primalrework.utils.HarvestInfo;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.IWaterLoggable;
@@ -78,7 +76,7 @@ public class SBSlab extends StagedBlock implements IWaterLoggable {
 	@Override
 	public boolean canBeReplaced(BlockState state, BlockItemUseContext ctx) {
 		SlabType slabtype = state.getValue(TYPE);
-		if (slabtype != SlabType.DOUBLE && ctx.getItemInHand().getItem() == asStagedItem()) {
+		if (slabtype != SlabType.DOUBLE && ctx.getItemInHand().getItem() == getStagedItem()) {
 			if (ctx.replacingClickedOnBlock()) {
 				boolean flag = ctx.getClickLocation().y - ctx.getClickedPos().getY() > 0.5;
 				Direction direction = ctx.getClickedFace();

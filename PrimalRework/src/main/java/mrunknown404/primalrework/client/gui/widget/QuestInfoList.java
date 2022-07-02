@@ -38,9 +38,8 @@ public class QuestInfoList extends AbstractList<QuestInfoList.QuestInfoEntry> {
 		this.quest = quest;
 		this.x0 = 40;
 		this.headerHeight = 26;
-		
-		this.headerHeight += quest.hasReward() ? (this.headerHeight == 26 ? 20 : 10) : 0;
-		this.headerHeight += quest.isRoot() ? 0 : (this.headerHeight == 26 ? 20 : 10);
+		this.headerHeight += quest.hasReward() ? (headerHeight == 26 ? 20 : 10) : 0;
+		this.headerHeight += quest.isRoot() ? 0 : (headerHeight == 26 ? 20 : 10);
 		
 		for (ITextComponent text : quest.getDescription()) {
 			addEntry(new QuestInfoEntry(this, mc, text));

@@ -1,4 +1,4 @@
-package mrunknown404.primalrework.blocks.raw;
+package mrunknown404.primalrework.blocks;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,11 +8,12 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 import mrunknown404.primalrework.init.InitPRItemGroups;
-import mrunknown404.primalrework.items.raw.StagedItem;
-import mrunknown404.primalrework.items.raw.StagedItem.ItemType;
+import mrunknown404.primalrework.items.ISIProvider;
+import mrunknown404.primalrework.items.StagedItem;
+import mrunknown404.primalrework.items.StagedItem.ItemType;
+import mrunknown404.primalrework.recipes.IIngredientProvider;
+import mrunknown404.primalrework.recipes.Ingredient;
 import mrunknown404.primalrework.stage.Stage;
-import mrunknown404.primalrework.utils.BlockInfo;
-import mrunknown404.primalrework.utils.HarvestInfo;
 import mrunknown404.primalrework.utils.enums.Element;
 import mrunknown404.primalrework.utils.enums.ToolType;
 import mrunknown404.primalrework.utils.helpers.WordH;
@@ -27,7 +28,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockReader;
 
-public class StagedBlock extends Block {
+public class StagedBlock extends Block implements ISIProvider, IIngredientProvider {
 	private final Map<ToolType, HarvestInfo> harvestInfos = new HashMap<ToolType, HarvestInfo>();
 	protected final Map<Element, Integer> elements = new LinkedHashMap<Element, Integer>();
 	
@@ -100,9 +101,15 @@ public class StagedBlock extends Block {
 		return ItemType.block;
 	}
 	
-	public StagedItem asStagedItem() {
+	@Override
+	public StagedItem getStagedItem() {
 		Item item = asItem(); //Just used to fix data generation. unsure why StagedTags are even called tbh but they are being called
 		return item == Items.AIR ? null : (StagedItem) item;
+	}
+	
+	@Override
+	public Ingredient getIngredient() {
+		return Ingredient.createUsingItem(getStagedItem());
 	}
 	
 	@Deprecated

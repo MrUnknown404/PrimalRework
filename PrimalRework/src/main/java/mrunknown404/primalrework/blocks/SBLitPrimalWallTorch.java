@@ -2,11 +2,9 @@ package mrunknown404.primalrework.blocks;
 
 import java.util.Random;
 
+import mrunknown404.primalrework.blocks.HarvestInfo.DropInfo;
 import mrunknown404.primalrework.init.InitBlocks;
 import mrunknown404.primalrework.init.InitStages;
-import mrunknown404.primalrework.utils.BlockInfo;
-import mrunknown404.primalrework.utils.HarvestInfo;
-import mrunknown404.primalrework.utils.HarvestInfo.DropInfo;
 import mrunknown404.primalrework.utils.enums.ToolMaterial;
 import mrunknown404.primalrework.utils.enums.ToolType;
 import net.minecraft.block.BlockState;
@@ -17,7 +15,7 @@ import net.minecraft.world.World;
 
 public class SBLitPrimalWallTorch extends SBUnlitPrimalWallTorch {
 	public SBLitPrimalWallTorch() {
-		super(InitStages.STAGE_1, BlockInfo.LIT_PRIMAL_TORCH, new HarvestInfo(ToolType.NONE, ToolMaterial.HAND, DropInfo.block(() -> InitBlocks.LIT_PRIMAL_TORCH)));
+		super(InitStages.STAGE_1, BlockInfo.LIT_PRIMAL_TORCH, new HarvestInfo(ToolType.NONE, ToolMaterial.HAND, DropInfo.of(InitBlocks.LIT_PRIMAL_TORCH)));
 	}
 	
 	@Override

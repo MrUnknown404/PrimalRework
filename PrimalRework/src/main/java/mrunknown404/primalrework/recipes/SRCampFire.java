@@ -1,6 +1,6 @@
 package mrunknown404.primalrework.recipes;
 
-import mrunknown404.primalrework.items.raw.StagedItem;
+import mrunknown404.primalrework.items.StagedItem;
 import mrunknown404.primalrework.recipes.inputs.RICampfire;
 import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.utils.enums.RecipeType;

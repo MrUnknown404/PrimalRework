@@ -8,7 +8,7 @@ import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import mrunknown404.primalrework.client.CraftingDisplayH;
-import mrunknown404.primalrework.items.raw.StagedItem;
+import mrunknown404.primalrework.items.StagedItem;
 import mrunknown404.primalrework.utils.helpers.ColorH;
 import mrunknown404.primalrework.utils.helpers.MathH;
 import mrunknown404.primalrework.utils.helpers.WordH;

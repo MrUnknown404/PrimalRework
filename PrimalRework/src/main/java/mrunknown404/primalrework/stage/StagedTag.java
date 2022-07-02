@@ -4,70 +4,62 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
-import mrunknown404.primalrework.init.InitStages;
-import mrunknown404.primalrework.items.raw.StagedItem;
+import mrunknown404.primalrework.items.ISIProvider;
+import mrunknown404.primalrework.items.StagedItem;
+import mrunknown404.primalrework.recipes.IIngredientProvider;
+import mrunknown404.primalrework.recipes.Ingredient;
 import mrunknown404.primalrework.utils.helpers.StageH;
 import mrunknown404.primalrework.utils.helpers.WordH;
-import net.minecraft.util.text.TextComponent;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.common.util.Lazy;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
-public class StagedTag extends ForgeRegistryEntry<StagedTag> {
-	private final Lazy<TextComponent> displayName = Lazy.of(() -> WordH.translate("stagedtag." + getRegistryName().getPath()));
+public class StagedTag extends ForgeRegistryEntry<StagedTag> implements IIngredientProvider {
+	private final Lazy<ITextComponent> displayName = Lazy.of(() -> WordH.translate("stagedtag." + getRegistryName().getPath()));
 	
-	private final Map<Supplier<Stage>, List<StagedItem>> itemMap_sup = new HashMap<Supplier<Stage>, List<StagedItem>>();
-	private final Map<Stage, List<StagedItem>> itemMap = new HashMap<Stage, List<StagedItem>>();
-	private final Map<StagedItem, Stage> stageMap = new HashMap<StagedItem, Stage>();
+	private final List<StagedItem> items = new ArrayList<StagedItem>();
+	private final Map<Supplier<Stage>, List<StagedItem>> stageMap = new HashMap<Supplier<Stage>, List<StagedItem>>();
+	private final StagedItem icon;
 	
-	public TextComponent getDisplayName() {
+	public StagedTag(ISIProvider icon, ISIProvider... items) {
+		this.icon = icon.getStagedItem();
+		
+		add(icon.getStagedItem());
+		for (ISIProvider i : items) {
+			add(i.getStagedItem());
+		}
+	}
+	
+	public ITextComponent getDisplayName() {
 		return displayName.get();
 	}
 	
-	public StagedTag add(Supplier<Stage> stage, StagedItem item, StagedItem... items) {
-		itemMap_sup.computeIfAbsent(stage, (s) -> new ArrayList<StagedItem>()).add(item);
-		
-		for (StagedItem i : items) {
-			itemMap_sup.get(stage).add(i);
-		}
-		return this;
+	public StagedItem getIcon() {
+		return icon;
 	}
 	
-	public void finish() {
-		for (Entry<Supplier<Stage>, List<StagedItem>> pair : itemMap_sup.entrySet()) {
-			Stage stage = pair.getKey().get();
-			itemMap.computeIfAbsent(stage, (s) -> new ArrayList<StagedItem>());
-			
-			for (StagedItem i : pair.getValue()) {
-				itemMap.get(stage).add(i);
-				stageMap.put(i, stage);
-			}
-		}
+	private void add(StagedItem item) {
+		stageMap.computeIfAbsent(item.stage, (s) -> new ArrayList<StagedItem>()).add(item);
+		items.add(item);
 	}
 	
 	public boolean containsAtCurrentStage(StagedItem item) {
-		return containsAtAll(item) && StageH.hasAccessToStage(stageMap.get(item));
+		return containsAtAll(item) && stageMap.entrySet().stream().anyMatch((e) -> StageH.hasAccessToStage(e.getKey().get()) && e.getValue().contains(item));
 	}
 	
 	public boolean containsAtAll(StagedItem item) {
-		return stageMap.containsKey(item);
+		return items.contains(item);
 	}
 	
 	public List<StagedItem> getItemsWithCurrentStage() {
-		List<Stage> stages = InitStages.getStagesBeforeCurrent(true);
-		List<StagedItem> items = new ArrayList<StagedItem>();
-		
-		for (Stage s : stages) {
-			items.addAll(itemMap.getOrDefault(s, new ArrayList<StagedItem>()));
-		}
-		
-		return items;
+		return stageMap.entrySet().stream().filter((e) -> StageH.hasAccessToStage(e.getKey().get())).map((e) -> e.getValue()).flatMap(List::stream).collect(Collectors.toList());
 	}
 	
 	@Override
-	public String toString() {
-		return "Name: " + getRegistryName() + ", Map: " + itemMap.toString();
+	public Ingredient getIngredient() {
+		return Ingredient.createUsingTag(this);
 	}
 }

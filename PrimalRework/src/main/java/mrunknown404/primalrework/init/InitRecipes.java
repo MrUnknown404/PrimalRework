@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import mrunknown404.primalrework.items.raw.StagedItem;
+import mrunknown404.primalrework.items.StagedItem;
 import mrunknown404.primalrework.recipes.Ingredient;
 import mrunknown404.primalrework.recipes.SRCrafting3;
 import mrunknown404.primalrework.recipes.StagedRecipe;
@@ -41,11 +41,11 @@ public class InitRecipes {
 		
 		//@formatter:off
 		Stage stage = InitStages.STAGE_0.get();
-		addRecipe(new SRCrafting3(stage, InitItems.CLAY_SHOVEL.get(), 1, RICrafting3.shaped().set1x2(InitItems.CLAY_BALL, InitItems.STICK).finish()));
-		addRecipe(new SRCrafting3(stage, InitItems.CLAY_AXE.get(), 1, RICrafting3.shaped().set2x2(InitItems.CLAY_BALL, InitItems.CLAY_BALL, null, InitItems.STICK).finish()));
-		addRecipe(new SRCrafting3(stage, InitItems.PLANT_ROPE.get(), 1, RICrafting3.shapeless().set(InitItems.PLANT_FIBER, 3).finish()));
-		addRecipe(new SRCrafting3(stage, InitItems.PLANT_MESH.get(), 1, RICrafting3.shaped().set2x2(InitItems.STICK, InitItems.PLANT_FIBER, InitItems.PLANT_FIBER, InitItems.STICK).finish()));
-		addRecipe(new SRCrafting3(stage, InitBlocks.THATCH.get().asStagedItem(), 1, RICrafting3.shaped().set2x2(InitItems.PLANT_FIBER).finish()));
+		addRecipe(new SRCrafting3(stage, InitItems.CLAY_SHOVEL, 1, RICrafting3.shaped().set1x2(InitItems.CLAY_BALL, InitItems.STICK).finish()));
+		addRecipe(new SRCrafting3(stage, InitItems.CLAY_AXE,    1, RICrafting3.shaped().set2x2(InitItems.CLAY_BALL, InitItems.CLAY_BALL, null, InitItems.STICK).finish()));
+		addRecipe(new SRCrafting3(stage, InitItems.PLANT_ROPE,  1, RICrafting3.shapeless().set(InitItems.PLANT_FIBER, 3).finish()));
+		addRecipe(new SRCrafting3(stage, InitItems.PLANT_MESH,  1, RICrafting3.shaped().set2x2(InitItems.STICK, InitItems.PLANT_FIBER, InitItems.PLANT_FIBER, InitItems.STICK).finish()));
+		addRecipe(new SRCrafting3(stage, InitBlocks.THATCH,     1, RICrafting3.shaped().set2x2(InitItems.PLANT_FIBER).finish()));
 		//@formatter:on
 	}
 	

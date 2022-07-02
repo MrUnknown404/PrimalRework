@@ -1,8 +1,8 @@
-package mrunknown404.primalrework.items.raw;
+package mrunknown404.primalrework.items;
 
 import java.util.Map;
 
-import mrunknown404.primalrework.blocks.raw.StagedBlock;
+import mrunknown404.primalrework.blocks.StagedBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.BlockItemUseContext;

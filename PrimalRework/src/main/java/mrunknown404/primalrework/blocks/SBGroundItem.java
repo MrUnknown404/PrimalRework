@@ -1,16 +1,11 @@
 package mrunknown404.primalrework.blocks;
 
-import java.util.function.Supplier;
-
-import mrunknown404.primalrework.blocks.raw.StagedBlock;
+import mrunknown404.primalrework.blocks.BlockInfo.UniqueRawBlockInfo;
+import mrunknown404.primalrework.blocks.HarvestInfo.DropInfo;
 import mrunknown404.primalrework.init.InitPRItemGroups;
 import mrunknown404.primalrework.init.InitStages;
-import mrunknown404.primalrework.items.raw.StagedItem;
-import mrunknown404.primalrework.items.raw.StagedItem.ItemType;
-import mrunknown404.primalrework.utils.BlockInfo;
-import mrunknown404.primalrework.utils.HarvestInfo;
-import mrunknown404.primalrework.utils.BlockInfo.UniqueRawBlockInfo;
-import mrunknown404.primalrework.utils.HarvestInfo.DropInfo;
+import mrunknown404.primalrework.items.ISIProvider;
+import mrunknown404.primalrework.items.StagedItem.ItemType;
 import mrunknown404.primalrework.utils.enums.ToolMaterial;
 import mrunknown404.primalrework.utils.enums.ToolType;
 import net.minecraft.block.Block;
@@ -38,9 +33,9 @@ public class SBGroundItem extends StagedBlock implements IWaterLoggable {
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	private static final VoxelShape SHAPE = box(3, 0, 3, 13, 1, 13);
 	
-	public SBGroundItem(UniqueRawBlockInfo info, Supplier<StagedItem> dropInstead) {
+	public SBGroundItem(UniqueRawBlockInfo info, ISIProvider dropInstead) {
 		super(InitStages.STAGE_0, 64, InitPRItemGroups.BLOCKS, BlockInfo.of(info), BlockStateType.random_direction, BlockModelType.none,
-				dropInstead == null ? HarvestInfo.HAND : new HarvestInfo(ToolType.NONE, ToolMaterial.HAND, DropInfo.item(dropInstead)));
+				dropInstead == null ? HarvestInfo.HAND : new HarvestInfo(ToolType.NONE, ToolMaterial.HAND, DropInfo.of(dropInstead)));
 		registerDefaultState(defaultBlockState().setValue(WATERLOGGED, false));
 	}
 	

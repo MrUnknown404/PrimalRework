@@ -3,8 +3,6 @@ package mrunknown404.primalrework.blocks;
 import java.util.Random;
 
 import mrunknown404.primalrework.init.InitStages;
-import mrunknown404.primalrework.utils.BlockInfo;
-import mrunknown404.primalrework.utils.HarvestInfo;
 import net.minecraft.block.BlockState;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.math.BlockPos;

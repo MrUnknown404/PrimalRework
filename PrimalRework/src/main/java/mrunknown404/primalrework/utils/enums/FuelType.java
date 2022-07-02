@@ -1,7 +1,7 @@
 package mrunknown404.primalrework.utils.enums;
 
 import mrunknown404.primalrework.init.InitItems;
-import mrunknown404.primalrework.items.raw.StagedItem;
+import mrunknown404.primalrework.items.StagedItem;
 import mrunknown404.primalrework.utils.helpers.WordH;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.IFormattableTextComponent;

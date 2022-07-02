@@ -5,10 +5,10 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
+import mrunknown404.primalrework.blocks.BlockInfo;
+import mrunknown404.primalrework.blocks.BlockInfo.Hardness;
 import mrunknown404.primalrework.init.InitStages;
 import mrunknown404.primalrework.stage.Stage;
-import mrunknown404.primalrework.utils.BlockInfo;
-import mrunknown404.primalrework.utils.BlockInfo.Hardness;
 import net.minecraftforge.common.util.Lazy;
 
 public enum Metal {

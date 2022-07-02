@@ -1,14 +1,14 @@
 package mrunknown404.primalrework.recipes.inputs;
 
-import mrunknown404.primalrework.items.raw.StagedItem;
+import mrunknown404.primalrework.recipes.IIngredientProvider;
 import mrunknown404.primalrework.recipes.Ingredient;
 
 public class RIBurnableFuel extends RecipeInput<RIBurnableFuel> {
 	public final Ingredient input;
 	
-	public RIBurnableFuel(StagedItem input) {
+	public RIBurnableFuel(IIngredientProvider input) {
 		super(null);
-		this.input = Ingredient.createUsingItem(input);
+		this.input = input.getIngredient();
 	}
 	
 	@Override

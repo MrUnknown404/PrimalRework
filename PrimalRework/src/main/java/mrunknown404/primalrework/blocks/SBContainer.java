@@ -1,4 +1,4 @@
-package mrunknown404.primalrework.blocks.raw;
+package mrunknown404.primalrework.blocks;
 
 import java.util.function.Supplier;
 
@@ -6,8 +6,6 @@ import javax.annotation.Nullable;
 
 import mrunknown404.primalrework.init.InitPRItemGroups;
 import mrunknown404.primalrework.stage.Stage;
-import mrunknown404.primalrework.utils.BlockInfo;
-import mrunknown404.primalrework.utils.HarvestInfo;
 import net.minecraft.block.BlockState;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.tileentity.TileEntity;

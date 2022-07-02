@@ -1,4 +1,4 @@
-package mrunknown404.primalrework.items.raw;
+package mrunknown404.primalrework.items;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -11,6 +11,8 @@ import com.google.common.collect.ImmutableMultimap.Builder;
 import com.google.common.collect.Multimap;
 
 import mrunknown404.primalrework.init.InitPRItemGroups;
+import mrunknown404.primalrework.recipes.IIngredientProvider;
+import mrunknown404.primalrework.recipes.Ingredient;
 import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.utils.enums.Element;
 import mrunknown404.primalrework.utils.enums.ToolMaterial;
@@ -27,7 +29,7 @@ import net.minecraft.item.Rarity;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 
-public class StagedItem extends Item {
+public class StagedItem extends Item implements ISIProvider, IIngredientProvider {
 	public final Supplier<Stage> stage;
 	public final ToolType toolType;
 	public final ToolMaterial toolMat;
@@ -114,6 +116,16 @@ public class StagedItem extends Item {
 	
 	public boolean usesVanillaNamespace() {
 		return usesVanillaNamespace;
+	}
+	
+	@Override
+	public StagedItem getStagedItem() {
+		return this;
+	}
+	
+	@Override
+	public Ingredient getIngredient() {
+		return Ingredient.createUsingItem(this);
 	}
 	
 	public static Properties toProperties(int maxStackSize, int maxDamage, ItemGroup tab, Rarity rarity, Food food, boolean isFireResistant, boolean canRepair) {
