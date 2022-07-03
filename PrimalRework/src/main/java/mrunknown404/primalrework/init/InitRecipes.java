@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import mrunknown404.primalrework.PrimalRework;
 import mrunknown404.primalrework.items.StagedItem;
 import mrunknown404.primalrework.recipes.Ingredient;
 import mrunknown404.primalrework.recipes.SRCrafting3;
@@ -47,6 +48,9 @@ public class InitRecipes {
 		addRecipe(new SRCrafting3(stage, InitItems.PLANT_MESH,  1, RICrafting3.shaped().set2x2(InitItems.STICK, InitItems.PLANT_FIBER, InitItems.PLANT_FIBER, InitItems.STICK).finish()));
 		addRecipe(new SRCrafting3(stage, InitBlocks.THATCH,     1, RICrafting3.shaped().set2x2(InitItems.PLANT_FIBER).finish()));
 		//@formatter:on
+		
+		PrimalRework.printDivider();
+		RECIPES.forEach((type, list) -> System.out.println("Loaded '" + list.size() + "' recipes for " + type));
 	}
 	
 	public static void addRecipe(StagedRecipe<?, ?> recipe) {

@@ -1,7 +1,6 @@
 package mrunknown404.primalrework.utils.enums;
 
 public enum Element {
-	UNKNOWN("??", 0, 0),
 	HYDROGEN("H", 14, 20),
 	HELIUM("He", 1, 4),
 	LITHIUM("Li", 454, 1615),

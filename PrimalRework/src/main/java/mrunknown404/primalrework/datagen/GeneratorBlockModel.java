@@ -3,9 +3,9 @@ package mrunknown404.primalrework.datagen;
 import mrunknown404.primalrework.PrimalRework;
 import mrunknown404.primalrework.blocks.SBMetal;
 import mrunknown404.primalrework.blocks.StagedBlock;
+import mrunknown404.primalrework.init.InitMetals;
 import mrunknown404.primalrework.init.InitRegistry;
 import mrunknown404.primalrework.utils.IMetalColored;
-import mrunknown404.primalrework.utils.enums.Metal;
 import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.util.ResourceLocation;
@@ -32,7 +32,7 @@ class GeneratorBlockModel extends ModelProvider<TexturelessModelBuilder> {
 			String name = rawName;
 			
 			if (b instanceof IMetalColored) {
-				if (((IMetalColored) b).getMetal() != Metal.UNKNOWN) {
+				if (((IMetalColored) b).getMetal() != InitMetals.UNKNOWN.get()) {
 					name = "template_" + name.substring(name.indexOf('_') + 1);
 				}
 			}
@@ -41,7 +41,7 @@ class GeneratorBlockModel extends ModelProvider<TexturelessModelBuilder> {
 				case none:
 					break;
 				case normal:
-					if (b instanceof SBMetal && ((SBMetal) b).getMetal() != Metal.UNKNOWN) {
+					if (b instanceof SBMetal && ((SBMetal) b).getMetal() != InitMetals.UNKNOWN.get()) {
 						getBuilder(rawName).parent(getExistingFile(new ResourceLocation(id, "block/template_metal_block")));
 					} else {
 						cubeAll(rawName, new ResourceLocation(id, "block/" + name));

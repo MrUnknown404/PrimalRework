@@ -11,10 +11,11 @@ import mrunknown404.primalrework.items.SIIngot;
 import mrunknown404.primalrework.items.SIRawPart;
 import mrunknown404.primalrework.items.SISimpleTool;
 import mrunknown404.primalrework.items.StagedItem;
+import mrunknown404.primalrework.registry.Metal;
+import mrunknown404.primalrework.registry.PRRegistryObject;
 import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.utils.ROISIProvider;
 import mrunknown404.primalrework.utils.enums.CraftingToolType;
-import mrunknown404.primalrework.utils.enums.Metal;
 import mrunknown404.primalrework.utils.enums.RawPart;
 import mrunknown404.primalrework.utils.enums.ToolMaterial;
 import mrunknown404.primalrework.utils.enums.ToolType;
@@ -94,28 +95,27 @@ public class InitItems {
 			registerCast(type);
 		}
 		
-		for (Metal metal : Metal.values()) {
-			INGOTS.add(InitRegistry.item(metal.toString() + "_ingot", () -> new SIIngot(metal, false)));
-			INGOTS.add(InitRegistry.item(metal.toString() + "_nugget", () -> new SIIngot(metal, true)));
+		for (PRRegistryObject<Metal> metal : InitRegistry.getMetals()) {
+			INGOTS.add(InitRegistry.item(metal.get() + "_ingot", () -> new SIIngot(metal.get(), false)));
+			INGOTS.add(InitRegistry.item(metal.get() + "_nugget", () -> new SIIngot(metal.get(), true)));
 			
 			for (RawPart type : RawPart.values()) {
-				RAW_PARTS.add(InitRegistry.item(metal.toString() + "_" + type.toString(), () -> new SIRawPart<RawPart>(InitPRItemGroups.RAW_PARTS, metal, type)));
+				RAW_PARTS.add(InitRegistry.item(metal.get() + "_" + type, () -> new SIRawPart<RawPart>(InitPRItemGroups.RAW_PARTS, metal.get(), type)));
 			}
 			for (CraftingToolType type : CraftingToolType.values()) {
-				CRAFTING_TOOLS.add(InitRegistry.item(metal.toString() + "_" + type.toString(), () -> new SICraftingTool(metal, type)));
-				TOOL_PARTS.add(
-						InitRegistry.item(metal.toString() + "_" + type.toString() + "_part", () -> new SIRawPart<CraftingToolType>(InitPRItemGroups.TOOL_PARTS, metal, type)));
+				CRAFTING_TOOLS.add(InitRegistry.item(metal.get() + "_" + type, () -> new SICraftingTool(metal.get(), type)));
+				TOOL_PARTS.add(InitRegistry.item(metal.get() + "_" + type + "_part", () -> new SIRawPart<CraftingToolType>(InitPRItemGroups.TOOL_PARTS, metal.get(), type)));
 			}
 			for (ToolType type : ToolType.values()) {
 				if (type != ToolType.NONE) {
-					TOOL_PARTS.add(InitRegistry.item(metal.toString() + "_" + type.toString() + "_part", () -> new SIRawPart<ToolType>(InitPRItemGroups.TOOL_PARTS, metal, type)));
+					TOOL_PARTS.add(InitRegistry.item(metal.get() + "_" + type + "_part", () -> new SIRawPart<ToolType>(InitPRItemGroups.TOOL_PARTS, metal.get(), type)));
 				}
 			}
 		}
 	}
 	
 	private static ROISIProvider<StagedItem> simpleTool(Supplier<Stage> stage, ToolType toolType, ToolMaterial toolMat) {
-		return InitRegistry.item(toolMat.toString() + "_" + toolType.toString(),
+		return InitRegistry.item(toolMat + "_" + toolType,
 				() -> toolMat == ToolMaterial.WOOD ? new SISimpleTool(stage, toolType, toolMat).useVanillaNamespace() : new SISimpleTool(stage, toolType, toolMat));
 	}
 	

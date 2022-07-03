@@ -1,7 +1,7 @@
 package mrunknown404.primalrework.items;
 
+import mrunknown404.primalrework.registry.Metal;
 import mrunknown404.primalrework.utils.IMetalColored;
-import mrunknown404.primalrework.utils.enums.Metal;
 import mrunknown404.primalrework.utils.enums.ToolMaterial;
 import mrunknown404.primalrework.utils.enums.ToolType;
 import net.minecraft.item.ItemGroup;
@@ -15,7 +15,7 @@ public class SIRawPart<T extends Enum<T>> extends StagedItem implements IMetalCo
 		super(metal.stage, 32, ToolType.NONE, ToolMaterial.HAND, group, Rarity.COMMON, null, false, false, ItemType.generated);
 		this.metal = metal;
 		this.part = part;
-		this.elements.putAll(metal.getElements());
+		this.elements.putAll(metal.elements);
 	}
 	
 	@Override

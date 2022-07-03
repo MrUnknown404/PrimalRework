@@ -1,10 +1,10 @@
 package mrunknown404.primalrework.datagen;
 
 import mrunknown404.primalrework.PrimalRework;
+import mrunknown404.primalrework.init.InitMetals;
 import mrunknown404.primalrework.init.InitRegistry;
 import mrunknown404.primalrework.items.StagedItem;
 import mrunknown404.primalrework.utils.IMetalColored;
-import mrunknown404.primalrework.utils.enums.Metal;
 import mrunknown404.primalrework.utils.enums.ToolMaterial;
 import mrunknown404.primalrework.utils.enums.ToolType;
 import net.minecraft.data.DataGenerator;
@@ -38,7 +38,7 @@ class GeneratorItemModel extends ModelProvider<TexturelessModelBuilder> {
 			}
 			
 			if (i instanceof IMetalColored) {
-				if (((IMetalColored) i).getMetal() != Metal.UNKNOWN) {
+				if (((IMetalColored) i).getMetal() != InitMetals.UNKNOWN.get()) {
 					name = "template_" + name.substring(name.indexOf('_') + 1);
 				}
 			}

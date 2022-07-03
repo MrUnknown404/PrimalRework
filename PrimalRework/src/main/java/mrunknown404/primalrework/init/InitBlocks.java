@@ -29,8 +29,9 @@ import mrunknown404.primalrework.blocks.StagedBlock;
 import mrunknown404.primalrework.blocks.StagedBlock.BlockModelType;
 import mrunknown404.primalrework.blocks.StagedBlock.BlockStateType;
 import mrunknown404.primalrework.items.SIWallFloor;
+import mrunknown404.primalrework.registry.Metal;
+import mrunknown404.primalrework.registry.PRRegistryObject;
 import mrunknown404.primalrework.utils.ROISIProvider;
-import mrunknown404.primalrework.utils.enums.Metal;
 import mrunknown404.primalrework.utils.enums.ToolMaterial;
 import mrunknown404.primalrework.utils.enums.ToolType;
 import net.minecraft.block.Block;
@@ -70,7 +71,7 @@ public class InitBlocks {
 	public static final ROISIProvider<StagedBlock> SANDSTONE = InitRegistry.block("sandstone", () -> new StagedBlock(InitStages.STAGE_0, BlockInfo.of(BlockInfo.STONE), HarvestInfo.PICKAXE_MIN).useVanillaNamespaceFull());
 	
 	//SLABS
-	public static final ROISIProvider<StagedBlock> DIRT_SLAB = InitRegistry.block("dirt_slab", () -> new SBSlab(InitStages.STAGE_0, BlockInfo.of(BlockInfo.DIRT), HarvestInfo.SHOVEL_MIN).useVanillaNamespaceFull());
+	public static final ROISIProvider<StagedBlock> DIRT_SLAB = InitRegistry.block("dirt_slab", () -> new SBSlab(InitStages.STAGE_0, BlockInfo.of(BlockInfo.DIRT), HarvestInfo.SHOVEL_MIN).useVanillaNamespaceBlock());
 	public static final ROISIProvider<StagedBlock> GRASS_SLAB = InitRegistry.block("grass_slab", () -> new SBGrassSlab());
 	
 	//MACHINES
@@ -95,12 +96,12 @@ public class InitBlocks {
 	public static final ROISIProvider<StagedBlock> ACACIA_LEAVES = InitRegistry.block("acacia_leaves", () -> new SBLeaves().useVanillaNamespaceFull());
 	public static final ROISIProvider<StagedBlock> DARK_OAK_LEAVES = InitRegistry.block("dark_oak_leaves", () -> new SBLeaves().useVanillaNamespaceFull());
 	
-	//@formatter:off
+	//@formatter:on
 	
 	private static WallFloorWrap registerWallFloor(String floorName, String wallname, Supplier<StagedBlock> floorBlock, Supplier<StagedBlock> wallBlock) {
 		ROISIProvider<StagedBlock> floor = InitRegistry.blockNoItem(floorName, floorBlock);
 		ROISIProvider<StagedBlock> wall = InitRegistry.blockNoItem(wallname, wallBlock);
-		InitRegistry.item(floorName, ()-> new SIWallFloor(floor.get(), wall.get()));
+		InitRegistry.item(floorName, () -> new SIWallFloor(floor.get(), wall.get()));
 		return lastWrap = new WallFloorWrap(floor, wall);
 	}
 	
@@ -111,8 +112,8 @@ public class InitBlocks {
 	}
 	
 	static {
-		for (Metal metal : Metal.values()) {
-			INGOT_BLOCKS.add(InitRegistry.block(metal + "_block",()->new SBMetal(metal)));
+		for (PRRegistryObject<Metal> metal : InitRegistry.getMetals()) {
+			INGOT_BLOCKS.add(InitRegistry.block(metal.get() + "_block", () -> new SBMetal(metal.get())));
 		}
 	}
 	

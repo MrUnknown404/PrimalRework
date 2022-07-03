@@ -3,7 +3,6 @@ package mrunknown404.primalrework.utils.helpers;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map.Entry;
 
 import mrunknown404.primalrework.blocks.BlockInfo;
 import mrunknown404.primalrework.blocks.HarvestInfo;
@@ -117,12 +116,9 @@ public class ItemH {
 			}
 			
 			if (!item.getElements().isEmpty() && config.tooltips_showAtomicSymbolsInTooltips.get()) {
-				String s = "";
-				for (Entry<Element, Integer> entry : item.getElements().entrySet()) {
-					s += entry.getKey() == Element.UNKNOWN || entry.getValue() == 1 ? entry.getKey().atomicSymbol() :
-							entry.getKey().atomicSymbol() + Element.subscript(entry.getValue());
-				}
-				list.add(WordH.string(s).withStyle(TextFormatting.GREEN));
+				final StringBuilder s = new StringBuilder();
+				item.getElements().forEach((k, v) -> s.append(v == 1 ? k.atomicSymbol() : k.atomicSymbol() + Element.subscript(v)));
+				list.add(WordH.string(s.toString()).withStyle(TextFormatting.GREEN));
 			}
 			
 			if (config.tooltips_showStage.get()) {

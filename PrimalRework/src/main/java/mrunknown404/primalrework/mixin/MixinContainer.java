@@ -3,8 +3,6 @@ package mrunknown404.primalrework.mixin;
 import java.util.List;
 import java.util.Set;
 
-import javax.annotation.Nullable;
-
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -43,14 +41,14 @@ public abstract class MixinContainer {
 		PlayerInventory playerinventory = player.inventory;
 		if (type == ClickType.QUICK_CRAFT) {
 			int i1 = quickcraftStatus;
-			quickcraftStatus = getQuickcraftHeader(mouse);
+			quickcraftStatus = Container.getQuickcraftHeader(mouse);
 			if ((i1 != 1 || quickcraftStatus != 2) && i1 != quickcraftStatus) {
 				resetQuickCraft();
 			} else if (playerinventory.getCarried().isEmpty()) {
 				resetQuickCraft();
 			} else if (quickcraftStatus == 0) {
-				quickcraftType = getQuickcraftType(mouse);
-				if (isValidQuickcraftType(quickcraftType, player)) {
+				quickcraftType = Container.getQuickcraftType(mouse);
+				if (Container.isValidQuickcraftType(quickcraftType, player)) {
 					quickcraftStatus = 1;
 					quickcraftSlots.clear();
 				} else {
@@ -59,7 +57,7 @@ public abstract class MixinContainer {
 			} else if (quickcraftStatus == 1) {
 				Slot slot7 = slots.get(slot0);
 				ItemStack itemstack12 = playerinventory.getCarried();
-				if (slot7 != null && canItemQuickReplace(slot7, itemstack12, true) && slot7.mayPlace(itemstack12) &&
+				if (slot7 != null && Container.canItemQuickReplace(slot7, itemstack12, true) && slot7.mayPlace(itemstack12) &&
 						(quickcraftType == 2 || itemstack12.getCount() > quickcraftSlots.size()) && canDragTo(slot7)) {
 					quickcraftSlots.add(slot7);
 				}
@@ -70,11 +68,11 @@ public abstract class MixinContainer {
 					
 					for (Slot slot8 : quickcraftSlots) {
 						ItemStack itemstack13 = playerinventory.getCarried();
-						if (slot8 != null && canItemQuickReplace(slot8, itemstack13, true) && slot8.mayPlace(itemstack13) &&
+						if (slot8 != null && Container.canItemQuickReplace(slot8, itemstack13, true) && slot8.mayPlace(itemstack13) &&
 								(quickcraftType == 2 || itemstack13.getCount() >= quickcraftSlots.size()) && canDragTo(slot8)) {
 							ItemStack itemstack14 = itemstack10.copy();
 							int j3 = slot8.hasItem() ? slot8.getItem().getCount() : 0;
-							getQuickCraftSlotCount(quickcraftSlots, quickcraftType, itemstack14, j3);
+							Container.getQuickCraftSlotCount(quickcraftSlots, quickcraftType, itemstack14, j3);
 							int k3 = Math.min(itemstack14.getMaxStackSize(), slot8.getMaxStackSize(itemstack14));
 							if (itemstack14.getCount() > k3) {
 								itemstack14.setCount(k3);
@@ -209,7 +207,7 @@ public abstract class MixinContainer {
 								continue;
 							}
 							
-							if (slot1.hasItem() && canItemQuickReplace(slot1, itemstack5, true) && slot1.mayPickup(player) && canTakeItemForPickAll(itemstack5, slot1)) {
+							if (slot1.hasItem() && Container.canItemQuickReplace(slot1, itemstack5, true) && slot1.mayPickup(player) && canTakeItemForPickAll(itemstack5, slot1)) {
 								ItemStack itemstack3 = slot1.getItem();
 								if (j != 0 || itemstack3.getCount() != itemstack3.getMaxStackSize()) {
 									int l = Math.min(itemstack5.getMaxStackSize() - itemstack5.getCount(), itemstack3.getCount());
@@ -265,7 +263,7 @@ public abstract class MixinContainer {
 					slot6.onTake(player, playerinventory.getCarried());
 				}
 			} else if (slot6.mayPlace(itemstack11)) {
-				if (consideredTheSameItem(itemstack9, itemstack11)) {
+				if (Container.consideredTheSameItem(itemstack9, itemstack11)) {
 					int l2 = mouse == 0 ? itemstack11.getCount() : 1;
 					if (l2 > slot6.getMaxStackSize(itemstack11) - itemstack9.getCount()) {
 						l2 = slot6.getMaxStackSize(itemstack11) - itemstack9.getCount();
@@ -281,7 +279,7 @@ public abstract class MixinContainer {
 					slot6.set(itemstack11);
 					playerinventory.setCarried(itemstack9);
 				}
-			} else if (itemstack11.getMaxStackSize() > 1 && consideredTheSameItem(itemstack9, itemstack11) && !itemstack9.isEmpty()) {
+			} else if (itemstack11.getMaxStackSize() > 1 && Container.consideredTheSameItem(itemstack9, itemstack11) && !itemstack9.isEmpty()) {
 				int i3 = itemstack9.getCount();
 				if (i3 + itemstack11.getCount() <= itemstack11.getMaxStackSize()) {
 					itemstack11.grow(i3);
@@ -298,12 +296,6 @@ public abstract class MixinContainer {
 		return itemstack;
 	}
 	
-	@SuppressWarnings("unused")
-	@Shadow
-	public static boolean isValidQuickcraftType(int p_180610_0_, PlayerEntity p_180610_1_) {
-		throw new IllegalStateException("Mixin failed to shadow");
-	}
-	
 	@Shadow
 	public void broadcastChanges() {
 		throw new IllegalStateException("Mixin failed to shadow");
@@ -316,37 +308,7 @@ public abstract class MixinContainer {
 	
 	@SuppressWarnings("unused")
 	@Shadow
-	public static boolean canItemQuickReplace(@Nullable Slot p_94527_0_, ItemStack p_94527_1_, boolean p_94527_2_) {
-		throw new IllegalStateException("Mixin failed to shadow");
-	}
-	
-	@SuppressWarnings("unused")
-	@Shadow
-	public static void getQuickCraftSlotCount(Set<Slot> p_94525_0_, int p_94525_1_, ItemStack p_94525_2_, int p_94525_3_) {
-		throw new IllegalStateException("Mixin failed to shadow");
-	}
-	
-	@SuppressWarnings("unused")
-	@Shadow
 	public boolean canDragTo(Slot p_94531_1_) {
-		throw new IllegalStateException("Mixin failed to shadow");
-	}
-	
-	@SuppressWarnings("unused")
-	@Shadow
-	public static int getQuickcraftType(int p_94529_0_) {
-		throw new IllegalStateException("Mixin failed to shadow");
-	}
-	
-	@SuppressWarnings("unused")
-	@Shadow
-	public static int getQuickcraftHeader(int p_94532_0_) {
-		throw new IllegalStateException("Mixin failed to shadow");
-	}
-	
-	@SuppressWarnings("unused")
-	@Shadow
-	public static boolean consideredTheSameItem(ItemStack p_195929_0_, ItemStack p_195929_1_) {
 		throw new IllegalStateException("Mixin failed to shadow");
 	}
 	

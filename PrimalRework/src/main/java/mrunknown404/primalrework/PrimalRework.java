@@ -10,6 +10,7 @@ import mrunknown404.primalrework.utils.Proxy;
 import mrunknown404.primalrework.utils.ProxyClient;
 import net.minecraft.command.CommandSource;
 import net.minecraftforge.event.RegisterCommandsEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -19,12 +20,14 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
+/** If anyone is reading this looking for code examples, there's a lot of bad practices here. Don't do anything I do. You have been warned! */
 @PrimalMod
 @Mod(PrimalRework.MOD_ID)
 public class PrimalRework {
 	public static final String MOD_ID = "primalrework";
 	
-	public static Proxy proxy;
+	private static final String OUTPUT_DIVIDER = "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=";
+	private static Proxy proxy;
 	
 	public PrimalRework() {
 		System.out.println("#-# Thank you for playing PrimalRework! #-#");
@@ -34,8 +37,9 @@ public class PrimalRework {
 		proxy = DistExecutor.safeRunForDist(() -> ProxyClient::new, () -> Proxy::new);
 		proxy.preSetup(this);
 		
-		FMLJavaModLoadingContext.get().getModEventBus().addListener((FMLCommonSetupEvent e) -> proxy.setup());
-		FMLJavaModLoadingContext.get().getModEventBus().addListener((FMLLoadCompleteEvent e) -> System.err.println("#-# Finished loading PrimalRework! #-#"));
+		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+		bus.addListener((FMLCommonSetupEvent e) -> proxy.setup());
+		bus.addListener((FMLLoadCompleteEvent e) -> System.err.println("#-# Finished loading PrimalRework! #-#"));
 	}
 	
 	@SubscribeEvent
@@ -43,5 +47,9 @@ public class PrimalRework {
 		CommandDispatcher<CommandSource> commandDispatcher = e.getDispatcher();
 		CommandStage.register(commandDispatcher);
 		CommandQuest.register(commandDispatcher);
+	}
+	
+	public static void printDivider() {
+		System.out.println(OUTPUT_DIVIDER);
 	}
 }

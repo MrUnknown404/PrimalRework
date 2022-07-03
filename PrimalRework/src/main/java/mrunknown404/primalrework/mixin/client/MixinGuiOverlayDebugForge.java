@@ -15,7 +15,7 @@ public class MixinGuiOverlayDebugForge extends DebugOverlayGui {
 		super(null);
 	}
 	
-	@Inject(at = @At("HEAD"), method = "getLeft()Ljava/util/List;", cancellable = true)
+	@Inject(at = @At("HEAD"), method = "getLeft()Ljava/util/List;", cancellable = true, remap = false)
 	private void getLeft(CallbackInfoReturnable<List<String>> callback) {
 		callback.setReturnValue(getGameInformation());
 	}

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import mrunknown404.primalrework.PrimalRework;
 import mrunknown404.primalrework.items.ISIProvider;
 import mrunknown404.primalrework.items.StagedItem;
 import mrunknown404.primalrework.recipes.IIngredientProvider;
@@ -28,6 +29,9 @@ public class InitPRFuels {
 		
 		int oneBurnableItem = 200;
 		addFuel(FuelType.BURNABLE_FUEL, InitItems.STICK, oneBurnableItem / 4);
+		
+		PrimalRework.printDivider();
+		FUELS.forEach((type, list) -> System.out.println("Loaded " + list.size() + " fuels for " + type));
 	}
 	
 	public static <T extends IIngredientProvider & ISIProvider> void addFuel(FuelType type, T item, int cookTime) {

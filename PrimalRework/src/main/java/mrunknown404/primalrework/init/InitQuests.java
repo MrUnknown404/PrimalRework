@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import mrunknown404.primalrework.PrimalRework;
 import mrunknown404.primalrework.quests.Quest;
 import mrunknown404.primalrework.quests.QuestTab;
 import mrunknown404.primalrework.quests.requirements.QRItem;
@@ -47,6 +48,7 @@ public class InitQuests {
 	//@formatter:on
 	
 	public static void load() {
+		PrimalRework.printDivider();
 		System.out.println("Loaded '" + QUEST_TABS.size() + "' quest tabs!");
 		System.out.println("Loaded '" + QUESTS.size() + "' quests!");
 	}

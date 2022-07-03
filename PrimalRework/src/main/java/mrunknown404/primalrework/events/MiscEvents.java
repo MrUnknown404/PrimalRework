@@ -102,6 +102,6 @@ public class MiscEvents {
 	@SubscribeEvent
 	public void onReload(AddReloadListenerEvent e) {
 		ObfuscationReflectionHelper.setPrivateValue(DataPackRegistries.class, e.getDataPackRegistries(), new NoAdvancementManager(e.getDataPackRegistries().getPredicateManager()),
-				"advancements");
+				"field_240958_h_"); //advancements
 	}
 }

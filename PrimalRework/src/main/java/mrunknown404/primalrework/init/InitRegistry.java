@@ -3,14 +3,21 @@ package mrunknown404.primalrework.init;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Supplier;
 
 import mrunknown404.primalrework.PrimalRework;
+import mrunknown404.primalrework.api.events.EventPRRegistryRegistration;
 import mrunknown404.primalrework.blocks.StagedBlock;
 import mrunknown404.primalrework.items.SIBlock;
 import mrunknown404.primalrework.items.StagedItem;
+import mrunknown404.primalrework.registry.Metal;
+import mrunknown404.primalrework.registry.PRRegistry;
+import mrunknown404.primalrework.registry.PRRegistry.State;
+import mrunknown404.primalrework.registry.PRRegistryObject;
 import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.stage.StagedTag;
 import mrunknown404.primalrework.utils.ROISIProvider;
@@ -41,16 +48,15 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryBuilder;
 
 public class InitRegistry {
-	private static final IForgeRegistry<Stage> REG_STAGES = new RegistryBuilder<Stage>().setName(new ResourceLocation(PrimalRework.MOD_ID, "stages")).setType(Stage.class).create();
-	private static final IForgeRegistry<StagedTag> REG_STAGED_TAGS = new RegistryBuilder<StagedTag>().setName(new ResourceLocation(PrimalRework.MOD_ID, "staged_tags"))
-			.setType(StagedTag.class).create();
-	
-	private static final DeferredRegister<Stage> STAGES = DeferredRegister.create(REG_STAGES, PrimalRework.MOD_ID);
-	private static final DeferredRegister<StagedTag> STAGED_TAGS = DeferredRegister.create(REG_STAGED_TAGS, PrimalRework.MOD_ID);
+	private static final DeferredRegister<Stage> STAGES = DeferredRegister
+			.create(new RegistryBuilder<Stage>().setName(new ResourceLocation(PrimalRework.MOD_ID, "stages")).setType(Stage.class).create(), PrimalRework.MOD_ID);
+	private static final DeferredRegister<StagedTag> STAGED_TAGS = DeferredRegister
+			.create(new RegistryBuilder<StagedTag>().setName(new ResourceLocation(PrimalRework.MOD_ID, "staged_tags")).setType(StagedTag.class).create(), PrimalRework.MOD_ID);
+	//private static final DeferredRegister<Metal> METALS = DeferredRegister
+	//		.create(new RegistryBuilder<Metal>().setName(new ResourceLocation(PrimalRework.MOD_ID, "metals")).setType(Metal.class).create(), PrimalRework.MOD_ID);
 	
 	private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, PrimalRework.MOD_ID);
 	private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, PrimalRework.MOD_ID);
@@ -61,21 +67,47 @@ public class InitRegistry {
 	private static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, PrimalRework.MOD_ID);
 	private static final DeferredRegister<SurfaceBuilder<?>> SURFACE_BUILDERS = DeferredRegister.create(ForgeRegistries.SURFACE_BUILDERS, PrimalRework.MOD_ID);
 	
+	private static final Map<String, List<PRRegistry<?>>> PR_REGISTRIES = new LinkedHashMap<String, List<PRRegistry<?>>>();
+	private static final PRRegistry<Metal> METALS = new PRRegistry<Metal>(PrimalRework.MOD_ID, Metal.class, InitMetals.class);
+	
 	private static final Map<String, List<Supplier<ConfiguredFeature<?, ?>>>> BIOME_FEATURE_MAP = new HashMap<String, List<Supplier<ConfiguredFeature<?, ?>>>>();
 	private static final Map<String, PRBiome> PR_BIOMES = new HashMap<String, PRBiome>();
+	private static State registrationState = State.TOO_EARLY;
 	
 	public static void register() {
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-		bus.addGenericListener(Stage.class, InitRegistry::registerStages);
-		bus.addGenericListener(StagedTag.class, InitRegistry::registerStagedTags);
-		bus.addGenericListener(Block.class, InitRegistry::registerBlocks);
-		bus.addGenericListener(Item.class, InitRegistry::registerItems);
-		bus.addGenericListener(TileEntityType.class, InitRegistry::registerTileEntities);
-		bus.addGenericListener(ContainerType.class, InitRegistry::registerContainers);
-		bus.addGenericListener(ForgeWorldType.class, InitRegistry::registerWorldTypes);
-		bus.addGenericListener(Feature.class, InitRegistry::registerFeatures);
-		bus.addGenericListener(Biome.class, InitRegistry::registerBiomes);
-		bus.addGenericListener(SurfaceBuilder.class, InitRegistry::registerSurfaceBuilders);
+		//bus.addListener((EventPRRegistryRegistration e) -> e.registerRegistry(METALS)); //Example!
+		
+		registrationState = State.NOW;
+		PrimalRework.printDivider();
+		System.out.println("Adding PrimalRework's registries");
+		registerRegistry(METALS);
+		
+		PrimalRework.printDivider();
+		System.out.println("Adding Addon's registries");
+		
+		EventPRRegistryRegistration event = new EventPRRegistryRegistration();
+		bus.post(event);
+		event.getRegistries().forEach((reg) -> registerRegistry(reg));
+		
+		PrimalRework.printDivider();
+		PR_REGISTRIES.values().stream().forEach((list) -> list.forEach((reg) -> {
+			loadClass(reg.classToLoad);
+			System.out.println("Loaded " + reg.getEntries().size() + " " + reg.clazzType.getSimpleName() + "s");
+			reg.finish();
+		}));
+		registrationState = State.LATE;
+		
+		bus.addGenericListener(Stage.class, (RegistryEvent.Register<Stage> e) -> loadClass(InitStages.class, STAGES, "Stages"));
+		bus.addGenericListener(StagedTag.class, (RegistryEvent.Register<StagedTag> e) -> loadClass(InitStagedTags.class, STAGED_TAGS, "StagedTags"));
+		bus.addGenericListener(Block.class, (RegistryEvent.Register<Block> e) -> loadClass(InitBlocks.class, BLOCKS, "Blocks"));
+		bus.addGenericListener(Item.class, (RegistryEvent.Register<Item> e) -> loadClass(InitItems.class, ITEMS, "Items"));
+		bus.addGenericListener(TileEntityType.class, (RegistryEvent.Register<TileEntityType<?>> e) -> loadClass(InitTileEntities.class, TILE_ENTITIES, "Tile Entity Types"));
+		bus.addGenericListener(ContainerType.class, (RegistryEvent.Register<ContainerType<?>> e) -> loadClass(InitContainers.class, CONTAINERS, "Container Types"));
+		bus.addGenericListener(ForgeWorldType.class, (RegistryEvent.Register<ForgeWorldType> e) -> loadClass(InitWorld.class, WORLD_TYPES, "World Types"));
+		bus.addGenericListener(Feature.class, (RegistryEvent.Register<Feature<?>> e) -> loadClass(InitFeatures.class, FEATURES, "Features"));
+		bus.addGenericListener(Biome.class, (RegistryEvent.Register<Biome> e) -> loadClass(InitBiomes.class, BIOMES, "Biomes"));
+		bus.addGenericListener(SurfaceBuilder.class, (RegistryEvent.Register<SurfaceBuilder<?>> e) -> loadClass(InitSurfaceBuilders.class, SURFACE_BUILDERS, "Surface Builders"));
 		
 		STAGES.register(bus);
 		STAGED_TAGS.register(bus);
@@ -91,63 +123,35 @@ public class InitRegistry {
 		Registry.register(Registry.BIOME_SOURCE, new ResourceLocation(PrimalRework.MOD_ID, "biome_source"), BiomeProviderPrimal.PRIMAL_CODEC);
 	}
 	
-	@SubscribeEvent
-	public static void registerStages(@SuppressWarnings("unused") RegistryEvent.Register<Stage> e) {
-		loadClass(InitStages.class);
+	private static void registerRegistry(final PRRegistry<?> registry) {
+		if (InitRegistry.getRegistrationState() == State.TOO_EARLY) {
+			throw new UnsupportedOperationException("Cannot register registry too early!");
+		} else if (InitRegistry.getRegistrationState() == State.LATE) {
+			throw new UnsupportedOperationException("Cannot register registry when registry registration is finished!");
+		}
+		
+		Objects.requireNonNull(registry);
+		
+		System.out.println("New registry " + registry);
+		List<PRRegistry<?>> list = PR_REGISTRIES.computeIfAbsent(registry.getModID(), (modid) -> new ArrayList<PRRegistry<?>>());
+		
+		if (list.stream().anyMatch((reg) -> reg.clazzType == registry.clazzType || reg.is(registry))) {
+			throw new IllegalArgumentException("Duplicate registry for [modid:registryType] -> " + registry);
+		}
+		
+		list.add(registry);
 	}
 	
-	@SubscribeEvent
-	public static void registerStagedTags(@SuppressWarnings("unused") RegistryEvent.Register<StagedTag> e) {
-		loadClass(InitStagedTags.class);
-	}
-	
-	@SubscribeEvent
-	public static void registerBlocks(@SuppressWarnings("unused") RegistryEvent.Register<Block> e) {
-		loadClass(InitBlocks.class);
-	}
-	
-	@SubscribeEvent
-	public static void registerItems(@SuppressWarnings("unused") RegistryEvent.Register<Item> e) {
-		loadClass(InitItems.class);
-	}
-	
-	@SubscribeEvent
-	public static void registerTileEntities(@SuppressWarnings("unused") RegistryEvent.Register<TileEntityType<?>> e) {
-		loadClass(InitTileEntities.class);
-	}
-	
-	@SubscribeEvent
-	public static void registerContainers(@SuppressWarnings("unused") RegistryEvent.Register<ContainerType<?>> e) {
-		loadClass(InitContainers.class);
-	}
-	
-	@SubscribeEvent
-	public static void registerWorldTypes(@SuppressWarnings("unused") RegistryEvent.Register<ForgeWorldType> e) {
-		loadClass(InitWorld.class);
-	}
-	
-	@SubscribeEvent
-	public static void registerFeatures(@SuppressWarnings("unused") RegistryEvent.Register<Feature<?>> e) {
-		loadClass(InitFeatures.class);
-	}
-	
-	@SubscribeEvent
-	public static void registerBiomes(@SuppressWarnings("unused") RegistryEvent.Register<Biome> e) {
-		loadClass(InitBiomes.class);
-	}
-	
-	@SubscribeEvent
-	public static void registerSurfaceBuilders(@SuppressWarnings("unused") RegistryEvent.Register<SurfaceBuilder<?>> e) {
-		loadClass(InitSurfaceBuilders.class);
-	}
-	
-	@SubscribeEvent
-	public static void biomeLoad(BiomeLoadingEvent e) {
-		List<Supplier<ConfiguredFeature<?, ?>>> list = BIOME_FEATURE_MAP.getOrDefault(e.getName().toString(), new ArrayList<Supplier<ConfiguredFeature<?, ?>>>());
-		for (Supplier<ConfiguredFeature<?, ?>> conf : list) {
-			e.getGeneration().addFeature(Decoration.TOP_LAYER_MODIFICATION.ordinal(), () -> InitConfiguredFeatures.GROUND_SLABS);
-			e.getGeneration().addFeature(Decoration.TOP_LAYER_MODIFICATION.ordinal(), () -> InitConfiguredFeatures.GROUND_ITEMS);
-			e.getGeneration().addFeature(Decoration.RAW_GENERATION.ordinal(), conf); //TODO make Decoration configurable
+	private static void loadClass(Class<?> clazz, DeferredRegister<?> reg, String displayName) {
+		if (clazz == InitBlocks.class) {
+			PrimalRework.printDivider();
+		}
+		
+		try {
+			Class.forName(clazz.getName());
+			System.out.println("Loaded " + reg.getEntries().size() + " " + displayName);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
 		}
 	}
 	
@@ -165,6 +169,10 @@ public class InitRegistry {
 	
 	public static RegistryObject<StagedTag> stagedTag(String name, Supplier<StagedTag> o) {
 		return STAGED_TAGS.register(name, o);
+	}
+	
+	public static PRRegistryObject<Metal> metal(String name, Supplier<Metal> o) {
+		return METALS.register(name, o);
 	}
 	
 	public static <T extends StagedBlock> ROISIProvider<T> blockNoItem(String name, Supplier<T> o) {
@@ -208,6 +216,16 @@ public class InitRegistry {
 		return SURFACE_BUILDERS.register(name, o);
 	}
 	
+	@SubscribeEvent
+	public static void biomeLoad(BiomeLoadingEvent e) {
+		List<Supplier<ConfiguredFeature<?, ?>>> list = BIOME_FEATURE_MAP.getOrDefault(e.getName().toString(), new ArrayList<Supplier<ConfiguredFeature<?, ?>>>());
+		for (Supplier<ConfiguredFeature<?, ?>> conf : list) {
+			e.getGeneration().addFeature(Decoration.TOP_LAYER_MODIFICATION.ordinal(), () -> InitConfiguredFeatures.GROUND_SLABS);
+			e.getGeneration().addFeature(Decoration.TOP_LAYER_MODIFICATION.ordinal(), () -> InitConfiguredFeatures.GROUND_ITEMS);
+			e.getGeneration().addFeature(Decoration.RAW_GENERATION.ordinal(), conf); //TODO make Decoration configurable
+		}
+	}
+	
 	public static Collection<RegistryObject<Stage>> getStages() {
 		return STAGES.getEntries();
 	}
@@ -228,7 +246,15 @@ public class InitRegistry {
 		return BIOMES.getEntries();
 	}
 	
+	public static Collection<PRRegistryObject<Metal>> getMetals() {
+		return METALS.getEntries();
+	}
+	
 	public static PRBiome getBiome(String name) {
 		return PR_BIOMES.get(name);
+	}
+	
+	public static State getRegistrationState() {
+		return registrationState;
 	}
 }

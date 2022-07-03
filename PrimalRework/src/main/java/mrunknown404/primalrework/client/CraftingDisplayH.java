@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import mrunknown404.primalrework.client.gui.screen.ScreenRecipeList;
 import mrunknown404.primalrework.init.InitPRFuels;
@@ -21,7 +20,6 @@ import mrunknown404.primalrework.utils.helpers.StageH;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.renderer.ItemRenderer;
-import net.minecraft.client.renderer.model.IBakedModel;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -72,12 +70,7 @@ public class CraftingDisplayH {
 		if (!lateRun) {
 			lateRun = true;
 			ItemRenderer ir = Minecraft.getInstance().getItemRenderer();
-			for (Entry<StagedItem, Data> data : ITEM_DATA.entrySet()) {
-				IBakedModel model = ir.getModel(data.getValue().stack, null, null);
-				if (model.usesBlockLight()) {
-					data.getValue().is3D();
-				}
-			}
+			ITEM_DATA.values().stream().filter((data) -> ir.getModel(data.stack, null, null).usesBlockLight()).forEach((data) -> data.is3D());
 		}
 		
 		return ITEM_DATA.get(item.getItem()).is3D;

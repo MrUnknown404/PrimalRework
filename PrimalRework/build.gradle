@@ -6,7 +6,7 @@ buildscript {
 	}
 	dependencies {
 		classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-		classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
+		classpath 'org.spongepowered:mixingradle:0.7.+'
 	}
 }
 apply plugin: 'net.minecraftforge.gradle'
@@ -16,7 +16,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
 
 version = mod_version
-archivesBaseName = 'PrimalRework' + mc_version
+archivesBaseName = 'PrimalRework-[' + mc_version + ']'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(8)
 
@@ -86,7 +86,7 @@ mixin {
 dependencies {
 	minecraft 'net.minecraftforge:forge:' + mc_version + '-' + forge_version
 	
-	annotationProcessor 'org.spongepowered:mixin:0.8:processor'
+	annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..

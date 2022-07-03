@@ -7,7 +7,6 @@ import mrunknown404.primalrework.PrimalRework;
 import mrunknown404.primalrework.blocks.IBiomeColored;
 import mrunknown404.primalrework.blocks.StagedBlock;
 import mrunknown404.primalrework.client.CraftingDisplayH;
-import mrunknown404.primalrework.client.gui.GuiNoToast;
 import mrunknown404.primalrework.client.gui.screen.container.ScreenCampFire;
 import mrunknown404.primalrework.client.gui.screen.container.ScreenInventory;
 import mrunknown404.primalrework.client.gui.screen.container.ScreenPrimalCraftingTable;
@@ -19,11 +18,11 @@ import mrunknown404.primalrework.events.client.QuestCEvents;
 import mrunknown404.primalrework.events.client.TooltipCEvents;
 import mrunknown404.primalrework.init.InitBlocks;
 import mrunknown404.primalrework.init.InitContainers;
+import mrunknown404.primalrework.init.InitMetals;
 import mrunknown404.primalrework.init.InitRegistry;
 import mrunknown404.primalrework.init.InitTileEntities;
 import mrunknown404.primalrework.items.SIBlock;
 import mrunknown404.primalrework.items.StagedItem;
-import mrunknown404.primalrework.utils.enums.Metal;
 import mrunknown404.primalrework.utils.helpers.ColorH;
 import net.minecraft.block.Block;
 import net.minecraft.client.GameSettings;
@@ -37,7 +36,6 @@ import net.minecraft.item.Item;
 import net.minecraft.world.GrassColors;
 import net.minecraft.world.biome.BiomeColors;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
@@ -62,9 +60,8 @@ public class ProxyClient extends Proxy {
 		super.setup();
 		
 		Minecraft mc = Minecraft.getInstance();
-		ObfuscationReflectionHelper.setPrivateValue(Minecraft.class, mc, new GuiNoToast(mc), "toast");
-		
 		int index = -1;
+		
 		for (int i = 0; i < mc.options.keyMappings.length; i++) {
 			if (mc.options.keyMappings[i] == mc.options.keyAdvancements) {
 				index = i;
@@ -72,7 +69,7 @@ public class ProxyClient extends Proxy {
 			}
 		}
 		
-		ObfuscationReflectionHelper.setPrivateValue(GameSettings.class, mc.options, EMPTY, "keyAdvancements");
+		ObfuscationReflectionHelper.setPrivateValue(GameSettings.class, mc.options, EMPTY, "field_194146_ao"); //keyAdvancements
 		mc.options.keyMappings = ArrayUtils.remove(mc.options.keyMappings, index);
 		
 		ClientRegistry.registerKeyBinding(OPEN_QUESTS);
@@ -95,22 +92,20 @@ public class ProxyClient extends Proxy {
 		ScreenManager.register(InitContainers.PRIMAL_CRAFTING_TABLE.get(), ScreenPrimalCraftingTable::new);
 		ScreenManager.register(InitContainers.INVENTORY.get(), ScreenInventory::new);
 		
-		for (RegistryObject<Item> item : InitRegistry.getItems()) {
-			CraftingDisplayH.addItem((StagedItem) item.get());
-		}
+		InitRegistry.getItems().stream().map((ro) -> (StagedItem) ro.get()).forEach((item) -> CraftingDisplayH.addItem(item));
 		CraftingDisplayH.finish();
 		
 		//Color setup
 		Block[] metalBlocks = InitRegistry.getBlocks().stream().filter((ro) -> {
 			StagedBlock block = (StagedBlock) ro.get();
-			return block instanceof IMetalColored && ((IMetalColored) block).getMetal() != Metal.UNKNOWN;
+			return block instanceof IMetalColored && ((IMetalColored) block).getMetal() != InitMetals.UNKNOWN.get();
 		}).map((ro) -> ro.get()).toArray(Block[]::new);
 		Block[] biomeColored = InitRegistry.getBlocks().stream().filter((ro) -> ro.get() instanceof IBiomeColored).map((ro) -> ro.get()).toArray(Block[]::new);
 		
 		//Block colors
 		mc.getBlockColors().register((state, reader, pos, tintIndex) -> reader != null && pos != null ? BiomeColors.getAverageGrassColor(reader, pos) : GrassColors.get(0.5, 1),
 				biomeColored);
-		mc.getBlockColors().register((state, reader, pos, tintIndex) -> ColorH.rgba2Int(((IMetalColored) state.getBlock()).getMetal().ingotColor), metalBlocks);
+		mc.getBlockColors().register((state, reader, pos, tintIndex) -> ColorH.rgba2Int(((IMetalColored) state.getBlock()).getMetal().color), metalBlocks);
 		
 		//Item colors
 		mc.getItemColors().register((itemstack, tintIndex) -> mc.getBlockColors().getColor(((SIBlock) itemstack.getItem()).getBlock().defaultBlockState(), null, null, tintIndex),
@@ -118,10 +113,10 @@ public class ProxyClient extends Proxy {
 		mc.getItemColors().register((itemstack, tintIndex) -> mc.getBlockColors().getColor(((SIBlock) itemstack.getItem()).getBlock().defaultBlockState(), null, null, tintIndex),
 				metalBlocks);
 		
-		mc.getItemColors().register((itemstack, tintIndex) -> ColorH.rgba2Int(((IMetalColored) itemstack.getItem()).getMetal().ingotColor),
+		mc.getItemColors().register((itemstack, tintIndex) -> ColorH.rgba2Int(((IMetalColored) itemstack.getItem()).getMetal().color),
 				InitRegistry.getItems().stream().filter((ro) -> {
 					StagedItem item = (StagedItem) ro.get();
-					return item instanceof IMetalColored && ((IMetalColored) item).getMetal() != Metal.UNKNOWN;
+					return item instanceof IMetalColored && ((IMetalColored) item).getMetal() != InitMetals.UNKNOWN.get();
 				}).map((ro) -> ro.get()).toArray(Item[]::new));
 	}
 }
