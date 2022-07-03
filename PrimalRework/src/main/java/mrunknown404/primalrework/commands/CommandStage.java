@@ -11,7 +11,6 @@ import mrunknown404.primalrework.utils.helpers.StageH;
 import mrunknown404.primalrework.utils.helpers.WordH;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
-import net.minecraftforge.fml.RegistryObject;
 
 public class CommandStage {
 	public static void register(CommandDispatcher<CommandSource> dispatcher) {
@@ -19,11 +18,11 @@ public class CommandStage {
 		cmd.then(Commands.literal("get").executes(c -> getStage(c)));
 		
 		LiteralArgumentBuilder<CommandSource> set = Commands.literal("set");
-		for (RegistryObject<Stage> stage : InitRegistry.getStages()) {
-			if (stage != InitStages.NO_SHOW) {
-				set.then(Commands.literal(stage.get().getNameID()).executes(c -> setStage(c, stage.get())));
+		InitRegistry.getStages().stream().forEach((s) -> {
+			if (s != InitStages.NO_SHOW) {
+				set.then(Commands.literal(s.get().getNameID()).executes(c -> setStage(c, s.get())));
 			}
-		}
+		});
 		
 		cmd.then(set);
 		dispatcher.register(cmd);

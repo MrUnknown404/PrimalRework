@@ -1,4 +1,4 @@
-package mrunknown404.primalrework.utils;
+package mrunknown404.primalrework.api;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

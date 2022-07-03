@@ -142,8 +142,7 @@ public class ScreenCraftingDisplayItems extends Screen {
 		
 		if (heightItems < listSize) {
 			drawString(stack, font, scrollFaster, 4, height - font.lineHeight - 2, ColorH.rgba2Int(255, 255, 255));
-			int sc = scroll < 0 ? listSize + scroll : scroll;
-			drawString(stack, font, WordH.string(sc + "/" + listSize), 4, height - font.lineHeight * 2 - 4, ColorH.rgba2Int(255, 255, 255));
+			drawString(stack, font, WordH.string((scroll < 0 ? listSize + scroll : scroll) + "/" + listSize), 4, height - font.lineHeight * 2 - 4, ColorH.rgba2Int(255, 255, 255));
 		}
 		
 		RenderSystem.enableDepthTest();
@@ -182,8 +181,8 @@ public class ScreenCraftingDisplayItems extends Screen {
 				return true;
 			}
 			
-			int mod = InputMappings.isKeyDown(minecraft.getWindow().getWindow(), minecraft.options.keyShift.getKey().getValue()) ? heightItems : 2;
-			scroll -= Math.round(scrollDelta * minecraft.options.mouseWheelSensitivity * mod);
+			scroll -= Math.round(scrollDelta * minecraft.options.mouseWheelSensitivity *
+					(InputMappings.isKeyDown(minecraft.getWindow().getWindow(), minecraft.options.keyShift.getKey().getValue()) ? heightItems : 2));
 			
 			if (scroll > listSize - heightItems + 1) {
 				scroll -= listSize;

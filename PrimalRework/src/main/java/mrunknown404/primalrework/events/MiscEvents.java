@@ -2,9 +2,9 @@ package mrunknown404.primalrework.events;
 
 import java.util.Random;
 
+import mrunknown404.primalrework.PrimalRework;
 import mrunknown404.primalrework.init.InitBlocks;
 import mrunknown404.primalrework.init.InitItems;
-import mrunknown404.primalrework.network.NetworkHandler;
 import mrunknown404.primalrework.network.packets.PSyncStage;
 import mrunknown404.primalrework.utils.NoAdvancementManager;
 import mrunknown404.primalrework.utils.helpers.RayTraceH;
@@ -47,7 +47,7 @@ public class MiscEvents {
 	public void onPlayerJoin(PlayerLoggedInEvent e) {
 		PlayerEntity player = e.getPlayer();
 		
-		NetworkHandler.sendPacketToTarget((ServerPlayerEntity) player, new PSyncStage(StageH.getStage()));
+		PrimalRework.NETWORK.sendPacketToTarget((ServerPlayerEntity) player, new PSyncStage(StageH.getStage()));
 	}
 	
 	@SubscribeEvent

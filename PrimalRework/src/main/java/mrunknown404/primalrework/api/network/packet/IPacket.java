@@ -1,4 +1,4 @@
-package mrunknown404.primalrework.network.packets;
+package mrunknown404.primalrework.api.network.packet;
 
 import net.minecraftforge.fml.network.NetworkEvent;
 

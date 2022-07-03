@@ -26,15 +26,11 @@ public class PRAreaTransformer implements IAreaTransformer0 {
 		return biomeRegistry.getID(biomes.get(rand));
 	}
 	
-	public static class BiomeList implements Iterable<Pair<Biome, Integer>> {
-		protected final List<Pair<Biome, Integer>> list = new ArrayList<Pair<Biome, Integer>>();
-		protected int totalWeight;
+	private static class BiomeList implements Iterable<Pair<Biome, Integer>> {
+		private final List<Pair<Biome, Integer>> list = new ArrayList<Pair<Biome, Integer>>();
+		private int totalWeight;
 		
-		public BiomeList() {
-			
-		}
-		
-		public BiomeList(List<Pair<Biome, Integer>> list) {
+		private BiomeList(List<Pair<Biome, Integer>> list) {
 			for (Pair<Biome, Integer> entry : list) {
 				add(entry.getL(), entry.getR());
 			}

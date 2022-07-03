@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import mrunknown404.primalrework.client.gui.screen.ScreenRecipeList;
 import mrunknown404.primalrework.init.InitPRFuels;
@@ -37,9 +38,7 @@ public class CraftingDisplayH {
 	}
 	
 	public static void finish() {
-		for (Data map : ITEM_DATA.values()) {
-			ALL_ITEMS.add(map.stack);
-		}
+		ITEM_DATA.values().forEach((d) -> ALL_ITEMS.add(d.stack));
 		
 		ALL_ITEMS.sort((o1, o2) -> {
 			Item i1 = o1.getItem(), i2 = o2.getItem();
@@ -49,14 +48,7 @@ public class CraftingDisplayH {
 	
 	public static List<ItemStack> getItemList() {
 		if (!ITEM_CACHE.is(StageH.getStage())) {
-			List<ItemStack> list = new ArrayList<ItemStack>();
-			for (ItemStack stack : ALL_ITEMS) {
-				if (StageH.hasAccessToStage(((StagedItem) stack.getItem()).stage.get())) {
-					list.add(stack);
-				}
-			}
-			
-			ITEM_CACHE.set(StageH.getStage(), list);
+			ITEM_CACHE.set(StageH.getStage(), ALL_ITEMS.stream().filter((s) -> StageH.hasAccessToStage(((StagedItem) s.getItem()).stage.get())).collect(Collectors.toList()));
 		}
 		
 		//TODO handle search here

@@ -1,8 +1,7 @@
 package mrunknown404.primalrework.commands;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
@@ -32,13 +31,8 @@ public class CommandQuest {
 	}
 	
 	private static CompletableFuture<Suggestions> getSuggestions(SuggestionsBuilder builder, boolean wantFinished) {
-		List<String> list = new ArrayList<String>();
-		for (Quest quest : InitQuests.getQuests()) {
-			if (quest.isFinished() == wantFinished) {
-				list.add(quest.getName());
-			}
-		}
-		return ISuggestionProvider.suggest(list, builder);
+		return ISuggestionProvider.suggest(InitQuests.getQuests().stream().filter((q) -> q.isFinished() == wantFinished).map((q) -> q.getName()).collect(Collectors.toList()),
+				builder);
 	}
 	
 	private static int finishQuest(CommandContext<CommandSource> src, Quest quest) {

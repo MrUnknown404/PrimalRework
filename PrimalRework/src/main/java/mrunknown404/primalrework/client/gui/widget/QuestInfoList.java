@@ -165,7 +165,6 @@ public class QuestInfoList extends AbstractList<QuestInfoList.QuestInfoEntry> {
 		@Override
 		public void render(MatrixStack stack, int mouseX, int mouseY, float partial) {
 			int x = this.x + questInfo.x0;
-			
 			mc.font.draw(stack, text, x, y, ColorH.rgba2Int(45, 45, 45));
 		}
 	}
@@ -204,7 +203,7 @@ public class QuestInfoList extends AbstractList<QuestInfoList.QuestInfoEntry> {
 		
 		@Override
 		public boolean isDragging() {
-			return this.dragging;
+			return dragging;
 		}
 		
 		@Override

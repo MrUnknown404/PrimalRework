@@ -264,20 +264,12 @@ public class ScreenCreateWorld extends Screen {
 	
 	private OptionalLong parseSeed() {
 		String s = seedEdit.getValue();
-		OptionalLong optionallong;
-		
 		if (StringUtils.isEmpty(s)) {
 			return OptionalLong.empty();
 		}
 		
 		OptionalLong optionallong1 = parseLong(s);
-		if (optionallong1.isPresent() && optionallong1.getAsLong() != 0) {
-			optionallong = optionallong1;
-		} else {
-			optionallong = OptionalLong.of(s.hashCode());
-		}
-		
-		return optionallong;
+		return optionallong1.isPresent() && optionallong1.getAsLong() != 0 ? optionallong1 : OptionalLong.of(s.hashCode());
 	}
 	
 	private static OptionalLong parseLong(String str) {

@@ -18,8 +18,6 @@ import mrunknown404.primalrework.events.client.QuestCEvents;
 import mrunknown404.primalrework.events.client.TooltipCEvents;
 import mrunknown404.primalrework.init.InitBlocks;
 import mrunknown404.primalrework.init.InitContainers;
-import mrunknown404.primalrework.init.InitMetals;
-import mrunknown404.primalrework.init.InitRegistry;
 import mrunknown404.primalrework.init.InitTileEntities;
 import mrunknown404.primalrework.items.SIBlock;
 import mrunknown404.primalrework.items.StagedItem;
@@ -38,6 +36,7 @@ import net.minecraft.world.biome.BiomeColors;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 
 @SuppressWarnings("deprecation")
 public class ProxyClient extends Proxy {
@@ -92,15 +91,13 @@ public class ProxyClient extends Proxy {
 		ScreenManager.register(InitContainers.PRIMAL_CRAFTING_TABLE.get(), ScreenPrimalCraftingTable::new);
 		ScreenManager.register(InitContainers.INVENTORY.get(), ScreenInventory::new);
 		
-		InitRegistry.getItems().stream().map((ro) -> (StagedItem) ro.get()).forEach((item) -> CraftingDisplayH.addItem(item));
+		ForgeRegistries.ITEMS.getValues().stream().filter((i) -> i instanceof StagedItem).forEach((item) -> CraftingDisplayH.addItem((StagedItem) item));
 		CraftingDisplayH.finish();
 		
 		//Color setup
-		Block[] metalBlocks = InitRegistry.getBlocks().stream().filter((ro) -> {
-			StagedBlock block = (StagedBlock) ro.get();
-			return block instanceof IMetalColored && ((IMetalColored) block).getMetal() != InitMetals.UNKNOWN.get();
-		}).map((ro) -> ro.get()).toArray(Block[]::new);
-		Block[] biomeColored = InitRegistry.getBlocks().stream().filter((ro) -> ro.get() instanceof IBiomeColored).map((ro) -> ro.get()).toArray(Block[]::new);
+		Block[] metalBlocks = ForgeRegistries.BLOCKS.getValues().stream()
+				.filter((b) -> b instanceof StagedBlock && b instanceof IMetalColored && ((IMetalColored) b).getMetal().color != null).toArray(Block[]::new);
+		Block[] biomeColored = ForgeRegistries.BLOCKS.getValues().stream().filter((b) -> b instanceof StagedBlock && b instanceof IBiomeColored).toArray(Block[]::new);
 		
 		//Block colors
 		mc.getBlockColors().register((state, reader, pos, tintIndex) -> reader != null && pos != null ? BiomeColors.getAverageGrassColor(reader, pos) : GrassColors.get(0.5, 1),
@@ -113,10 +110,7 @@ public class ProxyClient extends Proxy {
 		mc.getItemColors().register((itemstack, tintIndex) -> mc.getBlockColors().getColor(((SIBlock) itemstack.getItem()).getBlock().defaultBlockState(), null, null, tintIndex),
 				metalBlocks);
 		
-		mc.getItemColors().register((itemstack, tintIndex) -> ColorH.rgba2Int(((IMetalColored) itemstack.getItem()).getMetal().color),
-				InitRegistry.getItems().stream().filter((ro) -> {
-					StagedItem item = (StagedItem) ro.get();
-					return item instanceof IMetalColored && ((IMetalColored) item).getMetal() != InitMetals.UNKNOWN.get();
-				}).map((ro) -> ro.get()).toArray(Item[]::new));
+		mc.getItemColors().register((itemstack, tintIndex) -> ColorH.rgba2Int(((IMetalColored) itemstack.getItem()).getMetal().color), ForgeRegistries.ITEMS.getValues().stream()
+				.filter((i) -> i instanceof StagedItem && i instanceof IMetalColored && ((IMetalColored) i).getMetal().color != null).toArray(Item[]::new));
 	}
 }

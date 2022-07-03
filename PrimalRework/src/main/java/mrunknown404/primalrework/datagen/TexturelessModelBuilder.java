@@ -16,7 +16,7 @@ class TexturelessModelBuilder extends ModelBuilder<TexturelessModelBuilder> {
 	public TexturelessModelBuilder texture(String key, ResourceLocation texture) {
 		Preconditions.checkNotNull(key, "Key must not be null");
 		Preconditions.checkNotNull(texture, "Texture must not be null");
-		this.textures.put(key, texture.toString());
+		textures.put(key, texture.toString());
 		return this;
 	}
 	

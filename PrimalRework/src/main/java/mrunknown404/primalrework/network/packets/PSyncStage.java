@@ -1,5 +1,6 @@
 package mrunknown404.primalrework.network.packets;
 
+import mrunknown404.primalrework.api.network.packet.IPacket;
 import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.utils.helpers.StageH;
 import net.minecraftforge.fml.network.NetworkEvent.Context;

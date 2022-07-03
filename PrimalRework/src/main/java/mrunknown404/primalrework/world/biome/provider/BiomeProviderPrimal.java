@@ -1,6 +1,5 @@
 package mrunknown404.primalrework.world.biome.provider;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.LongFunction;
 import java.util.stream.Collectors;
@@ -21,7 +20,6 @@ import net.minecraft.world.gen.area.IAreaFactory;
 import net.minecraft.world.gen.layer.Layer;
 import net.minecraft.world.gen.layer.LayerUtil;
 import net.minecraft.world.gen.layer.ZoomLayer;
-import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistry;
 
@@ -38,24 +36,17 @@ public class BiomeProviderPrimal extends BiomeProvider {
 	public BiomeProviderPrimal(long seed, Registry<Biome> biomeRegistry) {
 		super(biomeRegistry.stream().collect(Collectors.toList()));
 		this.seed = seed;
-		
-		List<Biome> biomes = new ArrayList<Biome>();
-		for (RegistryObject<Biome> b : InitRegistry.getBiomes()) {
-			biomes.add(b.get());
-		}
-		
-		this.noiseBiomeLayer = buildLayerGen(seed, biomes, (ForgeRegistry<Biome>) ForgeRegistries.BIOMES);
 		this.biomes = biomeRegistry;
-	}
-	
-	private static Layer buildLayerGen(long seed, List<Biome> biomes, ForgeRegistry<Biome> biomeRegistry) {
-		return new Layer(buildLayers(biomes, biomeRegistry, (l) -> new LazyAreaLayerContext(25, seed, l)));
+		this.noiseBiomeLayer = new Layer(buildLayers(InitRegistry.getBiomes().stream().map((b) -> b.get()).collect(Collectors.toList()),
+				(ForgeRegistry<Biome>) ForgeRegistries.BIOMES, (l) -> new LazyAreaLayerContext(25, seed, l)));
 	}
 	
 	private static <T extends IArea, C extends IExtendedNoiseRandom<T>> IAreaFactory<T> buildLayers(List<Biome> biomes, ForgeRegistry<Biome> biomeRegistry,
 			LongFunction<C> seedHandler) {
-		IAreaFactory<T> iareafactory = new PRAreaTransformer(biomes, biomeRegistry).run(seedHandler.apply(1L));
-		iareafactory = LayerUtil.zoom(2001L, ZoomLayer.NORMAL, iareafactory, 4, seedHandler);
+		final int biomeSize = 4;
+		
+		IAreaFactory<T> iareafactory = new PRAreaTransformer(biomes, biomeRegistry).run(seedHandler.apply(1));
+		iareafactory = LayerUtil.zoom(2001, ZoomLayer.NORMAL, iareafactory, biomeSize, seedHandler);
 		
 		return iareafactory;
 	}

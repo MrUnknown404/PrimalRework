@@ -1,7 +1,6 @@
 package mrunknown404.primalrework.datagen;
 
 import mrunknown404.primalrework.PrimalRework;
-import mrunknown404.primalrework.init.InitMetals;
 import mrunknown404.primalrework.init.InitRegistry;
 import mrunknown404.primalrework.items.StagedItem;
 import mrunknown404.primalrework.utils.IMetalColored;
@@ -38,7 +37,7 @@ class GeneratorItemModel extends ModelProvider<TexturelessModelBuilder> {
 			}
 			
 			if (i instanceof IMetalColored) {
-				if (((IMetalColored) i).getMetal() != InitMetals.UNKNOWN.get()) {
+				if (((IMetalColored) i).getMetal().color != null) {
 					name = "template_" + name.substring(name.indexOf('_') + 1);
 				}
 			}

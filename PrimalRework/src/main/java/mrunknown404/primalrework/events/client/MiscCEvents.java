@@ -3,12 +3,12 @@ package mrunknown404.primalrework.events.client;
 import java.util.ArrayList;
 import java.util.List;
 
+import mrunknown404.primalrework.PrimalRework;
+import mrunknown404.primalrework.api.PrimalMod;
 import mrunknown404.primalrework.client.gui.screen.ScreenCreateWorld;
 import mrunknown404.primalrework.client.gui.screen.ScreenNonSupportedMods;
 import mrunknown404.primalrework.client.gui.screen.ScreenPause;
-import mrunknown404.primalrework.network.NetworkHandler;
 import mrunknown404.primalrework.network.packets.POpenInventory;
-import mrunknown404.primalrework.utils.PrimalMod;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.CreateWorldScreen;
 import net.minecraft.client.gui.screen.IngameMenuScreen;
@@ -40,9 +40,7 @@ public class MiscCEvents {
 			ModList.get().forEachModContainer((modid, instance) -> {
 				if (modid.equalsIgnoreCase("minecraft") || modid.equalsIgnoreCase("forge")) {
 					return;
-				}
-				
-				if (!instance.getMod().getClass().isAnnotationPresent(PrimalMod.class)) {
+				} else if (!instance.getMod().getClass().isAnnotationPresent(PrimalMod.class)) {
 					modids.add(modid);
 					System.out.println("Mod '" + modid + "' is not supported!");
 				}
@@ -54,7 +52,7 @@ public class MiscCEvents {
 		} else if (gui instanceof InventoryScreen) {
 			if (!mc.player.isCreative()) {
 				e.setCanceled(true);
-				NetworkHandler.sendPacketToServer(new POpenInventory());
+				PrimalRework.NETWORK.sendPacketToServer(new POpenInventory());
 			} else {
 				e.setGui(new CreativeScreen(mc.player));
 			}

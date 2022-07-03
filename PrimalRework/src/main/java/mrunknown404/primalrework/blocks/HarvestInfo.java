@@ -65,16 +65,8 @@ public class HarvestInfo {
 		}
 		
 		public ItemStack getItem() {
-			if (result == null) {
-				return ItemStack.EMPTY;
-			}
-			
-			if (R.nextInt(100) + 1 <= chance) {
-				int count = max == min ? max : R.nextInt(max - min) + min;
-				return new ItemStack(result.getStagedItem(), count);
-			}
-			
-			return ItemStack.EMPTY;
+			return result == null ? ItemStack.EMPTY :
+					R.nextInt(100) + 1 <= chance ? new ItemStack(result.getStagedItem(), max == min ? max : R.nextInt(max - min) + min) : ItemStack.EMPTY;
 		}
 	}
 }

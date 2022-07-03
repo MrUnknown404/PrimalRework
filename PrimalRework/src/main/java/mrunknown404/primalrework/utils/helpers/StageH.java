@@ -1,7 +1,7 @@
 package mrunknown404.primalrework.utils.helpers;
 
+import mrunknown404.primalrework.PrimalRework;
 import mrunknown404.primalrework.init.InitStages;
-import mrunknown404.primalrework.network.NetworkHandler;
 import mrunknown404.primalrework.network.packets.PSyncStage;
 import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.world.savedata.WSDStage;
@@ -12,7 +12,7 @@ public class StageH {
 	
 	public static void setStage(ServerWorld world, Stage stage) {
 		StageH.stage = stage;
-		NetworkHandler.sendPacketToAll(new PSyncStage(StageH.stage));
+		PrimalRework.NETWORK.sendPacketToAll(new PSyncStage(StageH.stage));
 		WSDStage.get(world).setDirty();
 	}
 	
