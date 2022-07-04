@@ -7,7 +7,7 @@ import mrunknown404.primalrework.PrimalRework;
 import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.stage.StagedTag;
 import mrunknown404.primalrework.utils.Metal;
-import mrunknown404.primalrework.utils.enums.ToolMaterial;
+import mrunknown404.primalrework.utils.ToolMaterial;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 import net.minecraftforge.registries.IForgeRegistry;

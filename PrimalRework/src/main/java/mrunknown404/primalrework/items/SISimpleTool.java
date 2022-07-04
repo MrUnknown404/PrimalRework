@@ -7,7 +7,7 @@ import mrunknown404.primalrework.init.InitBlocks;
 import mrunknown404.primalrework.init.InitItems;
 import mrunknown404.primalrework.init.InitPRItemGroups;
 import mrunknown404.primalrework.stage.Stage;
-import mrunknown404.primalrework.utils.enums.ToolMaterial;
+import mrunknown404.primalrework.utils.ToolMaterial;
 import mrunknown404.primalrework.utils.enums.ToolType;
 import mrunknown404.primalrework.utils.helpers.BlockH;
 import mrunknown404.primalrework.utils.helpers.RayTraceH;

@@ -7,7 +7,7 @@ import java.util.function.Supplier;
 
 import mrunknown404.primalrework.api.utils.ISIProvider;
 import mrunknown404.primalrework.init.InitToolMaterials;
-import mrunknown404.primalrework.utils.enums.ToolMaterial;
+import mrunknown404.primalrework.utils.ToolMaterial;
 import mrunknown404.primalrework.utils.enums.ToolType;
 import net.minecraft.item.ItemStack;
 

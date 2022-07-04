@@ -17,9 +17,9 @@ import mrunknown404.primalrework.items.SISimpleTool;
 import mrunknown404.primalrework.items.StagedItem;
 import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.utils.Metal;
+import mrunknown404.primalrework.utils.ToolMaterial;
 import mrunknown404.primalrework.utils.enums.CraftingToolType;
 import mrunknown404.primalrework.utils.enums.RawPart;
-import mrunknown404.primalrework.utils.enums.ToolMaterial;
 import mrunknown404.primalrework.utils.enums.ToolType;
 
 public class InitItems {

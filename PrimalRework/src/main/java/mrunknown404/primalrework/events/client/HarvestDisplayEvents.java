@@ -14,7 +14,7 @@ import mrunknown404.primalrework.init.InitToolMaterials;
 import mrunknown404.primalrework.items.StagedItem;
 import mrunknown404.primalrework.utils.DoubleCache;
 import mrunknown404.primalrework.utils.PRConfig;
-import mrunknown404.primalrework.utils.enums.ToolMaterial;
+import mrunknown404.primalrework.utils.ToolMaterial;
 import mrunknown404.primalrework.utils.enums.ToolType;
 import mrunknown404.primalrework.utils.helpers.BlockH;
 import mrunknown404.primalrework.utils.helpers.ColorH;

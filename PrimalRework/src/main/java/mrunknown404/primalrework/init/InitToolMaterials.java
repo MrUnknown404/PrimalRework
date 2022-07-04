@@ -1,7 +1,7 @@
 package mrunknown404.primalrework.init;
 
 import mrunknown404.primalrework.api.registry.PRRegistryObject;
-import mrunknown404.primalrework.utils.enums.ToolMaterial;
+import mrunknown404.primalrework.utils.ToolMaterial;
 
 public class InitToolMaterials {
 	public static final PRRegistryObject<ToolMaterial> HAND = InitRegistry.toolMaterial("hand", () -> new ToolMaterial(0, 0, 1, 0));

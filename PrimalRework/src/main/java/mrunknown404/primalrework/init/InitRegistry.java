@@ -24,7 +24,7 @@ import mrunknown404.primalrework.items.StagedItem;
 import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.stage.StagedTag;
 import mrunknown404.primalrework.utils.Metal;
-import mrunknown404.primalrework.utils.enums.ToolMaterial;
+import mrunknown404.primalrework.utils.ToolMaterial;
 import mrunknown404.primalrework.world.biome.PRBiome;
 import mrunknown404.primalrework.world.biome.provider.BiomeProviderPrimal;
 import net.minecraft.block.Block;

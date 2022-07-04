@@ -1,4 +1,4 @@
-package mrunknown404.primalrework.utils.enums;
+package mrunknown404.primalrework.utils;
 
 import net.minecraftforge.registries.ForgeRegistryEntry;
 

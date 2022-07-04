@@ -9,7 +9,6 @@ import mrunknown404.primalrework.blocks.BlockInfo;
 import mrunknown404.primalrework.blocks.BlockInfo.Hardness;
 import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.utils.enums.Element;
-import mrunknown404.primalrework.utils.enums.ToolMaterial;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
 public class Metal extends ForgeRegistryEntry<Metal> {
