@@ -16,7 +16,7 @@ public class Metal extends ForgeRegistryEntry<Metal> {
 	//These are only used for block/item creation
 	public final BlockInfo blockInfo;
 	public final Supplier<Stage> stage;
-	public final ToolMaterial toolMat;
+	public final Supplier<ToolMaterial> toolMat;
 	public final Color color;
 	public final boolean isAlloy;
 	
@@ -24,7 +24,7 @@ public class Metal extends ForgeRegistryEntry<Metal> {
 	public final int meltingPoint, boilingPoint;
 	public final Map<Element, Integer> elements;
 	
-	private Metal(Hardness hardness, Supplier<Stage> stage, ToolMaterial toolMat, Color color, int meltingPoint, int boilingPoint, Map<Element, Integer> elements) {
+	private Metal(Hardness hardness, Supplier<Stage> stage, Supplier<ToolMaterial> toolMat, Color color, int meltingPoint, int boilingPoint, Map<Element, Integer> elements) {
 		this.blockInfo = BlockInfo.with(BlockInfo.METAL, hardness);
 		this.stage = stage;
 		this.toolMat = toolMat;
@@ -35,25 +35,25 @@ public class Metal extends ForgeRegistryEntry<Metal> {
 		this.elements = elements;
 	}
 	
-	public static Metal elemental(Hardness hardness, Supplier<Stage> stage, ToolMaterial toolMat, Color ingotColor, Element element) {
+	public static Metal elemental(Hardness hardness, Supplier<Stage> stage, Supplier<ToolMaterial> toolMat, Color ingotColor, Element element) {
 		return new Metal(hardness, stage, toolMat, ingotColor, element.getMeltingPoint(), element.getBoilingPoint(), toMap(element));
 	}
 	
-	public static Metal elementalAlloy(Hardness hardness, Supplier<Stage> stage, ToolMaterial toolMat, Color ingotColor, int meltingPoint, int boilingPoint, Element element0,
-			Element element1, Element... elements) {
+	public static Metal elementalAlloy(Hardness hardness, Supplier<Stage> stage, Supplier<ToolMaterial> toolMat, Color ingotColor, int meltingPoint, int boilingPoint,
+			Element element0, Element element1, Element... elements) {
 		return new Metal(hardness, stage, toolMat, ingotColor, meltingPoint, boilingPoint, toMap(element0, element1, elements));
 	}
 	
-	public static Metal metal(Hardness hardness, Supplier<Stage> stage, ToolMaterial toolMat, Color ingotColor, int meltingPoint, int boilingPoint) {
+	public static Metal metal(Hardness hardness, Supplier<Stage> stage, Supplier<ToolMaterial> toolMat, Color ingotColor, int meltingPoint, int boilingPoint) {
 		return new Metal(hardness, stage, toolMat, ingotColor, meltingPoint, boilingPoint, new LinkedHashMap<Element, Integer>());
 	}
 	
-	public static Metal elemental(Hardness hardness, Supplier<Stage> stage, ToolMaterial toolMat, Color ingotColor, Pair<Element, Integer> element) {
+	public static Metal elemental(Hardness hardness, Supplier<Stage> stage, Supplier<ToolMaterial> toolMat, Color ingotColor, Pair<Element, Integer> element) {
 		return new Metal(hardness, stage, toolMat, ingotColor, element.getL().getMeltingPoint(), element.getL().getBoilingPoint(), toMap(element));
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static Metal elementalAlloy(Hardness hardness, Supplier<Stage> stage, ToolMaterial toolMat, Color ingotColor, int meltingPoint, int boilingPoint,
+	public static Metal elementalAlloy(Hardness hardness, Supplier<Stage> stage, Supplier<ToolMaterial> toolMat, Color ingotColor, int meltingPoint, int boilingPoint,
 			Pair<Element, Integer> element0, Pair<Element, Integer> element1, Pair<Element, Integer>... elements) {
 		return new Metal(hardness, stage, toolMat, ingotColor, meltingPoint, boilingPoint, toMap(element0, element1, elements));
 	}

@@ -7,6 +7,7 @@ import mrunknown404.primalrework.PrimalRework;
 import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.stage.StagedTag;
 import mrunknown404.primalrework.utils.Metal;
+import mrunknown404.primalrework.utils.enums.ToolMaterial;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -16,6 +17,7 @@ public final class PRRegistries {
 	private static final Map<Class<? extends ForgeRegistryEntry<?>>, PRRegistry<?>> REGISTRIES = new LinkedHashMap<Class<? extends ForgeRegistryEntry<?>>, PRRegistry<?>>();
 	
 	public static final PRRegistry<Metal> METALS = addMasterRegistry("metal", Metal.class);
+	public static final PRRegistry<ToolMaterial> TOOL_MATERIALS = addMasterRegistry("tool_materials", ToolMaterial.class);
 	
 	public static final IForgeRegistry<Stage> STAGES = new RegistryBuilder<Stage>().setName(new ResourceLocation(PrimalRework.MOD_ID, "stages")).setType(Stage.class).create();
 	public static final IForgeRegistry<StagedTag> STAGED_TAGS = new RegistryBuilder<StagedTag>().setName(new ResourceLocation(PrimalRework.MOD_ID, "staged_tags"))

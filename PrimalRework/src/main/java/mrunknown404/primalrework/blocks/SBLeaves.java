@@ -5,7 +5,7 @@ import java.util.Random;
 import mrunknown404.primalrework.blocks.HarvestInfo.DropInfo;
 import mrunknown404.primalrework.init.InitPRItemGroups;
 import mrunknown404.primalrework.init.InitStages;
-import mrunknown404.primalrework.utils.enums.ToolMaterial;
+import mrunknown404.primalrework.init.InitToolMaterials;
 import mrunknown404.primalrework.utils.enums.ToolType;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -30,8 +30,8 @@ public class SBLeaves extends StagedBlock {
 	
 	public SBLeaves() { // TODO add saplings/sticks
 		super(InitStages.STAGE_0, 32, InitPRItemGroups.BLOCKS, BlockInfo.of(BlockInfo.LEAVES), BlockStateType.normal, BlockModelType.normal,
-				new HarvestInfo(ToolType.NONE, ToolMaterial.HAND, DropInfo.NONE), new HarvestInfo(ToolType.KNIFE, ToolMaterial.CLAY, DropInfo.NONE),
-				new HarvestInfo(ToolType.AXE, ToolMaterial.CLAY, DropInfo.NONE), new HarvestInfo(ToolType.SHEARS, ToolMaterial.CLAY));
+				new HarvestInfo(ToolType.NONE, InitToolMaterials.HAND, DropInfo.NONE), new HarvestInfo(ToolType.KNIFE, InitToolMaterials.CLAY, DropInfo.NONE),
+				new HarvestInfo(ToolType.AXE, InitToolMaterials.CLAY, DropInfo.NONE), new HarvestInfo(ToolType.SHEARS, InitToolMaterials.CLAY));
 		registerDefaultState(stateDefinition.any().setValue(DISTANCE, Integer.valueOf(7)).setValue(PERSISTENT, false));
 	}
 	

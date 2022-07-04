@@ -2,9 +2,9 @@ package mrunknown404.primalrework.datagen;
 
 import mrunknown404.primalrework.PrimalRework;
 import mrunknown404.primalrework.init.InitRegistry;
+import mrunknown404.primalrework.init.InitToolMaterials;
 import mrunknown404.primalrework.items.StagedItem;
 import mrunknown404.primalrework.utils.IMetalColored;
-import mrunknown404.primalrework.utils.enums.ToolMaterial;
 import mrunknown404.primalrework.utils.enums.ToolType;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.item.Item;
@@ -30,7 +30,7 @@ class GeneratorItemModel extends ModelProvider<TexturelessModelBuilder> {
 			final String rawName = i.getRegistryName().getPath();
 			String name = rawName;
 			
-			if (i.toolType != ToolType.NONE && i.toolMat == ToolMaterial.WOOD && (i.toolType == ToolType.SHOVEL || i.toolType == ToolType.AXE)) {
+			if (i.toolType != ToolType.NONE && i.toolMat == InitToolMaterials.WOOD.get() && (i.toolType == ToolType.SHOVEL || i.toolType == ToolType.AXE)) {
 				String[] split = name.split("_");
 				name = split[0] + "en_" + split[1];
 			} else if (name.equals("tall_grass")) {

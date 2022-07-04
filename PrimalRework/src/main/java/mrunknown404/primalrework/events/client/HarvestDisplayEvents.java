@@ -10,6 +10,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import mrunknown404.primalrework.blocks.BlockInfo;
 import mrunknown404.primalrework.blocks.HarvestInfo;
 import mrunknown404.primalrework.blocks.StagedBlock;
+import mrunknown404.primalrework.init.InitToolMaterials;
 import mrunknown404.primalrework.items.StagedItem;
 import mrunknown404.primalrework.utils.DoubleCache;
 import mrunknown404.primalrework.utils.PRConfig;
@@ -102,11 +103,11 @@ public class HarvestDisplayEvents {
 			
 			if (config.harvestDisplay_showRequiredTool.get()) {
 				ToolType toolType = item instanceof StagedItem ? ((StagedItem) item).toolType : ToolType.NONE;
-				ToolMaterial toolMat = item instanceof StagedItem ? ((StagedItem) item).toolMat : ToolMaterial.HAND;
+				ToolMaterial toolMat = item instanceof StagedItem ? ((StagedItem) item).toolMat : InitToolMaterials.HAND.get();
 				boolean has = infos.stream().anyMatch((i) -> i.toolType == toolType);
 				
 				for (HarvestInfo info : infos) {
-					if (info.toolMat != ToolMaterial.UNBREAKABLE) {
+					if (info.toolMat != InitToolMaterials.UNBREAKABLE.get()) {
 						boolean canMine = (!has && info.toolType == ToolType.NONE) || (info.toolType == toolType && info.toolMat.level <= toolMat.level);
 						texts.add((canMine ? YES_MINE : NO_MINE).copy()
 								.append(WordH.translate("tooltips.stat.level").withStyle(TextFormatting.WHITE).append(" " + info.toolMat.level + " " + info.toolType.getName())));

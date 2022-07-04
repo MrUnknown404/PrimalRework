@@ -3,31 +3,33 @@ package mrunknown404.primalrework.blocks;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.function.Supplier;
 
 import mrunknown404.primalrework.api.utils.ISIProvider;
+import mrunknown404.primalrework.init.InitToolMaterials;
 import mrunknown404.primalrework.utils.enums.ToolMaterial;
 import mrunknown404.primalrework.utils.enums.ToolType;
 import net.minecraft.item.ItemStack;
 
 public class HarvestInfo {
-	public static final HarvestInfo AXE_MIN = new HarvestInfo(ToolType.AXE, ToolMaterial.CLAY);
-	public static final HarvestInfo HOE_MIN = new HarvestInfo(ToolType.HOE, ToolMaterial.CLAY);
-	public static final HarvestInfo KNIFE_MIN = new HarvestInfo(ToolType.KNIFE, ToolMaterial.CLAY);
-	public static final HarvestInfo PICKAXE_MIN = new HarvestInfo(ToolType.PICKAXE, ToolMaterial.CLAY);
-	public static final HarvestInfo SHEARS_MIN = new HarvestInfo(ToolType.SHEARS, ToolMaterial.CLAY);
-	public static final HarvestInfo SHOVEL_MIN = new HarvestInfo(ToolType.SHOVEL, ToolMaterial.CLAY);
-	public static final HarvestInfo SWORD_MIN = new HarvestInfo(ToolType.SWORD, ToolMaterial.CLAY);
+	public static final HarvestInfo AXE_MIN = new HarvestInfo(ToolType.AXE, InitToolMaterials.CLAY);
+	public static final HarvestInfo HOE_MIN = new HarvestInfo(ToolType.HOE, InitToolMaterials.CLAY);
+	public static final HarvestInfo KNIFE_MIN = new HarvestInfo(ToolType.KNIFE, InitToolMaterials.CLAY);
+	public static final HarvestInfo PICKAXE_MIN = new HarvestInfo(ToolType.PICKAXE, InitToolMaterials.CLAY);
+	public static final HarvestInfo SHEARS_MIN = new HarvestInfo(ToolType.SHEARS, InitToolMaterials.CLAY);
+	public static final HarvestInfo SHOVEL_MIN = new HarvestInfo(ToolType.SHOVEL, InitToolMaterials.CLAY);
+	public static final HarvestInfo SWORD_MIN = new HarvestInfo(ToolType.SWORD, InitToolMaterials.CLAY);
 	
-	public static final HarvestInfo HAND = new HarvestInfo(ToolType.NONE, ToolMaterial.HAND);
-	public static final HarvestInfo UNBREAKABLE = new HarvestInfo(ToolType.NONE, ToolMaterial.UNBREAKABLE);
+	public static final HarvestInfo HAND = new HarvestInfo(ToolType.NONE, InitToolMaterials.HAND);
+	public static final HarvestInfo UNBREAKABLE = new HarvestInfo(ToolType.NONE, InitToolMaterials.UNBREAKABLE);
 	
 	public final ToolType toolType;
 	public final ToolMaterial toolMat;
 	public final List<DropInfo> drops = new ArrayList<DropInfo>();
 	
-	public HarvestInfo(ToolType toolType, ToolMaterial toolMat, DropInfo... drops) {
+	public HarvestInfo(ToolType toolType, Supplier<ToolMaterial> toolMat, DropInfo... drops) {
 		this.toolType = toolType;
-		this.toolMat = toolMat;
+		this.toolMat = toolMat.get();
 		
 		for (DropInfo drop : drops) {
 			this.drops.add(drop);

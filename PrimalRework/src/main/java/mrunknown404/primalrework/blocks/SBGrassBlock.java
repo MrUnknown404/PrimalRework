@@ -5,7 +5,7 @@ import java.util.Random;
 import mrunknown404.primalrework.blocks.HarvestInfo.DropInfo;
 import mrunknown404.primalrework.init.InitBlocks;
 import mrunknown404.primalrework.init.InitStages;
-import mrunknown404.primalrework.utils.enums.ToolMaterial;
+import mrunknown404.primalrework.init.InitToolMaterials;
 import mrunknown404.primalrework.utils.enums.ToolType;
 import mrunknown404.primalrework.utils.helpers.BlockH;
 import net.minecraft.block.BlockState;
@@ -22,7 +22,7 @@ import net.minecraftforge.common.IPlantable;
 public class SBGrassBlock extends SBSnowyDirt { //TODO switch to my snow
 	public SBGrassBlock() {
 		super(InitStages.STAGE_0, BlockInfo.of(BlockInfo.R_DRY_GRASS), BlockStateType.none, BlockModelType.none,
-				new HarvestInfo(ToolType.SHOVEL, ToolMaterial.CLAY, DropInfo.of(InitBlocks.DIRT)));
+				new HarvestInfo(ToolType.SHOVEL, InitToolMaterials.CLAY, DropInfo.of(InitBlocks.DIRT)));
 		useVanillaNamespaceFull();
 	}
 	

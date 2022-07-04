@@ -1,8 +1,9 @@
 package mrunknown404.primalrework.events;
 
 import mrunknown404.primalrework.blocks.HarvestInfo;
-import mrunknown404.primalrework.blocks.StagedBlock;
 import mrunknown404.primalrework.blocks.HarvestInfo.DropInfo;
+import mrunknown404.primalrework.blocks.StagedBlock;
+import mrunknown404.primalrework.init.InitToolMaterials;
 import mrunknown404.primalrework.items.StagedItem;
 import mrunknown404.primalrework.utils.enums.ToolMaterial;
 import mrunknown404.primalrework.utils.enums.ToolType;
@@ -29,17 +30,17 @@ public class HarvestEvents {
 		
 		StagedBlock block = (StagedBlock) e.getState().getBlock();
 		ToolType toolType = item instanceof StagedItem ? ((StagedItem) item).toolType : ToolType.NONE;
-		ToolMaterial toolMat = item instanceof StagedItem ? ((StagedItem) item).toolMat : ToolMaterial.HAND;
+		ToolMaterial toolMat = item instanceof StagedItem ? ((StagedItem) item).toolMat : InitToolMaterials.HAND.get();
 		HarvestInfo info = BlockH.getBlockHarvestInfo(block, toolType);
 		
-		if (toolMat == ToolMaterial.UNBREAKABLE) {
+		if (toolMat == InitToolMaterials.UNBREAKABLE.get()) {
 			e.setNewSpeed(0);
 			return;
 		}
 		
 		if (info != null) {
 			if (info.toolType == ToolType.NONE) {
-				e.setNewSpeed(ToolMaterial.HAND.speed);
+				e.setNewSpeed(InitToolMaterials.HAND.get().speed);
 			} else if (toolType == info.toolType && toolMat.level >= info.toolMat.level) {
 				e.setNewSpeed(toolMat.speed);
 			} else {
@@ -63,7 +64,7 @@ public class HarvestEvents {
 		
 		StagedBlock block = (StagedBlock) e.getState().getBlock();
 		ToolType toolType = item instanceof StagedItem ? ((StagedItem) item).toolType : ToolType.NONE;
-		ToolMaterial toolMat = item instanceof StagedItem ? ((StagedItem) item).toolMat : ToolMaterial.HAND;
+		ToolMaterial toolMat = item instanceof StagedItem ? ((StagedItem) item).toolMat : InitToolMaterials.HAND.get();
 		HarvestInfo info = BlockH.getBlockHarvestInfo(block, toolType);
 		
 		if (info != null && ((toolType == info.toolType && toolMat.level >= info.toolMat.level) || info.toolType == ToolType.NONE)) {

@@ -6,8 +6,8 @@ import mrunknown404.primalrework.blocks.HarvestInfo.DropInfo;
 import mrunknown404.primalrework.init.InitItems;
 import mrunknown404.primalrework.init.InitPRItemGroups;
 import mrunknown404.primalrework.init.InitStages;
+import mrunknown404.primalrework.init.InitToolMaterials;
 import mrunknown404.primalrework.items.StagedItem.ItemType;
-import mrunknown404.primalrework.utils.enums.ToolMaterial;
 import mrunknown404.primalrework.utils.enums.ToolType;
 import mrunknown404.primalrework.utils.helpers.BlockH;
 import net.minecraft.block.BlockState;
@@ -26,10 +26,10 @@ public class SBTallGrass extends StagedBlock {
 	
 	public SBTallGrass(ROISIProvider<StagedBlock> self, Hardness hardness, VoxelShape shape) {
 		super(InitStages.STAGE_0, 64, InitPRItemGroups.BLOCKS, BlockInfo.with(BlockInfo.REPLACEABLE_PLANT, hardness), BlockStateType.normal, BlockModelType.none,
-				new HarvestInfo(ToolType.NONE, ToolMaterial.HAND, DropInfo.of(InitItems.PLANT_FIBER, 30)),
-				new HarvestInfo(ToolType.KNIFE, ToolMaterial.CLAY, DropInfo.of(InitItems.PLANT_FIBER, 80)),
-				new HarvestInfo(ToolType.HOE, ToolMaterial.CLAY, DropInfo.of(InitItems.PLANT_FIBER, 80) /* TODO add seeds here */),
-				new HarvestInfo(ToolType.SHEARS, ToolMaterial.CLAY, DropInfo.of(self, 80)));
+				new HarvestInfo(ToolType.NONE, InitToolMaterials.HAND, DropInfo.of(InitItems.PLANT_FIBER, 30)),
+				new HarvestInfo(ToolType.KNIFE, InitToolMaterials.CLAY, DropInfo.of(InitItems.PLANT_FIBER, 80)),
+				new HarvestInfo(ToolType.HOE, InitToolMaterials.CLAY, DropInfo.of(InitItems.PLANT_FIBER, 80) /* TODO add seeds here */),
+				new HarvestInfo(ToolType.SHEARS, InitToolMaterials.CLAY, DropInfo.of(self, 80)));
 		this.shape = shape;
 	}
 	

@@ -3,8 +3,8 @@ package mrunknown404.primalrework.items;
 import java.util.function.Supplier;
 
 import mrunknown404.primalrework.init.InitPRItemGroups;
+import mrunknown404.primalrework.init.InitToolMaterials;
 import mrunknown404.primalrework.stage.Stage;
-import mrunknown404.primalrework.utils.enums.ToolMaterial;
 import mrunknown404.primalrework.utils.enums.ToolType;
 import mrunknown404.primalrework.utils.helpers.MathH;
 import net.minecraft.item.Food;
@@ -16,8 +16,8 @@ public class SIFood extends StagedItem {
 	public final float saturation;
 	
 	public SIFood(Supplier<Stage> stage, int maxStackSize, int nutrition, float saturation, boolean isMeat, boolean canAlwaysEat, boolean fastFood) {
-		super(stage, maxStackSize, ToolType.NONE, ToolMaterial.HAND, InitPRItemGroups.FOOD, Rarity.COMMON, toFood(nutrition, saturation, isMeat, canAlwaysEat, fastFood), false, false,
-				ItemType.generated);
+		super(stage, maxStackSize, ToolType.NONE, InitToolMaterials.HAND.get(), InitPRItemGroups.FOOD, Rarity.COMMON, toFood(nutrition, saturation, isMeat, canAlwaysEat, fastFood),
+				false, false, ItemType.generated);
 		this.nutrition = nutrition;
 		this.saturation = saturation;
 	}

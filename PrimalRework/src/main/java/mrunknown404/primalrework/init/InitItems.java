@@ -60,25 +60,25 @@ public class InitItems {
 	public static final ROISIProvider<StagedItem> ROCK = InitRegistry.item("rock", () -> new StagedItem(InitStages.STAGE_0));
 	
 	//DAMAGEABLE
-	public static final ROISIProvider<StagedItem> MORTAR_PESTLE = InitRegistry.item("mortar_pestle", () -> new SIDamageable(InitStages.STAGE_0, ToolMaterial.WOOD));
-	public static final ROISIProvider<StagedItem> PLANT_MESH = InitRegistry.item("plant_mesh", () -> new SIDamageable(InitStages.STAGE_0, ToolMaterial.WOOD));
-	public static final ROISIProvider<StagedItem> STRING_MESH = InitRegistry.item("string_mesh", () -> new SIDamageable(InitStages.STAGE_0, ToolMaterial.FLINT));
+	public static final ROISIProvider<StagedItem> MORTAR_PESTLE = InitRegistry.item("mortar_pestle", () -> new SIDamageable(InitStages.STAGE_0, InitToolMaterials.WOOD.get()));
+	public static final ROISIProvider<StagedItem> PLANT_MESH = InitRegistry.item("plant_mesh", () -> new SIDamageable(InitStages.STAGE_0, InitToolMaterials.WOOD.get()));
+	public static final ROISIProvider<StagedItem> STRING_MESH = InitRegistry.item("string_mesh", () -> new SIDamageable(InitStages.STAGE_0, InitToolMaterials.FLINT.get()));
 	
 	//FOOD
 	public static final ROISIProvider<StagedItem> DOUGH = InitRegistry.item("dough", () -> new SIFood(InitStages.STAGE_1, 1, 0.5f));
 	
 	//TOOLS
-	public static final ROISIProvider<StagedItem> CLAY_SHOVEL = simpleTool(InitStages.STAGE_0, ToolType.SHOVEL, ToolMaterial.CLAY);
-	public static final ROISIProvider<StagedItem> CLAY_AXE = simpleTool(InitStages.STAGE_0, ToolType.AXE, ToolMaterial.CLAY);
-	public static final ROISIProvider<StagedItem> WOOD_SHOVEL = simpleTool(InitStages.STAGE_0, ToolType.SHOVEL, ToolMaterial.WOOD);
-	public static final ROISIProvider<StagedItem> WOOD_AXE = simpleTool(InitStages.STAGE_0, ToolType.AXE, ToolMaterial.WOOD);
-	public static final ROISIProvider<StagedItem> FLINT_PICKAXE = simpleTool(InitStages.STAGE_1, ToolType.PICKAXE, ToolMaterial.FLINT);
-	public static final ROISIProvider<StagedItem> FLINT_SHOVEL = simpleTool(InitStages.STAGE_1, ToolType.SHOVEL, ToolMaterial.FLINT);
-	public static final ROISIProvider<StagedItem> FLINT_AXE = simpleTool(InitStages.STAGE_1, ToolType.AXE, ToolMaterial.FLINT);
-	public static final ROISIProvider<StagedItem> FLINT_HOE = simpleTool(InitStages.STAGE_1, ToolType.HOE, ToolMaterial.FLINT);
-	public static final ROISIProvider<StagedItem> FLINT_KNIFE = simpleTool(InitStages.STAGE_1, ToolType.KNIFE, ToolMaterial.FLINT);
-	public static final ROISIProvider<StagedItem> FLINT_SHEARS = simpleTool(InitStages.STAGE_1, ToolType.SHEARS, ToolMaterial.FLINT);
-	public static final ROISIProvider<StagedItem> BONE_SWORD = simpleTool(InitStages.STAGE_1, ToolType.SWORD, ToolMaterial.BONE);
+	public static final ROISIProvider<StagedItem> CLAY_SHOVEL = simpleTool(InitStages.STAGE_0, ToolType.SHOVEL, InitToolMaterials.CLAY);
+	public static final ROISIProvider<StagedItem> CLAY_AXE = simpleTool(InitStages.STAGE_0, ToolType.AXE, InitToolMaterials.CLAY);
+	public static final ROISIProvider<StagedItem> WOOD_SHOVEL = simpleTool(InitStages.STAGE_0, ToolType.SHOVEL, InitToolMaterials.WOOD);
+	public static final ROISIProvider<StagedItem> WOOD_AXE = simpleTool(InitStages.STAGE_0, ToolType.AXE, InitToolMaterials.WOOD);
+	public static final ROISIProvider<StagedItem> FLINT_PICKAXE = simpleTool(InitStages.STAGE_1, ToolType.PICKAXE, InitToolMaterials.FLINT);
+	public static final ROISIProvider<StagedItem> FLINT_SHOVEL = simpleTool(InitStages.STAGE_1, ToolType.SHOVEL, InitToolMaterials.FLINT);
+	public static final ROISIProvider<StagedItem> FLINT_AXE = simpleTool(InitStages.STAGE_1, ToolType.AXE, InitToolMaterials.FLINT);
+	public static final ROISIProvider<StagedItem> FLINT_HOE = simpleTool(InitStages.STAGE_1, ToolType.HOE, InitToolMaterials.FLINT);
+	public static final ROISIProvider<StagedItem> FLINT_KNIFE = simpleTool(InitStages.STAGE_1, ToolType.KNIFE, InitToolMaterials.FLINT);
+	public static final ROISIProvider<StagedItem> FLINT_SHEARS = simpleTool(InitStages.STAGE_1, ToolType.SHEARS, InitToolMaterials.FLINT);
+	public static final ROISIProvider<StagedItem> BONE_SWORD = simpleTool(InitStages.STAGE_1, ToolType.SWORD, InitToolMaterials.BONE);
 	
 	//VANILLA OVERRIDES
 	public static final ROISIProvider<StagedItem> FLINT = InitRegistry.item("flint", () -> new StagedItem(InitStages.STAGE_0).useVanillaNamespace());
@@ -116,9 +116,10 @@ public class InitItems {
 		}
 	}
 	
-	private static ROISIProvider<StagedItem> simpleTool(Supplier<Stage> stage, ToolType toolType, ToolMaterial toolMat) {
-		return InitRegistry.item(toolMat + "_" + toolType,
-				() -> toolMat == ToolMaterial.WOOD ? new SISimpleTool(stage, toolType, toolMat).useVanillaNamespace() : new SISimpleTool(stage, toolType, toolMat));
+	private static ROISIProvider<StagedItem> simpleTool(Supplier<Stage> stage, ToolType toolType, Supplier<ToolMaterial> toolMat) {
+		return InitRegistry.item(toolMat.get() + "_" + toolType,
+				() -> toolMat.get() == InitToolMaterials.WOOD.get() ? new SISimpleTool(stage, toolType, toolMat.get()).useVanillaNamespace() :
+						new SISimpleTool(stage, toolType, toolMat.get()));
 	}
 	
 	private static ROISIProvider<StagedItem> registerCast(Enum<?> type) {

@@ -5,8 +5,8 @@ import mrunknown404.primalrework.blocks.BlockInfo.UniqueRawBlockInfo;
 import mrunknown404.primalrework.blocks.HarvestInfo.DropInfo;
 import mrunknown404.primalrework.init.InitPRItemGroups;
 import mrunknown404.primalrework.init.InitStages;
+import mrunknown404.primalrework.init.InitToolMaterials;
 import mrunknown404.primalrework.items.StagedItem.ItemType;
-import mrunknown404.primalrework.utils.enums.ToolMaterial;
 import mrunknown404.primalrework.utils.enums.ToolType;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
@@ -35,7 +35,7 @@ public class SBGroundItem extends StagedBlock implements IWaterLoggable {
 	
 	public SBGroundItem(UniqueRawBlockInfo info, ISIProvider dropInstead) {
 		super(InitStages.STAGE_0, 64, InitPRItemGroups.BLOCKS, BlockInfo.of(info), BlockStateType.random_direction, BlockModelType.none,
-				dropInstead == null ? HarvestInfo.HAND : new HarvestInfo(ToolType.NONE, ToolMaterial.HAND, DropInfo.of(dropInstead)));
+				dropInstead == null ? HarvestInfo.HAND : new HarvestInfo(ToolType.NONE, InitToolMaterials.HAND, DropInfo.of(dropInstead)));
 		registerDefaultState(defaultBlockState().setValue(WATERLOGGED, false));
 	}
 	

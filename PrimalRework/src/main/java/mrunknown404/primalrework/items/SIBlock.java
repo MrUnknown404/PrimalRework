@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import mrunknown404.primalrework.blocks.StagedBlock;
-import mrunknown404.primalrework.utils.enums.ToolMaterial;
+import mrunknown404.primalrework.init.InitToolMaterials;
 import mrunknown404.primalrework.utils.enums.ToolType;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.Block;
@@ -36,7 +36,7 @@ public class SIBlock extends StagedItem {
 	private final StagedBlock block;
 	
 	public SIBlock(StagedBlock block) {
-		super(block.stage, block.stackSize, ToolType.NONE, ToolMaterial.HAND, block.tab, Rarity.COMMON, null, false, false, ItemType.block);
+		super(block.stage, block.stackSize, ToolType.NONE, InitToolMaterials.HAND.get(), block.tab, Rarity.COMMON, null, false, false, ItemType.block);
 		this.block = block;
 		
 		if (!block.getElements().isEmpty()) {

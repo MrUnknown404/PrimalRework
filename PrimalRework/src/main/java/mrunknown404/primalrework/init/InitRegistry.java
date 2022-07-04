@@ -24,6 +24,7 @@ import mrunknown404.primalrework.items.StagedItem;
 import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.stage.StagedTag;
 import mrunknown404.primalrework.utils.Metal;
+import mrunknown404.primalrework.utils.enums.ToolMaterial;
 import mrunknown404.primalrework.world.biome.PRBiome;
 import mrunknown404.primalrework.world.biome.provider.BiomeProviderPrimal;
 import net.minecraft.block.Block;
@@ -62,6 +63,7 @@ public class InitRegistry {
 	
 	private static final Map<String, List<PRRegistry<?>>> PR_REGISTRIES = new LinkedHashMap<String, List<PRRegistry<?>>>();
 	private static final PRRegistry<Metal> METALS = new PRRegistry<Metal>(PrimalRework.MOD_ID, Metal.class, InitMetals.class);
+	private static final PRRegistry<ToolMaterial> TOOL_MATERIALS = new PRRegistry<ToolMaterial>(PrimalRework.MOD_ID, ToolMaterial.class, InitToolMaterials.class);
 	
 	private static final Map<String, Supplier<FeatureMap>> BIOME_FEATURE_MAP = new HashMap<String, Supplier<FeatureMap>>();
 	private static final Map<String, PRBiome> PR_BIOMES = new HashMap<String, PRBiome>();
@@ -75,6 +77,7 @@ public class InitRegistry {
 		PrimalRework.printDivider();
 		System.out.println("Adding PrimalRework's registries");
 		registerRegistry(METALS);
+		registerRegistry(TOOL_MATERIALS);
 		
 		PrimalRework.printDivider();
 		System.out.println("Adding Addon's registries");
@@ -174,6 +177,10 @@ public class InitRegistry {
 	
 	static PRRegistryObject<Metal> metal(String name, Supplier<Metal> o) {
 		return METALS.register(name, o);
+	}
+	
+	static PRRegistryObject<ToolMaterial> toolMaterial(String name, Supplier<ToolMaterial> o) {
+		return TOOL_MATERIALS.register(name, o);
 	}
 	
 	static <T extends StagedBlock> ROISIProvider<T> blockNoItem(String name, Supplier<T> o) {

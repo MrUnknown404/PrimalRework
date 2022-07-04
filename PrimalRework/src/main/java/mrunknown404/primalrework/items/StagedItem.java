@@ -13,6 +13,7 @@ import com.google.common.collect.Multimap;
 import mrunknown404.primalrework.api.utils.ISIProvider;
 import mrunknown404.primalrework.api.utils.IStageProvider;
 import mrunknown404.primalrework.init.InitPRItemGroups;
+import mrunknown404.primalrework.init.InitToolMaterials;
 import mrunknown404.primalrework.recipes.IIngredientProvider;
 import mrunknown404.primalrework.recipes.Ingredient;
 import mrunknown404.primalrework.stage.Stage;
@@ -54,19 +55,19 @@ public class StagedItem extends Item implements ISIProvider, IIngredientProvider
 	}
 	
 	public StagedItem(Supplier<Stage> stage) {
-		this(stage, 64, ToolType.NONE, ToolMaterial.HAND, InitPRItemGroups.ITEMS, Rarity.COMMON, null, false, false, ItemType.generated);
+		this(stage, 64, ToolType.NONE, InitToolMaterials.HAND.get(), InitPRItemGroups.ITEMS, Rarity.COMMON, null, false, false, ItemType.generated);
 	}
 	
 	public StagedItem(Supplier<Stage> stage, int stackSize) {
-		this(stage, stackSize, ToolType.NONE, ToolMaterial.HAND, InitPRItemGroups.ITEMS, Rarity.COMMON, null, false, false, ItemType.generated);
+		this(stage, stackSize, ToolType.NONE, InitToolMaterials.HAND.get(), InitPRItemGroups.ITEMS, Rarity.COMMON, null, false, false, ItemType.generated);
 	}
 	
 	public StagedItem(Supplier<Stage> stage, ItemGroup tab) {
-		this(stage, 64, ToolType.NONE, ToolMaterial.HAND, tab, Rarity.COMMON, null, false, false, ItemType.generated);
+		this(stage, 64, ToolType.NONE, InitToolMaterials.HAND.get(), tab, Rarity.COMMON, null, false, false, ItemType.generated);
 	}
 	
 	public StagedItem(Supplier<Stage> stage, int stackSize, ItemGroup tab) {
-		this(stage, stackSize, ToolType.NONE, ToolMaterial.HAND, tab, Rarity.COMMON, null, false, false, ItemType.generated);
+		this(stage, stackSize, ToolType.NONE, InitToolMaterials.HAND.get(), tab, Rarity.COMMON, null, false, false, ItemType.generated);
 	}
 	
 	public StagedItem addTooltip(int amount) {

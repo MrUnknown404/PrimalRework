@@ -34,7 +34,6 @@ import mrunknown404.primalrework.blocks.StagedBlock.BlockModelType;
 import mrunknown404.primalrework.blocks.StagedBlock.BlockStateType;
 import mrunknown404.primalrework.items.SIWallFloor;
 import mrunknown404.primalrework.utils.Metal;
-import mrunknown404.primalrework.utils.enums.ToolMaterial;
 import mrunknown404.primalrework.utils.enums.ToolType;
 import net.minecraft.block.Block;
 
@@ -57,7 +56,7 @@ public class InitBlocks {
 	public static final ROISIProvider<StagedBlock> UNLIT_PRIMAL_WALL_TORCH = getLastWall();
 	public static final ROISIProvider<StagedBlock> LIT_PRIMAL_TORCH = registerWallFloor("lit_primal_torch", "lit_primal_wall_torch", () -> new SBLitPrimalTorch(), () -> new SBLitPrimalWallTorch()).floor;
 	public static final ROISIProvider<StagedBlock> LIT_PRIMAL_WALL_TORCH = getLastWall();
-	public static final ROISIProvider<StagedBlock> SALT = InitRegistry.block("salt_block", () -> new StagedBlock(InitStages.STAGE_1, BlockInfo.of(BlockInfo.DIRT), new HarvestInfo(ToolType.SHOVEL, ToolMaterial.CLAY, DropInfo.of(InitItems.SALT, 4, 4))));
+	public static final ROISIProvider<StagedBlock> SALT = InitRegistry.block("salt_block", () -> new StagedBlock(InitStages.STAGE_1, BlockInfo.of(BlockInfo.DIRT), new HarvestInfo(ToolType.SHOVEL, InitToolMaterials.CLAY, DropInfo.of(InitItems.SALT, 4, 4))));
 	public static final ROISIProvider<StagedBlock> DENSE_LOG = InitRegistry.block("dense_log", () -> new SBDenseLog());
 	public static final ROISIProvider<StagedBlock> CHARCOAL_BLOCK = InitRegistry.block("charcoal_block", () -> new StagedBlock(InitStages.STAGE_2, BlockInfo.with(BlockInfo.COAL, Hardness.SOFT_2), HarvestInfo.HAND, HarvestInfo.KNIFE_MIN));
 	public static final ROISIProvider<StagedBlock> STRIPPED_OAK_LOG = InitRegistry.block("stripped_oak_log", () -> new SBStrippedLog());
@@ -83,7 +82,7 @@ public class InitBlocks {
 	//VANILLA OVERRIDES
 	public static final ROISIProvider<StagedBlock> DIRT = InitRegistry.block("dirt", () -> new StagedBlock(InitStages.STAGE_0, BlockInfo.of(BlockInfo.DIRT), HarvestInfo.SHOVEL_MIN).useVanillaNamespaceFull());
 	public static final ROISIProvider<StagedBlock> GRASS_BLOCK = InitRegistry.block("grass_block", () -> new SBGrassBlock());
-	public static final ROISIProvider<StagedBlock> STONE = InitRegistry.block("stone", () -> new StagedBlock(InitStages.STAGE_0, BlockInfo.of(BlockInfo.STONE), BlockStateType.none, BlockModelType.normal, new HarvestInfo(ToolType.PICKAXE, ToolMaterial.CLAY, DropInfo.of(InitItems.ROCK, 2, 4))).useVanillaNamespaceFull());
+	public static final ROISIProvider<StagedBlock> STONE = InitRegistry.block("stone", () -> new StagedBlock(InitStages.STAGE_0, BlockInfo.of(BlockInfo.STONE), BlockStateType.none, BlockModelType.normal, new HarvestInfo(ToolType.PICKAXE, InitToolMaterials.CLAY, DropInfo.of(InitItems.ROCK, 2, 4))).useVanillaNamespaceFull());
 	public static final ROISIProvider<StagedBlock> COBBLESTONE = InitRegistry.block("cobblestone", () -> new StagedBlock(InitStages.STAGE_0, BlockInfo.of(BlockInfo.STONE), HarvestInfo.PICKAXE_MIN).useVanillaNamespaceFull());
 	public static final ROISIProvider<StagedBlock> OAK_LOG = InitRegistry.block("oak_log", () -> new SBLog().useVanillaNamespaceFull());
 	public static final ROISIProvider<StagedBlock> SPRUCE_LOG = InitRegistry.block("spruce_log", () -> new SBLog().useVanillaNamespaceFull());
