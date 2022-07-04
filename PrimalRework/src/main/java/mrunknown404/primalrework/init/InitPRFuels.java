@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import mrunknown404.primalrework.PrimalRework;
-import mrunknown404.primalrework.items.ISIProvider;
+import mrunknown404.primalrework.api.utils.ISIProvider;
 import mrunknown404.primalrework.items.StagedItem;
 import mrunknown404.primalrework.recipes.IIngredientProvider;
 import mrunknown404.primalrework.recipes.SRBurnableFuel;
@@ -21,7 +21,7 @@ public class InitPRFuels {
 	private static final Cache<StagedItem, Map<FuelType, Pair<StagedItem, Integer>>> fuelsCache = new Cache<StagedItem, Map<FuelType, Pair<StagedItem, Integer>>>();
 	private static final Cache<FuelType, List<SRBurnableFuel>> fuelsAsRecipesCache = new Cache<FuelType, List<SRBurnableFuel>>();
 	
-	public static void load() {
+	static void load() {
 		for (FuelType type : FuelType.values()) {
 			FUELS.put(type, new HashMap<StagedItem, Integer>());
 			FUELS_AS_RECIPES.put(type, new ArrayList<SRBurnableFuel>());

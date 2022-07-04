@@ -19,8 +19,7 @@ import net.minecraft.world.IWorldReader;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.IPlantable;
 
-@SuppressWarnings("deprecation")
-public class SBGrassBlock extends SBSnowyDirt implements IBiomeColored { //TODO switch to my snow
+public class SBGrassBlock extends SBSnowyDirt { //TODO switch to my snow
 	public SBGrassBlock() {
 		super(InitStages.STAGE_0, BlockInfo.of(BlockInfo.R_DRY_GRASS), BlockStateType.none, BlockModelType.none,
 				new HarvestInfo(ToolType.SHOVEL, ToolMaterial.CLAY, DropInfo.of(InitBlocks.DIRT)));
@@ -77,5 +76,10 @@ public class SBGrassBlock extends SBSnowyDirt implements IBiomeColored { //TODO 
 	
 	private static boolean canPropagate(BlockState state, IWorldReader world, BlockPos pos) {
 		return canBeGrass(state, world, pos) && !world.getFluidState(pos.above()).is(FluidTags.WATER);
+	}
+	
+	@Override
+	public boolean coloredByBiome() {
+		return true;
 	}
 }

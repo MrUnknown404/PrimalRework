@@ -20,6 +20,7 @@ class GeneratorItemModel extends ModelProvider<TexturelessModelBuilder> {
 		super(generator, PrimalRework.MOD_ID, ITEM_FOLDER, TexturelessModelBuilder::new, existingFileHelper);
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void registerModels() {
 		for (RegistryObject<Item> regItem : InitRegistry.getItems()) {

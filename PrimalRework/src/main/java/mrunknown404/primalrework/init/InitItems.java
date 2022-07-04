@@ -2,8 +2,12 @@ package mrunknown404.primalrework.init;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Supplier;
 
+import mrunknown404.primalrework.api.registry.PRRegistries;
+import mrunknown404.primalrework.api.registry.PRRegistryObject;
+import mrunknown404.primalrework.api.registry.ROISIProvider;
 import mrunknown404.primalrework.items.SICraftingTool;
 import mrunknown404.primalrework.items.SIDamageable;
 import mrunknown404.primalrework.items.SIFood;
@@ -11,10 +15,8 @@ import mrunknown404.primalrework.items.SIIngot;
 import mrunknown404.primalrework.items.SIRawPart;
 import mrunknown404.primalrework.items.SISimpleTool;
 import mrunknown404.primalrework.items.StagedItem;
-import mrunknown404.primalrework.registry.Metal;
-import mrunknown404.primalrework.registry.PRRegistryObject;
 import mrunknown404.primalrework.stage.Stage;
-import mrunknown404.primalrework.utils.ROISIProvider;
+import mrunknown404.primalrework.utils.Metal;
 import mrunknown404.primalrework.utils.enums.CraftingToolType;
 import mrunknown404.primalrework.utils.enums.RawPart;
 import mrunknown404.primalrework.utils.enums.ToolMaterial;
@@ -95,7 +97,7 @@ public class InitItems {
 			registerCast(type);
 		}
 		
-		for (PRRegistryObject<Metal> metal : InitRegistry.getMetals()) {
+		for (PRRegistryObject<Metal> metal : PRRegistries.METALS.getEntries()) {
 			INGOTS.add(InitRegistry.item(metal.get() + "_ingot", () -> new SIIngot(metal.get(), false)));
 			INGOTS.add(InitRegistry.item(metal.get() + "_nugget", () -> new SIIngot(metal.get(), true)));
 			
@@ -127,48 +129,35 @@ public class InitItems {
 	
 	@SuppressWarnings("unchecked")
 	public static SIRawPart<RawPart> getRawPart(Metal metal, RawPart part) {
-		for (ROISIProvider<StagedItem> item : RAW_PARTS) {
-			SIRawPart<?> itemPart = (SIRawPart<?>) item.get();
-			if (itemPart.metal == metal && itemPart.part == part) {
-				return (SIRawPart<RawPart>) itemPart;
-			}
-		}
-		
-		return null;
+		Optional<ROISIProvider<StagedItem>> item = RAW_PARTS.stream().filter(i -> {
+			SIRawPart<?> itemPart = ((SIRawPart<?>) i.get());
+			return itemPart.metal == metal && itemPart.part == part;
+		}).findFirst();
+		return item.isPresent() ? (SIRawPart<RawPart>) item.get().get() : null;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public static SIRawPart<ToolType> getToolPart(Metal metal, ToolType part) {
-		for (ROISIProvider<StagedItem> item : TOOL_PARTS) {
-			SIRawPart<?> itemPart = (SIRawPart<?>) item.get();
-			if (itemPart.metal == metal && itemPart.part == part) {
-				return (SIRawPart<ToolType>) itemPart;
-			}
-		}
-		
-		return null;
+		return I_getToolPart(metal, part);
+	}
+	
+	public static SIRawPart<CraftingToolType> getToolPart(Metal metal, CraftingToolType part) {
+		return I_getToolPart(metal, part);
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static SIRawPart<CraftingToolType> getToolPart(Metal metal, CraftingToolType part) {
-		for (ROISIProvider<StagedItem> item : TOOL_PARTS) {
-			SIRawPart<?> itemPart = (SIRawPart<?>) item.get();
-			if (itemPart.metal == metal && itemPart.part == part) {
-				return (SIRawPart<CraftingToolType>) itemPart;
-			}
-		}
-		
-		return null;
+	private static <T extends Enum<T>> SIRawPart<T> I_getToolPart(Metal metal, T part) {
+		Optional<ROISIProvider<StagedItem>> item = TOOL_PARTS.stream().filter(i -> {
+			SIRawPart<?> itemPart = ((SIRawPart<?>) i.get());
+			return itemPart.metal == metal && itemPart.part == part;
+		}).findFirst();
+		return item.isPresent() ? (SIRawPart<T>) item.get().get() : null;
 	}
 	
-	public static SICraftingTool getCraftingTool(Metal metal, CraftingToolType type) {
-		for (ROISIProvider<StagedItem> item : TOOL_PARTS) {
-			SICraftingTool itemPart = (SICraftingTool) item.get();
-			if (itemPart.metal == metal && itemPart.type == type) {
-				return itemPart;
-			}
-		}
-		
-		return null;
+	public static SICraftingTool getCraftingTool(Metal metal, CraftingToolType type) {//TODO switch to stream
+		Optional<ROISIProvider<StagedItem>> item = CRAFTING_TOOLS.stream().filter(i -> {
+			SICraftingTool tool = ((SICraftingTool) i.get());
+			return tool.metal == metal && tool.type == type;
+		}).findFirst();
+		return item.isPresent() ? (SICraftingTool) item.get().get() : null;
 	}
 }

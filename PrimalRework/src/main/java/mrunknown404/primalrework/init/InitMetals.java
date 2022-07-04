@@ -2,9 +2,9 @@ package mrunknown404.primalrework.init;
 
 import java.awt.Color;
 
+import mrunknown404.primalrework.api.registry.PRRegistryObject;
 import mrunknown404.primalrework.blocks.BlockInfo.Hardness;
-import mrunknown404.primalrework.registry.Metal;
-import mrunknown404.primalrework.registry.PRRegistryObject;
+import mrunknown404.primalrework.utils.Metal;
 import mrunknown404.primalrework.utils.enums.Element;
 import mrunknown404.primalrework.utils.enums.ToolMaterial;
 

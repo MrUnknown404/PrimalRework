@@ -1,4 +1,4 @@
-package mrunknown404.primalrework.registry;
+package mrunknown404.primalrework.utils;
 
 import java.awt.Color;
 import java.util.LinkedHashMap;
@@ -8,7 +8,6 @@ import java.util.function.Supplier;
 import mrunknown404.primalrework.blocks.BlockInfo;
 import mrunknown404.primalrework.blocks.BlockInfo.Hardness;
 import mrunknown404.primalrework.stage.Stage;
-import mrunknown404.primalrework.utils.Pair;
 import mrunknown404.primalrework.utils.enums.Element;
 import mrunknown404.primalrework.utils.enums.ToolMaterial;
 import net.minecraftforge.registries.ForgeRegistryEntry;

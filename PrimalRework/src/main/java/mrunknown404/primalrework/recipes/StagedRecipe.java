@@ -1,13 +1,14 @@
 package mrunknown404.primalrework.recipes;
 
-import mrunknown404.primalrework.items.ISIProvider;
+import mrunknown404.primalrework.api.utils.ISIProvider;
+import mrunknown404.primalrework.api.utils.IStageProvider;
 import mrunknown404.primalrework.items.StagedItem;
 import mrunknown404.primalrework.recipes.inputs.RecipeInput;
 import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.utils.enums.RecipeType;
 import net.minecraft.item.ItemStack;
 
-public abstract class StagedRecipe<T extends StagedRecipe<T, V>, V extends RecipeInput<?>> {
+public abstract class StagedRecipe<T extends StagedRecipe<T, V>, V extends RecipeInput<?>> implements IStageProvider {
 	public final Stage stage;
 	public final V inputRecipe;
 	public final RecipeType recipeType;
@@ -36,5 +37,10 @@ public abstract class StagedRecipe<T extends StagedRecipe<T, V>, V extends Recip
 	@Deprecated
 	public ItemStack getOutputNoCopy() {
 		return output;
+	}
+	
+	@Override
+	public Stage getStage() {
+		return stage;
 	}
 }

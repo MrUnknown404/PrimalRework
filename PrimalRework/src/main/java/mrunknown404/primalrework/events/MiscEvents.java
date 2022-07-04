@@ -8,7 +8,6 @@ import mrunknown404.primalrework.init.InitItems;
 import mrunknown404.primalrework.network.packets.PSyncStage;
 import mrunknown404.primalrework.utils.NoAdvancementManager;
 import mrunknown404.primalrework.utils.helpers.RayTraceH;
-import mrunknown404.primalrework.utils.helpers.StageH;
 import mrunknown404.primalrework.world.savedata.WSDQuests;
 import mrunknown404.primalrework.world.savedata.WSDStage;
 import net.minecraft.block.Block;
@@ -47,7 +46,7 @@ public class MiscEvents {
 	public void onPlayerJoin(PlayerLoggedInEvent e) {
 		PlayerEntity player = e.getPlayer();
 		
-		PrimalRework.NETWORK.sendPacketToTarget((ServerPlayerEntity) player, new PSyncStage(StageH.getStage()));
+		PrimalRework.NETWORK.sendPacketToTarget((ServerPlayerEntity) player, new PSyncStage(WSDStage.getStage()));
 	}
 	
 	@SubscribeEvent

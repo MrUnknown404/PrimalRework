@@ -97,7 +97,7 @@ public abstract class NetworkH {
 		}, (msg, ctx) -> {
 			NetworkEvent.Context context = ctx.get();
 			if (context.getDirection() != dir) {
-				return;
+				throw new UnsupportedOperationException("You tried to send the packet '" + clazz.getSimpleName() + "' from the wrong side!");
 			}
 			
 			context.enqueueWork(() -> msg.handle(context));

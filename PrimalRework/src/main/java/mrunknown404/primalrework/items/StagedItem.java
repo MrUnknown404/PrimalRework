@@ -10,6 +10,8 @@ import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableMultimap.Builder;
 import com.google.common.collect.Multimap;
 
+import mrunknown404.primalrework.api.utils.ISIProvider;
+import mrunknown404.primalrework.api.utils.IStageProvider;
 import mrunknown404.primalrework.init.InitPRItemGroups;
 import mrunknown404.primalrework.recipes.IIngredientProvider;
 import mrunknown404.primalrework.recipes.Ingredient;
@@ -29,7 +31,7 @@ import net.minecraft.item.Rarity;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 
-public class StagedItem extends Item implements ISIProvider, IIngredientProvider {
+public class StagedItem extends Item implements ISIProvider, IIngredientProvider, IStageProvider {
 	public final Supplier<Stage> stage;
 	public final ToolType toolType;
 	public final ToolMaterial toolMat;
@@ -128,7 +130,12 @@ public class StagedItem extends Item implements ISIProvider, IIngredientProvider
 		return Ingredient.createUsingItem(this);
 	}
 	
-	public static Properties toProperties(int maxStackSize, int maxDamage, ItemGroup tab, Rarity rarity, Food food, boolean isFireResistant, boolean canRepair) {
+	@Override
+	public Stage getStage() {
+		return stage.get();
+	}
+	
+	protected static Properties toProperties(int maxStackSize, int maxDamage, ItemGroup tab, Rarity rarity, Food food, boolean isFireResistant, boolean canRepair) {
 		Properties p = new Properties().stacksTo(maxStackSize).tab(tab).rarity(rarity).food(food);
 		
 		if (maxDamage != 0) {

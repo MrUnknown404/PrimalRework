@@ -1,9 +1,9 @@
-package mrunknown404.primalrework.api.events;
+package mrunknown404.primalrework.api.events.common;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import mrunknown404.primalrework.registry.PRRegistry;
+import mrunknown404.primalrework.api.registry.PRRegistry;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.fml.event.lifecycle.IModBusEvent;
 

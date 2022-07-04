@@ -11,7 +11,7 @@ import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 @EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, modid = PrimalRework.MOD_ID)
 public class DataGenerators {
 	@SubscribeEvent
-	public static void onGatherData(GatherDataEvent e) {
+	public static void onGatherData(GatherDataEvent e) { //TODO make this publicly usable
 		DataGenerator gen = e.getGenerator();
 		ExistingFileHelper efh = e.getExistingFileHelper();
 		gen.addProvider(new GeneratorItemModel(gen, efh));

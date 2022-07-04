@@ -7,11 +7,10 @@ import java.util.Map;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-import mrunknown404.primalrework.items.ISIProvider;
+import mrunknown404.primalrework.api.utils.ISIProvider;
 import mrunknown404.primalrework.items.StagedItem;
 import mrunknown404.primalrework.recipes.IIngredientProvider;
 import mrunknown404.primalrework.recipes.Ingredient;
-import mrunknown404.primalrework.utils.helpers.StageH;
 import mrunknown404.primalrework.utils.helpers.WordH;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.common.util.Lazy;
@@ -48,7 +47,7 @@ public class StagedTag extends ForgeRegistryEntry<StagedTag> implements IIngredi
 	}
 	
 	public boolean containsAtCurrentStage(StagedItem item) {
-		return containsAtAll(item) && stageMap.entrySet().stream().anyMatch((e) -> StageH.hasAccessToStage(e.getKey().get()) && e.getValue().contains(item));
+		return containsAtAll(item) && stageMap.entrySet().stream().anyMatch((e) -> e.getKey().get().hasAccessToCurrentStage() && e.getValue().contains(item));
 	}
 	
 	public boolean containsAtAll(StagedItem item) {
@@ -56,7 +55,7 @@ public class StagedTag extends ForgeRegistryEntry<StagedTag> implements IIngredi
 	}
 	
 	public List<StagedItem> getItemsWithCurrentStage() {
-		return stageMap.entrySet().stream().filter((e) -> StageH.hasAccessToStage(e.getKey().get())).map((e) -> e.getValue()).flatMap(List::stream).collect(Collectors.toList());
+		return stageMap.entrySet().stream().filter((e) -> e.getKey().get().hasAccessToCurrentStage()).map((e) -> e.getValue()).flatMap(List::stream).collect(Collectors.toList());
 	}
 	
 	@Override

@@ -37,8 +37,7 @@ public class BiomeProviderPrimal extends BiomeProvider {
 		super(biomeRegistry.stream().collect(Collectors.toList()));
 		this.seed = seed;
 		this.biomes = biomeRegistry;
-		this.noiseBiomeLayer = new Layer(buildLayers(InitRegistry.getBiomes().stream().map((b) -> b.get()).collect(Collectors.toList()),
-				(ForgeRegistry<Biome>) ForgeRegistries.BIOMES, (l) -> new LazyAreaLayerContext(25, seed, l)));
+		this.noiseBiomeLayer = new Layer(buildLayers(InitRegistry.getBiomes(), (ForgeRegistry<Biome>) ForgeRegistries.BIOMES, (l) -> new LazyAreaLayerContext(25, seed, l)));
 	}
 	
 	private static <T extends IArea, C extends IExtendedNoiseRandom<T>> IAreaFactory<T> buildLayers(List<Biome> biomes, ForgeRegistry<Biome> biomeRegistry,

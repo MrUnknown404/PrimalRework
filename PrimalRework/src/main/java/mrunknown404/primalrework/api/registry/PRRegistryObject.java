@@ -1,4 +1,4 @@
-package mrunknown404.primalrework.registry;
+package mrunknown404.primalrework.api.registry;
 
 import java.util.function.Supplier;
 
@@ -25,6 +25,6 @@ public class PRRegistryObject<T extends ForgeRegistryEntry<T>> implements Suppli
 	@Deprecated
 	@Override
 	public String toString() {
-		throw new UnsupportedOperationException("Cannot convert PRRegistryObject to string! You probably mean to call #get() first");
+		throw new UnsupportedOperationException("Cannot convert PRRegistryObject to string! You probably meant to call #get() first");
 	}
 }

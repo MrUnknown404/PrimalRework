@@ -31,7 +31,7 @@ public class CommandQuest {
 	}
 	
 	private static CompletableFuture<Suggestions> getSuggestions(SuggestionsBuilder builder, boolean wantFinished) {
-		return ISuggestionProvider.suggest(InitQuests.getQuests().stream().filter((q) -> q.isFinished() == wantFinished).map((q) -> q.getName()).collect(Collectors.toList()),
+		return ISuggestionProvider.suggest(InitQuests.getQuests().stream().filter(q -> q.isFinished() == wantFinished).map((q) -> q.getName()).collect(Collectors.toList()),
 				builder);
 	}
 	

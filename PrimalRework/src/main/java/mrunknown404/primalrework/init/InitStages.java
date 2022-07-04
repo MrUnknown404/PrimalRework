@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Supplier;
 
+import mrunknown404.primalrework.api.registry.PRRegistries;
 import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.utils.Cache;
-import mrunknown404.primalrework.utils.helpers.StageH;
+import mrunknown404.primalrework.world.savedata.WSDStage;
 import net.minecraftforge.fml.RegistryObject;
 
 public class InitStages {
-	private static final Map<Byte, Supplier<Stage>> STAGE_MAP = new HashMap<Byte, Supplier<Stage>>();
+	private static final Map<Byte, Stage> STAGE_MAP = new HashMap<Byte, Stage>();
 	
 	public static final RegistryObject<Stage> STAGE_0 = register((byte) 0);
 	public static final RegistryObject<Stage> STAGE_1 = register((byte) 1);
@@ -23,36 +23,31 @@ public class InitStages {
 	public static final RegistryObject<Stage> DO_LATER = register((byte) (Byte.MAX_VALUE - 1));
 	public static final RegistryObject<Stage> NO_SHOW = register(Byte.MAX_VALUE);
 	
-	public static RegistryObject<Stage> register(String name, byte id, Supplier<Stage> stage) {
-		RegistryObject<Stage> s = InitRegistry.stage(name, stage);
-		STAGE_MAP.put(id, s);
-		return s;
+	private static RegistryObject<Stage> register(byte id) {
+		return InitRegistry.stage("stage_" + id, () -> new Stage(id));
 	}
 	
-	public static RegistryObject<Stage> register(byte b) {
-		Supplier<Stage> stage = () -> new Stage(b);
-		RegistryObject<Stage> s = InitRegistry.stage("stage_" + b, stage);
-		STAGE_MAP.put(b, s);
-		return s;
+	static void load() {
+		PRRegistries.STAGES.getValues().forEach(s -> STAGE_MAP.put(s.id, s));
 	}
 	
 	public static Stage byID(byte id) {
-		return STAGE_MAP.get(id).get();
+		return STAGE_MAP.get(id);
 	}
 	
 	private static final Cache<Byte, List<Stage>> PREV_STAGE_CACHE = new Cache<Byte, List<Stage>>();
 	
 	public static List<Stage> getStagesBeforeCurrent(boolean includeCurrentStage) {
-		Stage curStage = StageH.getStage();
+		Stage curStage = WSDStage.getStage();
 		if (PREV_STAGE_CACHE.is(curStage.id)) {
 			return PREV_STAGE_CACHE.get();
 		}
 		
 		List<Stage> stages = new ArrayList<Stage>();
 		byte curStageID = curStage.id;
-		for (RegistryObject<Stage> stage : InitRegistry.getStages()) {
-			if (stage.get().id < curStage.id) {
-				stages.add(stage.get());
+		for (Stage stage : PRRegistries.STAGES.getValues()) {
+			if (stage.id < curStage.id) {
+				stages.add(stage);
 			}
 		}
 		
@@ -65,15 +60,19 @@ public class InitStages {
 	}
 	
 	public static Stage getNextStage() {
-		Stage curStage = StageH.getStage();
+		return getStageAfter(WSDStage.getStage());
+	}
+	
+	public static Stage getStageAfter(Stage stage) {
+		Stage curStage = stage;
 		byte lastID = Byte.MAX_VALUE;
 		
-		for (RegistryObject<Stage> stage : InitRegistry.getStages()) {
-			if (stage.get().id > curStage.id && stage.get().id < lastID) {
-				lastID = stage.get().id;
+		for (Stage s : PRRegistries.STAGES.getValues()) {
+			if (s.id > curStage.id && s.id < lastID) {
+				lastID = s.id;
 			}
 		}
 		
-		return STAGE_MAP.get(lastID).get();
+		return STAGE_MAP.get(lastID);
 	}
 }

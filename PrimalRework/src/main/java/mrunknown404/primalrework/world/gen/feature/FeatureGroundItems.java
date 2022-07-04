@@ -3,8 +3,8 @@ package mrunknown404.primalrework.world.gen.feature;
 import java.util.Random;
 
 import mrunknown404.primalrework.init.InitBlocks;
-import mrunknown404.primalrework.utils.helpers.BlockH;
 import net.minecraft.block.BlockState;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ISeedReader;
 import net.minecraft.world.IWorldWriter;
@@ -24,13 +24,14 @@ public class FeatureGroundItems extends Feature<NoFeatureConfig> {
 	
 	@Override
 	public boolean place(ISeedReader seed, ChunkGenerator gen, Random r, BlockPos pos, NoFeatureConfig config) {
-		if (BlockH.canSupportPlant(seed.getBlockState(pos.below()).getBlock())) {
-			int ri = r.nextInt(8);
-			if (ri == 7) {
+		BlockState state = seed.getBlockState(pos.below());
+		if (state.isFaceSturdy(seed, pos, Direction.UP) && seed.getBlockState(pos).getMaterial().isReplaceable()) {
+			int ri = r.nextInt(6);
+			if (ri == 5) {
 				setBlock(seed, pos, InitBlocks.GROUND_FLINT.get().defaultBlockState());
-			} else if (ri >= 5) {
+			} else if (ri == 4) {
 				setBlock(seed, pos, InitBlocks.GROUND_CLAY.get().defaultBlockState());
-			} else if (ri >= 3) {
+			} else if (ri >= 2) {
 				setBlock(seed, pos, InitBlocks.GROUND_ROCK.get().defaultBlockState());
 			} else {
 				setBlock(seed, pos, InitBlocks.GROUND_STICK.get().defaultBlockState());

@@ -9,7 +9,7 @@ import mrunknown404.primalrework.items.StagedItem;
 import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.stage.StagedTag;
 import mrunknown404.primalrework.utils.Cache;
-import mrunknown404.primalrework.utils.helpers.StageH;
+import mrunknown404.primalrework.world.savedata.WSDStage;
 
 public class Ingredient implements IIngredientProvider {
 	public static final Ingredient EMPTY = createUsingItem(null);
@@ -59,7 +59,7 @@ public class Ingredient implements IIngredientProvider {
 	}
 	
 	public List<StagedItem> getStagedItems() {
-		if (itemsCache.is(StageH.getStage())) {
+		if (itemsCache.is(WSDStage.getStage())) {
 			return itemsCache.get();
 		}
 		
@@ -75,7 +75,7 @@ public class Ingredient implements IIngredientProvider {
 			}
 		}
 		
-		itemsCache.set(StageH.getStage(), items);
+		itemsCache.set(WSDStage.getStage(), items);
 		return itemsCache.get();
 	}
 	

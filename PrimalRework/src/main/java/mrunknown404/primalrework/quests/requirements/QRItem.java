@@ -2,7 +2,7 @@ package mrunknown404.primalrework.quests.requirements;
 
 import java.util.List;
 
-import mrunknown404.primalrework.items.ISIProvider;
+import mrunknown404.primalrework.api.utils.ISIProvider;
 import mrunknown404.primalrework.items.StagedItem;
 import mrunknown404.primalrework.utils.helpers.WordH;
 import net.minecraft.entity.player.PlayerEntity;

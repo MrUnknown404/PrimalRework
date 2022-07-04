@@ -8,19 +8,22 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 import mrunknown404.primalrework.PrimalRework;
-import mrunknown404.primalrework.api.events.EventPRRegistryRegistration;
+import mrunknown404.primalrework.api.events.common.EventPRRegistryRegistration;
+import mrunknown404.primalrework.api.registry.PRRegistries;
+import mrunknown404.primalrework.api.registry.PRRegistry;
+import mrunknown404.primalrework.api.registry.PRRegistry.State;
+import mrunknown404.primalrework.api.registry.PRRegistryObject;
+import mrunknown404.primalrework.api.registry.ROISIProvider;
 import mrunknown404.primalrework.blocks.StagedBlock;
+import mrunknown404.primalrework.init.InitBiomes.FeatureMap;
 import mrunknown404.primalrework.items.SIBlock;
 import mrunknown404.primalrework.items.StagedItem;
-import mrunknown404.primalrework.registry.Metal;
-import mrunknown404.primalrework.registry.PRRegistry;
-import mrunknown404.primalrework.registry.PRRegistry.State;
-import mrunknown404.primalrework.registry.PRRegistryObject;
 import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.stage.StagedTag;
-import mrunknown404.primalrework.utils.ROISIProvider;
+import mrunknown404.primalrework.utils.Metal;
 import mrunknown404.primalrework.world.biome.PRBiome;
 import mrunknown404.primalrework.world.biome.provider.BiomeProviderPrimal;
 import net.minecraft.block.Block;
@@ -29,16 +32,11 @@ import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.GenerationStage.Decoration;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
-import net.minecraftforge.common.BiomeManager;
-import net.minecraftforge.common.BiomeManager.BiomeEntry;
 import net.minecraftforge.common.world.ForgeWorldType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
@@ -48,15 +46,10 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryBuilder;
 
 public class InitRegistry {
-	private static final DeferredRegister<Stage> STAGES = DeferredRegister
-			.create(new RegistryBuilder<Stage>().setName(new ResourceLocation(PrimalRework.MOD_ID, "stages")).setType(Stage.class).create(), PrimalRework.MOD_ID);
-	private static final DeferredRegister<StagedTag> STAGED_TAGS = DeferredRegister
-			.create(new RegistryBuilder<StagedTag>().setName(new ResourceLocation(PrimalRework.MOD_ID, "staged_tags")).setType(StagedTag.class).create(), PrimalRework.MOD_ID);
-	//private static final DeferredRegister<Metal> METALS = DeferredRegister
-	//		.create(new RegistryBuilder<Metal>().setName(new ResourceLocation(PrimalRework.MOD_ID, "metals")).setType(Metal.class).create(), PrimalRework.MOD_ID);
+	private static final DeferredRegister<Stage> STAGES = DeferredRegister.create(PRRegistries.STAGES, PrimalRework.MOD_ID);
+	private static final DeferredRegister<StagedTag> STAGED_TAGS = DeferredRegister.create(PRRegistries.STAGED_TAGS, PrimalRework.MOD_ID);
 	
 	private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, PrimalRework.MOD_ID);
 	private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, PrimalRework.MOD_ID);
@@ -70,13 +63,13 @@ public class InitRegistry {
 	private static final Map<String, List<PRRegistry<?>>> PR_REGISTRIES = new LinkedHashMap<String, List<PRRegistry<?>>>();
 	private static final PRRegistry<Metal> METALS = new PRRegistry<Metal>(PrimalRework.MOD_ID, Metal.class, InitMetals.class);
 	
-	private static final Map<String, List<Supplier<ConfiguredFeature<?, ?>>>> BIOME_FEATURE_MAP = new HashMap<String, List<Supplier<ConfiguredFeature<?, ?>>>>();
+	private static final Map<String, Supplier<FeatureMap>> BIOME_FEATURE_MAP = new HashMap<String, Supplier<FeatureMap>>();
 	private static final Map<String, PRBiome> PR_BIOMES = new HashMap<String, PRBiome>();
 	private static State registrationState = State.TOO_EARLY;
 	
-	public static void register() {
+	@SuppressWarnings("deprecation")
+	public static void preSetup() {
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-		//bus.addListener((EventPRRegistryRegistration e) -> e.registerRegistry(METALS)); //Example!
 		
 		registrationState = State.NOW;
 		PrimalRework.printDivider();
@@ -93,8 +86,9 @@ public class InitRegistry {
 		PrimalRework.printDivider();
 		PR_REGISTRIES.values().stream().forEach((list) -> list.forEach((reg) -> {
 			loadClass(reg.classToLoad);
-			System.out.println("Loaded " + reg.getEntries().size() + " " + reg.clazzType.getSimpleName() + "s");
+			System.out.println("Loaded " + reg.getEntries().size() + " " + reg.getType().getSimpleName() + "s");
 			reg.finish();
+			PRRegistries.addToMasterRegistery(reg);
 		}));
 		registrationState = State.LATE;
 		
@@ -123,6 +117,13 @@ public class InitRegistry {
 		Registry.register(Registry.BIOME_SOURCE, new ResourceLocation(PrimalRework.MOD_ID, "biome_source"), BiomeProviderPrimal.PRIMAL_CODEC);
 	}
 	
+	public static void setup() {
+		InitStages.load();
+		InitQuests.load();
+		InitRecipes.load();
+		InitPRFuels.load();
+	}
+	
 	private static void registerRegistry(final PRRegistry<?> registry) {
 		if (InitRegistry.getRegistrationState() == State.TOO_EARLY) {
 			throw new UnsupportedOperationException("Cannot register registry too early!");
@@ -135,7 +136,7 @@ public class InitRegistry {
 		System.out.println("New registry " + registry);
 		List<PRRegistry<?>> list = PR_REGISTRIES.computeIfAbsent(registry.getModID(), (modid) -> new ArrayList<PRRegistry<?>>());
 		
-		if (list.stream().anyMatch((reg) -> reg.clazzType == registry.clazzType || reg.is(registry))) {
+		if (list.stream().anyMatch(registry::is)) {
 			throw new IllegalArgumentException("Duplicate registry for [modid:registryType] -> " + registry);
 		}
 		
@@ -147,15 +148,15 @@ public class InitRegistry {
 			PrimalRework.printDivider();
 		}
 		
-		try {
-			Class.forName(clazz.getName());
-			System.out.println("Loaded " + reg.getEntries().size() + " " + displayName);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+		loadClass(clazz);
+		System.out.println("Loaded " + reg.getEntries().size() + " " + displayName);
 	}
 	
 	private static void loadClass(Class<?> clazz) {
+		if (clazz == null) {
+			return;
+		}
+		
 		try {
 			Class.forName(clazz.getName());
 		} catch (ClassNotFoundException e) {
@@ -163,91 +164,82 @@ public class InitRegistry {
 		}
 	}
 	
-	public static RegistryObject<Stage> stage(String nameID, Supplier<Stage> o) {
+	static RegistryObject<Stage> stage(String nameID, Supplier<Stage> o) {
 		return STAGES.register(nameID, o);
 	}
 	
-	public static RegistryObject<StagedTag> stagedTag(String name, Supplier<StagedTag> o) {
+	static RegistryObject<StagedTag> stagedTag(String name, Supplier<StagedTag> o) {
 		return STAGED_TAGS.register(name, o);
 	}
 	
-	public static PRRegistryObject<Metal> metal(String name, Supplier<Metal> o) {
+	static PRRegistryObject<Metal> metal(String name, Supplier<Metal> o) {
 		return METALS.register(name, o);
 	}
 	
-	public static <T extends StagedBlock> ROISIProvider<T> blockNoItem(String name, Supplier<T> o) {
-		return new ROISIProvider<T>(BLOCKS.register(name, o));
+	static <T extends StagedBlock> ROISIProvider<T> blockNoItem(String name, Supplier<T> o) {
+		return ROISIProvider.of(BLOCKS.register(name, o));
 	}
 	
-	public static <T extends StagedBlock> ROISIProvider<T> block(String name, Supplier<T> o) {
+	static <T extends StagedBlock> ROISIProvider<T> block(String name, Supplier<T> o) {
 		RegistryObject<T> ro = BLOCKS.register(name, o);
 		item(name, () -> new SIBlock(ro.get()));
-		return new ROISIProvider<T>(ro);
+		return ROISIProvider.of(ro);
 	}
 	
-	public static <T extends StagedItem> ROISIProvider<T> item(String name, Supplier<T> o) {
-		return new ROISIProvider<T>(ITEMS.register(name, o));
+	static <T extends StagedItem> ROISIProvider<T> item(String name, Supplier<T> o) {
+		return ROISIProvider.of(ITEMS.register(name, o));
 	}
 	
-	public static <T extends TileEntity> RegistryObject<TileEntityType<T>> tileEntity(String name, Supplier<T> entity, ROISIProvider<StagedBlock> block) {
+	static <T extends TileEntity> RegistryObject<TileEntityType<T>> tileEntity(String name, Supplier<T> entity, ROISIProvider<StagedBlock> block) {
 		return TILE_ENTITIES.register(name, () -> TileEntityType.Builder.of(entity, block.get()).build(null));
 	}
 	
-	public static <T extends Container> RegistryObject<ContainerType<T>> container(String name, Supplier<ContainerType<T>> container) {
+	static <T extends Container> RegistryObject<ContainerType<T>> container(String name, Supplier<ContainerType<T>> container) {
 		return CONTAINERS.register(name, container);
 	}
 	
-	public static <T extends ForgeWorldType> RegistryObject<T> worldType(String name, Supplier<T> worldType) {
+	static <T extends ForgeWorldType> RegistryObject<T> worldType(String name, Supplier<T> worldType) {
 		return WORLD_TYPES.register(name, worldType);
 	}
 	
-	public static RegistryObject<Biome> biome(PRBiome o, List<Supplier<ConfiguredFeature<?, ?>>> features) {
-		BiomeManager.addBiome(o.biomeType, new BiomeEntry(RegistryKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(PrimalRework.MOD_ID, o.name)), o.weight));
-		PR_BIOMES.put(o.name, o);
-		BIOME_FEATURE_MAP.put(PrimalRework.MOD_ID + ":" + o.name, features);
-		return BIOMES.register(o.name, () -> o.biome);
+	/** TODO make this publicly usable */
+	static RegistryObject<Biome> biome(String name, PRBiome o, Supplier<FeatureMap> features) {
+		PR_BIOMES.put(PrimalRework.MOD_ID + ":" + name, o);
+		BIOME_FEATURE_MAP.put(PrimalRework.MOD_ID + ":" + name, features);
+		return BIOMES.register(name, () -> o.biome);
 	}
 	
-	public static <T extends Feature<?>> RegistryObject<T> feature(String name, Supplier<T> o) {
+	static <T extends Feature<?>> RegistryObject<T> feature(String name, Supplier<T> o) {
 		return FEATURES.register(name, o);
 	}
 	
-	public static <T extends SurfaceBuilder<?>> RegistryObject<T> surfaceBuilder(String name, Supplier<T> o) {
+	static <T extends SurfaceBuilder<?>> RegistryObject<T> surfaceBuilder(String name, Supplier<T> o) {
 		return SURFACE_BUILDERS.register(name, o);
 	}
 	
 	@SubscribeEvent
 	public static void biomeLoad(BiomeLoadingEvent e) {
-		List<Supplier<ConfiguredFeature<?, ?>>> list = BIOME_FEATURE_MAP.getOrDefault(e.getName().toString(), new ArrayList<Supplier<ConfiguredFeature<?, ?>>>());
-		for (Supplier<ConfiguredFeature<?, ?>> conf : list) {
-			e.getGeneration().addFeature(Decoration.TOP_LAYER_MODIFICATION.ordinal(), () -> InitConfiguredFeatures.GROUND_SLABS);
-			e.getGeneration().addFeature(Decoration.TOP_LAYER_MODIFICATION.ordinal(), () -> InitConfiguredFeatures.GROUND_ITEMS);
-			e.getGeneration().addFeature(Decoration.RAW_GENERATION.ordinal(), conf); //TODO make Decoration configurable
+		if (e.getName().getNamespace().equals("minecraft")) {
+			return;
 		}
+		
+		BIOME_FEATURE_MAP.get(e.getName().toString()).get().addFeaturesToBiome(e.getGeneration()::addFeature);
 	}
 	
-	public static Collection<RegistryObject<Stage>> getStages() {
-		return STAGES.getEntries();
-	}
-	
-	public static Collection<RegistryObject<StagedTag>> getTags() {
-		return STAGED_TAGS.getEntries();
-	}
-	
+	/** Data-gen only! */
+	@Deprecated
 	public static Collection<RegistryObject<Block>> getBlocks() {
 		return BLOCKS.getEntries();
 	}
 	
+	/** Data-gen only! */
+	@Deprecated
 	public static Collection<RegistryObject<Item>> getItems() {
 		return ITEMS.getEntries();
 	}
 	
-	public static Collection<RegistryObject<Biome>> getBiomes() {
-		return BIOMES.getEntries();
-	}
-	
-	public static Collection<PRRegistryObject<Metal>> getMetals() {
-		return METALS.getEntries();
+	public static List<Biome> getBiomes() {
+		return PR_BIOMES.values().stream().map(b -> b.biome).collect(Collectors.toList());
 	}
 	
 	public static PRBiome getBiome(String name) {

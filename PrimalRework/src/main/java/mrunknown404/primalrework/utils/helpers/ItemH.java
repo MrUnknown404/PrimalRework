@@ -47,7 +47,7 @@ public class ItemH {
 		final PRConfig.Client config = PRConfig.CLIENT;
 		
 		Stage stage = item.stage.get();
-		if (StageH.hasAccessToStage(stage)) {
+		if (stage.hasAccessToCurrentStage()) {
 			list.add(config.tooltips_showStackSize.get() && stack.getMaxStackSize() != 1 ?
 					name.copy().append(WordH.string(" [" + stack.getCount() + "/" + stack.getMaxStackSize() + "]").withStyle(Style.EMPTY.withItalic(false))) :
 					name);

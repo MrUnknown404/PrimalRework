@@ -7,7 +7,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import mrunknown404.primalrework.items.StagedItem;
-import mrunknown404.primalrework.utils.helpers.StageH;
 import mrunknown404.primalrework.utils.helpers.WordH;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -22,7 +21,7 @@ public class MixinItemStack {
 		Item item = getItem();
 		if (item instanceof StagedItem) {
 			StagedItem si = (StagedItem) item;
-			if (!StageH.hasAccessToStage(si.stage.get())) {
+			if (!si.hasAccessToCurrentStage()) {
 				callback.setReturnValue(UNKNOWN_ITEM);
 			}
 		} else {

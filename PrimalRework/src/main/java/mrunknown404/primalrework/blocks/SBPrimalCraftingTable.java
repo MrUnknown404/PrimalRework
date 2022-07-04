@@ -55,14 +55,16 @@ public class SBPrimalCraftingTable extends SBContainer {
 	
 	@SuppressWarnings("deprecation")
 	@Override
-	public void onRemove(BlockState state, World world, BlockPos pos, BlockState state2, boolean flag) {
-		if (!state.is(state2.getBlock())) {
+	public void onRemove(BlockState state0, World world, BlockPos pos, BlockState state1, boolean flag) {
+		if (!state0.is(state1.getBlock())) {
 			TileEntity tileentity = world.getBlockEntity(pos);
 			if (tileentity instanceof TEIPrimalCraftingTable) {
-				InventoryHelper.dropContents(world, pos, (IInventory) tileentity);
+				for (int i = 0; i < 9; i++) {
+					InventoryHelper.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), ((IInventory) tileentity).getItem(i));
+				}
 			}
 			
-			super.onRemove(state, world, pos, state2, flag);
+			super.onRemove(state0, world, pos, state1, flag);
 		}
 	}
 	

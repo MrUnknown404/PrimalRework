@@ -20,7 +20,7 @@ public class ScreenPause extends Screen {
 	@Override
 	protected void init() {
 		addButton(new Button(width / 2 - 102, height / 4 + 24, 204, 20, WordH.translate("menu.returnToGame"), (button) -> {
-			minecraft.setScreen((Screen) null);
+			minecraft.setScreen(null);
 			minecraft.mouseHandler.grabMouse();
 		}));
 		
@@ -45,8 +45,7 @@ public class ScreenPause extends Screen {
 			if (flag) {
 				minecraft.setScreen(new MainMenuScreen());
 			} else if (minecraft.isConnectedToRealms()) {
-				RealmsBridgeScreen realmsbridgescreen = new RealmsBridgeScreen();
-				realmsbridgescreen.switchToRealms(new MainMenuScreen());
+				new RealmsBridgeScreen().switchToRealms(new MainMenuScreen());
 			} else {
 				minecraft.setScreen(new MultiplayerScreen(new MainMenuScreen()));
 			}

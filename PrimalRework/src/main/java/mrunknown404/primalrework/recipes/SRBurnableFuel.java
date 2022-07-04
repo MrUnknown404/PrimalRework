@@ -1,6 +1,6 @@
 package mrunknown404.primalrework.recipes;
 
-import mrunknown404.primalrework.items.ISIProvider;
+import mrunknown404.primalrework.api.utils.ISIProvider;
 import mrunknown404.primalrework.recipes.inputs.RIBurnableFuel;
 
 public class SRBurnableFuel extends StagedRecipe<SRBurnableFuel, RIBurnableFuel> {

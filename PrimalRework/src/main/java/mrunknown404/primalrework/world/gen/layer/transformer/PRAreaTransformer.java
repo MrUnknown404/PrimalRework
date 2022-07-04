@@ -17,7 +17,7 @@ public class PRAreaTransformer implements IAreaTransformer0 {
 	private final ForgeRegistry<Biome> biomeRegistry;
 	
 	public PRAreaTransformer(List<Biome> biomes, ForgeRegistry<Biome> biomeRegistry) {
-		this.biomes = new BiomeList(biomes.stream().map((b) -> Pair.of(b, InitRegistry.getBiome(b.getRegistryName().getPath()).weight)).collect(Collectors.toList()));
+		this.biomes = new BiomeList(biomes.stream().map((b) -> Pair.of(b, InitRegistry.getBiome(b.getRegistryName().toString()).weight)).collect(Collectors.toList()));
 		this.biomeRegistry = biomeRegistry;
 	}
 	

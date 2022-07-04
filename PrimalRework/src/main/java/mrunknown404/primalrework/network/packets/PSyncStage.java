@@ -2,7 +2,7 @@ package mrunknown404.primalrework.network.packets;
 
 import mrunknown404.primalrework.api.network.packet.IPacket;
 import mrunknown404.primalrework.stage.Stage;
-import mrunknown404.primalrework.utils.helpers.StageH;
+import mrunknown404.primalrework.world.savedata.WSDStage;
 import net.minecraftforge.fml.network.NetworkEvent.Context;
 
 public class PSyncStage implements IPacket {
@@ -16,8 +16,9 @@ public class PSyncStage implements IPacket {
 		this.stage = stage;
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public void handle(Context ctx) {
-		StageH.loadStage(stage);
+		WSDStage.loadStage(stage);
 	}
 }

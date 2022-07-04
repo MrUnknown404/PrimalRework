@@ -7,8 +7,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 
+import mrunknown404.primalrework.api.utils.ISIProvider;
+import mrunknown404.primalrework.api.utils.IStageProvider;
 import mrunknown404.primalrework.init.InitPRItemGroups;
-import mrunknown404.primalrework.items.ISIProvider;
 import mrunknown404.primalrework.items.StagedItem;
 import mrunknown404.primalrework.items.StagedItem.ItemType;
 import mrunknown404.primalrework.recipes.IIngredientProvider;
@@ -28,7 +29,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockReader;
 
-public class StagedBlock extends Block implements ISIProvider, IIngredientProvider {
+public class StagedBlock extends Block implements ISIProvider, IIngredientProvider, IStageProvider {
 	private final Map<ToolType, HarvestInfo> harvestInfos = new HashMap<ToolType, HarvestInfo>();
 	protected final Map<Element, Integer> elements = new LinkedHashMap<Element, Integer>();
 	
@@ -101,6 +102,10 @@ public class StagedBlock extends Block implements ISIProvider, IIngredientProvid
 		return ItemType.block;
 	}
 	
+	public boolean coloredByBiome() {
+		return false;
+	}
+	
 	@Override
 	public StagedItem getStagedItem() {
 		Item item = asItem(); //Just used to fix data generation. unsure why StagedTags are even called tbh but they are being called
@@ -110,6 +115,11 @@ public class StagedBlock extends Block implements ISIProvider, IIngredientProvid
 	@Override
 	public Ingredient getIngredient() {
 		return Ingredient.createUsingItem(getStagedItem());
+	}
+	
+	@Override
+	public Stage getStage() {
+		return stage.get();
 	}
 	
 	@Deprecated

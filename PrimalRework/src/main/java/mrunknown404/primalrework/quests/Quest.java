@@ -7,12 +7,13 @@ import java.util.function.Supplier;
 
 import javax.annotation.Nullable;
 
+import mrunknown404.primalrework.api.utils.IStageProvider;
 import mrunknown404.primalrework.init.InitStages;
 import mrunknown404.primalrework.quests.requirements.QuestRequirement;
 import mrunknown404.primalrework.stage.Stage;
-import mrunknown404.primalrework.utils.helpers.StageH;
 import mrunknown404.primalrework.utils.helpers.WordH;
 import mrunknown404.primalrework.world.savedata.WSDQuests;
+import mrunknown404.primalrework.world.savedata.WSDStage;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Util;
@@ -20,7 +21,7 @@ import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.server.ServerWorld;
 
-public class Quest {
+public class Quest implements IStageProvider {
 	protected final String name_key;
 	protected final ItemStack itemIcon;
 	protected final Quest parent;
@@ -107,8 +108,8 @@ public class Quest {
 		}
 		
 		if (isEnd) {
-			if (stage.get().id <= StageH.getStage().id) {
-				StageH.setStage(world, InitStages.getNextStage());
+			if (stage.get().id <= WSDStage.getStage().id) {
+				WSDStage.setStage(world, InitStages.getNextStage());
 				System.out.println("The world has advanced to the next stage!");
 			} else {
 				System.err.println("Finished an end quest that should progress to the next stage but we're already there");
@@ -128,8 +129,9 @@ public class Quest {
 		this.isFinished = isFinished;
 	}
 	
-	public Supplier<Stage> getStage() {
-		return stage;
+	@Override
+	public Stage getStage() {
+		return stage.get();
 	}
 	
 	public IFormattableTextComponent getFancyName() {

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import mrunknown404.primalrework.PrimalRework;
 import mrunknown404.primalrework.items.StagedItem;
@@ -16,7 +18,7 @@ import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.utils.DoubleCache;
 import mrunknown404.primalrework.utils.DoubleCache.DoubleCachePredicate;
 import mrunknown404.primalrework.utils.enums.RecipeType;
-import mrunknown404.primalrework.utils.helpers.StageH;
+import mrunknown404.primalrework.world.savedata.WSDStage;
 
 public class InitRecipes {
 	private static final Map<RecipeType, List<StagedRecipe<?, ?>>> RECIPES = new HashMap<RecipeType, List<StagedRecipe<?, ?>>>();
@@ -25,11 +27,11 @@ public class InitRecipes {
 	private static final Map<RecipeType, DoubleCache<Stage, StagedItem, List<StagedRecipe<?, ?>>>> cacheRecipesForOutput0 = new HashMap<RecipeType, DoubleCache<Stage, StagedItem, List<StagedRecipe<?, ?>>>>();
 	private static final Map<RecipeType, DoubleCache<Stage, RecipeInput<?>, StagedRecipe<?, ?>>> cacheRecipesForInput = new HashMap<RecipeType, DoubleCache<Stage, RecipeInput<?>, StagedRecipe<?, ?>>>();
 	private static final Map<RecipeType, DoubleCache<Stage, Ingredient, List<StagedRecipe<?, ?>>>> cacheRecipesContainingInput0 = new HashMap<RecipeType, DoubleCache<Stage, Ingredient, List<StagedRecipe<?, ?>>>>();
-	private static final DoubleCache<Stage, StagedItem, Map<RecipeType, List<StagedRecipe<?, ?>>>> cacheRecipesForOutput1 = DoubleCache.and();
-	private static final DoubleCache<Stage, Ingredient, Map<RecipeType, List<StagedRecipe<?, ?>>>> cacheRecipesContainingInput1 = DoubleCache
+	private static final DoubleCache<Stage, StagedItem, Map<RecipeType, List<StagedRecipe<?, ?>>>> CACHE_WAYS_OF_MAKING = DoubleCache.and();
+	private static final DoubleCache<Stage, Ingredient, Map<RecipeType, List<StagedRecipe<?, ?>>>> CACHE_WHAT_CAN_BE_MADE_WITH = DoubleCache
 			.create((o0, o1, k0, k1) -> (o0 == k0 || (o0 != null && o0.equals(k0))) && (o1 == null ? false : o1.matches(k1)));
 	
-	public static void load() {
+	static void load() {
 		final DoubleCachePredicate<Stage, RecipeInput<?>> predicate0 = (o0, o1, k0, k1) -> (o0 == k0 || (o0 != null && o0.equals(k0))) && (o1 == null ? false : o1.matches(k1));
 		final DoubleCachePredicate<Stage, Ingredient> predicate1 = (o0, o1, k0, k1) -> (o0 == k0 || (o0 != null && o0.equals(k0))) && (o1 == null ? false : o1.matches(k1));
 		
@@ -62,102 +64,68 @@ public class InitRecipes {
 			return null;
 		}
 		
-		Stage stage = StageH.getStage();
+		Stage stage = WSDStage.getStage();
 		if (cacheRecipesForInput.get(input.recipeType).is(stage, input)) {
 			return cacheRecipesForInput.get(input.recipeType).get();
 		}
 		
-		for (StagedRecipe<?, ?> recipe : RECIPES.get(input.recipeType)) {
-			if (StageH.hasAccessToStage(recipe.stage) && recipe.inputRecipe.matches(input)) {
-				cacheRecipesForInput.get(input.recipeType).set(stage, recipe.inputRecipe, recipe);
-				return recipe;
-			}
-		}
-		
-		return null;
+		Optional<StagedRecipe<?, ?>> recipe = RECIPES.get(input.recipeType).stream().filter(r -> r.hasAccessToCurrentStage() && r.inputRecipe.matches(input)).findFirst();
+		return recipe.isPresent() ? cacheRecipesForInput.get(input.recipeType).set(stage, recipe.get().inputRecipe, recipe.get()) : null;
 	}
 	
 	@SuppressWarnings("unchecked")
 	public static <T extends StagedRecipe<T, ?>> List<T> getRecipesForOutput(RecipeType type, StagedItem output) {
-		Stage stage = StageH.getStage();
+		Stage stage = WSDStage.getStage();
 		if (cacheRecipesForOutput0.get(type).is(stage, output)) {
 			return (List<T>) cacheRecipesForOutput0.get(type).get();
 		}
 		
-		List<T> list = new ArrayList<T>();
-		for (StagedRecipe<?, ?> recipe : RECIPES.get(type)) {
-			if (StageH.hasAccessToStage(recipe.stage) && recipe.getOutput() == output) {
-				list.add((T) recipe);
-			}
-		}
-		
-		cacheRecipesForOutput0.get(type).set(stage, output, (List<StagedRecipe<?, ?>>) list);
-		return list;
+		return (List<T>) cacheRecipesForOutput0.get(type).set(stage, output,
+				RECIPES.get(type).stream().filter(r -> r.hasAccessToCurrentStage() && r.getOutput() == output).collect(Collectors.toList()));
 	}
 	
 	@SuppressWarnings("unchecked")
 	public static <T extends StagedRecipe<T, ?>> List<T> getRecipesContainingInput(RecipeType type, Ingredient input) {
-		Stage stage = StageH.getStage();
+		Stage stage = WSDStage.getStage();
 		if (cacheRecipesContainingInput0.get(type).is(stage, input)) {
 			return (List<T>) cacheRecipesContainingInput0.get(type).get();
 		}
 		
-		List<T> list = new ArrayList<T>();
-		for (StagedRecipe<?, ?> recipe : RECIPES.get(type)) {
-			if (StageH.hasAccessToStage(recipe.stage) && recipe.has(input)) {
-				list.add((T) recipe);
-			}
-		}
-		
-		cacheRecipesContainingInput0.get(type).set(stage, input, (List<StagedRecipe<?, ?>>) list);
-		return list;
+		return (List<T>) cacheRecipesContainingInput0.get(type).set(stage, input,
+				RECIPES.get(type).stream().filter(r -> r.hasAccessToCurrentStage() && r.has(input)).collect(Collectors.toList()));
 	}
 	
-	public static Map<RecipeType, List<StagedRecipe<?, ?>>> getRecipesContainingInput(Ingredient ingredient) {
-		Stage stage = StageH.getStage();
-		if (cacheRecipesContainingInput1.is(stage, ingredient)) {
-			return cacheRecipesContainingInput1.get();
+	public static Map<RecipeType, List<StagedRecipe<?, ?>>> getWhatCanBeMadeWith(Ingredient ingredient) {
+		Stage stage = WSDStage.getStage();
+		if (CACHE_WHAT_CAN_BE_MADE_WITH.is(stage, ingredient)) {
+			return CACHE_WHAT_CAN_BE_MADE_WITH.get();
 		}
 		
 		Map<RecipeType, List<StagedRecipe<?, ?>>> map = new HashMap<RecipeType, List<StagedRecipe<?, ?>>>();
-		for (RecipeType type : RecipeType.values()) {
-			List<StagedRecipe<?, ?>> list = new ArrayList<StagedRecipe<?, ?>>();
-			for (StagedRecipe<?, ?> recipe : RECIPES.get(type)) {
-				if (StageH.hasAccessToStage(recipe.stage) && recipe.has(ingredient)) {
-					list.add(recipe);
-				}
+		RECIPES.forEach((type, list) -> {
+			List<StagedRecipe<?, ?>> newList = list.stream().filter(r -> r.hasAccessToCurrentStage() && r.has(ingredient)).collect(Collectors.toList());
+			if (!newList.isEmpty()) {
+				map.put(type, newList);
 			}
-			
-			if (!list.isEmpty()) {
-				map.put(type, list);
-			}
-		}
+		});
 		
-		cacheRecipesContainingInput1.set(stage, ingredient, map);
-		return map;
+		return CACHE_WHAT_CAN_BE_MADE_WITH.set(stage, ingredient, map);
 	}
 	
-	public static Map<RecipeType, List<StagedRecipe<?, ?>>> getRecipesForOutput(StagedItem item) {
-		Stage stage = StageH.getStage();
-		if (cacheRecipesForOutput1.is(stage, item)) {
-			return cacheRecipesForOutput1.get();
+	public static Map<RecipeType, List<StagedRecipe<?, ?>>> getWaysOfMaking(StagedItem item) {
+		Stage stage = WSDStage.getStage();
+		if (CACHE_WAYS_OF_MAKING.is(stage, item)) {
+			return CACHE_WAYS_OF_MAKING.get();
 		}
 		
 		Map<RecipeType, List<StagedRecipe<?, ?>>> map = new HashMap<RecipeType, List<StagedRecipe<?, ?>>>();
-		for (RecipeType type : RecipeType.values()) {
-			List<StagedRecipe<?, ?>> list = new ArrayList<StagedRecipe<?, ?>>();
-			for (StagedRecipe<?, ?> recipe : RECIPES.get(type)) {
-				if (StageH.hasAccessToStage(recipe.stage) && recipe.getOutput() == item) {
-					list.add(recipe);
-				}
+		RECIPES.forEach((type, list) -> {
+			List<StagedRecipe<?, ?>> newList = list.stream().filter(r -> r.hasAccessToCurrentStage() && r.getOutput() == item).collect(Collectors.toList());
+			if (!newList.isEmpty()) {
+				map.put(type, newList);
 			}
-			
-			if (!list.isEmpty()) {
-				map.put(type, list);
-			}
-		}
+		});
 		
-		cacheRecipesForOutput1.set(stage, item, map);
-		return map;
+		return CACHE_WAYS_OF_MAKING.set(stage, item, map);
 	}
 }

@@ -1,25 +1,28 @@
-package mrunknown404.primalrework.registry;
+package mrunknown404.primalrework.api.registry;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
+import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
 import mrunknown404.primalrework.init.InitRegistry;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
+/** Example: {@code FMLJavaModLoadingContext.get().getModEventBus().addListener((EventPRRegistryRegistration e) -> e.registerRegistry(METALS));} */
 public class PRRegistry<T extends ForgeRegistryEntry<T>> {
 	private final ResourceLocation name;
 	private final Map<String, PRRegistryObject<T>> map = new HashMap<String, PRRegistryObject<T>>();
 	
-	public final Class<T> clazzType;
+	private final Class<T> classType;
 	public final Class<?> classToLoad;
 	
 	public PRRegistry(String modid, Class<T> clazzType, Class<?> classToLoad) {
 		this.name = new ResourceLocation(modid, clazzType.getSimpleName().toLowerCase());
-		this.clazzType = clazzType;
+		this.classType = clazzType;
 		this.classToLoad = classToLoad;
 	}
 	
@@ -42,6 +45,8 @@ public class PRRegistry<T extends ForgeRegistryEntry<T>> {
 		return ro;
 	}
 	
+	/** You shouldn't call this! */
+	@Deprecated
 	public void finish() {
 		String modid = getModID();
 		map.forEach((name, obj) -> obj.get().setRegistryName(new ResourceLocation(modid, name)));
@@ -51,12 +56,28 @@ public class PRRegistry<T extends ForgeRegistryEntry<T>> {
 		return name.getNamespace();
 	}
 	
+	public String getTypeName() {
+		return name.getPath();
+	}
+	
+	public void forEach(BiConsumer<String, PRRegistryObject<T>> con) {
+		map.forEach(con);
+	}
+	
+	public Set<String> getKeys() {
+		return map.keySet();
+	}
+	
 	public Collection<PRRegistryObject<T>> getEntries() {
 		return map.values();
 	}
 	
 	public boolean is(PRRegistry<?> registry) {
-		return name.equals(registry.name);
+		return name.equals(registry.name) || classType == registry.classType;
+	}
+	
+	public Class<T> getType() {
+		return classType;
 	}
 	
 	@Override

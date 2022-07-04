@@ -17,6 +17,7 @@ class GeneratorBlockModel extends ModelProvider<TexturelessModelBuilder> {
 		super(generator, PrimalRework.MOD_ID, BLOCK_FOLDER, TexturelessModelBuilder::new, existingFileHelper);
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void registerModels() {
 		for (RegistryObject<Block> regBlock : InitRegistry.getBlocks()) {

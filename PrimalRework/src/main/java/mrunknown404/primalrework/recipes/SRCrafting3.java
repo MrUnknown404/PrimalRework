@@ -1,6 +1,6 @@
 package mrunknown404.primalrework.recipes;
 
-import mrunknown404.primalrework.items.ISIProvider;
+import mrunknown404.primalrework.api.utils.ISIProvider;
 import mrunknown404.primalrework.recipes.inputs.RICrafting3;
 import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.utils.enums.RecipeType;

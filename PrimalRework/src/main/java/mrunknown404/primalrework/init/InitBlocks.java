@@ -2,8 +2,12 @@ package mrunknown404.primalrework.init;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Supplier;
 
+import mrunknown404.primalrework.api.registry.PRRegistries;
+import mrunknown404.primalrework.api.registry.PRRegistryObject;
+import mrunknown404.primalrework.api.registry.ROISIProvider;
 import mrunknown404.primalrework.blocks.BlockInfo;
 import mrunknown404.primalrework.blocks.BlockInfo.Hardness;
 import mrunknown404.primalrework.blocks.HarvestInfo;
@@ -29,9 +33,7 @@ import mrunknown404.primalrework.blocks.StagedBlock;
 import mrunknown404.primalrework.blocks.StagedBlock.BlockModelType;
 import mrunknown404.primalrework.blocks.StagedBlock.BlockStateType;
 import mrunknown404.primalrework.items.SIWallFloor;
-import mrunknown404.primalrework.registry.Metal;
-import mrunknown404.primalrework.registry.PRRegistryObject;
-import mrunknown404.primalrework.utils.ROISIProvider;
+import mrunknown404.primalrework.utils.Metal;
 import mrunknown404.primalrework.utils.enums.ToolMaterial;
 import mrunknown404.primalrework.utils.enums.ToolType;
 import net.minecraft.block.Block;
@@ -112,22 +114,14 @@ public class InitBlocks {
 	}
 	
 	static {
-		for (PRRegistryObject<Metal> metal : InitRegistry.getMetals()) {
+		for (PRRegistryObject<Metal> metal : PRRegistries.METALS.getEntries()) {
 			INGOT_BLOCKS.add(InitRegistry.block(metal.get() + "_block", () -> new SBMetal(metal.get())));
 		}
 	}
 	
 	public static SBMetal getMetalBlock(Metal alloy) {
-		for (ROISIProvider<StagedBlock> b : INGOT_BLOCKS) {
-			if (b.get() instanceof SBMetal) {
-				SBMetal ore = (SBMetal) b.get();
-				if (ore.metal == alloy) {
-					return ore;
-				}
-			}
-		}
-		
-		return null;
+		Optional<ROISIProvider<StagedBlock>> metal = INGOT_BLOCKS.stream().filter(b -> ((SBMetal) b.get()).metal == alloy).findFirst();
+		return metal.isPresent() ? (SBMetal) metal.get().get() : null;
 	}
 	
 	private static class WallFloorWrap {

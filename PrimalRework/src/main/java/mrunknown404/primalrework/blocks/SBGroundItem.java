@@ -1,10 +1,10 @@
 package mrunknown404.primalrework.blocks;
 
+import mrunknown404.primalrework.api.utils.ISIProvider;
 import mrunknown404.primalrework.blocks.BlockInfo.UniqueRawBlockInfo;
 import mrunknown404.primalrework.blocks.HarvestInfo.DropInfo;
 import mrunknown404.primalrework.init.InitPRItemGroups;
 import mrunknown404.primalrework.init.InitStages;
-import mrunknown404.primalrework.items.ISIProvider;
 import mrunknown404.primalrework.items.StagedItem.ItemType;
 import mrunknown404.primalrework.utils.enums.ToolMaterial;
 import mrunknown404.primalrework.utils.enums.ToolType;

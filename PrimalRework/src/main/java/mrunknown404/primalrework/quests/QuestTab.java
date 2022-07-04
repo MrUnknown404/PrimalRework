@@ -5,12 +5,13 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.function.Supplier;
 
-import mrunknown404.primalrework.items.ISIProvider;
+import mrunknown404.primalrework.api.utils.ISIProvider;
+import mrunknown404.primalrework.api.utils.IStageProvider;
 import mrunknown404.primalrework.stage.Stage;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 
-public class QuestTab {
+public class QuestTab implements IStageProvider {
 	private final List<Quest> quests = new ArrayList<Quest>();
 	private Quest root;
 	
@@ -50,8 +51,9 @@ public class QuestTab {
 		return I18n.get("quest_tab." + stage.toString() + ".desc");
 	}
 	
-	public Supplier<Stage> getStage() {
-		return stage;
+	@Override
+	public Stage getStage() {
+		return stage.get();
 	}
 	
 	public ItemStack getIcon() {

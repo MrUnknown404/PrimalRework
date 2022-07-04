@@ -1,8 +1,8 @@
 package mrunknown404.primalrework.items;
 
 import mrunknown404.primalrework.init.InitPRItemGroups;
-import mrunknown404.primalrework.registry.Metal;
 import mrunknown404.primalrework.utils.IMetalColored;
+import mrunknown404.primalrework.utils.Metal;
 import mrunknown404.primalrework.utils.enums.ToolMaterial;
 import mrunknown404.primalrework.utils.enums.ToolType;
 import net.minecraft.item.Rarity;

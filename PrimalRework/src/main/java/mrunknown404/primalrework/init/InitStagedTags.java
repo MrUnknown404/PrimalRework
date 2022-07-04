@@ -1,14 +1,15 @@
 package mrunknown404.primalrework.init;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import mrunknown404.primalrework.items.ISIProvider;
+import mrunknown404.primalrework.api.registry.PRRegistries;
+import mrunknown404.primalrework.api.utils.ISIProvider;
 import mrunknown404.primalrework.items.StagedItem;
 import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.stage.StagedTag;
 import mrunknown404.primalrework.utils.DoubleCache;
-import mrunknown404.primalrework.utils.helpers.StageH;
+import mrunknown404.primalrework.world.savedata.WSDStage;
 import net.minecraftforge.fml.RegistryObject;
 
 public class InitStagedTags {
@@ -20,21 +21,11 @@ public class InitStagedTags {
 	private static final DoubleCache<StagedItem, Stage, List<StagedTag>> tagCache = DoubleCache.and();
 	
 	public static List<StagedTag> getItemsTags(ISIProvider item) {
-		if (tagCache.is(item.getStagedItem(), StageH.getStage())) {
+		if (tagCache.is(item.getStagedItem(), WSDStage.getStage())) {
 			return tagCache.get();
 		}
 		
-		List<StagedTag> tags = new ArrayList<StagedTag>();
-		for (RegistryObject<StagedTag> tag : InitRegistry.getTags()) {
-			if (tag.get().getItemsWithCurrentStage().contains(item)) {
-				tags.add(tag.get());
-			}
-		}
-		
-		if (!tags.isEmpty()) {
-			tagCache.set(item.getStagedItem(), StageH.getStage(), tags);
-		}
-		
-		return tags;
+		return tagCache.set(item.getStagedItem(), WSDStage.getStage(),
+				PRRegistries.STAGED_TAGS.getValues().stream().filter(tag -> tag.getItemsWithCurrentStage().contains(item)).collect(Collectors.toList()));
 	}
 }

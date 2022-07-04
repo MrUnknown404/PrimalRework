@@ -47,7 +47,7 @@ public class InitQuests {
 	public static final Quest GET_STICK         = addQuest(Quest.simple("get_stick",         STAGE_0_ROOT,      0,  3, new QRItem(InitItems.STICK,         4)));
 	//@formatter:on
 	
-	public static void load() {
+	static void load() {
 		PrimalRework.printDivider();
 		System.out.println("Loaded '" + QUEST_TABS.size() + "' quest tabs!");
 		System.out.println("Loaded '" + QUESTS.size() + "' quests!");

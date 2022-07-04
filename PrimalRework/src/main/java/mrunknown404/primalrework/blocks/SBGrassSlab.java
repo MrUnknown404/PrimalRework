@@ -17,8 +17,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.server.ServerWorld;
 
-@SuppressWarnings("deprecation")
-public class SBGrassSlab extends SBSlab implements IBiomeColored { //TODO replace with my snow
+public class SBGrassSlab extends SBSlab { //TODO replace with my snow
 	public SBGrassSlab() {
 		super(InitStages.STAGE_0, BlockInfo.of(BlockInfo.DRY_GRASS), new HarvestInfo(ToolType.SHOVEL, ToolMaterial.CLAY, DropInfo.of(InitBlocks.DIRT_SLAB)));
 	}
@@ -72,5 +71,10 @@ public class SBGrassSlab extends SBSlab implements IBiomeColored { //TODO replac
 	
 	private static boolean canPropagate(BlockState state, IWorldReader world, BlockPos pos) {
 		return canBeGrass(state, world, pos) && !world.getFluidState(pos.above()).is(FluidTags.WATER);
+	}
+	
+	@Override
+	public boolean coloredByBiome() {
+		return true;
 	}
 }

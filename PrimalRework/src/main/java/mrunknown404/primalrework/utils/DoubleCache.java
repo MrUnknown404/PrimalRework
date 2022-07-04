@@ -22,10 +22,11 @@ public class DoubleCache<K0, K1, V> {
 		return create((okey0, okey1, key0, key1) -> (okey0 == key0 || (okey0 != null && okey0.equals(key0))) || (okey1 == key1 || (okey1 != null && okey1.equals(key1))));
 	}
 	
-	public void set(K0 key0, K1 key1, V value) {
+	public V set(K0 key0, K1 key1, V value) {
 		this.key0 = key0;
 		this.key1 = key1;
 		this.value = value;
+		return value;
 	}
 	
 	public boolean isEmpty() {

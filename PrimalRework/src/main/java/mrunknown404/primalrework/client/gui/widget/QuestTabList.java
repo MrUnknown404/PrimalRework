@@ -2,7 +2,6 @@ package mrunknown404.primalrework.client.gui.widget;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Supplier;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.matrix.MatrixStack;
@@ -100,12 +99,12 @@ public class QuestTabList extends AbstractList<QuestTabList.QuestTabEntry> {
 	}
 	
 	private static class TabButton extends Button {
-		private final Supplier<Stage> stage;
+		private final Stage stage;
 		private final QuestTab tab;
 		private final ScreenQuestMenu screen;
 		
-		private TabButton(ScreenQuestMenu screen, int x, int y, Supplier<Stage> stage, QuestTab tab) {
-			super(x, y, 22, 22, stage.get().getFancyName(), (onPress) -> {
+		private TabButton(ScreenQuestMenu screen, int x, int y, Stage stage, QuestTab tab) {
+			super(x, y, 22, 22, stage.getFancyName(), (onPress) -> {
 				screen.selectedTab = tab;
 				screen.setQuestInfo(null);
 			});
@@ -129,7 +128,7 @@ public class QuestTabList extends AbstractList<QuestTabList.QuestTabEntry> {
 			mc.getItemRenderer().renderGuiItem(tab.getIcon(), x + 3, y + 3);
 			
 			if (isSelected) {
-				GuiUtils.drawHoveringText(stack, Arrays.asList(stage.get().getFancyName()), mouseX, mouseY, screen.width, screen.height, -1, mc.font);
+				GuiUtils.drawHoveringText(stack, Arrays.asList(stage.getFancyName()), mouseX, mouseY, screen.width, screen.height, -1, mc.font);
 			}
 		}
 	}

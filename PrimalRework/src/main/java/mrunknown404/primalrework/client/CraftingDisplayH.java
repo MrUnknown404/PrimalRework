@@ -17,7 +17,7 @@ import mrunknown404.primalrework.utils.Cache;
 import mrunknown404.primalrework.utils.Pair;
 import mrunknown404.primalrework.utils.enums.FuelType;
 import mrunknown404.primalrework.utils.enums.RecipeType;
-import mrunknown404.primalrework.utils.helpers.StageH;
+import mrunknown404.primalrework.world.savedata.WSDStage;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.renderer.ItemRenderer;
@@ -47,8 +47,8 @@ public class CraftingDisplayH {
 	}
 	
 	public static List<ItemStack> getItemList() {
-		if (!ITEM_CACHE.is(StageH.getStage())) {
-			ITEM_CACHE.set(StageH.getStage(), ALL_ITEMS.stream().filter((s) -> StageH.hasAccessToStage(((StagedItem) s.getItem()).stage.get())).collect(Collectors.toList()));
+		if (!ITEM_CACHE.is(WSDStage.getStage())) {
+			ITEM_CACHE.set(WSDStage.getStage(), ALL_ITEMS.stream().filter((s) -> ((StagedItem) s.getItem()).hasAccessToCurrentStage()).collect(Collectors.toList()));
 		}
 		
 		//TODO handle search here
@@ -69,14 +69,14 @@ public class CraftingDisplayH {
 	}
 	
 	public static void showHowToCraft(Minecraft minecraft, StagedItem item, ContainerScreen<?> lastScreen) {
-		Map<RecipeType, List<StagedRecipe<?, ?>>> recipes = InitRecipes.getRecipesForOutput(item);
+		Map<RecipeType, List<StagedRecipe<?, ?>>> recipes = InitRecipes.getWaysOfMaking(item);
 		if (!recipes.isEmpty()) {
 			minecraft.setScreen(new ScreenRecipeList(lastScreen, recipes, null, item));
 		}
 	}
 	
 	public static void showWhatCanBeMade(Minecraft minecraft, StagedItem item, ContainerScreen<?> lastScreen) {
-		Map<RecipeType, List<StagedRecipe<?, ?>>> recipes = InitRecipes.getRecipesContainingInput(Ingredient.createUsingTags(item));
+		Map<RecipeType, List<StagedRecipe<?, ?>>> recipes = InitRecipes.getWhatCanBeMadeWith(Ingredient.createUsingTags(item));
 		Map<FuelType, Pair<StagedItem, Integer>> fuels = InitPRFuels.getFuels(item);
 		if (!recipes.isEmpty() || !fuels.isEmpty()) {
 			minecraft.setScreen(new ScreenRecipeList(lastScreen, recipes, fuels, item));

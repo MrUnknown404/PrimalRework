@@ -121,9 +121,7 @@ public abstract class RecipeDisplay<T extends StagedRecipe<T, ?>> {
 			item = items.get(curIng);
 		}
 		
-		ItemStack stack = new ItemStack(item);
-		lastIngCache.set(ing, ti, stack);
-		return stack;
+		return lastIngCache.set(ing, ti, new ItemStack(item));
 	}
 	
 	protected void drawOutputItem(ItemStack output, int x, int y) {

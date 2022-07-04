@@ -19,12 +19,10 @@ public class PRBiome {
 	
 	public final Biome biome;
 	public final BiomeType biomeType;
-	public final String name;
 	public final int weight;
 	
-	public PRBiome(String name, Supplier<ConfiguredSurfaceBuilder<?>> surface, int weight, BiomeType biomeType, Category category, float depth, float scale, float downfall,
-			float temp, int waterColor, int waterFogColor, TemperatureModifier tempMod, RainType rainType) {
-		this.name = name;
+	public PRBiome(Supplier<ConfiguredSurfaceBuilder<?>> surface, int weight, BiomeType biomeType, Category category, float depth, float scale, float downfall, float temp,
+			int waterColor, int waterFogColor, TemperatureModifier tempMod, RainType rainType) {
 		this.weight = weight;
 		this.biomeType = biomeType;
 		
@@ -64,14 +62,12 @@ public class PRBiome {
 		this.biome = b.build();
 	}
 	
-	public PRBiome(String name, Supplier<ConfiguredSurfaceBuilder<?>> surface, int weight, BiomeType biomeType, Category category, float depth, float scale, float downfall,
-			float temp, int waterColor, int waterFogColor) {
-		this(name, surface, weight, biomeType, category, depth, scale, downfall, temp, waterColor, waterFogColor, TemperatureModifier.NONE, RainType.RAIN);
+	public PRBiome(Supplier<ConfiguredSurfaceBuilder<?>> surface, int weight, BiomeType biomeType, Category category, float depth, float scale, float downfall, float temp,
+			int waterColor, int waterFogColor) {
+		this(surface, weight, biomeType, category, depth, scale, downfall, temp, waterColor, waterFogColor, TemperatureModifier.NONE, RainType.RAIN);
 	}
 	
-	public PRBiome(String name, Supplier<ConfiguredSurfaceBuilder<?>> surface, int weight, BiomeType biomeType, Category category, float depth, float scale, float downfall,
-			float temp) {
-		this(name, surface, weight, biomeType, category, depth, scale, downfall, temp, ColorH.rgba2Int(63, 118, 228), ColorH.rgba2Int(5, 5, 51), TemperatureModifier.NONE,
-				RainType.RAIN);
+	public PRBiome(Supplier<ConfiguredSurfaceBuilder<?>> surface, int weight, BiomeType biomeType, Category category, float depth, float scale, float downfall, float temp) {
+		this(surface, weight, biomeType, category, depth, scale, downfall, temp, ColorH.rgba2Int(63, 118, 228), ColorH.rgba2Int(5, 5, 51), TemperatureModifier.NONE, RainType.RAIN);
 	}
 }

@@ -35,6 +35,7 @@ class GeneratorBlockState extends BlockStateProvider {
 		ObfuscationReflectionHelper.setPrivateValue(BlockStateProvider.class, this, new ModItemModelProvider(generator, existingFileHelper), "itemModels");
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void registerStatesAndModels() {
 		for (RegistryObject<Block> regBlock : InitRegistry.getBlocks()) {

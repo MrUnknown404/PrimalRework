@@ -79,11 +79,6 @@ public abstract class TEInventory extends TileEntity implements IInventory, INam
 	protected abstract ITextComponent getDefaultName();
 	//@formatter:on
 	
-	@SuppressWarnings("unused")
-	public void onItemChange(int slot, PlayerEntity player, int containerID) {
-		
-	}
-	
 	@Override
 	public void setItem(int slot, ItemStack stack) {
 		items.set(slot, stack);

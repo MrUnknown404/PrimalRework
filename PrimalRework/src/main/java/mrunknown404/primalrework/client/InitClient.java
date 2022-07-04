@@ -1,12 +1,9 @@
-package mrunknown404.primalrework.utils;
+package mrunknown404.primalrework.client;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.lwjgl.glfw.GLFW;
 
-import mrunknown404.primalrework.PrimalRework;
-import mrunknown404.primalrework.blocks.IBiomeColored;
 import mrunknown404.primalrework.blocks.StagedBlock;
-import mrunknown404.primalrework.client.CraftingDisplayH;
 import mrunknown404.primalrework.client.gui.screen.container.ScreenCampFire;
 import mrunknown404.primalrework.client.gui.screen.container.ScreenInventory;
 import mrunknown404.primalrework.client.gui.screen.container.ScreenPrimalCraftingTable;
@@ -21,6 +18,7 @@ import mrunknown404.primalrework.init.InitContainers;
 import mrunknown404.primalrework.init.InitTileEntities;
 import mrunknown404.primalrework.items.SIBlock;
 import mrunknown404.primalrework.items.StagedItem;
+import mrunknown404.primalrework.utils.IMetalColored;
 import mrunknown404.primalrework.utils.helpers.ColorH;
 import net.minecraft.block.Block;
 import net.minecraft.client.GameSettings;
@@ -38,15 +36,15 @@ import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 
-@SuppressWarnings("deprecation")
-public class ProxyClient extends Proxy {
+public class InitClient {
 	public static final KeyBinding OPEN_QUESTS = new KeyBinding("key.quest", InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_GRAVE_ACCENT, "key.categories.primalrework");
 	private static final KeyBinding EMPTY = new KeyBinding("empty", InputMappings.UNKNOWN.getValue(), "empty");
 	
-	@Override
-	public void preSetup(PrimalRework main) {
-		super.preSetup(main);
+	private InitClient() {
 		
+	}
+	
+	public static void preSetup() {
 		MinecraftForge.EVENT_BUS.register(new TooltipCEvents());
 		MinecraftForge.EVENT_BUS.register(new HarvestDisplayCEvents());
 		MinecraftForge.EVENT_BUS.register(new CraftingDisplayCEvents());
@@ -54,10 +52,7 @@ public class ProxyClient extends Proxy {
 		MinecraftForge.EVENT_BUS.register(new QuestCEvents());
 	}
 	
-	@Override
-	public void setup() {
-		super.setup();
-		
+	public static void setup() {
 		Minecraft mc = Minecraft.getInstance();
 		int index = -1;
 		
@@ -96,8 +91,8 @@ public class ProxyClient extends Proxy {
 		
 		//Color setup
 		Block[] metalBlocks = ForgeRegistries.BLOCKS.getValues().stream()
-				.filter((b) -> b instanceof StagedBlock && b instanceof IMetalColored && ((IMetalColored) b).getMetal().color != null).toArray(Block[]::new);
-		Block[] biomeColored = ForgeRegistries.BLOCKS.getValues().stream().filter((b) -> b instanceof StagedBlock && b instanceof IBiomeColored).toArray(Block[]::new);
+				.filter(b -> b instanceof StagedBlock && b instanceof IMetalColored && ((IMetalColored) b).getMetal().color != null).toArray(Block[]::new);
+		Block[] biomeColored = ForgeRegistries.BLOCKS.getValues().stream().filter(b -> b instanceof StagedBlock && ((StagedBlock) b).coloredByBiome()).toArray(Block[]::new);
 		
 		//Block colors
 		mc.getBlockColors().register((state, reader, pos, tintIndex) -> reader != null && pos != null ? BiomeColors.getAverageGrassColor(reader, pos) : GrassColors.get(0.5, 1),
@@ -111,6 +106,6 @@ public class ProxyClient extends Proxy {
 				metalBlocks);
 		
 		mc.getItemColors().register((itemstack, tintIndex) -> ColorH.rgba2Int(((IMetalColored) itemstack.getItem()).getMetal().color), ForgeRegistries.ITEMS.getValues().stream()
-				.filter((i) -> i instanceof StagedItem && i instanceof IMetalColored && ((IMetalColored) i).getMetal().color != null).toArray(Item[]::new));
+				.filter(i -> i instanceof StagedItem && i instanceof IMetalColored && ((IMetalColored) i).getMetal().color != null).toArray(Item[]::new));
 	}
 }

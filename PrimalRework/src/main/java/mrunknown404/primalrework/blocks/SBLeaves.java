@@ -24,8 +24,7 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
-@SuppressWarnings("deprecation")
-public class SBLeaves extends StagedBlock implements IBiomeColored {
+public class SBLeaves extends StagedBlock {
 	public static final IntegerProperty DISTANCE = BlockStateProperties.DISTANCE;
 	public static final BooleanProperty PERSISTENT = BlockStateProperties.PERSISTENT;
 	
@@ -96,16 +95,14 @@ public class SBLeaves extends StagedBlock implements IBiomeColored {
 	
 	@Override
 	public void animateTick(BlockState state, World world, BlockPos pos, Random r) { //TODO i want falling leaf particles one day
-		if (world.isRainingAt(pos.above())) {
-			if (r.nextInt(15) == 1) {
-				BlockPos blockpos = pos.below();
-				BlockState blockstate = world.getBlockState(blockpos);
-				if (!blockstate.canOcclude() || !blockstate.isFaceSturdy(world, blockpos, Direction.UP)) {
-					double d0 = pos.getX() + r.nextDouble();
-					double d1 = pos.getY() - 0.05;
-					double d2 = pos.getZ() + r.nextDouble();
-					world.addParticle(ParticleTypes.DRIPPING_WATER, d0, d1, d2, 0, 0, 0);
-				}
+		if (world.isRainingAt(pos.above()) && r.nextInt(15) == 1) {
+			BlockPos blockpos = pos.below();
+			BlockState blockstate = world.getBlockState(blockpos);
+			if (!blockstate.canOcclude() || !blockstate.isFaceSturdy(world, blockpos, Direction.UP)) {
+				double d0 = pos.getX() + r.nextDouble();
+				double d1 = pos.getY() - 0.05;
+				double d2 = pos.getZ() + r.nextDouble();
+				world.addParticle(ParticleTypes.DRIPPING_WATER, d0, d1, d2, 0, 0, 0);
 			}
 		}
 	}
@@ -118,5 +115,10 @@ public class SBLeaves extends StagedBlock implements IBiomeColored {
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext ctx) {
 		return updateDistance(defaultBlockState().setValue(PERSISTENT, true), ctx.getLevel(), ctx.getClickedPos());
+	}
+	
+	@Override
+	public boolean coloredByBiome() {
+		return true;
 	}
 }
