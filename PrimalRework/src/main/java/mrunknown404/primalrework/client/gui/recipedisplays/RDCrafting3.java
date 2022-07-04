@@ -16,7 +16,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.gui.GuiUtils;
 
 public class RDCrafting3 extends RecipeDisplay<SRCrafting3> {
-	private static final ResourceLocation BG = new ResourceLocation(PrimalRework.MOD_ID, "textures/gui/craftingdisplay/primal_crafting_table.png");
+	private static final ResourceLocation BG = new ResourceLocation(PrimalRework.MOD_ID, "textures/gui/recipebrowser/primal_crafting_table.png");
 	
 	protected RDCrafting3(List<SRCrafting3> recipes, StagedItem output) {
 		super(recipes, output, 54);

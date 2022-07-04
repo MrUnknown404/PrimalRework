@@ -1,6 +1,6 @@
 package mrunknown404.primalrework.events.client;
 
-import mrunknown404.primalrework.client.gui.screen.ScreenCraftingDisplayItems;
+import mrunknown404.primalrework.client.gui.screen.ScreenRecipeBrowserItems;
 import net.minecraft.client.MainWindow;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
@@ -10,15 +10,15 @@ import net.minecraftforge.client.event.GuiScreenEvent.DrawScreenEvent;
 import net.minecraftforge.client.event.GuiScreenEvent.InitGuiEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-public class CraftingDisplayCEvents {
-	private ScreenCraftingDisplayItems screen;
+public class RecipeBrowserEvents {
+	private ScreenRecipeBrowserItems screen;
 	
 	@SubscribeEvent
 	public void onScreenToggle(GuiOpenEvent e) {
 		if (e.getGui() == null) {
 			screen = null;
 		} else if (e.getGui() instanceof ContainerScreen) {
-			screen = new ScreenCraftingDisplayItems();
+			screen = new ScreenRecipeBrowserItems();
 		} else {
 			screen = null;
 		}
@@ -60,5 +60,15 @@ public class CraftingDisplayCEvents {
 		}
 		
 		e.setCanceled(screen.scroll(e.getMouseX(), e.getScrollDelta()));
+	}
+	
+	@SubscribeEvent
+	public void onKeyPress(GuiScreenEvent.KeyboardKeyPressedEvent.Pre e) {
+		if (screen == null) {
+			return;
+		}
+		
+		//I hope this is the order
+		e.setCanceled(screen.keyPressed(e.getKeyCode(), e.getScanCode(), e.getModifiers()));
 	}
 }

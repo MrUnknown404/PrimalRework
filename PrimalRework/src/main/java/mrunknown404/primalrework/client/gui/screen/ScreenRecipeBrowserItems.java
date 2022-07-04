@@ -7,12 +7,12 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 
-import mrunknown404.primalrework.client.CraftingDisplayH;
+import mrunknown404.primalrework.client.InitClient;
+import mrunknown404.primalrework.client.RecipeBrowserH;
 import mrunknown404.primalrework.items.StagedItem;
 import mrunknown404.primalrework.utils.helpers.ColorH;
 import mrunknown404.primalrework.utils.helpers.MathH;
 import mrunknown404.primalrework.utils.helpers.WordH;
-import net.minecraft.client.MainWindow;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
@@ -29,44 +29,46 @@ import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.fml.client.gui.GuiUtils;
 
-public class ScreenCraftingDisplayItems extends Screen {
+public class ScreenRecipeBrowserItems extends Screen {
 	private ItemRenderer ir;
 	private TextureManager textureManager;
-	private MainWindow window;
 	private ContainerScreen<?> container;
 	private final List<Data> curItems = new ArrayList<Data>(), items3D = new ArrayList<Data>(), items2D = new ArrayList<Data>(), preItems3D = new ArrayList<Data>(),
 			preItems2D = new ArrayList<Data>();
-	private int heightItems, widthItems, padding, xStart, listSize;
+	private int heightItems, padding, xStart, listSize;
 	private StagedItem itemUnderMouse;
 	private ITextComponent scrollFaster;
 	
 	private static int scroll, lastHeightItems, lastSize;
 	
-	public ScreenCraftingDisplayItems() {
+	public ScreenRecipeBrowserItems() {
 		super(WordH.translate("screen.crafting_display.title"));
 	}
 	
 	@Override
 	protected void init() {
 		ir = minecraft.getItemRenderer();
-		window = minecraft.getWindow();
 		textureManager = minecraft.textureManager;
-		container = (ContainerScreen<?>) minecraft.screen;
+		if (minecraft.screen instanceof ScreenRecipeBrowser) {
+			container = ((ScreenRecipeBrowser) minecraft.screen).getLastScreen();
+		} else {
+			container = (ContainerScreen<?>) minecraft.screen;
+		}
 		
 		int guiScale = minecraft.options.guiScale;
-		int height = window.getHeight();
+		int height = minecraft.getWindow().getHeight();
 		int itemSize = MathH.floor(18 * guiScale);
 		padding = height % itemSize / guiScale / 2 + 1;
 		heightItems = MathH.floor(height / itemSize);
-		widthItems = MathH.floor(container.getGuiLeft() * guiScale / itemSize);
+		int widthItems = MathH.floor(container.getGuiLeft() * guiScale / itemSize);
 		xStart = width - (widthItems * 18) - (padding / 2);
-		listSize = MathH.floor((float) (CraftingDisplayH.getItemList().size() - 1) / (float) widthItems); //Unsure if this fixed it tbh
+		listSize = MathH.floor((float) (RecipeBrowserH.getItemList().size() - 1) / (float) widthItems); //Unsure if this fixed it tbh
 		
-		if (lastHeightItems != heightItems || lastSize != CraftingDisplayH.getItemList().size()) {
+		if (lastHeightItems != heightItems || lastSize != RecipeBrowserH.getItemList().size()) {
 			scroll = 0;
 		}
 		
-		lastSize = CraftingDisplayH.getItemList().size();
+		lastSize = RecipeBrowserH.getItemList().size();
 		lastHeightItems = heightItems;
 		
 		items3D.clear();
@@ -75,12 +77,12 @@ public class ScreenCraftingDisplayItems extends Screen {
 		preItems2D.clear();
 		
 		int j = 0;
-		for (int i = 0; i < CraftingDisplayH.getItemList().size(); i++) {
-			ItemStack item = CraftingDisplayH.getItemList().get(i);
+		for (int i = 0; i < RecipeBrowserH.getItemList().size(); i++) {
+			ItemStack item = RecipeBrowserH.getItemList().get(i);
 			int y = MathH.floor((float) i / (float) widthItems);
 			Data d = new Data(item, ir.getModel(item, null, null), i % widthItems, y, false);
 			
-			if (CraftingDisplayH.isItem3D(item)) {
+			if (RecipeBrowserH.isItem3D(item)) {
 				items3D.add(d);
 			} else {
 				items2D.add(d);
@@ -88,7 +90,7 @@ public class ScreenCraftingDisplayItems extends Screen {
 			
 			if (y >= listSize - heightItems + 1) {
 				d = new Data(item, ir.getModel(item, null, null), j % widthItems, MathH.floor((float) j / (float) widthItems), true);
-				if (CraftingDisplayH.isItem3D(item)) {
+				if (RecipeBrowserH.isItem3D(item)) {
 					preItems3D.add(d);
 				} else {
 					preItems2D.add(d);
@@ -200,10 +202,24 @@ public class ScreenCraftingDisplayItems extends Screen {
 		if (mouseX >= xStart) {
 			if (itemUnderMouse != null) {
 				if (button == 0) {
-					CraftingDisplayH.showHowToCraft(minecraft, itemUnderMouse, container);
+					RecipeBrowserH.showHowToCraft(minecraft, itemUnderMouse, container);
 				} else if (button == 1) {
-					CraftingDisplayH.showWhatCanBeMade(minecraft, itemUnderMouse, container);
+					RecipeBrowserH.showWhatCanBeMade(minecraft, itemUnderMouse, container);
 				}
+			}
+			return true;
+		}
+		
+		return false;
+	}
+	
+	@Override
+	public boolean keyPressed(int keycode, int var0, int var1) {
+		if (itemUnderMouse != null) {
+			if (InitClient.RECIPE_BROWSER_HOW_TO_CRAFT.getKey().getValue() == keycode) {
+				RecipeBrowserH.showHowToCraft(minecraft, itemUnderMouse, container);
+			} else if (InitClient.RECIPE_BROWSER_WHAT_CAN_I_CRAFT.getKey().getValue() == keycode) {
+				RecipeBrowserH.showWhatCanBeMade(minecraft, itemUnderMouse, container);
 			}
 			return true;
 		}

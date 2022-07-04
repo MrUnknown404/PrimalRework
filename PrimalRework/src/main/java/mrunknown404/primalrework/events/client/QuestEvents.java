@@ -9,7 +9,7 @@ import net.minecraft.client.gui.screen.ChatScreen;
 import net.minecraftforge.client.event.InputEvent.KeyInputEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-public class QuestCEvents {
+public class QuestEvents {
 	@SubscribeEvent
 	public void onKeyInput(KeyInputEvent e) {
 		Minecraft mc = Minecraft.getInstance();
@@ -17,10 +17,10 @@ public class QuestCEvents {
 			return;
 		}
 		
-		if (e.getAction() == GLFW.GLFW_PRESS && e.getKey() == InitClient.OPEN_QUESTS.getKey().getValue()) {
-			if (!(mc.screen instanceof ScreenQuestMenu)) {
+		if (e.getAction() == GLFW.GLFW_PRESS && e.getKey() == InitClient.QUESTS_OPEN.getKey().getValue()) {
+			if (mc.screen == null) {
 				mc.setScreen(new ScreenQuestMenu());
-			} else {
+			} else if (mc.screen instanceof ScreenQuestMenu) {
 				mc.setScreen(null);
 			}
 		}

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import mrunknown404.primalrework.client.gui.screen.ScreenRecipeList;
+import mrunknown404.primalrework.client.gui.screen.ScreenRecipeBrowser;
 import mrunknown404.primalrework.init.InitPRFuels;
 import mrunknown404.primalrework.init.InitRecipes;
 import mrunknown404.primalrework.items.StagedItem;
@@ -24,7 +24,7 @@ import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class CraftingDisplayH {
+public class RecipeBrowserH {
 	private static final Map<StagedItem, Data> ITEM_DATA = new HashMap<StagedItem, Data>();
 	private static final List<ItemStack> ALL_ITEMS = new ArrayList<ItemStack>();
 	private static final Cache<Stage, List<ItemStack>> ITEM_CACHE = new Cache<Stage, List<ItemStack>>();
@@ -62,7 +62,7 @@ public class CraftingDisplayH {
 		if (!lateRun) {
 			lateRun = true;
 			ItemRenderer ir = Minecraft.getInstance().getItemRenderer();
-			ITEM_DATA.values().stream().filter((data) -> ir.getModel(data.stack, null, null).usesBlockLight()).forEach((data) -> data.is3D());
+			ITEM_DATA.values().stream().filter((data) -> ir.getModel(data.stack, null, null).usesBlockLight()).forEach(Data::is3D);
 		}
 		
 		return ITEM_DATA.get(item.getItem()).is3D;
@@ -71,7 +71,7 @@ public class CraftingDisplayH {
 	public static void showHowToCraft(Minecraft minecraft, StagedItem item, ContainerScreen<?> lastScreen) {
 		Map<RecipeType, List<StagedRecipe<?, ?>>> recipes = InitRecipes.getWaysOfMaking(item);
 		if (!recipes.isEmpty()) {
-			minecraft.setScreen(new ScreenRecipeList(lastScreen, recipes, null, item));
+			minecraft.setScreen(new ScreenRecipeBrowser(lastScreen, recipes, null, item));
 		}
 	}
 	
@@ -79,7 +79,7 @@ public class CraftingDisplayH {
 		Map<RecipeType, List<StagedRecipe<?, ?>>> recipes = InitRecipes.getWhatCanBeMadeWith(Ingredient.createUsingTags(item));
 		Map<FuelType, Pair<StagedItem, Integer>> fuels = InitPRFuels.getFuels(item);
 		if (!recipes.isEmpty() || !fuels.isEmpty()) {
-			minecraft.setScreen(new ScreenRecipeList(lastScreen, recipes, fuels, item));
+			minecraft.setScreen(new ScreenRecipeBrowser(lastScreen, recipes, fuels, item));
 		}
 	}
 	

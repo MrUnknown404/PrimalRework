@@ -7,8 +7,9 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 
+import mrunknown404.primalrework.PrimalRework;
 import mrunknown404.primalrework.client.gui.screen.ScreenQuestMenu;
-import mrunknown404.primalrework.quests.Quest;
+import mrunknown404.primalrework.quests.QuestState;
 import mrunknown404.primalrework.utils.helpers.ColorH;
 import mrunknown404.primalrework.utils.helpers.MathH;
 import mrunknown404.primalrework.utils.helpers.WordH;
@@ -19,29 +20,33 @@ import net.minecraft.client.gui.IGuiEventListener;
 import net.minecraft.client.gui.INestedGuiEventHandler;
 import net.minecraft.client.gui.IRenderable;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.client.gui.widget.list.AbstractList;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.ITextComponent;
 
 public class QuestInfoList extends AbstractList<QuestInfoList.QuestInfoEntry> {
+	private static final IFormattableTextComponent ARROW = WordH.string(" -> ");
+	
 	private final ScreenQuestMenu screen;
-	private final Quest quest;
+	private final QuestState quest;
+	private final ClaimButton claimButton;
 	
-	private final IFormattableTextComponent arrow = WordH.string(" -> ");
-	
-	public QuestInfoList(ScreenQuestMenu screen, Minecraft mc, Quest quest) {
+	public QuestInfoList(ScreenQuestMenu screen, Minecraft mc, QuestState quest) {
 		super(mc, screen.width - 1, 0, screen.height - getInfoHeight(screen) + 1, screen.height - 1, 10);
 		this.screen = screen;
 		this.quest = quest;
 		this.x0 = 40;
 		this.headerHeight = 26;
-		this.headerHeight += quest.hasReward() ? (headerHeight == 26 ? 20 : 10) : 0;
-		this.headerHeight += quest.isRoot() ? 0 : (headerHeight == 26 ? 20 : 10);
+		this.headerHeight += quest.quest.hasReward() ? (headerHeight == 26 ? 20 : 10) : 0;
+		this.headerHeight += quest.quest.isRoot() ? 0 : (headerHeight == 26 ? 20 : 10);
+		this.claimButton = new ClaimButton(mc, quest, x0 + width - 127);
 		
-		for (ITextComponent text : quest.getDescription()) {
+		for (ITextComponent text : quest.quest.getDescription()) {
 			addEntry(new QuestInfoEntry(this, mc, text));
 		}
 		
@@ -87,32 +92,54 @@ public class QuestInfoList extends AbstractList<QuestInfoList.QuestInfoEntry> {
 		
 		int x = x0 + 4, y = y0 + 4 - (int) getScrollAmount();
 		
-		minecraft.textureManager.bind(quest.isEnd() ? ScreenQuestMenu.QUEST_END_ICON : ScreenQuestMenu.QUEST_ICON);
+		minecraft.textureManager.bind(quest.quest.isEnd() ? ScreenQuestMenu.QUEST_END_ICON : ScreenQuestMenu.QUEST_ICON);
 		blit(stack, x, y, 0, 0, 22, 22, 22, 22);
+		
+		if (quest.isFinished() && quest.quest.hasReward()) {
+			claimButton.y = y;
+			
+			if (!quest.wasClaimed()) {
+				claimButton.render(stack, mouseX, mouseY, tick);
+			} else {
+				claimButton.renderBackground(stack, mouseX, mouseY);
+				minecraft.font.draw(stack, WordH.translate("quest.claim_button.claimed"), claimButton.x + 14, claimButton.y + 7, ColorH.rgba2Int(45, 45, 45));
+			}
+		}
+		
+		minecraft.font.draw(stack, quest.quest.getFancyName(), x + 26, y + 7, ColorH.rgba2Int(45, 45, 45));
+		minecraft.getItemRenderer().renderGuiItem(quest.quest.getIcon(), x + 3, y + 3);
+		
 		if (quest.isFinished()) {
-			stack.translate(0, 0, 60);
+			stack.translate(0, 0, 50);
 			minecraft.textureManager.bind(ScreenQuestMenu.QUEST_CHECKMARK);
 			blit(stack, x, y, 0, 0, 22, 22, 22, 22);
 		}
 		
-		minecraft.getItemRenderer().renderGuiItem(quest.getIcon(), x + 3, y + 3);
-		x++;
-		
-		minecraft.font.draw(stack, quest.getFancyName(), x + 25, y + 7, ColorH.rgba2Int(45, 45, 45));
-		
-		if (quest.hasReward()) {
-			ITextComponent reward = quest.getReward().getDescription();
-			minecraft.font.draw(stack, WordH.translate("quest.info.reward").append(arrow).append(reward), x, y + 26, ColorH.rgba2Int(45, 45, 45));
+		if (quest.quest.hasReward()) {
+			minecraft.font.draw(stack, WordH.translate("quest.info.reward").append(ARROW).append(quest.quest.getReward().getDescription()), x + 1, y + 26,
+					ColorH.rgba2Int(45, 45, 45));
 		}
 		
-		if (!quest.isRoot()) {
-			ITextComponent requirement = quest.getRequirement().getDescription();
-			minecraft.font.draw(stack, WordH.translate("quest.info.requirement").append(arrow).append(requirement), x, y + (quest.hasReward() ? 36 : 26),
-					ColorH.rgba2Int(45, 45, 45));
+		if (!quest.quest.isRoot()) {
+			minecraft.font.draw(stack, WordH.translate("quest.info.requirement").append(ARROW).append(quest.quest.getRequirement().getDescription()), x + 1,
+					y + (quest.quest.hasReward() ? 36 : 26), ColorH.rgba2Int(45, 45, 45));
 		}
 		
 		renderList(stack, getRowLeft(), y, mouseX, mouseY, tick);
 		GlStateManager._disableScissorTest();
+	}
+	
+	@Override
+	public boolean mouseClicked(double x, double y, int var) {
+		boolean flag = false;
+		if (quest.isFinished() && quest.quest.hasReward() && !quest.wasClaimed()) {
+			flag = claimButton.mouseClicked(x, y, var);
+		}
+		
+		if (!flag) {
+			flag = super.mouseClicked(x, y, var);
+		}
+		return flag;
 	}
 	
 	@Override
@@ -140,12 +167,35 @@ public class QuestInfoList extends AbstractList<QuestInfoList.QuestInfoEntry> {
 		return false;
 	}
 	
-	public boolean isQuest(Quest quest) {
-		return this.quest == quest;
+	public boolean isQuest(QuestState quest) {
+		return this.quest.quest == quest.quest;
 	}
 	
 	public static int getInfoHeight(Screen screen) {
 		return screen.height / 3;
+	}
+	
+	private static class ClaimButton extends Button {
+		private static final ResourceLocation QUEST_CLAIM_REWARD = new ResourceLocation(PrimalRework.MOD_ID, "textures/gui/quest/claim_reward.png");
+		private static final ResourceLocation QUEST_CLAIM_REWARD_HOVER = new ResourceLocation(PrimalRework.MOD_ID, "textures/gui/quest/claim_reward_hover.png");
+		
+		private final Minecraft mc;
+		
+		public ClaimButton(Minecraft mc, QuestState quest, int x) {
+			super(x, 0, 76, 22, WordH.string(""), (press) -> quest.claimQuest());
+			this.mc = mc;
+		}
+		
+		@Override
+		public void render(MatrixStack stack, int mouseX, int mouseY, float tick) {
+			renderBackground(stack, mouseX, mouseY);
+			mc.font.draw(stack, WordH.translate("quest.claim_button.reward"), x + 7, y + 7, ColorH.rgba2Int(45, 45, 45));
+		}
+		
+		public void renderBackground(MatrixStack stack, int mouseX, int mouseY) {
+			mc.getTextureManager().bind(mouseX >= x && mouseX < x + width && mouseY >= y && mouseY < y + height ? QUEST_CLAIM_REWARD_HOVER : QUEST_CLAIM_REWARD);
+			blit(stack, x, y, 0, 0, 76, 22, 76, 22);
+		}
 	}
 	
 	private static class QuestInfoGui extends AbstractGui implements IRenderable {
@@ -164,8 +214,7 @@ public class QuestInfoList extends AbstractList<QuestInfoList.QuestInfoEntry> {
 		
 		@Override
 		public void render(MatrixStack stack, int mouseX, int mouseY, float partial) {
-			int x = this.x + questInfo.x0;
-			mc.font.draw(stack, text, x, y, ColorH.rgba2Int(45, 45, 45));
+			mc.font.draw(stack, text, x + questInfo.x0, y, ColorH.rgba2Int(45, 45, 45));
 		}
 	}
 	

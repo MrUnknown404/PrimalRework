@@ -5,7 +5,7 @@ import java.util.Random;
 import mrunknown404.primalrework.PrimalRework;
 import mrunknown404.primalrework.init.InitBlocks;
 import mrunknown404.primalrework.init.InitItems;
-import mrunknown404.primalrework.network.packets.PSyncStage;
+import mrunknown404.primalrework.network.packets.server.PSyncStage;
 import mrunknown404.primalrework.utils.NoAdvancementManager;
 import mrunknown404.primalrework.utils.helpers.RayTraceH;
 import mrunknown404.primalrework.world.savedata.WSDQuests;
@@ -18,9 +18,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.resources.DataPackRegistries;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.entity.player.BonemealEvent;
@@ -36,10 +38,13 @@ public class MiscEvents {
 	
 	@SubscribeEvent
 	public void onWorldStart(WorldEvent.Load e) {
-		if (e.getWorld() instanceof ServerWorld) {
-			WSDStage.get((ServerWorld) e.getWorld());
-			WSDQuests.get((ServerWorld) e.getWorld());
+		if (((World) e.getWorld()).dimension() != World.OVERWORLD || !(e.getWorld() instanceof ServerWorld)) {
+			return;
 		}
+		
+		MinecraftServer server = ((ServerWorld) e.getWorld()).getServer();
+		WSDStage.get(server);
+		WSDQuests.get(server);
 	}
 	
 	@SubscribeEvent
@@ -47,6 +52,7 @@ public class MiscEvents {
 		PlayerEntity player = e.getPlayer();
 		
 		PrimalRework.NETWORK.sendPacketToTarget((ServerPlayerEntity) player, new PSyncStage(WSDStage.getStage()));
+		//TODO send packet to client with all quest states
 	}
 	
 	@SubscribeEvent

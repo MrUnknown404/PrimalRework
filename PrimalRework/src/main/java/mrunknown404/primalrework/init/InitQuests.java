@@ -7,6 +7,7 @@ import java.util.Map;
 
 import mrunknown404.primalrework.PrimalRework;
 import mrunknown404.primalrework.quests.Quest;
+import mrunknown404.primalrework.quests.QuestReward;
 import mrunknown404.primalrework.quests.QuestTab;
 import mrunknown404.primalrework.quests.requirements.QRItem;
 import mrunknown404.primalrework.quests.requirements.QRTag;
@@ -30,7 +31,7 @@ public class InitQuests {
 	
 	//@formatter:off
 	//STAGE 0
-	public static final Quest GET_PLANT_FIBER   = addQuest(Quest.simple("get_plant_fiber",   STAGE_0_ROOT,      0,  0, new QRItem(InitItems.PLANT_FIBER,   12)));
+	public static final Quest GET_PLANT_FIBER   = addQuest(Quest.simple("get_plant_fiber",   STAGE_0_ROOT,      0,  0, new QRItem(InitItems.PLANT_FIBER,   12), new QuestReward("test", p -> System.out.println("reward given!"))));
 	public static final Quest GET_PLANT_MESH    = addQuest(Quest.simple("get_plant_mesh",    GET_PLANT_FIBER,   0,  0, new QRItem(InitItems.PLANT_MESH,    1)));
 	public static final Quest GET_PLANT_ROPE    = addQuest(Quest.simple("get_plant_rope",    GET_PLANT_FIBER,   0, -1, new QRItem(InitItems.PLANT_ROPE,    4)));
 	public static final Quest GET_THATCH        = addQuest(Quest.simple("get_thatch",        GET_PLANT_FIBER,   0, -2, new QRItem(InitBlocks.THATCH,       16)));
@@ -53,7 +54,7 @@ public class InitQuests {
 		System.out.println("Loaded '" + QUESTS.size() + "' quests!");
 	}
 	
-	private static Quest addQuest(Quest q) {
+	public static Quest addQuest(Quest q) {
 		QUEST_NAME_INDEX_MAP.put(q.getName(), QUESTS.size());
 		QUESTS.add(q);
 		q.getTab().addQuestToTab(q);
@@ -65,12 +66,12 @@ public class InitQuests {
 		return q;
 	}
 	
-	private static Quest addRoot(Quest q) {
+	public static Quest addRoot(Quest q) {
 		q.getTab().setRoot(q);
 		return addQuest(q);
 	}
 	
-	private static QuestTab addTab(QuestTab tab) {
+	public static QuestTab addTab(QuestTab tab) {
 		QUEST_TABS.add(tab);
 		return tab;
 	}

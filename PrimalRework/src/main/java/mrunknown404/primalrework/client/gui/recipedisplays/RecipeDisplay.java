@@ -4,8 +4,9 @@ import java.util.List;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 
-import mrunknown404.primalrework.client.CraftingDisplayH;
-import mrunknown404.primalrework.client.gui.screen.ScreenRecipeList;
+import mrunknown404.primalrework.client.InitClient;
+import mrunknown404.primalrework.client.RecipeBrowserH;
+import mrunknown404.primalrework.client.gui.screen.ScreenRecipeBrowser;
 import mrunknown404.primalrework.items.StagedItem;
 import mrunknown404.primalrework.recipes.Ingredient;
 import mrunknown404.primalrework.recipes.SRBurnableFuel;
@@ -36,7 +37,7 @@ public abstract class RecipeDisplay<T extends StagedRecipe<T, ?>> {
 			.create((o0, o1, k0, k1) -> (o0 != null && k0 != null) ? (o0.matches(k0) && o1 == k1) : false);
 	
 	private ItemRenderer ir;
-	private ScreenRecipeList list;
+	private ScreenRecipeBrowser list;
 	private Ingredient lastIng;
 	private int ti, ingSize, curIng;
 	
@@ -46,7 +47,7 @@ public abstract class RecipeDisplay<T extends StagedRecipe<T, ?>> {
 		this.thisHeight = thisHeight;
 	}
 	
-	public final void init(Minecraft mc, ScreenRecipeList list) {
+	public final void init(Minecraft mc, ScreenRecipeBrowser list) {
 		this.mc = mc;
 		this.font = mc.font;
 		this.ir = mc.getItemRenderer();
@@ -136,12 +137,25 @@ public abstract class RecipeDisplay<T extends StagedRecipe<T, ?>> {
 	public boolean mouseClicked(int button) {
 		if (itemUnderMouse != null) {
 			if (button == 0) {
-				CraftingDisplayH.showHowToCraft(mc, (StagedItem) itemUnderMouse.getItem(), list.getLastScreen());
+				RecipeBrowserH.showHowToCraft(mc, (StagedItem) itemUnderMouse.getItem(), list.getLastScreen());
 				return true;
 			} else if (button == 1) {
-				CraftingDisplayH.showWhatCanBeMade(mc, (StagedItem) itemUnderMouse.getItem(), list.getLastScreen());
+				RecipeBrowserH.showWhatCanBeMade(mc, (StagedItem) itemUnderMouse.getItem(), list.getLastScreen());
 				return true;
 			}
+		}
+		
+		return false;
+	}
+	
+	public boolean keyPressed(int keycode) {
+		if (itemUnderMouse != null) {
+			if (InitClient.RECIPE_BROWSER_HOW_TO_CRAFT.getKey().getValue() == keycode) {
+				RecipeBrowserH.showHowToCraft(mc, (StagedItem) itemUnderMouse.getItem(), list.getLastScreen());
+			} else if (InitClient.RECIPE_BROWSER_WHAT_CAN_I_CRAFT.getKey().getValue() == keycode) {
+				RecipeBrowserH.showWhatCanBeMade(mc, (StagedItem) itemUnderMouse.getItem(), list.getLastScreen());
+			}
+			return true;
 		}
 		
 		return false;

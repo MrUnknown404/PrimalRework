@@ -41,7 +41,7 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.gui.GuiUtils;
 
-public class HarvestDisplayCEvents {
+public class HarvestDisplayEvents {
 	private DoubleCache<Block, Item, List<ITextComponent>> blockCache = DoubleCache.and();
 	
 	private static final IFormattableTextComponent YES_MINE = WordH.string("\u2714 ").withStyle(TextFormatting.GREEN),

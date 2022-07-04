@@ -10,7 +10,7 @@ import mrunknown404.primalrework.client.gui.GuiQuestTree;
 import mrunknown404.primalrework.client.gui.widget.QuestInfoList;
 import mrunknown404.primalrework.client.gui.widget.QuestTabList;
 import mrunknown404.primalrework.init.InitQuests;
-import mrunknown404.primalrework.quests.Quest;
+import mrunknown404.primalrework.quests.QuestState;
 import mrunknown404.primalrework.quests.QuestTab;
 import mrunknown404.primalrework.utils.helpers.MathH;
 import mrunknown404.primalrework.utils.helpers.WordH;
@@ -18,17 +18,17 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.util.ResourceLocation;
 
 public class ScreenQuestMenu extends Screen {
-	private static final ResourceLocation BG = new ResourceLocation(PrimalRework.MOD_ID, "textures/gui/quest/quest_menu_background.png");
-	public static final ResourceLocation QUEST_CHECKMARK = new ResourceLocation(PrimalRework.MOD_ID, "textures/gui/quest/quest_icon_checkmark.png");
+	private static final ResourceLocation BG = new ResourceLocation(PrimalRework.MOD_ID, "textures/gui/quest/menu_background.png");
+	public static final ResourceLocation QUEST_CHECKMARK = new ResourceLocation(PrimalRework.MOD_ID, "textures/gui/quest/icon_checkmark.png");
 	
-	public static final ResourceLocation QUEST_ICON = new ResourceLocation(PrimalRework.MOD_ID, "textures/gui/quest/quest_icon.png");
-	public static final ResourceLocation QUEST_ICON_HOVER = new ResourceLocation(PrimalRework.MOD_ID, "textures/gui/quest/quest_icon_hover.png");
-	public static final ResourceLocation QUEST_ICON_SELECTED = new ResourceLocation(PrimalRework.MOD_ID, "textures/gui/quest/quest_icon_selected.png");
-	public static final ResourceLocation QUEST_ICON_SELECTED_HOVER = new ResourceLocation(PrimalRework.MOD_ID, "textures/gui/quest/quest_icon_selected_hover.png");
-	public static final ResourceLocation QUEST_END_ICON = new ResourceLocation(PrimalRework.MOD_ID, "textures/gui/quest/quest_end_icon.png");
-	public static final ResourceLocation QUEST_END_ICON_HOVER = new ResourceLocation(PrimalRework.MOD_ID, "textures/gui/quest/quest_end_icon_hover.png");
-	public static final ResourceLocation QUEST_END_ICON_SELECTED = new ResourceLocation(PrimalRework.MOD_ID, "textures/gui/quest/quest_end_icon_selected.png");
-	public static final ResourceLocation QUEST_END_ICON_SELECTED_HOVER = new ResourceLocation(PrimalRework.MOD_ID, "textures/gui/quest/quest_end_icon_selected_hover.png");
+	public static final ResourceLocation QUEST_ICON = new ResourceLocation(PrimalRework.MOD_ID, "textures/gui/quest/icon.png");
+	public static final ResourceLocation QUEST_ICON_HOVER = new ResourceLocation(PrimalRework.MOD_ID, "textures/gui/quest/icon_hover.png");
+	public static final ResourceLocation QUEST_ICON_SELECTED = new ResourceLocation(PrimalRework.MOD_ID, "textures/gui/quest/icon_selected.png");
+	public static final ResourceLocation QUEST_ICON_SELECTED_HOVER = new ResourceLocation(PrimalRework.MOD_ID, "textures/gui/quest/icon_selected_hover.png");
+	public static final ResourceLocation QUEST_END_ICON = new ResourceLocation(PrimalRework.MOD_ID, "textures/gui/quest/end_icon.png");
+	public static final ResourceLocation QUEST_END_ICON_HOVER = new ResourceLocation(PrimalRework.MOD_ID, "textures/gui/quest/end_icon_hover.png");
+	public static final ResourceLocation QUEST_END_ICON_SELECTED = new ResourceLocation(PrimalRework.MOD_ID, "textures/gui/quest/end_icon_selected.png");
+	public static final ResourceLocation QUEST_END_ICON_SELECTED_HOVER = new ResourceLocation(PrimalRework.MOD_ID, "textures/gui/quest/end_icon_selected_hover.png");
 	
 	private static final Map<QuestTab, GuiQuestTree> TREE_MAP = new HashMap<QuestTab, GuiQuestTree>();
 	private QuestTabList tabList;
@@ -117,7 +117,7 @@ public class ScreenQuestMenu extends Screen {
 		return true;
 	}
 	
-	public void setQuestInfo(Quest quest) {
+	public void setQuestInfo(QuestState quest) {
 		if (quest != null && (questInfo == null || !questInfo.isQuest(quest))) {
 			questInfo = new QuestInfoList(this, minecraft, quest);
 		} else {

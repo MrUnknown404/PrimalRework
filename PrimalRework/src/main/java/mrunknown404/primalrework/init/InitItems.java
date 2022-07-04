@@ -153,7 +153,7 @@ public class InitItems {
 		return item.isPresent() ? (SIRawPart<T>) item.get().get() : null;
 	}
 	
-	public static SICraftingTool getCraftingTool(Metal metal, CraftingToolType type) {//TODO switch to stream
+	public static SICraftingTool getCraftingTool(Metal metal, CraftingToolType type) {
 		Optional<ROISIProvider<StagedItem>> item = CRAFTING_TOOLS.stream().filter(i -> {
 			SICraftingTool tool = ((SICraftingTool) i.get());
 			return tool.metal == metal && tool.type == type;

@@ -5,7 +5,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-public class TooltipCEvents {
+public class TooltipEvents {
 	@SubscribeEvent
 	public void onTooltip(ItemTooltipEvent e) {
 		ItemStack stack = e.getItemStack();

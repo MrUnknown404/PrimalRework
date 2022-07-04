@@ -20,6 +20,7 @@ import mrunknown404.primalrework.utils.enums.ICraftingInput;
 import mrunknown404.primalrework.utils.enums.RecipeType;
 import mrunknown404.primalrework.utils.helpers.ColorH;
 import mrunknown404.primalrework.utils.helpers.WordH;
+import net.minecraft.client.MainWindow;
 import net.minecraft.client.audio.SimpleSound;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
@@ -29,20 +30,23 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.fml.client.gui.GuiUtils;
 
-public class ScreenRecipeList extends Screen {
-	private static final ResourceLocation BG = new ResourceLocation(PrimalRework.MOD_ID, "textures/gui/craftingdisplay/crafting_display_background.png");
-	private static final ResourceLocation TAB = new ResourceLocation(PrimalRework.MOD_ID, "textures/gui/craftingdisplay/crafting_display_tab.png");
+public class ScreenRecipeBrowser extends Screen {
+	private static final ResourceLocation BG = new ResourceLocation(PrimalRework.MOD_ID, "textures/gui/recipebrowser/background.png");
+	private static final ResourceLocation TAB = new ResourceLocation(PrimalRework.MOD_ID, "textures/gui/recipebrowser/tab.png");
 	
 	private final int imageWidth = 176;
 	
+	private final ScreenRecipeBrowserItems recipeBrowserItems;
 	private final ContainerScreen<?> lastScreen;
 	private final List<Data> recipes;
 	private int leftPos, topPos, curRecipeTab;
 	private Button leftButton, rightButton;
 	private ITextComponent recipeName, pageCount;
 	
-	public ScreenRecipeList(ContainerScreen<?> lastScreen, Map<RecipeType, List<StagedRecipe<?, ?>>> recipes, Map<FuelType, Pair<StagedItem, Integer>> fuels, StagedItem output) {
+	public ScreenRecipeBrowser(ContainerScreen<?> lastScreen, Map<RecipeType, List<StagedRecipe<?, ?>>> recipes, Map<FuelType, Pair<StagedItem, Integer>> fuels,
+			StagedItem output) {
 		super(WordH.translate("screen.recipelist.title"));
+		this.recipeBrowserItems = new ScreenRecipeBrowserItems();
 		this.lastScreen = lastScreen;
 		this.recipes = new ArrayList<Data>();
 		
@@ -76,6 +80,9 @@ public class ScreenRecipeList extends Screen {
 		curRecipeTab = 0;
 		addButton(leftButton = new Button(leftPos - 22, topPos + 4, 20, 20, WordH.string("<"), (button) -> recipes.get(curRecipeTab).display.decreasePage()));
 		addButton(rightButton = new Button(leftPos + 182, topPos + 4, 20, 20, WordH.string(">"), (button) -> recipes.get(curRecipeTab).display.increasePage()));
+		
+		MainWindow w = minecraft.getWindow();
+		recipeBrowserItems.init(minecraft, w.getGuiScaledWidth(), w.getGuiScaledHeight());
 		
 		onTabChange(true);
 	}
@@ -117,6 +124,7 @@ public class ScreenRecipeList extends Screen {
 		font.draw(stack, pageCount, leftPos + 90 - font.width(pageCount) / 2, topPos + h + 3, ColorH.rgba2Int(45, 45, 45));
 		
 		curData.display.render(stack, leftPos, topPos + 16, mouseX, mouseY);
+		recipeBrowserItems.render(stack, mouseX, mouseY, delta);
 		super.render(stack, mouseX, mouseY, delta);
 	}
 	
@@ -158,7 +166,7 @@ public class ScreenRecipeList extends Screen {
 			}
 		}
 		
-		return super.mouseClicked(mouseX, mouseY, button) || recipes.get(curRecipeTab).display.mouseClicked(button);
+		return recipeBrowserItems.click(mouseX, button) || super.mouseClicked(mouseX, mouseY, button) || recipes.get(curRecipeTab).display.mouseClicked(button);
 	}
 	
 	@Override
@@ -167,7 +175,8 @@ public class ScreenRecipeList extends Screen {
 			onClose();
 			return true;
 		}
-		return super.keyPressed(key, p_231046_2_, p_231046_3_);
+		
+		return recipeBrowserItems.keyPressed(key, p_231046_2_, p_231046_3_) || super.keyPressed(key, p_231046_2_, p_231046_3_) || recipes.get(curRecipeTab).display.keyPressed(key);
 	}
 	
 	public ContainerScreen<?> getLastScreen() {

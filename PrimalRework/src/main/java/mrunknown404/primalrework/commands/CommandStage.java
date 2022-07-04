@@ -29,7 +29,7 @@ public class CommandStage {
 	}
 	
 	private static int setStage(CommandContext<CommandSource> source, Stage stage) {
-		WSDStage.setStage(source.getSource().getServer().overworld(), stage);
+		WSDStage.setStage(source.getSource().getServer(), stage);
 		source.getSource().sendSuccess(WordH.translate("commands.stage.success").append(WordH.string(" " + stage.getName())), false);
 		return 1;
 	}

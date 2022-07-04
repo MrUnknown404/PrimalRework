@@ -2,11 +2,10 @@ package mrunknown404.primalrework.world.savedata;
 
 import mrunknown404.primalrework.PrimalRework;
 import mrunknown404.primalrework.init.InitStages;
-import mrunknown404.primalrework.network.packets.PSyncStage;
+import mrunknown404.primalrework.network.packets.server.PSyncStage;
 import mrunknown404.primalrework.stage.Stage;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.world.server.ServerWorld;
-import net.minecraft.world.storage.DimensionSavedDataManager;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.storage.WorldSavedData;
 
 public class WSDStage extends WorldSavedData {
@@ -15,12 +14,14 @@ public class WSDStage extends WorldSavedData {
 	
 	public WSDStage() {
 		super(NAME);
+		
+		stage = InitStages.STAGE_0.get();
 	}
 	
-	public static void setStage(ServerWorld world, Stage stage) {
+	public static void setStage(MinecraftServer server, Stage stage) {
 		WSDStage.stage = stage;
 		PrimalRework.NETWORK.sendPacketToAll(new PSyncStage(WSDStage.stage));
-		get(world).setDirty();
+		get(server).setDirty();
 	}
 	
 	public static Stage getStage() {
@@ -44,15 +45,7 @@ public class WSDStage extends WorldSavedData {
 		return nbt;
 	}
 	
-	public static WSDStage get(ServerWorld world) {
-		DimensionSavedDataManager storage = world.getDataStorage();
-		WSDStage data = storage.computeIfAbsent(() -> new WSDStage(), NAME);
-		
-		if (data == null) {
-			data = new WSDStage();
-			storage.set(data);
-		}
-		
-		return data;
+	public static WSDStage get(MinecraftServer server) {
+		return server.overworld().getDataStorage().computeIfAbsent(() -> new WSDStage(), NAME);
 	}
 }

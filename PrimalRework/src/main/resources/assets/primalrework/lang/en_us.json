@@ -40,7 +40,9 @@
 	"itemGroup.primalrework_nuggets": "P.R. Nuggets",
 	"itemGroup.primalrework_food": "P.R. Food",
 	"key.categories.primalrework": "PrimalRework",
-	"key.quest": "Open Quests",
+	"key.quests_open": "Open Quests",
+	"key.recipe_browser.how_to_craft": "How to craft",
+	"key.recipe_browser.what_can_i_craft": "What can I craft with",
 	"gui.crafting_display.pre": "Hold key",
 	"gui.crafting_display.post": "to scroll faster",
 	"screen.non_supported_mods.title": "Warning! You have non supported mods installed!",
@@ -62,5 +64,8 @@
 	"quest.finish.missing.post": "has been finished!",
 	"quest.info.reward": "Rewards",
 	"quest.info.requirement": "Requirements",
-	"quest.info.requirement.require": "Requires"
+	"quest.info.requirement.require": "Requires",
+	"quest.claim_button.reward": "Claim Reward",
+	"quest.claim_button.claimed": "✔ Claimed!",
+	"quest.stage_0.get_plant_fiber.desc": "test\ntest\ntest\ntest\ntest\ntest\ntest\ntest\ntest\ntest"
 }

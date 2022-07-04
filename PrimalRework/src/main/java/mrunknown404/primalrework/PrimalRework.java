@@ -12,9 +12,10 @@ import mrunknown404.primalrework.events.LeafEvents;
 import mrunknown404.primalrework.events.MiscEvents;
 import mrunknown404.primalrework.events.QuestEvents;
 import mrunknown404.primalrework.init.InitRegistry;
-import mrunknown404.primalrework.network.packets.POpenInventory;
-import mrunknown404.primalrework.network.packets.PSyncPrimalCraftingTableOutput;
-import mrunknown404.primalrework.network.packets.PSyncStage;
+import mrunknown404.primalrework.network.packets.client.POpenInventory;
+import mrunknown404.primalrework.network.packets.client.PQuestClaimRewards;
+import mrunknown404.primalrework.network.packets.server.PSyncPrimalCraftingTableOutput;
+import mrunknown404.primalrework.network.packets.server.PSyncStage;
 import mrunknown404.primalrework.utils.PRConfig;
 import net.minecraft.command.CommandSource;
 import net.minecraftforge.api.distmarker.Dist;
@@ -44,6 +45,7 @@ public class PrimalRework {
 		n.registerPacket(PSyncStage.class, NetworkDirection.PLAY_TO_CLIENT);
 		n.registerPacket(POpenInventory.class, NetworkDirection.PLAY_TO_SERVER);
 		n.registerPacket(PSyncPrimalCraftingTableOutput.class, NetworkDirection.PLAY_TO_CLIENT);
+		n.registerPacket(PQuestClaimRewards.class, NetworkDirection.PLAY_TO_SERVER);
 	});
 	
 	public PrimalRework() {

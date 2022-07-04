@@ -8,11 +8,11 @@ import mrunknown404.primalrework.client.gui.screen.container.ScreenCampFire;
 import mrunknown404.primalrework.client.gui.screen.container.ScreenInventory;
 import mrunknown404.primalrework.client.gui.screen.container.ScreenPrimalCraftingTable;
 import mrunknown404.primalrework.client.terenderers.TERCampFire;
-import mrunknown404.primalrework.events.client.CraftingDisplayCEvents;
-import mrunknown404.primalrework.events.client.HarvestDisplayCEvents;
-import mrunknown404.primalrework.events.client.MiscCEvents;
-import mrunknown404.primalrework.events.client.QuestCEvents;
-import mrunknown404.primalrework.events.client.TooltipCEvents;
+import mrunknown404.primalrework.events.client.HarvestDisplayEvents;
+import mrunknown404.primalrework.events.client.MiscEvents;
+import mrunknown404.primalrework.events.client.QuestEvents;
+import mrunknown404.primalrework.events.client.RecipeBrowserEvents;
+import mrunknown404.primalrework.events.client.TooltipEvents;
 import mrunknown404.primalrework.init.InitBlocks;
 import mrunknown404.primalrework.init.InitContainers;
 import mrunknown404.primalrework.init.InitTileEntities;
@@ -37,7 +37,11 @@ import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class InitClient {
-	public static final KeyBinding OPEN_QUESTS = new KeyBinding("key.quest", InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_GRAVE_ACCENT, "key.categories.primalrework");
+	public static final KeyBinding QUESTS_OPEN = new KeyBinding("key.quests_open", InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_GRAVE_ACCENT, "key.categories.primalrework");
+	public static final KeyBinding RECIPE_BROWSER_HOW_TO_CRAFT = new KeyBinding("key.recipe_browser.how_to_craft", InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_R,
+			"key.categories.primalrework");
+	public static final KeyBinding RECIPE_BROWSER_WHAT_CAN_I_CRAFT = new KeyBinding("key.recipe_browser.what_can_i_craft", InputMappings.Type.KEYSYM, GLFW.GLFW_KEY_U,
+			"key.categories.primalrework");
 	private static final KeyBinding EMPTY = new KeyBinding("empty", InputMappings.UNKNOWN.getValue(), "empty");
 	
 	private InitClient() {
@@ -45,11 +49,11 @@ public class InitClient {
 	}
 	
 	public static void preSetup() {
-		MinecraftForge.EVENT_BUS.register(new TooltipCEvents());
-		MinecraftForge.EVENT_BUS.register(new HarvestDisplayCEvents());
-		MinecraftForge.EVENT_BUS.register(new CraftingDisplayCEvents());
-		MinecraftForge.EVENT_BUS.register(new MiscCEvents());
-		MinecraftForge.EVENT_BUS.register(new QuestCEvents());
+		MinecraftForge.EVENT_BUS.register(new TooltipEvents());
+		MinecraftForge.EVENT_BUS.register(new HarvestDisplayEvents());
+		MinecraftForge.EVENT_BUS.register(new RecipeBrowserEvents());
+		MinecraftForge.EVENT_BUS.register(new MiscEvents());
+		MinecraftForge.EVENT_BUS.register(new QuestEvents());
 	}
 	
 	public static void setup() {
@@ -66,7 +70,9 @@ public class InitClient {
 		ObfuscationReflectionHelper.setPrivateValue(GameSettings.class, mc.options, EMPTY, "field_194146_ao"); //keyAdvancements
 		mc.options.keyMappings = ArrayUtils.remove(mc.options.keyMappings, index);
 		
-		ClientRegistry.registerKeyBinding(OPEN_QUESTS);
+		ClientRegistry.registerKeyBinding(QUESTS_OPEN);
+		ClientRegistry.registerKeyBinding(RECIPE_BROWSER_HOW_TO_CRAFT);
+		ClientRegistry.registerKeyBinding(RECIPE_BROWSER_WHAT_CAN_I_CRAFT);
 		
 		ClientRegistry.bindTileEntityRenderer(InitTileEntities.CAMPFIRE.get(), TERCampFire::new);
 		
@@ -86,8 +92,8 @@ public class InitClient {
 		ScreenManager.register(InitContainers.PRIMAL_CRAFTING_TABLE.get(), ScreenPrimalCraftingTable::new);
 		ScreenManager.register(InitContainers.INVENTORY.get(), ScreenInventory::new);
 		
-		ForgeRegistries.ITEMS.getValues().stream().filter((i) -> i instanceof StagedItem).forEach((item) -> CraftingDisplayH.addItem((StagedItem) item));
-		CraftingDisplayH.finish();
+		ForgeRegistries.ITEMS.getValues().stream().filter((i) -> i instanceof StagedItem).forEach((item) -> RecipeBrowserH.addItem((StagedItem) item));
+		RecipeBrowserH.finish();
 		
 		//Color setup
 		Block[] metalBlocks = ForgeRegistries.BLOCKS.getValues().stream()

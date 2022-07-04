@@ -11,9 +11,11 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import mrunknown404.primalrework.client.gui.screen.ScreenQuestMenu;
 import mrunknown404.primalrework.client.gui.widget.QuestInfoList;
 import mrunknown404.primalrework.quests.Quest;
+import mrunknown404.primalrework.quests.QuestState;
 import mrunknown404.primalrework.quests.QuestTab;
 import mrunknown404.primalrework.utils.helpers.ColorH;
 import mrunknown404.primalrework.utils.helpers.MathH;
+import mrunknown404.primalrework.world.savedata.WSDQuests;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FocusableGui;
 import net.minecraft.client.gui.IGuiEventListener;
@@ -41,7 +43,7 @@ public class GuiQuestTree extends FocusableGui implements IRenderable {
 		this.screen = screen;
 		
 		for (Quest quest : tab.get()) {
-			children.add(new QuestButton(quest, mc, this));
+			children.add(new QuestButton(WSDQuests.getQuestState(quest.getName()), mc, this));
 		}
 	}
 	
@@ -99,12 +101,12 @@ public class GuiQuestTree extends FocusableGui implements IRenderable {
 	
 	private static class QuestButton extends Button {
 		private final GuiQuestTree tree;
-		private final Quest quest;
+		private final QuestState quest;
 		private final Minecraft mc;
 		
-		private QuestButton(Quest quest, Minecraft mc, GuiQuestTree tree) {
-			super(MathH.floor(quest.getXPos() * 33) - 11 + tree.screen.width / 2, MathH.floor(quest.getYPos() * 33) - 11 + tree.screen.height / 2, 22, 22, quest.getFancyName(),
-					(onPress) -> tree.screen.setQuestInfo(quest));
+		private QuestButton(QuestState quest, Minecraft mc, GuiQuestTree tree) {
+			super(MathH.floor(quest.quest.getXPos() * 33) - 11 + tree.screen.width / 2, MathH.floor(quest.quest.getYPos() * 33) - 11 + tree.screen.height / 2, 22, 22,
+					quest.quest.getFancyName(), (onPress) -> tree.screen.setQuestInfo(quest));
 			this.quest = quest;
 			this.mc = mc;
 			this.tree = tree;
@@ -113,10 +115,10 @@ public class GuiQuestTree extends FocusableGui implements IRenderable {
 		private void renderBackgroundLines(MatrixStack stack) {
 			int x = this.x + MathH.floor(tree.x), y = this.y + MathH.floor(tree.y);
 			
-			if (quest.getParent() != null) {
-				Quest p = quest.getParent();
-				int px = MathH.floor(p.getXPos() * 33) + MathH.floor(tree.x) - 11 + tree.screen.width / 2;
-				int py = MathH.floor(p.getYPos() * 33) + MathH.floor(tree.y) - 11 + tree.screen.height / 2;
+			if (quest.hasParent()) {
+				QuestState p = quest.getParent();
+				int px = MathH.floor(p.quest.getXPos() * 33) + MathH.floor(tree.x) - 11 + tree.screen.width / 2;
+				int py = MathH.floor(p.quest.getYPos() * 33) + MathH.floor(tree.y) - 11 + tree.screen.height / 2;
 				int d = x - (px + 22);
 				
 				if (py == y) {
@@ -135,10 +137,10 @@ public class GuiQuestTree extends FocusableGui implements IRenderable {
 		private void renderLines(MatrixStack stack, int color) {
 			int x = this.x + MathH.floor(tree.x), y = this.y + MathH.floor(tree.y);
 			
-			if (quest.getParent() != null) {
-				Quest p = quest.getParent();
-				int px = MathH.floor(p.getXPos() * 33) + MathH.floor(tree.x) - 11 + tree.screen.width / 2;
-				int py = MathH.floor(p.getYPos() * 33) + MathH.floor(tree.y) - 11 + tree.screen.height / 2;
+			if (quest.hasParent()) {
+				QuestState p = quest.getParent();
+				int px = MathH.floor(p.quest.getXPos() * 33) + MathH.floor(tree.x) - 11 + tree.screen.width / 2;
+				int py = MathH.floor(p.quest.getYPos() * 33) + MathH.floor(tree.y) - 11 + tree.screen.height / 2;
 				int d = x - (px + 22);
 				
 				if (py == y) {
@@ -161,7 +163,7 @@ public class GuiQuestTree extends FocusableGui implements IRenderable {
 					mouseX >= x * s && mouseX < (x + width) * s && mouseY >= y * s && mouseY < (y + height) * s;
 			boolean isSelected = tree.screen.getQuestInfo() != null && tree.screen.getQuestInfo().isQuest(quest);
 			
-			if (quest.isEnd()) {
+			if (quest.quest.isEnd()) {
 				if (isSelected) {
 					mc.getTextureManager().bind(isHover ? ScreenQuestMenu.QUEST_END_ICON_SELECTED_HOVER : ScreenQuestMenu.QUEST_END_ICON_SELECTED);
 				} else {
@@ -177,7 +179,7 @@ public class GuiQuestTree extends FocusableGui implements IRenderable {
 			
 			blit(stack, x, y, 0, 0, 22, 22, 22, 22);
 			mc.getItemRenderer().blitOffset -= 50;
-			renderGuiItem(mc, stack, quest.getIcon(), MathH.floor((x + 3) * s), MathH.floor((y + 3) * s));
+			renderGuiItem(mc, stack, quest.quest.getIcon(), MathH.floor((x + 3) * s), MathH.floor((y + 3) * s));
 			mc.getItemRenderer().blitOffset += 50;
 			
 			if (quest.isFinished()) {
@@ -188,7 +190,7 @@ public class GuiQuestTree extends FocusableGui implements IRenderable {
 			}
 			
 			if (isHover) {
-				GuiUtils.drawHoveringText(new MatrixStack(), Arrays.asList(quest.getFancyName()), mouseX, mouseY, tree.screen.width, tree.screen.height, -1, mc.font);
+				GuiUtils.drawHoveringText(new MatrixStack(), Arrays.asList(quest.quest.getFancyName()), mouseX, mouseY, tree.screen.width, tree.screen.height, -1, mc.font);
 			}
 		}
 		
