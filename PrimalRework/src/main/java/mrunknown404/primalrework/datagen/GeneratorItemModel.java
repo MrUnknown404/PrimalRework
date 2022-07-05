@@ -1,10 +1,13 @@
 package mrunknown404.primalrework.datagen;
 
 import mrunknown404.primalrework.PrimalRework;
+import mrunknown404.primalrework.init.InitMetals;
 import mrunknown404.primalrework.init.InitRegistry;
 import mrunknown404.primalrework.init.InitToolMaterials;
+import mrunknown404.primalrework.items.SIRawPart;
 import mrunknown404.primalrework.items.StagedItem;
 import mrunknown404.primalrework.utils.IMetalColored;
+import mrunknown404.primalrework.utils.enums.RawPart;
 import mrunknown404.primalrework.utils.enums.ToolType;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.item.Item;
@@ -39,7 +42,7 @@ class GeneratorItemModel extends ModelProvider<TexturelessModelBuilder> {
 			
 			if (i instanceof IMetalColored) {
 				if (((IMetalColored) i).getMetal().color != null) {
-					name = "template_" + name.substring(name.indexOf('_') + 1);
+					name = "templates/template_" + name.substring(name.indexOf('_') + 1);
 				}
 			}
 			
@@ -48,7 +51,12 @@ class GeneratorItemModel extends ModelProvider<TexturelessModelBuilder> {
 					getBuilder(rawName).parent(new UncheckedModelFile(extendWithFolder(new ResourceLocation(id, "block/" + name))));
 					break;
 				case generated:
-					getBuilder(rawName).parent(getExistingFile(mcLoc("item/generated"))).texture("layer0", new ResourceLocation(id, "item/" + name));
+					if (i instanceof SIRawPart && ((SIRawPart<?>) i).part == RawPart.WIRE && ((SIRawPart<?>) i).metal != InitMetals.UNKNOWN.get()) {
+						getBuilder(rawName).parent(getExistingFile(mcLoc("item/generated"))).texture("layer0", new ResourceLocation(id, "item/" + name)).texture("layer1",
+								new ResourceLocation(id, "item/wire_frame"));
+					} else {
+						getBuilder(rawName).parent(getExistingFile(mcLoc("item/generated"))).texture("layer0", new ResourceLocation(id, "item/" + name));
+					}
 					break;
 				case handheld:
 					getBuilder(rawName).parent(getExistingFile(mcLoc("item/handheld"))).texture("layer0", new ResourceLocation(id, "item/" + name));

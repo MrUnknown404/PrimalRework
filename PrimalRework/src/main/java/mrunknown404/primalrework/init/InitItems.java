@@ -96,6 +96,9 @@ public class InitItems {
 		for (CraftingToolType type : CraftingToolType.values()) {
 			registerCast(type);
 		}
+		for (RawPart type : RawPart.values()) {
+			registerCast(type);
+		}
 		
 		for (PRRegistryObject<Metal> metal : PRRegistries.METALS.getEntries()) {
 			INGOTS.add(InitRegistry.item(metal.get() + "_ingot", () -> new SIIngot(metal.get(), false)));
@@ -123,7 +126,7 @@ public class InitItems {
 	}
 	
 	private static ROISIProvider<StagedItem> registerCast(Enum<?> type) {
-		ROISIProvider<StagedItem> reg = InitRegistry.item(type + "_cast", () -> new StagedItem(InitStages.STAGE_3, 8));
+		ROISIProvider<StagedItem> reg = InitRegistry.item("cast_" + type, () -> new StagedItem(InitStages.STAGE_3, 8));
 		CASTS.add(reg);
 		return reg;
 	}

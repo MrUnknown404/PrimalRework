@@ -6,7 +6,8 @@ public enum RawPart {
 	SCREW,
 	RING,
 	WIRE,
-	GEAR;
+	GEAR,
+	SPRING;
 	
 	@Override
 	public String toString() {
