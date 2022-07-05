@@ -48,11 +48,8 @@ public class SBGroundItem extends StagedBlock implements IWaterLoggable {
 	public BlockState getStateForPlacement(BlockItemUseContext ctx) {
 		BlockPos blockpos = ctx.getClickedPos();
 		BlockState blockstate = ctx.getLevel().getBlockState(blockpos);
-		if (blockstate.is(this)) {
-			return blockstate.setValue(WATERLOGGED, false);
-		}
-		
-		return defaultBlockState().setValue(WATERLOGGED, ctx.getLevel().getFluidState(blockpos).getType() == Fluids.WATER);
+		return blockstate.is(this) ? blockstate.setValue(WATERLOGGED, false) :
+				defaultBlockState().setValue(WATERLOGGED, ctx.getLevel().getFluidState(blockpos).getType() == Fluids.WATER);
 	}
 	
 	@Override

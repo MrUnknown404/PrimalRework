@@ -82,16 +82,18 @@ public class ScreenNonSupportedMods extends Screen {
 			@Override
 			public void render(MatrixStack mStack, int entryIdx, int top, int left, int entryWidth, int entryHeight, int mouseX, int mouseY, boolean p_194999_5_,
 					float partialTicks) {
-				FontRenderer font = Minecraft.getInstance().font;
-				List<IReorderingProcessor> strings = font.split(message, width);
-				int y = top + 2;
-				
-				for (int i = 0; i < Math.min(strings.size(), 2); i++) {
-					if (center) {
-						font.draw(mStack, strings.get(i), left + (width) - font.width(strings.get(i)) / 2F, y, 0xFFFFFF);
-					} else {
-						font.draw(mStack, strings.get(i), left + 5, y, 0xFFFFFF);
-						y += font.lineHeight;
+				try (Minecraft mc = Minecraft.getInstance()) {
+					FontRenderer font = mc.font;
+					List<IReorderingProcessor> strings = font.split(message, width);
+					int y = top + 2;
+					
+					for (int i = 0; i < Math.min(strings.size(), 2); i++) {
+						if (center) {
+							font.draw(mStack, strings.get(i), left + (width) - font.width(strings.get(i)) / 2F, y, 0xFFFFFF);
+						} else {
+							font.draw(mStack, strings.get(i), left + 5, y, 0xFFFFFF);
+							y += font.lineHeight;
+						}
 					}
 				}
 			}

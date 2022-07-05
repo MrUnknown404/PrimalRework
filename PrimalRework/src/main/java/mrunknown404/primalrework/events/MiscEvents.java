@@ -1,5 +1,6 @@
 package mrunknown404.primalrework.events;
 
+import java.io.IOException;
 import java.util.Random;
 
 import mrunknown404.primalrework.PrimalRework;
@@ -92,13 +93,17 @@ public class MiscEvents {
 			if (itemToAdd != null) {
 				e.getWorld().playSound(e.getPlayer(), e.getPos(), SoundEvents.STONE_BREAK, SoundCategory.PLAYERS, 1, 2);
 				
-				if (!e.getWorld().isClientSide && R.nextInt(3) == 0) {
-					item.shrink(1);
-					e.getWorld().addFreshEntity(new ItemEntity(e.getWorld(), hit.x, hit.y, hit.z, new ItemStack(itemToAdd, count)));
-					
-					if (item.getItem() == Items.BONE && R.nextInt(3) == 0) { //TODO switch to my bone
-						e.getWorld().addFreshEntity(new ItemEntity(e.getWorld(), hit.x, hit.y, hit.z, new ItemStack(Items.BONE_MEAL))); //TODO switch to my bone dust
+				try (World w = e.getWorld()) {
+					if (w.isClientSide && R.nextInt(3) == 0) {
+						item.shrink(1);
+						e.getWorld().addFreshEntity(new ItemEntity(e.getWorld(), hit.x, hit.y, hit.z, new ItemStack(itemToAdd, count)));
+						
+						if (item.getItem() == Items.BONE && R.nextInt(3) == 0) { //TODO switch to my bone
+							e.getWorld().addFreshEntity(new ItemEntity(e.getWorld(), hit.x, hit.y, hit.z, new ItemStack(Items.BONE_MEAL))); //TODO switch to my bone dust
+						}
 					}
+				} catch (IOException e1) {
+					e1.printStackTrace();
 				}
 			}
 		}

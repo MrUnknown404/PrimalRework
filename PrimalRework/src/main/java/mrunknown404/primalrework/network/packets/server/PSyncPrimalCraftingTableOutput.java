@@ -20,9 +20,11 @@ public class PSyncPrimalCraftingTableOutput implements IPacket {
 	
 	@Override
 	public void handle(Context ctx) {
-		PlayerEntity player = Minecraft.getInstance().player;
-		if (player.containerMenu instanceof ContainerPrimalCraftingTable) {
-			player.containerMenu.setItem(9, itemStack);
+		try (Minecraft mc = Minecraft.getInstance()) {
+			PlayerEntity player = mc.player;
+			if (player.containerMenu instanceof ContainerPrimalCraftingTable) {
+				player.containerMenu.setItem(9, itemStack);
+			}
 		}
 	}
 }
