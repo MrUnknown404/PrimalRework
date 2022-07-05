@@ -1,4 +1,4 @@
-package mrunknown404.primalrework.network.packets.server;
+package mrunknown404.primalrework.network.packets.toclient;
 
 import mrunknown404.primalrework.api.network.packet.IPacket;
 import mrunknown404.primalrework.stage.Stage;

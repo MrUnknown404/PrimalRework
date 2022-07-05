@@ -59,7 +59,7 @@ public class InitQuests {
 		QUESTS.add(q);
 		q.getTab().addQuestToTab(q);
 		
-		if (!q.isRoot()) {
+		if (q.hasParent()) {
 			q.getParent().addChild(q);
 		}
 		

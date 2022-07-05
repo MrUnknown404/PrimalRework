@@ -6,10 +6,10 @@ import java.util.Random;
 import mrunknown404.primalrework.PrimalRework;
 import mrunknown404.primalrework.init.InitBlocks;
 import mrunknown404.primalrework.init.InitItems;
-import mrunknown404.primalrework.network.packets.server.PSyncStage;
+import mrunknown404.primalrework.network.packets.toclient.PSyncStage;
 import mrunknown404.primalrework.utils.NoAdvancementManager;
 import mrunknown404.primalrework.utils.helpers.RayTraceH;
-import mrunknown404.primalrework.world.savedata.WSDQuests;
+import mrunknown404.primalrework.world.savedata.WSDQuestStates;
 import mrunknown404.primalrework.world.savedata.WSDStage;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.ItemEntity;
@@ -45,7 +45,7 @@ public class MiscEvents {
 		
 		MinecraftServer server = ((ServerWorld) e.getWorld()).getServer();
 		WSDStage.get(server);
-		WSDQuests.get(server);
+		WSDQuestStates.get(server);
 	}
 	
 	@SubscribeEvent

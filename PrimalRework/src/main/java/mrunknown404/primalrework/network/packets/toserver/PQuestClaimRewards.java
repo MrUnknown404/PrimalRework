@@ -1,8 +1,8 @@
-package mrunknown404.primalrework.network.packets.client;
+package mrunknown404.primalrework.network.packets.toserver;
 
 import mrunknown404.primalrework.api.network.packet.IPacket;
 import mrunknown404.primalrework.quests.Quest;
-import mrunknown404.primalrework.world.savedata.WSDQuests;
+import mrunknown404.primalrework.world.savedata.WSDQuestStates;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraftforge.fml.network.NetworkEvent.Context;
 
@@ -20,6 +20,6 @@ public class PQuestClaimRewards implements IPacket {
 	@Override
 	public void handle(Context ctx) {
 		ServerPlayerEntity player = ctx.getSender();
-		WSDQuests.getQuestState(questName).claimQuest(player);
+		WSDQuestStates.getQuestState(questName).claimQuest(player);
 	}
 }

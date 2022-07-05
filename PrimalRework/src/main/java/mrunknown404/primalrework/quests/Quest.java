@@ -93,42 +93,22 @@ public class Quest implements IStageProvider {
 		return tab;
 	}
 	
-	public QuestReward getReward() {
-		return reward;
-	}
-	
 	@Override
 	public String toString() {
 		return getName();
-	}
-	
-	public ItemStack getIcon() {
-		return itemIcon;
-	}
-	
-	public boolean isEnd() {
-		return isEnd;
-	}
-	
-	public boolean isRoot() {
-		return isRoot;
 	}
 	
 	public QuestRequirement<?> getRequirement() {
 		return req;
 	}
 	
-	public boolean hasReward() {
-		return reward != null;
-	}
-	
 	public float getXPos() {
-		float xx = !isRoot() ? parent.getXPos() : 0;
-		return xPos + xx + (!isRoot() ? 1 : 0);
+		float xx = !isRoot ? parent.getXPos() : 0;
+		return xPos + xx + (!isRoot ? 1 : 0);
 	}
 	
 	public float getYPos() {
-		float yy = !isRoot() ? parent.getYPos() : 0;
+		float yy = !isRoot ? parent.getYPos() : 0;
 		return yPos + yy;
 	}
 	

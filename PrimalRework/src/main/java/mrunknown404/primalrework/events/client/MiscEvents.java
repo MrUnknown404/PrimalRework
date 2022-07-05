@@ -8,7 +8,7 @@ import mrunknown404.primalrework.api.PrimalMod;
 import mrunknown404.primalrework.client.gui.screen.ScreenCreateWorld;
 import mrunknown404.primalrework.client.gui.screen.ScreenNonSupportedMods;
 import mrunknown404.primalrework.client.gui.screen.ScreenPause;
-import mrunknown404.primalrework.network.packets.client.POpenInventory;
+import mrunknown404.primalrework.network.packets.toserver.POpenInventory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.CreateWorldScreen;
 import net.minecraft.client.gui.screen.IngameMenuScreen;

@@ -2,7 +2,7 @@ package mrunknown404.primalrework.world.savedata;
 
 import mrunknown404.primalrework.PrimalRework;
 import mrunknown404.primalrework.init.InitStages;
-import mrunknown404.primalrework.network.packets.server.PSyncStage;
+import mrunknown404.primalrework.network.packets.toclient.PSyncStage;
 import mrunknown404.primalrework.stage.Stage;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.server.MinecraftServer;

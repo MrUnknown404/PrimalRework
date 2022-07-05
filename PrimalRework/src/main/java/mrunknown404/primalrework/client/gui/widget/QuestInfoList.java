@@ -42,11 +42,11 @@ public class QuestInfoList extends AbstractList<QuestInfoList.QuestInfoEntry> {
 		this.quest = quest;
 		this.x0 = 40;
 		this.headerHeight = 26;
-		this.headerHeight += quest.quest.hasReward() ? (headerHeight == 26 ? 20 : 10) : 0;
-		this.headerHeight += quest.quest.isRoot() ? 0 : (headerHeight == 26 ? 20 : 10);
+		this.headerHeight += quest.hasReward() ? (headerHeight == 26 ? 20 : 10) : 0;
+		this.headerHeight += quest.isRoot() ? 0 : (headerHeight == 26 ? 20 : 10);
 		this.claimButton = new ClaimButton(mc, quest, x0 + width - 127);
 		
-		for (ITextComponent text : quest.quest.getDescription()) {
+		for (ITextComponent text : quest.getDescription()) {
 			addEntry(new QuestInfoEntry(this, mc, text));
 		}
 		
@@ -92,10 +92,10 @@ public class QuestInfoList extends AbstractList<QuestInfoList.QuestInfoEntry> {
 		
 		int x = x0 + 4, y = y0 + 4 - (int) getScrollAmount();
 		
-		minecraft.textureManager.bind(quest.quest.isEnd() ? ScreenQuestMenu.QUEST_END_ICON : ScreenQuestMenu.QUEST_ICON);
+		minecraft.textureManager.bind(quest.isEnd() ? ScreenQuestMenu.QUEST_END_ICON : ScreenQuestMenu.QUEST_ICON);
 		blit(stack, x, y, 0, 0, 22, 22, 22, 22);
 		
-		if (quest.isFinished() && quest.quest.hasReward()) {
+		if (quest.isFinished() && quest.hasReward()) {
 			claimButton.y = y;
 			
 			if (!quest.wasClaimed()) {
@@ -106,8 +106,8 @@ public class QuestInfoList extends AbstractList<QuestInfoList.QuestInfoEntry> {
 			}
 		}
 		
-		minecraft.font.draw(stack, quest.quest.getFancyName(), x + 26, y + 7, ColorH.rgba2Int(45, 45, 45));
-		minecraft.getItemRenderer().renderGuiItem(quest.quest.getIcon(), x + 3, y + 3);
+		minecraft.font.draw(stack, quest.getFancyName(), x + 26, y + 7, ColorH.rgba2Int(45, 45, 45));
+		minecraft.getItemRenderer().renderGuiItem(quest.getIcon(), x + 3, y + 3);
 		
 		if (quest.isFinished()) {
 			stack.translate(0, 0, 50);
@@ -115,14 +115,14 @@ public class QuestInfoList extends AbstractList<QuestInfoList.QuestInfoEntry> {
 			blit(stack, x, y, 0, 0, 22, 22, 22, 22);
 		}
 		
-		if (quest.quest.hasReward()) {
-			minecraft.font.draw(stack, WordH.translate("quest.info.reward").append(ARROW).append(quest.quest.getReward().getDescription()), x + 1, y + 26,
+		if (quest.hasReward()) {
+			minecraft.font.draw(stack, WordH.translate("quest.info.reward").append(ARROW).append(quest.getReward().getDescription()), x + 1, y + 26,
 					ColorH.rgba2Int(45, 45, 45));
 		}
 		
-		if (!quest.quest.isRoot()) {
-			minecraft.font.draw(stack, WordH.translate("quest.info.requirement").append(ARROW).append(quest.quest.getRequirement().getDescription()), x + 1,
-					y + (quest.quest.hasReward() ? 36 : 26), ColorH.rgba2Int(45, 45, 45));
+		if (!quest.isRoot()) {
+			minecraft.font.draw(stack, WordH.translate("quest.info.requirement").append(ARROW).append(quest.getRequirement().getDescription()), x + 1,
+					y + (quest.hasReward() ? 36 : 26), ColorH.rgba2Int(45, 45, 45));
 		}
 		
 		renderList(stack, getRowLeft(), y, mouseX, mouseY, tick);
@@ -132,7 +132,7 @@ public class QuestInfoList extends AbstractList<QuestInfoList.QuestInfoEntry> {
 	@Override
 	public boolean mouseClicked(double x, double y, int var) {
 		boolean flag = false;
-		if (quest.isFinished() && quest.quest.hasReward() && !quest.wasClaimed()) {
+		if (quest.isFinished() && quest.hasReward() && !quest.wasClaimed()) {
 			flag = claimButton.mouseClicked(x, y, var);
 		}
 		
@@ -168,7 +168,7 @@ public class QuestInfoList extends AbstractList<QuestInfoList.QuestInfoEntry> {
 	}
 	
 	public boolean isQuest(QuestState quest) {
-		return this.quest.quest == quest.quest;
+		return this.quest.is(quest);
 	}
 	
 	public static int getInfoHeight(Screen screen) {

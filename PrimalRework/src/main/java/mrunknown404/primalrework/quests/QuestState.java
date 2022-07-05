@@ -1,22 +1,30 @@
 package mrunknown404.primalrework.quests;
 
+import java.util.List;
+
 import javax.annotation.Nullable;
 
 import mrunknown404.primalrework.PrimalRework;
+import mrunknown404.primalrework.api.utils.IStageProvider;
 import mrunknown404.primalrework.init.InitStages;
-import mrunknown404.primalrework.network.packets.client.PQuestClaimRewards;
+import mrunknown404.primalrework.network.packets.toclient.PSyncQuestState;
+import mrunknown404.primalrework.network.packets.toserver.PQuestClaimRewards;
+import mrunknown404.primalrework.quests.requirements.QuestRequirement;
+import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.utils.helpers.WordH;
-import mrunknown404.primalrework.world.savedata.WSDQuests;
+import mrunknown404.primalrework.world.savedata.WSDQuestStates;
 import mrunknown404.primalrework.world.savedata.WSDStage;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Util;
 import net.minecraft.util.text.IFormattableTextComponent;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.server.ServerWorld;
 
-public class QuestState {
-	public final Quest quest;
+public class QuestState implements IStageProvider {
+	private final Quest quest;
 	private QuestState parentState;
 	private boolean isFinished, wasClaimed;
 	
@@ -35,23 +43,7 @@ public class QuestState {
 		this.parentState = parentState;
 	}
 	
-	public boolean hasParent() {
-		return quest.hasParent();
-	}
-	
-	public QuestState getParent() {
-		return parentState;
-	}
-	
-	public boolean isFinished() {
-		return isFinished;
-	}
-	
-	public boolean wasClaimed() {
-		return wasClaimed;
-	}
-	
-	public void finishQuest(ServerWorld world, @Nullable PlayerEntity player) { //TODO send packet to clients
+	public void finishQuest(ServerWorld world, @Nullable PlayerEntity player) {
 		if (quest.isRoot) {
 			System.out.println("Root quest '" + quest.getName() + "' has been finished!");
 		} else if (player != null) {
@@ -74,12 +66,12 @@ public class QuestState {
 		}
 		
 		isFinished = true;
-		if (quest.reward == null) {
+		if (!hasReward()) {
 			wasClaimed = true;
 		}
 		
 		if (quest.isEnd) {
-			if (quest.stage.get().id <= WSDStage.getStage().id) {
+			if (quest.getStage().id <= WSDStage.getStage().id) {
 				WSDStage.setStage(world.getServer(), InitStages.getNextStage());
 				System.out.println("The world has advanced to the next stage!");
 			} else {
@@ -87,14 +79,17 @@ public class QuestState {
 			}
 		}
 		
-		WSDQuests.get(world.getServer()).setDirty();
+		WSDQuestStates.get(world.getServer()).setDirty();
+		PrimalRework.NETWORK.sendPacketToAll(new PSyncQuestState(this));
 	}
 	
-	public void forgetQuest(ServerWorld world) { //TODO send packet to clients
+	public void forgetQuest(ServerWorld world) {
 		System.out.println("Quest '" + quest.getName() + "' was forgotten!");
 		isFinished = false;
 		wasClaimed = false;
-		WSDQuests.get(world.getServer()).setDirty();
+		
+		WSDQuestStates.get(world.getServer()).setDirty();
+		PrimalRework.NETWORK.sendPacketToAll(new PSyncQuestState(this));
 	}
 	
 	public void claimQuest() {
@@ -109,6 +104,79 @@ public class QuestState {
 	public void claimQuest(ServerPlayerEntity player) {
 		wasClaimed = true;
 		quest.reward.giveRewards(player);
-		WSDQuests.get(player.getCommandSenderWorld().getServer()).setDirty();
+		WSDQuestStates.get(player.getCommandSenderWorld().getServer()).setDirty();
+	}
+	
+	public ItemStack getIcon() {
+		return quest.itemIcon;
+	}
+	
+	public String getName() {
+		return quest.getName();
+	}
+	
+	public ITextComponent getFancyName() {
+		return quest.getFancyName();
+	}
+	
+	public List<IFormattableTextComponent> getDescription() {
+		return quest.getDescription();
+	}
+	
+	public boolean hasParent() {
+		return quest.hasParent();
+	}
+	
+	public String getParentName() {
+		return quest.getParent().getName();
+	}
+	
+	public QuestState getParent() {
+		return parentState;
+	}
+	
+	public boolean hasReward() {
+		return quest.reward != null;
+	}
+	
+	public QuestReward getReward() {
+		return quest.reward;
+	}
+	
+	public QuestRequirement<?> getRequirement() {
+		return quest.getRequirement();
+	}
+	
+	public boolean isFinished() {
+		return isFinished;
+	}
+	
+	public boolean wasClaimed() {
+		return wasClaimed;
+	}
+	
+	public boolean isEnd() {
+		return quest.isEnd;
+	}
+	
+	public boolean isRoot() {
+		return quest.isRoot;
+	}
+	
+	public float getXPos() {
+		return quest.getXPos();
+	}
+	
+	public float getYPos() {
+		return quest.getYPos();
+	}
+	
+	@Override
+	public Stage getStage() {
+		return quest.getStage();
+	}
+	
+	public boolean is(QuestState quest) {
+		return this.quest == quest.quest;
 	}
 }

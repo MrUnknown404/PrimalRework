@@ -8,7 +8,7 @@ import mrunknown404.primalrework.init.InitRecipes;
 import mrunknown404.primalrework.init.InitTileEntities;
 import mrunknown404.primalrework.inventory.container.ContainerPrimalCraftingTable;
 import mrunknown404.primalrework.items.StagedItem;
-import mrunknown404.primalrework.network.packets.server.PSyncPrimalCraftingTableOutput;
+import mrunknown404.primalrework.network.packets.toclient.PSyncPrimalCraftingTableOutput;
 import mrunknown404.primalrework.recipes.Ingredient;
 import mrunknown404.primalrework.recipes.StagedRecipe;
 import mrunknown404.primalrework.recipes.inputs.RICrafting3;

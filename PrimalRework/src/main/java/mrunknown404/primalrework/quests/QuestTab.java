@@ -1,7 +1,6 @@
 package mrunknown404.primalrework.quests;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -58,18 +57,5 @@ public class QuestTab implements IStageProvider {
 	
 	public ItemStack getIcon() {
 		return itemIcon;
-	}
-	
-	public void sort() {
-		quests.sort(COMPARE);
-	}
-	
-	private static final CompareQuest COMPARE = new CompareQuest();
-	
-	private static class CompareQuest implements Comparator<Quest> {
-		@Override
-		public int compare(Quest o1, Quest o2) {
-			return o1.name_key.compareTo(o2.name_key);
-		}
 	}
 }

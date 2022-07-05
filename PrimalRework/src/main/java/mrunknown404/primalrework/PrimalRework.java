@@ -12,10 +12,11 @@ import mrunknown404.primalrework.events.LeafEvents;
 import mrunknown404.primalrework.events.MiscEvents;
 import mrunknown404.primalrework.events.QuestEvents;
 import mrunknown404.primalrework.init.InitRegistry;
-import mrunknown404.primalrework.network.packets.client.POpenInventory;
-import mrunknown404.primalrework.network.packets.client.PQuestClaimRewards;
-import mrunknown404.primalrework.network.packets.server.PSyncPrimalCraftingTableOutput;
-import mrunknown404.primalrework.network.packets.server.PSyncStage;
+import mrunknown404.primalrework.network.packets.toclient.PSyncPrimalCraftingTableOutput;
+import mrunknown404.primalrework.network.packets.toclient.PSyncQuestState;
+import mrunknown404.primalrework.network.packets.toclient.PSyncStage;
+import mrunknown404.primalrework.network.packets.toserver.POpenInventory;
+import mrunknown404.primalrework.network.packets.toserver.PQuestClaimRewards;
 import mrunknown404.primalrework.utils.PRConfig;
 import net.minecraft.command.CommandSource;
 import net.minecraftforge.api.distmarker.Dist;
@@ -42,10 +43,11 @@ public class PrimalRework {
 	private static final String OUTPUT_DIVIDER = "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=";
 	
 	public static final NetworkH NETWORK = NetworkH.create(PrimalRework.MOD_ID, "main", "1", (n) -> {
-		n.registerPacket(PSyncStage.class, NetworkDirection.PLAY_TO_CLIENT);
 		n.registerPacket(POpenInventory.class, NetworkDirection.PLAY_TO_SERVER);
-		n.registerPacket(PSyncPrimalCraftingTableOutput.class, NetworkDirection.PLAY_TO_CLIENT);
 		n.registerPacket(PQuestClaimRewards.class, NetworkDirection.PLAY_TO_SERVER);
+		n.registerPacket(PSyncPrimalCraftingTableOutput.class, NetworkDirection.PLAY_TO_CLIENT);
+		n.registerPacket(PSyncQuestState.class, NetworkDirection.PLAY_TO_CLIENT);
+		n.registerPacket(PSyncStage.class, NetworkDirection.PLAY_TO_CLIENT);
 	});
 	
 	public PrimalRework() {

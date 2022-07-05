@@ -1,4 +1,4 @@
-package mrunknown404.primalrework.network.packets.client;
+package mrunknown404.primalrework.network.packets.toserver;
 
 import mrunknown404.primalrework.api.network.packet.IPacket;
 import mrunknown404.primalrework.inventory.container.ContainerInventory;
