@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import mrunknown404.primalrework.PrimalRework;
 import mrunknown404.primalrework.quests.Quest;
 import mrunknown404.primalrework.quests.QuestReward;
 import mrunknown404.primalrework.quests.QuestTab;
@@ -48,12 +47,6 @@ public class InitQuests {
 	public static final Quest GET_STICK         = addQuest(Quest.simple("get_stick",         STAGE_0_ROOT,      0,  3, new QRItem(InitItems.STICK,         4)));
 	//@formatter:on
 	
-	static void load() {
-		PrimalRework.printDivider();
-		System.out.println("Loaded '" + QUEST_TABS.size() + "' quest tabs!");
-		System.out.println("Loaded '" + QUESTS.size() + "' quests!");
-	}
-	
 	public static Quest addQuest(Quest q) {
 		QUEST_NAME_INDEX_MAP.put(q.getName(), QUESTS.size());
 		QUESTS.add(q);
@@ -86,5 +79,12 @@ public class InitQuests {
 	
 	public static Quest getFromName(String name) {
 		return QUESTS.get(QUEST_NAME_INDEX_MAP.getOrDefault(name, -1));
+	}
+	
+	public static List<String> getRecipeListPrint() {
+		List<String> list = new ArrayList<String>();
+		list.add("Loaded " + QUEST_TABS.size() + " quest tabs!");
+		list.add("Loaded " + QUESTS.size() + " quests!");
+		return list;
 	}
 }

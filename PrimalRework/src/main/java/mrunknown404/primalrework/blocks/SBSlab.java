@@ -2,7 +2,7 @@ package mrunknown404.primalrework.blocks;
 
 import java.util.function.Supplier;
 
-import mrunknown404.primalrework.init.InitPRItemGroups;
+import mrunknown404.primalrework.init.InitItemGroups;
 import mrunknown404.primalrework.stage.Stage;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -33,7 +33,7 @@ public class SBSlab extends StagedBlock implements IWaterLoggable {
 	private static final VoxelShape TOP_AABB = Block.box(0, 8, 0, 16, 16, 16);
 	
 	public SBSlab(Supplier<Stage> stage, BlockInfo blockInfo, HarvestInfo info) {
-		super(stage, 64, InitPRItemGroups.BLOCKS, blockInfo, BlockStateType.slab, BlockModelType.slab, info);
+		super(stage, 64, InitItemGroups.BLOCKS, blockInfo, BlockStateType.slab, BlockModelType.slab, info);
 		registerDefaultState(defaultBlockState().setValue(TYPE, SlabType.BOTTOM).setValue(WATERLOGGED, false));
 	}
 	

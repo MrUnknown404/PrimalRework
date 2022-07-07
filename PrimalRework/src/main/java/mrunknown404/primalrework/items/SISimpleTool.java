@@ -5,7 +5,7 @@ import java.util.function.Supplier;
 
 import mrunknown404.primalrework.init.InitBlocks;
 import mrunknown404.primalrework.init.InitItems;
-import mrunknown404.primalrework.init.InitPRItemGroups;
+import mrunknown404.primalrework.init.InitItemGroups;
 import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.utils.ToolMaterial;
 import mrunknown404.primalrework.utils.enums.ToolType;
@@ -34,7 +34,7 @@ import net.minecraft.world.World;
 
 public class SISimpleTool extends SIDamageable {
 	public SISimpleTool(Supplier<Stage> stage, ToolType toolType, ToolMaterial toolMat) {
-		super(stage, toolType, toolMat, InitPRItemGroups.TOOLS, ItemType.handheld);
+		super(stage, toolType, toolMat, InitItemGroups.TOOLS, ItemType.handheld);
 	}
 	
 	@Override

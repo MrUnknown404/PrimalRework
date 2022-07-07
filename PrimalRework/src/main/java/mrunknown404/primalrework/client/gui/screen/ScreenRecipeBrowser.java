@@ -11,7 +11,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 
 import mrunknown404.primalrework.PrimalRework;
 import mrunknown404.primalrework.client.gui.recipedisplays.RecipeDisplay;
-import mrunknown404.primalrework.init.InitPRFuels;
+import mrunknown404.primalrework.init.InitFuels;
 import mrunknown404.primalrework.items.StagedItem;
 import mrunknown404.primalrework.recipes.StagedRecipe;
 import mrunknown404.primalrework.utils.Pair;
@@ -62,7 +62,7 @@ public class ScreenRecipeBrowser extends Screen {
 		if (fuels != null) {
 			for (FuelType type : FuelType.values()) {
 				if (fuels.containsKey(type)) {
-					this.recipes.add(new Data(type, RecipeDisplay.createFrom(type, InitPRFuels.convertToRecipes(type, fuels.get(type)), output), fuels.size()));
+					this.recipes.add(new Data(type, RecipeDisplay.createFrom(type, InitFuels.convertToRecipes(type, fuels.get(type)), output), fuels.size()));
 				}
 			}
 		}

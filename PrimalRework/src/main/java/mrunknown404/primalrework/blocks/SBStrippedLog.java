@@ -1,7 +1,7 @@
 package mrunknown404.primalrework.blocks;
 
 import mrunknown404.primalrework.blocks.BlockInfo.Hardness;
-import mrunknown404.primalrework.init.InitPRItemGroups;
+import mrunknown404.primalrework.init.InitItemGroups;
 import mrunknown404.primalrework.init.InitStages;
 import net.minecraft.block.BlockState;
 import net.minecraft.state.properties.BlockStateProperties;
@@ -17,7 +17,7 @@ public class SBStrippedLog extends SBRotatedPillar {
 	private static final VoxelShape NONE = box(1, 1, 1, 15, 15, 15);
 	
 	public SBStrippedLog() {
-		super(InitStages.STAGE_0, 32, InitPRItemGroups.BLOCKS, BlockInfo.with(BlockInfo.WOOD, Hardness.MEDIUM_2), HarvestInfo.AXE_MIN);
+		super(InitStages.STAGE_0, 32, InitItemGroups.BLOCKS, BlockInfo.with(BlockInfo.WOOD, Hardness.MEDIUM_2), HarvestInfo.AXE_MIN);
 	}
 	
 	@Override

@@ -35,6 +35,7 @@ public final class PRRegistries {
 			throw new UnsupportedOperationException("Unknown registry type '" + reg.getType().getSimpleName() + "'");
 		}
 		
+		reg.finish();
 		reg.forEach(((PRRegistry<T>) REGISTRIES.get(reg.getType()))::register);
 	}
 	

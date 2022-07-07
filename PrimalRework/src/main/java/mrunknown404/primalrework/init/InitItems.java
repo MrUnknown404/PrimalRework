@@ -105,15 +105,15 @@ public class InitItems {
 			INGOTS.add(InitRegistry.item(metal.get() + "_nugget", () -> new SIIngot(metal.get(), true)));
 			
 			for (RawPart type : RawPart.values()) {
-				RAW_PARTS.add(InitRegistry.item(metal.get() + "_" + type, () -> new SIRawPart<RawPart>(InitPRItemGroups.RAW_PARTS, metal.get(), type)));
+				RAW_PARTS.add(InitRegistry.item(metal.get() + "_" + type, () -> new SIRawPart<RawPart>(InitItemGroups.RAW_PARTS, metal.get(), type)));
 			}
 			for (CraftingToolType type : CraftingToolType.values()) {
 				CRAFTING_TOOLS.add(InitRegistry.item(metal.get() + "_" + type, () -> new SICraftingTool(metal.get(), type)));
-				TOOL_PARTS.add(InitRegistry.item(metal.get() + "_" + type + "_part", () -> new SIRawPart<CraftingToolType>(InitPRItemGroups.TOOL_PARTS, metal.get(), type)));
+				TOOL_PARTS.add(InitRegistry.item(metal.get() + "_" + type + "_part", () -> new SIRawPart<CraftingToolType>(InitItemGroups.TOOL_PARTS, metal.get(), type)));
 			}
 			for (ToolType type : ToolType.values()) {
 				if (type != ToolType.NONE) {
-					TOOL_PARTS.add(InitRegistry.item(metal.get() + "_" + type + "_part", () -> new SIRawPart<ToolType>(InitPRItemGroups.TOOL_PARTS, metal.get(), type)));
+					TOOL_PARTS.add(InitRegistry.item(metal.get() + "_" + type + "_part", () -> new SIRawPart<ToolType>(InitItemGroups.TOOL_PARTS, metal.get(), type)));
 				}
 			}
 		}
@@ -131,37 +131,35 @@ public class InitItems {
 		return reg;
 	}
 	
-	@SuppressWarnings("unchecked")
-	public static SIRawPart<RawPart> getRawPart(Metal metal, RawPart part) {
+	public static ROISIProvider<StagedItem> getRawPart(Metal metal, RawPart part) {
 		Optional<ROISIProvider<StagedItem>> item = RAW_PARTS.stream().filter(i -> {
 			SIRawPart<?> itemPart = ((SIRawPart<?>) i.get());
 			return itemPart.metal == metal && itemPart.part == part;
 		}).findFirst();
-		return item.isPresent() ? (SIRawPart<RawPart>) item.get().get() : null;
+		return item.isPresent() ? item.get() : null;
 	}
 	
-	public static SIRawPart<ToolType> getToolPart(Metal metal, ToolType part) {
+	public static ROISIProvider<StagedItem> getToolPart(Metal metal, ToolType part) {
 		return I_getToolPart(metal, part);
 	}
 	
-	public static SIRawPart<CraftingToolType> getToolPart(Metal metal, CraftingToolType part) {
+	public static ROISIProvider<StagedItem> getToolPart(Metal metal, CraftingToolType part) {
 		return I_getToolPart(metal, part);
 	}
 	
-	@SuppressWarnings("unchecked")
-	private static <T extends Enum<T>> SIRawPart<T> I_getToolPart(Metal metal, T part) {
+	private static <T extends Enum<T>> ROISIProvider<StagedItem> I_getToolPart(Metal metal, T part) {
 		Optional<ROISIProvider<StagedItem>> item = TOOL_PARTS.stream().filter(i -> {
 			SIRawPart<?> itemPart = ((SIRawPart<?>) i.get());
 			return itemPart.metal == metal && itemPart.part == part;
 		}).findFirst();
-		return item.isPresent() ? (SIRawPart<T>) item.get().get() : null;
+		return item.isPresent() ? item.get() : null;
 	}
 	
-	public static SICraftingTool getCraftingTool(Metal metal, CraftingToolType type) {
+	public static ROISIProvider<StagedItem> getCraftingTool(Metal metal, CraftingToolType type) {
 		Optional<ROISIProvider<StagedItem>> item = CRAFTING_TOOLS.stream().filter(i -> {
 			SICraftingTool tool = ((SICraftingTool) i.get());
 			return tool.metal == metal && tool.type == type;
 		}).findFirst();
-		return item.isPresent() ? (SICraftingTool) item.get().get() : null;
+		return item.isPresent() ? item.get() : null;
 	}
 }

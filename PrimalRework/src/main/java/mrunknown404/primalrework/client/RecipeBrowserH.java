@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import mrunknown404.primalrework.client.gui.screen.ScreenRecipeBrowser;
-import mrunknown404.primalrework.init.InitPRFuels;
+import mrunknown404.primalrework.init.InitFuels;
 import mrunknown404.primalrework.init.InitRecipes;
 import mrunknown404.primalrework.items.StagedItem;
 import mrunknown404.primalrework.recipes.Ingredient;
@@ -77,7 +77,7 @@ public class RecipeBrowserH {
 	
 	public static void showWhatCanBeMade(Minecraft minecraft, StagedItem item, ContainerScreen<?> lastScreen) {
 		Map<RecipeType, List<StagedRecipe<?, ?>>> recipes = InitRecipes.getWhatCanBeMadeWith(Ingredient.createUsingTags(item));
-		Map<FuelType, Pair<StagedItem, Integer>> fuels = InitPRFuels.getFuels(item);
+		Map<FuelType, Pair<StagedItem, Integer>> fuels = InitFuels.getFuels(item);
 		if (!recipes.isEmpty() || !fuels.isEmpty()) {
 			minecraft.setScreen(new ScreenRecipeBrowser(lastScreen, recipes, fuels, item));
 		}

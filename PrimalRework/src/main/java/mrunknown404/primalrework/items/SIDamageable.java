@@ -2,7 +2,7 @@ package mrunknown404.primalrework.items;
 
 import java.util.function.Supplier;
 
-import mrunknown404.primalrework.init.InitPRItemGroups;
+import mrunknown404.primalrework.init.InitItemGroups;
 import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.utils.ToolMaterial;
 import mrunknown404.primalrework.utils.enums.ToolType;
@@ -15,6 +15,6 @@ public class SIDamageable extends StagedItem {
 	}
 	
 	public SIDamageable(Supplier<Stage> stage, ToolMaterial mat) {
-		this(stage, ToolType.NONE, mat, InitPRItemGroups.ITEMS, ItemType.generated);
+		this(stage, ToolType.NONE, mat, InitItemGroups.ITEMS, ItemType.generated);
 	}
 }

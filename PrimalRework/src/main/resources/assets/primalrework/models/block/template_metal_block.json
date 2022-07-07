@@ -1,7 +1,7 @@
 {
 	"parent": "minecraft:block/block",
 	"textures": {
-		"all": "minecraft:block/iron_block",
+		"all": "primalrework:block/template_metal_block",
 		"particle": "#all"
 	},"elements": [
 		{

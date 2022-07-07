@@ -3,7 +3,7 @@ package mrunknown404.primalrework.blocks;
 import java.util.Random;
 import java.util.function.Supplier;
 
-import mrunknown404.primalrework.init.InitPRItemGroups;
+import mrunknown404.primalrework.init.InitItemGroups;
 import mrunknown404.primalrework.stage.Stage;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
@@ -18,15 +18,15 @@ import net.minecraft.world.server.ServerWorld;
 public class SBFalling extends StagedBlock {
 	public SBFalling(Supplier<Stage> stage, int stackSize, BlockInfo blockInfo, BlockStateType blockStateType, BlockModelType blockModelType, HarvestInfo info,
 			HarvestInfo[] extraInfos) {
-		super(stage, stackSize, InitPRItemGroups.BLOCKS, blockInfo, blockStateType, blockModelType, info, extraInfos);
+		super(stage, stackSize, InitItemGroups.BLOCKS, blockInfo, blockStateType, blockModelType, info, extraInfos);
 	}
 	
 	public SBFalling(Supplier<Stage> stage, BlockInfo blockInfo, BlockStateType blockStateType, BlockModelType blockModelType, HarvestInfo info, HarvestInfo... extraInfos) {
-		super(stage, 64, InitPRItemGroups.BLOCKS, blockInfo, blockStateType, blockModelType, info, extraInfos);
+		super(stage, 64, InitItemGroups.BLOCKS, blockInfo, blockStateType, blockModelType, info, extraInfos);
 	}
 	
 	public SBFalling(Supplier<Stage> stage, BlockInfo blockInfo, HarvestInfo info, HarvestInfo... extraInfos) {
-		super(stage, 64, InitPRItemGroups.BLOCKS, blockInfo, BlockStateType.normal, BlockModelType.normal, info, extraInfos);
+		super(stage, 64, InitItemGroups.BLOCKS, blockInfo, BlockStateType.normal, BlockModelType.normal, info, extraInfos);
 	}
 	
 	@Override

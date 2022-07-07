@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
-import mrunknown404.primalrework.PrimalRework;
 import mrunknown404.primalrework.api.utils.ISIProvider;
 import mrunknown404.primalrework.items.StagedItem;
 import mrunknown404.primalrework.recipes.IIngredientProvider;
@@ -14,7 +14,7 @@ import mrunknown404.primalrework.utils.Cache;
 import mrunknown404.primalrework.utils.Pair;
 import mrunknown404.primalrework.utils.enums.FuelType;
 
-public class InitPRFuels {
+public class InitFuels {
 	private static final Map<FuelType, Map<StagedItem, Integer>> FUELS = new HashMap<FuelType, Map<StagedItem, Integer>>();
 	private static final Map<FuelType, List<SRBurnableFuel>> FUELS_AS_RECIPES = new HashMap<FuelType, List<SRBurnableFuel>>();
 	
@@ -29,9 +29,6 @@ public class InitPRFuels {
 		
 		int oneBurnableItem = 200;
 		addFuel(FuelType.BURNABLE_FUEL, InitItems.STICK, oneBurnableItem / 4);
-		
-		PrimalRework.printDivider();
-		FUELS.forEach((type, list) -> System.out.println("Loaded " + list.size() + " fuels for " + type));
 	}
 	
 	public static <T extends IIngredientProvider & ISIProvider> void addFuel(FuelType type, T item, int cookTime) {
@@ -78,5 +75,9 @@ public class InitPRFuels {
 		
 		fuelsAsRecipesCache.set(type, srFuels);
 		return srFuels;
+	}
+	
+	public static List<String> getRecipeListPrint() {
+		return FUELS.entrySet().stream().map(e -> "Loaded " + e.getValue().size() + " fuels for " + e.getKey()).collect(Collectors.toList());
 	}
 }

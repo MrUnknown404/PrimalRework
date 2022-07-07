@@ -18,6 +18,7 @@ import mrunknown404.primalrework.network.packets.toclient.PSyncQuestState;
 import mrunknown404.primalrework.network.packets.toclient.PSyncStage;
 import mrunknown404.primalrework.network.packets.toserver.POpenInventory;
 import mrunknown404.primalrework.network.packets.toserver.PQuestClaimRewards;
+import mrunknown404.primalrework.utils.Logger;
 import mrunknown404.primalrework.utils.PRConfig;
 import net.minecraft.command.CommandSource;
 import net.minecraftforge.api.distmarker.Dist;
@@ -41,8 +42,6 @@ import net.minecraftforge.fml.network.NetworkDirection;
 public class PrimalRework {
 	public static final String MOD_ID = "primalrework";
 	
-	private static final String OUTPUT_DIVIDER = "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=";
-	
 	public static final NetworkH NETWORK = NetworkH.create(PrimalRework.MOD_ID, "main", "1", (n) -> {
 		n.registerPacket(POpenInventory.class, NetworkDirection.PLAY_TO_SERVER);
 		n.registerPacket(PQuestClaimRewards.class, NetworkDirection.PLAY_TO_SERVER);
@@ -52,8 +51,7 @@ public class PrimalRework {
 		n.registerPacket(PSyncStage.class, NetworkDirection.PLAY_TO_CLIENT);
 	});
 	
-	// BUG server not generating world correctly? probably server reading properties files and using wrong world type! replace ServerProperties#worldGenSettings?
-	// TODO use a logger?
+	//TODO setup registries for quests,recipes,fuels
 	
 	/* TODO list of stuff to do progression-wise
 	 * after breaking log should work on getting a primal crafting table. which unlocks flint tools.
@@ -61,9 +59,7 @@ public class PrimalRework {
 	 */
 	
 	public PrimalRework() {
-		printDivider();
-		System.out.println("#-# Thank you for playing PrimalRework! #-#");
-		printDivider();
+		Logger.multiLine("#-# Thank you for playing PrimalRework! #-#");
 		
 		ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, PRConfig.CLIENT_SPEC);
 		
@@ -88,9 +84,5 @@ public class PrimalRework {
 		CommandDispatcher<CommandSource> commandDispatcher = e.getDispatcher();
 		CommandStage.register(commandDispatcher);
 		CommandQuest.register(commandDispatcher);
-	}
-	
-	public static void printDivider() {
-		System.out.println(OUTPUT_DIVIDER);
 	}
 }

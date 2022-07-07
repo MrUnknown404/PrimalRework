@@ -3,7 +3,7 @@ package mrunknown404.primalrework.blocks;
 import java.util.Random;
 
 import mrunknown404.primalrework.blocks.HarvestInfo.DropInfo;
-import mrunknown404.primalrework.init.InitPRItemGroups;
+import mrunknown404.primalrework.init.InitItemGroups;
 import mrunknown404.primalrework.init.InitStages;
 import mrunknown404.primalrework.init.InitToolMaterials;
 import mrunknown404.primalrework.utils.enums.ToolType;
@@ -29,7 +29,7 @@ public class SBLeaves extends StagedBlock {
 	public static final BooleanProperty PERSISTENT = BlockStateProperties.PERSISTENT;
 	
 	public SBLeaves() { // TODO add saplings/sticks
-		super(InitStages.STAGE_0, 32, InitPRItemGroups.BLOCKS, BlockInfo.of(BlockInfo.LEAVES), BlockStateType.normal, BlockModelType.normal,
+		super(InitStages.STAGE_0, 32, InitItemGroups.BLOCKS, BlockInfo.of(BlockInfo.LEAVES), BlockStateType.normal, BlockModelType.normal,
 				new HarvestInfo(ToolType.NONE, InitToolMaterials.HAND, DropInfo.NONE), new HarvestInfo(ToolType.KNIFE, InitToolMaterials.CLAY, DropInfo.NONE),
 				new HarvestInfo(ToolType.AXE, InitToolMaterials.CLAY, DropInfo.NONE), new HarvestInfo(ToolType.SHEARS, InitToolMaterials.CLAY));
 		registerDefaultState(stateDefinition.any().setValue(DISTANCE, Integer.valueOf(7)).setValue(PERSISTENT, false));

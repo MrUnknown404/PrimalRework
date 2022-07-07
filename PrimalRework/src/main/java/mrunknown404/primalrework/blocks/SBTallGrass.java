@@ -4,7 +4,7 @@ import mrunknown404.primalrework.api.registry.ROISIProvider;
 import mrunknown404.primalrework.blocks.BlockInfo.Hardness;
 import mrunknown404.primalrework.blocks.HarvestInfo.DropInfo;
 import mrunknown404.primalrework.init.InitItems;
-import mrunknown404.primalrework.init.InitPRItemGroups;
+import mrunknown404.primalrework.init.InitItemGroups;
 import mrunknown404.primalrework.init.InitStages;
 import mrunknown404.primalrework.init.InitToolMaterials;
 import mrunknown404.primalrework.items.StagedItem.ItemType;
@@ -25,7 +25,7 @@ public class SBTallGrass extends StagedBlock {
 	private final VoxelShape shape;
 	
 	public SBTallGrass(ROISIProvider<StagedBlock> self, Hardness hardness, VoxelShape shape) {
-		super(InitStages.STAGE_0, 64, InitPRItemGroups.BLOCKS, BlockInfo.with(BlockInfo.REPLACEABLE_PLANT, hardness), BlockStateType.normal, BlockModelType.none,
+		super(InitStages.STAGE_0, 64, InitItemGroups.BLOCKS, BlockInfo.with(BlockInfo.REPLACEABLE_PLANT, hardness), BlockStateType.normal, BlockModelType.none,
 				new HarvestInfo(ToolType.NONE, InitToolMaterials.HAND, DropInfo.of(InitItems.PLANT_FIBER, 30)),
 				new HarvestInfo(ToolType.KNIFE, InitToolMaterials.CLAY, DropInfo.of(InitItems.PLANT_FIBER, 80)),
 				new HarvestInfo(ToolType.HOE, InitToolMaterials.CLAY, DropInfo.of(InitItems.PLANT_FIBER, 80) /* TODO add seeds here */),

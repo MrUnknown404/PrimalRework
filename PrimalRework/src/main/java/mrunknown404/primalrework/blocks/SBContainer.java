@@ -4,7 +4,7 @@ import java.util.function.Supplier;
 
 import javax.annotation.Nullable;
 
-import mrunknown404.primalrework.init.InitPRItemGroups;
+import mrunknown404.primalrework.init.InitItemGroups;
 import mrunknown404.primalrework.stage.Stage;
 import net.minecraft.block.BlockState;
 import net.minecraft.inventory.container.INamedContainerProvider;
@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 @SuppressWarnings("deprecation")
 public abstract class SBContainer extends StagedBlock {
 	protected SBContainer(Supplier<Stage> stage, BlockInfo material, BlockStateType blockStateType, BlockModelType blockModelType, HarvestInfo info, HarvestInfo... extraInfos) {
-		super(stage, 1, InitPRItemGroups.MACHINES, material, blockStateType, blockModelType, info, extraInfos);
+		super(stage, 1, InitItemGroups.MACHINES, material, blockStateType, blockModelType, info, extraInfos);
 	}
 	
 	@Override

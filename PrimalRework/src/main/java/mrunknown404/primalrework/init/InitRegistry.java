@@ -23,6 +23,7 @@ import mrunknown404.primalrework.items.SIBlock;
 import mrunknown404.primalrework.items.StagedItem;
 import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.stage.StagedTag;
+import mrunknown404.primalrework.utils.Logger;
 import mrunknown404.primalrework.utils.Metal;
 import mrunknown404.primalrework.utils.ToolMaterial;
 import mrunknown404.primalrework.world.biome.PRBiome;
@@ -47,6 +48,7 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.IForgeRegistry;
 
 public class InitRegistry {
 	private static final DeferredRegister<Stage> STAGES = DeferredRegister.create(PRRegistries.STAGES, PrimalRework.MOD_ID);
@@ -74,37 +76,37 @@ public class InitRegistry {
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 		
 		registrationState = State.NOW;
-		PrimalRework.printDivider();
-		System.out.println("Adding PrimalRework's registries");
-		registerRegistry(METALS);
-		registerRegistry(TOOL_MATERIALS);
-		
-		PrimalRework.printDivider();
-		System.out.println("Adding Addon's registries");
+		List<String> multiLine = new ArrayList<String>();
+		multiLine.add("Results of adding PrimalRework's registries");
+		multiLine.add(registerRegistry(METALS));
+		multiLine.add(registerRegistry(TOOL_MATERIALS));
+		Logger.multiLine(multiLine);
 		
 		EventPRRegistryRegistration event = new EventPRRegistryRegistration();
 		bus.post(event);
-		event.getRegistries().forEach((reg) -> registerRegistry(reg));
+		event.getRegistries().forEach(InitRegistry::registerRegistry);
 		
-		PrimalRework.printDivider();
-		PR_REGISTRIES.values().stream().forEach((list) -> list.forEach((reg) -> {
+		multiLine.clear();
+		multiLine.add("Results of adding Addon's registries");
+		
+		PR_REGISTRIES.values().stream().forEach(list -> list.forEach(reg -> {
 			loadClass(reg.classToLoad);
-			System.out.println("Loaded " + reg.getEntries().size() + " " + reg.getType().getSimpleName() + "s");
-			reg.finish();
 			PRRegistries.addToMasterRegistery(reg);
+			multiLine.add("Loaded " + reg.getEntries().size() + " " + reg.getType().getSimpleName() + "s");
 		}));
 		registrationState = State.LATE;
+		Logger.multiLine(multiLine);
 		
-		bus.addGenericListener(Stage.class, (RegistryEvent.Register<Stage> e) -> loadClass(InitStages.class, STAGES, "Stages"));
-		bus.addGenericListener(StagedTag.class, (RegistryEvent.Register<StagedTag> e) -> loadClass(InitStagedTags.class, STAGED_TAGS, "StagedTags"));
-		bus.addGenericListener(Block.class, (RegistryEvent.Register<Block> e) -> loadClass(InitBlocks.class, BLOCKS, "Blocks"));
-		bus.addGenericListener(Item.class, (RegistryEvent.Register<Item> e) -> loadClass(InitItems.class, ITEMS, "Items"));
-		bus.addGenericListener(TileEntityType.class, (RegistryEvent.Register<TileEntityType<?>> e) -> loadClass(InitTileEntities.class, TILE_ENTITIES, "Tile Entity Types"));
-		bus.addGenericListener(ContainerType.class, (RegistryEvent.Register<ContainerType<?>> e) -> loadClass(InitContainers.class, CONTAINERS, "Container Types"));
-		bus.addGenericListener(ForgeWorldType.class, (RegistryEvent.Register<ForgeWorldType> e) -> loadClass(InitWorld.class, WORLD_TYPES, "World Types"));
-		bus.addGenericListener(Feature.class, (RegistryEvent.Register<Feature<?>> e) -> loadClass(InitFeatures.class, FEATURES, "Features"));
-		bus.addGenericListener(Biome.class, (RegistryEvent.Register<Biome> e) -> loadClass(InitBiomes.class, BIOMES, "Biomes"));
-		bus.addGenericListener(SurfaceBuilder.class, (RegistryEvent.Register<SurfaceBuilder<?>> e) -> loadClass(InitSurfaceBuilders.class, SURFACE_BUILDERS, "Surface Builders"));
+		bus.addGenericListener(Stage.class, (RegistryEvent.Register<Stage> e) -> loadClass(InitStages.class));
+		bus.addGenericListener(StagedTag.class, (RegistryEvent.Register<StagedTag> e) -> loadClass(InitStagedTags.class));
+		bus.addGenericListener(Block.class, (RegistryEvent.Register<Block> e) -> loadClass(InitBlocks.class));
+		bus.addGenericListener(Item.class, (RegistryEvent.Register<Item> e) -> loadClass(InitItems.class));
+		bus.addGenericListener(TileEntityType.class, (RegistryEvent.Register<TileEntityType<?>> e) -> loadClass(InitTileEntities.class));
+		bus.addGenericListener(ContainerType.class, (RegistryEvent.Register<ContainerType<?>> e) -> loadClass(InitContainers.class));
+		bus.addGenericListener(ForgeWorldType.class, (RegistryEvent.Register<ForgeWorldType> e) -> loadClass(InitWorld.class));
+		bus.addGenericListener(Feature.class, (RegistryEvent.Register<Feature<?>> e) -> loadClass(InitFeatures.class));
+		bus.addGenericListener(Biome.class, (RegistryEvent.Register<Biome> e) -> loadClass(InitBiomes.class));
+		bus.addGenericListener(SurfaceBuilder.class, (RegistryEvent.Register<SurfaceBuilder<?>> e) -> loadClass(InitSurfaceBuilders.class));
 		
 		STAGES.register(bus);
 		STAGED_TAGS.register(bus);
@@ -121,13 +123,24 @@ public class InitRegistry {
 	}
 	
 	public static void setup() {
+		Logger.multiLine("Results of adding Forge registries", loaded(PRRegistries.STAGES, "Stages"), loaded(PRRegistries.STAGED_TAGS, "StagedTags"),
+				loaded(ForgeRegistries.BLOCKS, "Blocks"), loaded(ForgeRegistries.ITEMS, "Items"), loaded(ForgeRegistries.TILE_ENTITIES, "Tile Entity Types"),
+				loaded(ForgeRegistries.CONTAINERS, "Container Types"), loaded(ForgeRegistries.WORLD_TYPES, "World Types"), loaded(ForgeRegistries.FEATURES, "Features"),
+				loaded(ForgeRegistries.BIOMES, "Biomes"), loaded(ForgeRegistries.SURFACE_BUILDERS, "Surface Builders"));
+		
 		InitStages.load();
-		InitQuests.load();
 		InitRecipes.load();
-		InitPRFuels.load();
+		InitFuels.load();
+		
+		List<String> multiLine = new ArrayList<String>();
+		multiLine.add("Results of adding Quests/Recipes/Fuels");
+		multiLine.addAll(InitQuests.getRecipeListPrint());
+		multiLine.addAll(InitRecipes.getRecipeListPrint());
+		multiLine.addAll(InitFuels.getRecipeListPrint());
+		Logger.multiLine(multiLine);
 	}
 	
-	private static void registerRegistry(final PRRegistry<?> registry) {
+	private static String registerRegistry(final PRRegistry<?> registry) {
 		if (InitRegistry.getRegistrationState() == State.TOO_EARLY) {
 			throw new UnsupportedOperationException("Cannot register registry too early!");
 		} else if (InitRegistry.getRegistrationState() == State.LATE) {
@@ -135,24 +148,18 @@ public class InitRegistry {
 		}
 		
 		Objects.requireNonNull(registry);
-		
-		System.out.println("New registry " + registry);
-		List<PRRegistry<?>> list = PR_REGISTRIES.computeIfAbsent(registry.getModID(), (modid) -> new ArrayList<PRRegistry<?>>());
+		List<PRRegistry<?>> list = PR_REGISTRIES.computeIfAbsent(registry.getModID(), modid -> new ArrayList<PRRegistry<?>>());
 		
 		if (list.stream().anyMatch(registry::is)) {
 			throw new IllegalArgumentException("Duplicate registry for [modid:registryType] -> " + registry);
 		}
 		
 		list.add(registry);
+		return "New registry " + registry;
 	}
 	
-	private static void loadClass(Class<?> clazz, DeferredRegister<?> reg, String displayName) {
-		if (clazz == InitBlocks.class) {
-			PrimalRework.printDivider();
-		}
-		
-		loadClass(clazz);
-		System.out.println("Loaded " + reg.getEntries().size() + " " + displayName);
+	private static String loaded(IForgeRegistry<?> reg, String displayName) {
+		return "Loaded " + reg.getEntries().stream().filter(e -> !e.getKey().location().getNamespace().equals("minecraft")).count() + " " + displayName;
 	}
 	
 	private static void loadClass(Class<?> clazz) {

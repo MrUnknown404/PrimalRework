@@ -45,9 +45,7 @@ public class PRRegistry<T extends ForgeRegistryEntry<T>> {
 		return ro;
 	}
 	
-	/** You shouldn't call this! */
-	@Deprecated
-	public void finish() {
+	void finish() {
 		String modid = getModID();
 		map.forEach((name, obj) -> obj.get().setRegistryName(new ResourceLocation(modid, name)));
 	}

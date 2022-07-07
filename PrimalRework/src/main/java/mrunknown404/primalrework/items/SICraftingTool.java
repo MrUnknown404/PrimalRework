@@ -1,6 +1,6 @@
 package mrunknown404.primalrework.items;
 
-import mrunknown404.primalrework.init.InitPRItemGroups;
+import mrunknown404.primalrework.init.InitItemGroups;
 import mrunknown404.primalrework.init.InitToolMaterials;
 import mrunknown404.primalrework.utils.IMetalColored;
 import mrunknown404.primalrework.utils.Metal;
@@ -12,7 +12,7 @@ public class SICraftingTool extends SIDamageable implements IMetalColored {
 	public final CraftingToolType type;
 	
 	public SICraftingTool(Metal metal, CraftingToolType type) {
-		super(metal.stage, ToolType.NONE, InitToolMaterials.HAND.get(), InitPRItemGroups.TOOLS, type == CraftingToolType.SAW ? ItemType.handheld_rod : ItemType.handheld);
+		super(metal.stage, ToolType.NONE, InitToolMaterials.HAND.get(), InitItemGroups.TOOLS, type == CraftingToolType.SAW ? ItemType.handheld_rod : ItemType.handheld);
 		this.metal = metal;
 		this.type = type;
 	}
