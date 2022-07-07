@@ -10,7 +10,7 @@ import net.minecraftforge.common.world.ForgeWorldType;
 
 @Mixin(ForgeHooks.class) //ForgeWorldTypeScreens also exists but is client side so i don't care
 public class MixinForgeHooks {
-	@Redirect(method = "getDefaultWorldType", at = @At(value = "INVOKE", target = "Lnet/minecraftforge/common/world/ForgeWorldType;getDefaultWorldType()Lnet/minecraftforge/common/world/ForgeWorldType;"))
+	@Redirect(method = "getDefaultWorldType", at = @At(value = "INVOKE", target = "Lnet/minecraftforge/common/world/ForgeWorldType;getDefaultWorldType()Lnet/minecraftforge/common/world/ForgeWorldType;"), remap = false)
 	private static ForgeWorldType getDefaultWorldType() {
 		return InitWorld.PRIMAL_WORLD.get();
 	}

@@ -65,7 +65,7 @@ public class HarvestDisplayEvents {
 			return;
 		}
 		
-		Block bOld = mc.player.getCommandSenderWorld().getBlockState(RayTraceH.rayTrace(e.getPartialTicks(), false).getBlockPos()).getBlock();
+		Block bOld = mc.player.getCommandSenderWorld().getBlockState(RayTraceH.rayTrace(mc.player, e.getPartialTicks(), false).getBlockPos()).getBlock();
 		ItemStack stack = mc.player.getMainHandItem();
 		Item item = stack.getItem();
 		

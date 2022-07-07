@@ -102,7 +102,7 @@ public class MiscEvents {
 					if (w.isClientSide && R.nextInt(3) == 0) {
 						item.shrink(1);
 						
-						Vector3d hit = RayTraceH.rayTrace(1, false).getLocation();
+						Vector3d hit = RayTraceH.rayTrace(e.getPlayer(), 1, false).getLocation();
 						e.getWorld().addFreshEntity(new ItemEntity(e.getWorld(), hit.x, hit.y, hit.z, new ItemStack(itemToAdd, 1 + R.nextInt(1))));
 						
 						if (item.getItem() == Items.BONE && R.nextInt(3) == 0) { //TODO switch to my bone

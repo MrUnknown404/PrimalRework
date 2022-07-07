@@ -67,7 +67,7 @@ public class SISimpleTool extends SIDamageable {
 			if (getUseDuration(stack) - partialTicks > 22) {
 				PlayerEntity player = (PlayerEntity) entity;
 				
-				BlockRayTraceResult ray = RayTraceH.rayTrace(partialTicks, false);
+				BlockRayTraceResult ray = RayTraceH.rayTrace(entity, partialTicks, false);
 				if (ray != null) {
 					BlockPos pos = ray.getBlockPos();
 					Block b = world.getBlockState(pos).getBlock();
