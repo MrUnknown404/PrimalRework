@@ -19,14 +19,16 @@ import net.minecraftforge.fml.RegistryObject;
 
 public class InitBiomes {
 	public static final RegistryObject<Biome> FOREST = InitRegistry.biome("forest",
-			new PRBiome(() -> InitConfiguredSurfaceBuilders.GRASS, 100, BiomeType.WARM, Category.PLAINS, 0, 0.1f, 1, 1),
+			new PRBiome(() -> InitConfiguredSurfaceBuilders.FOREST, 100, BiomeType.WARM, Category.PLAINS, 0.1f, 0.2f, 1, 1),
 			() -> FeatureMap.withDefaults().trees(InitConfiguredFeatures.OAK_COMMON, InitConfiguredFeatures.BIG_OAK_RARE, InitConfiguredFeatures.BIRCH_RARE));
 	public static final RegistryObject<Biome> SUNKEN_FOREST = InitRegistry.biome("sunken_forest",
-			new PRBiome(() -> InitConfiguredSurfaceBuilders.GRASS, 20, BiomeType.WARM, Category.SWAMP, -0.2f, 0f, 1, 1, ColorH.rgba2Int(60, 80, 100), ColorH.rgba2Int(20, 30, 40)),
+			new PRBiome(() -> InitConfiguredSurfaceBuilders.FOREST, 20, BiomeType.WARM, Category.SWAMP, -0.2f, 0f, 1, 1, ColorH.rgba2Int(60, 80, 100), ColorH.rgba2Int(20, 30, 40)),
 			() -> FeatureMap.withDefaults().trees(InitConfiguredFeatures.SUNKEN_OAK_COMMON, InitConfiguredFeatures.SUNKEN_BIG_OAK_RARE, InitConfiguredFeatures.SUNKEN_BIRCH_RARE));
 	public static final RegistryObject<Biome> BEACH = InitRegistry.biome("beach",
-			new PRBiome(() -> InitConfiguredSurfaceBuilders.SAND, 60, BiomeType.WARM, Category.BEACH, -0.3f, 0f, 1, 1),
+			new PRBiome(() -> InitConfiguredSurfaceBuilders.DESERT, 60, BiomeType.WARM, Category.BEACH, -0.3f, 0f, 1, 1),
 			() -> FeatureMap.withDefaults().trees(InitConfiguredFeatures.OAK_COMMON, InitConfiguredFeatures.BIG_OAK_RARE, InitConfiguredFeatures.BIRCH_RARE));
+	public static final RegistryObject<Biome> OCEAN = InitRegistry.biome("ocean",
+			new PRBiome(() -> InitConfiguredSurfaceBuilders.OCEAN, 30, BiomeType.WARM, Category.OCEAN, -1.3f, 0.3f, 1, 1), () -> FeatureMap.withDefaults());
 	
 	public static Pair<Decoration, Supplier<ConfiguredFeature<?, ?>>> tree(Supplier<ConfiguredFeature<?, ?>> feature) {
 		return Pair.of(Decoration.VEGETAL_DECORATION, feature);

@@ -70,6 +70,7 @@ public class InitBlocks {
 	public static final ROISIProvider<StagedBlock> TALL_GRASS = InitRegistry.block("tall_grass", () -> new SBTallGrass(InitBlocks.TALL_GRASS, Hardness.MEDIUM_0, Block.box(2, 0, 2, 14, 13, 14)).useVanillaNamespaceItem());
 	public static final ROISIProvider<StagedBlock> SAND = InitRegistry.block("sand", () -> new SBFalling(InitStages.STAGE_0, BlockInfo.of(BlockInfo.SAND), HarvestInfo.SHOVEL_MIN).useVanillaNamespaceFull());
 	public static final ROISIProvider<StagedBlock> SANDSTONE = InitRegistry.block("sandstone", () -> new StagedBlock(InitStages.STAGE_0, BlockInfo.of(BlockInfo.STONE), HarvestInfo.PICKAXE_MIN).useVanillaNamespaceFull());
+	public static final ROISIProvider<StagedBlock> GRAVEL = InitRegistry.block("gravel", () -> new SBFalling(InitStages.STAGE_0, BlockInfo.of(BlockInfo.GRAVEL), HarvestInfo.SHOVEL_MIN).useVanillaNamespaceFull());
 	
 	//SLABS
 	public static final ROISIProvider<StagedBlock> DIRT_SLAB = InitRegistry.block("dirt_slab", () -> new SBSlab(InitStages.STAGE_0, BlockInfo.of(BlockInfo.DIRT), HarvestInfo.SHOVEL_MIN).useVanillaNamespaceBlock());

@@ -44,7 +44,7 @@ public class BiomeProviderPrimal extends BiomeProvider {
 			LongFunction<C> seedHandler) {
 		final int biomeSize = 4;
 		
-		IAreaFactory<T> iareafactory = new PRAreaTransformer(biomes, biomeRegistry).run(seedHandler.apply(1));
+		IAreaFactory<T> iareafactory = new PRAreaTransformer(biomes, biomeRegistry).run(seedHandler.apply(1)); //TODO this needs to be re-done!
 		iareafactory = LayerUtil.zoom(2001, ZoomLayer.NORMAL, iareafactory, biomeSize, seedHandler);
 		
 		return iareafactory;

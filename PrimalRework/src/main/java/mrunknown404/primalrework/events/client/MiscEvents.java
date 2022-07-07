@@ -6,9 +6,11 @@ import java.util.List;
 import mrunknown404.primalrework.PrimalRework;
 import mrunknown404.primalrework.api.PrimalMod;
 import mrunknown404.primalrework.client.gui.screen.ScreenCreateWorld;
+import mrunknown404.primalrework.client.gui.screen.ScreenMainMenu;
 import mrunknown404.primalrework.client.gui.screen.ScreenNonSupportedMods;
 import mrunknown404.primalrework.client.gui.screen.ScreenPause;
 import mrunknown404.primalrework.network.packets.toserver.POpenInventory;
+import net.minecraft.client.AnvilConverterException;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.CreateWorldScreen;
 import net.minecraft.client.gui.screen.IngameMenuScreen;
@@ -22,7 +24,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 
 public class MiscEvents {
-	private static boolean firstMainMenu;
+	private static boolean checkNonSupportedMods, firstMainMenu = true;
 	
 	@SubscribeEvent
 	public void onGuiOpen(GuiOpenEvent e) {
@@ -30,25 +32,36 @@ public class MiscEvents {
 		Screen gui = e.getGui();
 		
 		if (gui instanceof CreateWorldScreen) {
-			e.setGui(new ScreenCreateWorld(mc.screen));
+			try {
+				e.setGui(new ScreenCreateWorld(mc.getLevelSource().getLevelList().isEmpty() ? null : mc.screen));
+				
+			} catch (AnvilConverterException e1) {
+				e1.printStackTrace();
+			}
 		} else if (gui instanceof IngameMenuScreen) {
 			e.setGui(new ScreenPause(!(mc.hasSingleplayerServer() && !mc.getSingleplayerServer().isPublished())));
-		} else if (!firstMainMenu && gui instanceof MainMenuScreen) {
-			firstMainMenu = true;
-			List<String> modids = new ArrayList<String>();
-			
-			ModList.get().forEachModContainer((modid, instance) -> {
-				if (modid.equalsIgnoreCase("minecraft") || modid.equalsIgnoreCase("forge")) {
+		} else if (gui instanceof MainMenuScreen) {
+			if (!checkNonSupportedMods) {
+				checkNonSupportedMods = true;
+				List<String> modids = new ArrayList<String>();
+				
+				ModList.get().forEachModContainer((modid, instance) -> {
+					if (modid.equalsIgnoreCase("minecraft") || modid.equalsIgnoreCase("forge")) {
+						return;
+					} else if (!instance.getMod().getClass().isAnnotationPresent(PrimalMod.class)) {
+						modids.add(modid);
+						System.out.println("Mod '" + modid + "' is not supported!");
+					}
+				});
+				
+				if (!modids.isEmpty()) {
+					e.setGui(new ScreenNonSupportedMods(modids));
 					return;
-				} else if (!instance.getMod().getClass().isAnnotationPresent(PrimalMod.class)) {
-					modids.add(modid);
-					System.out.println("Mod '" + modid + "' is not supported!");
 				}
-			});
-			
-			if (!modids.isEmpty()) {
-				e.setGui(new ScreenNonSupportedMods(modids));
 			}
+			
+			e.setGui(new ScreenMainMenu(firstMainMenu));
+			firstMainMenu = false;
 		} else if (gui instanceof InventoryScreen) {
 			if (!mc.player.isCreative()) {
 				e.setCanceled(true);

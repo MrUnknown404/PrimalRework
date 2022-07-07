@@ -20,6 +20,7 @@ public class BlockInfo {
 	public static final RawBlockInfo COAL = RawBlockInfo.simpleFullFlammable(MaterialColor.STONE, SoundType.STONE, 3f, 10f, 8, 10);
 	public static final RawBlockInfo WOOD = RawBlockInfo.simpleFullFlammable(MaterialColor.WOOD, SoundType.WOOD, 1f, 2f, 20, 5);
 	public static final RawBlockInfo SAND = RawBlockInfo.simpleFull(MaterialColor.SAND, SoundType.SAND, 0.4f, 0.4f);
+	public static final RawBlockInfo GRAVEL = RawBlockInfo.simpleFull(MaterialColor.STONE, SoundType.GRAVEL, 0.6f, 0.6f);
 	
 	public static final UniqueRawBlockInfo WOOD_GROUND_ITEM = UniqueRawBlockInfo.of(MaterialColor.NONE, SoundType.WOOD, 0, 0, false, false, false, 0, 0, false, false, 0,
 			PushReaction.DESTROY);

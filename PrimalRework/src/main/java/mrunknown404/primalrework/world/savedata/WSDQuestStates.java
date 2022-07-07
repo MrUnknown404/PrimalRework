@@ -1,8 +1,9 @@
 package mrunknown404.primalrework.world.savedata;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import mrunknown404.primalrework.PrimalRework;
@@ -14,38 +15,40 @@ import net.minecraft.nbt.ListNBT;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.storage.WorldSavedData;
 import net.minecraftforge.common.util.Constants;
+import net.minecraftforge.common.util.Lazy;
 
 public class WSDQuestStates extends WorldSavedData {
 	public static final String NAME = PrimalRework.MOD_ID + "_queststates";
-	private static final Map<String, QuestState> QUEST_STATES = new HashMap<String, QuestState>();
+	private static final Lazy<Map<String, QuestState>> QUEST_STATES = Lazy
+			.of(() -> InitQuests.getQuests().stream().map(q -> new QuestState(q, false, false)).collect(Collectors.toMap(QuestState::getName, Function.identity())));
 	
 	public WSDQuestStates() {
 		super(NAME);
-		
-		if (QUEST_STATES.isEmpty()) {
-			InitQuests.getQuests().forEach(q -> QUEST_STATES.put(q.getName(), new QuestState(q, false, false)));
-			QUEST_STATES.values().stream().filter(q -> q.hasParent()).forEach(q -> q.load(QUEST_STATES.get(q.getParentName())));
-		} else {
-			QUEST_STATES.values().forEach(q -> q.load(false, false));
-		}
+		loadParents();
 	}
 	
 	/** Don't use this! */
 	@Deprecated
 	public static void loadQuestState(String name, boolean isFinished, boolean wasClaimed) {
-		QUEST_STATES.get(name).load(isFinished, wasClaimed);
+		QUEST_STATES.get().get(name).load(isFinished, wasClaimed);
+	}
+	
+	/** Don't use this! */
+	@Deprecated
+	public static void loadParents() {
+		QUEST_STATES.get().values().stream().filter(QuestState::hasParent).forEach(q -> q.load(QUEST_STATES.get().get(q.getParentName())));
 	}
 	
 	public static QuestState getQuestState(String questName) {
-		return QUEST_STATES.get(questName);
+		return QUEST_STATES.get().get(questName);
 	}
 	
 	public void forEach(Consumer<QuestState> consumer) {
-		QUEST_STATES.values().forEach(consumer);
+		QUEST_STATES.get().values().forEach(consumer);
 	}
 	
 	public Stream<QuestState> stream() {
-		return QUEST_STATES.values().stream();
+		return QUEST_STATES.get().values().stream();
 	}
 	
 	@Override
@@ -53,14 +56,14 @@ public class WSDQuestStates extends WorldSavedData {
 		ListNBT list = nbt.getList("quests", Constants.NBT.TAG_COMPOUND);
 		for (INBT inbt : list) {
 			CompoundNBT inner = (CompoundNBT) inbt;
-			QUEST_STATES.get(inner.getString("name")).load(inner.getBoolean("finished"), inner.getBoolean("claimed"));
+			QUEST_STATES.get().get(inner.getString("name")).load(inner.getBoolean("finished"), inner.getBoolean("claimed"));
 		}
 	}
 	
 	@Override
 	public CompoundNBT save(CompoundNBT nbt) {
 		ListNBT list = new ListNBT();
-		for (QuestState q : QUEST_STATES.values()) {
+		for (QuestState q : QUEST_STATES.get().values()) {
 			CompoundNBT inner = new CompoundNBT();
 			inner.putString("name", q.getName());
 			inner.putBoolean("finished", q.isFinished());

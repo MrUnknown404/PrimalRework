@@ -37,21 +37,14 @@ public class ScreenCreateWorld extends Screen {
 	private static final ITextComponent NAME_LABEL = WordH.translate("selectWorld.enterName");
 	private static final ITextComponent OUTPUT_DIR_INFO = WordH.translate("selectWorld.resultFolder");
 	private final Screen lastScreen;
-	private TextFieldWidget nameEdit;
-	private TextFieldWidget seedEdit;
+	private TextFieldWidget nameEdit, seedEdit;
 	private String resultFolder;
 	private GameMode gameMode = GameMode.SURVIVAL;
-	private Difficulty selectedDifficulty = Difficulty.NORMAL;
-	private Difficulty effectiveDifficulty = Difficulty.NORMAL;
-	private boolean commands;
-	private boolean commandsChanged;
+	private Difficulty selectedDifficulty = Difficulty.NORMAL, effectiveDifficulty = Difficulty.NORMAL;
+	private boolean commands, commandsChanged;
 	public boolean hardCore;
-	private Button createButton;
-	private Button difficultyButton;
-	private Button gameRulesButton;
-	private Button commandsButton;
-	private ITextComponent gameModeHelp1;
-	private ITextComponent gameModeHelp2;
+	private Button createButton, difficultyButton, gameRulesButton, commandsButton;
+	private ITextComponent gameModeHelp1, gameModeHelp2;
 	private String initName;
 	private GameRules gameRules = new GameRules();
 	private final Impl impl;
@@ -74,7 +67,7 @@ public class ScreenCreateWorld extends Screen {
 		};
 		
 		nameEdit.setValue(initName);
-		nameEdit.setResponder((val) -> {
+		nameEdit.setResponder(val -> {
 			initName = val;
 			createButton.active = !nameEdit.getValue().isEmpty();
 			updateResultFolder();
@@ -87,7 +80,7 @@ public class ScreenCreateWorld extends Screen {
 		int left = width / 2 - 155;
 		int right = width / 2 + 5;
 		
-		addButton(new Button(left, 160, 150, 20, StringTextComponent.EMPTY, (button) -> {
+		addButton(new Button(left, 160, 150, 20, StringTextComponent.EMPTY, button -> {
 			switch (gameMode) {
 				case SURVIVAL:
 					setGameMode(GameMode.HARDCORE);
@@ -113,7 +106,7 @@ public class ScreenCreateWorld extends Screen {
 			}
 		});
 		
-		commandsButton = addButton(new Button(left, 185, 150, 20, WordH.translate("selectWorld.allowCommands"), (button) -> {
+		commandsButton = addButton(new Button(left, 185, 150, 20, WordH.translate("selectWorld.allowCommands"), button -> {
 			commandsChanged = true;
 			commands = !commands;
 			button.queueNarration(250);
@@ -129,7 +122,7 @@ public class ScreenCreateWorld extends Screen {
 			}
 		});
 		
-		difficultyButton = addButton(new Button(right, 160, 150, 20, WordH.translate("options.difficulty"), (button) -> {
+		difficultyButton = addButton(new Button(right, 160, 150, 20, WordH.translate("options.difficulty"), button -> {
 			selectedDifficulty = selectedDifficulty.nextById();
 			effectiveDifficulty = selectedDifficulty;
 			button.queueNarration(250);
@@ -141,15 +134,15 @@ public class ScreenCreateWorld extends Screen {
 		});
 		
 		gameRulesButton = addButton(
-				new Button(right, 185, 150, 20, WordH.translate("selectWorld.gameRules"), (button) -> minecraft.setScreen(new EditGamerulesScreen(gameRules.copy(), (val) -> {
+				new Button(right, 185, 150, 20, WordH.translate("selectWorld.gameRules"), button -> minecraft.setScreen(new EditGamerulesScreen(gameRules.copy(), val -> {
 					minecraft.setScreen(this);
 					val.ifPresent((gameRules) -> this.gameRules = gameRules);
 				}))));
 		
-		createButton = addButton(new Button(left, height - 28, 150, 20, WordH.translate("selectWorld.create"), (button) -> onCreate()));
+		createButton = addButton(new Button(left, height - 28, 150, 20, WordH.translate("selectWorld.create"), button -> onCreate()));
 		
 		createButton.active = !initName.isEmpty();
-		addButton(new Button(right, height - 28, 150, 20, DialogTexts.GUI_CANCEL, (button) -> popScreen()));
+		addButton(new Button(right, height - 28, 150, 20, DialogTexts.GUI_CANCEL, button -> onClose()));
 		
 		setInitialFocus(nameEdit);
 		setGameMode(gameMode);
@@ -255,10 +248,6 @@ public class ScreenCreateWorld extends Screen {
 	
 	@Override
 	public void onClose() {
-		popScreen();
-	}
-	
-	private void popScreen() {
 		minecraft.setScreen(lastScreen);
 	}
 	

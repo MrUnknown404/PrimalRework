@@ -47,6 +47,15 @@ public abstract class NetworkH {
 		this.<Double>mapHandler(double.class, PacketBuffer::readDouble, PacketBuffer::writeDouble);
 		this.<Boolean>mapHandler(boolean.class, PacketBuffer::readBoolean, PacketBuffer::writeBoolean);
 		this.<Character>mapHandler(char.class, PacketBuffer::readChar, PacketBuffer::writeChar);
+		// I don't technically know if this is needed?
+		this.<Byte>mapHandler(Byte.class, PacketBuffer::readByte, PacketBuffer::writeByte);
+		this.<Short>mapHandler(Short.class, PacketBuffer::readShort, PacketBuffer::writeShort);
+		this.<Integer>mapHandler(Integer.class, PacketBuffer::readInt, PacketBuffer::writeInt);
+		this.<Long>mapHandler(Long.class, PacketBuffer::readLong, PacketBuffer::writeLong);
+		this.<Float>mapHandler(Float.class, PacketBuffer::readFloat, PacketBuffer::writeFloat);
+		this.<Double>mapHandler(Double.class, PacketBuffer::readDouble, PacketBuffer::writeDouble);
+		this.<Boolean>mapHandler(Boolean.class, PacketBuffer::readBoolean, PacketBuffer::writeBoolean);
+		this.<Character>mapHandler(Character.class, PacketBuffer::readChar, PacketBuffer::writeChar);
 		
 		mapHandler(BlockPos.class, PacketBuffer::readBlockPos, PacketBuffer::writeBlockPos);
 		mapHandler(UUID.class, PacketBuffer::readUUID, PacketBuffer::writeUUID);

@@ -105,6 +105,7 @@ public class QuestState implements IStageProvider {
 		wasClaimed = true;
 		quest.reward.giveRewards(player);
 		WSDQuestStates.get(player.getCommandSenderWorld().getServer()).setDirty();
+		PrimalRework.NETWORK.sendPacketToAll(new PSyncQuestState(this));
 	}
 	
 	public ItemStack getIcon() {

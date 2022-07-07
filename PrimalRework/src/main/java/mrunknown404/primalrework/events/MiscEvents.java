@@ -1,16 +1,20 @@
 package mrunknown404.primalrework.events;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.Random;
+
+import com.google.gson.JsonElement;
 
 import mrunknown404.primalrework.PrimalRework;
 import mrunknown404.primalrework.init.InitBlocks;
 import mrunknown404.primalrework.init.InitItems;
+import mrunknown404.primalrework.network.packets.toclient.PSyncAllQuests;
 import mrunknown404.primalrework.network.packets.toclient.PSyncStage;
-import mrunknown404.primalrework.utils.NoAdvancementManager;
 import mrunknown404.primalrework.utils.helpers.RayTraceH;
 import mrunknown404.primalrework.world.savedata.WSDQuestStates;
 import mrunknown404.primalrework.world.savedata.WSDStage;
+import net.minecraft.advancements.AdvancementManager;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -18,8 +22,11 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.profiler.IProfiler;
 import net.minecraft.resources.DataPackRegistries;
+import net.minecraft.resources.IResourceManager;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.vector.Vector3d;
@@ -53,7 +60,7 @@ public class MiscEvents {
 		PlayerEntity player = e.getPlayer();
 		
 		PrimalRework.NETWORK.sendPacketToTarget((ServerPlayerEntity) player, new PSyncStage(WSDStage.getStage()));
-		//TODO send packet to client with all quest states
+		PrimalRework.NETWORK.sendPacketToTarget((ServerPlayerEntity) player, PSyncAllQuests.create());
 	}
 	
 	@SubscribeEvent
@@ -76,9 +83,7 @@ public class MiscEvents {
 		
 		if (b == InitBlocks.STONE.get() || b == InitBlocks.COBBLESTONE.get()) {
 			ItemStack item = e.getItemStack();
-			Vector3d hit = RayTraceH.rayTrace(1, false).getLocation();
 			Item itemToAdd = null;
-			int count = 1 + R.nextInt(1);
 			
 			if (item.getItem() == InitItems.FLINT.get()) {
 				itemToAdd = InitItems.KNAPPED_FLINT.get();
@@ -96,7 +101,9 @@ public class MiscEvents {
 				try (World w = e.getWorld()) {
 					if (w.isClientSide && R.nextInt(3) == 0) {
 						item.shrink(1);
-						e.getWorld().addFreshEntity(new ItemEntity(e.getWorld(), hit.x, hit.y, hit.z, new ItemStack(itemToAdd, count)));
+						
+						Vector3d hit = RayTraceH.rayTrace(1, false).getLocation();
+						e.getWorld().addFreshEntity(new ItemEntity(e.getWorld(), hit.x, hit.y, hit.z, new ItemStack(itemToAdd, 1 + R.nextInt(1))));
 						
 						if (item.getItem() == Items.BONE && R.nextInt(3) == 0) { //TODO switch to my bone
 							e.getWorld().addFreshEntity(new ItemEntity(e.getWorld(), hit.x, hit.y, hit.z, new ItemStack(Items.BONE_MEAL))); //TODO switch to my bone dust
@@ -111,7 +118,11 @@ public class MiscEvents {
 	
 	@SubscribeEvent
 	public void onReload(AddReloadListenerEvent e) {
-		ObfuscationReflectionHelper.setPrivateValue(DataPackRegistries.class, e.getDataPackRegistries(), new NoAdvancementManager(e.getDataPackRegistries().getPredicateManager()),
-				"field_240958_h_"); //advancements
+		ObfuscationReflectionHelper.setPrivateValue(DataPackRegistries.class, e.getDataPackRegistries(), new AdvancementManager(e.getDataPackRegistries().getPredicateManager()) {
+			@Override
+			protected void apply(Map<ResourceLocation, JsonElement> p_212853_1_, IResourceManager p_212853_2_, IProfiler p_212853_3_) {
+				
+			}
+		}, "field_240958_h_"); //advancements
 	}
 }

@@ -12,6 +12,7 @@ import mrunknown404.primalrework.events.LeafEvents;
 import mrunknown404.primalrework.events.MiscEvents;
 import mrunknown404.primalrework.events.QuestEvents;
 import mrunknown404.primalrework.init.InitRegistry;
+import mrunknown404.primalrework.network.packets.toclient.PSyncAllQuests;
 import mrunknown404.primalrework.network.packets.toclient.PSyncPrimalCraftingTableOutput;
 import mrunknown404.primalrework.network.packets.toclient.PSyncQuestState;
 import mrunknown404.primalrework.network.packets.toclient.PSyncStage;
@@ -45,10 +46,19 @@ public class PrimalRework {
 	public static final NetworkH NETWORK = NetworkH.create(PrimalRework.MOD_ID, "main", "1", (n) -> {
 		n.registerPacket(POpenInventory.class, NetworkDirection.PLAY_TO_SERVER);
 		n.registerPacket(PQuestClaimRewards.class, NetworkDirection.PLAY_TO_SERVER);
+		n.registerPacket(PSyncAllQuests.class, NetworkDirection.PLAY_TO_CLIENT);
 		n.registerPacket(PSyncPrimalCraftingTableOutput.class, NetworkDirection.PLAY_TO_CLIENT);
 		n.registerPacket(PSyncQuestState.class, NetworkDirection.PLAY_TO_CLIENT);
 		n.registerPacket(PSyncStage.class, NetworkDirection.PLAY_TO_CLIENT);
 	});
+	
+	// BUG server not generating world correctly? probably server reading properties files and using wrong world type! replace ServerProperties#worldGenSettings?
+	// TODO use a logger?
+	
+	/* TODO list of stuff to do progression-wise
+	 * after breaking log should work on getting a primal crafting table. which unlocks flint tools.
+	 * 
+	 */
 	
 	public PrimalRework() {
 		printDivider();

@@ -98,6 +98,5 @@ public class ScreenNonSupportedMods extends Screen {
 				}
 			}
 		}
-		
 	}
 }

@@ -1,6 +1,6 @@
 package mrunknown404.primalrework.api.registry;
 
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.Map;
 
 import mrunknown404.primalrework.PrimalRework;
@@ -14,7 +14,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryBuilder;
 
 public final class PRRegistries {
-	private static final Map<Class<? extends ForgeRegistryEntry<?>>, PRRegistry<?>> REGISTRIES = new LinkedHashMap<Class<? extends ForgeRegistryEntry<?>>, PRRegistry<?>>();
+	private static final Map<Class<? extends ForgeRegistryEntry<?>>, PRRegistry<?>> REGISTRIES = new HashMap<Class<? extends ForgeRegistryEntry<?>>, PRRegistry<?>>();
 	
 	public static final PRRegistry<Metal> METALS = addMasterRegistry("metal", Metal.class);
 	public static final PRRegistry<ToolMaterial> TOOL_MATERIALS = addMasterRegistry("tool_materials", ToolMaterial.class);

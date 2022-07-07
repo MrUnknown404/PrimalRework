@@ -34,11 +34,11 @@ public class InitQuests {
 	public static final Quest GET_PLANT_FIBER   = addQuest(Quest.simple("get_plant_fiber",   STAGE_0_ROOT,      0,  0, new QRItem(InitItems.PLANT_FIBER,   12), new QuestReward("test", p -> System.out.println("reward given!"))));
 	public static final Quest GET_PLANT_MESH    = addQuest(Quest.simple("get_plant_mesh",    GET_PLANT_FIBER,   0,  0, new QRItem(InitItems.PLANT_MESH,    1)));
 	public static final Quest GET_PLANT_ROPE    = addQuest(Quest.simple("get_plant_rope",    GET_PLANT_FIBER,   0, -1, new QRItem(InitItems.PLANT_ROPE,    4)));
-	public static final Quest GET_THATCH        = addQuest(Quest.simple("get_thatch",        GET_PLANT_FIBER,   0, -2, new QRItem(InitBlocks.THATCH,       16)));
+	public static final Quest GET_THATCH        = addQuest(Quest.simple("get_thatch",        GET_PLANT_FIBER,   0, -2, new QRItem(InitBlocks.THATCH,       8)));
 	public static final Quest GET_FLINT         = addQuest(Quest.simple("get_flint",         STAGE_0_ROOT,      0,  1, new QRItem(InitItems.FLINT,         4)));
 	public static final Quest GET_KNAPPED_FLINT = addQuest(Quest.simple("get_knapped_flint", GET_FLINT,         0,  0, new QRItem(InitItems.KNAPPED_FLINT, 2)));
 	public static final Quest GET_FLINT_POINT   = addQuest(Quest.simple("get_flint_point",   GET_KNAPPED_FLINT, 0,  0, new QRItem(InitItems.FLINT_POINT,   2)));
-	public static final Quest GET_CLAY          = addQuest(Quest.simple("get_clay",          STAGE_0_ROOT,      0,  2, new QRItem(InitItems.CLAY_BALL,     16)));
+	public static final Quest GET_CLAY          = addQuest(Quest.simple("get_clay",          STAGE_0_ROOT,      0,  2, new QRItem(InitItems.CLAY_BALL,     4)));
 	public static final Quest GET_CLAY_SHOVEL   = addQuest(Quest.simple("get_clay_shovel",   GET_CLAY,          0,  0, new QRItem(InitItems.CLAY_SHOVEL,   1)));
 	public static final Quest GET_SALT          = addQuest(Quest.simple("get_salt",          GET_CLAY_SHOVEL,   0,  0, new QRItem(InitItems.SALT,          16)));
 	public static final Quest GET_CLAY_AXE      = addQuest(Quest.simple("get_clay_axe",      GET_CLAY,          0,  1, new QRItem(InitItems.CLAY_AXE,      1)));
