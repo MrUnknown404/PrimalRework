@@ -61,8 +61,8 @@ public abstract class NetworkH {
 		mapHandler(UUID.class, PacketBuffer::readUUID, PacketBuffer::writeUUID);
 		mapHandler(CompoundNBT.class, PacketBuffer::readNbt, PacketBuffer::writeNbt);
 		mapHandler(ItemStack.class, PacketBuffer::readItem, PacketBuffer::writeItem);
-		mapHandler(String.class, (buf) -> buf.readUtf(), PacketBuffer::writeUtf);
-		mapHandler(Stage.class, (buf) -> InitStages.byID(buf.readByte()), (buf, stage) -> buf.writeByte(stage.id));
+		mapHandler(String.class, buf -> buf.readUtf(), PacketBuffer::writeUtf);
+		mapHandler(Stage.class, buf -> InitStages.byID(buf.readByte()), (buf, stage) -> buf.writeByte(stage.id));
 		
 		registerPackets();
 	}
@@ -84,19 +84,19 @@ public abstract class NetworkH {
 				for (Field f : getClassFields(obj.getClass())) {
 					Class<?> type = f.getType();
 					if (allowField(f, type)) {
-						getHandler(type).getRight().accept(buf, f, f.get(obj));
+						getHandler(type).getR().accept(buf, f, f.get(obj));
 					}
 				}
 			} catch (IllegalArgumentException | IllegalAccessException e) {
 				throw new RuntimeException(e);
 			}
-		}, (buf) -> {
+		}, buf -> {
 			try {
 				T msg = clazz.newInstance();
 				for (Field f : getClassFields(clazz)) {
 					Class<?> type = f.getType();
 					if (allowField(f, type)) {
-						f.set(msg, getHandler(type).getLeft().apply(buf, f));
+						f.set(msg, getHandler(type).getL().apply(buf, f));
 					}
 				}
 				return msg;
@@ -132,7 +132,7 @@ public abstract class NetworkH {
 		if (pair == null) {
 			throw new RuntimeException("No handler for  " + clazz);
 		}
-		return Pair.of(pair.getLeft(), (TriConsumer<PacketBuffer, Field, T>) pair.getRight());
+		return Pair.of(pair.getLeft(), (TriConsumer<PacketBuffer, Field, T>) pair.getR());
 	}
 	
 	private boolean allowField(Field f, Class<?> type) {
@@ -140,13 +140,14 @@ public abstract class NetworkH {
 		return Modifier.isFinal(mod) || Modifier.isStatic(mod) || Modifier.isTransient(mod) ? false : handlers.containsKey(type);
 	}
 	
-	private <T> void mapHandler(Class<T> type, Function<PacketBuffer, T> readerLower, BiConsumer<PacketBuffer, T> writerLower) {
+	protected <T> void mapHandler(Class<T> type, Function<PacketBuffer, T> readerLower, BiConsumer<PacketBuffer, T> writerLower) {
 		mapHandler(type, (buf, field) -> readerLower.apply(buf), (buf, field, t) -> writerLower.accept(buf, t));
 	}
 	
 	@SuppressWarnings("unchecked")
-	private <T> void mapHandler(Class<T> type, BiFunction<PacketBuffer, Field, T> reader, TriConsumer<PacketBuffer, Field, T> writer) {
-		BiFunction<PacketBuffer, Field, T[]> arrayReader = (buf, field) -> {
+	protected <T> void mapHandler(Class<T> type, BiFunction<PacketBuffer, Field, T> reader, TriConsumer<PacketBuffer, Field, T> writer) {
+		handlers.put(type, Pair.of(reader, writer));
+		handlers.put(Array.newInstance(type, 0).getClass(), Pair.of((buf, field) -> {
 			int count = buf.readInt();
 			T[] array = (T[]) Array.newInstance(type, count);
 			
@@ -155,18 +156,13 @@ public abstract class NetworkH {
 			}
 			
 			return array;
-		};
-		
-		TriConsumer<PacketBuffer, Field, T[]> arrayWriter = (buf, field, t) -> {
+		}, (PacketBuffer buf, Field field, T[] t) -> {
 			buf.writeInt(t.length);
 			
 			for (int i = 0; i < t.length; i++) {
 				writer.accept(buf, field, t[i]);
 			}
-		};
-		
-		handlers.put(type, Pair.of(reader, writer));
-		handlers.put(Array.newInstance(type, 0).getClass(), Pair.of(arrayReader, arrayWriter));
+		}));
 	}
 	
 	private Field[] getClassFields(Class<?> clazz) {

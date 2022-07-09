@@ -10,7 +10,6 @@ import com.mojang.blaze3d.systems.RenderSystem;
 
 import mrunknown404.primalrework.client.gui.screen.ScreenQuestMenu;
 import mrunknown404.primalrework.client.gui.widget.QuestInfoList;
-import mrunknown404.primalrework.quests.Quest;
 import mrunknown404.primalrework.quests.QuestState;
 import mrunknown404.primalrework.quests.QuestTab;
 import mrunknown404.primalrework.utils.helpers.ColorH;
@@ -41,10 +40,7 @@ public class GuiQuestTree extends FocusableGui implements IRenderable {
 	
 	public GuiQuestTree(ScreenQuestMenu screen, Minecraft mc, QuestTab tab) {
 		this.screen = screen;
-		
-		for (Quest quest : tab.get()) {
-			children.add(new QuestButton(WSDQuestStates.getQuestState(quest.getName()), mc, this));
-		}
+		tab.get().forEach(q -> children.add(new QuestButton(WSDQuestStates.getQuestState(q.getName()), mc, this)));
 	}
 	
 	@Override

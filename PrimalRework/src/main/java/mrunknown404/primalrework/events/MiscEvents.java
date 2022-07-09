@@ -1,10 +1,13 @@
 package mrunknown404.primalrework.events;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Map;
 import java.util.Random;
 
 import com.google.gson.JsonElement;
+import com.mojang.brigadier.context.CommandContext;
+import com.mojang.brigadier.context.ParsedArgument;
 
 import mrunknown404.primalrework.PrimalRework;
 import mrunknown404.primalrework.init.InitBlocks;
@@ -16,8 +19,8 @@ import mrunknown404.primalrework.world.savedata.WSDQuestStates;
 import mrunknown404.primalrework.world.savedata.WSDStage;
 import net.minecraft.advancements.AdvancementManager;
 import net.minecraft.block.Block;
+import net.minecraft.command.CommandSource;
 import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -30,6 +33,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.event.AddReloadListenerEvent;
@@ -46,21 +50,31 @@ public class MiscEvents {
 	
 	@SubscribeEvent
 	public void onWorldStart(WorldEvent.Load e) {
-		if (((World) e.getWorld()).dimension() != World.OVERWORLD || !(e.getWorld() instanceof ServerWorld)) {
+		if (!(e.getWorld() instanceof ServerWorld)) {
 			return;
 		}
 		
 		MinecraftServer server = ((ServerWorld) e.getWorld()).getServer();
-		WSDStage.get(server);
-		WSDQuestStates.get(server);
+		if (((World) e.getWorld()).dimension() == World.OVERWORLD) {
+			WSDStage.get(server);
+			WSDQuestStates.get(server);
+		}
+		
+		GameRules rules = ((ServerWorld) e.getWorld()).getGameRules();
+		rules.getRule(GameRules.RULE_DISABLE_RAIDS).set(true, server);
+		rules.getRule(GameRules.RULE_DO_PATROL_SPAWNING).set(false, server);
+		rules.getRule(GameRules.RULE_DO_TRADER_SPAWNING).set(false, server);
+		rules.getRule(GameRules.RULE_DOINSOMNIA).set(false, server);
+		rules.getRule(GameRules.RULE_SPAWN_RADIUS).setFromArgument(new CommandContext<CommandSource>(server.createCommandSourceStack(), null,
+				Collections.singletonMap(GameRules.RULE_SPAWN_RADIUS.getId(), new ParsedArgument<CommandSource, Object>(0, 0, 32)), null, null, null, null, null, null, false),
+				GameRules.RULE_SPAWN_RADIUS.getId());
 	}
 	
 	@SubscribeEvent
 	public void onPlayerJoin(PlayerLoggedInEvent e) {
-		PlayerEntity player = e.getPlayer();
-		
-		PrimalRework.NETWORK.sendPacketToTarget((ServerPlayerEntity) player, new PSyncStage(WSDStage.getStage()));
-		PrimalRework.NETWORK.sendPacketToTarget((ServerPlayerEntity) player, PSyncAllQuests.create());
+		ServerPlayerEntity player = (ServerPlayerEntity) e.getPlayer();
+		PrimalRework.NETWORK.sendPacketToTarget(player, new PSyncStage(WSDStage.getStage()));
+		PrimalRework.NETWORK.sendPacketToTarget(player, PSyncAllQuests.create());
 	}
 	
 	@SubscribeEvent

@@ -8,7 +8,6 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.server.integrated.IntegratedServer;
 import net.minecraft.util.HTTPUtil;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.GameType;
 
 public class ScreenPrimalShareToLan extends Screen {
@@ -21,25 +20,19 @@ public class ScreenPrimalShareToLan extends Screen {
 	
 	@Override
 	protected void init() {
-		addButton(new Button(width / 2 - 75, height / 2 - 12, 150, 20, WordH.translate("lanServer.start"), (button) -> {
+		addButton(new Button(width / 2 - 75, height / 2 - 12, 150, 20, WordH.translate("lanServer.start"), button -> {
 			minecraft.setScreen(null);
 			int port = HTTPUtil.getAvailablePort();
-			ITextComponent itextcomponent;
-			
 			IntegratedServer server = minecraft.getSingleplayerServer();
-			if (server.publishServer(GameType.SURVIVAL, server.getPlayerList().isOp(minecraft.player.getGameProfile()), port)) {
-				itextcomponent = WordH.translate("commands.publish.started", port);
-			} else {
-				itextcomponent = WordH.translate("commands.publish.failed");
-			}
 			
-			minecraft.gui.getChat().addMessage(itextcomponent);
+			minecraft.gui.getChat()
+					.addMessage(server.publishServer(GameType.SURVIVAL, server.getPlayerList().isOp(minecraft.player.getGameProfile()), port) ?
+							WordH.translate("commands.publish.started", port) :
+							WordH.translate("commands.publish.failed"));
 			minecraft.updateTitle();
 		}));
 		
-		addButton(new Button(width / 2 - 75, height / 2 + 12, 150, 20, DialogTexts.GUI_CANCEL, (button) -> {
-			minecraft.setScreen(lastScreen);
-		}));
+		addButton(new Button(width / 2 - 75, height / 2 + 12, 150, 20, DialogTexts.GUI_CANCEL, button -> minecraft.setScreen(lastScreen)));
 	}
 	
 	@Override

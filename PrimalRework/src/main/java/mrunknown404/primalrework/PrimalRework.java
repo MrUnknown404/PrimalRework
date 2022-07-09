@@ -41,6 +41,7 @@ import net.minecraftforge.fml.network.NetworkDirection;
 @Mod(PrimalRework.MOD_ID)
 public class PrimalRework {
 	public static final String MOD_ID = "primalrework";
+	public static final boolean IS_DEBUG = true;
 	
 	public static final NetworkH NETWORK = NetworkH.create(PrimalRework.MOD_ID, "main", "1", (n) -> {
 		n.registerPacket(POpenInventory.class, NetworkDirection.PLAY_TO_SERVER);
@@ -51,7 +52,8 @@ public class PrimalRework {
 		n.registerPacket(PSyncStage.class, NetworkDirection.PLAY_TO_CLIENT);
 	});
 	
-	//TODO setup registries for quests,recipes,fuels
+	//BUG wandering trader spawns?
+	//TODO setup registries or something for quests,recipes,fuels
 	
 	/* TODO list of stuff to do progression-wise
 	 * after breaking log should work on getting a primal crafting table. which unlocks flint tools.

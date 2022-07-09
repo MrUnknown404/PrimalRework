@@ -47,13 +47,9 @@ public class ScreenQuestMenu extends Screen {
 		children.add(tabList);
 		TREE_MAP.clear();
 		questInfo = null;
-		
-		for (QuestTab tab : InitQuests.getTabs()) {
-			TREE_MAP.put(tab, new GuiQuestTree(this, minecraft, tab));
-		}
 		scale = 1;
-		
 		selectedTab = InitQuests.TAB_STAGE_0;
+		InitQuests.getTabs().stream().forEach(t -> TREE_MAP.put(t, new GuiQuestTree(this, minecraft, t)));
 	}
 	
 	@Override
@@ -99,6 +95,7 @@ public class ScreenQuestMenu extends Screen {
 			} else if (mouseY < height - QuestInfoList.getInfoHeight(this)) {
 				return TREE_MAP.get(selectedTab).mouseDragged(mouseX, mouseY, partial, moveX, moveY);
 			}
+			
 			questInfo.mouseDragged(mouseX, mouseY, partial, moveX, moveY);
 		}
 		

@@ -36,9 +36,9 @@ public class ScreenRecipeBrowser extends Screen {
 	
 	private final int imageWidth = 176;
 	
-	private final ScreenRecipeBrowserItems recipeBrowserItems;
+	private final ScreenRecipeBrowserItems recipeBrowserItems = new ScreenRecipeBrowserItems();
 	private final ContainerScreen<?> lastScreen;
-	private final List<Data> recipes;
+	private final List<Data> recipes = new ArrayList<Data>();
 	private int leftPos, topPos, curRecipeTab;
 	private Button leftButton, rightButton;
 	private ITextComponent recipeName, pageCount;
@@ -46,25 +46,15 @@ public class ScreenRecipeBrowser extends Screen {
 	public ScreenRecipeBrowser(ContainerScreen<?> lastScreen, Map<RecipeType, List<StagedRecipe<?, ?>>> recipes, Map<FuelType, Pair<StagedItem, Integer>> fuels,
 			StagedItem output) {
 		super(WordH.translate("screen.recipelist.title"));
-		this.recipeBrowserItems = new ScreenRecipeBrowserItems();
 		this.lastScreen = lastScreen;
-		this.recipes = new ArrayList<Data>();
 		
 		if (recipes != null) {
-			for (RecipeType type : RecipeType.values()) {
-				if (recipes.containsKey(type)) {
-					List<StagedRecipe<?, ?>> list = recipes.get(type);
-					this.recipes.add(new Data(type, RecipeDisplay.createFrom(type, list, output), list.size()));
-				}
-			}
+			recipes.entrySet().stream().forEach(e -> this.recipes.add(new Data(e.getKey(), RecipeDisplay.createFrom(e.getKey(), e.getValue(), output))));
 		}
 		
 		if (fuels != null) {
-			for (FuelType type : FuelType.values()) {
-				if (fuels.containsKey(type)) {
-					this.recipes.add(new Data(type, RecipeDisplay.createFrom(type, InitFuels.convertToRecipes(type, fuels.get(type)), output), fuels.size()));
-				}
-			}
+			fuels.entrySet().stream()
+					.forEach(e -> this.recipes.add(new Data(e.getKey(), RecipeDisplay.createFrom(e.getKey(), InitFuels.convertToRecipes(e.getKey(), e.getValue()), output))));
 		}
 	}
 	
@@ -73,13 +63,11 @@ public class ScreenRecipeBrowser extends Screen {
 		leftPos = (width - imageWidth) / 2;
 		topPos = 32;
 		
-		for (Data data : recipes) {
-			data.display.init(minecraft, this);
-		}
+		recipes.forEach(d -> d.display.init(minecraft, this));
 		
 		curRecipeTab = 0;
-		addButton(leftButton = new Button(leftPos - 22, topPos + 4, 20, 20, WordH.string("<"), (button) -> recipes.get(curRecipeTab).display.decreasePage()));
-		addButton(rightButton = new Button(leftPos + 182, topPos + 4, 20, 20, WordH.string(">"), (button) -> recipes.get(curRecipeTab).display.increasePage()));
+		leftButton = addButton(new Button(leftPos - 22, topPos + 4, 20, 20, WordH.string("<"), button -> recipes.get(curRecipeTab).display.decreasePage()));
+		rightButton = addButton(new Button(leftPos + 182, topPos + 4, 20, 20, WordH.string(">"), button -> recipes.get(curRecipeTab).display.increasePage()));
 		
 		MainWindow w = minecraft.getWindow();
 		recipeBrowserItems.init(minecraft, w.getGuiScaledWidth(), w.getGuiScaledHeight());
@@ -92,7 +80,7 @@ public class ScreenRecipeBrowser extends Screen {
 		renderBackground(stack);
 		
 		Data curData = recipes.get(curRecipeTab);
-		int h = Math.min(curData.size - (curData.display.getPage() * curData.display.getMaxRecipesSupported()), curData.display.getMaxRecipesSupported()) *
+		int h = Math.min(curData.display.getAmountOfRecipes() - (curData.display.getPage() * curData.display.getMaxRecipesSupported()), curData.display.getMaxRecipesSupported()) *
 				(curData.display.thisHeight + 2) + 6;
 		
 		for (int i = 0; i < recipes.size(); i++) {
@@ -114,7 +102,7 @@ public class ScreenRecipeBrowser extends Screen {
 		h += 8;
 		minecraft.textureManager.bind(BG);
 		blit(stack, leftPos, topPos, 0, 0, 180, 12, 180, 16);
-		blit(stack, leftPos, topPos + 12, 0, h, 180, h, 180, (h) * 3);
+		blit(stack, leftPos, topPos + 12, 0, h, 180, h, 180, h * 3);
 		blit(stack, leftPos, topPos + h + 12, 0, 12, 180, 4, 180, 16);
 		
 		minecraft.textureManager.bind(TAB);
@@ -186,12 +174,10 @@ public class ScreenRecipeBrowser extends Screen {
 	private static class Data {
 		private final ICraftingInput type;
 		private final RecipeDisplay<?> display;
-		private final int size;
 		
-		private Data(ICraftingInput type, RecipeDisplay<?> display, int size) {
+		private Data(ICraftingInput type, RecipeDisplay<?> display) {
 			this.type = type;
 			this.display = display;
-			this.size = size;
 		}
 	}
 }

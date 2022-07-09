@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import mrunknown404.primalrework.blocks.BlockInfo;
-import mrunknown404.primalrework.blocks.HarvestInfo;
 import mrunknown404.primalrework.blocks.StagedBlock;
 import mrunknown404.primalrework.items.SIBlock;
 import mrunknown404.primalrework.items.SIDamageable;
@@ -31,7 +29,7 @@ public class ItemH {
 		}
 	};
 	
-	private static final List<ITextComponent> UNKNOWN_ITEM = Arrays.asList(WordH.string("???").withStyle(TextFormatting.GRAY));
+	public static final List<ITextComponent> UNKNOWN_ITEM = Arrays.asList(WordH.translate("tooltips.unknown").withStyle(TextFormatting.GRAY));
 	
 	public static List<ITextComponent> getTooltips(ItemStack stack) {
 		if (!(stack.getItem() instanceof StagedItem)) {
@@ -68,27 +66,24 @@ public class ItemH {
 			if (item instanceof SIFood && PRConfig.CLIENT.tooltips_showFoodNutrients.get()) {
 				SIFood food = (SIFood) item;
 				
-				list.add(WordH.string(WordH.toPrintableNumber(food.nutrition) + " ").append(WordH.translate("tooltips.food.nutrition")).withStyle(TextFormatting.GRAY));
-				list.add(WordH.string(WordH.toPrintableNumber(food.nutrition * food.saturation) + " ").append(WordH.translate("tooltips.food.saturation"))
+				list.add(WordH.string(String.valueOf(food.nutrition)).append(WordH.translate("tooltips.food.nutrition")).withStyle(TextFormatting.GRAY));
+				list.add(WordH.string(WordH.formatNumber(1, food.nutrition * food.saturation) + " ").append(WordH.translate("tooltips.food.saturation"))
 						.withStyle(TextFormatting.GRAY));
 			} else if (item instanceof SIBlock) {
 				if (config.tooltips_showBlockInfo.get()) {
 					StagedBlock block = ((SIBlock) item).getBlock();
-					BlockInfo blockInfo = block.blockInfo;
-					float hardness = blockInfo.getHardness();
-					float blast = blockInfo.getBlast();
+					float hardness = block.blockInfo.getHardness();
+					float blast = block.blockInfo.getBlast();
 					
-					list.add(hardness != -1 ? WordH.string(WordH.toPrintableNumber(hardness) + " ").append(WordH.translate("tooltips.block.hardness")) :
+					list.add(hardness >= 0 ? WordH.string(WordH.formatNumber(1, hardness) + " ").append(WordH.translate("tooltips.block.hardness")) :
 							WordH.translate("tooltips.block.unbreakable"));
-					list.add(blast != -1 ? WordH.string(WordH.toPrintableNumber(blast) + " ").append(WordH.translate("tooltips.block.blast")) :
+					list.add(blast >= 0 ? WordH.string(WordH.formatNumber(1, blast) + " ").append(WordH.translate("tooltips.block.blast")) :
 							WordH.translate("tooltips.block.unexplodable"));
 					
 					list.add(StringTextComponent.EMPTY);
 					list.add(WordH.translate("tooltips.require.following").withStyle(TextFormatting.GRAY));
-					for (HarvestInfo info : BlockH.getBlockHarvestInfos(block)) {
-						list.add(WordH.translate("tooltips.require.level").append(WordH.string(" " + info.toolMat.level + " " + info.toolType.getName()))
-								.withStyle(TextFormatting.GRAY));
-					}
+					BlockH.getBlockHarvestInfos(block).forEach(info -> list.add(WordH.translate("tooltips.require.level")
+							.append(WordH.string(" " + info.toolMat.level + " " + info.toolType.getName())).withStyle(TextFormatting.GRAY)));
 				}
 			} else {
 				if (item instanceof SIDamageable && config.tooltips_showDurability.get()) {
@@ -102,11 +97,11 @@ public class ItemH {
 						list.add(StringTextComponent.EMPTY);
 					}
 					
-					list.add(WordH.string(WordH.toPrintableNumber(item.toolType.baseDamage + item.toolMat.extraDamage) + " ").append(WordH.translate("tooltips.stat.damage"))
+					list.add(WordH.string(WordH.formatNumber(2, item.toolType.baseDamage + item.toolMat.extraDamage) + " ").append(WordH.translate("tooltips.stat.damage"))
 							.withStyle(TextFormatting.GRAY));
-					list.add(WordH.string(WordH.toPrintableNumber(item.toolType.swingSpeed + 4) + " ").append(WordH.translate("tooltips.stat.speed.attack"))
+					list.add(WordH.string(WordH.formatNumber(2, item.toolType.swingSpeed + 4) + " ").append(WordH.translate("tooltips.stat.speed.attack"))
 							.withStyle(TextFormatting.GRAY));
-					list.add(WordH.string(WordH.toPrintableNumber(item.toolMat.speed) + " ").append(WordH.translate("tooltips.stat.speed.mine")).withStyle(TextFormatting.GRAY));
+					list.add(WordH.string(WordH.formatNumber(2, item.toolMat.speed) + " ").append(WordH.translate("tooltips.stat.speed.mine")).withStyle(TextFormatting.GRAY));
 					list.add(WordH.translate("tooltips.stat.level").append(WordH.string(" " + item.toolMat.level + " " + item.toolType.getName())).withStyle(TextFormatting.GRAY));
 				}
 			}
@@ -125,7 +120,7 @@ public class ItemH {
 				list.add(WordH.translate("tooltips.require.stage").withStyle(TextFormatting.LIGHT_PURPLE).append(WordH.string(" " + stage.getName())));
 			}
 		} else {
-			list.add(WordH.translate("tooltips.unknown").withStyle(TextFormatting.GRAY));
+			list.addAll(UNKNOWN_ITEM);
 		}
 		
 		TOOLTIP_CACHE.set(stack, list);

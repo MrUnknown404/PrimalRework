@@ -33,8 +33,7 @@ public class ScreenRecipeBrowserItems extends Screen {
 	private ItemRenderer ir;
 	private TextureManager textureManager;
 	private ContainerScreen<?> container;
-	private final List<Data> curItems = new ArrayList<Data>(), items3D = new ArrayList<Data>(), items2D = new ArrayList<Data>(), preItems3D = new ArrayList<Data>(),
-			preItems2D = new ArrayList<Data>();
+	private final List<Data> items3D = new ArrayList<Data>(), items2D = new ArrayList<Data>(), preItems3D = new ArrayList<Data>(), preItems2D = new ArrayList<Data>();
 	private int heightItems, padding, xStart, listSize;
 	private StagedItem itemUnderMouse;
 	private ITextComponent scrollFaster;
@@ -49,11 +48,7 @@ public class ScreenRecipeBrowserItems extends Screen {
 	protected void init() {
 		ir = minecraft.getItemRenderer();
 		textureManager = minecraft.textureManager;
-		if (minecraft.screen instanceof ScreenRecipeBrowser) {
-			container = ((ScreenRecipeBrowser) minecraft.screen).getLastScreen();
-		} else {
-			container = (ContainerScreen<?>) minecraft.screen;
-		}
+		container = minecraft.screen instanceof ScreenRecipeBrowser ? ((ScreenRecipeBrowser) minecraft.screen).getLastScreen() : (ContainerScreen<?>) minecraft.screen;
 		
 		int guiScale = minecraft.options.guiScale;
 		int height = minecraft.getWindow().getHeight();
@@ -80,20 +75,18 @@ public class ScreenRecipeBrowserItems extends Screen {
 		for (int i = 0; i < RecipeBrowserH.getItemList().size(); i++) {
 			ItemStack item = RecipeBrowserH.getItemList().get(i);
 			int y = MathH.floor((float) i / (float) widthItems);
-			Data d = new Data(item, ir.getModel(item, null, null), i % widthItems, y, false);
 			
 			if (RecipeBrowserH.isItem3D(item)) {
-				items3D.add(d);
+				items3D.add(new Data(item, ir.getModel(item, null, null), i % widthItems, y, false));
 			} else {
-				items2D.add(d);
+				items2D.add(new Data(item, ir.getModel(item, null, null), i % widthItems, y, false));
 			}
 			
 			if (y >= listSize - heightItems + 1) {
-				d = new Data(item, ir.getModel(item, null, null), j % widthItems, MathH.floor((float) j / (float) widthItems), true);
 				if (RecipeBrowserH.isItem3D(item)) {
-					preItems3D.add(d);
+					preItems3D.add(new Data(item, ir.getModel(item, null, null), j % widthItems, MathH.floor((float) j / (float) widthItems), true));
 				} else {
-					preItems2D.add(d);
+					preItems2D.add(new Data(item, ir.getModel(item, null, null), j % widthItems, MathH.floor((float) j / (float) widthItems), true));
 				}
 				j++;
 			}
@@ -123,23 +116,18 @@ public class ScreenRecipeBrowserItems extends Screen {
 		itemUnderMouse = null;
 		RenderHelper.setupFor3DItems();
 		
-		curItems.clear();
-		curItems.addAll(items3D);
+		renderItems(items3D, stack, buf, mouseX, mouseY);
 		if (scroll < 0) {
-			curItems.addAll(preItems3D);
+			renderItems(preItems3D, stack, buf, mouseX, mouseY);
 		}
-		
-		renderItems(curItems, stack, buf, mouseX, mouseY);
 		buf.endBatch();
 		
-		curItems.clear();
-		curItems.addAll(items2D);
-		if (scroll < 0) {
-			curItems.addAll(preItems2D);
-		}
-		
 		RenderHelper.setupForFlatItems();
-		renderItems(curItems, stack, buf, mouseX, mouseY);
+		
+		renderItems(items2D, stack, buf, mouseX, mouseY);
+		if (scroll < 0) {
+			renderItems(preItems2D, stack, buf, mouseX, mouseY);
+		}
 		buf.endBatch();
 		
 		if (heightItems < listSize) {
@@ -168,7 +156,11 @@ public class ScreenRecipeBrowserItems extends Screen {
 			}
 			
 			int xx = xStart + data.x * 18, yy = padding + data.y * 18 - ymod;
-			renderGuiItem(data.itemStack, data.model, stack, buf, xx, yy);
+			stack.pushPose();
+			stack.translate(xx + 8, yy + 8, 100 + ir.blitOffset);
+			stack.scale(16, -16, 16);
+			ir.render(data.itemStack, ItemCameraTransforms.TransformType.GUI, false, stack, buf, 15728880, OverlayTexture.NO_OVERLAY, data.model);
+			stack.popPose();
 			
 			if (mouseX > xx && mouseX <= xx + 16 && mouseY > yy && mouseY <= yy + 16) {
 				itemUnderMouse = (StagedItem) data.itemStack.getItem();
@@ -203,11 +195,12 @@ public class ScreenRecipeBrowserItems extends Screen {
 			if (itemUnderMouse != null) {
 				if (button == 0) {
 					RecipeBrowserH.showHowToCraft(minecraft, itemUnderMouse, container);
+					return true;
 				} else if (button == 1) {
 					RecipeBrowserH.showWhatCanBeMade(minecraft, itemUnderMouse, container);
+					return true;
 				}
 			}
-			return true;
 		}
 		
 		return false;
@@ -218,21 +211,14 @@ public class ScreenRecipeBrowserItems extends Screen {
 		if (itemUnderMouse != null) {
 			if (InitClient.RECIPE_BROWSER_HOW_TO_CRAFT.getKey().getValue() == keycode) {
 				RecipeBrowserH.showHowToCraft(minecraft, itemUnderMouse, container);
+				return true;
 			} else if (InitClient.RECIPE_BROWSER_WHAT_CAN_I_CRAFT.getKey().getValue() == keycode) {
 				RecipeBrowserH.showWhatCanBeMade(minecraft, itemUnderMouse, container);
+				return true;
 			}
-			return true;
 		}
 		
 		return false;
-	}
-	
-	private void renderGuiItem(ItemStack stack, IBakedModel model, MatrixStack matrixStack, IRenderTypeBuffer.Impl buffer, int x, int y) {
-		matrixStack.pushPose();
-		matrixStack.translate(x + 8, y + 8, 100 + ir.blitOffset);
-		matrixStack.scale(16, -16, 16);
-		ir.render(stack, ItemCameraTransforms.TransformType.GUI, false, matrixStack, buffer, 15728880, OverlayTexture.NO_OVERLAY, model);
-		matrixStack.popPose();
 	}
 	
 	private static class Data {

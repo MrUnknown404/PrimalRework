@@ -28,6 +28,5 @@ public class MixinItemParser {
 	private void suggestItemIdOrTag(SuggestionsBuilder builder, ITagCollection<Item> tags, CallbackInfoReturnable<CompletableFuture<Suggestions>> callable) {
 		callable.setReturnValue(forTesting ? ISuggestionProvider.suggestResource(tags.getAvailableTags(), builder, String.valueOf('#')) :
 				ISuggestionProvider.suggestResource(ForgeRegistries.ITEMS.getKeys().stream().filter((r) -> !r.getNamespace().equals("minecraft")), builder));
-		
 	}
 }

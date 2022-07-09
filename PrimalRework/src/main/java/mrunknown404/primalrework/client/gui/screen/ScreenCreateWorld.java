@@ -28,7 +28,6 @@ import net.minecraft.world.Difficulty;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.GameType;
 import net.minecraft.world.WorldSettings;
-import net.minecraft.world.gen.settings.DimensionGeneratorSettings;
 
 public class ScreenCreateWorld extends Screen {
 	private static final ITextComponent GAME_MODEL_LABEL = WordH.translate("selectWorld.gameMode");
@@ -41,8 +40,7 @@ public class ScreenCreateWorld extends Screen {
 	private String resultFolder;
 	private GameMode gameMode = GameMode.SURVIVAL;
 	private Difficulty selectedDifficulty = Difficulty.NORMAL, effectiveDifficulty = Difficulty.NORMAL;
-	private boolean commands, commandsChanged;
-	public boolean hardCore;
+	private boolean commands, commandsChanged, hardCore;
 	private Button createButton, difficultyButton, gameRulesButton, commandsButton;
 	private ITextComponent gameModeHelp1, gameModeHelp2;
 	private String initName;
@@ -136,12 +134,12 @@ public class ScreenCreateWorld extends Screen {
 		gameRulesButton = addButton(
 				new Button(right, 185, 150, 20, WordH.translate("selectWorld.gameRules"), button -> minecraft.setScreen(new EditGamerulesScreen(gameRules.copy(), val -> {
 					minecraft.setScreen(this);
-					val.ifPresent((gameRules) -> this.gameRules = gameRules);
+					val.ifPresent(gameRules -> this.gameRules = gameRules);
 				}))));
 		
 		createButton = addButton(new Button(left, height - 28, 150, 20, WordH.translate("selectWorld.create"), button -> onCreate()));
-		
 		createButton.active = !initName.isEmpty();
+		
 		addButton(new Button(right, height - 28, 150, 20, DialogTexts.GUI_CANCEL, button -> onClose()));
 		
 		setInitialFocus(nameEdit);
@@ -203,11 +201,11 @@ public class ScreenCreateWorld extends Screen {
 	
 	private void onCreate() {
 		minecraft.forceSetScreen(new DirtMessageScreen(WordH.translate("createWorld.preparing")));
-		WorldSettings worldsettings = new WorldSettings(nameEdit.getValue().trim(), gameMode.gameType, hardCore, effectiveDifficulty, commands && !hardCore,
-				hardCore ? new GameRules() : gameRules, DatapackCodec.DEFAULT);
-		DimensionGeneratorSettings settings = InitWorld.PRIMAL_WORLD.get().createSettings(impl, 0, false, false, "");
-		minecraft.createLevel(resultFolder, worldsettings, impl,
-				settings.withSeed(hardCore, seedEdit.getValue().isEmpty() ? OptionalLong.of(new Random().nextLong()) : parseSeed()));
+		minecraft.createLevel(resultFolder,
+				new WorldSettings(nameEdit.getValue().trim(), gameMode.gameType, hardCore, effectiveDifficulty, commands && !hardCore, hardCore ? new GameRules() : gameRules,
+						DatapackCodec.DEFAULT),
+				impl, InitWorld.PRIMAL_WORLD.get().createSettings(impl, 0, false, false, "").withSeed(hardCore,
+						seedEdit.getValue().isEmpty() ? OptionalLong.of(new Random().nextLong()) : parseSeed()));
 	}
 	
 	private void setGameMode(GameMode gameMode) {

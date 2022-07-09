@@ -58,12 +58,12 @@ public class ScreenNonSupportedMods extends Screen {
 		
 		@Override
 		protected int getScrollbarPosition() {
-			return this.getRight() - 6;
+			return getRight() - 6;
 		}
 		
 		@Override
 		public int getRowWidth() {
-			return this.width;
+			return width;
 		}
 		
 		private class LoadingMessageEntry extends ExtendedList.AbstractListEntry<LoadingMessageEntry> {
@@ -80,8 +80,7 @@ public class ScreenNonSupportedMods extends Screen {
 			}
 			
 			@Override
-			public void render(MatrixStack mStack, int entryIdx, int top, int left, int entryWidth, int entryHeight, int mouseX, int mouseY, boolean p_194999_5_,
-					float partialTicks) {
+			public void render(MatrixStack mStack, int entryIdx, int top, int left, int entryWidth, int entryHeight, int mouseX, int mouseY, boolean flag, float partialTicks) {
 				try (Minecraft mc = Minecraft.getInstance()) {
 					FontRenderer font = mc.font;
 					List<IReorderingProcessor> strings = font.split(message, width);

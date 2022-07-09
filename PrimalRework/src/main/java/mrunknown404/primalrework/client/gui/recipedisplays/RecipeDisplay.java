@@ -152,10 +152,11 @@ public abstract class RecipeDisplay<T extends StagedRecipe<T, ?>> {
 		if (itemUnderMouse != null) {
 			if (InitClient.RECIPE_BROWSER_HOW_TO_CRAFT.getKey().getValue() == keycode) {
 				RecipeBrowserH.showHowToCraft(mc, (StagedItem) itemUnderMouse.getItem(), list.getLastScreen());
+				return true;
 			} else if (InitClient.RECIPE_BROWSER_WHAT_CAN_I_CRAFT.getKey().getValue() == keycode) {
 				RecipeBrowserH.showWhatCanBeMade(mc, (StagedItem) itemUnderMouse.getItem(), list.getLastScreen());
+				return true;
 			}
-			return true;
 		}
 		
 		return false;
@@ -191,6 +192,10 @@ public abstract class RecipeDisplay<T extends StagedRecipe<T, ?>> {
 			page = maxPages - 1;
 		}
 		list.refreshPageCount(this);
+	}
+	
+	public int getAmountOfRecipes() {
+		return recipes.size();
 	}
 	
 	@SuppressWarnings("unchecked")

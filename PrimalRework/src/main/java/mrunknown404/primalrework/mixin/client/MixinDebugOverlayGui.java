@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -14,6 +15,7 @@ import com.mojang.blaze3d.platform.PlatformDescriptors;
 import mrunknown404.primalrework.PrimalRework;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.overlay.DebugOverlayGui;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.SharedConstants;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
@@ -21,21 +23,27 @@ import net.minecraftforge.fml.ModList;
 
 @Mixin(DebugOverlayGui.class)
 public class MixinDebugOverlayGui {
-	@SuppressWarnings("static-method")
+	@Shadow
+	private Minecraft minecraft;
+	
 	@Inject(at = @At("HEAD"), method = "getGameInformation()Ljava/util/List;", cancellable = true)
 	private void getGameInformation(CallbackInfoReturnable<List<String>> callback) {
 		List<String> list = new ArrayList<String>();
-		Minecraft mc = Minecraft.getInstance();
 		
 		list.add("Minecraft " + SharedConstants.getCurrentVersion().getName() + " - PrimalRework " +
 				ModList.get().getModContainerById(PrimalRework.MOD_ID).get().getModInfo().getVersion());
-		list.add("FPS: " + mc.fpsString.substring(0, mc.fpsString.indexOf(' ')));
+		list.add("FPS: " + minecraft.fpsString.substring(0, minecraft.fpsString.indexOf(' ')));
 		
-		BlockPos blockpos = mc.getCameraEntity().blockPosition();
-		if (blockpos.getY() >= 0 && blockpos.getY() < 256) {
+		if (PrimalRework.IS_DEBUG) {
+			PlayerEntity pl = (PlayerEntity) minecraft.getCameraEntity();
+			BlockPos pos = pl.blockPosition();
+			
 			list.add("");
 			list.add("Debug ->");
-			list.add("Biome: " + mc.level.registryAccess().registryOrThrow(Registry.BIOME_REGISTRY).getKey(mc.level.getBiome(blockpos)));
+			list.add(String.format("XYZ: %.3f / %.5f / %.3f", pl.getX(), pl.getY(), pl.getZ()));
+			if (pos.getY() >= 0 && pos.getY() < 256) {
+				list.add("Biome: " + minecraft.level.registryAccess().registryOrThrow(Registry.BIOME_REGISTRY).getKey(minecraft.level.getBiome(pos)));
+			}
 		}
 		
 		callback.setReturnValue(list);

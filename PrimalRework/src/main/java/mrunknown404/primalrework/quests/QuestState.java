@@ -52,9 +52,8 @@ public class QuestState implements IStageProvider {
 			System.out.println("Someone has finished the quest '" + quest.getName() + "'!");
 		}
 		
+		StringTextComponent space = WordH.space();
 		for (PlayerEntity pl : world.players()) {
-			StringTextComponent space = WordH.space();
-			
 			if (player != null) {
 				pl.sendMessage(((IFormattableTextComponent) player.getDisplayName()).append(space).append(WordH.translate("quest.finish.player")).append(space)
 						.append(quest.getFancyName()), Util.NIL_UUID);
