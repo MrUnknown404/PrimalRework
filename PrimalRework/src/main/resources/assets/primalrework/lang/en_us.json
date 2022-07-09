@@ -1,9 +1,8 @@
 {
-	"stage.stage_0.name": "Before",
-	"stage.stage_1.name": "Early Stone",
-	"stage.stage_2.name": "Late Stone",
-	"stage.stage_3.name": "Copper",
-	"stage.stage_4.name": "Bronze",
+	"stage.stage_0.name": "Before Age",
+	"stage.stage_1.name": "Stone Age",
+	"stage.stage_2.name": "Copper Age",
+	"stage.stage_3.name": "Bronze Age",
 	"stage.no_show.name": "No Show",
 	"tool.type.none.name": "Hand",
 	"tool.type.shears.name": "Shears",

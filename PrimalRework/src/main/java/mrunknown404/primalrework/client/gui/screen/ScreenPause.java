@@ -27,7 +27,7 @@ public class ScreenPause extends Screen {
 		addButton(new Button(width / 2 - 102, height / 4 + 48, 98, 20, WordH.translate("menu.options"), b -> minecraft.setScreen(new OptionsScreen(this, minecraft.options))));
 		
 		addButton(new Button(width / 2 - 102, height / 4 + 72, 204, 20, WordH.translate("menu.shareToLan"),
-				b -> minecraft.setScreen(new ScreenPrimalShareToLan(this)))).active = minecraft.hasSingleplayerServer() && !minecraft.getSingleplayerServer().isPublished();
+				b -> minecraft.setScreen(new ScreenShareToLan(this)))).active = minecraft.hasSingleplayerServer() && !minecraft.getSingleplayerServer().isPublished();
 		
 		Button button1 = addButton(new Button(width / 2 - 102, height / 4 + 96, 204, 20, WordH.translate("menu.returnToMenu"), (button0) -> {
 			boolean flag = minecraft.isLocalServer();

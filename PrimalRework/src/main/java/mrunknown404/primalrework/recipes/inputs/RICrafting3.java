@@ -75,8 +75,6 @@ public class RICrafting3 extends RecipeInput<RICrafting3> {
 		isEmpty = !found;
 	}
 	
-	private static final IngredientCompare COMPARE = new IngredientCompare();
-	
 	@Override
 	protected boolean match(RICrafting3 input) {
 		if (isShapeless) {
@@ -173,11 +171,7 @@ public class RICrafting3 extends RecipeInput<RICrafting3> {
 			}
 		}
 		
-		public RICrafting3 finish() {
-			return new RICrafting3(ingredients, false);
-		}
-		
-		public Builder setRing(IIngredientProvider i) {
+		public RICrafting3 setRing(IIngredientProvider i) {
 			Ingredient ig = create(i);
 			ingredients.set(0, ig);
 			ingredients.set(1, ig);
@@ -187,34 +181,34 @@ public class RICrafting3 extends RecipeInput<RICrafting3> {
 			ingredients.set(6, ig);
 			ingredients.set(7, ig);
 			ingredients.set(8, ig);
-			return this;
+			return new RICrafting3(ingredients, false);
 		}
 		
-		public Builder set2x2(IIngredientProvider i0, IIngredientProvider i1, IIngredientProvider i2, IIngredientProvider i3) {
+		public RICrafting3 set2x2(IIngredientProvider i0, IIngredientProvider i1, IIngredientProvider i2, IIngredientProvider i3) {
 			ingredients.set(0, create(i0));
 			ingredients.set(1, create(i1));
 			ingredients.set(3, create(i2));
 			ingredients.set(4, create(i3));
-			return this;
+			return new RICrafting3(ingredients, false);
 		}
 		
-		public Builder set2x2(IIngredientProvider i) {
+		public RICrafting3 set2x2(IIngredientProvider i) {
 			Ingredient ig = create(i);
 			return set2x2(ig, ig, ig, ig);
 		}
 		
-		public Builder set1x2(IIngredientProvider i0, IIngredientProvider i1) {
+		public RICrafting3 set1x2(IIngredientProvider i0, IIngredientProvider i1) {
 			ingredients.set(0, create(i0));
 			ingredients.set(3, create(i1));
-			return this;
+			return new RICrafting3(ingredients, false);
 		}
 		
-		public Builder set1x2(IIngredientProvider i) {
+		public RICrafting3 set1x2(IIngredientProvider i) {
 			Ingredient ig = create(i);
 			return set1x2(ig, ig);
 		}
 		
-		public Builder set3x3(IIngredientProvider i0, IIngredientProvider i1, IIngredientProvider i2, IIngredientProvider i3, IIngredientProvider i4, IIngredientProvider i5,
+		public RICrafting3 set3x3(IIngredientProvider i0, IIngredientProvider i1, IIngredientProvider i2, IIngredientProvider i3, IIngredientProvider i4, IIngredientProvider i5,
 				IIngredientProvider i6, IIngredientProvider i7, IIngredientProvider i8) {
 			ingredients.set(0, create(i0));
 			ingredients.set(1, create(i1));
@@ -225,44 +219,66 @@ public class RICrafting3 extends RecipeInput<RICrafting3> {
 			ingredients.set(6, create(i6));
 			ingredients.set(7, create(i7));
 			ingredients.set(8, create(i8));
-			return this;
+			return new RICrafting3(ingredients, false);
 		}
 		
-		public Builder set3x3(IIngredientProvider i) {
+		public RICrafting3 set3x3(IIngredientProvider i) {
 			Ingredient ig = create(i);
 			return set3x3(ig, ig, ig, ig, ig, ig, ig, ig, ig);
 		}
 		
-		public Builder set2x3(IIngredientProvider i0, IIngredientProvider i1, IIngredientProvider i2, IIngredientProvider i3, IIngredientProvider i4, IIngredientProvider i5) {
+		public RICrafting3 set2x3(IIngredientProvider i0, IIngredientProvider i1, IIngredientProvider i2, IIngredientProvider i3, IIngredientProvider i4, IIngredientProvider i5) {
 			ingredients.set(0, create(i0));
 			ingredients.set(1, create(i1));
 			ingredients.set(3, create(i2));
 			ingredients.set(4, create(i3));
 			ingredients.set(6, create(i4));
 			ingredients.set(7, create(i5));
-			return this;
+			return new RICrafting3(ingredients, false);
 		}
 		
-		public Builder set2x3(IIngredientProvider i) {
+		public RICrafting3 set2x3(IIngredientProvider i) {
 			Ingredient ig = create(i);
 			return set2x3(ig, ig, ig, ig, ig, ig);
 		}
 		
-		public Builder set1x3(IIngredientProvider i0, IIngredientProvider i1, IIngredientProvider i2) {
+		public RICrafting3 set1x3(IIngredientProvider i0, IIngredientProvider i1, IIngredientProvider i2) {
 			ingredients.set(0, create(i0));
 			ingredients.set(3, create(i1));
 			ingredients.set(6, create(i2));
-			return this;
+			return new RICrafting3(ingredients, false);
 		}
 		
-		public Builder set1x3(IIngredientProvider i) {
+		public RICrafting3 set1x3(IIngredientProvider i) {
 			Ingredient ig = create(i);
 			return set1x3(ig, ig, ig);
 		}
 		
-		public Builder setMiddle(IIngredientProvider i) {
-			ingredients.set(4, create(i));
-			return this;
+		public RICrafting3 set3x2(IIngredientProvider i0, IIngredientProvider i1, IIngredientProvider i2, IIngredientProvider i3, IIngredientProvider i4, IIngredientProvider i5) {
+			ingredients.set(0, create(i0));
+			ingredients.set(1, create(i1));
+			ingredients.set(2, create(i2));
+			ingredients.set(3, create(i3));
+			ingredients.set(4, create(i4));
+			ingredients.set(5, create(i5));
+			return new RICrafting3(ingredients, false);
+		}
+		
+		public RICrafting3 set3x2(IIngredientProvider i) {
+			Ingredient ig = create(i);
+			return set3x2(ig, ig, ig, ig, ig, ig);
+		}
+		
+		public RICrafting3 set3x1(IIngredientProvider i0, IIngredientProvider i1, IIngredientProvider i2) {
+			ingredients.set(0, create(i0));
+			ingredients.set(1, create(i1));
+			ingredients.set(2, create(i2));
+			return new RICrafting3(ingredients, false);
+		}
+		
+		public RICrafting3 set3x1(IIngredientProvider i) {
+			Ingredient ig = create(i);
+			return set1x3(ig, ig, ig);
 		}
 	}
 	
@@ -275,44 +291,42 @@ public class RICrafting3 extends RecipeInput<RICrafting3> {
 			}
 		}
 		
-		public RICrafting3 finish() {
-			return new RICrafting3(ingredients, true);
-		}
-		
-		public SBuilder set(IIngredientProvider... i) {
+		public RICrafting3 set(IIngredientProvider... i) {
 			if (i.length > 9) {
 				System.out.println("Tried to feed in too much ingredients");
-				return this;
+				return null;
 			} else if (i.length == 0) {
 				System.out.println("Tried to feed in too little ingredients");
-				return this;
+				return null;
 			}
 			
 			for (int j = 0; j < i.length; j++) {
 				ingredients.set(j, create(i[j]));
 			}
-			return this;
+			return new RICrafting3(ingredients, true);
 		}
 		
-		public SBuilder set(IIngredientProvider i, int amount) {
+		public RICrafting3 set(IIngredientProvider i, int amount) {
 			if (amount > 10) {
 				System.out.println("Tried to feed in too much ingredients");
-				return this;
+				return null;
 			} else if (amount <= 0) {
 				System.out.println("Tried to feed in too little ingredients");
-				return this;
+				return null;
 			}
 			
 			for (int j = 0; j < amount; j++) {
 				ingredients.set(j, create(i));
 			}
-			return this;
+			return new RICrafting3(ingredients, true);
 		}
 	}
 	
 	private static Ingredient create(IIngredientProvider obj) {
 		return obj == null ? Ingredient.EMPTY : obj.getIngredient();
 	}
+	
+	private static final IngredientCompare COMPARE = new IngredientCompare();
 	
 	private static class IngredientCompare implements Comparator<Ingredient> {
 		@Override

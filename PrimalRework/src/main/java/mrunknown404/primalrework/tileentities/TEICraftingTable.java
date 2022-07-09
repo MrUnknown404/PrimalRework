@@ -22,8 +22,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.text.ITextComponent;
 
-public class TEIPrimalCraftingTable extends TEInventory {
-	public TEIPrimalCraftingTable() {
+public class TEICraftingTable extends TEInventory {
+	public TEICraftingTable() {
 		super(InitTileEntities.PRIMAL_CRAFTING_TABLE.get(), 10);
 	}
 	

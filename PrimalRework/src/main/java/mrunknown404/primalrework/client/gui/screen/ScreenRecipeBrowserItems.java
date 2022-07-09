@@ -34,11 +34,11 @@ public class ScreenRecipeBrowserItems extends Screen {
 	private TextureManager textureManager;
 	private ContainerScreen<?> container;
 	private final List<Data> items3D = new ArrayList<Data>(), items2D = new ArrayList<Data>(), preItems3D = new ArrayList<Data>(), preItems2D = new ArrayList<Data>();
-	private int heightItems, padding, xStart, listSize;
+	private int heightItems, xStart, yStart, listSize;
 	private StagedItem itemUnderMouse;
 	private ITextComponent scrollFaster;
 	
-	private static int scroll, lastHeightItems, lastSize;
+	private static int scroll, lastHeightItems, lastWidthItems, lastSize;
 	
 	public ScreenRecipeBrowserItems() {
 		super(WordH.translate("screen.crafting_display.title"));
@@ -50,21 +50,22 @@ public class ScreenRecipeBrowserItems extends Screen {
 		textureManager = minecraft.textureManager;
 		container = minecraft.screen instanceof ScreenRecipeBrowser ? ((ScreenRecipeBrowser) minecraft.screen).getLastScreen() : (ContainerScreen<?>) minecraft.screen;
 		
-		int guiScale = minecraft.options.guiScale;
-		int height = minecraft.getWindow().getHeight();
-		int itemSize = MathH.floor(18 * guiScale);
-		padding = height % itemSize / guiScale / 2 + 1;
-		heightItems = MathH.floor(height / itemSize);
-		int widthItems = MathH.floor(container.getGuiLeft() * guiScale / itemSize);
-		xStart = width - (widthItems * 18) - (padding / 2);
-		listSize = MathH.floor((float) (RecipeBrowserH.getItemList().size() - 1) / (float) widthItems); //Unsure if this fixed it tbh
+		int guiScale = (int) minecraft.getWindow().getGuiScale(), itemSize = 18 * guiScale;
+		int guiLeft = container.getGuiLeft(), height = minecraft.getWindow().getHeight();
+		heightItems = MathH.floor((height - 2f) / itemSize);
+		int widthItems = MathH.floor((guiLeft - 4f) * guiScale / itemSize);
 		
-		if (lastHeightItems != heightItems || lastSize != RecipeBrowserH.getItemList().size()) {
+		xStart = guiLeft + 2 + container.getXSize() + MathH.ceil(((guiLeft - 2f) * guiScale / itemSize - widthItems) * 9);
+		yStart = MathH.ceil(((float) height / (float) itemSize - heightItems) * 9);
+		
+		listSize = MathH.ceil((float) (RecipeBrowserH.getItemList().size() - 1) / (float) widthItems) + 1;
+		if (lastHeightItems != heightItems || lastWidthItems != widthItems || lastSize != RecipeBrowserH.getItemList().size()) {
 			scroll = 0;
 		}
 		
 		lastSize = RecipeBrowserH.getItemList().size();
 		lastHeightItems = heightItems;
+		lastWidthItems = widthItems;
 		
 		items3D.clear();
 		items2D.clear();
@@ -82,7 +83,7 @@ public class ScreenRecipeBrowserItems extends Screen {
 				items2D.add(new Data(item, ir.getModel(item, null, null), i % widthItems, y, false));
 			}
 			
-			if (y >= listSize - heightItems + 1) {
+			if (y >= listSize - heightItems) {
 				if (RecipeBrowserH.isItem3D(item)) {
 					preItems3D.add(new Data(item, ir.getModel(item, null, null), j % widthItems, MathH.floor((float) j / (float) widthItems), true));
 				} else {
@@ -155,7 +156,7 @@ public class ScreenRecipeBrowserItems extends Screen {
 				ymod = scroll * 18;
 			}
 			
-			int xx = xStart + data.x * 18, yy = padding + data.y * 18 - ymod;
+			int xx = xStart + data.x * 18, yy = yStart + data.y * 18 - ymod;
 			stack.pushPose();
 			stack.translate(xx + 8, yy + 8, 100 + ir.blitOffset);
 			stack.scale(16, -16, 16);
@@ -176,9 +177,9 @@ public class ScreenRecipeBrowserItems extends Screen {
 			}
 			
 			scroll -= Math.round(scrollDelta * minecraft.options.mouseWheelSensitivity *
-					(InputMappings.isKeyDown(minecraft.getWindow().getWindow(), minecraft.options.keyShift.getKey().getValue()) ? heightItems : 2));
+					(InputMappings.isKeyDown(minecraft.getWindow().getWindow(), minecraft.options.keyShift.getKey().getValue()) ? 10 : 2));
 			
-			if (scroll > listSize - heightItems + 1) {
+			if (scroll > listSize - heightItems) {
 				scroll -= listSize;
 			} else if (scroll < -heightItems) {
 				scroll += listSize;

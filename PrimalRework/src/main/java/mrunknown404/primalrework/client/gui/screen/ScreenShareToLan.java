@@ -10,10 +10,10 @@ import net.minecraft.server.integrated.IntegratedServer;
 import net.minecraft.util.HTTPUtil;
 import net.minecraft.world.GameType;
 
-public class ScreenPrimalShareToLan extends Screen {
+public class ScreenShareToLan extends Screen {
 	private final Screen lastScreen;
 	
-	public ScreenPrimalShareToLan(Screen lastScreen) {
+	public ScreenShareToLan(Screen lastScreen) {
 		super(WordH.translate("lanServer.title"));
 		this.lastScreen = lastScreen;
 	}

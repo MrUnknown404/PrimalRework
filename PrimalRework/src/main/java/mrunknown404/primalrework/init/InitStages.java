@@ -18,7 +18,6 @@ public class InitStages {
 	public static final RegistryObject<Stage> STAGE_1 = register((byte) 1);
 	public static final RegistryObject<Stage> STAGE_2 = register((byte) 2);
 	public static final RegistryObject<Stage> STAGE_3 = register((byte) 3);
-	public static final RegistryObject<Stage> STAGE_4 = register((byte) 4);
 	
 	public static final RegistryObject<Stage> DO_LATER = register((byte) (Byte.MAX_VALUE - 1));
 	public static final RegistryObject<Stage> NO_SHOW = register(Byte.MAX_VALUE);

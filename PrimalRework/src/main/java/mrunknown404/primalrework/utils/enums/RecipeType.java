@@ -8,7 +8,7 @@ import net.minecraft.util.text.IFormattableTextComponent;
 
 public enum RecipeType implements ICraftingInput {
 	//@formatter:off
-	CRAFTING_3(InitBlocks.PRIMAL_CRAFTING_TABLE),
+	CRAFTING_3(InitBlocks.CRAFTING_TABLE),
 	CAMPFIRE  (InitBlocks.CAMPFIRE);
 	//@formatter:on
 	

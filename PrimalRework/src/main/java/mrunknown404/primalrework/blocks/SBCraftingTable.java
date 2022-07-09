@@ -1,7 +1,7 @@
 package mrunknown404.primalrework.blocks;
 
 import mrunknown404.primalrework.init.InitStages;
-import mrunknown404.primalrework.tileentities.TEIPrimalCraftingTable;
+import mrunknown404.primalrework.tileentities.TEICraftingTable;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.LivingEntity;
@@ -20,9 +20,9 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
-public class SBPrimalCraftingTable extends SBContainer {
-	public SBPrimalCraftingTable() {
-		super(InitStages.DO_LATER, BlockInfo.of(BlockInfo.PRIMAL_CRAFTING_TABLE), BlockStateType.normal, BlockModelType.normal, HarvestInfo.AXE_MIN);
+public class SBCraftingTable extends SBContainer {
+	public SBCraftingTable() {
+		super(InitStages.STAGE_1, BlockInfo.of(BlockInfo.PRIMAL_CRAFTING_TABLE), BlockStateType.normal, BlockModelType.normal, HarvestInfo.AXE_MIN);
 	}
 	
 	@Override
@@ -32,7 +32,7 @@ public class SBPrimalCraftingTable extends SBContainer {
 		}
 		
 		TileEntity tileentity = world.getBlockEntity(pos);
-		if (tileentity instanceof TEIPrimalCraftingTable) {
+		if (tileentity instanceof TEICraftingTable) {
 			NetworkHooks.openGui((ServerPlayerEntity) player, (INamedContainerProvider) tileentity);
 		}
 		return ActionResultType.CONSUME;
@@ -40,15 +40,15 @@ public class SBPrimalCraftingTable extends SBContainer {
 	
 	@Override
 	public TileEntity makeTileEntity(BlockState state, IBlockReader world) {
-		return new TEIPrimalCraftingTable();
+		return new TEICraftingTable();
 	}
 	
 	@Override
 	public void setPlacedBy(World world, BlockPos pos, BlockState state, LivingEntity entity, ItemStack stack) {
 		if (stack.hasCustomHoverName()) {
 			TileEntity tileentity = world.getBlockEntity(pos);
-			if (tileentity instanceof TEIPrimalCraftingTable) {
-				((TEIPrimalCraftingTable) tileentity).setCustomName(stack.getHoverName());
+			if (tileentity instanceof TEICraftingTable) {
+				((TEICraftingTable) tileentity).setCustomName(stack.getHoverName());
 			}
 		}
 	}
@@ -58,7 +58,7 @@ public class SBPrimalCraftingTable extends SBContainer {
 	public void onRemove(BlockState state0, World world, BlockPos pos, BlockState state1, boolean flag) {
 		if (!state0.is(state1.getBlock())) {
 			TileEntity tileentity = world.getBlockEntity(pos);
-			if (tileentity instanceof TEIPrimalCraftingTable) {
+			if (tileentity instanceof TEICraftingTable) {
 				for (int i = 0; i < 9; i++) {
 					InventoryHelper.dropItemStack(world, pos.getX(), pos.getY(), pos.getZ(), ((IInventory) tileentity).getItem(i));
 				}

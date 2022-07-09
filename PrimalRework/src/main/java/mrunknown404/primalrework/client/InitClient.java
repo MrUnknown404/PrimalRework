@@ -6,7 +6,7 @@ import org.lwjgl.glfw.GLFW;
 import mrunknown404.primalrework.blocks.StagedBlock;
 import mrunknown404.primalrework.client.gui.screen.container.ScreenCampFire;
 import mrunknown404.primalrework.client.gui.screen.container.ScreenInventory;
-import mrunknown404.primalrework.client.gui.screen.container.ScreenPrimalCraftingTable;
+import mrunknown404.primalrework.client.gui.screen.container.ScreenCraftingTable;
 import mrunknown404.primalrework.client.terenderers.TERCampFire;
 import mrunknown404.primalrework.events.client.HarvestDisplayEvents;
 import mrunknown404.primalrework.events.client.MiscEvents;
@@ -89,7 +89,7 @@ public class InitClient {
 		RenderTypeLookup.setRenderLayer(InitBlocks.TALL_GRASS.get(), RenderType.cutoutMipped());
 		
 		ScreenManager.register(InitContainers.CAMPFIRE.get(), ScreenCampFire::new);
-		ScreenManager.register(InitContainers.PRIMAL_CRAFTING_TABLE.get(), ScreenPrimalCraftingTable::new);
+		ScreenManager.register(InitContainers.PRIMAL_CRAFTING_TABLE.get(), ScreenCraftingTable::new);
 		ScreenManager.register(InitContainers.INVENTORY.get(), ScreenInventory::new);
 		
 		ForgeRegistries.ITEMS.getValues().stream().filter((i) -> i instanceof StagedItem).forEach((item) -> RecipeBrowserH.addItem((StagedItem) item));

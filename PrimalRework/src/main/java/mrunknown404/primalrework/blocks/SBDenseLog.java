@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 
 public class SBDenseLog extends SBRotatedPillar {
 	public SBDenseLog() {
-		super(InitStages.STAGE_2, 16, InitItemGroups.BLOCKS, BlockInfo.with(BlockInfo.WOOD, Hardness.HARD_0), HarvestInfo.AXE_MIN);
+		super(InitStages.STAGE_1, 16, InitItemGroups.BLOCKS, BlockInfo.with(BlockInfo.WOOD, Hardness.HARD_0), HarvestInfo.AXE_MIN);
 	}
 	
 	@SuppressWarnings("deprecation")

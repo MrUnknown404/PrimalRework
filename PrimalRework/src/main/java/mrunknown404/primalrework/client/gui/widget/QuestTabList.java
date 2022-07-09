@@ -94,7 +94,7 @@ public class QuestTabList extends AbstractList<QuestTabList.QuestTabEntry> {
 	}
 	
 	@Override
-	protected boolean isSelectedItem(int p_230957_1_) {
+	protected boolean isSelectedItem(int var) {
 		return false;
 	}
 	
@@ -104,13 +104,14 @@ public class QuestTabList extends AbstractList<QuestTabList.QuestTabEntry> {
 		private final ScreenQuestMenu screen;
 		
 		private TabButton(ScreenQuestMenu screen, int x, int y, Stage stage, QuestTab tab) {
-			super(x, y, 22, 22, stage.getFancyName(), (onPress) -> {
+			super(x, y, 22, 22, stage.getFancyName(), onPress -> {
 				screen.selectedTab = tab;
 				screen.setQuestInfo(null);
 			});
 			this.stage = stage;
 			this.tab = tab;
 			this.screen = screen;
+			this.active = tab.hasAccessToCurrentStage();
 		}
 		
 		@Override
@@ -118,10 +119,14 @@ public class QuestTabList extends AbstractList<QuestTabList.QuestTabEntry> {
 			Minecraft mc = Minecraft.getInstance();
 			
 			boolean isSelected = mouseX >= x && mouseX < x + width && mouseY >= y && mouseY < y + height;
-			if (screen.selectedTab == tab) {
-				mc.getTextureManager().bind(isSelected ? ScreenQuestMenu.QUEST_ICON_SELECTED_HOVER : ScreenQuestMenu.QUEST_ICON_SELECTED);
+			if (active) {
+				if (screen.selectedTab == tab) {
+					mc.getTextureManager().bind(isSelected ? ScreenQuestMenu.QUEST_ICON_SELECTED_HOVER : ScreenQuestMenu.QUEST_ICON_SELECTED);
+				} else {
+					mc.getTextureManager().bind(isSelected ? ScreenQuestMenu.QUEST_ICON_HOVER : ScreenQuestMenu.QUEST_ICON);
+				}
 			} else {
-				mc.getTextureManager().bind(isSelected ? ScreenQuestMenu.QUEST_ICON_HOVER : ScreenQuestMenu.QUEST_ICON);
+				mc.getTextureManager().bind(ScreenQuestMenu.QUEST_ICON_HOVER);
 			}
 			
 			blit(stack, x, y, 0, 0, 22, 22, 22, 22);
@@ -144,10 +149,9 @@ public class QuestTabList extends AbstractList<QuestTabList.QuestTabEntry> {
 		}
 		
 		@Override
-		public void render(MatrixStack stack, int p_230432_2_, int p_230432_3_, int p_230432_4_, int p_230432_5_, int p_230432_6_, int p_230432_7_, int p_230432_8_,
-				boolean p_230432_9_, float p_230432_10_) {
-			button.y = p_230432_3_;
-			button.render(stack, p_230432_7_, p_230432_8_, p_230432_10_);
+		public void render(MatrixStack stack, int x, int y, int p_230432_4_, int p_230432_5_, int p_230432_6_, int mouseX, int mouseY, boolean p_230432_9_, float partial) {
+			button.y = y;
+			button.render(stack, mouseX, mouseY, partial);
 		}
 		
 		@Override
@@ -156,18 +160,18 @@ public class QuestTabList extends AbstractList<QuestTabList.QuestTabEntry> {
 		}
 		
 		@Override
-		public boolean mouseClicked(double x, double y, int p_231044_5_) {
-			return button.mouseClicked(x, y, p_231044_5_);
+		public boolean mouseClicked(double x, double y, int key) {
+			return button.mouseClicked(x, y, key);
 		}
 		
 		@Override
-		public boolean mouseReleased(double x, double y, int p_231048_5_) {
-			return this.button.mouseReleased(x, y, p_231048_5_);
+		public boolean mouseReleased(double x, double y, int key) {
+			return button.mouseReleased(x, y, key);
 		}
 		
 		@Override
 		public boolean isDragging() {
-			return this.dragging;
+			return dragging;
 		}
 		
 		@Override

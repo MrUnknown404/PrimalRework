@@ -9,10 +9,10 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
-public class ScreenPrimalCraftingTable extends ContainerScreen<ContainerPrimalCraftingTable> {
+public class ScreenCraftingTable extends ContainerScreen<ContainerPrimalCraftingTable> {
 	private static final ResourceLocation CRAFTING_TABLE_LOCATION = new ResourceLocation("textures/gui/container/crafting_table.png");
 	
-	public ScreenPrimalCraftingTable(ContainerPrimalCraftingTable container, PlayerInventory inv, ITextComponent text) {
+	public ScreenCraftingTable(ContainerPrimalCraftingTable container, PlayerInventory inv, ITextComponent text) {
 		super(container, inv, text);
 	}
 	
