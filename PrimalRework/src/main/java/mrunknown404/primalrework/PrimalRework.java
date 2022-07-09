@@ -52,7 +52,6 @@ public class PrimalRework {
 		n.registerPacket(PSyncStage.class, NetworkDirection.PLAY_TO_CLIENT);
 	});
 	
-	//BUG wandering trader spawns?
 	//TODO setup registries or something for quests,recipes,fuels
 	
 	/* TODO list of stuff to do progression-wise
