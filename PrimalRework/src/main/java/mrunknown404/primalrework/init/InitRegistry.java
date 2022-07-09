@@ -3,18 +3,14 @@ package mrunknown404.primalrework.init;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 import mrunknown404.primalrework.PrimalRework;
-import mrunknown404.primalrework.api.events.common.EventPRRegistryRegistration;
 import mrunknown404.primalrework.api.registry.PRRegistries;
 import mrunknown404.primalrework.api.registry.PRRegistry;
-import mrunknown404.primalrework.api.registry.PRRegistry.State;
 import mrunknown404.primalrework.api.registry.PRRegistryObject;
 import mrunknown404.primalrework.api.registry.ROISIProvider;
 import mrunknown404.primalrework.blocks.StagedBlock;
@@ -63,40 +59,16 @@ public class InitRegistry {
 	private static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, PrimalRework.MOD_ID);
 	private static final DeferredRegister<SurfaceBuilder<?>> SURFACE_BUILDERS = DeferredRegister.create(ForgeRegistries.SURFACE_BUILDERS, PrimalRework.MOD_ID);
 	
-	private static final Map<String, List<PRRegistry<?>>> PR_REGISTRIES = new LinkedHashMap<String, List<PRRegistry<?>>>();
 	private static final PRRegistry<Metal> METALS = new PRRegistry<Metal>(PrimalRework.MOD_ID, Metal.class, InitMetals.class);
 	private static final PRRegistry<ToolMaterial> TOOL_MATERIALS = new PRRegistry<ToolMaterial>(PrimalRework.MOD_ID, ToolMaterial.class, InitToolMaterials.class);
 	
 	private static final Map<String, Supplier<FeatureMap>> BIOME_FEATURE_MAP = new HashMap<String, Supplier<FeatureMap>>();
 	private static final Map<String, PRBiome> PR_BIOMES = new HashMap<String, PRBiome>();
-	private static State registrationState = State.TOO_EARLY;
 	
-	@SuppressWarnings("deprecation")
 	public static void preSetup() {
+		PRRegistries.addRegistries(PrimalRework.MOD_ID, METALS, TOOL_MATERIALS);
+		
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-		
-		registrationState = State.NOW;
-		List<String> multiLine = new ArrayList<String>();
-		multiLine.add("Results of adding PrimalRework's registries");
-		multiLine.add(registerRegistry(METALS));
-		multiLine.add(registerRegistry(TOOL_MATERIALS));
-		Logger.multiLine(multiLine);
-		
-		EventPRRegistryRegistration event = new EventPRRegistryRegistration();
-		bus.post(event);
-		event.getRegistries().forEach(InitRegistry::registerRegistry);
-		
-		multiLine.clear();
-		multiLine.add("Results of adding Addon's registries");
-		
-		PR_REGISTRIES.values().stream().forEach(list -> list.forEach(reg -> {
-			loadClass(reg.classToLoad);
-			PRRegistries.addToMasterRegistery(reg);
-			multiLine.add("Loaded " + reg.getEntries().size() + " " + reg.getType().getSimpleName() + "s");
-		}));
-		registrationState = State.LATE;
-		Logger.multiLine(multiLine);
-		
 		bus.addGenericListener(Stage.class, (RegistryEvent.Register<Stage> e) -> loadClass(InitStages.class));
 		bus.addGenericListener(StagedTag.class, (RegistryEvent.Register<StagedTag> e) -> loadClass(InitStagedTags.class));
 		bus.addGenericListener(Block.class, (RegistryEvent.Register<Block> e) -> loadClass(InitBlocks.class));
@@ -140,33 +112,11 @@ public class InitRegistry {
 		Logger.multiLine(multiLine);
 	}
 	
-	private static String registerRegistry(final PRRegistry<?> registry) {
-		if (InitRegistry.getRegistrationState() == State.TOO_EARLY) {
-			throw new UnsupportedOperationException("Cannot register registry too early!");
-		} else if (InitRegistry.getRegistrationState() == State.LATE) {
-			throw new UnsupportedOperationException("Cannot register registry when registry registration is finished!");
-		}
-		
-		Objects.requireNonNull(registry);
-		List<PRRegistry<?>> list = PR_REGISTRIES.computeIfAbsent(registry.getModID(), modid -> new ArrayList<PRRegistry<?>>());
-		
-		if (list.stream().anyMatch(registry::is)) {
-			throw new IllegalArgumentException("Duplicate registry for [modid:registryType] -> " + registry);
-		}
-		
-		list.add(registry);
-		return "New registry " + registry;
-	}
-	
 	private static String loaded(IForgeRegistry<?> reg, String displayName) {
 		return "Loaded " + reg.getEntries().stream().filter(e -> !e.getKey().location().getNamespace().equals("minecraft")).count() + " " + displayName;
 	}
 	
 	private static void loadClass(Class<?> clazz) {
-		if (clazz == null) {
-			return;
-		}
-		
 		try {
 			Class.forName(clazz.getName());
 		} catch (ClassNotFoundException e) {
@@ -258,9 +208,5 @@ public class InitRegistry {
 	
 	public static PRBiome getBiome(String name) {
 		return PR_BIOMES.get(name);
-	}
-	
-	public static State getRegistrationState() {
-		return registrationState;
 	}
 }

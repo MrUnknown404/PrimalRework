@@ -4,6 +4,7 @@ import com.mojang.brigadier.CommandDispatcher;
 
 import mrunknown404.primalrework.api.PrimalMod;
 import mrunknown404.primalrework.api.network.NetworkH;
+import mrunknown404.primalrework.api.registry.PRRegistries;
 import mrunknown404.primalrework.client.InitClient;
 import mrunknown404.primalrework.commands.CommandQuest;
 import mrunknown404.primalrework.commands.CommandStage;
@@ -32,6 +33,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLConstructModEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.network.NetworkDirection;
@@ -59,6 +61,7 @@ public class PrimalRework {
 	 * 
 	 */
 	
+	@SuppressWarnings("deprecation")
 	public PrimalRework() {
 		Logger.multiLine("#-# Thank you for playing PrimalRework! #-#");
 		
@@ -75,6 +78,7 @@ public class PrimalRework {
 		DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> InitClient::preSetup);
 		
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+		bus.addListener((FMLConstructModEvent e) -> PRRegistries.setup());
 		bus.addListener((FMLCommonSetupEvent e) -> InitRegistry.setup());
 		bus.addListener((FMLClientSetupEvent e) -> InitClient.setup());
 		bus.addListener((FMLLoadCompleteEvent e) -> System.err.println("#-# Finished loading PrimalRework! #-#"));

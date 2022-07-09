@@ -114,7 +114,7 @@ public class InitBlocks {
 	}
 	
 	static {
-		for (PRRegistryObject<Metal> metal : PRRegistries.METALS.getEntries()) {
+		for (PRRegistryObject<Metal> metal : PRRegistries.METALS) {
 			INGOT_BLOCKS.add(InitRegistry.block(metal.get() + "_block", () -> new SBMetal(metal.get())));
 		}
 	}

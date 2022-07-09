@@ -5,14 +5,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
-import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-import mrunknown404.primalrework.init.InitRegistry;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
-/** Example: {@code FMLJavaModLoadingContext.get().getModEventBus().addListener((EventPRRegistryRegistration e) -> e.registerRegistry(METALS));} */
+/** Register using {@link PRRegistries#addRegistries(String, PRRegistry...)} */
 public class PRRegistry<T extends ForgeRegistryEntry<T>> {
 	private final ResourceLocation name;
 	private final Map<String, PRRegistryObject<T>> map = new HashMap<String, PRRegistryObject<T>>();
@@ -27,9 +26,9 @@ public class PRRegistry<T extends ForgeRegistryEntry<T>> {
 	}
 	
 	public PRRegistryObject<T> register(String name, Supplier<T> obj) {
-		if (InitRegistry.getRegistrationState() == State.TOO_EARLY) {
+		if (PRRegistries.getRegistrationState() == State.TOO_EARLY) {
 			throw new UnsupportedOperationException("Cannot register new objects too early!");
-		} else if (InitRegistry.getRegistrationState() == State.LATE) {
+		} else if (PRRegistries.getRegistrationState() == State.LATE) {
 			throw new UnsupportedOperationException("Cannot register new objects when registration is finished!");
 		}
 		
@@ -58,8 +57,8 @@ public class PRRegistry<T extends ForgeRegistryEntry<T>> {
 		return name.getPath();
 	}
 	
-	public void forEach(BiConsumer<String, PRRegistryObject<T>> con) {
-		map.forEach(con);
+	public void forEach(Consumer<PRRegistryObject<T>> con) {
+		map.values().forEach(con);
 	}
 	
 	public Set<String> getKeys() {

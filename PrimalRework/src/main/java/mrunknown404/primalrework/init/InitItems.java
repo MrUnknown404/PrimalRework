@@ -96,7 +96,7 @@ public class InitItems {
 			registerCast(type);
 		}
 		
-		for (PRRegistryObject<Metal> metal : PRRegistries.METALS.getEntries()) {
+		for (PRRegistryObject<Metal> metal : PRRegistries.METALS) {
 			INGOTS.add(InitRegistry.item(metal.get() + "_ingot", () -> new SIIngot(metal.get(), false)));
 			INGOTS.add(InitRegistry.item(metal.get() + "_nugget", () -> new SIIngot(metal.get(), true)));
 			

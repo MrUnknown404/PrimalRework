@@ -40,28 +40,28 @@ public class FeaturePrimalTree extends Feature<BaseTreeFeatureConfig> {
 	}
 	
 	private static boolean isFree(IWorldGenerationBaseReader world, BlockPos pos) {
-		return validTreePos(world, pos) || world.isStateAtPosition(pos, (state) -> state.getBlock() instanceof SBLog);
+		return validTreePos(world, pos) || world.isStateAtPosition(pos, state -> state.getBlock() instanceof SBLog);
 	}
 	
 	private static boolean isVine(IWorldGenerationBaseReader world, BlockPos pos) {
-		return world.isStateAtPosition(pos, (state) -> state.is(Blocks.VINE));
+		return world.isStateAtPosition(pos, state -> state.is(Blocks.VINE));
 	}
 	
 	private static boolean isBlockWater(IWorldGenerationBaseReader world, BlockPos pos) {
-		return world.isStateAtPosition(pos, (state) -> state.is(Blocks.WATER));
+		return world.isStateAtPosition(pos, state -> state.is(Blocks.WATER));
 	}
 	
 	@SuppressWarnings("deprecation")
 	public static boolean isAirOrLeaves(IWorldGenerationBaseReader world, BlockPos pos) {
-		return world.isStateAtPosition(pos, (state) -> state.isAir() || state.getBlock() instanceof SBLeaves);
+		return world.isStateAtPosition(pos, state -> state.isAir() || state.getBlock() instanceof SBLeaves);
 	}
 	
 	private static boolean isGrassOrDirtOrFarmland(IWorldGenerationBaseReader world, BlockPos pos) {
-		return world.isStateAtPosition(pos, (state) -> BlockH.canSupportPlant(state.getBlock()));
+		return world.isStateAtPosition(pos, state -> BlockH.canSupportPlant(state.getBlock()));
 	}
 	
 	private static boolean isReplaceablePlant(IWorldGenerationBaseReader world, BlockPos pos) {
-		return world.isStateAtPosition(pos, (state) -> state.getMaterial() == Material.REPLACEABLE_PLANT);
+		return world.isStateAtPosition(pos, state -> state.getMaterial() == Material.REPLACEABLE_PLANT);
 	}
 	
 	private static boolean validTreePos(IWorldGenerationBaseReader world, BlockPos pos) {
