@@ -14,7 +14,6 @@ import mrunknown404.primalrework.recipes.Ingredient;
 import mrunknown404.primalrework.recipes.StagedRecipe;
 import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.utils.Cache;
-import mrunknown404.primalrework.utils.Pair;
 import mrunknown404.primalrework.utils.enums.FuelType;
 import mrunknown404.primalrework.utils.enums.RecipeType;
 import mrunknown404.primalrework.world.savedata.WSDStage;
@@ -27,7 +26,7 @@ import net.minecraft.item.ItemStack;
 public class RecipeBrowserH {
 	private static final Map<StagedItem, Data> ITEM_DATA = new HashMap<StagedItem, Data>();
 	private static final List<ItemStack> ALL_ITEMS = new ArrayList<ItemStack>();
-	private static final Cache<Stage, List<ItemStack>> ITEM_CACHE = new Cache<Stage, List<ItemStack>>();
+	private static final Cache<Stage, List<ItemStack>> ITEM_CACHE = Cache.create();
 	
 	public static void addItem(StagedItem item) {
 		if (item.getItemCategory() == null) {
@@ -42,18 +41,13 @@ public class RecipeBrowserH {
 		
 		ALL_ITEMS.sort((o1, o2) -> {
 			Item i1 = o1.getItem(), i2 = o2.getItem();
-			return (i1.getItemCategory().getId() * 100000) - (i2.getItemCategory().getId() * 100000) + ITEM_DATA.get(i1).order - ITEM_DATA.get(i2).order;
+			return (i1.getItemCategory().getId() * 100000) - (i2.getItemCategory().getId() * 100000) + (ITEM_DATA.get(i1).order - ITEM_DATA.get(i2).order);
 		});
 	}
 	
-	public static List<ItemStack> getItemList() {
-		if (!ITEM_CACHE.is(WSDStage.getStage())) {
-			ITEM_CACHE.set(WSDStage.getStage(), ALL_ITEMS.stream().filter((s) -> ((StagedItem) s.getItem()).hasAccessToCurrentStage()).collect(Collectors.toList()));
-		}
-		
-		//TODO handle search here
-		
-		return ITEM_CACHE.get();
+	public static List<ItemStack> getItemList() { // TODO handle search here
+		return ITEM_CACHE.computeIfAbsent(WSDStage.getStage(),
+				() -> ALL_ITEMS.stream().filter(s -> ((StagedItem) s.getItem()).hasAccessToCurrentStage()).collect(Collectors.toList()));
 	}
 	
 	private static boolean lateRun = false; //i don't like this but doesn't want to work in #finish
@@ -62,7 +56,7 @@ public class RecipeBrowserH {
 		if (!lateRun) {
 			lateRun = true;
 			ItemRenderer ir = Minecraft.getInstance().getItemRenderer();
-			ITEM_DATA.values().stream().filter((data) -> ir.getModel(data.stack, null, null).usesBlockLight()).forEach(Data::is3D);
+			ITEM_DATA.values().stream().filter(data -> ir.getModel(data.stack, null, null).usesBlockLight()).forEach(Data::is3D);
 		}
 		
 		return ITEM_DATA.get(item.getItem()).is3D;
@@ -77,7 +71,7 @@ public class RecipeBrowserH {
 	
 	public static void showWhatCanBeMade(Minecraft minecraft, StagedItem item, ContainerScreen<?> lastScreen) {
 		Map<RecipeType, List<StagedRecipe<?, ?>>> recipes = InitRecipes.getWhatCanBeMadeWith(Ingredient.createUsingTags(item));
-		Map<FuelType, Pair<StagedItem, Integer>> fuels = InitFuels.getFuels(item);
+		Map<FuelType, StagedItem> fuels = InitFuels.getFuels(item);
 		if (!recipes.isEmpty() || !fuels.isEmpty()) {
 			minecraft.setScreen(new ScreenRecipeBrowser(lastScreen, recipes, fuels, item));
 		}

@@ -2,11 +2,8 @@ package mrunknown404.primalrework.init;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
 import mrunknown404.primalrework.PrimalRework;
 import mrunknown404.primalrework.api.registry.PRRegistries;
@@ -37,9 +34,7 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 import net.minecraftforge.common.world.ForgeWorldType;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
@@ -61,9 +56,6 @@ public class InitRegistry {
 	
 	private static final PRRegistry<Metal> METALS = new PRRegistry<Metal>(PrimalRework.MOD_ID, Metal.class, InitMetals.class);
 	private static final PRRegistry<ToolMaterial> TOOL_MATERIALS = new PRRegistry<ToolMaterial>(PrimalRework.MOD_ID, ToolMaterial.class, InitToolMaterials.class);
-	
-	private static final Map<String, Supplier<FeatureMap>> BIOME_FEATURE_MAP = new HashMap<String, Supplier<FeatureMap>>();
-	private static final Map<String, PRBiome> PR_BIOMES = new HashMap<String, PRBiome>();
 	
 	public static void preSetup() {
 		PRRegistries.addRegistries(PrimalRework.MOD_ID, METALS, TOOL_MATERIALS);
@@ -166,11 +158,8 @@ public class InitRegistry {
 		return WORLD_TYPES.register(name, worldType);
 	}
 	
-	/** TODO make this publicly usable */
 	static RegistryObject<Biome> biome(String name, PRBiome o, Supplier<FeatureMap> features) {
-		PR_BIOMES.put(PrimalRework.MOD_ID + ":" + name, o);
-		BIOME_FEATURE_MAP.put(PrimalRework.MOD_ID + ":" + name, features);
-		return BIOMES.register(name, () -> o.biome);
+		return PRRegistries.biome(PrimalRework.MOD_ID, BIOMES, name, o, features);
 	}
 	
 	static <T extends Feature<?>> RegistryObject<T> feature(String name, Supplier<T> o) {
@@ -179,15 +168,6 @@ public class InitRegistry {
 	
 	static <T extends SurfaceBuilder<?>> RegistryObject<T> surfaceBuilder(String name, Supplier<T> o) {
 		return SURFACE_BUILDERS.register(name, o);
-	}
-	
-	@SubscribeEvent
-	public static void biomeLoad(BiomeLoadingEvent e) {
-		if (e.getName().getNamespace().equals("minecraft")) {
-			return;
-		}
-		
-		BIOME_FEATURE_MAP.get(e.getName().toString()).get().addFeaturesToBiome(e.getGeneration()::addFeature);
 	}
 	
 	/** Data-gen only! */
@@ -200,13 +180,5 @@ public class InitRegistry {
 	@Deprecated
 	public static Collection<RegistryObject<Item>> getItems() {
 		return ITEMS.getEntries();
-	}
-	
-	public static List<Biome> getBiomes() {
-		return PR_BIOMES.values().stream().map(b -> b.biome).collect(Collectors.toList());
-	}
-	
-	public static PRBiome getBiome(String name) {
-		return PR_BIOMES.get(name);
 	}
 }

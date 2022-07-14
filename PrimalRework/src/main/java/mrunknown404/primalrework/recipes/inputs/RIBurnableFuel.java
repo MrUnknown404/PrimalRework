@@ -7,7 +7,6 @@ public class RIBurnableFuel extends RecipeInput<RIBurnableFuel> {
 	public final Ingredient input;
 	
 	public RIBurnableFuel(IIngredientProvider input) {
-		super(null);
 		this.input = input.getIngredient();
 	}
 	

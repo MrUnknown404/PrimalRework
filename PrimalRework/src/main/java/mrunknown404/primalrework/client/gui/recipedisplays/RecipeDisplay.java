@@ -74,11 +74,9 @@ public abstract class RecipeDisplay<T extends StagedRecipe<T, ?>> {
 	protected abstract void drawSlot(MatrixStack stack, int left, int top, int mouseX, int mouseY, int drawSlot);
 	
 	protected void setup() {
-		
 	}
 	
 	protected void update() {
-		
 	}
 	
 	public final void tick() {
@@ -97,32 +95,30 @@ public abstract class RecipeDisplay<T extends StagedRecipe<T, ?>> {
 	}
 	
 	protected ItemStack getIngToRender(Ingredient ing) {
-		if (lastIngCache.is(ing, ti)) {
-			return lastIngCache.get();
-		}
-		
-		StagedItem item = null;
-		List<StagedItem> items = ing.getStagedItems();
-		
-		if (items.isEmpty()) {
-			System.err.println("Recipe stage < Ingredient stage?");
-			return ItemStack.EMPTY;
-		}
-		
-		if (items.size() == 1) {
-			item = items.get(0);
-		} else {
-			if (lastIng == null || !lastIng.matches(ing)) {
-				lastIng = ing;
-				ingSize = items.size();
-				curIng = 0;
-				ti = 0;
+		return lastIngCache.computeIfAbsent(ing, ti, () -> {
+			List<StagedItem> items = ing.getStagedItems();
+			
+			if (items.isEmpty()) {
+				System.err.println("Recipe stage < Ingredient stage?");
+				return ItemStack.EMPTY;
 			}
 			
-			item = items.get(curIng);
-		}
-		
-		return lastIngCache.set(ing, ti, new ItemStack(item));
+			StagedItem item = null;
+			if (items.size() == 1) {
+				item = items.get(0);
+			} else {
+				if (lastIng == null || !lastIng.matches(ing)) {
+					lastIng = ing;
+					ingSize = items.size();
+					curIng = 0;
+					ti = 0;
+				}
+				
+				item = items.get(curIng);
+			}
+			
+			return new ItemStack(item);
+		});
 	}
 	
 	protected void drawOutputItem(ItemStack output, int x, int y) {
@@ -206,7 +202,6 @@ public abstract class RecipeDisplay<T extends StagedRecipe<T, ?>> {
 					return new RecipeDisplay<SRCampFire>((List<SRCampFire>) recipes, output, 1) {
 						@Override
 						protected void drawSlot(MatrixStack stack, int left, int top, int mouseX, int mouseY, int drawSlot) {
-							
 						}
 					};
 				case CRAFTING_3:

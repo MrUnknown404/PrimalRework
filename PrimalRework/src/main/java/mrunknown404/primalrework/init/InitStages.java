@@ -1,9 +1,9 @@
 package mrunknown404.primalrework.init;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import mrunknown404.primalrework.api.registry.PRRegistries;
 import mrunknown404.primalrework.stage.Stage;
@@ -12,6 +12,7 @@ import mrunknown404.primalrework.world.savedata.WSDStage;
 import net.minecraftforge.fml.RegistryObject;
 
 public class InitStages {
+	private static final Cache<Byte, List<Stage>> PREV_STAGE_CACHE = Cache.create();
 	private static final Map<Byte, Stage> STAGE_MAP = new HashMap<Byte, Stage>();
 	
 	public static final RegistryObject<Stage> STAGE_0 = register((byte) 0);
@@ -34,28 +35,10 @@ public class InitStages {
 		return STAGE_MAP.get(id);
 	}
 	
-	private static final Cache<Byte, List<Stage>> PREV_STAGE_CACHE = new Cache<Byte, List<Stage>>();
-	
 	public static List<Stage> getStagesBeforeCurrent(boolean includeCurrentStage) {
 		Stage curStage = WSDStage.getStage();
-		if (PREV_STAGE_CACHE.is(curStage.id)) {
-			return PREV_STAGE_CACHE.get();
-		}
-		
-		List<Stage> stages = new ArrayList<Stage>();
-		byte curStageID = curStage.id;
-		for (Stage stage : PRRegistries.STAGES.getValues()) {
-			if (stage.id < curStage.id) {
-				stages.add(stage);
-			}
-		}
-		
-		if (includeCurrentStage) {
-			stages.add(curStage);
-		}
-		
-		PREV_STAGE_CACHE.set(curStageID, stages);
-		return stages;
+		return PREV_STAGE_CACHE.computeIfAbsent(curStage.id,
+				() -> PRRegistries.STAGES.getValues().stream().filter(s -> includeCurrentStage ? s.id <= curStage.id : s.id < curStage.id).collect(Collectors.toList()));
 	}
 	
 	public static Stage getNextStage() {

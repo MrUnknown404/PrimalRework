@@ -11,6 +11,7 @@ import mrunknown404.primalrework.network.packets.toclient.PSyncQuestState;
 import mrunknown404.primalrework.network.packets.toserver.PQuestClaimRewards;
 import mrunknown404.primalrework.quests.requirements.QuestRequirement;
 import mrunknown404.primalrework.stage.Stage;
+import mrunknown404.primalrework.utils.Logger;
 import mrunknown404.primalrework.utils.helpers.WordH;
 import mrunknown404.primalrework.world.savedata.WSDQuestStates;
 import mrunknown404.primalrework.world.savedata.WSDStage;
@@ -45,11 +46,11 @@ public class QuestState implements IStageProvider {
 	
 	public void finishQuest(ServerWorld world, @Nullable PlayerEntity player) {
 		if (quest.isRoot) {
-			System.out.println("Root quest '" + quest.getName() + "' has been finished!");
+			Logger.info("Root quest '" + quest.getName() + "' has been finished!");
 		} else if (player != null) {
-			System.out.println(player.getDisplayName().getString() + " has finished the quest '" + quest.getName() + "'!");
+			Logger.info(player.getDisplayName().getString() + " has finished the quest '" + quest.getName() + "'!");
 		} else {
-			System.out.println("Someone has finished the quest '" + quest.getName() + "'!");
+			Logger.info("Someone has finished the quest '" + quest.getName() + "'!");
 		}
 		
 		StringTextComponent space = WordH.space();
@@ -72,9 +73,9 @@ public class QuestState implements IStageProvider {
 		if (quest.isEnd) {
 			if (quest.getStage().id <= WSDStage.getStage().id) {
 				WSDStage.setStage(world.getServer(), InitStages.getNextStage());
-				System.out.println("The world has advanced to the next stage!");
+				Logger.info("The world has advanced to the next stage!");
 			} else {
-				System.err.println("Finished an end quest that should progress to the next stage but we're already there");
+				Logger.warn("Finished an end quest that should progress to the next stage but we're already there");
 			}
 		}
 		
@@ -83,7 +84,7 @@ public class QuestState implements IStageProvider {
 	}
 	
 	public void forgetQuest(ServerWorld world) {
-		System.out.println("Quest '" + quest.getName() + "' was forgotten!");
+		Logger.info("Quest '" + quest.getName() + "' was forgotten!");
 		isFinished = false;
 		wasClaimed = false;
 		

@@ -1,13 +1,13 @@
 package mrunknown404.primalrework.inventory;
 
 import java.util.Arrays;
-import java.util.List;
 
 import mrunknown404.primalrework.init.InitRecipes;
 import mrunknown404.primalrework.items.StagedItem;
 import mrunknown404.primalrework.recipes.Ingredient;
 import mrunknown404.primalrework.recipes.StagedRecipe;
 import mrunknown404.primalrework.recipes.inputs.RICrafting3;
+import mrunknown404.primalrework.utils.enums.RecipeType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ItemStackHelper;
@@ -78,12 +78,13 @@ public class InvCraftingGrid implements IInventory {
 			return;
 		}
 		
-		List<Ingredient> ings = Arrays.asList(item0 == Items.AIR ? Ingredient.EMPTY : Ingredient.createUsingTags((StagedItem) item0),
-				item1 == Items.AIR ? Ingredient.EMPTY : Ingredient.createUsingTags((StagedItem) item1), Ingredient.EMPTY,
-				item2 == Items.AIR ? Ingredient.EMPTY : Ingredient.createUsingTags((StagedItem) item2),
-				item3 == Items.AIR ? Ingredient.EMPTY : Ingredient.createUsingTags((StagedItem) item3), Ingredient.EMPTY, Ingredient.EMPTY, Ingredient.EMPTY, Ingredient.EMPTY);
+		recipe = InitRecipes.getRecipeForInput(RecipeType.CRAFTING_3,
+				RICrafting3.fromInventory(Arrays.asList(item0 == Items.AIR ? Ingredient.EMPTY : Ingredient.createUsingTags((StagedItem) item0),
+						item1 == Items.AIR ? Ingredient.EMPTY : Ingredient.createUsingTags((StagedItem) item1), Ingredient.EMPTY,
+						item2 == Items.AIR ? Ingredient.EMPTY : Ingredient.createUsingTags((StagedItem) item2),
+						item3 == Items.AIR ? Ingredient.EMPTY : Ingredient.createUsingTags((StagedItem) item3), Ingredient.EMPTY, Ingredient.EMPTY, Ingredient.EMPTY,
+						Ingredient.EMPTY)));
 		
-		recipe = InitRecipes.getRecipeForInput(RICrafting3.fromInventory(ings));
 		ItemStack stack = recipe == null ? ItemStack.EMPTY : recipe.getOutputCopy();
 		result.setItem(0, stack);
 	}

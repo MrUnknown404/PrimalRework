@@ -5,9 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
-import java.util.function.Supplier;
 
-import mrunknown404.primalrework.utils.Pair;
 import mrunknown404.primalrework.utils.helpers.ColorH;
 import mrunknown404.primalrework.world.biome.PRBiome;
 import net.minecraft.world.biome.Biome;
@@ -30,10 +28,6 @@ public class InitBiomes {
 	public static final RegistryObject<Biome> OCEAN = InitRegistry.biome("ocean",
 			new PRBiome(() -> InitConfiguredSurfaceBuilders.OCEAN, 30, BiomeType.WARM, Category.OCEAN, -1.3f, 0.3f, 1, 1), () -> FeatureMap.withDefaults());
 	
-	public static Pair<Decoration, Supplier<ConfiguredFeature<?, ?>>> tree(Supplier<ConfiguredFeature<?, ?>> feature) {
-		return Pair.of(Decoration.VEGETAL_DECORATION, feature);
-	}
-	
 	public static class FeatureMap {
 		private final Map<Decoration, List<ConfiguredFeature<?, ?>>> map = new HashMap<Decoration, List<ConfiguredFeature<?, ?>>>();
 		
@@ -49,11 +43,11 @@ public class InitBiomes {
 		}
 		
 		public void addFeaturesToBiome(BiConsumer<Decoration, ConfiguredFeature<?, ?>> object) {
-			map.forEach((dec, list) -> list.forEach((feat) -> object.accept(dec, feat)));
+			map.forEach((dec, list) -> list.forEach(feat -> object.accept(dec, feat)));
 		}
 		
 		public FeatureMap add(Decoration decoration, ConfiguredFeature<?, ?> feature) {
-			map.computeIfAbsent(decoration, (d) -> new ArrayList<ConfiguredFeature<?, ?>>()).add(feature);
+			map.computeIfAbsent(decoration, d -> new ArrayList<ConfiguredFeature<?, ?>>()).add(feature);
 			return this;
 		}
 		

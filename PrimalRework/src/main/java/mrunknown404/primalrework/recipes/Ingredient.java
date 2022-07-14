@@ -3,6 +3,7 @@ package mrunknown404.primalrework.recipes;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import mrunknown404.primalrework.init.InitStagedTags;
 import mrunknown404.primalrework.items.StagedItem;
@@ -18,7 +19,7 @@ public class Ingredient implements IIngredientProvider {
 	private final List<StagedTag> tags;
 	private final boolean isEmpty;
 	
-	private Cache<Stage, List<StagedItem>> itemsCache = new Cache<Stage, List<StagedItem>>();
+	private Cache<Stage, List<StagedItem>> itemsCache = Cache.create();
 	
 	private Ingredient(StagedItem item, List<StagedTag> tags) {
 		this.item = item;
@@ -59,24 +60,18 @@ public class Ingredient implements IIngredientProvider {
 	}
 	
 	public List<StagedItem> getStagedItems() {
-		if (itemsCache.is(WSDStage.getStage())) {
-			return itemsCache.get();
-		}
-		
-		List<StagedItem> items = new ArrayList<StagedItem>();
-		if (item != null) {
-			items.add(item);
-		}
-		if (!tags.isEmpty()) {
-			for (StagedTag tag : tags) {
-				for (StagedItem item : tag.getItemsWithCurrentStage()) {
-					items.add(item);
-				}
+		return itemsCache.computeIfAbsent(WSDStage.getStage(), () -> {
+			List<StagedItem> items = new ArrayList<StagedItem>();
+			if (item != null) {
+				items.add(item);
 			}
-		}
-		
-		itemsCache.set(WSDStage.getStage(), items);
-		return itemsCache.get();
+			
+			if (!tags.isEmpty()) {
+				items.addAll(tags.stream().flatMap(tag -> tag.getItemsWithCurrentStage().stream()).collect(Collectors.toList()));
+			}
+			
+			return items;
+		});
 	}
 	
 	@Override

@@ -7,7 +7,7 @@ import java.util.List;
 
 import mrunknown404.primalrework.recipes.IIngredientProvider;
 import mrunknown404.primalrework.recipes.Ingredient;
-import mrunknown404.primalrework.utils.enums.RecipeType;
+import mrunknown404.primalrework.utils.Logger;
 
 public class RICrafting3 extends RecipeInput<RICrafting3> {
 	private final List<Ingredient> ingredients;
@@ -15,7 +15,6 @@ public class RICrafting3 extends RecipeInput<RICrafting3> {
 	public final int width, height;
 	
 	private RICrafting3(List<Ingredient> ingredients, boolean isShapeless) {
-		super(RecipeType.CRAFTING_3);
 		this.ingredients = ingredients;
 		this.isShapeless = isShapeless;
 		
@@ -147,10 +146,10 @@ public class RICrafting3 extends RecipeInput<RICrafting3> {
 	
 	public static RICrafting3 fromInventory(List<Ingredient> i) {
 		if (i.size() > 9) {
-			System.out.println("Tried to feed in too much ingredients");
+			Logger.warn("Tried to feed in too much ingredients");
 			return null;
 		} else if (i.size() < 9) {
-			System.out.println("Tried to feed in too little ingredients");
+			Logger.warn("Tried to feed in too little ingredients");
 			return null;
 		}
 		
@@ -293,10 +292,10 @@ public class RICrafting3 extends RecipeInput<RICrafting3> {
 		
 		public RICrafting3 set(IIngredientProvider... i) {
 			if (i.length > 9) {
-				System.out.println("Tried to feed in too much ingredients");
+				Logger.warn("Tried to feed in too much ingredients");
 				return null;
 			} else if (i.length == 0) {
-				System.out.println("Tried to feed in too little ingredients");
+				Logger.warn("Tried to feed in too little ingredients");
 				return null;
 			}
 			
@@ -308,10 +307,10 @@ public class RICrafting3 extends RecipeInput<RICrafting3> {
 		
 		public RICrafting3 set(IIngredientProvider i, int amount) {
 			if (amount > 10) {
-				System.out.println("Tried to feed in too much ingredients");
+				Logger.warn("Tried to feed in too much ingredients");
 				return null;
 			} else if (amount <= 0) {
-				System.out.println("Tried to feed in too little ingredients");
+				Logger.warn("Tried to feed in too little ingredients");
 				return null;
 			}
 			

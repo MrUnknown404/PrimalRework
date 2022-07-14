@@ -35,11 +35,8 @@ public class PRBiome {
 		b.temperatureAdjustment(tempMod);
 		b.precipitation(rainType);
 		
-		BiomeGenerationSettings.Builder bgs = new BiomeGenerationSettings.Builder();
 		MobSpawnInfo msi = new MobSpawnInfo.Builder().setPlayerCanSpawn().build();
 		BiomeAmbience.Builder ba = new BiomeAmbience.Builder();
-		
-		bgs.surfaceBuilder(surface);
 		
 		//ba.ambientAdditionsSound(new SoundAdditionsAmbience(SoundEvents.ANVIL_PLACE, 1));
 		//ba.ambientLoopSound(SoundEvents.ANVIL_PLACE);
@@ -56,7 +53,7 @@ public class PRBiome {
 		ba.waterColor(waterColor);
 		ba.waterFogColor(waterFogColor);
 		
-		b.generationSettings(bgs.build());
+		b.generationSettings(new BiomeGenerationSettings.Builder().surfaceBuilder(surface).build());
 		b.mobSpawnSettings(msi);
 		b.specialEffects(ba.build());
 		this.biome = b.build();

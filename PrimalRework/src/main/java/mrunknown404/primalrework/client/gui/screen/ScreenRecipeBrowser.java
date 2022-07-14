@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.lwjgl.glfw.GLFW;
 
@@ -14,7 +15,6 @@ import mrunknown404.primalrework.client.gui.recipedisplays.RecipeDisplay;
 import mrunknown404.primalrework.init.InitFuels;
 import mrunknown404.primalrework.items.StagedItem;
 import mrunknown404.primalrework.recipes.StagedRecipe;
-import mrunknown404.primalrework.utils.Pair;
 import mrunknown404.primalrework.utils.enums.FuelType;
 import mrunknown404.primalrework.utils.enums.ICraftingInput;
 import mrunknown404.primalrework.utils.enums.RecipeType;
@@ -43,18 +43,19 @@ public class ScreenRecipeBrowser extends Screen {
 	private Button leftButton, rightButton;
 	private ITextComponent recipeName, pageCount;
 	
-	public ScreenRecipeBrowser(ContainerScreen<?> lastScreen, Map<RecipeType, List<StagedRecipe<?, ?>>> recipes, Map<FuelType, Pair<StagedItem, Integer>> fuels,
-			StagedItem output) {
+	public ScreenRecipeBrowser(ContainerScreen<?> lastScreen, Map<RecipeType, List<StagedRecipe<?, ?>>> recipes, Map<FuelType, StagedItem> fuels, StagedItem output) {
 		super(WordH.translate("screen.recipelist.title"));
 		this.lastScreen = lastScreen;
 		
 		if (recipes != null) {
-			recipes.entrySet().stream().forEach(e -> this.recipes.add(new Data(e.getKey(), RecipeDisplay.createFrom(e.getKey(), e.getValue(), output))));
+			this.recipes
+					.addAll(recipes.entrySet().stream().map(e -> new Data(e.getKey(), RecipeDisplay.createFrom(e.getKey(), e.getValue(), output))).collect(Collectors.toList()));
 		}
 		
 		if (fuels != null) {
-			fuels.entrySet().stream()
-					.forEach(e -> this.recipes.add(new Data(e.getKey(), RecipeDisplay.createFrom(e.getKey(), InitFuels.convertToRecipes(e.getKey(), e.getValue()), output))));
+			this.recipes.addAll(
+					fuels.entrySet().stream().map(e -> new Data(e.getKey(), RecipeDisplay.createFrom(e.getKey(), InitFuels.convertToRecipes(e.getKey(), e.getValue()), output)))
+							.collect(Collectors.toList()));
 		}
 	}
 	

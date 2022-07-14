@@ -26,7 +26,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -45,7 +44,7 @@ public class PrimalRework {
 	public static final String MOD_ID = "primalrework";
 	public static final boolean IS_DEBUG = true;
 	
-	public static final NetworkH NETWORK = NetworkH.create(PrimalRework.MOD_ID, "main", "1", (n) -> {
+	public static final NetworkH NETWORK = NetworkH.create(PrimalRework.MOD_ID, "main", "1", n -> {
 		n.registerPacket(POpenInventory.class, NetworkDirection.PLAY_TO_SERVER);
 		n.registerPacket(PQuestClaimRewards.class, NetworkDirection.PLAY_TO_SERVER);
 		n.registerPacket(PSyncAllQuests.class, NetworkDirection.PLAY_TO_CLIENT);
@@ -71,8 +70,12 @@ public class PrimalRework {
 		MinecraftForge.EVENT_BUS.register(new MiscEvents());
 		MinecraftForge.EVENT_BUS.register(new LeafEvents());
 		MinecraftForge.EVENT_BUS.register(new QuestEvents());
-		MinecraftForge.EVENT_BUS.register(InitRegistry.class);
-		MinecraftForge.EVENT_BUS.register(this);
+		MinecraftForge.EVENT_BUS.addListener(PRRegistries::biomeLoad);
+		MinecraftForge.EVENT_BUS.addListener((RegisterCommandsEvent e) -> {
+			CommandDispatcher<CommandSource> cmd = e.getDispatcher();
+			CommandStage.register(cmd);
+			CommandQuest.register(cmd);
+		});
 		
 		InitRegistry.preSetup();
 		DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> InitClient::preSetup);
@@ -81,13 +84,6 @@ public class PrimalRework {
 		bus.addListener((FMLConstructModEvent e) -> PRRegistries.setup());
 		bus.addListener((FMLCommonSetupEvent e) -> InitRegistry.setup());
 		bus.addListener((FMLClientSetupEvent e) -> InitClient.setup());
-		bus.addListener((FMLLoadCompleteEvent e) -> System.err.println("#-# Finished loading PrimalRework! #-#"));
-	}
-	
-	@SubscribeEvent
-	public void onRegisterCommandEvent(RegisterCommandsEvent e) {
-		CommandDispatcher<CommandSource> commandDispatcher = e.getDispatcher();
-		CommandStage.register(commandDispatcher);
-		CommandQuest.register(commandDispatcher);
+		bus.addListener((FMLLoadCompleteEvent e) -> Logger.multiLine("#-# Finished loading PrimalRework! #-#"));
 	}
 }

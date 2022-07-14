@@ -18,14 +18,10 @@ public class InitStagedTags {
 					InitBlocks.STRIPPED_OAK_LOG, InitBlocks.STRIPPED_SPRUCE_LOG, InitBlocks.STRIPPED_BIRCH_LOG, InitBlocks.STRIPPED_JUNGLE_LOG, InitBlocks.STRIPPED_ACACIA_LOG,
 					InitBlocks.STRIPPED_DARK_OAK_LOG));
 	
-	private static final DoubleCache<StagedItem, Stage, List<StagedTag>> tagCache = DoubleCache.and();
+	private static final DoubleCache<StagedItem, Stage, List<StagedTag>> TAG_CACHE = DoubleCache.and();
 	
 	public static List<StagedTag> getItemsTags(ISIProvider item) {
-		if (tagCache.is(item.getStagedItem(), WSDStage.getStage())) {
-			return tagCache.get();
-		}
-		
-		return tagCache.set(item.getStagedItem(), WSDStage.getStage(),
-				PRRegistries.STAGED_TAGS.getValues().stream().filter(tag -> tag.getItemsWithCurrentStage().contains(item)).collect(Collectors.toList()));
+		return TAG_CACHE.computeIfAbsent(item.getStagedItem(), WSDStage.getStage(),
+				() -> PRRegistries.STAGED_TAGS.getValues().stream().filter(tag -> tag.getItemsWithCurrentStage().contains(item)).collect(Collectors.toList()));
 	}
 }

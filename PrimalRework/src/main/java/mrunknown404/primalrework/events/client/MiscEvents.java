@@ -10,6 +10,7 @@ import mrunknown404.primalrework.client.gui.screen.ScreenMainMenu;
 import mrunknown404.primalrework.client.gui.screen.ScreenNonSupportedMods;
 import mrunknown404.primalrework.client.gui.screen.ScreenPause;
 import mrunknown404.primalrework.network.packets.toserver.POpenInventory;
+import mrunknown404.primalrework.utils.Logger;
 import net.minecraft.client.AnvilConverterException;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.CreateWorldScreen;
@@ -44,17 +45,19 @@ public class MiscEvents {
 			if (!checkNonSupportedMods) {
 				checkNonSupportedMods = true;
 				List<String> modids = new ArrayList<String>();
+				List<String> logs = new ArrayList<String>();
 				
 				ModList.get().forEachModContainer((modid, instance) -> {
 					if (modid.equalsIgnoreCase("minecraft") || modid.equalsIgnoreCase("forge")) {
 						return;
 					} else if (!instance.getMod().getClass().isAnnotationPresent(PrimalMod.class)) {
 						modids.add(modid);
-						System.out.println("Mod '" + modid + "' is not supported!");
+						logs.add("Mod '" + modid + "' is not supported!");
 					}
 				});
 				
 				if (!modids.isEmpty()) {
+					Logger.multiLine(logs);
 					e.setGui(new ScreenNonSupportedMods(modids));
 					return;
 				}

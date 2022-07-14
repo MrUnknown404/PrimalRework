@@ -3,23 +3,18 @@ package mrunknown404.primalrework.world.gen.layer.transformer;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import mrunknown404.primalrework.init.InitRegistry;
+import mrunknown404.primalrework.api.registry.PRRegistries;
 import mrunknown404.primalrework.utils.Pair;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.INoiseRandom;
 import net.minecraft.world.gen.layer.traits.IAreaTransformer0;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistry;
 
 public class PRAreaTransformer implements IAreaTransformer0 {
-	private final BiomeList biomes;
-	private final ForgeRegistry<Biome> biomeRegistry;
-	
-	public PRAreaTransformer(List<Biome> biomes, ForgeRegistry<Biome> biomeRegistry) {
-		this.biomes = new BiomeList(biomes.stream().map((b) -> Pair.of(b, InitRegistry.getBiome(b.getRegistryName().toString()).weight)).collect(Collectors.toList()));
-		this.biomeRegistry = biomeRegistry;
-	}
+	private final BiomeList biomes = new BiomeList();
+	private final ForgeRegistry<Biome> biomeRegistry = (ForgeRegistry<Biome>) ForgeRegistries.BIOMES;
 	
 	@Override
 	public int applyPixel(INoiseRandom rand, int x, int z) {
@@ -30,22 +25,17 @@ public class PRAreaTransformer implements IAreaTransformer0 {
 		private final List<Pair<Biome, Integer>> list = new ArrayList<Pair<Biome, Integer>>();
 		private int totalWeight;
 		
-		private BiomeList(List<Pair<Biome, Integer>> list) {
-			for (Pair<Biome, Integer> entry : list) {
-				add(entry.getL(), entry.getR());
-			}
-		}
-		
-		private void add(Biome t, int weight) {
-			list.add(Pair.of(t, weight));
-			totalWeight += weight;
+		private BiomeList() {
+			PRRegistries.getBiomes().forEach(b -> {
+				list.add(Pair.of(b.biome, b.weight));
+				totalWeight += b.weight;
+			});
 		}
 		
 		private Biome get(INoiseRandom random) {
 			int idx = 0;
 			for (double r = random.nextRandom(totalWeight); idx < list.size() - 1; idx++) {
-				r -= list.get(idx).getR();
-				if (r <= 0) {
+				if ((r -= list.get(idx).getR()) <= 0) {
 					break;
 				}
 			}

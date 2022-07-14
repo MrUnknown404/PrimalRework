@@ -12,6 +12,7 @@ import mrunknown404.primalrework.network.packets.toclient.PSyncPrimalCraftingTab
 import mrunknown404.primalrework.recipes.Ingredient;
 import mrunknown404.primalrework.recipes.StagedRecipe;
 import mrunknown404.primalrework.recipes.inputs.RICrafting3;
+import mrunknown404.primalrework.utils.enums.RecipeType;
 import mrunknown404.primalrework.utils.helpers.WordH;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -38,7 +39,7 @@ public class TEICraftingTable extends TEInventory {
 			ingredients.add(item instanceof StagedItem ? Ingredient.createUsingTags((StagedItem) item) : Ingredient.EMPTY);
 		}
 		
-		StagedRecipe<?, ?> rec = InitRecipes.getRecipeForInput(RICrafting3.fromInventory(ingredients));
+		StagedRecipe<?, ?> rec = InitRecipes.getRecipeForInput(RecipeType.CRAFTING_3, RICrafting3.fromInventory(ingredients));
 		ItemStack stack = rec == null ? ItemStack.EMPTY : rec.getOutputCopy();
 		
 		if (!lastStack.equals(stack, false)) {
@@ -60,7 +61,6 @@ public class TEICraftingTable extends TEInventory {
 	
 	@Override
 	protected void loadNBT(BlockState state, CompoundNBT nbt) {
-		
 	}
 	
 	@Override

@@ -43,7 +43,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.gui.GuiUtils;
 
 public class HarvestDisplayEvents {
-	private DoubleCache<Block, Item, List<ITextComponent>> blockCache = DoubleCache.and();
+	private static final DoubleCache<Block, Item, List<ITextComponent>> BLOCK_CACHE = DoubleCache.and();
 	
 	private static final IFormattableTextComponent YES_MINE = WordH.string("\u2714 ").withStyle(TextFormatting.GREEN),
 			NO_MINE = WordH.string("\u274C ").withStyle(TextFormatting.RED), ICON_SPACE = WordH.string("    ");
@@ -78,8 +78,8 @@ public class HarvestDisplayEvents {
 		
 		List<ITextComponent> texts = new ArrayList<ITextComponent>();
 		
-		if (blockCache.is(b, item)) {
-			texts = blockCache.get();
+		if (BLOCK_CACHE.is(b, item)) {
+			texts = BLOCK_CACHE.get();
 		} else if (b != Blocks.AIR) {
 			List<HarvestInfo> infos = BlockH.getBlockHarvestInfos(b);
 			
@@ -114,7 +114,7 @@ public class HarvestDisplayEvents {
 				}
 			}
 			
-			blockCache.set(b, item, texts);
+			BLOCK_CACHE.set(b, item, texts);
 		}
 		
 		if (!texts.isEmpty()) {
