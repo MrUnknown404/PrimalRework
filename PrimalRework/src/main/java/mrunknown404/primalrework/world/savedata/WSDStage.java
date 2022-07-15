@@ -10,12 +10,12 @@ import net.minecraft.world.storage.WorldSavedData;
 
 public class WSDStage extends WorldSavedData {
 	public static final String NAME = PrimalRework.MOD_ID + "_stage";
-	private static Stage stage = InitStages.STAGE_0.get();
+	private static Stage stage = InitStages.STAGE_BEFORE.get();
 	
 	public WSDStage() {
 		super(NAME);
 		
-		stage = InitStages.STAGE_0.get();
+		stage = InitStages.STAGE_BEFORE.get();
 	}
 	
 	public static void setStage(MinecraftServer server, Stage stage) {

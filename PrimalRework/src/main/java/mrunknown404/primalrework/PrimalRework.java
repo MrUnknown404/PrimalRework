@@ -53,7 +53,13 @@ public class PrimalRework {
 		n.registerPacket(PSyncStage.class, NetworkDirection.PLAY_TO_CLIENT);
 	});
 	
-	//TODO setup registries or something for quests,recipes,fuels
+	/* Ideas:
+	 * Container for holding parts. kinda like a storage drawer but with a gui and multiple slots
+	 * rotation energy -> electricity -> rotation energy
+	 */
+	
+	// TODO setup registries or something for quests,recipes,fuels
+	// TODO remove weird stack sizes
 	
 	/* TODO list of stuff to do progression-wise
 	 * after breaking log should work on getting a primal crafting table. which unlocks flint tools.

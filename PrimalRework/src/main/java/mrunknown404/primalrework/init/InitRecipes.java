@@ -39,26 +39,34 @@ public class InitRecipes {
 		}
 		
 		//@formatter:off
-		Stage stage = InitStages.STAGE_0.get();
-		addRecipe(new SRCrafting3(stage, InitItems.CLAY_SHOVEL,     1, RICrafting3.shaped().set1x2(InitItems.CLAY_BALL, InitItems.STICK)));
-		addRecipe(new SRCrafting3(stage, InitItems.CLAY_AXE,        1, RICrafting3.shaped().set2x2(InitItems.CLAY_BALL, InitItems.CLAY_BALL, null, InitItems.STICK)));
-		addRecipe(new SRCrafting3(stage, InitItems.PLANT_ROPE,      1, RICrafting3.shapeless().set(InitItems.PLANT_FIBER, 3)));
-		addRecipe(new SRCrafting3(stage, InitItems.PLANT_MESH,      1, RICrafting3.shaped().set2x2(InitItems.STICK, InitItems.PLANT_FIBER, InitItems.PLANT_FIBER, InitItems.STICK)));
-		addRecipe(new SRCrafting3(stage, InitBlocks.THATCH,         1, RICrafting3.shaped().set2x2(InitItems.PLANT_FIBER)));
-		stage = InitStages.STAGE_1.get();
-		addRecipe(new SRCrafting3(stage, InitBlocks.CRAFTING_TABLE, 1, RICrafting3.shaped().set2x2(InitItems.KNAPPED_FLINT, InitItems.FLINT_POINT, InitStagedTags.LOGS.get(), InitStagedTags.LOGS.get())));
-		addRecipe(new SRCrafting3(stage, InitItems.FLINT_PICKAXE,   1, RICrafting3.shaped().set3x3(InitItems.FLINT_POINT, InitItems.KNAPPED_FLINT, null, InitItems.PLANT_ROPE, InitItems.STICK, null, null, InitItems.STICK, null)));
-		addRecipe(new SRCrafting3(stage, InitItems.FLINT_SHOVEL,    1, RICrafting3.shaped().set3x3(null, InitItems.KNAPPED_FLINT, null, InitItems.PLANT_ROPE, InitItems.STICK, null, null, InitItems.STICK, null)));
-		addRecipe(new SRCrafting3(stage, InitItems.FLINT_AXE,       1, RICrafting3.shaped().set3x3(InitItems.KNAPPED_FLINT, InitItems.KNAPPED_FLINT, null, InitItems.PLANT_ROPE, InitItems.STICK, null, null, InitItems.STICK, null)));
-		addRecipe(new SRCrafting3(stage, InitItems.FLINT_HOE,       1, RICrafting3.shaped().set3x3(InitItems.FLINT_POINT, InitItems.FLINT_POINT, null, InitItems.PLANT_ROPE, InitItems.STICK, null, null, InitItems.STICK, null)));
-		addRecipe(new SRCrafting3(stage, InitItems.FLINT_KNIFE,     1, RICrafting3.shaped().set2x2(null, InitItems.FLINT_POINT, InitItems.PLANT_ROPE, InitItems.STICK)));
-		addRecipe(new SRCrafting3(stage, InitItems.FLINT_SHEARS,    1, RICrafting3.shaped().set3x3(InitItems.FLINT_POINT, null, InitItems.FLINT_POINT, InitItems.FLINT_POINT, InitItems.PLANT_ROPE, InitItems.FLINT_POINT, null, InitItems.STICK, null)));
-		addRecipe(new SRCrafting3(stage, InitItems.BONE_SWORD,      1, RICrafting3.shaped().set2x3(null, InitItems.BONE_SHARD, null, InitItems.BONE_SHARD, InitItems.PLANT_ROPE, InitItems.STICK)));
+		Stage stage = InitStages.STAGE_BEFORE.get();
+		addCrafting3(new SRCrafting3(stage, InitItems.CLAY_SHOVEL,     1, RICrafting3.shaped().set1x2(InitItems.CLAY_BALL, InitItems.STICK)));
+		addCrafting3(new SRCrafting3(stage, InitItems.CLAY_AXE,        1, RICrafting3.shaped().set2x2(InitItems.CLAY_BALL, InitItems.CLAY_BALL, null, InitItems.STICK)));
+		addCrafting3(new SRCrafting3(stage, InitItems.PLANT_ROPE,      1, RICrafting3.shapeless().set(InitItems.PLANT_FIBER, 3)));
+		addCrafting3(new SRCrafting3(stage, InitItems.PLANT_MESH,      1, RICrafting3.shaped().set2x2(InitItems.STICK, InitItems.PLANT_FIBER, InitItems.PLANT_FIBER, InitItems.STICK)));
+		addCrafting3(new SRCrafting3(stage, InitBlocks.THATCH,         1, RICrafting3.shaped().set2x2(InitItems.PLANT_FIBER)));
+		stage = InitStages.STAGE_STONE.get();
+		addCrafting3(new SRCrafting3(stage, InitBlocks.CRAFTING_TABLE, 1, RICrafting3.shaped().set2x2(InitItems.KNAPPED_FLINT, InitItems.FLINT_POINT, InitStagedTags.LOGS.get(), InitStagedTags.LOGS.get())));
+		addCrafting3(new SRCrafting3(stage, InitItems.FLINT_PICKAXE,   1, RICrafting3.shaped().set3x3(InitItems.FLINT_POINT, InitItems.KNAPPED_FLINT, null, InitItems.PLANT_ROPE, InitItems.STICK, null, null, InitItems.STICK, null)));
+		addCrafting3(new SRCrafting3(stage, InitItems.FLINT_SHOVEL,    1, RICrafting3.shaped().set3x3(null, InitItems.KNAPPED_FLINT, null, InitItems.PLANT_ROPE, InitItems.STICK, null, null, InitItems.STICK, null)));
+		addCrafting3(new SRCrafting3(stage, InitItems.FLINT_AXE,       1, RICrafting3.shaped().set3x3(InitItems.KNAPPED_FLINT, InitItems.KNAPPED_FLINT, null, InitItems.PLANT_ROPE, InitItems.STICK, null, null, InitItems.STICK, null)));
+		addCrafting3(new SRCrafting3(stage, InitItems.FLINT_HOE,       1, RICrafting3.shaped().set3x3(InitItems.FLINT_POINT, InitItems.FLINT_POINT, null, InitItems.PLANT_ROPE, InitItems.STICK, null, null, InitItems.STICK, null)));
+		addCrafting3(new SRCrafting3(stage, InitItems.FLINT_KNIFE,     1, RICrafting3.shaped().set2x2(null, InitItems.FLINT_POINT, InitItems.PLANT_ROPE, InitItems.STICK)));
+		addCrafting3(new SRCrafting3(stage, InitItems.FLINT_SHEARS,    1, RICrafting3.shaped().set3x3(InitItems.FLINT_POINT, null, InitItems.FLINT_POINT, InitItems.FLINT_POINT, InitItems.PLANT_ROPE, InitItems.FLINT_POINT, null, InitItems.STICK, null)));
+		addCrafting3(new SRCrafting3(stage, InitItems.BONE_SWORD,      1, RICrafting3.shaped().set2x3(null, InitItems.BONE_SHARD, null, InitItems.BONE_SHARD, InitItems.PLANT_ROPE, InitItems.STICK)));
 		//@formatter:on
 	}
 	
-	public static void addRecipe(StagedRecipe<?, ?> recipe) {
-		RECIPES.get(recipe.recipeType).add(recipe);
+	public static void addRecipe(RecipeType type, StagedRecipe<?, ?> recipe) {
+		if (type.supportsClass != recipe.getClass()) {
+			throw new IllegalArgumentException("RecipeType: "+type+" does not support Class: " + recipe.getClass());
+		}
+		
+		RECIPES.get(type).add(recipe);
+	}
+	
+	public static void addCrafting3(SRCrafting3 recipe) {
+		addRecipe(RecipeType.CRAFTING_3, recipe);
 	}
 	
 	public static StagedRecipe<?, ?> getRecipeForInput(RecipeType recipeType, RecipeInput<?> input) {

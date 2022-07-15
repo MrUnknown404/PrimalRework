@@ -48,7 +48,7 @@ public class ScreenQuestMenu extends Screen {
 		TREE_MAP.clear();
 		questInfo = null;
 		scale = 1;
-		selectedTab = InitQuests.TAB_STAGE_0;
+		selectedTab = InitQuests.TAB_STAGE_COPPER;
 		InitQuests.getTabs().stream().forEach(t -> TREE_MAP.put(t, new GuiQuestTree(this, minecraft, t)));
 	}
 	

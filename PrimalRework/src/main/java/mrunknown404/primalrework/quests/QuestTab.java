@@ -2,8 +2,8 @@ package mrunknown404.primalrework.quests;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Supplier;
 
+import mrunknown404.primalrework.api.registry.PRRegistryObject;
 import mrunknown404.primalrework.api.utils.ISIProvider;
 import mrunknown404.primalrework.api.utils.IStageProvider;
 import mrunknown404.primalrework.stage.Stage;
@@ -14,11 +14,11 @@ public class QuestTab implements IStageProvider {
 	private final List<Quest> quests = new ArrayList<Quest>();
 	private Quest root;
 	
-	private final Supplier<Stage> stage;
+	private final Stage stage;
 	private final ItemStack itemIcon;
 	
-	public QuestTab(Supplier<Stage> stage, ISIProvider itemIcon) {
-		this.stage = stage;
+	public QuestTab(PRRegistryObject<Stage> stage, ISIProvider itemIcon) {
+		this.stage = stage.get();
 		this.itemIcon = new ItemStack(itemIcon.getStagedItem());
 	}
 	
@@ -43,7 +43,7 @@ public class QuestTab implements IStageProvider {
 	}
 	
 	public String getName() {
-		return stage.get().getName();
+		return stage.getName();
 	}
 	
 	public String getDesc() {
@@ -52,7 +52,7 @@ public class QuestTab implements IStageProvider {
 	
 	@Override
 	public Stage getStage() {
-		return stage.get();
+		return stage;
 	}
 	
 	public ItemStack getIcon() {

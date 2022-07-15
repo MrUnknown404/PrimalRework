@@ -34,7 +34,7 @@ public class SBGroundItem extends StagedBlock implements IWaterLoggable {
 	private static final VoxelShape SHAPE = box(3, 0, 3, 13, 1, 13);
 	
 	public SBGroundItem(UniqueRawBlockInfo info, ISIProvider dropInstead) {
-		super(InitStages.STAGE_0, 64, InitItemGroups.BLOCKS, BlockInfo.of(info), BlockStateType.random_direction, BlockModelType.none,
+		super(InitStages.STAGE_BEFORE, 64, InitItemGroups.BLOCKS, BlockInfo.of(info), BlockStateType.random_direction, BlockModelType.none,
 				dropInstead == null ? HarvestInfo.HAND : new HarvestInfo(ToolType.NONE, InitToolMaterials.HAND, DropInfo.of(dropInstead)));
 		registerDefaultState(defaultBlockState().setValue(WATERLOGGED, false));
 	}

@@ -42,7 +42,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 
 public class InitRegistry {
-	private static final DeferredRegister<Stage> STAGES = DeferredRegister.create(PRRegistries.STAGES, PrimalRework.MOD_ID);
 	private static final DeferredRegister<StagedTag> STAGED_TAGS = DeferredRegister.create(PRRegistries.STAGED_TAGS, PrimalRework.MOD_ID);
 	
 	private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, PrimalRework.MOD_ID);
@@ -54,14 +53,14 @@ public class InitRegistry {
 	private static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, PrimalRework.MOD_ID);
 	private static final DeferredRegister<SurfaceBuilder<?>> SURFACE_BUILDERS = DeferredRegister.create(ForgeRegistries.SURFACE_BUILDERS, PrimalRework.MOD_ID);
 	
+	private static final PRRegistry<Stage> STAGES = new PRRegistry<Stage>(PrimalRework.MOD_ID, Stage.class, InitStages.class);
 	private static final PRRegistry<Metal> METALS = new PRRegistry<Metal>(PrimalRework.MOD_ID, Metal.class, InitMetals.class);
 	private static final PRRegistry<ToolMaterial> TOOL_MATERIALS = new PRRegistry<ToolMaterial>(PrimalRework.MOD_ID, ToolMaterial.class, InitToolMaterials.class);
 	
 	public static void preSetup() {
-		PRRegistries.addRegistries(PrimalRework.MOD_ID, METALS, TOOL_MATERIALS);
+		PRRegistries.addRegistries(PrimalRework.MOD_ID, STAGES, METALS, TOOL_MATERIALS);
 		
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-		bus.addGenericListener(Stage.class, (RegistryEvent.Register<Stage> e) -> loadClass(InitStages.class));
 		bus.addGenericListener(StagedTag.class, (RegistryEvent.Register<StagedTag> e) -> loadClass(InitStagedTags.class));
 		bus.addGenericListener(Block.class, (RegistryEvent.Register<Block> e) -> loadClass(InitBlocks.class));
 		bus.addGenericListener(Item.class, (RegistryEvent.Register<Item> e) -> loadClass(InitItems.class));
@@ -72,7 +71,6 @@ public class InitRegistry {
 		bus.addGenericListener(Biome.class, (RegistryEvent.Register<Biome> e) -> loadClass(InitBiomes.class));
 		bus.addGenericListener(SurfaceBuilder.class, (RegistryEvent.Register<SurfaceBuilder<?>> e) -> loadClass(InitSurfaceBuilders.class));
 		
-		STAGES.register(bus);
 		STAGED_TAGS.register(bus);
 		BLOCKS.register(bus);
 		ITEMS.register(bus);
@@ -87,10 +85,10 @@ public class InitRegistry {
 	}
 	
 	public static void setup() {
-		Logger.multiLine("Results of adding Forge registries", loaded(PRRegistries.STAGES, "Stages"), loaded(PRRegistries.STAGED_TAGS, "StagedTags"),
-				loaded(ForgeRegistries.BLOCKS, "Blocks"), loaded(ForgeRegistries.ITEMS, "Items"), loaded(ForgeRegistries.TILE_ENTITIES, "Tile Entity Types"),
-				loaded(ForgeRegistries.CONTAINERS, "Container Types"), loaded(ForgeRegistries.WORLD_TYPES, "World Types"), loaded(ForgeRegistries.FEATURES, "Features"),
-				loaded(ForgeRegistries.BIOMES, "Biomes"), loaded(ForgeRegistries.SURFACE_BUILDERS, "Surface Builders"));
+		Logger.multiLine("Results of adding Forge registries", loaded(PRRegistries.STAGED_TAGS, "StagedTags"), loaded(ForgeRegistries.BLOCKS, "Blocks"),
+				loaded(ForgeRegistries.ITEMS, "Items"), loaded(ForgeRegistries.TILE_ENTITIES, "Tile Entity Types"), loaded(ForgeRegistries.CONTAINERS, "Container Types"),
+				loaded(ForgeRegistries.WORLD_TYPES, "World Types"), loaded(ForgeRegistries.FEATURES, "Features"), loaded(ForgeRegistries.BIOMES, "Biomes"),
+				loaded(ForgeRegistries.SURFACE_BUILDERS, "Surface Builders"));
 		
 		InitStages.load();
 		InitRecipes.load();
@@ -116,7 +114,7 @@ public class InitRegistry {
 		}
 	}
 	
-	static RegistryObject<Stage> stage(String nameID, Supplier<Stage> o) {
+	static PRRegistryObject<Stage> stage(String nameID, Supplier<Stage> o) {
 		return STAGES.register(nameID, o);
 	}
 	

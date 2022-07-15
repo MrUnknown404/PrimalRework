@@ -3,7 +3,6 @@ package mrunknown404.primalrework.init;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Supplier;
 
 import mrunknown404.primalrework.api.registry.PRRegistries;
 import mrunknown404.primalrework.api.registry.PRRegistryObject;
@@ -32,54 +31,54 @@ public class InitItems {
 	//@formatter:off
 	
 	//MISC
-	public static final ROISIProvider<StagedItem> PLANT_FIBER = InitRegistry.item("plant_fiber", () -> new StagedItem(InitStages.STAGE_0));
-	public static final ROISIProvider<StagedItem> PLANT_ROPE = InitRegistry.item("plant_rope", () -> new StagedItem(InitStages.STAGE_0));
-	public static final ROISIProvider<StagedItem> KNAPPED_FLINT = InitRegistry.item("knapped_flint", () -> new StagedItem(InitStages.STAGE_0));
-	public static final ROISIProvider<StagedItem> FLINT_POINT = InitRegistry.item("flint_point", () -> new StagedItem(InitStages.STAGE_0));
-	public static final ROISIProvider<StagedItem> BONE_SHARD = InitRegistry.item("bone_shard", () -> new StagedItem(InitStages.STAGE_0));
-	public static final ROISIProvider<StagedItem> BARK = InitRegistry.item("bark", () -> new StagedItem(InitStages.STAGE_0));
-	public static final ROISIProvider<StagedItem> CLOTH = InitRegistry.item("cloth", () -> new StagedItem(InitStages.STAGE_1));
-	public static final ROISIProvider<StagedItem> OAK_PLANK = InitRegistry.item("oak_plank", () -> new StagedItem(InitStages.STAGE_1));
-	public static final ROISIProvider<StagedItem> SPRUCE_PLANK = InitRegistry.item("spruce_plank", () -> new StagedItem(InitStages.STAGE_1));
-	public static final ROISIProvider<StagedItem> BIRCH_PLANK = InitRegistry.item("birch_plank", () -> new StagedItem(InitStages.STAGE_1));
-	public static final ROISIProvider<StagedItem> JUNGLE_PLANK = InitRegistry.item("jungle_plank", () -> new StagedItem(InitStages.STAGE_1));
-	public static final ROISIProvider<StagedItem> DARK_OAK_PLANK = InitRegistry.item("dark_oak_plank", () -> new StagedItem(InitStages.STAGE_1));
-	public static final ROISIProvider<StagedItem> ACACIA_PLANK = InitRegistry.item("acacia_plank", () -> new StagedItem(InitStages.STAGE_1));
-	public static final ROISIProvider<StagedItem> SALT = InitRegistry.item("salt", () -> new StagedItem(InitStages.STAGE_0));
-	public static final ROISIProvider<StagedItem> ANIMAL_PELT = InitRegistry.item("animal_pelt", () -> new StagedItem(InitStages.STAGE_0));
-	public static final ROISIProvider<StagedItem> WET_HIDE = InitRegistry.item("wet_hide", () -> new StagedItem(InitStages.STAGE_1));
-	public static final ROISIProvider<StagedItem> RAW_HIDE = InitRegistry.item("raw_hide", () -> new StagedItem(InitStages.STAGE_1));
-	public static final ROISIProvider<StagedItem> CLEANED_HIDE = InitRegistry.item("cleaned_hide", () -> new StagedItem(InitStages.STAGE_1));
-	public static final ROISIProvider<StagedItem> SALTED_HIDE = InitRegistry.item("salted_hide", () -> new StagedItem(InitStages.STAGE_1));
-	public static final ROISIProvider<StagedItem> DRIED_HIDE = InitRegistry.item("dried_hide", () -> new StagedItem(InitStages.STAGE_1));
-	public static final ROISIProvider<StagedItem> WET_TANNED_HIDE = InitRegistry.item("wet_tanned_hide", () -> new StagedItem(InitStages.STAGE_1));
-	public static final ROISIProvider<StagedItem> DRY_TANNED_HIDE = InitRegistry.item("dry_tanned_hide", () -> new StagedItem(InitStages.STAGE_1));
-	public static final ROISIProvider<StagedItem> ROPE = InitRegistry.item("rope", () -> new StagedItem(InitStages.STAGE_1));
-	public static final ROISIProvider<StagedItem> LEATHER_STRIP = InitRegistry.item("leather_strip", () -> new StagedItem(InitStages.STAGE_1));
-	public static final ROISIProvider<StagedItem> BLANK_CAST = InitRegistry.item("blank_cast", () -> new StagedItem(InitStages.STAGE_2));
-	public static final ROISIProvider<StagedItem> ROCK = InitRegistry.item("rock", () -> new StagedItem(InitStages.STAGE_0));
-	public static final ROISIProvider<StagedItem> FLINT = InitRegistry.item("flint", () -> new StagedItem(InitStages.STAGE_0).useVanillaNamespace());
-	public static final ROISIProvider<StagedItem> STICK = InitRegistry.item("stick", () -> new StagedItem(InitStages.STAGE_0).useVanillaNamespace());
-	public static final ROISIProvider<StagedItem> CLAY_BALL = InitRegistry.item("clay_ball", () -> new StagedItem(InitStages.STAGE_0).useVanillaNamespace());
+	public static final ROISIProvider<StagedItem> PLANT_FIBER = InitRegistry.item("plant_fiber", () -> new StagedItem(InitStages.STAGE_BEFORE));
+	public static final ROISIProvider<StagedItem> PLANT_ROPE = InitRegistry.item("plant_rope", () -> new StagedItem(InitStages.STAGE_BEFORE));
+	public static final ROISIProvider<StagedItem> KNAPPED_FLINT = InitRegistry.item("knapped_flint", () -> new StagedItem(InitStages.STAGE_BEFORE));
+	public static final ROISIProvider<StagedItem> FLINT_POINT = InitRegistry.item("flint_point", () -> new StagedItem(InitStages.STAGE_BEFORE));
+	public static final ROISIProvider<StagedItem> BONE_SHARD = InitRegistry.item("bone_shard", () -> new StagedItem(InitStages.STAGE_BEFORE));
+	public static final ROISIProvider<StagedItem> BARK = InitRegistry.item("bark", () -> new StagedItem(InitStages.STAGE_BEFORE));
+	public static final ROISIProvider<StagedItem> CLOTH = InitRegistry.item("cloth", () -> new StagedItem(InitStages.STAGE_STONE));
+	public static final ROISIProvider<StagedItem> OAK_PLANK = InitRegistry.item("oak_plank", () -> new StagedItem(InitStages.STAGE_STONE));
+	public static final ROISIProvider<StagedItem> SPRUCE_PLANK = InitRegistry.item("spruce_plank", () -> new StagedItem(InitStages.STAGE_STONE));
+	public static final ROISIProvider<StagedItem> BIRCH_PLANK = InitRegistry.item("birch_plank", () -> new StagedItem(InitStages.STAGE_STONE));
+	public static final ROISIProvider<StagedItem> JUNGLE_PLANK = InitRegistry.item("jungle_plank", () -> new StagedItem(InitStages.STAGE_STONE));
+	public static final ROISIProvider<StagedItem> DARK_OAK_PLANK = InitRegistry.item("dark_oak_plank", () -> new StagedItem(InitStages.STAGE_STONE));
+	public static final ROISIProvider<StagedItem> ACACIA_PLANK = InitRegistry.item("acacia_plank", () -> new StagedItem(InitStages.STAGE_STONE));
+	public static final ROISIProvider<StagedItem> SALT = InitRegistry.item("salt", () -> new StagedItem(InitStages.STAGE_BEFORE));
+	public static final ROISIProvider<StagedItem> ANIMAL_PELT = InitRegistry.item("animal_pelt", () -> new StagedItem(InitStages.STAGE_BEFORE));
+	public static final ROISIProvider<StagedItem> WET_HIDE = InitRegistry.item("wet_hide", () -> new StagedItem(InitStages.STAGE_STONE));
+	public static final ROISIProvider<StagedItem> RAW_HIDE = InitRegistry.item("raw_hide", () -> new StagedItem(InitStages.STAGE_STONE));
+	public static final ROISIProvider<StagedItem> CLEANED_HIDE = InitRegistry.item("cleaned_hide", () -> new StagedItem(InitStages.STAGE_STONE));
+	public static final ROISIProvider<StagedItem> SALTED_HIDE = InitRegistry.item("salted_hide", () -> new StagedItem(InitStages.STAGE_STONE));
+	public static final ROISIProvider<StagedItem> DRIED_HIDE = InitRegistry.item("dried_hide", () -> new StagedItem(InitStages.STAGE_STONE));
+	public static final ROISIProvider<StagedItem> WET_TANNED_HIDE = InitRegistry.item("wet_tanned_hide", () -> new StagedItem(InitStages.STAGE_STONE));
+	public static final ROISIProvider<StagedItem> DRY_TANNED_HIDE = InitRegistry.item("dry_tanned_hide", () -> new StagedItem(InitStages.STAGE_STONE));
+	public static final ROISIProvider<StagedItem> ROPE = InitRegistry.item("rope", () -> new StagedItem(InitStages.STAGE_STONE));
+	public static final ROISIProvider<StagedItem> LEATHER_STRIP = InitRegistry.item("leather_strip", () -> new StagedItem(InitStages.STAGE_STONE));
+	public static final ROISIProvider<StagedItem> BLANK_CAST = InitRegistry.item("blank_cast", () -> new StagedItem(InitStages.STAGE_COPPER));
+	public static final ROISIProvider<StagedItem> ROCK = InitRegistry.item("rock", () -> new StagedItem(InitStages.STAGE_BEFORE));
+	public static final ROISIProvider<StagedItem> FLINT = InitRegistry.item("flint", () -> new StagedItem(InitStages.STAGE_BEFORE).useVanillaNamespace());
+	public static final ROISIProvider<StagedItem> STICK = InitRegistry.item("stick", () -> new StagedItem(InitStages.STAGE_BEFORE).useVanillaNamespace());
+	public static final ROISIProvider<StagedItem> CLAY_BALL = InitRegistry.item("clay_ball", () -> new StagedItem(InitStages.STAGE_BEFORE).useVanillaNamespace());
 	
 	//DAMAGEABLE
-	public static final ROISIProvider<StagedItem> MORTAR_PESTLE = InitRegistry.item("mortar_pestle", () -> new SIDamageable(InitStages.STAGE_0, InitToolMaterials.WOOD.get()));
-	public static final ROISIProvider<StagedItem> PLANT_MESH = InitRegistry.item("plant_mesh", () -> new SIDamageable(InitStages.STAGE_0, InitToolMaterials.WOOD.get()));
-	public static final ROISIProvider<StagedItem> STRING_MESH = InitRegistry.item("string_mesh", () -> new SIDamageable(InitStages.STAGE_1, InitToolMaterials.FLINT.get()));
+	public static final ROISIProvider<StagedItem> MORTAR_PESTLE = InitRegistry.item("mortar_pestle", () -> new SIDamageable(InitStages.STAGE_BEFORE, InitToolMaterials.WOOD.get()));
+	public static final ROISIProvider<StagedItem> PLANT_MESH = InitRegistry.item("plant_mesh", () -> new SIDamageable(InitStages.STAGE_BEFORE, InitToolMaterials.WOOD.get()));
+	public static final ROISIProvider<StagedItem> STRING_MESH = InitRegistry.item("string_mesh", () -> new SIDamageable(InitStages.STAGE_STONE, InitToolMaterials.FLINT.get()));
 	
 	//FOOD
-	public static final ROISIProvider<StagedItem> DOUGH = InitRegistry.item("dough", () -> new SIFood(InitStages.STAGE_1, 1, 0.5f));
+	public static final ROISIProvider<StagedItem> DOUGH = InitRegistry.item("dough", () -> new SIFood(InitStages.STAGE_STONE, 1, 0.5f));
 	
 	//TOOLS
-	public static final ROISIProvider<StagedItem> CLAY_SHOVEL = simpleTool(InitStages.STAGE_0, ToolType.SHOVEL, InitToolMaterials.CLAY);
-	public static final ROISIProvider<StagedItem> CLAY_AXE = simpleTool(InitStages.STAGE_0, ToolType.AXE, InitToolMaterials.CLAY);
-	public static final ROISIProvider<StagedItem> FLINT_PICKAXE = simpleTool(InitStages.STAGE_1, ToolType.PICKAXE, InitToolMaterials.FLINT);
-	public static final ROISIProvider<StagedItem> FLINT_SHOVEL = simpleTool(InitStages.STAGE_1, ToolType.SHOVEL, InitToolMaterials.FLINT);
-	public static final ROISIProvider<StagedItem> FLINT_AXE = simpleTool(InitStages.STAGE_1, ToolType.AXE, InitToolMaterials.FLINT);
-	public static final ROISIProvider<StagedItem> FLINT_HOE = simpleTool(InitStages.STAGE_1, ToolType.HOE, InitToolMaterials.FLINT);
-	public static final ROISIProvider<StagedItem> FLINT_KNIFE = simpleTool(InitStages.STAGE_1, ToolType.KNIFE, InitToolMaterials.FLINT);
-	public static final ROISIProvider<StagedItem> FLINT_SHEARS = simpleTool(InitStages.STAGE_1, ToolType.SHEARS, InitToolMaterials.FLINT);
-	public static final ROISIProvider<StagedItem> BONE_SWORD = simpleTool(InitStages.STAGE_1, ToolType.SWORD, InitToolMaterials.BONE);
+	public static final ROISIProvider<StagedItem> CLAY_SHOVEL = simpleTool(InitStages.STAGE_BEFORE, ToolType.SHOVEL, InitToolMaterials.CLAY);
+	public static final ROISIProvider<StagedItem> CLAY_AXE = simpleTool(InitStages.STAGE_BEFORE, ToolType.AXE, InitToolMaterials.CLAY);
+	public static final ROISIProvider<StagedItem> FLINT_PICKAXE = simpleTool(InitStages.STAGE_STONE, ToolType.PICKAXE, InitToolMaterials.FLINT);
+	public static final ROISIProvider<StagedItem> FLINT_SHOVEL = simpleTool(InitStages.STAGE_STONE, ToolType.SHOVEL, InitToolMaterials.FLINT);
+	public static final ROISIProvider<StagedItem> FLINT_AXE = simpleTool(InitStages.STAGE_STONE, ToolType.AXE, InitToolMaterials.FLINT);
+	public static final ROISIProvider<StagedItem> FLINT_HOE = simpleTool(InitStages.STAGE_STONE, ToolType.HOE, InitToolMaterials.FLINT);
+	public static final ROISIProvider<StagedItem> FLINT_KNIFE = simpleTool(InitStages.STAGE_STONE, ToolType.KNIFE, InitToolMaterials.FLINT);
+	public static final ROISIProvider<StagedItem> FLINT_SHEARS = simpleTool(InitStages.STAGE_STONE, ToolType.SHEARS, InitToolMaterials.FLINT);
+	public static final ROISIProvider<StagedItem> BONE_SWORD = simpleTool(InitStages.STAGE_STONE, ToolType.SWORD, InitToolMaterials.BONE);
 	
 	//@formatter:on
 	
@@ -97,8 +96,8 @@ public class InitItems {
 		}
 		
 		for (PRRegistryObject<Metal> metal : PRRegistries.METALS) {
-			INGOTS.add(InitRegistry.item(metal.get() + "_ingot", () -> new SIIngot(metal.get(), false)));
-			INGOTS.add(InitRegistry.item(metal.get() + "_nugget", () -> new SIIngot(metal.get(), true)));
+			INGOTS.add(InitRegistry.item(metal.get() + "_ingot", () -> new SIIngot(metal.get())));
+			INGOTS.add(InitRegistry.item(metal.get() + "_nugget", () -> new SIIngot(metal.get())));
 			
 			for (RawPart type : RawPart.values()) {
 				RAW_PARTS.add(InitRegistry.item(metal.get() + "_" + type, () -> new SIRawPart<RawPart>(InitItemGroups.RAW_PARTS, metal.get(), type)));
@@ -115,14 +114,14 @@ public class InitItems {
 		}
 	}
 	
-	private static ROISIProvider<StagedItem> simpleTool(Supplier<Stage> stage, ToolType toolType, Supplier<ToolMaterial> toolMat) {
+	private static ROISIProvider<StagedItem> simpleTool(PRRegistryObject<Stage> stage, ToolType toolType, PRRegistryObject<ToolMaterial> toolMat) {
 		return InitRegistry.item(toolMat.get() + "_" + toolType,
 				() -> toolMat.get() == InitToolMaterials.WOOD.get() ? new SISimpleTool(stage, toolType, toolMat.get()).useVanillaNamespace() :
 						new SISimpleTool(stage, toolType, toolMat.get()));
 	}
 	
 	private static ROISIProvider<StagedItem> registerCast(Enum<?> type) {
-		ROISIProvider<StagedItem> reg = InitRegistry.item("cast_" + type, () -> new StagedItem(InitStages.STAGE_2, 8));
+		ROISIProvider<StagedItem> reg = InitRegistry.item("cast_" + type, () -> new StagedItem(InitStages.STAGE_COPPER, 8));
 		CASTS.add(reg);
 		return reg;
 	}

@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Supplier;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableMultimap.Builder;
 import com.google.common.collect.Multimap;
 
+import mrunknown404.primalrework.api.registry.PRRegistryObject;
 import mrunknown404.primalrework.api.utils.ISIProvider;
 import mrunknown404.primalrework.api.utils.IStageProvider;
 import mrunknown404.primalrework.init.InitItemGroups;
@@ -33,7 +33,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 
 public class StagedItem extends Item implements ISIProvider, IIngredientProvider, IStageProvider {
-	public final Supplier<Stage> stage;
+	public final Stage stage;
 	public final ToolType toolType;
 	public final ToolMaterial toolMat;
 	private ItemType itemType;
@@ -43,10 +43,10 @@ public class StagedItem extends Item implements ISIProvider, IIngredientProvider
 	private final List<ITextComponent> tooltips = new ArrayList<ITextComponent>();
 	private Multimap<Attribute, AttributeModifier> defaultModifiers;
 	
-	protected StagedItem(Supplier<Stage> stage, int maxStackSize, ToolType toolType, ToolMaterial toolMat, ItemGroup tab, Rarity rarity, Food food, boolean isFireResistant,
+	protected StagedItem(PRRegistryObject<Stage> stage, int maxStackSize, ToolType toolType, ToolMaterial toolMat, ItemGroup tab, Rarity rarity, Food food, boolean isFireResistant,
 			boolean canRepair, ItemType itemType) {
 		super(toProperties(maxStackSize, toolMat.durability, tab, rarity, food, isFireResistant, canRepair));
-		this.stage = stage;
+		this.stage = stage.get();
 		this.toolType = toolType;
 		this.toolMat = toolMat;
 		this.itemType = itemType;
@@ -54,19 +54,19 @@ public class StagedItem extends Item implements ISIProvider, IIngredientProvider
 		setupModifiers();
 	}
 	
-	public StagedItem(Supplier<Stage> stage) {
+	public StagedItem(PRRegistryObject<Stage> stage) {
 		this(stage, 64, ToolType.NONE, InitToolMaterials.HAND.get(), InitItemGroups.ITEMS, Rarity.COMMON, null, false, false, ItemType.generated);
 	}
 	
-	public StagedItem(Supplier<Stage> stage, int stackSize) {
+	public StagedItem(PRRegistryObject<Stage> stage, int stackSize) {
 		this(stage, stackSize, ToolType.NONE, InitToolMaterials.HAND.get(), InitItemGroups.ITEMS, Rarity.COMMON, null, false, false, ItemType.generated);
 	}
 	
-	public StagedItem(Supplier<Stage> stage, ItemGroup tab) {
+	public StagedItem(PRRegistryObject<Stage> stage, ItemGroup tab) {
 		this(stage, 64, ToolType.NONE, InitToolMaterials.HAND.get(), tab, Rarity.COMMON, null, false, false, ItemType.generated);
 	}
 	
-	public StagedItem(Supplier<Stage> stage, int stackSize, ItemGroup tab) {
+	public StagedItem(PRRegistryObject<Stage> stage, int stackSize, ItemGroup tab) {
 		this(stage, stackSize, ToolType.NONE, InitToolMaterials.HAND.get(), tab, Rarity.COMMON, null, false, false, ItemType.generated);
 	}
 	
@@ -133,7 +133,7 @@ public class StagedItem extends Item implements ISIProvider, IIngredientProvider
 	
 	@Override
 	public Stage getStage() {
-		return stage.get();
+		return stage;
 	}
 	
 	protected static Properties toProperties(int maxStackSize, int maxDamage, ItemGroup tab, Rarity rarity, Food food, boolean isFireResistant, boolean canRepair) {

@@ -5,17 +5,14 @@ import mrunknown404.primalrework.api.utils.IStageProvider;
 import mrunknown404.primalrework.items.StagedItem;
 import mrunknown404.primalrework.recipes.inputs.RecipeInput;
 import mrunknown404.primalrework.stage.Stage;
-import mrunknown404.primalrework.utils.enums.RecipeType;
 import net.minecraft.item.ItemStack;
 
 public abstract class StagedRecipe<T extends StagedRecipe<T, V>, V extends RecipeInput<?>> implements IStageProvider {
 	public final Stage stage;
 	public final V inputRecipe;
-	public final RecipeType recipeType;
 	private final ItemStack output;
 	
-	public StagedRecipe(RecipeType recipeType, Stage stage, ISIProvider output, int count, V inputRecipe) {
-		this.recipeType = recipeType;
+	public StagedRecipe(Stage stage, ISIProvider output, int count, V inputRecipe) {
 		this.stage = stage;
 		this.inputRecipe = inputRecipe;
 		this.output = new ItemStack(output.getStagedItem(), count);

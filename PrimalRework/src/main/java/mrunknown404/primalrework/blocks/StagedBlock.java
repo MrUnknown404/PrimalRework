@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Supplier;
 
+import mrunknown404.primalrework.api.registry.PRRegistryObject;
 import mrunknown404.primalrework.api.utils.ISIProvider;
 import mrunknown404.primalrework.api.utils.IStageProvider;
 import mrunknown404.primalrework.init.InitItemGroups;
@@ -33,7 +33,7 @@ public class StagedBlock extends Block implements ISIProvider, IIngredientProvid
 	private final Map<ToolType, HarvestInfo> harvestInfos = new HashMap<ToolType, HarvestInfo>();
 	protected final Map<Element, Integer> elements = new LinkedHashMap<Element, Integer>();
 	
-	public final Supplier<Stage> stage;
+	public final PRRegistryObject<Stage> stage;
 	public final int stackSize;
 	public final ItemGroup tab;
 	public final BlockInfo blockInfo;
@@ -42,8 +42,8 @@ public class StagedBlock extends Block implements ISIProvider, IIngredientProvid
 	private final List<ITextComponent> tooltips = new ArrayList<ITextComponent>();
 	private boolean useVanillaNamespaceBlock, useVanillaNamespaceItem;
 	
-	public StagedBlock(Supplier<Stage> stage, int stackSize, ItemGroup tab, BlockInfo blockInfo, BlockStateType blockStateType, BlockModelType blockModelType, HarvestInfo info,
-			HarvestInfo... extraInfos) {
+	public StagedBlock(PRRegistryObject<Stage> stage, int stackSize, ItemGroup tab, BlockInfo blockInfo, BlockStateType blockStateType, BlockModelType blockModelType,
+			HarvestInfo info, HarvestInfo... extraInfos) {
 		super(toProperties(blockInfo));
 		this.stage = stage;
 		this.stackSize = stackSize;
@@ -58,11 +58,12 @@ public class StagedBlock extends Block implements ISIProvider, IIngredientProvid
 		}
 	}
 	
-	public StagedBlock(Supplier<Stage> stage, BlockInfo blockInfo, BlockStateType blockStateType, BlockModelType blockModelType, HarvestInfo info, HarvestInfo... extraInfos) {
+	public StagedBlock(PRRegistryObject<Stage> stage, BlockInfo blockInfo, BlockStateType blockStateType, BlockModelType blockModelType, HarvestInfo info,
+			HarvestInfo... extraInfos) {
 		this(stage, 64, InitItemGroups.BLOCKS, blockInfo, blockStateType, blockModelType, info, extraInfos);
 	}
 	
-	public StagedBlock(Supplier<Stage> stage, BlockInfo blockInfo, HarvestInfo info, HarvestInfo... extraInfos) {
+	public StagedBlock(PRRegistryObject<Stage> stage, BlockInfo blockInfo, HarvestInfo info, HarvestInfo... extraInfos) {
 		this(stage, 64, InitItemGroups.BLOCKS, blockInfo, BlockStateType.normal, BlockModelType.normal, info, extraInfos);
 	}
 	

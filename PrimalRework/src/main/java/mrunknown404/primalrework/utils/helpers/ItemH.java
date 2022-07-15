@@ -15,10 +15,8 @@ import mrunknown404.primalrework.utils.PRConfig;
 import mrunknown404.primalrework.utils.enums.Element;
 import mrunknown404.primalrework.utils.enums.ToolType;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextFormatting;
 
 public class ItemH {
@@ -28,17 +26,13 @@ public class ItemH {
 	
 	public static List<ITextComponent> getTooltips(ItemStack stack) {
 		return !(stack.getItem() instanceof StagedItem) ? UNKNOWN_ITEM : TOOLTIP_CACHE.computeIfAbsent(stack, () -> {
-			IFormattableTextComponent name = (IFormattableTextComponent) stack.getHoverName();
 			StagedItem item = (StagedItem) stack.getItem();
 			List<ITextComponent> list = new ArrayList<ITextComponent>();
 			
-			final PRConfig.Client config = PRConfig.CLIENT;
-			
-			Stage stage = item.stage.get();
+			Stage stage = item.stage;
 			if (stage.hasAccessToCurrentStage()) {
-				list.add(config.tooltips_showStackSize.get() && stack.getMaxStackSize() != 1 ?
-						name.copy().append(WordH.string(" [" + stack.getCount() + "/" + stack.getMaxStackSize() + "]").withStyle(Style.EMPTY.withItalic(false))) :
-						name);
+				final PRConfig.Client config = PRConfig.CLIENT;
+				list.add(stack.getHoverName());
 				
 				List<ITextComponent> temp = item.getTooltips();
 				if (!temp.isEmpty()) {

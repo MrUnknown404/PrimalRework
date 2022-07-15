@@ -13,7 +13,6 @@ public class PRConfig {
 		public final BooleanValue harvestDisplay_showRequiredTool;
 		
 		public final BooleanValue tooltips_showAtomicSymbolsInTooltips;
-		public final BooleanValue tooltips_showStackSize;
 		public final BooleanValue tooltips_showFoodNutrients;
 		public final BooleanValue tooltips_showBlockInfo;
 		public final BooleanValue tooltips_showDurability;
@@ -29,7 +28,6 @@ public class PRConfig {
 			builder.pop();
 			builder.push("Tooltips");
 			tooltips_showAtomicSymbolsInTooltips = builder.define("show atomic symbols", true);
-			tooltips_showStackSize = builder.define("show stack size", true);
 			tooltips_showFoodNutrients = builder.define("show food nutrients", true);
 			tooltips_showBlockInfo = builder.define("show block info", true);
 			tooltips_showDurability = builder.define("show durability", true);

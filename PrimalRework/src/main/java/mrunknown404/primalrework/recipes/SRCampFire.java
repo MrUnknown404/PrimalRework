@@ -3,13 +3,12 @@ package mrunknown404.primalrework.recipes;
 import mrunknown404.primalrework.items.StagedItem;
 import mrunknown404.primalrework.recipes.inputs.RICampfire;
 import mrunknown404.primalrework.stage.Stage;
-import mrunknown404.primalrework.utils.enums.RecipeType;
 
 public class SRCampFire extends StagedRecipe<SRCampFire, RICampfire> {
 	public final int time;
 	
 	public SRCampFire(Stage stage, StagedItem input, StagedItem output, int time) {
-		super(RecipeType.CAMPFIRE, stage, output, 1, new RICampfire(input));
+		super(stage, output, 1, new RICampfire(input));
 		this.time = time;
 	}
 	

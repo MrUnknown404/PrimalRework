@@ -1,5 +1,7 @@
 package mrunknown404.primalrework.client.gui.screen;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import com.google.common.util.concurrent.Runnables;
@@ -7,6 +9,8 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 
+import mrunknown404.primalrework.api.PrimalMod;
+import mrunknown404.primalrework.utils.Logger;
 import mrunknown404.primalrework.utils.helpers.WordH;
 import net.minecraft.client.GameSettings;
 import net.minecraft.client.gui.AccessibilityScreen;
@@ -27,6 +31,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.gui.NotificationModUpdateScreen;
 import net.minecraftforge.fml.BrandingControl;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.client.gui.screen.ModListScreen;
 
 public class ScreenMainMenu extends Screen {
@@ -35,24 +40,44 @@ public class ScreenMainMenu extends Screen {
 	private static final ResourceLocation MINECRAFT_LOGO = new ResourceLocation("textures/gui/title/minecraft.png");
 	private static final ResourceLocation MINECRAFT_EDITION = new ResourceLocation("textures/gui/title/edition.png");
 	private final RenderSkybox panorama = new RenderSkybox(MainMenuScreen.CUBE_MAP);
-	private final boolean minceraftEasterEgg, fading;
+	private final boolean minceraftEasterEgg = new Random().nextFloat() < 1.0e-4d;
 	private String splash;
 	private int copyrightX, copyrightWidth;
 	private long fadeInStart;
 	private NotificationModUpdateScreen modUpdateNotification;
 	
-	public ScreenMainMenu() {
-		this(false);
-	}
+	private static boolean firstCreation = true, checkNonSupportedMods = true, firstMainMenu = true;
 	
-	public ScreenMainMenu(boolean fading) {
+	public ScreenMainMenu() {
 		super(WordH.translate("narrator.screen.title"));
-		this.fading = fading;
-		this.minceraftEasterEgg = new Random().nextFloat() < 1.0e-4d;
+		if (firstCreation) {
+			firstCreation = false;
+		} else if (firstMainMenu) {
+			firstMainMenu = false;
+		}
 	}
 	
 	@Override
 	protected void init() {
+		if (checkNonSupportedMods && firstMainMenu) {
+			checkNonSupportedMods = false;
+			List<String> modids = new ArrayList<String>();
+			List<String> logs = new ArrayList<String>();
+			
+			ModList.get().forEachModContainer((modid, instance) -> {
+				if (!modid.equalsIgnoreCase("minecraft") && !modid.equalsIgnoreCase("forge") && !instance.getMod().getClass().isAnnotationPresent(PrimalMod.class)) {
+					modids.add(modid);
+					logs.add("Mod '" + modid + "' is not supported!");
+				}
+			});
+			
+			if (!modids.isEmpty()) {
+				Logger.multiLine(logs);
+				//minecraft.setScreen(new ScreenNonSupportedMods(modids)); //TODO figure out why this is crashing
+				//return;
+			}
+		}
+		
 		if (splash == null) {
 			splash = minecraft.getSplashManager().getSplash();
 		}
@@ -87,11 +112,11 @@ public class ScreenMainMenu extends Screen {
 	@SuppressWarnings("deprecation")
 	@Override
 	public void render(MatrixStack stack, int mouseX, int mouseY, float partial) {
-		if (fadeInStart == 0 && fading) {
+		if (fadeInStart == 0 && firstMainMenu) {
 			fadeInStart = Util.getMillis();
 		}
 		
-		float fade = fading ? (Util.getMillis() - fadeInStart) / 1000f : 1f;
+		float fade = firstMainMenu ? (Util.getMillis() - fadeInStart) / 1000f : 1f;
 		int x = width / 2 - 137;
 		
 		fill(stack, 0, 0, width, height, -1);
@@ -100,10 +125,10 @@ public class ScreenMainMenu extends Screen {
 		
 		RenderSystem.enableBlend();
 		RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
-		RenderSystem.color4f(1f, 1f, 1f, fading ? (float) MathHelper.ceil(MathHelper.clamp(fade, 0f, 1f)) : 1f);
+		RenderSystem.color4f(1f, 1f, 1f, firstMainMenu ? (float) MathHelper.ceil(MathHelper.clamp(fade, 0f, 1f)) : 1f);
 		blit(stack, 0, 0, width, height, 0f, 0f, 16, 128, 16, 128);
 		
-		float f1 = fading ? MathHelper.clamp(fade - 1f, 0f, 1f) : 1f;
+		float f1 = firstMainMenu ? MathHelper.clamp(fade - 1f, 0f, 1f) : 1f;
 		int l = MathHelper.ceil(f1 * 255f) << 24;
 		
 		if ((l & -67108864) != 0) {

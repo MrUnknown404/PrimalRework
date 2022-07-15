@@ -1,8 +1,8 @@
 package mrunknown404.primalrework.blocks;
 
 import java.util.Random;
-import java.util.function.Supplier;
 
+import mrunknown404.primalrework.api.registry.PRRegistryObject;
 import mrunknown404.primalrework.init.InitItemGroups;
 import mrunknown404.primalrework.stage.Stage;
 import net.minecraft.block.BlockState;
@@ -16,16 +16,15 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
 public class SBFalling extends StagedBlock {
-	public SBFalling(Supplier<Stage> stage, int stackSize, BlockInfo blockInfo, BlockStateType blockStateType, BlockModelType blockModelType, HarvestInfo info,
-			HarvestInfo[] extraInfos) {
+	public SBFalling(PRRegistryObject<Stage> stage, int stackSize, BlockInfo blockInfo, BlockStateType blockStateType, BlockModelType blockModelType, HarvestInfo info, HarvestInfo[] extraInfos) {
 		super(stage, stackSize, InitItemGroups.BLOCKS, blockInfo, blockStateType, blockModelType, info, extraInfos);
 	}
 	
-	public SBFalling(Supplier<Stage> stage, BlockInfo blockInfo, BlockStateType blockStateType, BlockModelType blockModelType, HarvestInfo info, HarvestInfo... extraInfos) {
+	public SBFalling(PRRegistryObject<Stage> stage, BlockInfo blockInfo, BlockStateType blockStateType, BlockModelType blockModelType, HarvestInfo info, HarvestInfo... extraInfos) {
 		super(stage, 64, InitItemGroups.BLOCKS, blockInfo, blockStateType, blockModelType, info, extraInfos);
 	}
 	
-	public SBFalling(Supplier<Stage> stage, BlockInfo blockInfo, HarvestInfo info, HarvestInfo... extraInfos) {
+	public SBFalling(PRRegistryObject<Stage> stage, BlockInfo blockInfo, HarvestInfo info, HarvestInfo... extraInfos) {
 		super(stage, 64, InitItemGroups.BLOCKS, blockInfo, BlockStateType.normal, BlockModelType.normal, info, extraInfos);
 	}
 	
@@ -51,7 +50,6 @@ public class SBFalling extends StagedBlock {
 	}
 	
 	protected void falling(@SuppressWarnings("unused") FallingBlockEntity entity) {
-		
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -62,11 +60,9 @@ public class SBFalling extends StagedBlock {
 	
 	@SuppressWarnings("unused")
 	public void onLand(World world, BlockPos pos, BlockState state0, BlockState state1, FallingBlockEntity entity) {
-		
 	}
 	
 	@SuppressWarnings("unused")
 	public void onBroken(World world, BlockPos pos, FallingBlockEntity entity) {
-		
 	}
 }

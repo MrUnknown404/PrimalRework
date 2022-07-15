@@ -1,7 +1,6 @@
 package mrunknown404.primalrework.blocks;
 
-import java.util.function.Supplier;
-
+import mrunknown404.primalrework.api.registry.PRRegistryObject;
 import mrunknown404.primalrework.init.InitItemGroups;
 import mrunknown404.primalrework.stage.Stage;
 import net.minecraft.block.Block;
@@ -18,7 +17,7 @@ import net.minecraft.world.IWorld;
 public class SBSnowyDirt extends StagedBlock {//TODO switch to my snow
 	public static final BooleanProperty SNOWY = BlockStateProperties.SNOWY;
 	
-	public SBSnowyDirt(Supplier<Stage> stage, BlockInfo blockInfo, BlockStateType blockStateType, BlockModelType blockModelType, HarvestInfo info, HarvestInfo... extraInfos) {
+	public SBSnowyDirt(PRRegistryObject<Stage> stage, BlockInfo blockInfo, BlockStateType blockStateType, BlockModelType blockModelType, HarvestInfo info, HarvestInfo... extraInfos) {
 		super(stage, 64, InitItemGroups.BLOCKS, blockInfo, blockStateType, blockModelType, info, extraInfos);
 		registerDefaultState(stateDefinition.any().setValue(SNOWY, false));
 	}

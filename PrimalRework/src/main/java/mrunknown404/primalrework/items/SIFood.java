@@ -1,7 +1,6 @@
 package mrunknown404.primalrework.items;
 
-import java.util.function.Supplier;
-
+import mrunknown404.primalrework.api.registry.PRRegistryObject;
 import mrunknown404.primalrework.init.InitItemGroups;
 import mrunknown404.primalrework.init.InitToolMaterials;
 import mrunknown404.primalrework.stage.Stage;
@@ -15,18 +14,18 @@ public class SIFood extends StagedItem {
 	public final int nutrition;
 	public final float saturation;
 	
-	public SIFood(Supplier<Stage> stage, int maxStackSize, int nutrition, float saturation, boolean isMeat, boolean canAlwaysEat, boolean fastFood) {
+	public SIFood(PRRegistryObject<Stage>  stage, int maxStackSize, int nutrition, float saturation, boolean isMeat, boolean canAlwaysEat, boolean fastFood) {
 		super(stage, maxStackSize, ToolType.NONE, InitToolMaterials.HAND.get(), InitItemGroups.FOOD, Rarity.COMMON, toFood(nutrition, saturation, isMeat, canAlwaysEat, fastFood),
 				false, false, ItemType.generated);
 		this.nutrition = nutrition;
 		this.saturation = saturation;
 	}
 	
-	public SIFood(Supplier<Stage> stage, int maxStackSize, int nutrition, float saturation) {
+	public SIFood(PRRegistryObject<Stage>  stage, int maxStackSize, int nutrition, float saturation) {
 		this(stage, maxStackSize, nutrition, saturation, false, false, false);
 	}
 	
-	public SIFood(Supplier<Stage> stage, int nutrition, float saturation) {
+	public SIFood(PRRegistryObject<Stage>  stage, int nutrition, float saturation) {
 		this(stage, 64, nutrition, saturation, false, false, false);
 	}
 	

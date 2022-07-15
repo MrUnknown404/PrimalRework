@@ -3,10 +3,10 @@ package mrunknown404.primalrework.quests;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.function.Supplier;
 
 import javax.annotation.Nullable;
 
+import mrunknown404.primalrework.api.registry.PRRegistryObject;
 import mrunknown404.primalrework.api.utils.IStageProvider;
 import mrunknown404.primalrework.quests.requirements.QuestRequirement;
 import mrunknown404.primalrework.stage.Stage;
@@ -21,15 +21,15 @@ public class Quest implements IStageProvider {
 	protected final QuestTab tab;
 	protected final QuestRequirement<?> req;
 	protected final QuestReward reward;
-	protected final Supplier<Stage> stage;
+	protected final PRRegistryObject<Stage> stage;
 	protected final boolean isEnd, isRoot;
 	
 	/** Grid pos! */
 	protected final float xPos, yPos;
 	protected List<Quest> children = new ArrayList<Quest>();
 	
-	private Quest(Supplier<Stage> stage, String name_key, Quest parent, float xPos, float yPos, ItemStack itemIcon, QuestRequirement<?> req, @Nullable QuestReward reward,
-			boolean isEnd, boolean isRoot, QuestTab tab) {
+	private Quest(PRRegistryObject<Stage> stage, String name_key, Quest parent, float xPos, float yPos, ItemStack itemIcon, QuestRequirement<?> req, @Nullable QuestReward reward, boolean isEnd,
+			boolean isRoot, QuestTab tab) {
 		this.stage = stage;
 		this.name_key = name_key;
 		this.tab = tab;
@@ -59,7 +59,7 @@ public class Quest implements IStageProvider {
 		return new Quest(parent.stage, name_key, parent, xPos, yPos, new ItemStack(req.getIcon()), req, reward, true, false, parent.tab);
 	}
 	
-	public static Quest root(Supplier<Stage> stage, QuestTab tab) {
+	public static Quest root(PRRegistryObject<Stage> stage, QuestTab tab) {
 		return new Quest(stage, "root", null, 0, 0, tab.getIcon(), null, null, false, true, tab);
 	}
 	

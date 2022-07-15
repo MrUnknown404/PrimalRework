@@ -25,7 +25,7 @@ public class SBTallGrass extends StagedBlock {
 	private final VoxelShape shape;
 	
 	public SBTallGrass(ROISIProvider<StagedBlock> self, Hardness hardness, VoxelShape shape) {
-		super(InitStages.STAGE_0, 64, InitItemGroups.BLOCKS, BlockInfo.with(BlockInfo.REPLACEABLE_PLANT, hardness), BlockStateType.normal, BlockModelType.none,
+		super(InitStages.STAGE_BEFORE, 64, InitItemGroups.BLOCKS, BlockInfo.with(BlockInfo.REPLACEABLE_PLANT, hardness), BlockStateType.normal, BlockModelType.none,
 				new HarvestInfo(ToolType.NONE, InitToolMaterials.HAND, DropInfo.of(InitItems.PLANT_FIBER, 30)),
 				new HarvestInfo(ToolType.KNIFE, InitToolMaterials.CLAY, DropInfo.of(InitItems.PLANT_FIBER, 80)),
 				new HarvestInfo(ToolType.HOE, InitToolMaterials.CLAY, DropInfo.of(InitItems.PLANT_FIBER, 80) /* TODO add seeds here */),

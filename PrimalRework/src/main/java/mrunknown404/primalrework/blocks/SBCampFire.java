@@ -37,7 +37,7 @@ public class SBCampFire extends SBContainer {
 	private static final VoxelShape COL_SHAPE = box(2, 0, 2, 14, 2, 14);
 	
 	public SBCampFire() {
-		super(InitStages.STAGE_1, BlockInfo.of(BlockInfo.CAMPFIRE), BlockStateType.lit, BlockModelType.none, HarvestInfo.HAND, HarvestInfo.AXE_MIN);
+		super(InitStages.STAGE_STONE, BlockInfo.of(BlockInfo.CAMPFIRE), BlockStateType.lit, BlockModelType.none, HarvestInfo.HAND, HarvestInfo.AXE_MIN);
 		registerDefaultState(defaultBlockState().setValue(BlockStateProperties.LIT, false));
 	}
 	

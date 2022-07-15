@@ -1,7 +1,6 @@
 package mrunknown404.primalrework.blocks;
 
-import java.util.function.Supplier;
-
+import mrunknown404.primalrework.api.registry.PRRegistryObject;
 import mrunknown404.primalrework.blocks.BlockInfo.UniqueRawBlockInfo;
 import mrunknown404.primalrework.init.InitItemGroups;
 import mrunknown404.primalrework.init.InitStages;
@@ -20,12 +19,12 @@ import net.minecraft.world.IWorldReader;
 public class SBUnlitPrimalTorch extends StagedBlock {
 	private static final VoxelShape SHAPE = box(6, 0, 6, 10, 8, 10);
 	
-	SBUnlitPrimalTorch(Supplier<Stage> stage, UniqueRawBlockInfo blockInfo, BlockStateType blockstateType, HarvestInfo info) {
+	SBUnlitPrimalTorch(PRRegistryObject<Stage> stage, UniqueRawBlockInfo blockInfo, BlockStateType blockstateType, HarvestInfo info) {
 		super(stage, 64, InitItemGroups.BLOCKS, BlockInfo.of(blockInfo), blockstateType, BlockModelType.none, info);
 	}
 	
 	public SBUnlitPrimalTorch() {
-		super(InitStages.STAGE_0, 64, InitItemGroups.BLOCKS, BlockInfo.of(BlockInfo.UNLIT_PRIMAL_TORCH), BlockStateType.normal, BlockModelType.none, HarvestInfo.HAND);
+		super(InitStages.STAGE_BEFORE, 64, InitItemGroups.BLOCKS, BlockInfo.of(BlockInfo.UNLIT_PRIMAL_TORCH), BlockStateType.normal, BlockModelType.none, HarvestInfo.HAND);
 	}
 	
 	@Override

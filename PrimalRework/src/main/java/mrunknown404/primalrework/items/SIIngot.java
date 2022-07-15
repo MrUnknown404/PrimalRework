@@ -10,8 +10,8 @@ import net.minecraft.item.Rarity;
 public class SIIngot extends StagedItem implements IMetalColored {
 	public final Metal metal;
 	
-	public SIIngot(Metal metal, boolean isNugget) {
-		super(metal.stage, isNugget ? 32 : 16, ToolType.NONE, InitToolMaterials.HAND.get(), InitItemGroups.ITEMS, Rarity.COMMON, null, false, false, ItemType.generated);
+	public SIIngot(Metal metal) {
+		super(metal.stage, 64, ToolType.NONE, InitToolMaterials.HAND.get(), InitItemGroups.ITEMS, Rarity.COMMON, null, false, false, ItemType.generated);
 		this.metal = metal;
 		this.elements.putAll(metal.elements);
 	}

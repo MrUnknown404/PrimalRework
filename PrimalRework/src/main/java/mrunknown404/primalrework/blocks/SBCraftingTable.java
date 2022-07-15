@@ -22,7 +22,7 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 public class SBCraftingTable extends SBContainer {
 	public SBCraftingTable() {
-		super(InitStages.STAGE_1, BlockInfo.of(BlockInfo.PRIMAL_CRAFTING_TABLE), BlockStateType.normal, BlockModelType.normal, HarvestInfo.AXE_MIN);
+		super(InitStages.STAGE_STONE, BlockInfo.of(BlockInfo.PRIMAL_CRAFTING_TABLE), BlockStateType.normal, BlockModelType.normal, HarvestInfo.AXE_MIN);
 	}
 	
 	@Override

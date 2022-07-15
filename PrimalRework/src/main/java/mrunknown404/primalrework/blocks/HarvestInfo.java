@@ -3,8 +3,8 @@ package mrunknown404.primalrework.blocks;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.function.Supplier;
 
+import mrunknown404.primalrework.api.registry.PRRegistryObject;
 import mrunknown404.primalrework.api.utils.ISIProvider;
 import mrunknown404.primalrework.init.InitToolMaterials;
 import mrunknown404.primalrework.utils.ToolMaterial;
@@ -27,7 +27,7 @@ public class HarvestInfo {
 	public final ToolMaterial toolMat;
 	public final List<DropInfo> drops = new ArrayList<DropInfo>();
 	
-	public HarvestInfo(ToolType toolType, Supplier<ToolMaterial> toolMat, DropInfo... drops) {
+	public HarvestInfo(ToolType toolType, PRRegistryObject<ToolMaterial> toolMat, DropInfo... drops) {
 		this.toolType = toolType;
 		this.toolMat = toolMat.get();
 		

@@ -1,11 +1,11 @@
 package mrunknown404.primalrework.items;
 
 import java.util.Random;
-import java.util.function.Supplier;
 
+import mrunknown404.primalrework.api.registry.PRRegistryObject;
 import mrunknown404.primalrework.init.InitBlocks;
-import mrunknown404.primalrework.init.InitItems;
 import mrunknown404.primalrework.init.InitItemGroups;
+import mrunknown404.primalrework.init.InitItems;
 import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.utils.ToolMaterial;
 import mrunknown404.primalrework.utils.enums.ToolType;
@@ -33,20 +33,20 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
 
 public class SISimpleTool extends SIDamageable {
-	public SISimpleTool(Supplier<Stage> stage, ToolType toolType, ToolMaterial toolMat) {
+	public SISimpleTool(PRRegistryObject<Stage> stage, ToolType toolType, ToolMaterial toolMat) {
 		super(stage, toolType, toolMat, InitItemGroups.TOOLS, ItemType.handheld);
 	}
 	
 	@Override
 	public boolean hurtEnemy(ItemStack stack, LivingEntity entity0, LivingEntity entity1) {
-		stack.hurtAndBreak(1, entity1, (e) -> e.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
+		stack.hurtAndBreak(1, entity1, e -> e.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
 		return true;
 	}
 	
 	@Override
 	public boolean mineBlock(ItemStack stack, World world, BlockState block, BlockPos pos, LivingEntity entity) {
 		if (!world.isClientSide && block.getDestroySpeed(world, pos) != 0) {
-			stack.hurtAndBreak(1, entity, (e) -> e.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
+			stack.hurtAndBreak(1, entity, e -> e.broadcastBreakEvent(EquipmentSlotType.MAINHAND));
 		}
 		return true;
 	}
@@ -65,10 +65,9 @@ public class SISimpleTool extends SIDamageable {
 	public void releaseUsing(ItemStack stack, World world, LivingEntity entity, int partialTicks) {
 		if (toolType == ToolType.AXE && entity instanceof PlayerEntity) {
 			if (getUseDuration(stack) - partialTicks > 22) {
-				PlayerEntity player = (PlayerEntity) entity;
-				
 				BlockRayTraceResult ray = RayTraceH.rayTrace(entity, partialTicks, false);
 				if (ray != null) {
+					PlayerEntity player = (PlayerEntity) entity;
 					BlockPos pos = ray.getBlockPos();
 					Block b = world.getBlockState(pos).getBlock();
 					
@@ -113,10 +112,9 @@ public class SISimpleTool extends SIDamageable {
 		if (toolType == ToolType.SHOVEL) {
 			World w = context.getLevel();
 			BlockPos pos = context.getClickedPos();
-			Block b = w.getBlockState(pos).getBlock();
 			
-			if ((BlockH.canSupportPlant(b)) && context.getClickedFace() != Direction.DOWN && w.isEmptyBlock(pos.above())) {
-				w.playSound(context.getPlayer(), pos, SoundEvents.HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
+			if (BlockH.canSupportPlant(w.getBlockState(pos).getBlock()) && context.getClickedFace() != Direction.DOWN && w.isEmptyBlock(pos.above())) {
+				w.playSound(context.getPlayer(), pos, SoundEvents.HOE_TILL, SoundCategory.BLOCKS, 1f, 1f);
 				
 				if (!w.isClientSide) {
 					w.setBlock(pos, Blocks.GRASS_PATH.defaultBlockState(), 11); //TODO switch to my grass path
@@ -131,11 +129,11 @@ public class SISimpleTool extends SIDamageable {
 			Block b = w.getBlockState(pos).getBlock();
 			
 			if ((BlockH.canSupportPlant(b) || b == Blocks.GRASS_PATH) && context.getClickedFace() != Direction.DOWN && w.isEmptyBlock(pos.above())) { //TODO switch to my grass path
-				w.playSound(context.getPlayer(), pos, SoundEvents.HOE_TILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
+				w.playSound(context.getPlayer(), pos, SoundEvents.HOE_TILL, SoundCategory.BLOCKS, 1f, 1f);
 				
 				if (!w.isClientSide) {
 					w.setBlock(pos, Blocks.FARMLAND.defaultBlockState(), 11); //TODO switch to my farmland
-					context.getItemInHand().hurtAndBreak(1, context.getPlayer(), (e) -> e.broadcastBreakEvent(context.getHand()));
+					context.getItemInHand().hurtAndBreak(1, context.getPlayer(), e -> e.broadcastBreakEvent(context.getHand()));
 				}
 				
 				return ActionResultType.sidedSuccess(w.isClientSide);

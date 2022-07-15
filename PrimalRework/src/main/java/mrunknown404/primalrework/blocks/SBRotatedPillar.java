@@ -1,7 +1,6 @@
 package mrunknown404.primalrework.blocks;
 
-import java.util.function.Supplier;
-
+import mrunknown404.primalrework.api.registry.PRRegistryObject;
 import mrunknown404.primalrework.stage.Stage;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -13,7 +12,7 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.Rotation;
 
 public class SBRotatedPillar extends StagedBlock {
-	public SBRotatedPillar(Supplier<Stage> stage, int stackSize, ItemGroup tab, BlockInfo blockInfo, HarvestInfo info, HarvestInfo... extraInfos) {
+	public SBRotatedPillar(PRRegistryObject<Stage> stage, int stackSize, ItemGroup tab, BlockInfo blockInfo, HarvestInfo info, HarvestInfo... extraInfos) {
 		super(stage, stackSize, tab, blockInfo, BlockStateType.facing_pillar, BlockModelType.facing_pillar, info, extraInfos);
 		registerDefaultState(defaultBlockState().setValue(BlockStateProperties.AXIS, Direction.Axis.Y));
 	}

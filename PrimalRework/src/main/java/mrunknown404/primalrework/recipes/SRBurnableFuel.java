@@ -7,7 +7,7 @@ public class SRBurnableFuel extends StagedRecipe<SRBurnableFuel, RIBurnableFuel>
 	private final int time;
 	
 	public <T extends IIngredientProvider & ISIProvider> SRBurnableFuel(T item, int time) {
-		super(null, item.getStagedItem().stage.get(), item, 1, new RIBurnableFuel(item));
+		super(item.getStagedItem().stage, item, 1, new RIBurnableFuel(item));
 		this.time = time;
 	}
 	

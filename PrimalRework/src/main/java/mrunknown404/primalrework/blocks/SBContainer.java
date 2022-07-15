@@ -1,9 +1,8 @@
 package mrunknown404.primalrework.blocks;
 
-import java.util.function.Supplier;
-
 import javax.annotation.Nullable;
 
+import mrunknown404.primalrework.api.registry.PRRegistryObject;
 import mrunknown404.primalrework.init.InitItemGroups;
 import mrunknown404.primalrework.stage.Stage;
 import net.minecraft.block.BlockState;
@@ -15,7 +14,7 @@ import net.minecraft.world.World;
 
 @SuppressWarnings("deprecation")
 public abstract class SBContainer extends StagedBlock {
-	protected SBContainer(Supplier<Stage> stage, BlockInfo material, BlockStateType blockStateType, BlockModelType blockModelType, HarvestInfo info, HarvestInfo... extraInfos) {
+	protected SBContainer(PRRegistryObject<Stage> stage, BlockInfo material, BlockStateType blockStateType, BlockModelType blockModelType, HarvestInfo info, HarvestInfo... extraInfos) {
 		super(stage, 1, InitItemGroups.MACHINES, material, blockStateType, blockModelType, info, extraInfos);
 	}
 	

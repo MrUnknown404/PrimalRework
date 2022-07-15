@@ -19,7 +19,7 @@ import net.minecraft.world.server.ServerWorld;
 
 public class SBGrassSlab extends SBSlab { //TODO replace with my snow
 	public SBGrassSlab() {
-		super(InitStages.STAGE_0, BlockInfo.of(BlockInfo.DRY_GRASS), new HarvestInfo(ToolType.SHOVEL, InitToolMaterials.CLAY, DropInfo.of(InitBlocks.DIRT_SLAB)));
+		super(InitStages.STAGE_BEFORE, BlockInfo.of(BlockInfo.DRY_GRASS), new HarvestInfo(ToolType.SHOVEL, InitToolMaterials.CLAY, DropInfo.of(InitBlocks.DIRT_SLAB)));
 	}
 	
 	@Override

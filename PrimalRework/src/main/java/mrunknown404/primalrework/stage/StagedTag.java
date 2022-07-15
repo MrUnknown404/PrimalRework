@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 import mrunknown404.primalrework.api.utils.ISIProvider;
@@ -20,7 +19,7 @@ public class StagedTag extends ForgeRegistryEntry<StagedTag> implements IIngredi
 	private final Lazy<ITextComponent> displayName = Lazy.of(() -> WordH.translate("stagedtag." + getRegistryName().getPath()));
 	
 	private final List<StagedItem> items = new ArrayList<StagedItem>();
-	private final Map<Supplier<Stage>, List<StagedItem>> stageMap = new HashMap<Supplier<Stage>, List<StagedItem>>();
+	private final Map<Stage, List<StagedItem>> stageMap = new HashMap<Stage, List<StagedItem>>();
 	
 	public StagedTag(ISIProvider icon, ISIProvider... items) {
 		add(icon.getStagedItem());
@@ -42,12 +41,12 @@ public class StagedTag extends ForgeRegistryEntry<StagedTag> implements IIngredi
 			return;
 		}
 		
-		stageMap.computeIfAbsent(item.stage, (s) -> new ArrayList<StagedItem>()).add(item);
+		stageMap.computeIfAbsent(item.stage, s -> new ArrayList<StagedItem>()).add(item);
 		items.add(item);
 	}
 	
 	public boolean containsAtCurrentStage(StagedItem item) {
-		return containsAtAll(item) && stageMap.entrySet().stream().anyMatch((e) -> e.getKey().get().hasAccessToCurrentStage() && e.getValue().contains(item));
+		return containsAtAll(item) && stageMap.entrySet().stream().anyMatch(e -> e.getKey().hasAccessToCurrentStage() && e.getValue().contains(item));
 	}
 	
 	public boolean containsAtAll(StagedItem item) {
@@ -55,7 +54,7 @@ public class StagedTag extends ForgeRegistryEntry<StagedTag> implements IIngredi
 	}
 	
 	public List<StagedItem> getItemsWithCurrentStage() {
-		return stageMap.entrySet().stream().filter((e) -> e.getKey().get().hasAccessToCurrentStage()).map((e) -> e.getValue()).flatMap(List::stream).collect(Collectors.toList());
+		return stageMap.entrySet().stream().filter(e -> e.getKey().hasAccessToCurrentStage()).map(e -> e.getValue()).flatMap(List::stream).collect(Collectors.toList());
 	}
 	
 	@Override

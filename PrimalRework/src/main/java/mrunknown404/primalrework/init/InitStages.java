@@ -6,29 +6,31 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import mrunknown404.primalrework.api.registry.PRRegistries;
+import mrunknown404.primalrework.api.registry.PRRegistryObject;
 import mrunknown404.primalrework.stage.Stage;
 import mrunknown404.primalrework.utils.Cache;
 import mrunknown404.primalrework.world.savedata.WSDStage;
-import net.minecraftforge.fml.RegistryObject;
 
 public class InitStages {
 	private static final Cache<Byte, List<Stage>> PREV_STAGE_CACHE = Cache.create();
 	private static final Map<Byte, Stage> STAGE_MAP = new HashMap<Byte, Stage>();
 	
-	public static final RegistryObject<Stage> STAGE_0 = register((byte) 0);
-	public static final RegistryObject<Stage> STAGE_1 = register((byte) 1);
-	public static final RegistryObject<Stage> STAGE_2 = register((byte) 2);
-	public static final RegistryObject<Stage> STAGE_3 = register((byte) 3);
+	public static final PRRegistryObject<Stage> STAGE_BEFORE = register((byte) 0, "before");
+	public static final PRRegistryObject<Stage> STAGE_STONE = register((byte) 1, "stone");
+	public static final PRRegistryObject<Stage> STAGE_COPPER = register((byte) 2, "copper");
+	public static final PRRegistryObject<Stage> STAGE_BRONZE = register((byte) 3, "bronze");
+	public static final PRRegistryObject<Stage> STAGE_IRON = register((byte) 4, "iron");
+	public static final PRRegistryObject<Stage> STAGE_STEAM = register((byte) 5, "steam");
+	public static final PRRegistryObject<Stage> STAGE_STEEL = register((byte) 6, "steel");
+	public static final PRRegistryObject<Stage> STAGE_BASIC_ELECTRIC = register((byte) 7, "basic_electric");
+	public static final PRRegistryObject<Stage> STAGE_ELECTRIC = register((byte) 8, "electric");
 	
-	public static final RegistryObject<Stage> DO_LATER = register((byte) (Byte.MAX_VALUE - 1));
-	public static final RegistryObject<Stage> NO_SHOW = register(Byte.MAX_VALUE);
-	
-	private static RegistryObject<Stage> register(byte id) {
-		return InitRegistry.stage("stage_" + id, () -> new Stage(id));
+	private static PRRegistryObject<Stage> register(byte id, String name) {
+		return InitRegistry.stage("stage_" + name, () -> new Stage(id));
 	}
 	
 	static void load() {
-		PRRegistries.STAGES.getValues().forEach(s -> STAGE_MAP.put(s.id, s));
+		PRRegistries.STAGES.forEach(s -> STAGE_MAP.put(s.get().id, s.get()));
 	}
 	
 	public static Stage byID(byte id) {
@@ -38,7 +40,7 @@ public class InitStages {
 	public static List<Stage> getStagesBeforeCurrent(boolean includeCurrentStage) {
 		Stage curStage = WSDStage.getStage();
 		return PREV_STAGE_CACHE.computeIfAbsent(curStage.id,
-				() -> PRRegistries.STAGES.getValues().stream().filter(s -> includeCurrentStage ? s.id <= curStage.id : s.id < curStage.id).collect(Collectors.toList()));
+				() -> PRRegistries.STAGES.stream().map(s -> s.get()).filter(s -> includeCurrentStage ? s.id <= curStage.id : s.id < curStage.id).collect(Collectors.toList()));
 	}
 	
 	public static Stage getNextStage() {
@@ -49,9 +51,9 @@ public class InitStages {
 		Stage curStage = stage;
 		byte lastID = Byte.MAX_VALUE;
 		
-		for (Stage s : PRRegistries.STAGES.getValues()) {
-			if (s.id > curStage.id && s.id < lastID) {
-				lastID = s.id;
+		for (PRRegistryObject<Stage> s : PRRegistries.STAGES) {
+			if (s.get().id > curStage.id && s.get().id < lastID) {
+				lastID = s.get().id;
 			}
 		}
 		

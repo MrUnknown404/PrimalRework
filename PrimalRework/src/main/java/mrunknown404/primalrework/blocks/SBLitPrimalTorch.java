@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 
 public class SBLitPrimalTorch extends SBUnlitPrimalTorch {
 	public SBLitPrimalTorch() {
-		super(InitStages.STAGE_1, BlockInfo.LIT_PRIMAL_TORCH, BlockStateType.normal, HarvestInfo.HAND);
+		super(InitStages.STAGE_STONE, BlockInfo.LIT_PRIMAL_TORCH, BlockStateType.normal, HarvestInfo.HAND);
 	}
 	
 	@Override

@@ -17,7 +17,7 @@ public class SBStrippedLog extends SBRotatedPillar {
 	private static final VoxelShape NONE = box(1, 1, 1, 15, 15, 15);
 	
 	public SBStrippedLog() {
-		super(InitStages.STAGE_0, 32, InitItemGroups.BLOCKS, BlockInfo.with(BlockInfo.WOOD, Hardness.MEDIUM_2), HarvestInfo.AXE_MIN);
+		super(InitStages.STAGE_BEFORE, 64, InitItemGroups.BLOCKS, BlockInfo.with(BlockInfo.WOOD, Hardness.MEDIUM_2), HarvestInfo.AXE_MIN);
 	}
 	
 	@Override

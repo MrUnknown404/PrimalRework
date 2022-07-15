@@ -4,7 +4,7 @@ import java.util.function.Supplier;
 
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
-public class PRRegistryObject<T extends ForgeRegistryEntry<T>> implements Supplier<T> {
+public class PRRegistryObject<T extends ForgeRegistryEntry<T>> {
 	private Supplier<T> supplier;
 	private T value;
 	
@@ -12,7 +12,6 @@ public class PRRegistryObject<T extends ForgeRegistryEntry<T>> implements Suppli
 		this.supplier = supplier;
 	}
 	
-	@Override
 	public T get() {
 		if (value == null) {
 			value = supplier.get();

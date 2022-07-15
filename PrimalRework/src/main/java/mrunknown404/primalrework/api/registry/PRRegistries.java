@@ -33,10 +33,10 @@ public final class PRRegistries {
 	private static final Map<Class<?>, List<PRRegistryObject<?>>> MASTER_REGISTRIES = new HashMap<Class<?>, List<PRRegistryObject<?>>>();
 	private static final Map<String, List<PRRegistry<?>>> EVENT_MAP = new HashMap<String, List<PRRegistry<?>>>();
 	
+	public static final List<PRRegistryObject<Stage>> STAGES = addMasterRegistry(Stage.class);
 	public static final List<PRRegistryObject<Metal>> METALS = addMasterRegistry(Metal.class);
 	public static final List<PRRegistryObject<ToolMaterial>> TOOL_MATERIALS = addMasterRegistry(ToolMaterial.class);
 	
-	public static final IForgeRegistry<Stage> STAGES = forgeRegistry("stages", Stage.class);
 	public static final IForgeRegistry<StagedTag> STAGED_TAGS = forgeRegistry("staged_tags", StagedTag.class);
 	
 	private static State registrationState = State.TOO_EARLY;

@@ -21,7 +21,7 @@ import net.minecraftforge.common.IPlantable;
 
 public class SBGrassBlock extends SBSnowyDirt { //TODO switch to my snow
 	public SBGrassBlock() {
-		super(InitStages.STAGE_0, BlockInfo.of(BlockInfo.R_DRY_GRASS), BlockStateType.none, BlockModelType.none,
+		super(InitStages.STAGE_BEFORE, BlockInfo.of(BlockInfo.R_DRY_GRASS), BlockStateType.none, BlockModelType.none,
 				new HarvestInfo(ToolType.SHOVEL, InitToolMaterials.CLAY, DropInfo.of(InitBlocks.DIRT)));
 		useVanillaNamespaceFull();
 	}

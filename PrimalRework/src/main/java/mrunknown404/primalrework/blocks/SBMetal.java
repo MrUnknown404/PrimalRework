@@ -9,7 +9,7 @@ public class SBMetal extends StagedBlock implements IMetalColored {
 	public final Metal metal;
 	
 	public SBMetal(Metal metal) {
-		super(metal.stage, 16, InitItemGroups.BLOCKS, metal.blockInfo, BlockStateType.normal, metal.color != null ? BlockModelType.normal : BlockModelType.normal,
+		super(metal.stage, 64, InitItemGroups.BLOCKS, metal.blockInfo, BlockStateType.normal, metal.color != null ? BlockModelType.normal : BlockModelType.normal,
 				new HarvestInfo(ToolType.PICKAXE, metal.toolMat));
 		this.metal = metal;
 		this.elements.putAll(metal.elements);
